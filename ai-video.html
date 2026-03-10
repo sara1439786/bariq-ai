@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bariq AI Video Generator</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:linear-gradient(135deg,#faf7ff,#fff9ef,#f8f2ff);
+margin:0;
+padding:40px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+border:1px solid #f1df9f;
+}
+
+h1{
+color:#5f2396;
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:20px;
+border-radius:8px;
+border:1px solid #ddd;
+}
+
+button{
+background:linear-gradient(135deg,#5f2396,#8a3ffc,#d4af37);
+color:white;
+border:none;
+padding:14px 20px;
+border-radius:10px;
+cursor:pointer;
+font-weight:700;
+}
+
+.result{
+margin-top:20px;
+padding:15px;
+background:#fff4d2;
+border-radius:8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Generate AI Video</h1>
+
+<p>Describe your video and Bariq AI will generate a marketing script.</p>
+
+<textarea id="prompt" placeholder="Example: Create a skincare product promotion video"></textarea>
+
+<button onclick="generate()">Generate Video Script</button>
+
+<div class="result" id="result">
+Your generated video script will appear here.
+</div>
+
+</div>
+
+<script>
+
+function generate(){
+
+const prompt=document.getElementById("prompt").value;
+
+document.getElementById("result").innerText=
+"AI Script:\n\nIntroducing our revolutionary product designed to transform your daily routine. Experience premium quality, unmatched results, and a lifestyle upgrade today.";
+
+}
+
+</script>
+
+</body>
+</html>
