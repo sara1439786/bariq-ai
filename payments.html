@@ -1,333 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bariq AI Payments</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI Payments</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-<style>
+    body {
+      background: linear-gradient(135deg, #faf7ff 0%, #fff9ef 50%, #f8f2ff 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+      color: #241f31;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
 
-body{
-background:linear-gradient(135deg,#F5F3FF,#FFF9E6);
-min-height:100vh;
-padding:40px 20px;
-color:#1F1F2E;
-}
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
 
-.container{
-max-width:1200px;
-margin:auto;
-}
+    .logo-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 78px;
+      height: 78px;
+      border-radius: 22px;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #5f2396 0%, #8a3ffc 55%, #d4af37 100%);
+      box-shadow: 0 10px 30px rgba(95, 35, 150, 0.22);
+    }
 
-.header{
-text-align:center;
-margin-bottom:40px;
-}
+    .logo-icon {
+      font-size: 34px;
+      line-height: 1;
+      color: #fff7d6;
+      text-shadow: 0 1px 6px rgba(212, 175, 55, 0.45);
+    }
 
-.header h1{
-font-size:36px;
-color:#5B2EFF;
-margin-bottom:10px;
-}
+    .header h1 {
+      font-size: 38px;
+      margin-bottom: 10px;
+      color: #5f2396;
+      font-weight: 700;
+    }
 
-.header p{
-color:#6B6B80;
-}
+    .header p {
+      color: #6f6680;
+      font-size: 16px;
+    }
 
-.plans{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
-margin-bottom:35px;
-}
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 34px;
+    }
 
-.plan-card{
-background:white;
-border-radius:20px;
-padding:28px;
-border:1px solid #F0E6B8;
-box-shadow:0 10px 25px rgba(0,0,0,0.07);
-transition:0.25s;
-}
+    .plan-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #f1df9f;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 14px 35px rgba(78, 38, 112, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
 
-.plan-card:hover{
-transform:translateY(-6px);
-box-shadow:0 14px 35px rgba(0,0,0,0.12);
-}
+    .plan-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #5f2396 0%, #8a3ffc 55%, #d4af37 100%);
+    }
 
-.plan-card h2{
-color:#5B2EFF;
-margin-bottom:8px;
-}
+    .plan-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 42px rgba(78, 38, 112, 0.14);
+    }
 
-.subtitle{
-color:#6B6B80;
-margin-bottom:18px;
-}
+    .plan-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
 
-.price{
-font-size:30px;
-font-weight:700;
-margin-bottom:6px;
-color:#1F1F2E;
-}
+    .plan-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #5f2396 0%, #8a3ffc 60%, #d4af37 100%);
+      color: #fff4cc;
+      font-size: 21px;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(95, 35, 150, 0.18);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+    }
 
-.credits{
-color:#D4AF37;
-font-weight:700;
-margin-bottom:18px;
-}
+    .plan-card h2 {
+      color: #5f2396;
+      font-size: 25px;
+    }
 
-.features{
-list-style:none;
-margin-bottom:20px;
-}
+    .subtitle {
+      color: #6f6680;
+      margin-bottom: 18px;
+      min-height: 42px;
+      line-height: 1.5;
+    }
 
-.features li{
-margin-bottom:8px;
-color:#44445A;
-}
+    .price {
+      font-size: 31px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #241f31;
+    }
 
-.btn{
-width:100%;
-border:none;
-padding:14px;
-border-radius:12px;
-font-size:15px;
-font-weight:700;
-cursor:pointer;
-background:linear-gradient(135deg,#5B2EFF,#7A4BFF);
-color:white;
-transition:0.25s;
-}
+    .credits {
+      display: inline-block;
+      background: #fff7dc;
+      color: #9a6d00;
+      border: 1px solid #efd889;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
 
-.btn:hover{
-opacity:0.95;
-}
+    .features {
+      list-style: none;
+      margin-bottom: 22px;
+    }
 
-.status-box{
-background:white;
-border-radius:20px;
-padding:26px;
-max-width:700px;
-margin:auto;
-border:1px solid #F0E6B8;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
+    .features li {
+      margin-bottom: 10px;
+      color: #453d52;
+      line-height: 1.5;
+      padding-left: 22px;
+      position: relative;
+    }
 
-.status-box h3{
-margin-bottom:14px;
-color:#5B2EFF;
-}
+    .features li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #d4af37;
+      font-size: 14px;
+    }
 
-.status-line{
-margin-bottom:10px;
-color:#44445A;
-}
+    .btn {
+      width: 100%;
+      border: none;
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(135deg, #5f2396 0%, #8a3ffc 60%, #d4af37 130%);
+      color: white;
+      box-shadow: 0 10px 24px rgba(95, 35, 150, 0.18);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
 
-.status-highlight{
-display:inline-block;
-background:#FFF6CC;
-color:#8B6B00;
-padding:8px 14px;
-border-radius:20px;
-font-size:13px;
-font-weight:700;
-margin-top:8px;
-}
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.96;
+    }
 
-.action-row{
-margin-top:18px;
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-}
+    .status-box {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid #f1df9f;
+      border-radius: 24px;
+      padding: 28px;
+      max-width: 760px;
+      margin: auto;
+      box-shadow: 0 14px 35px rgba(78, 38, 112, 0.08);
+    }
 
-.small-btn{
-border:none;
-padding:11px 15px;
-border-radius:10px;
-cursor:pointer;
-background:#F5F3FF;
-color:#5B2EFF;
-font-weight:700;
-}
+    .status-box h3 {
+      margin-bottom: 16px;
+      color: #5f2396;
+      font-size: 24px;
+    }
 
-.small-btn-dark{
-background:linear-gradient(135deg,#5B2EFF,#7A4BFF);
-color:white;
-}
+    .status-line {
+      margin-bottom: 10px;
+      color: #4c445a;
+      line-height: 1.6;
+    }
 
-</style>
+    .status-highlight {
+      display: inline-block;
+      background: #fff4d2;
+      color: #8b6500;
+      border: 1px solid #efd889;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .action-row {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .small-btn {
+      border: none;
+      padding: 12px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #f6eeff;
+      color: #5f2396;
+      font-weight: 700;
+      border: 1px solid #e7d7ff;
+    }
+
+    .small-btn-dark {
+      background: linear-gradient(135deg, #5f2396 0%, #8a3ffc 60%, #d4af37 130%);
+      color: white;
+      border: none;
+    }
+
+    @media (max-width: 640px) {
+      .header h1 {
+        font-size: 31px;
+      }
+
+      .price {
+        font-size: 27px;
+      }
+
+      .status-box {
+        padding: 22px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
+    <div class="header">
+      <div class="logo-wrap">
+        <div class="logo-icon">✦</div>
+      </div>
+      <h1>Bariq AI Payments</h1>
+      <p>Choose a plan to unlock your premium AI content workspace</p>
+    </div>
 
-<div class="container">
+    <div class="plans">
+      <div class="plan-card">
+        <div class="plan-head">
+          <div class="plan-icon">S</div>
+          <h2>Starter</h2>
+        </div>
+        <div class="subtitle">Perfect for solo founders and early-stage creators</div>
+        <div class="price">₹999 / month</div>
+        <div class="credits">50 Credits</div>
 
-<div class="header">
-<h1>Bariq AI Payments</h1>
-<p>Choose a plan to unlock your AI content workspace</p>
-</div>
+        <ul class="features">
+          <li>5 AI Videos</li>
+          <li>Basic Support</li>
+          <li>1 Brand Kit</li>
+        </ul>
 
-<div class="plans">
+        <button class="btn" onclick="selectPlan('Starter','₹999/month','50 Credits',['5 AI Videos','Basic Support','1 Brand Kit'])">
+          Choose Starter
+        </button>
+      </div>
 
-<div class="plan-card">
-<h2>Starter</h2>
-<div class="subtitle">Perfect for solo founders</div>
-<div class="price">₹999 / month</div>
-<div class="credits">50 Credits</div>
+      <div class="plan-card">
+        <div class="plan-head">
+          <div class="plan-icon">G</div>
+          <h2>Growth</h2>
+        </div>
+        <div class="subtitle">Best for scaling brands and growing business campaigns</div>
+        <div class="price">₹2499 / month</div>
+        <div class="credits">150 Credits</div>
 
-<ul class="features">
-<li>5 AI Videos</li>
-<li>Basic Support</li>
-<li>1 Brand Kit</li>
-</ul>
+        <ul class="features">
+          <li>20 AI Videos</li>
+          <li>Priority Support</li>
+          <li>3 Brand Kits</li>
+        </ul>
 
-<button class="btn"
-onclick="selectPlan('Starter','₹999/month','50 Credits',['5 AI Videos','Basic Support','1 Brand Kit'])">
-Choose Starter
-</button>
+        <button class="btn" onclick="selectPlan('Growth','₹2499/month','150 Credits',['20 AI Videos','Priority Support','3 Brand Kits'])">
+          Choose Growth
+        </button>
+      </div>
 
-</div>
+      <div class="plan-card">
+        <div class="plan-head">
+          <div class="plan-icon">P</div>
+          <h2>Pro</h2>
+        </div>
+        <div class="subtitle">For agencies, premium teams, and advanced AI usage</div>
+        <div class="price">₹4999 / month</div>
+        <div class="credits">500 Credits</div>
 
-<div class="plan-card">
-<h2>Growth</h2>
-<div class="subtitle">Best for scaling businesses</div>
-<div class="price">₹2499 / month</div>
-<div class="credits">150 Credits</div>
+        <ul class="features">
+          <li>Unlimited Campaigns</li>
+          <li>Premium Support</li>
+          <li>10 Brand Kits</li>
+        </ul>
 
-<ul class="features">
-<li>20 AI Videos</li>
-<li>Priority Support</li>
-<li>3 Brand Kits</li>
-</ul>
+        <button class="btn" onclick="selectPlan('Pro','₹4999/month','500 Credits',['Unlimited Campaigns','Premium Support','10 Brand Kits'])">
+          Choose Pro
+        </button>
+      </div>
+    </div>
 
-<button class="btn"
-onclick="selectPlan('Growth','₹2499/month','150 Credits',['20 AI Videos','Priority Support','3 Brand Kits'])">
-Choose Growth
-</button>
+    <div class="status-box">
+      <h3>Plan Status Console</h3>
 
-</div>
+      <div class="status-line" id="selectedPlanLine">Selected Plan: None</div>
+      <div class="status-line" id="selectedPriceLine">Amount: --</div>
+      <div class="status-line" id="selectedCreditsLine">Credits: --</div>
+      <div class="status-line" id="selectedFeaturesLine">Features: --</div>
 
-<div class="plan-card">
-<h2>Pro</h2>
-<div class="subtitle">For agencies and advanced users</div>
-<div class="price">₹4999 / month</div>
-<div class="credits">500 Credits</div>
+      <div class="status-highlight" id="statusBadge">Testing mode active</div>
 
-<ul class="features">
-<li>Unlimited Campaigns</li>
-<li>Premium Support</li>
-<li>10 Brand Kits</li>
-</ul>
+      <div class="action-row">
+        <button class="small-btn" onclick="proceedToPayment()">Proceed to Payment</button>
+        <button class="small-btn small-btn-dark" onclick="goToDashboard()">Open Dashboard</button>
+      </div>
+    </div>
+  </div>
 
-<button class="btn"
-onclick="selectPlan('Pro','₹4999/month','500 Credits',['Unlimited Campaigns','Premium Support','10 Brand Kits'])">
-Choose Pro
-</button>
+  <script>
+    const RAZORPAY_KEY = "rzp_test_SPdsh7aPZjqwvJ";
 
-</div>
+    function selectPlan(planName, price, credits, features) {
+      const selectedPlan = {
+        name: planName,
+        price: price,
+        credits: credits,
+        features: features
+      };
 
-</div>
+      localStorage.setItem("bariq_selected_plan", JSON.stringify(selectedPlan));
 
+      document.getElementById("selectedPlanLine").innerText = "Selected Plan: " + planName;
+      document.getElementById("selectedPriceLine").innerText = "Amount: " + price;
+      document.getElementById("selectedCreditsLine").innerText = "Credits: " + credits;
+      document.getElementById("selectedFeaturesLine").innerText = "Features: " + features.join(", ");
+      document.getElementById("statusBadge").innerText = "Plan selected successfully";
+    }
 
-<div class="status-box">
+    function proceedToPayment() {
+      const storedPlan = localStorage.getItem("bariq_selected_plan");
 
-<h3>Plan Status Console</h3>
+      if (!storedPlan) {
+        alert("Please select a plan first.");
+        return;
+      }
 
-<div class="status-line" id="selectedPlanLine">
-Selected Plan: None
-</div>
+      const plan = JSON.parse(storedPlan);
 
-<div class="status-line" id="selectedPriceLine">
-Amount: --
-</div>
+      let amount = 0;
 
-<div class="status-line" id="selectedCreditsLine">
-Credits: --
-</div>
+      if (plan.name === "Starter") {
+        amount = 99900;
+      } else if (plan.name === "Growth") {
+        amount = 249900;
+      } else if (plan.name === "Pro") {
+        amount = 499900;
+      }
 
-<div class="status-line" id="selectedFeaturesLine">
-Features: --
-</div>
+      const options = {
+        key: RAZORPAY_KEY,
+        amount: amount,
+        currency: "INR",
+        name: "Bariq AI",
+        description: plan.name + " Plan Subscription",
+        handler: function (response) {
+          localStorage.setItem("bariq_payment_status", "success");
+          localStorage.setItem("bariq_payment_id", response.razorpay_payment_id || "");
+          document.getElementById("statusBadge").innerText = "Payment successful";
+          window.location.href = "business-dashboard.html";
+        },
+        prefill: {
+          name: "",
+          email: "",
+          contact: ""
+        },
+        notes: {
+          selected_plan: plan.name
+        },
+        theme: {
+          color: "#5f2396"
+        },
+        modal: {
+          ondismiss: function () {
+            document.getElementById("statusBadge").innerText = "Payment popup closed";
+          }
+        }
+      };
 
-<div class="status-highlight" id="statusBadge">
-Testing mode active
-</div>
+      const rzp = new Razorpay(options);
+      rzp.open();
+    }
 
-<div class="action-row">
+    function goToDashboard() {
+      const storedPlan = localStorage.getItem("bariq_selected_plan");
 
-<button class="small-btn" onclick="simulatePayment()">
-Proceed to Payment
-</button>
+      if (!storedPlan) {
+        alert("Please select a plan first.");
+        return;
+      }
 
-<button class="small-btn small-btn-dark" onclick="goToDashboard()">
-Open Dashboard
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<script>
-
-function selectPlan(planName,price,credits,features){
-
-const selectedPlan={
-name:planName,
-price:price,
-credits:credits,
-features:features
-};
-
-localStorage.setItem("bariq_selected_plan",JSON.stringify(selectedPlan));
-
-document.getElementById("selectedPlanLine").innerText="Selected Plan: "+planName;
-document.getElementById("selectedPriceLine").innerText="Amount: "+price;
-document.getElementById("selectedCreditsLine").innerText="Credits: "+credits;
-document.getElementById("selectedFeaturesLine").innerText="Features: "+features.join(", ");
-document.getElementById("statusBadge").innerText="Plan selected successfully";
-
-}
-
-function simulatePayment(){
-
-const storedPlan=localStorage.getItem("bariq_selected_plan");
-
-if(!storedPlan){
-alert("Please select a plan first.");
-return;
-}
-
-alert("Payment gateway will be connected here next.");
-
-}
-
-function goToDashboard(){
-
-const storedPlan=localStorage.getItem("bariq_selected_plan");
-
-if(!storedPlan){
-alert("Please select a plan first.");
-return;
-}
-
-window.location.href="business-dashboard.html";
-
-}
-
-</script>
-
+      window.location.href = "business-dashboard.html";
+    }
+  </script>
 </body>
 </html>
