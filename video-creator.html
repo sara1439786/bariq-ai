@@ -20,7 +20,7 @@
     }
 
     .container {
-      max-width: 1280px;
+      max-width: 1300px;
       margin: 0 auto;
     }
 
@@ -96,7 +96,7 @@
 
     .main-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.05fr 0.95fr;
       gap: 22px;
     }
 
@@ -333,6 +333,29 @@
       font-size: 13px;
     }
 
+    .subtitle-strip {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 96px;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+    }
+
+    .subtitle-pill {
+      max-width: 90%;
+      text-align: center;
+      background: rgba(0,0,0,0.58);
+      color: #fff8df;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 700;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+    }
+
     .style-list {
       display: grid;
       gap: 12px;
@@ -356,6 +379,40 @@
       color: #5d536a;
       font-size: 14px;
       line-height: 1.6;
+    }
+
+    .music-card {
+      margin-bottom: 18px;
+      background: #fffdf8;
+      border: 1px solid #f1df9f;
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .music-card h4 {
+      color: #5f2396;
+      font-size: 19px;
+      margin-bottom: 12px;
+    }
+
+    .music-meta {
+      color: #5d536a;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .music-tag {
+      display: inline-block;
+      background: #f6eeff;
+      color: #5f2396;
+      border: 1px solid #e7d7ff;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 8px;
+      margin-top: 8px;
     }
 
     .scene-board {
@@ -460,6 +517,35 @@
       font-weight: 700;
     }
 
+    .subtitle-board {
+      margin-top: 18px;
+      background: #fffdf8;
+      border: 1px solid #f1df9f;
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .subtitle-board h4 {
+      color: #5f2396;
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+
+    .subtitle-lines {
+      display: grid;
+      gap: 10px;
+    }
+
+    .subtitle-line {
+      background: rgba(33, 23, 44, 0.94);
+      color: #fff8df;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
     @media (max-width: 980px) {
       .main-grid {
         grid-template-columns: 1fr;
@@ -512,7 +598,7 @@
       <h2>Create Short Videos Step by Step</h2>
       <p>
         Start with Instagram Reels, offer promos, product showcases, inserts, and social ads.
-        Generate a reel blueprint first, preview the visual style, and now see each scene as a frame sequence.
+        Generate a reel blueprint, preview the visual style, pick music mood, and see subtitle strips before building export.
       </p>
     </div>
 
@@ -572,6 +658,16 @@
               <option value="Emotional">Emotional</option>
               <option value="Friendly">Friendly</option>
               <option value="Trust-Building">Trust-Building</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="musicStyle">Music Style</label>
+            <select id="musicStyle">
+              <option value="Luxury Ambient">Luxury Ambient</option>
+              <option value="Bold Beat">Bold Beat</option>
+              <option value="Soft Emotional">Soft Emotional</option>
+              <option value="Trendy Social">Trendy Social</option>
             </select>
           </div>
 
@@ -658,12 +754,28 @@
               </div>
             </div>
 
+            <div class="subtitle-strip">
+              <div class="subtitle-pill" id="previewSubtitle">
+                Your subtitle preview appears here
+              </div>
+            </div>
+
             <div class="preview-bottom">
               <div class="preview-cta" id="previewCTA">Shop Now</div>
               <div class="preview-brand" id="previewBrand">Your Brand</div>
               <div class="preview-meta" id="previewMeta">Product Promo • Premium Tone</div>
             </div>
           </div>
+        </div>
+
+        <div class="music-card">
+          <h4>Music Direction</h4>
+          <div class="music-meta" id="musicDescription">
+            Luxury Ambient selected for premium, smooth, elegant short-form videos.
+          </div>
+          <span class="music-tag" id="musicTag1">Luxury Ambient</span>
+          <span class="music-tag" id="musicTag2">Premium Pace</span>
+          <span class="music-tag" id="musicTag3">Soft Rise</span>
         </div>
 
         <div class="style-list">
@@ -711,6 +823,13 @@
           </div>
         </div>
 
+        <div class="subtitle-board">
+          <h4>Subtitle Strip Preview</h4>
+          <div class="subtitle-lines" id="subtitleLines">
+            <div class="subtitle-line">Your subtitle lines will appear here.</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -728,6 +847,31 @@
       } else {
         screen.style.background = "linear-gradient(180deg, #4c2277 0%, #22132f 52%, #d4af37 180%)";
       }
+    }
+
+    function getMusicData(musicStyle) {
+      if (musicStyle === "Bold Beat") {
+        return {
+          description: "Bold Beat selected for fast, energetic, high-attention promotional short videos.",
+          tags: ["Bold Beat", "Fast Pulse", "High Energy"]
+        };
+      }
+      if (musicStyle === "Soft Emotional") {
+        return {
+          description: "Soft Emotional selected for warm, story-led, feeling-driven short video flow.",
+          tags: ["Soft Emotional", "Warm Mood", "Slow Rise"]
+        };
+      }
+      if (musicStyle === "Trendy Social") {
+        return {
+          description: "Trendy Social selected for modern, scrolling-friendly, social-first short-form content.",
+          tags: ["Trendy Social", "Social Pulse", "Creator Feel"]
+        };
+      }
+      return {
+        description: "Luxury Ambient selected for premium, smooth, elegant short-form videos.",
+        tags: ["Luxury Ambient", "Premium Pace", "Soft Rise"]
+      };
     }
 
     function getSceneData(duration, productName, audience, offer, cta, brandName) {
@@ -835,6 +979,12 @@
       ];
     }
 
+    function getSubtitleLines(sceneData) {
+      return sceneData.map(function(scene) {
+        return scene.text;
+      });
+    }
+
     function renderSceneCards(sceneData) {
       const sceneCards = document.getElementById("sceneCards");
       sceneCards.innerHTML = "";
@@ -860,6 +1010,28 @@
       });
     }
 
+    function renderSubtitleLines(lines) {
+      const subtitleLines = document.getElementById("subtitleLines");
+      subtitleLines.innerHTML = "";
+
+      lines.forEach(function(line) {
+        const div = document.createElement("div");
+        div.className = "subtitle-line";
+        div.textContent = line;
+        subtitleLines.appendChild(div);
+      });
+    }
+
+    function updateMusicPreview() {
+      const musicStyle = document.getElementById("musicStyle").value || "Luxury Ambient";
+      const music = getMusicData(musicStyle);
+
+      document.getElementById("musicDescription").textContent = music.description;
+      document.getElementById("musicTag1").textContent = music.tags[0];
+      document.getElementById("musicTag2").textContent = music.tags[1];
+      document.getElementById("musicTag3").textContent = music.tags[2];
+    }
+
     function updatePreviewOnly() {
       const brandName = document.getElementById("brandName").value || "Your Brand";
       const productName = document.getElementById("productName").value || "Your Product";
@@ -878,11 +1050,14 @@
       document.getElementById("previewCTA").textContent = cta;
       document.getElementById("previewBrand").textContent = brandName;
       document.getElementById("previewMeta").textContent = videoType + " • " + tone + " Tone";
+      document.getElementById("previewSubtitle").textContent = offer;
 
       buildPreviewTheme(templateStyle);
+      updateMusicPreview();
 
       const sceneData = getSceneData(duration, productName, audience, offer, cta, brandName);
       renderSceneCards(sceneData);
+      renderSubtitleLines(getSubtitleLines(sceneData));
     }
 
     function generateVideoPlan() {
@@ -892,6 +1067,7 @@
       const duration = document.getElementById("duration").value || "30 sec";
       const templateStyle = document.getElementById("templateStyle").value || "Bold Promo";
       const tone = document.getElementById("tone").value || "Premium";
+      const musicStyle = document.getElementById("musicStyle").value || "Luxury Ambient";
       const audience = document.getElementById("audience").value || "your audience";
       const cta = document.getElementById("cta").value || "Shop Now";
       const offer = document.getElementById("offer").value || "Special offer available now";
@@ -954,6 +1130,7 @@ On-screen text: ${cta}`;
       const voiceover =
 `${brandName} presents ${productName}.
 Created for ${audience}, this ${videoType.toLowerCase()} follows a ${templateStyle.toLowerCase()} style with a ${tone.toLowerCase()} tone.
+Music mood: ${musicStyle.toLowerCase()}.
 ${offer}.
 Bring attention, build trust, and make your audience take action.
 ${cta}.
@@ -961,7 +1138,7 @@ ${prompt}`;
 
       const caption =
 `${productName} by ${brandName} is here for ${audience}. ${offer}.
-Style: ${templateStyle} | Duration: ${duration}
+Style: ${templateStyle} | Duration: ${duration} | Music: ${musicStyle}
 ${cta}
 
 #${brandName.replace(/\s+/g, "")} #VideoMarketing #Reels #ContentCreation #BrandGrowth`;
@@ -983,6 +1160,7 @@ ${cta}
       document.getElementById("duration").value = "15 sec";
       document.getElementById("templateStyle").value = "Bold Promo";
       document.getElementById("tone").value = "Premium";
+      document.getElementById("musicStyle").value = "Luxury Ambient";
       document.getElementById("audience").value = "";
       document.getElementById("cta").value = "";
       document.getElementById("offer").value = "";
@@ -1002,8 +1180,10 @@ ${cta}
       document.getElementById("previewCTA").textContent = "Shop Now";
       document.getElementById("previewBrand").textContent = "Your Brand";
       document.getElementById("previewMeta").textContent = "Product Promo • Premium Tone";
+      document.getElementById("previewSubtitle").textContent = "Your subtitle preview appears here";
 
       buildPreviewTheme("Bold Promo");
+      updateMusicPreview();
       renderSceneCards([
         {
           title: "Opening Scene",
@@ -1012,9 +1192,11 @@ ${cta}
           text: "Your first frame preview will appear here"
         }
       ]);
+      renderSubtitleLines(["Your subtitle lines will appear here."]);
     }
 
     buildPreviewTheme("Bold Promo");
+    updateMusicPreview();
     renderSceneCards([
       {
         title: "Opening Scene",
@@ -1023,6 +1205,7 @@ ${cta}
         text: "Your first frame preview will appear here"
       }
     ]);
+    renderSubtitleLines(["Your subtitle lines will appear here."]);
   </script>
 </body>
 </html>
