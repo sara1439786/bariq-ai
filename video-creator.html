@@ -34,17 +34,12 @@
     .brand-text h1 { font-size:30px; color:#5f2396; margin-bottom:4px; }
     .brand-text p { color:#6f6680; font-size:14px; }
 
-    .back-btn {
-      text-decoration:none; background:#f6eeff; color:#5f2396;
-      border:1px solid #e7d7ff; padding:12px 16px; border-radius:12px; font-weight:700;
-    }
-
     .hero-box, .panel {
-      background:rgba(255,255,255,0.96);
-      border:1px solid #f1df9f;
-      border-radius:28px;
-      padding:26px;
-      box-shadow:0 16px 40px rgba(78,38,112,0.08);
+      background: rgba(255,255,255,0.96);
+      border: 1px solid #f1df9f;
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: 0 16px 40px rgba(78,38,112,0.08);
     }
 
     .hero-box { margin-bottom:24px; }
@@ -126,7 +121,7 @@
       border:1px solid #e7d7ff;
     }
 
-    .result-card, .status-card, .clips-card {
+    .card {
       margin-top:22px;
       background:#fffdf8;
       border:1px solid #f1df9f;
@@ -134,7 +129,7 @@
       padding:22px;
     }
 
-    .result-card h4, .clips-card h4, .status-card h4 {
+    .card h4 {
       color:#5f2396;
       font-size:22px;
       margin-bottom:14px;
@@ -257,15 +252,11 @@
           <p>Real Video Builder MVP</p>
         </div>
       </div>
-      <a href="business-dashboard.html" class="back-btn">← Back to Dashboard</a>
     </div>
 
     <div class="hero-box">
       <h2>Generate Real Video Clips</h2>
-      <p>
-        This version fetches real stock footage from Pexels based on your input.
-        It is the first real step from slide preview to actual video generation.
-      </p>
+      <p>This version fetches real stock footage from Pexels based on user input.</p>
     </div>
 
     <div class="main-grid">
@@ -328,13 +319,13 @@
           <button class="btn btn-light" onclick="clearAll()">Clear</button>
         </div>
 
-        <div class="status-card">
+        <div class="card">
           <h4>Status</h4>
           <div id="statusText" class="loading">Waiting for input...</div>
           <div class="badge" id="statusBadge">Idle</div>
         </div>
 
-        <div class="result-card">
+        <div class="card">
           <h4>AI Blueprint</h4>
 
           <div class="result-block">
@@ -356,11 +347,9 @@
 
       <div class="panel">
         <h3>Real Video Clips</h3>
-        <p class="muted">
-          Bariq AI will search real stock footage and place it here scene by scene.
-        </p>
+        <p class="muted">Bariq AI will search real stock footage and place it here scene by scene.</p>
 
-        <div class="clips-card">
+        <div class="card">
           <h4>Fetched Clips</h4>
           <div id="videoResults" class="video-grid">
             <div class="video-tile">
@@ -372,7 +361,7 @@
           </div>
         </div>
 
-        <div class="clips-card">
+        <div class="card">
           <h4>Scene Mapping</h4>
           <div id="sceneMapping" class="scene-list">
             <div class="scene-item">
@@ -386,8 +375,7 @@
   </div>
 
   <script>
-    const PEXELS_API_KEY = 
-    "6qOa2IzSU0hP6cnDLdXWbawLFB8cYWErHYGnehF9IPmce1AJqxPF2FYj";
+    const PEXELS_API_KEY = 6qOa2IzSU0hP6cnDLdXWbawLFB8cYWErHYGnehF9IPmce1AJqxPF2FYj;"
 
     function setStatus(text, badge) {
       document.getElementById("statusText").textContent = text;
