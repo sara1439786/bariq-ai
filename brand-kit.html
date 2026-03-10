@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bariq AI Brand Kit</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:linear-gradient(135deg,#faf7ff,#fff9ef,#f8f2ff);
+padding:40px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+border:1px solid #f1df9f;
+}
+
+h1{
+color:#5f2396;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:20px;
+border-radius:8px;
+border:1px solid #ddd;
+}
+
+button{
+background:linear-gradient(135deg,#5f2396,#8a3ffc,#d4af37);
+color:white;
+border:none;
+padding:14px 20px;
+border-radius:10px;
+cursor:pointer;
+font-weight:700;
+}
+
+.result{
+margin-top:20px;
+padding:15px;
+background:#fff4d2;
+border-radius:8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Create Brand Kit</h1>
+
+<input id="brand" placeholder="Brand Name">
+
+<input id="industry" placeholder="Industry">
+
+<button onclick="generateBrand()">Generate Brand Style</button>
+
+<div class="result" id="brandResult">
+Brand style suggestions will appear here.
+</div>
+
+</div>
+
+<script>
+
+function generateBrand(){
+
+const brand=document.getElementById("brand").value;
+
+document.getElementById("brandResult").innerText=
+"Brand Kit for "+brand+":\n\nPrimary Color: Metallic Purple\nSecondary: Gold\nTone: Premium, Futuristic, Confident.";
+
+}
+
+</script>
+
+</body>
+</html>
