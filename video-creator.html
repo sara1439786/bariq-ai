@@ -20,7 +20,7 @@
     }
 
     .container {
-      max-width: 1220px;
+      max-width: 1280px;
       margin: 0 auto;
     }
 
@@ -336,6 +336,7 @@
     .style-list {
       display: grid;
       gap: 12px;
+      margin-bottom: 18px;
     }
 
     .style-box {
@@ -355,6 +356,108 @@
       color: #5d536a;
       font-size: 14px;
       line-height: 1.6;
+    }
+
+    .scene-board {
+      margin-top: 18px;
+    }
+
+    .scene-board h4 {
+      color: #5f2396;
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+
+    .scene-cards {
+      display: grid;
+      gap: 14px;
+    }
+
+    .scene-card {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 14px;
+      background: #fffdf8;
+      border: 1px solid #f1df9f;
+      border-radius: 18px;
+      padding: 12px;
+      align-items: center;
+    }
+
+    .scene-thumb {
+      height: 138px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #5a2f84 0%, #24142f 55%, #d4af37 180%);
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    .scene-thumb::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.18), transparent 30%),
+        linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.22) 100%);
+    }
+
+    .scene-index {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 2;
+      background: rgba(255, 244, 210, 0.92);
+      color: #7b5b05;
+      border: 1px solid rgba(239, 216, 137, 0.9);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .scene-overlay-text {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 12px;
+      z-index: 2;
+      color: #fff8df;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    }
+
+    .scene-info h5 {
+      color: #5f2396;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .scene-time {
+      color: #8b6500;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .scene-desc {
+      color: #4d425b;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .scene-text-tag {
+      display: inline-block;
+      background: #f6eeff;
+      color: #5f2396;
+      border: 1px solid #e7d7ff;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
     }
 
     @media (max-width: 980px) {
@@ -380,6 +483,14 @@
       .preview-headline {
         font-size: 28px;
       }
+
+      .scene-card {
+        grid-template-columns: 1fr;
+      }
+
+      .scene-thumb {
+        height: 180px;
+      }
     }
   </style>
 </head>
@@ -401,7 +512,7 @@
       <h2>Create Short Videos Step by Step</h2>
       <p>
         Start with Instagram Reels, offer promos, product showcases, inserts, and social ads.
-        Generate a reel blueprint first, then preview the visual style before building the full video engine.
+        Generate a reel blueprint first, preview the visual style, and now see each scene as a frame sequence.
       </p>
     </div>
 
@@ -581,6 +692,25 @@
             <p>Clean product-forward structure with benefits, packaging emphasis, and direct CTA.</p>
           </div>
         </div>
+
+        <div class="scene-board">
+          <h4>Scene Frame Sequence</h4>
+          <div class="scene-cards" id="sceneCards">
+            <div class="scene-card">
+              <div class="scene-thumb">
+                <div class="scene-index">Scene 1</div>
+                <div class="scene-overlay-text">Your first frame preview will appear here</div>
+              </div>
+              <div class="scene-info">
+                <h5>Opening Scene</h5>
+                <div class="scene-time">0-3 sec</div>
+                <div class="scene-desc">Scene details will appear here after you generate the video blueprint.</div>
+                <div class="scene-text-tag">On-screen text will appear here</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -598,6 +728,136 @@
       } else {
         screen.style.background = "linear-gradient(180deg, #4c2277 0%, #22132f 52%, #d4af37 180%)";
       }
+    }
+
+    function getSceneData(duration, productName, audience, offer, cta, brandName) {
+      if (duration === "15 sec") {
+        return [
+          {
+            title: "Hook Scene",
+            time: "0-3 sec",
+            desc: "Fast opening visual with a bold attention-grabbing product entry.",
+            text: productName + " you need to notice today"
+          },
+          {
+            title: "Offer Scene",
+            time: "3-8 sec",
+            desc: "Highlight the product or service in a premium visual setting.",
+            text: offer
+          },
+          {
+            title: "Benefit Scene",
+            time: "8-12 sec",
+            desc: "Show the main result, transformation, or reason to care.",
+            text: "Better results. Better brand feel."
+          },
+          {
+            title: "CTA Scene",
+            time: "12-15 sec",
+            desc: "Close with a strong final frame and action message.",
+            text: cta
+          }
+        ];
+      }
+
+      if (duration === "30 sec") {
+        return [
+          {
+            title: "Problem Hook",
+            time: "0-4 sec",
+            desc: "Start with a curiosity-led question or audience pain point.",
+            text: "Why is everyone talking about " + productName + "?"
+          },
+          {
+            title: "Product Focus",
+            time: "4-10 sec",
+            desc: "Show the product or service being used or presented.",
+            text: "Built for " + audience
+          },
+          {
+            title: "Offer Highlight",
+            time: "10-16 sec",
+            desc: "Bring in the main value proposition or limited-time offer.",
+            text: offer
+          },
+          {
+            title: "Trust Build",
+            time: "16-23 sec",
+            desc: "Reinforce quality, trust, elegance, or emotional pull.",
+            text: "Premium. Effective. Easy."
+          },
+          {
+            title: "Final CTA",
+            time: "23-30 sec",
+            desc: "End with brand lockup and strong action instruction.",
+            text: cta
+          }
+        ];
+      }
+
+      return [
+        {
+          title: "Premium Opening",
+          time: "0-5 sec",
+          desc: "Open with a refined visual and elegant brand reveal.",
+          text: "Meet " + productName
+        },
+        {
+          title: "Audience Need",
+          time: "5-12 sec",
+          desc: "Show the real need, desire, or lifestyle fit for the audience.",
+          text: "Designed for " + audience
+        },
+        {
+          title: "Offer Frame",
+          time: "12-20 sec",
+          desc: "Introduce the key offer, benefit, or core selling point.",
+          text: offer
+        },
+        {
+          title: "Benefit Breakdown",
+          time: "20-30 sec",
+          desc: "Present clear reasons why the viewer should care.",
+          text: "Smart. Elegant. Effective."
+        },
+        {
+          title: "Brand Trust",
+          time: "30-38 sec",
+          desc: "Reinforce premium positioning and confident brand identity.",
+          text: brandName + " delivers confidence"
+        },
+        {
+          title: "Closing CTA",
+          time: "38-45 sec",
+          desc: "Finish with direct action and premium end frame.",
+          text: cta
+        }
+      ];
+    }
+
+    function renderSceneCards(sceneData) {
+      const sceneCards = document.getElementById("sceneCards");
+      sceneCards.innerHTML = "";
+
+      sceneData.forEach(function(scene, index) {
+        const card = document.createElement("div");
+        card.className = "scene-card";
+
+        card.innerHTML = `
+          <div class="scene-thumb">
+            <div class="scene-index">Scene ${index + 1}</div>
+            <div class="scene-overlay-text">${scene.text}</div>
+          </div>
+          <div class="scene-info">
+            <h5>${scene.title}</h5>
+            <div class="scene-time">${scene.time}</div>
+            <div class="scene-desc">${scene.desc}</div>
+            <div class="scene-text-tag">${scene.text}</div>
+          </div>
+        `;
+
+        sceneCards.appendChild(card);
+      });
     }
 
     function updatePreviewOnly() {
@@ -620,6 +880,9 @@
       document.getElementById("previewMeta").textContent = videoType + " • " + tone + " Tone";
 
       buildPreviewTheme(templateStyle);
+
+      const sceneData = getSceneData(duration, productName, audience, offer, cta, brandName);
+      renderSceneCards(sceneData);
     }
 
     function generateVideoPlan() {
@@ -741,9 +1004,25 @@ ${cta}
       document.getElementById("previewMeta").textContent = "Product Promo • Premium Tone";
 
       buildPreviewTheme("Bold Promo");
+      renderSceneCards([
+        {
+          title: "Opening Scene",
+          time: "0-3 sec",
+          desc: "Scene details will appear here after you generate the video blueprint.",
+          text: "Your first frame preview will appear here"
+        }
+      ]);
     }
 
     buildPreviewTheme("Bold Promo");
+    renderSceneCards([
+      {
+        title: "Opening Scene",
+        time: "0-3 sec",
+        desc: "Scene details will appear here after you generate the video blueprint.",
+        text: "Your first frame preview will appear here"
+      }
+    ]);
   </script>
 </body>
 </html>
