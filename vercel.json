@@ -1,0 +1,35 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/admin", "destination": "/admin-dashboard.html" },
+    { "source": "/business", "destination": "/business-dashboard.html" },
+    { "source": "/creator", "destination": "/creator-dashboard.html" },
+    { "source": "/marketplace", "destination": "/creator-marketplace.html" },
+    { "source": "/creator-register", "destination": "/creator-register.html" },
+    { "source": "/ai-generator", "destination": "/ai-generator.html" },
+    { "source": "/campaign-studio", "destination": "/campaign-studio-pro.html" },
+    { "source": "/campaigns", "destination": "/campaigns.html" },
+    { "source": "/pricing", "destination": "/pricing.html" },
+    { "source": "/payments", "destination": "/payments.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
+    { "source": "/refund-policy", "destination": "/refund-policy.html" },
+    { "source": "/creator-policy", "destination": "/creator-policy.html" },
+    { "source": "/business-policy", "destination": "/business-policy.html" },
+    { "source": "/templates", "destination": "/templates.html" },
+    { "source": "/video-creator", "destination": "/video-creator.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}
