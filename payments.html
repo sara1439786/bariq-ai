@@ -3,472 +3,274 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI - Payments</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-
+  <title>Bariq AI Payments</title>
   <style>
-    :root{
-      --gold:#d8a63c;
-      --purple:#7f66bb;
-      --purple-deep:#5e4792;
-      --bg:#faf7ff;
-      --card:#ffffff;
-      --text:#352c43;
-      --muted:#7e7590;
-      --line:rgba(127,102,187,.14);
-      --shadow:0 16px 40px rgba(94,71,146,.08);
-      --radius:24px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
 
-    *{box-sizing:border-box;margin:0;padding:0}
-
-    <body style="font-family: Arial, sans-serif; background: #f7f8fc; margin: 0; padding: 40px;">
-
-  <div style="max-width: 1200px; margin: auto;">
-    <h1 style="text-align: center; margin-bottom: 10px;">Stable Payment Testing</h1>
-    <h2 style="text-align: center; margin-bottom: 40px;">Payments & Plans</h2>
-
-    <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-
-      <div style="background: white; border-radius: 16px; padding: 24px; width: 300px; box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
-        <h3>Starter</h3>
-        <p>Perfect for small businesses</p>
-        <h2>₹999/month</h2>
-        <p>50 Credits</p>
-        <button onclick="selectPlan('Starter','₹999/month','50 Credits')" style="width: 100%; padding: 12px; border: none; border-radius: 10px; background: black; color: white; cursor: pointer;">
-          Choose Starter
-        </button>
-      </div>
-
-      <div style="background: white; border-radius: 16px; padding: 24px; width: 300px; box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
-        <h3>Growth</h3>
-        <p>Best for scaling brands</p>
-        <h2>₹2499/month</h2>
-        <p>150 Credits</p>
-        <button onclick="selectPlan('Growth','₹2499/month','150 Credits')" style="width: 100%; padding: 12px; border: none; border-radius: 10px; background: black; color: white; cursor: pointer;">
-          Choose Growth
-        </button>
-      </div>
-
-      <div style="background: white; border-radius: 16px; padding: 24px; width: 300px; box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
-        <h3>Pro</h3>
-        <p>For advanced businesses</p>
-        <h2>₹4999/month</h2>
-        <p>500 Credits</p>
-        <button onclick="selectPlan('Pro','₹4999/month','500 Credits')" style="width: 100%; padding: 12px; border: none; border-radius: 10px; background: black; color: white; cursor: pointer;">
-          Choose Pro
-        </button>
-      </div>
-
-    </div>
-
-    <div id="statusBox" style="margin: 30px auto 0; max-width: 500px; background: white; padding: 20px; border-radius: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); text-align: center;">
-      <h3>Plan Status Console</h3>
-      <p id="statusMessage">Plan selected carefully.</p>
-    </div>
-  </div>
-
-  <script>
-    function selectPlan(planName, price, credits) {
-      const selectedPlan = {
-        name: planName,
-        price: price,
-        credits: credits
-      };
-
-      localStorage.setItem("bariq_selected_plan", JSON.stringify(selectedPlan));
-
-      document.getElementById("statusMessage").innerText =
-        "Plan " + planName + " selected successfully | Amount " + price + " | Testing mode activated";
-    }
-  </script>
-
-</body>
-      font-family:Inter,sans-serif;
-      background:
-        radial-gradient(circle at top left,#fff0d8 0%,transparent 22%),
-        radial-gradient(circle at top right,#f4ebff 0%,transparent 22%),
-        linear-gradient(180deg,#fffaf4 0%,#fff8fc 50%,#fbf9ff 100%);
-      color:var(--text);
-      min-height:100vh;
+    body {
+      background: linear-gradient(135deg, #f8fafc, #eef2ff);
+      color: #111827;
+      min-height: 100vh;
+      padding: 40px 20px;
     }
 
-    a{text-decoration:none;color:inherit}
-
-    .container{
-      width:min(1180px, calc(100% - 32px));
-      margin:auto;
+    .container {
+      max-width: 1200px;
+      margin: auto;
     }
 
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:10;
-      background:rgba(255,255,255,.88);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--line);
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
     }
 
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      padding:16px 0;
-      flex-wrap:wrap;
+    .header h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
     }
 
-    .logo{
-      font-family:Manrope,sans-serif;
-      font-size:34px;
-      font-weight:800;
-      letter-spacing:-0.8px;
-      background:linear-gradient(90deg,var(--gold) 0%,#efc56b 18%,var(--purple) 58%,var(--purple-deep) 100%);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
+    .header p {
+      color: #6b7280;
+      font-size: 16px;
     }
 
-    .nav-links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:16px;
-      align-items:center;
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
     }
 
-    .nav-links a{
-      font-size:14px;
-      font-weight:700;
-      color:#776e88;
+    .plan-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      transition: 0.25s ease;
     }
 
-    .page{
-      padding:34px 0 48px;
+    .plan-card:hover {
+      transform: translateY(-4px);
     }
 
-    .hero{
-      background:rgba(255,255,255,.94);
-      border:1px solid var(--line);
-      border-radius:30px;
-      box-shadow:var(--shadow);
-      padding:32px;
-      margin-bottom:18px;
+    .plan-card h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
     }
 
-    .badge{
-      display:inline-flex;
-      padding:10px 14px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background:#fff;
-      color:var(--purple-deep);
-      font-size:12px;
-      font-weight:800;
-      margin-bottom:14px;
+    .subtitle {
+      color: #6b7280;
+      margin-bottom: 18px;
+      min-height: 40px;
     }
 
-    .hero h1{
-      font-family:Manrope,sans-serif;
-      font-size:44px;
-      color:var(--purple-deep);
-      margin-bottom:10px;
+    .price {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
 
-    .hero p{
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.85;
-      max-width:860px;
+    .credits {
+      color: #374151;
+      font-weight: 600;
+      margin-bottom: 18px;
     }
 
-    .plans{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-      margin-bottom:18px;
+    .features {
+      list-style: none;
+      margin-bottom: 22px;
     }
 
-    .plan-card,
-    .status-card{
-      background:rgba(255,255,255,.95);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+    .features li {
+      margin-bottom: 10px;
+      color: #374151;
+      line-height: 1.5;
     }
 
-    .plan-card{
-      padding:24px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
+    .btn {
+      width: 100%;
+      border: none;
+      background: #111827;
+      color: #ffffff;
+      padding: 14px 16px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.25s ease;
     }
 
-    .plan-card h3{
-      font-family:Manrope,sans-serif;
-      font-size:24px;
-      color:var(--purple-deep);
+    .btn:hover {
+      opacity: 0.95;
     }
 
-    .price{
-      font-family:Manrope,sans-serif;
-      font-size:38px;
-      color:var(--text);
-      font-weight:800;
-      line-height:1;
+    .status-box {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      max-width: 700px;
+      margin: 0 auto;
     }
 
-    .price span{
-      font-size:15px;
-      color:var(--muted);
-      font-weight:700;
+    .status-box h3 {
+      margin-bottom: 14px;
+      font-size: 22px;
     }
 
-    .plan-card p{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.75;
+    .status-line {
+      margin-bottom: 10px;
+      color: #374151;
+      line-height: 1.6;
     }
 
-    .feature{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:10px 12px;
-      font-size:13px;
-      color:#655b76;
-      font-weight:600;
+    .status-highlight {
+      display: inline-block;
+      margin-top: 8px;
+      background: #dcfce7;
+      color: #166534;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
     }
 
-    .btn{
-      border:none;
-      border-radius:999px;
-      padding:13px 18px;
-      font-size:14px;
-      font-weight:800;
-      cursor:pointer;
-      background:linear-gradient(135deg,var(--gold),var(--purple));
-      color:#fff;
-      box-shadow:0 12px 24px rgba(94,71,146,.14);
+    .action-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    .status-card{
-      padding:24px;
+    .small-btn {
+      border: none;
+      padding: 12px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      background: #eef2ff;
+      color: #111827;
     }
 
-    .status-card h2{
-      font-family:Manrope,sans-serif;
-      font-size:28px;
-      color:var(--purple-deep);
-      margin-bottom:10px;
-    }
-
-    .status-box{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-      min-height:120px;
-      white-space:pre-line;
-      font-size:14px;
-      line-height:1.8;
-      color:var(--text);
-    }
-
-    .footer{
-      margin-top:18px;
-      border-top:1px solid var(--line);
-      padding-top:18px;
-      text-align:center;
-      color:#9489a8;
-      font-size:13px;
-    }
-
-    @media (max-width:1024px){
-      .plans{grid-template-columns:1fr}
-    }
-
-    @media (max-width:768px){
-      .hero h1{font-size:34px}
-      .nav{justify-content:center}
-      .nav-links{justify-content:center}
-      .price{font-size:32px}
+    .small-btn-dark {
+      background: #111827;
+      color: #ffffff;
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container nav">
-      <a href="index.html" class="logo">Bariq AI</a>
-
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="business-dashboard.html">Business</a>
-        <a href="ai-generator.html">AI Generator</a>
-        <a href="campaign-studio-pro.html">Campaign</a>
-        <a href="creator-marketplace.html">Marketplace</a>
-        <a href="creator-dashboard.html">Creators</a>
-        <a href="payments.html">Payments</a>
-        <a href="admin-dashboard.html">Admin</a>
-      </nav>
+  <div class="container">
+    <div class="header">
+      <h1>Bariq AI Payments & Plans</h1>
+      <p>Select a plan first. Payment gateway can be connected in the next step.</p>
     </div>
-  </header>
 
-  <main class="page">
-    <div class="container">
+    <div class="plans">
+      <div class="plan-card">
+        <h2>Starter</h2>
+        <div class="subtitle">Perfect for solo founders and small businesses</div>
+        <div class="price">₹999/month</div>
+        <div class="credits">50 Credits</div>
+        <ul class="features">
+          <li>5 AI Videos</li>
+          <li>Basic Support</li>
+          <li>1 Brand Kit</li>
+        </ul>
+        <button class="btn" onclick="selectPlan('Starter','₹999/month','50 Credits',['5 AI Videos','Basic Support','1 Brand Kit'])">
+          Choose Starter
+        </button>
+      </div>
 
-      <section class="hero">
-        <div class="badge">Stable Test Billing Mode</div>
-        <h1>Payments & Plans</h1>
-        <p>
-          Select a Bariq AI plan and move into the platform in stable testing mode. This version is intentionally simple and reliable so the site stays smooth during final testing before live payment gateway integration.
-        </p>
-      </section>
+      <div class="plan-card">
+        <h2>Growth</h2>
+        <div class="subtitle">Best for brands ready to scale content faster</div>
+        <div class="price">₹2499/month</div>
+        <div class="credits">150 Credits</div>
+        <ul class="features">
+          <li>20 AI Videos</li>
+          <li>Priority Support</li>
+          <li>3 Brand Kits</li>
+        </ul>
+        <button class="btn" onclick="selectPlan('Growth','₹2499/month','150 Credits',['20 AI Videos','Priority Support','3 Brand Kits'])">
+          Choose Growth
+        </button>
+      </div>
 
-      <section class="plans">
-        <div class="plan-card">
-          <h3>Starter</h3>
-          <div class="price">₹1,999 <span>/ month</span></div>
-          <p>Best for early businesses testing AI content generation and basic campaign planning.</p>
-          <div class="feature">AI campaign generation</div>
-          <div class="feature">Basic business dashboard</div>
-          <div class="feature">Stable testing mode access</div>
-          <button class="btn" onclick="buyPlan('Starter',1999)">Choose Starter</button>
-        </div>
-
-        <div class="plan-card">
-          <h3>Growth</h3>
-          <div class="price">₹4,999 <span>/ month</span></div>
-          <p>Best for active brands that want stronger creator workflow and campaign execution testing.</p>
-          <div class="feature">Everything in Starter</div>
-          <div class="feature">Marketplace workflow</div>
-          <div class="feature">Expanded campaign tools</div>
-          <button class="btn" onclick="buyPlan('Growth',4999)">Choose Growth</button>
-        </div>
-
-        <div class="plan-card">
-          <h3>Pro</h3>
-          <div class="price">₹9,999 <span>/ month</span></div>
-          <p>For premium businesses preparing for larger scale execution and deeper automation later.</p>
-          <div class="feature">Everything in Growth</div>
-          <div class="feature">Priority workflow mode</div>
-          <div class="feature">Advanced expansion readiness</div>
-          <button class="btn" onclick="buyPlan('Pro',9999)">Choose Pro</button>
-        </div>
-      </section>
-
-      <section class="status-card">
-        <h2>Plan Status Console</h2>
-        <div class="status-box" id="paymentStatusBox">No plan selected yet.</div>
-      </section>
-
-      <div class="footer">
-        © <span id="year"></span> Bariq AI. All rights reserved.
+      <div class="plan-card">
+        <h2>Pro</h2>
+        <div class="subtitle">For advanced businesses and agency-level usage</div>
+        <div class="price">₹4999/month</div>
+        <div class="credits">500 Credits</div>
+        <ul class="features">
+          <li>Unlimited AI Campaign Access</li>
+          <li>Premium Priority Support</li>
+          <li>10 Brand Kits</li>
+        </ul>
+        <button class="btn" onclick="selectPlan('Pro','₹4999/month','500 Credits',['Unlimited AI Campaign Access','Premium Priority Support','10 Brand Kits'])">
+          Choose Pro
+        </button>
       </div>
     </div>
-  </main>
+
+    <div class="status-box">
+      <h3>Plan Status Console</h3>
+      <div class="status-line" id="selectedPlanLine">Selected Plan: None</div>
+      <div class="status-line" id="selectedPriceLine">Amount: --</div>
+      <div class="status-line" id="selectedCreditsLine">Credits: --</div>
+      <div class="status-line" id="selectedFeaturesLine">Features: --</div>
+      <div class="status-highlight" id="statusBadge">Testing mode active</div>
+
+      <div class="action-row">
+        <button class="small-btn" onclick="simulatePayment()">Proceed to Payment</button>
+        <button class="small-btn small-btn-dark" onclick="goToDashboard()">Open Dashboard</button>
+      </div>
+    </div>
+  </div>
 
   <script>
-    function buyPlan(plan, price){
-      localStorage.setItem("bariq_user_plan", plan);
-      localStorage.setItem("bariq_plan_price", price);
+    function selectPlan(planName, price, credits, features) {
+      const selectedPlan = {
+        name: planName,
+        price: price,
+        credits: credits,
+        features: features
+      };
 
-      document.getElementById("paymentStatusBox").textContent = `Plan selected successfully
+      localStorage.setItem("bariq_selected_plan", JSON.stringify(selectedPlan));
 
-Plan: ${plan}
-Amount: ₹${price} / month
-
-Status:
-Stable testing mode activated
-
-Next step:
-Redirecting to business dashboard...`;
-
-      setTimeout(function(){
-        window.location.href = "business-dashboard.html";
-      }, 1200);
+      document.getElementById("selectedPlanLine").textContent = "Selected Plan: " + planName;
+      document.getElementById("selectedPriceLine").textContent = "Amount: " + price;
+      document.getElementById("selectedCreditsLine").textContent = "Credits: " + credits;
+      document.getElementById("selectedFeaturesLine").textContent = "Features: " + features.join(", ");
+      document.getElementById("statusBadge").textContent = "Plan selected successfully";
     }
 
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
-<script>
-  function selectPlan(planName, price, credits, features) {
-    const selectedPlan = {
-      name: planName,
-      price: price,
-      credits: credits,
-      features: features
-    };
+    function simulatePayment() {
+      const storedPlan = localStorage.getItem("bariq_selected_plan");
 
-    localStorage.setItem("bariq_selected_plan", JSON.stringify(selectedPlan));
-    window.location.href = "business-dashboard.html";
-  }
-</script>
-</body>
-</html>
-<button onclick="selectPlan('Starter', '₹999/month', '50 Credits', ['5 AI Videos', 'Basic Support', '1 Brand Kit'])">
-  Choose Starter
-</button>
-
-<button onclick="selectPlan('Growth', '₹2499/month', '150 Credits', ['20 AI Videos', 'Priority Support', '3 Brand Kits'])">
-  Choose Growth
-</button>
-
-<button onclick="selectPlan('Pro', '₹4999/month', '500 Credits', ['Unlimited Campaigns', 'Premium Support', '10 Brand Kits'])">
-  Choose Pro
-</button>
-</body>
-</html>
-<div class="plan-card">
- 
-<ul id="planFeatures"></ul>
-</div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const storedPlan = localStorage.getItem("bariq_selected_plan");
-
-    if (storedPlan) {
-      const plan = JSON.parse(storedPlan);
-
-      document.getElementById("planName").textContent = plan.name;
-      document.getElementById("planPrice").textContent = "Price: " + plan.price;
-      document.getElementById("planCredits").textContent = "Credits: " + plan.credits;
-
-      const featureList = document.getElementById("planFeatures");
-      featureList.innerHTML = "";
-
-      if (plan.features && Array.isArray(plan.features)) {
-        plan.features.forEach(feature => {
-          const li = document.createElement("li");
-          li.textContent = feature;
-          featureList.appendChild(li);
-        });
+      if (!storedPlan) {
+        alert("Please select a plan first.");
+        return;
       }
+
+      alert("Payment gateway will be connected here next.");
     }
-  });
-</script>
-</body>
-</html>
-<button onclick="clearPlan()">Reset Plan</button>
 
-  }
-</script>
+    function goToDashboard() {
+      const storedPlan = localStorage.getItem("bariq_selected_plan");
 
+      if (!storedPlan) {
+        alert("Please select a plan first.");
+        return;
+      }
 
-  const selectedPlan = {
-    name: planName,
-    price: price,
-    credits: credits,
-    features: ["20 AI Videos", "Priority Support", "3 Brand Kits"]
-  };
-
-  localStorage.setItem("bariq_selected_plan", JSON.stringify(selectedPlan));
-
-  document.getElementById("statusMessage").innerText = "Plan selected successfully";
-}
-</script>
+      window.location.href = "business-dashboard.html";
+    }
+  </script>
 </body>
 </html>
