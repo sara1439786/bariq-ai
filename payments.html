@@ -413,7 +413,7 @@ function selectPlan(planName, price, credits) {
 
   localStorage.setItem("bariq_selected_plan", JSON.stringify(selectedPlan));
 
-  window.location.href = "business-dashboard.html";
+  document.getElementById("statusMessage").innerText = "Plan selected successfully";
 }
 </script>
 </body>
