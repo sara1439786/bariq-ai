@@ -1,0 +1,589 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI - Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --gold:#D6A13A;
+      --gold-soft:#F1D28B;
+      --metal:#7D63B8;
+      --metal-deep:#5D468F;
+      --rose:#B97AA7;
+      --bg1:#fffaf4;
+      --bg2:#fff5fb;
+      --bg3:#fbf7ff;
+      --text:#3b2f45;
+      --muted:#7d728c;
+      --line:rgba(214,161,58,.18);
+      --white:#ffffff;
+      --success:#3f9968;
+      --warning:#c28a2c;
+      --danger:#c85d72;
+      --shadow:0 20px 50px rgba(95,70,120,.08);
+      --shadow2:0 10px 24px rgba(70,45,95,.06);
+      --radius-xl:30px;
+      --radius-lg:22px;
+      --radius-md:18px;
+    }*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at top left,#fff0d8 0%,transparent 24%),
+    radial-gradient(circle at top right,#f8e8ff 0%,transparent 24%),
+    linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 48%,var(--bg3) 100%);
+  min-height:100vh;
+}
+
+a{text-decoration:none;color:inherit}
+.container{width:min(1240px,calc(100% - 40px));margin:auto}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  padding:16px 0;
+  flex-wrap:wrap;
+}
+
+.logo{
+  font-family:Manrope,sans-serif;
+  font-size:31px;
+  font-weight:800;
+  letter-spacing:-0.8px;
+  background:linear-gradient(90deg,var(--gold) 0%,var(--gold-soft) 18%,var(--metal) 58%,var(--metal-deep) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.nav-links{display:flex;gap:18px;flex-wrap:wrap}
+.nav-links a{color:#776b83;font-size:14px;font-weight:600;position:relative}
+.nav-links a:hover{color:var(--metal-deep)}
+.nav-links a.active{color:var(--metal-deep)}
+.nav-links a.active::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-8px;
+  width:100%;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--gold),var(--metal));
+}
+
+.page{padding:34px 0 40px}
+
+.hero{
+  background:rgba(255,255,255,.92);
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow);
+  padding:32px;
+  margin-bottom:18px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  right:-90px;
+  top:-90px;
+  background:radial-gradient(circle,var(--gold-soft),transparent 70%);
+  opacity:.35;
+}
+
+.badge{
+  display:inline-flex;
+  padding:10px 15px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#fff;
+  color:var(--metal-deep);
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:14px;
+  position:relative;
+  z-index:1;
+}
+
+.hero h1{
+  font-family:Manrope,sans-serif;
+  font-size:42px;
+  color:var(--metal-deep);
+  margin-bottom:8px;
+  position:relative;
+  z-index:1;
+}
+
+.hero .tagline{
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+  font-size:28px;
+  color:#7c61ae;
+  margin-bottom:14px;
+  position:relative;
+  z-index:1;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.8;
+  max-width:900px;
+  font-size:15px;
+  position:relative;
+  z-index:1;
+}
+
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;position:relative;z-index:1}
+
+.btn,.btn-outline,.small-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 20px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s ease;
+  border:none;
+}
+
+.btn{
+  background:linear-gradient(135deg,var(--gold),var(--metal));
+  color:#fff;
+  box-shadow:0 12px 24px rgba(125,99,184,.18);
+}
+
+.btn-outline,.small-btn{
+  background:#fff;
+  color:var(--metal-deep);
+  border:1px solid var(--line);
+}
+
+.btn:hover,.btn-outline:hover,.small-btn:hover,.panel:hover,.stat-card:hover,.table-card:hover,.feed-item:hover{transform:translateY(-2px)}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:18px;
+}
+
+.stat-card{
+  background:linear-gradient(135deg,#fffaf2,#fff8fd);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  padding:22px;
+  box-shadow:var(--shadow2);
+  transition:.2s ease;
+}
+
+.stat-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.icon-box{
+  width:52px;
+  height:52px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+  border:1px solid var(--line);
+  background:linear-gradient(135deg,#fff3dc,#f3e9ff);
+}
+
+.stat-card h4{color:#866fb3;font-size:13px;font-weight:700}
+.num{font-family:Manrope,sans-serif;font-size:30px;color:var(--metal-deep);font-weight:800;margin-bottom:6px}
+.stat-card p{color:var(--muted);font-size:13px;line-height:1.65}
+.trend{margin-top:10px;font-size:12px;font-weight:700;color:#7f68b8}
+
+.grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-bottom:18px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+
+.panel,.table-card{
+  background:rgba(255,255,255,.92);
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  padding:24px;
+  box-shadow:var(--shadow2);
+  transition:.2s ease;
+}
+
+.panel h2,.table-card h2{
+  font-family:Manrope,sans-serif;
+  font-size:24px;
+  color:var(--metal-deep);
+  margin-bottom:8px;
+}
+
+.sub{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:16px}
+
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:20px;background:#fff}
+table{width:100%;border-collapse:collapse;min-width:700px}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid rgba(214,161,58,.12);font-size:14px}
+th{color:#7f68b8;background:linear-gradient(180deg,#fffaf2,#fff)}
+td{color:var(--text)}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  padding:7px 11px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  border:1px solid var(--line);
+  background:#fff;
+}
+.pill.success{color:var(--success)}
+.pill.warning{color:var(--warning)}
+.pill.danger{color:var(--danger)}
+
+.action-row{display:flex;gap:8px;flex-wrap:wrap}
+
+.feed-list{display:grid;gap:12px}
+.feed-item{
+  background:linear-gradient(135deg,#fffaf2,#fff8fd);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:var(--shadow2);
+  transition:.2s ease;
+}
+.feed-item strong{display:block;color:var(--metal-deep);font-size:15px;margin-bottom:6px}
+.feed-item span{display:block;color:var(--muted);font-size:13px;line-height:1.7}
+.feed-meta{margin-top:8px;color:#8d7cb2;font-size:12px;font-weight:700}
+
+.mini-stats{display:grid;gap:12px}
+.mini-card{
+  background:linear-gradient(135deg,#fffaf2,#fff8fd);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+}
+.mini-card strong{display:block;color:var(--metal-deep);font-size:15px;margin-bottom:6px}
+.mini-card span{display:block;color:var(--muted);font-size:13px;line-height:1.7}
+
+.footer{text-align:center;color:#8a7fa5;padding:34px 0 26px}
+
+@media (max-width: 1080px){
+  .stats,.grid-2,.grid-3{grid-template-columns:1fr}
+}
+
+@media (max-width: 768px){
+  .container{width:min(100% - 24px,1240px)}
+  .nav{justify-content:space-between;align-items:flex-start}
+  .nav-links{width:100%;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap;padding-bottom:4px;scrollbar-width:none}
+  .nav-links::-webkit-scrollbar{display:none}
+  .hero{padding:24px}
+  .hero h1{font-size:31px}
+  .hero .tagline{font-size:22px;line-height:1.35}
+}
+
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="index.html" class="logo">Bariq AI</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="business-dashboard.html">Business</a>
+        <a href="creator-dashboard.html">Creator</a>
+        <a href="ai-generator.html">AI Generator</a>
+        <a href="creator-marketplace.html">Marketplace</a>
+        <a href="campaign-studio-pro.html">Campaign Studio</a>
+        <a href="admin-dashboard.html" class="active">Admin</a>
+      </nav>
+    </div>
+  </header>  <main class="page">
+    <div class="container">
+      <section class="hero">
+        <div class="badge">Platform Control Center</div>
+        <h1>Admin Dashboard</h1>
+        <div class="tagline">Control creators, businesses, campaigns, and revenue from one premium command center</div>
+        <p>
+          This is the operational brain of Bariq AI. From here, the founder or admin team can monitor signups, approve profiles, track campaign activity, review platform revenue, and keep the entire ecosystem healthy.
+        </p>
+        <div class="hero-actions">
+          <button class="btn">Export Reports</button>
+          <button class="btn-outline">Review Approvals</button>
+          <button class="btn-outline">Open Revenue View</button>
+        </div>
+      </section><section class="stats">
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="icon-box">🏢</div>
+        <h4>Total Businesses</h4>
+      </div>
+      <div class="num">248</div>
+      <p>Registered brands, clinics, restaurants, and local businesses on Bariq AI.</p>
+      <div class="trend">+18 this week</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="icon-box">🎥</div>
+        <h4>Total Creators</h4>
+      </div>
+      <div class="num">1,426</div>
+      <p>Creators available for collaborations and campaign opportunities.</p>
+      <div class="trend">+73 this week</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="icon-box">📣</div>
+        <h4>Active Campaigns</h4>
+      </div>
+      <div class="num">89</div>
+      <p>Live campaigns currently running across the Bariq AI ecosystem.</p>
+      <div class="trend">12 need review</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="icon-box">💰</div>
+        <h4>Monthly Revenue</h4>
+      </div>
+      <div class="num">₹4.8L</div>
+      <p>Subscriptions, add-ons, and campaign management revenue this month.</p>
+      <div class="trend">+22% vs last month</div>
+    </div>
+  </section>
+
+  <section class="grid-2">
+    <div class="table-card">
+      <h2>Pending Approvals</h2>
+      <div class="sub">Quickly approve or review creators and businesses waiting to go live.</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>City</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Glowline Aesthetics</td>
+              <td>Business</td>
+              <td>Hyderabad</td>
+              <td><span class="pill warning">Pending</span></td>
+              <td>
+                <div class="action-row">
+                  <button class="small-btn">Approve</button>
+                  <button class="small-btn">Review</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Rhea Lifestyle</td>
+              <td>Creator</td>
+              <td>Mumbai</td>
+              <td><span class="pill warning">Pending</span></td>
+              <td>
+                <div class="action-row">
+                  <button class="small-btn">Approve</button>
+                  <button class="small-btn">Review</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Urban Spoon Café</td>
+              <td>Business</td>
+              <td>Bengaluru</td>
+              <td><span class="pill danger">Flagged</span></td>
+              <td>
+                <div class="action-row">
+                  <button class="small-btn">Check Docs</button>
+                  <button class="small-btn">Hold</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>FitWithAanya</td>
+              <td>Creator</td>
+              <td>Delhi</td>
+              <td><span class="pill warning">Pending</span></td>
+              <td>
+                <div class="action-row">
+                  <button class="small-btn">Approve</button>
+                  <button class="small-btn">Review</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Platform Activity Feed</h2>
+      <div class="sub">A founder-friendly snapshot of what is happening on the platform right now.</div>
+      <div class="feed-list">
+        <div class="feed-item">
+          <strong>New business onboarding request received</strong>
+          <span>Glowline Aesthetics submitted onboarding documents and requested campaign setup access.</span>
+          <div class="feed-meta">5 min ago</div>
+        </div>
+        <div class="feed-item">
+          <strong>Creator profile reached high visibility</strong>
+          <span>Riya Makeup Studio crossed 4.2K profile views and received 8 collaboration requests today.</span>
+          <div class="feed-meta">18 min ago</div>
+        </div>
+        <div class="feed-item">
+          <strong>Campaign budget updated</strong>
+          <span>A Hyderabad wellness brand increased creator campaign budget from ₹25,000 to ₹40,000.</span>
+          <div class="feed-meta">42 min ago</div>
+        </div>
+        <div class="feed-item">
+          <strong>Payment received</strong>
+          <span>Monthly subscription payment cleared from 7 active business accounts.</span>
+          <div class="feed-meta">1 hr ago</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid-3">
+    <div class="panel">
+      <h2>Campaign Oversight</h2>
+      <div class="sub">Watch the health of ongoing campaigns and take action when needed.</div>
+      <div class="mini-stats">
+        <div class="mini-card">
+          <strong>Top Category</strong>
+          <span>Beauty & Aesthetic campaigns are driving the highest number of creator matches this month.</span>
+        </div>
+        <div class="mini-card">
+          <strong>Needs Attention</strong>
+          <span>12 campaigns have low response rates and may need stronger hooks or better creator targeting.</span>
+        </div>
+        <div class="mini-card">
+          <strong>Best Performance</strong>
+          <span>Local clinic campaigns with clear offers and city-based targeting are performing best on Bariq AI.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Revenue Snapshot</h2>
+      <div class="sub">A clean view of how Bariq AI can be monetized and tracked at admin level.</div>
+      <div class="mini-stats">
+        <div class="mini-card">
+          <strong>Subscriptions</strong>
+          <span>₹3.2L collected from monthly business plans and creator-promoted visibility packages.</span>
+        </div>
+        <div class="mini-card">
+          <strong>Campaign Fees</strong>
+          <span>₹1.1L generated from campaign posting, boosted placements, and managed collaboration fees.</span>
+        </div>
+        <div class="mini-card">
+          <strong>Upsell Potential</strong>
+          <span>AI-generated creative packs and premium creator discovery can increase revenue further.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Admin Quick Actions</h2>
+      <div class="sub">Fast controls that make the founder feel in charge of the entire platform.</div>
+      <div class="mini-stats">
+        <div class="mini-card">
+          <strong>Approve Accounts</strong>
+          <span>Manually approve new creators and businesses after reviewing profile quality.</span>
+        </div>
+        <div class="mini-card">
+          <strong>Pause Accounts</strong>
+          <span>Temporarily hold suspicious, incomplete, or poor-quality profiles from going public.</span>
+        </div>
+        <div class="mini-card">
+          <strong>Export Reports</strong>
+          <span>Download business, creator, campaign, and revenue summaries for founder review.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="table-card" style="margin-top:18px;">
+    <h2>Recent Campaign Monitoring</h2>
+    <div class="sub">A broader monitoring view for campaign quality, approvals, and platform trust.</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Campaign</th>
+            <th>Business</th>
+            <th>Budget</th>
+            <th>Creator Matches</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Laser Hair Reduction Launch</td>
+            <td>Glowline Aesthetics</td>
+            <td>₹40,000</td>
+            <td>26</td>
+            <td><span class="pill success">Live</span></td>
+            <td><button class="small-btn">View Campaign</button></td>
+          </tr>
+          <tr>
+            <td>Healthy Bowl Week Promo</td>
+            <td>Urban Spoon Café</td>
+            <td>₹18,000</td>
+            <td>11</td>
+            <td><span class="pill warning">Review</span></td>
+            <td><button class="small-btn">Audit</button></td>
+          </tr>
+          <tr>
+            <td>Transformation Challenge</td>
+            <td>Pulse Fitness Studio</td>
+            <td>₹30,000</td>
+            <td>19</td>
+            <td><span class="pill success">Running</span></td>
+            <td><button class="small-btn">Open</button></td>
+          </tr>
+          <tr>
+            <td>Skincare Product Push</td>
+            <td>Bloom D2C</td>
+            <td>₹55,000</td>
+            <td>34</td>
+            <td><span class="pill danger">Flagged</span></td>
+            <td><button class="small-btn">Inspect</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="footer">© Bariq AI • Founder control with premium platform intelligence</div>
+</div>
+
+  </main>
+ <script src="bariq-connect.js"></script> 
+</body>
+</html>
