@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bariq AI Video Creator</title>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ccapture.js@1.1.0/build/CCapture.all.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -308,7 +310,7 @@
       position: absolute;
       inset: 100px 24px 160px 24px;
       z-index: 1;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       pointer-events: none;
@@ -462,7 +464,7 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.18);
     }
 
-    .ratio-card, .music-card {
+    .ratio-card, .music-card, .assets-card, .live-card {
       margin-bottom: 18px;
       background: #fffdf8;
       border: 1px solid #f1df9f;
@@ -470,13 +472,13 @@
       padding: 18px;
     }
 
-    .ratio-card h4, .music-card h4, .assets-card h4 {
+    .ratio-card h4, .music-card h4, .assets-card h4, .live-card h4, .scene-board h4, .subtitle-board h4 {
       color: #5f2396;
       font-size: 19px;
       margin-bottom: 10px;
     }
 
-    .ratio-meta, .music-meta {
+    .ratio-meta, .music-meta, .assets-meta {
       color: #5d536a;
       font-size: 14px;
       line-height: 1.6;
@@ -486,7 +488,7 @@
       margin-bottom: 10px;
     }
 
-    .music-tag {
+    .music-tag, .asset-mini {
       display: inline-block;
       background: #f6eeff;
       color: #5f2396;
@@ -499,14 +501,6 @@
       margin-top: 8px;
     }
 
-    .assets-card {
-      margin-bottom: 18px;
-      background: #fffdf8;
-      border: 1px solid #f1df9f;
-      border-radius: 20px;
-      padding: 18px;
-    }
-
     .asset-mini-row {
       display: flex;
       gap: 10px;
@@ -514,25 +508,8 @@
       flex-wrap: wrap;
     }
 
-    .asset-mini {
-      background: #f6eeff;
-      color: #5f2396;
-      border: 1px solid #e7d7ff;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
     .scene-board {
       margin-top: 18px;
-    }
-
-    .scene-board h4,
-    .subtitle-board h4 {
-      color: #5f2396;
-      font-size: 20px;
-      margin-bottom: 14px;
     }
 
     .scene-cards {
@@ -650,6 +627,18 @@
       font-weight: 700;
     }
 
+    .live-preview-player {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      height: 640px;
+      margin: 14px auto 0;
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #5f2396 0%, #22132f 50%, #d4af37 180%);
+      box-shadow: 0 16px 38px rgba(0,0,0,0.14);
+    }
+
     @media (max-width: 980px) {
       .main-grid {
         grid-template-columns: 1fr;
@@ -657,10 +646,7 @@
     }
 
     @media (max-width: 720px) {
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
+      .form-grid,
       .color-row {
         grid-template-columns: 1fr;
       }
@@ -680,6 +666,10 @@
 
       .preview-frame {
         min-height: 520px;
+      }
+
+      .live-preview-player {
+        height: 560px;
       }
     }
   </style>
@@ -702,7 +692,7 @@
       <h2>Create Short Videos Step by Step</h2>
       <p>
         Start with Instagram Reels, square posts, story ads, product promos, and landscape ads.
-        Add your brand assets, preview the look, and make Bariq AI feel like a real creator tool.
+        Add your assets, preview the creative, and now generate a real downloadable video preview.
       </p>
     </div>
 
@@ -877,18 +867,18 @@
       <div class="panel">
         <h3>Visual Template Preview</h3>
 
-        <div class="preview-frame" id="previewFrame">
+        <div class="preview-frame">
           <div class="preview-phone" id="previewShell">
             <div class="preview-screen" id="previewScreen">
               <div class="preview-overlay"></div>
 
-              <div class="preview-product" id="previewProductWrap" style="display:none;">
+              <div class="preview-product" id="previewProductWrap">
                 <img id="previewProductImage" alt="Product Preview" />
               </div>
 
               <div class="preview-chip" id="previewChip">15 sec • Bold Promo • 9:16</div>
 
-              <div class="preview-logo-wrap" id="previewLogoWrap">
+              <div class="preview-logo-wrap">
                 <div class="preview-logo-placeholder" id="previewLogoPlaceholder">LOGO</div>
                 <img id="previewLogoImage" alt="Logo Preview" style="display:none;" />
               </div>
@@ -925,7 +915,7 @@
 
         <div class="assets-card">
           <h4>Brand Asset Status</h4>
-          <div class="ratio-meta">Uploaded assets and brand colors will be reflected directly in the preview.</div>
+          <div class="assets-meta">Uploaded assets and brand colors will be reflected directly in the preview.</div>
           <div class="asset-mini-row">
             <span class="asset-mini" id="assetLogoStatus">Logo: Not uploaded</span>
             <span class="asset-mini" id="assetProductStatus">Product: Not uploaded</span>
@@ -975,6 +965,48 @@
           </div>
         </div>
 
+        <div class="live-card">
+          <h4>Live Video Preview Player</h4>
+          <div class="action-row">
+            <button class="btn btn-primary" onclick="playGeneratedPreview()">Play Preview</button>
+            <button class="btn btn-light" onclick="stopGeneratedPreview()">Stop Preview</button>
+            <button class="btn btn-primary" onclick="exportVideo()">Export Video</button>
+          </div>
+
+          <div id="livePreviewPlayer" class="live-preview-player">
+            <div id="playerProductWrap" style="position:absolute; inset:90px 24px 150px 24px; display:none; align-items:center; justify-content:center; z-index:1;">
+              <img id="playerProductImage" style="max-width:100%; max-height:100%; object-fit:contain; filter:drop-shadow(0 12px 22px rgba(0,0,0,0.25));" />
+            </div>
+
+            <div id="playerSceneBadge" style="position:absolute; top:16px; left:16px; z-index:3; background:rgba(255,244,210,0.92); color:#7b5b05; border:1px solid rgba(239,216,137,0.9); padding:8px 12px; border-radius:999px; font-size:12px; font-weight:700;">
+              Scene 1
+            </div>
+
+            <div id="playerLogoWrap" style="position:absolute; top:16px; right:16px; width:50px; height:50px; border-radius:14px; overflow:hidden; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; z-index:3;">
+              <span id="playerLogoText" style="font-size:10px; color:#fff8df; font-weight:700;">LOGO</span>
+              <img id="playerLogoImage" style="display:none; width:100%; height:100%; object-fit:contain; background:#fff;" />
+            </div>
+
+            <div id="playerHeadline" style="position:absolute; left:20px; right:20px; top:120px; z-index:3; text-align:center; font-size:32px; font-weight:800; line-height:1.16; color:#fff8df; text-shadow:0 4px 18px rgba(0,0,0,0.28);">
+              Your video preview will appear here
+            </div>
+
+            <div id="playerSubtitle" style="position:absolute; left:16px; right:16px; bottom:98px; z-index:3; display:flex; justify-content:center;">
+              <div style="max-width:90%; text-align:center; background:rgba(0,0,0,0.58); color:#fff8df; padding:10px 14px; border-radius:14px; font-size:14px; line-height:1.45; font-weight:700;">
+                Subtitle preview
+              </div>
+            </div>
+
+            <div style="position:absolute; left:18px; right:18px; bottom:18px; z-index:3; display:flex; flex-direction:column; gap:10px;">
+              <div id="playerCTA" style="align-self:flex-start; background:linear-gradient(135deg,#fff4d2 0%, #d4af37 100%); color:#4f2b00; font-size:13px; font-weight:800; padding:10px 14px; border-radius:999px;">
+                Shop Now
+              </div>
+              <div id="playerBrand" style="color:#fff; font-size:18px; font-weight:700;">Your Brand</div>
+              <div id="playerMeta" style="color:rgba(255,255,255,0.85); font-size:13px;">Preview Mode</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -982,6 +1014,11 @@
   <script>
     let uploadedLogoData = "";
     let uploadedProductData = "";
+    let previewTimer = null;
+    let previewSceneIndex = 0;
+    let previewScenes = [];
+    let capturer = null;
+    let recording = false;
 
     function readImageFile(input, callback) {
       const file = input.files && input.files[0];
@@ -1309,7 +1346,158 @@ ${cta}
       updatePreviewOnly();
     }
 
+    function buildLivePreviewScenes() {
+      const brandName = document.getElementById("brandName").value || "Your Brand";
+      const productName = document.getElementById("productName").value || "Your Product";
+      const duration = document.getElementById("duration").value || "15 sec";
+      const audience = document.getElementById("audience").value || "your audience";
+      const offer = document.getElementById("offer").value || "Special offer available now";
+      const cta = document.getElementById("cta").value || "Shop Now";
+      const videoType = document.getElementById("videoType").value || "Instagram Reel";
+      const tone = document.getElementById("tone").value || "Premium";
+
+      if (duration === "15 sec") {
+        return [
+          { title: productName, subtitle: productName + " you need to notice today" },
+          { title: offer, subtitle: "Premium visual highlight" },
+          { title: "Better results", subtitle: "Better brand feel" },
+          { title: cta, subtitle: brandName + " for " + audience }
+        ];
+      }
+
+      if (duration === "30 sec") {
+        return [
+          { title: "Why " + productName + "?", subtitle: "Built for " + audience },
+          { title: productName, subtitle: "Premium product focus" },
+          { title: offer, subtitle: "Main benefit highlight" },
+          { title: "Premium. Effective. Easy.", subtitle: tone + " style preview" },
+          { title: cta, subtitle: brandName + " • " + videoType }
+        ];
+      }
+
+      return [
+        { title: "Meet " + productName, subtitle: brandName + " presents" },
+        { title: "Designed for " + audience, subtitle: "Audience fit scene" },
+        { title: offer, subtitle: "Offer frame" },
+        { title: "Smart. Elegant. Effective.", subtitle: "Benefit breakdown" },
+        { title: brandName + " delivers confidence", subtitle: "Brand trust scene" },
+        { title: cta, subtitle: "Final closing frame" }
+      ];
+    }
+
+    function applyPlayerAssets() {
+      const brandName = document.getElementById("brandName").value || "Your Brand";
+      const videoType = document.getElementById("videoType").value || "Instagram Reel";
+      const tone = document.getElementById("tone").value || "Premium";
+      const cta = document.getElementById("cta").value || "Shop Now";
+      const primary = document.getElementById("primaryColor").value || "#5f2396";
+      const accent = document.getElementById("accentColor").value || "#d4af37";
+
+      const player = document.getElementById("livePreviewPlayer");
+      player.style.background = `linear-gradient(180deg, ${primary} 0%, #22132f 50%, ${accent} 180%)`;
+
+      document.getElementById("playerCTA").textContent = cta;
+      document.getElementById("playerCTA").style.background = `linear-gradient(135deg,#fff4d2 0%, ${accent} 100%)`;
+      document.getElementById("playerBrand").textContent = brandName;
+      document.getElementById("playerMeta").textContent = videoType + " • " + tone + " Tone";
+
+      if (uploadedLogoData) {
+        document.getElementById("playerLogoImage").src = uploadedLogoData;
+        document.getElementById("playerLogoImage").style.display = "block";
+        document.getElementById("playerLogoText").style.display = "none";
+      } else {
+        document.getElementById("playerLogoImage").style.display = "none";
+        document.getElementById("playerLogoText").style.display = "block";
+      }
+
+      if (uploadedProductData) {
+        document.getElementById("playerProductImage").src = uploadedProductData;
+        document.getElementById("playerProductWrap").style.display = "flex";
+      } else {
+        document.getElementById("playerProductWrap").style.display = "none";
+      }
+    }
+
+    function renderPreviewScene(index) {
+      if (!previewScenes.length) return;
+
+      const scene = previewScenes[index];
+      document.getElementById("playerSceneBadge").textContent = "Scene " + (index + 1);
+      document.getElementById("playerHeadline").textContent = scene.title;
+      document.getElementById("playerSubtitle").innerHTML =
+        '<div style="max-width:90%; text-align:center; background:rgba(0,0,0,0.58); color:#fff8df; padding:10px 14px; border-radius:14px; font-size:14px; line-height:1.45; font-weight:700;">' +
+        scene.subtitle +
+        '</div>';
+    }
+
+    function playGeneratedPreview() {
+      stopGeneratedPreview();
+      applyPlayerAssets();
+      previewScenes = buildLivePreviewScenes();
+      previewSceneIndex = 0;
+      renderPreviewScene(previewSceneIndex);
+
+      previewTimer = setInterval(function() {
+        previewSceneIndex++;
+        if (previewSceneIndex >= previewScenes.length) {
+          previewSceneIndex = 0;
+        }
+        renderPreviewScene(previewSceneIndex);
+      }, 1800);
+    }
+
+    function stopGeneratedPreview() {
+      if (previewTimer) {
+        clearInterval(previewTimer);
+        previewTimer = null;
+      }
+    }
+
+    function exportVideo() {
+      stopGeneratedPreview();
+      applyPlayerAssets();
+      previewScenes = buildLivePreviewScenes();
+      previewSceneIndex = 0;
+      renderPreviewScene(previewSceneIndex);
+
+      capturer = new CCapture({
+        format: "webm",
+        framerate: 30,
+        verbose: false
+      });
+
+      capturer.start();
+      recording = true;
+      captureSceneLoop();
+    }
+
+    function captureSceneLoop() {
+      if (!recording) return;
+
+      const player = document.getElementById("livePreviewPlayer");
+
+      html2canvas(player).then(function(canvas) {
+        capturer.capture(canvas);
+
+        previewSceneIndex++;
+
+        if (previewSceneIndex >= previewScenes.length) {
+          recording = false;
+          capturer.stop();
+          capturer.save();
+          alert("Video exported successfully");
+          return;
+        }
+
+        renderPreviewScene(previewSceneIndex);
+
+        setTimeout(captureSceneLoop, 1800);
+      });
+    }
+
     function clearForm() {
+      stopGeneratedPreview();
+
       document.getElementById("brandName").value = "";
       document.getElementById("productName").value = "";
       document.getElementById("videoType").value = "Instagram Reel";
@@ -1354,6 +1542,18 @@ ${cta}
       document.getElementById("previewMeta").textContent = "Product Promo • Premium Tone";
       document.getElementById("previewSubtitle").textContent = "Your subtitle preview appears here";
 
+      document.getElementById("playerSceneBadge").textContent = "Scene 1";
+      document.getElementById("playerHeadline").textContent = "Your video preview will appear here";
+      document.getElementById("playerSubtitle").innerHTML =
+        '<div style="max-width:90%; text-align:center; background:rgba(0,0,0,0.58); color:#fff8df; padding:10px 14px; border-radius:14px; font-size:14px; line-height:1.45; font-weight:700;">Subtitle preview</div>';
+      document.getElementById("playerCTA").textContent = "Shop Now";
+      document.getElementById("playerBrand").textContent = "Your Brand";
+      document.getElementById("playerMeta").textContent = "Preview Mode";
+      document.getElementById("playerLogoImage").style.display = "none";
+      document.getElementById("playerLogoText").style.display = "block";
+      document.getElementById("playerProductWrap").style.display = "none";
+      document.getElementById("livePreviewPlayer").style.background = "linear-gradient(180deg, #5f2396 0%, #22132f 50%, #d4af37 180%)";
+
       buildPreviewTheme("Bold Promo");
       updateMusicPreview();
       updateRatioPreview();
@@ -1382,167 +1582,5 @@ ${cta}
     ]);
     renderSubtitleLines(["Your subtitle lines will appear here."]);
   </script>
-  <div class="panel" style="margin-top:22px;">
-  <h3>Live Video Preview Player</h3>
-
-  <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;">
-    <button class="btn btn-primary" onclick="playGeneratedPreview()">Play Preview</button>
-    <button class="btn btn-light" onclick="stopGeneratedPreview()">Stop Preview</button>
-  </div>
-
-  <div id="livePreviewPlayer" style="position:relative; width:100%; max-width:380px; height:640px; margin:auto; border-radius:24px; overflow:hidden; background:linear-gradient(180deg,#5f2396 0%, #22132f 50%, #d4af37 180%); box-shadow:0 16px 38px rgba(0,0,0,0.14);">
-    <div id="playerProductWrap" style="position:absolute; inset:90px 24px 150px 24px; display:none; align-items:center; justify-content:center; z-index:1;">
-      <img id="playerProductImage" style="max-width:100%; max-height:100%; object-fit:contain; filter:drop-shadow(0 12px 22px rgba(0,0,0,0.25));" />
-    </div>
-
-    <div id="playerLogoWrap" style="position:absolute; top:16px; right:16px; width:50px; height:50px; border-radius:14px; overflow:hidden; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; z-index:3;">
-      <span id="playerLogoText" style="font-size:10px; color:#fff8df; font-weight:700;">LOGO</span>
-      <img id="playerLogoImage" style="display:none; width:100%; height:100%; object-fit:contain; background:#fff;" />
-    </div>
-
-    <div id="playerSceneBadge" style="position:absolute; top:16px; left:16px; z-index:3; background:rgba(255,244,210,0.92); color:#7b5b05; border:1px solid rgba(239,216,137,0.9); padding:8px 12px; border-radius:999px; font-size:12px; font-weight:700;">
-      Scene 1
-    </div>
-
-    <div id="playerHeadline" style="position:absolute; left:20px; right:20px; top:120px; z-index:3; text-align:center; font-size:32px; font-weight:800; line-height:1.16; color:#fff8df; text-shadow:0 4px 18px rgba(0,0,0,0.28);">
-      Your video preview will appear here
-    </div>
-
-    <div id="playerSubtitle" style="position:absolute; left:16px; right:16px; bottom:98px; z-index:3; display:flex; justify-content:center;">
-      <div style="max-width:90%; text-align:center; background:rgba(0,0,0,0.58); color:#fff8df; padding:10px 14px; border-radius:14px; font-size:14px; line-height:1.45; font-weight:700;">
-        Subtitle preview
-      </div>
-    </div>
-
-    <div style="position:absolute; left:18px; right:18px; bottom:18px; z-index:3; display:flex; flex-direction:column; gap:10px;">
-      <div id="playerCTA" style="align-self:flex-start; background:linear-gradient(135deg,#fff4d2 0%, #d4af37 100%); color:#4f2b00; font-size:13px; font-weight:800; padding:10px 14px; border-radius:999px;">
-        Shop Now
-      </div>
-      <div id="playerBrand" style="color:#fff; font-size:18px; font-weight:700;">Your Brand</div>
-      <div id="playerMeta" style="color:rgba(255,255,255,0.85); font-size:13px;">Preview Mode</div>
-    </div>
-  </div>
-</div>
-
-<script>
-  let previewTimer = null;
-  let previewSceneIndex = 0;
-  let previewScenes = [];
-
-  function buildLivePreviewScenes() {
-    const brandName = document.getElementById("brandName").value || "Your Brand";
-    const productName = document.getElementById("productName").value || "Your Product";
-    const duration = document.getElementById("duration").value || "15 sec";
-    const audience = document.getElementById("audience").value || "your audience";
-    const offer = document.getElementById("offer").value || "Special offer available now";
-    const cta = document.getElementById("cta").value || "Shop Now";
-    const videoType = document.getElementById("videoType").value || "Instagram Reel";
-    const tone = document.getElementById("tone").value || "Premium";
-
-    if (duration === "15 sec") {
-      return [
-        { title: productName, subtitle: productName + " you need to notice today" },
-        { title: offer, subtitle: "Premium visual highlight" },
-        { title: "Better results", subtitle: "Better brand feel" },
-        { title: cta, subtitle: brandName + " for " + audience }
-      ];
-    }
-
-    if (duration === "30 sec") {
-      return [
-        { title: "Why " + productName + "?", subtitle: "Built for " + audience },
-        { title: productName, subtitle: "Premium product focus" },
-        { title: offer, subtitle: "Main benefit highlight" },
-        { title: "Premium. Effective. Easy.", subtitle: tone + " style preview" },
-        { title: cta, subtitle: brandName + " • " + videoType }
-      ];
-    }
-
-    return [
-      { title: "Meet " + productName, subtitle: brandName + " presents" },
-      { title: "Designed for " + audience, subtitle: "Audience fit scene" },
-      { title: offer, subtitle: "Offer frame" },
-      { title: "Smart. Elegant. Effective.", subtitle: "Benefit breakdown" },
-      { title: brandName + " delivers confidence", subtitle: "Brand trust scene" },
-      { title: cta, subtitle: "Final closing frame" }
-    ];
-  }
-
-  function applyPlayerAssets() {
-    const brandName = document.getElementById("brandName").value || "Your Brand";
-    const videoType = document.getElementById("videoType").value || "Instagram Reel";
-    const tone = document.getElementById("tone").value || "Premium";
-    const cta = document.getElementById("cta").value || "Shop Now";
-    const primary = document.getElementById("primaryColor") ? document.getElementById("primaryColor").value : "#5f2396";
-    const accent = document.getElementById("accentColor") ? document.getElementById("accentColor").value : "#d4af37";
-
-    const player = document.getElementById("livePreviewPlayer");
-    player.style.background = `linear-gradient(180deg, ${primary} 0%, #22132f 50%, ${accent} 180%)`;
-
-    document.getElementById("playerCTA").textContent = cta;
-    document.getElementById("playerCTA").style.background = `linear-gradient(135deg,#fff4d2 0%, ${accent} 100%)`;
-    document.getElementById("playerBrand").textContent = brandName;
-    document.getElementById("playerMeta").textContent = videoType + " • " + tone + " Tone";
-
-    const logoImg = document.getElementById("previewLogoImage");
-    const playerLogoImg = document.getElementById("playerLogoImage");
-    const playerLogoText = document.getElementById("playerLogoText");
-
-    if (logoImg && logoImg.src && logoImg.style.display !== "none") {
-      playerLogoImg.src = logoImg.src;
-      playerLogoImg.style.display = "block";
-      playerLogoText.style.display = "none";
-    } else {
-      playerLogoImg.style.display = "none";
-      playerLogoText.style.display = "block";
-    }
-
-    const previewProductImg = document.getElementById("previewProductImage");
-    const playerProductImg = document.getElementById("playerProductImage");
-    const playerProductWrap = document.getElementById("playerProductWrap");
-
-    if (previewProductImg && previewProductImg.src) {
-      playerProductImg.src = previewProductImg.src;
-      playerProductWrap.style.display = "flex";
-    } else {
-      playerProductWrap.style.display = "none";
-    }
-  }
-
-  function renderPreviewScene(index) {
-    if (!previewScenes.length) return;
-
-    const scene = previewScenes[index];
-    document.getElementById("playerSceneBadge").textContent = "Scene " + (index + 1);
-    document.getElementById("playerHeadline").textContent = scene.title;
-    document.getElementById("playerSubtitle").innerHTML =
-      '<div style="max-width:90%; text-align:center; background:rgba(0,0,0,0.58); color:#fff8df; padding:10px 14px; border-radius:14px; font-size:14px; line-height:1.45; font-weight:700;">' +
-      scene.subtitle +
-      '</div>';
-  }
-
-  function playGeneratedPreview() {
-    stopGeneratedPreview();
-    applyPlayerAssets();
-    previewScenes = buildLivePreviewScenes();
-    previewSceneIndex = 0;
-    renderPreviewScene(previewSceneIndex);
-
-    previewTimer = setInterval(function() {
-      previewSceneIndex++;
-      if (previewSceneIndex >= previewScenes.length) {
-        previewSceneIndex = 0;
-      }
-      renderPreviewScene(previewSceneIndex);
-    }, 1800);
-  }
-
-  function stopGeneratedPreview() {
-    if (previewTimer) {
-      clearInterval(previewTimer);
-      previewTimer = null;
-    }
-  }
-</script>
 </body>
 </html>
