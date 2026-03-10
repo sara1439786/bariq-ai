@@ -1,141 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Bariq AI Payments</title>
-
-<style>
-
-body{
-font-family:Arial;
-background:#faf7ff;
-padding:40px;
-}
-
-.card{
-background:white;
-padding:30px;
-border-radius:12px;
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
-max-width:600px;
-margin:auto;
-}
-
-h1{
-color:#6b4de6;
-}
-
-.plan{
-border:1px solid #eee;
-padding:20px;
-margin-top:20px;
-border-radius:10px;
-}
-
-button{
-background:#6b4de6;
-color:white;
-border:none;
-padding:12px 20px;
-border-radius:8px;
-cursor:pointer;
-margin-top:10px;
-}
-
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI Payments</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#faf7ff;
+      padding:40px;
+      margin:0;
+    }
+    .card{
+      background:white;
+      padding:30px;
+      border-radius:12px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);
+      max-width:700px;
+      margin:auto;
+    }
+    h1{
+      color:#6b4de6;
+      margin-bottom:24px;
+    }
+    .plan{
+      border:1px solid #eee;
+      padding:20px;
+      margin-top:20px;
+      border-radius:10px;
+    }
+    .plan h3{
+      margin:0 0 10px 0;
+    }
+    .plan p{
+      font-size:28px;
+      font-weight:700;
+      margin:0 0 14px 0;
+      color:#333;
+    }
+    button{
+      background:#6b4de6;
+      color:white;
+      border:none;
+      padding:12px 20px;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:16px;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="card">
+  <div class="card">
+    <h1>Bariq AI Plans</h1>
 
-<h1>Bariq AI Plans</h1>
+    <div class="plan">
+      <h3>Starter</h3>
+      <p>₹1,999 / month</p>
+      <button onclick="buyPlan('Starter',1999)">Buy Plan</button>
+    </div>
 
-<div class="plan">
-<h3>Starter</h3>
-<p>₹1,999 / month</p>
-<button onclick="buyPlan('Starter',1999)">Buy Plan</button>
-</div>
+    <div class="plan">
+      <h3>Growth</h3>
+      <p>₹4,999 / month</p>
+      <button onclick="buyPlan('Growth',4999)">Buy Plan</button>
+    </div>
 
-<div class="plan">
-<h3>Growth</h3>
-<p>₹4,999 / month</p>
-<button onclick="buyPlan('Growth',4999)">Buy Plan</button>
-</div>
+    <div class="plan">
+      <h3>Pro</h3>
+      <p>₹9,999 / month</p>
+      <button onclick="buyPlan('Pro',9999)">Buy Plan</button>
+    </div>
+  </div>
 
-<div class="plan">
-<h3>Pro</h3>
-<p>₹9,999 / month</p>
-<button onclick="buyPlan('Pro',9999)">Buy Plan</button>
-</div>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    function buyPlan(plan, price) {
+      const options = {
+        key: "rzp_test_123456789",
+        amount: price * 100,
+        currency: "INR",
+        name: "Bariq AI",
+        description: plan + " Plan",
+        handler: function (response) {
+          alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+          localStorage.setItem("bariq_plan", plan);
+        },
+        theme: {
+          color: "#6b4de6"
+        }
+      };
 
-</div>
-
-<script>
-
-function buyPlan(plan,price){
-
-alert("Payment Gateway Coming Soon for "+plan+" ₹"+price);
-
-}
-
-</script>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-<script>
-const RAZORPAY_KEY = "rzp_test_yourkeyhere"; // paste your Razorpay Key ID
-
-function buyPlan(plan, price){
-
-  const options = {
-    key: RAZORPAY_KEY,
-    amount: price * 100, 
-    currency: "INR",
-    name: "Bariq AI",
-    description: plan + " Plan",
-    handler: function (response){
-      alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
-      localStorage.setItem("bariq_plan", plan);
-    },
-    theme: {
-      color: "#6b4de6"
+      const rzp1 = new Razorpay(options);
+      rzp1.open();
     }
-  };
+  </script>
 
-  const rzp = new Razorpay(options);
-  rzp.open();
-}
-</script>
-  
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-<script>
-
-function buyPlan(plan,price){
-
-var options = {
-    "key": "rzp_test_123456789", 
-    "amount": price * 100,
-    "currency": "INR",
-    "name": "Bariq AI",
-    "description": plan + " Plan",
-    "handler": function (response){
-
-        alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
-
-        localStorage.setItem("bariq_plan",plan);
-
-    },
-
-    "theme": {
-        "color": "#6b4de6"
-    }
-};
-
-var rzp1 = new Razorpay(options);
-rzp1.open();
-
-}
-
-</script>/body>
+</body>
 </html>
