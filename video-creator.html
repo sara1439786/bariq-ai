@@ -20,7 +20,7 @@
     }
 
     .container {
-      max-width: 1300px;
+      max-width: 1320px;
       margin: 0 auto;
     }
 
@@ -145,9 +145,56 @@
       outline: none;
     }
 
+    input[type="color"] {
+      height: 52px;
+      padding: 8px;
+    }
+
+    input[type="file"] {
+      padding: 12px;
+      background: #fffdf8;
+    }
+
     textarea {
       resize: vertical;
       min-height: 110px;
+    }
+
+    .upload-box {
+      background: #fffdf8;
+      border: 1px dashed #d8c38a;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .upload-preview {
+      margin-top: 12px;
+      width: 100%;
+      height: 120px;
+      border-radius: 14px;
+      background: #f7f1ff;
+      border: 1px solid #eadbf5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #7a6d8d;
+      font-size: 13px;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .upload-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: white;
+    }
+
+    .color-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
     .action-row {
@@ -257,11 +304,28 @@
         linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.48) 100%);
     }
 
+    .preview-product {
+      position: absolute;
+      inset: 100px 24px 160px 24px;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .preview-product img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 22px rgba(0,0,0,0.25));
+    }
+
     .preview-chip {
       position: absolute;
       top: 18px;
       left: 18px;
-      z-index: 2;
+      z-index: 3;
       background: rgba(255, 244, 210, 0.9);
       color: #7b5b05;
       border: 1px solid rgba(239, 216, 137, 0.9);
@@ -271,12 +335,45 @@
       font-weight: 700;
     }
 
+    .preview-logo-wrap {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 3;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+    }
+
+    .preview-logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: white;
+    }
+
+    .preview-logo-placeholder {
+      color: #fff6d9;
+      font-size: 10px;
+      text-align: center;
+      font-weight: 700;
+      padding: 6px;
+      line-height: 1.3;
+    }
+
     .preview-toptext {
       position: absolute;
-      top: 62px;
+      top: 82px;
       left: 18px;
       right: 18px;
-      z-index: 2;
+      z-index: 3;
       color: #fff;
       font-size: 15px;
       line-height: 1.5;
@@ -286,7 +383,7 @@
     .preview-center {
       position: absolute;
       inset: 0;
-      z-index: 2;
+      z-index: 3;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -314,7 +411,7 @@
       left: 18px;
       right: 18px;
       bottom: 18px;
-      z-index: 2;
+      z-index: 3;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -347,7 +444,7 @@
       left: 14px;
       right: 14px;
       bottom: 96px;
-      z-index: 2;
+      z-index: 3;
       display: flex;
       justify-content: center;
     }
@@ -365,7 +462,7 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.18);
     }
 
-    .music-card {
+    .ratio-card, .music-card {
       margin-bottom: 18px;
       background: #fffdf8;
       border: 1px solid #f1df9f;
@@ -373,16 +470,19 @@
       padding: 18px;
     }
 
-    .music-card h4 {
+    .ratio-card h4, .music-card h4, .assets-card h4 {
       color: #5f2396;
       font-size: 19px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .music-meta {
+    .ratio-meta, .music-meta {
       color: #5d536a;
       font-size: 14px;
       line-height: 1.6;
+    }
+
+    .music-meta {
       margin-bottom: 10px;
     }
 
@@ -399,7 +499,7 @@
       margin-top: 8px;
     }
 
-    .ratio-card {
+    .assets-card {
       margin-bottom: 18px;
       background: #fffdf8;
       border: 1px solid #f1df9f;
@@ -407,23 +507,29 @@
       padding: 18px;
     }
 
-    .ratio-card h4 {
-      color: #5f2396;
-      font-size: 19px;
-      margin-bottom: 10px;
+    .asset-mini-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
     }
 
-    .ratio-meta {
-      color: #5d536a;
-      font-size: 14px;
-      line-height: 1.6;
+    .asset-mini {
+      background: #f6eeff;
+      color: #5f2396;
+      border: 1px solid #e7d7ff;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
     }
 
     .scene-board {
       margin-top: 18px;
     }
 
-    .scene-board h4 {
+    .scene-board h4,
+    .subtitle-board h4 {
       color: #5f2396;
       font-size: 20px;
       margin-bottom: 14px;
@@ -529,12 +635,6 @@
       padding: 18px;
     }
 
-    .subtitle-board h4 {
-      color: #5f2396;
-      font-size: 20px;
-      margin-bottom: 14px;
-    }
-
     .subtitle-lines {
       display: grid;
       gap: 10px;
@@ -558,6 +658,10 @@
 
     @media (max-width: 720px) {
       .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .color-row {
         grid-template-columns: 1fr;
       }
 
@@ -598,7 +702,7 @@
       <h2>Create Short Videos Step by Step</h2>
       <p>
         Start with Instagram Reels, square posts, story ads, product promos, and landscape ads.
-        Generate a reel blueprint, preview the visual style, pick ratio, music mood, and subtitle feel before export.
+        Add your brand assets, preview the look, and make Bariq AI feel like a real creator tool.
       </p>
     </div>
 
@@ -699,6 +803,37 @@
             <label for="prompt">Extra Prompt / Brand Direction</label>
             <textarea id="prompt" placeholder="Example: Use luxury visuals, strong opening hook, and focus on visible product benefits."></textarea>
           </div>
+
+          <div class="field full">
+            <label>Brand Assets</label>
+            <div class="upload-box">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="logoUpload">Upload Logo</label>
+                  <input type="file" id="logoUpload" accept="image/*" />
+                  <div class="upload-preview" id="logoPreviewBox">Logo preview appears here</div>
+                </div>
+
+                <div class="field">
+                  <label for="productUpload">Upload Product Image</label>
+                  <input type="file" id="productUpload" accept="image/*" />
+                  <div class="upload-preview" id="productPreviewBox">Product image preview appears here</div>
+                </div>
+              </div>
+
+              <div class="color-row" style="margin-top:14px;">
+                <div class="field">
+                  <label for="primaryColor">Primary Brand Color</label>
+                  <input type="color" id="primaryColor" value="#5f2396" />
+                </div>
+
+                <div class="field">
+                  <label for="accentColor">Accent Brand Color</label>
+                  <input type="color" id="accentColor" value="#d4af37" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="action-row">
@@ -747,7 +882,16 @@
             <div class="preview-screen" id="previewScreen">
               <div class="preview-overlay"></div>
 
+              <div class="preview-product" id="previewProductWrap" style="display:none;">
+                <img id="previewProductImage" alt="Product Preview" />
+              </div>
+
               <div class="preview-chip" id="previewChip">15 sec • Bold Promo • 9:16</div>
+
+              <div class="preview-logo-wrap" id="previewLogoWrap">
+                <div class="preview-logo-placeholder" id="previewLogoPlaceholder">LOGO</div>
+                <img id="previewLogoImage" alt="Logo Preview" style="display:none;" />
+              </div>
 
               <div class="preview-toptext" id="previewTopText">
                 Instagram Reel for your next campaign
@@ -776,6 +920,16 @@
                 <div class="preview-meta" id="previewMeta">Product Promo • Premium Tone</div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="assets-card">
+          <h4>Brand Asset Status</h4>
+          <div class="ratio-meta">Uploaded assets and brand colors will be reflected directly in the preview.</div>
+          <div class="asset-mini-row">
+            <span class="asset-mini" id="assetLogoStatus">Logo: Not uploaded</span>
+            <span class="asset-mini" id="assetProductStatus">Product: Not uploaded</span>
+            <span class="asset-mini" id="assetColorStatus">Colors: Default theme</span>
           </div>
         </div>
 
@@ -826,18 +980,72 @@
   </div>
 
   <script>
+    let uploadedLogoData = "";
+    let uploadedProductData = "";
+
+    function readImageFile(input, callback) {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        callback(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function setupUploads() {
+      document.getElementById("logoUpload").addEventListener("change", function() {
+        readImageFile(this, function(dataUrl) {
+          uploadedLogoData = dataUrl;
+          document.getElementById("logoPreviewBox").innerHTML = '<img src="' + dataUrl + '" alt="Logo Preview">';
+          document.getElementById("previewLogoImage").src = dataUrl;
+          document.getElementById("previewLogoImage").style.display = "block";
+          document.getElementById("previewLogoPlaceholder").style.display = "none";
+          document.getElementById("assetLogoStatus").textContent = "Logo: Uploaded";
+        });
+      });
+
+      document.getElementById("productUpload").addEventListener("change", function() {
+        readImageFile(this, function(dataUrl) {
+          uploadedProductData = dataUrl;
+          document.getElementById("productPreviewBox").innerHTML = '<img src="' + dataUrl + '" alt="Product Preview">';
+          document.getElementById("previewProductImage").src = dataUrl;
+          document.getElementById("previewProductWrap").style.display = "flex";
+          document.getElementById("assetProductStatus").textContent = "Product: Uploaded";
+        });
+      });
+
+      document.getElementById("primaryColor").addEventListener("input", updateBrandColors);
+      document.getElementById("accentColor").addEventListener("input", updateBrandColors);
+    }
+
+    function updateBrandColors() {
+      const primary = document.getElementById("primaryColor").value || "#5f2396";
+      const accent = document.getElementById("accentColor").value || "#d4af37";
+
+      const screen = document.getElementById("previewScreen");
+      screen.style.background = `linear-gradient(180deg, ${primary} 0%, #22132f 50%, ${accent} 180%)`;
+
+      document.getElementById("previewCTA").style.background = `linear-gradient(135deg, #fff4d2 0%, ${accent} 100%)`;
+      document.getElementById("assetColorStatus").textContent = "Colors: Custom brand theme";
+    }
+
     function buildPreviewTheme(templateStyle) {
+      const primary = document.getElementById("primaryColor").value || "#5f2396";
+      const accent = document.getElementById("accentColor").value || "#d4af37";
       const screen = document.getElementById("previewScreen");
 
       if (templateStyle === "Elegant Premium") {
-        screen.style.background = "linear-gradient(180deg, #4a245f 0%, #24142f 50%, #c9a53a 180%)";
+        screen.style.background = `linear-gradient(180deg, ${primary} 0%, #24142f 50%, ${accent} 180%)`;
       } else if (templateStyle === "UGC / Social Proof") {
-        screen.style.background = "linear-gradient(180deg, #6a3c86 0%, #362245 50%, #d8b65a 180%)";
+        screen.style.background = `linear-gradient(180deg, ${primary} 0%, #362245 50%, ${accent} 180%)`;
       } else if (templateStyle === "Product Showcase") {
-        screen.style.background = "linear-gradient(180deg, #522d7c 0%, #1f162b 48%, #dcb64d 180%)";
+        screen.style.background = `linear-gradient(180deg, ${primary} 0%, #1f162b 48%, ${accent} 180%)`;
       } else {
-        screen.style.background = "linear-gradient(180deg, #4c2277 0%, #22132f 52%, #d4af37 180%)";
+        screen.style.background = `linear-gradient(180deg, ${primary} 0%, #22132f 52%, ${accent} 180%)`;
       }
+
+      document.getElementById("previewCTA").style.background = `linear-gradient(135deg, #fff4d2 0%, ${accent} 100%)`;
     }
 
     function updateRatioPreview() {
@@ -1114,6 +1322,21 @@ ${cta}
       document.getElementById("cta").value = "";
       document.getElementById("offer").value = "";
       document.getElementById("prompt").value = "";
+      document.getElementById("primaryColor").value = "#5f2396";
+      document.getElementById("accentColor").value = "#d4af37";
+      document.getElementById("logoUpload").value = "";
+      document.getElementById("productUpload").value = "";
+      uploadedLogoData = "";
+      uploadedProductData = "";
+
+      document.getElementById("logoPreviewBox").textContent = "Logo preview appears here";
+      document.getElementById("productPreviewBox").textContent = "Product image preview appears here";
+      document.getElementById("previewLogoImage").style.display = "none";
+      document.getElementById("previewLogoPlaceholder").style.display = "block";
+      document.getElementById("previewProductWrap").style.display = "none";
+      document.getElementById("assetLogoStatus").textContent = "Logo: Not uploaded";
+      document.getElementById("assetProductStatus").textContent = "Product: Not uploaded";
+      document.getElementById("assetColorStatus").textContent = "Colors: Default theme";
 
       document.getElementById("videoTitle").textContent = "Your video title will appear here.";
       document.getElementById("videoHook").textContent = "Your hook will appear here.";
@@ -1145,6 +1368,7 @@ ${cta}
       renderSubtitleLines(["Your subtitle lines will appear here."]);
     }
 
+    setupUploads();
     buildPreviewTheme("Bold Promo");
     updateMusicPreview();
     updateRatioPreview();
