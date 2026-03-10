@@ -245,7 +245,7 @@ Message: ${offer}`;
     }
 
     async function fetchVideosFromBackend(query) {
-      const response = await fetch("/api/videos?q=" + encodeURIComponent(query));
+        const response = await fetch("/api/generate-video?q=" + encodeURIComponent(query));
       if (!response.ok) {
         throw new Error("Backend request failed");
       }
