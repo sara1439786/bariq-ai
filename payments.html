@@ -106,5 +106,36 @@ function buyPlan(plan, price){
   rzp.open();
 }
 </script>
-</body>
+  
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+function buyPlan(plan,price){
+
+var options = {
+    "key": "rzp_test_123456789", 
+    "amount": price * 100,
+    "currency": "INR",
+    "name": "Bariq AI",
+    "description": plan + " Plan",
+    "handler": function (response){
+
+        alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+
+        localStorage.setItem("bariq_plan",plan);
+
+    },
+
+    "theme": {
+        "color": "#6b4de6"
+    }
+};
+
+var rzp1 = new Razorpay(options);
+rzp1.open();
+
+}
+
+</script>/body>
 </html>
