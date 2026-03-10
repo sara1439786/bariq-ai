@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI - Creator Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --gold:#D6A13A;
+      --gold-soft:#F1D28B;
+      --metal:#7D63B8;
+      --metal-deep:#5D468F;
+      --bg1:#fffaf4;
+      --bg2:#fff5fb;
+      --bg3:#fbf7ff;
+      --text:#3b2f45;
+      --muted:#7d728c;
+      --line:rgba(214,161,58,.18);
+      --success:#3f9968;
+      --warning:#c28a2c;
+      --shadow:0 20px 50px rgba(95,70,120,.08);
+      --shadow2:0 10px 24px rgba(70,45,95,.06);
+      --radius-xl:30px;
+      --radius-lg:22px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      font-family:Inter,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left,#fff0d8 0%,transparent 24%),
+        radial-gradient(circle at top right,#f8e8ff 0%,transparent 24%),
+        linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 48%,var(--bg3) 100%);
+      min-height:100vh;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    .container{
+      width:min(1240px, calc(100% - 40px));
+      margin:auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      padding:16px 0;
+      flex-wrap:wrap;
+    }
+
+    .logo{
+      font-family:Manrope,sans-serif;
+      font-size:31px;
+      font-weight:800;
+      letter-spacing:-0.8px;
+      background:linear-gradient(90deg,var(--gold) 0%,var(--gold-soft) 18%,var(--metal) 58%,var(--metal-deep) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      color:#776b83;
+      font-size:14px;
+      font-weight:600;
+      position:relative;
+    }
+
+    .nav-links a.active{
+      color:var(--metal-deep);
+    }
+
+    .nav-links a.active::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-8px;
+      width:100%;
+      height:2px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--gold),var(--metal));
+    }
+
+    .page{
+      padding:34px 0 40px;
+    }
+
+    .hero{
+      background:rgba(255,255,255,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+      padding:32px;
+      margin-bottom:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      width:240px;
+      height:240px;
+      right:-90px;
+      top:-90px;
+      background:radial-gradient(circle,var(--gold-soft),transparent 70%);
+      opacity:.35;
+    }
+
+    .badge{
+      display:inline-flex;
+      padding:10px 15px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+      color:var(--metal-deep);
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero h1{
+      font-family:Manrope,sans-serif;
+      font-size:42px;
+      color:var(--metal-deep);
+      margin-bottom:8px;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero .tagline{
+      font-family:"Cormorant Garamond",serif;
+      font-style:italic;
+      font-size:28px;
+      color:#7c61ae;
+      margin-bottom:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero p{
+      color:var(--muted);
+      line-height:1.8;
+      max-width:920px;
+      font-size:15px;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:20px;
+      position:relative;
+      z-index:1;
+    }
+
+    .btn,.btn-outline,.small-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 20px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s ease;
+      border:none;
+    }
+
+    .btn{
+      background:linear-gradient(135deg,var(--gold),var(--metal));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(125,99,184,.18);
+    }
+
+    .btn-outline,.small-btn{
+      background:#fff;
+      color:var(--metal-deep);
+      border:1px solid var(--line);
+    }
+
+    .btn:hover,.btn-outline:hover,.small-btn:hover,.stat-card:hover,.card:hover,.job-card:hover{
+      transform:translateY(-2px);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .stat-card{
+      background:linear-gradient(135deg,#fffaf2,#fff8fd);
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      padding:22px;
+      box-shadow:var(--shadow2);
+      transition:.2s ease;
+    }
+
+    .stat-top{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .icon-box{
+      width:52px;
+      height:52px;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg,#fff3dc,#f3e9ff);
+    }
+
+    .stat-card h4{
+      color:#866fb3;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .num{
+      font-family:Manrope,sans-serif;
+      font-size:30px;
+      color:var(--metal-deep);
+      font-weight:800;
+      margin-bottom:6px;
+    }
+
+    .stat-card p{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:.95fr 1.05fr;
+      gap:18px;
+      margin-bottom:18px;
+      align-items:start;
+    }
+
+    .card{
+      background:rgba(255,255,255,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      padding:24px;
+      box-shadow:var(--shadow2);
+      transition:.2s ease;
+    }
+
+    .card h2{
+      font-family:Manrope,sans-serif;
+      font-size:24px;
+      color:var(--metal-deep);
+      margin-bottom:8px;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+      margin-bottom:16px;
+    }
+
+    .profile-card{
+      background:linear-gradient(135deg,#fffaf2,#fff8fd);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:20px;
+    }
+
+    .profile-head{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+
+    .avatar{
+      width:72px;
+      height:72px;
+      border-radius:20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:28px;
+      background:linear-gradient(135deg,var(--gold),var(--metal));
+      color:#fff;
+      font-weight:800;
+    }
+
+    .profile-head h3{
+      font-family:Manrope,sans-serif;
+      color:var(--metal-deep);
+      font-size:22px;
+      margin-bottom:4px;
+    }
+
+    .profile-head p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .profile-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .profile-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+    }
+
+    .profile-box strong{
+      display:block;
+      color:#7f68b8;
+      font-size:12px;
+      margin-bottom:5px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .profile-box span{
+      display:block;
+      color:var(--text);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .job-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .job-card{
+      background:linear-gradient(135deg,#fffaf2,#fff8fd);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:var(--shadow2);
+      transition:.2s ease;
+    }
+
+    .job-card strong{
+      display:block;
+      color:var(--metal-deep);
+      font-size:15px;
+      margin-bottom:6px;
+    }
+
+    .job-card span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+      margin-bottom:8px;
+    }
+
+    .tags{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+
+    .tag{
+      background:#fff;
+      color:#6f59a5;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--success);
+      white-space:nowrap;
+    }
+
+    .empty{
+      text-align:center;
+      padding:28px 18px;
+      border:1px dashed var(--line);
+      border-radius:18px;
+      color:#8a7fa5;
+      background:#fff;
+    }
+
+    .footer{
+      text-align:center;
+      color:#8a7fa5;
+      padding:34px 0 26px;
+    }
+
+    @media (max-width: 1080px){
+      .stats,.layout,.profile-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 768px){
+      .container{width:min(100% - 24px,1240px)}
+      .nav{justify-content:space-between;align-items:flex-start}
+      .nav-links{
+        width:100%;
+        overflow-x:auto;
+        flex-wrap:nowrap;
+        white-space:nowrap;
+        padding-bottom:4px;
+        scrollbar-width:none;
+      }
+      .nav-links::-webkit-scrollbar{display:none}
+      .hero{padding:24px}
+      .hero h1{font-size:31px}
+      .hero .tagline{font-size:22px;line-height:1.35}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="index.html" class="logo">Bariq AI</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="business-dashboard.html">Business</a>
+        <a href="creator-dashboard.html" class="active">Creator</a>
+        <a href="ai-generator.html">AI Generator</a>
+        <a href="creator-marketplace.html">Marketplace</a>
+        <a href="campaign-studio-pro.html">Campaign Studio</a>
+        <a href="admin-dashboard.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <section class="hero">
+        <div class="badge">Creator Workspace</div>
+        <h1>Creator Dashboard</h1>
+        <div class="tagline">Manage your profile, applications, and campaign opportunities in one elegant space</div>
+        <p>
+          Bariq AI gives creators a premium workspace to track applied campaigns, discover new opportunities, and position themselves professionally for business collaborations.
+        </p>
+        <div class="hero-actions">
+          <button class="btn" onclick="window.location.href='creator-marketplace.html'">Open Marketplace</button>
+          <button class="btn-outline" onclick="refreshAppliedCampaigns()">Refresh Applications</button>
+          <button class="btn-outline" onclick="clearApplications()">Clear Applications</button>
+        </div>
+      </section>
+
+      <section class="stats">
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="icon-box">🎬</div>
+            <h4>Applied Campaigns</h4>
+          </div>
+          <div class="num" id="appliedCount">0</div>
+          <p>Total campaigns you applied to from the Bariq AI marketplace.</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="icon-box">🤝</div>
+            <h4>Invites Received</h4>
+          </div>
+          <div class="num" id="inviteCount">1</div>
+          <p>Businesses that may want to connect with your creator profile.</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="icon-box">👀</div>
+            <h4>Profile Views</h4>
+          </div>
+          <div class="num">84</div>
+          <p>How many times your creator profile has been viewed on Bariq AI.</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="icon-box">✨</div>
+            <h4>Status</h4>
+          </div>
+          <div class="num">Live</div>
+          <p>Your profile is currently visible inside the creator marketplace.</p>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div class="card">
+          <h2>Creator Profile</h2>
+          <div class="sub">A strong profile helps businesses trust and shortlist you faster.</div>
+
+          <div class="profile-card">
+            <div class="profile-head">
+              <div class="avatar">CR</div>
+              <div>
+                <h3>Creator Name</h3>
+                <p>Beauty / Lifestyle / Food / Fitness Creator</p>
+              </div>
+            </div>
+
+            <div class="profile-grid">
+              <div class="profile-box">
+                <strong>Followers</strong>
+                <span>42K</span>
+              </div>
+              <div class="profile-box">
+                <strong>City</strong>
+                <span>Hyderabad</span>
+              </div>
+              <div class="profile-box">
+                <strong>Pricing</strong>
+                <span>₹4,500 / Reel</span>
+              </div>
+              <div class="profile-box">
+                <strong>Instagram</strong>
+                <span>@yourhandle</span>
+              </div>
+            </div>
+
+            <div class="hero-actions" style="margin-top:18px;">
+              <button class="small-btn">Edit Profile</button>
+              <button class="small-btn" onclick="window.location.href='creator-marketplace.html'">Explore Campaigns</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Applied Campaigns</h2>
+          <div class="sub">These campaigns come directly from the Creator Marketplace applications.</div>
+          <div class="job-list" id="appliedCampaignList"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Recommended Opportunities</h2>
+        <div class="sub">Additional marketplace-style opportunities creators can explore and apply to.</div>
+
+        <div class="job-list">
+          <div class="job-card">
+            <strong>Laser Hair Reduction Promotion</strong>
+            <span>Business: Premium Clinic • Goal: Lead Generation • Budget: ₹25,000</span>
+            <div class="tags">
+              <div class="tag">Beauty</div>
+              <div class="tag">Reels</div>
+              <div class="tag">Hyderabad</div>
+            </div>
+          </div>
+
+          <div class="job-card">
+            <strong>Fitness Challenge Launch</strong>
+            <span>Business: Wellness Studio • Goal: Awareness • Budget: ₹18,000</span>
+            <div class="tags">
+              <div class="tag">Fitness</div>
+              <div class="tag">Lifestyle</div>
+              <div class="tag">Video Content</div>
+            </div>
+          </div>
+
+          <div class="job-card">
+            <strong>Restaurant Promo Week</strong>
+            <span>Business: Local Food Brand • Goal: Walk-ins • Budget: ₹22,000</span>
+            <div class="tags">
+              <div class="tag">Food</div>
+              <div class="tag">Stories</div>
+              <div class="tag">Creator Fit</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">© Bariq AI • Creator growth, campaign applications, and collaboration tracking</div>
+    </div>
+  </main>
+
+  <script>
+    function getApplications() {
+      return JSON.parse(localStorage.getItem("bariq_marketplace_applications") || "[]");
+    }
+
+    function refreshAppliedCampaigns() {
+      const apps = getApplications();
+      const list = document.getElementById("appliedCampaignList");
+      document.getElementById("appliedCount").textContent = apps.length;
+
+      if (!apps.length) {
+        list.innerHTML = `<div class="empty">No applied campaigns yet. Go to the Creator Marketplace and apply to campaigns.</div>`;
+        return;
+      }
+
+      list.innerHTML = apps.map((app, index) => `
+        <div class="job-card">
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;">
+            <div>
+              <strong>${app.campaignTitle || "Campaign Application"}</strong>
+              <span>Applied from Marketplace • Application #${index + 1}</span>
+            </div>
+            <div class="pill">Applied</div>
+          </div>
+
+          <div class="tags">
+            <div class="tag">Creator Application</div>
+            <div class="tag">${new Date(app.appliedAt).toLocaleDateString()}</div>
+          </div>
+
+          <div class="hero-actions" style="margin-top:14px;">
+            <button class="small-btn" onclick="window.location.href='creator-marketplace.html'">View More Campaigns</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function clearApplications() {
+      localStorage.removeItem("bariq_marketplace_applications");
+      refreshAppliedCampaigns();
+      alert("Applied campaigns cleared");
+    }
+
+    refreshAppliedCampaigns();
+  </script>
+</body>
+</html>
