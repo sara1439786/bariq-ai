@@ -20,7 +20,7 @@
     }
 
     .container {
-      max-width: 1150px;
+      max-width: 1220px;
       margin: 0 auto;
     }
 
@@ -94,9 +94,9 @@
       line-height: 1.7;
     }
 
-    .grid {
+    .main-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.1fr 0.9fr;
       gap: 22px;
     }
 
@@ -178,26 +178,6 @@
       border: 1px solid #e7d7ff;
     }
 
-    .template-box {
-      background: #fffaf0;
-      border: 1px solid #f1df9f;
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 14px;
-    }
-
-    .template-box h4 {
-      color: #5f2396;
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
-
-    .template-box p {
-      color: #5d536a;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
     .result-card {
       margin-top: 22px;
       background: #fffdf8;
@@ -241,11 +221,149 @@
       font-weight: 700;
     }
 
-    @media (max-width: 900px) {
-      .grid {
+    .preview-phone {
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto 22px;
+      background: #1d1326;
+      border-radius: 34px;
+      padding: 14px;
+      box-shadow: 0 18px 40px rgba(63, 34, 92, 0.16);
+      border: 1px solid #e9d79b;
+    }
+
+    .preview-screen {
+      position: relative;
+      height: 640px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #4c2277 0%, #22132f 52%, #d4af37 180%);
+    }
+
+    .preview-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.14), transparent 30%),
+        linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.48) 100%);
+    }
+
+    .preview-chip {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 2;
+      background: rgba(255, 244, 210, 0.9);
+      color: #7b5b05;
+      border: 1px solid rgba(239, 216, 137, 0.9);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .preview-toptext {
+      position: absolute;
+      top: 62px;
+      left: 18px;
+      right: 18px;
+      z-index: 2;
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.5;
+      opacity: 0.95;
+    }
+
+    .preview-center {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 26px;
+      text-align: center;
+    }
+
+    .preview-headline {
+      font-size: 33px;
+      font-weight: 800;
+      line-height: 1.16;
+      color: #fff8df;
+      text-shadow: 0 4px 18px rgba(0,0,0,0.28);
+    }
+
+    .preview-sub {
+      margin-top: 14px;
+      font-size: 15px;
+      color: #fdf2cb;
+      line-height: 1.5;
+    }
+
+    .preview-bottom {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .preview-cta {
+      align-self: flex-start;
+      background: linear-gradient(135deg, #fff4d2 0%, #e2b73b 100%);
+      color: #4f2b00;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 10px 14px;
+      border-radius: 999px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .preview-brand {
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .preview-meta {
+      color: rgba(255,255,255,0.85);
+      font-size: 13px;
+    }
+
+    .style-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .style-box {
+      background: #fffaf0;
+      border: 1px solid #f1df9f;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .style-box h4 {
+      color: #5f2396;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .style-box p {
+      color: #5d536a;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 980px) {
+      .main-grid {
         grid-template-columns: 1fr;
       }
+    }
 
+    @media (max-width: 720px) {
       .form-grid {
         grid-template-columns: 1fr;
       }
@@ -253,6 +371,14 @@
       .hero-box h2,
       .brand-text h1 {
         font-size: 25px;
+      }
+
+      .preview-screen {
+        height: 560px;
+      }
+
+      .preview-headline {
+        font-size: 28px;
       }
     }
   </style>
@@ -274,12 +400,12 @@
     <div class="hero-box">
       <h2>Create Short Videos Step by Step</h2>
       <p>
-        Start with short-form content for Instagram Reels, product promos, offer videos, inserts, and social ads.
-        Bariq AI will generate a structured reel blueprint for 15 sec, 30 sec, or 45 sec video formats.
+        Start with Instagram Reels, offer promos, product showcases, inserts, and social ads.
+        Generate a reel blueprint first, then preview the visual style before building the full video engine.
       </p>
     </div>
 
-    <div class="grid">
+    <div class="main-grid">
       <div class="panel">
         <h3>Video Setup</h3>
 
@@ -361,6 +487,7 @@
 
         <div class="action-row">
           <button class="btn btn-primary" onclick="generateVideoPlan()">Generate Video Blueprint</button>
+          <button class="btn btn-light" onclick="updatePreviewOnly()">Update Preview</button>
           <button class="btn btn-light" onclick="clearForm()">Clear</button>
         </div>
 
@@ -397,42 +524,104 @@
       </div>
 
       <div class="panel">
-        <h3>MVP Template Styles</h3>
+        <h3>Visual Template Preview</h3>
 
-        <div class="template-box">
-          <h4>Bold Promo</h4>
-          <p>Fast hook, strong problem-solution flow, offer-led messaging, high attention-grabbing style.</p>
+        <div class="preview-phone">
+          <div class="preview-screen" id="previewScreen">
+            <div class="preview-overlay"></div>
+
+            <div class="preview-chip" id="previewChip">15 sec • Bold Promo</div>
+
+            <div class="preview-toptext" id="previewTopText">
+              Instagram Reel for your next campaign
+            </div>
+
+            <div class="preview-center">
+              <div>
+                <div class="preview-headline" id="previewHeadline">
+                  Your headline will appear here
+                </div>
+                <div class="preview-sub" id="previewSub">
+                  Premium gold-purple short video layout
+                </div>
+              </div>
+            </div>
+
+            <div class="preview-bottom">
+              <div class="preview-cta" id="previewCTA">Shop Now</div>
+              <div class="preview-brand" id="previewBrand">Your Brand</div>
+              <div class="preview-meta" id="previewMeta">Product Promo • Premium Tone</div>
+            </div>
+          </div>
         </div>
 
-        <div class="template-box">
-          <h4>Elegant Premium</h4>
-          <p>Luxury visual tone, softer transitions, rich emotional appeal, premium positioning.</p>
-        </div>
+        <div class="style-list">
+          <div class="style-box">
+            <h4>Preview Purpose</h4>
+            <p>This mockup shows how your short video may feel visually before we move into subtitles, voiceover, stock clips, and MP4 export.</p>
+          </div>
 
-        <div class="template-box">
-          <h4>UGC / Social Proof</h4>
-          <p>Human, relatable, conversational style that feels organic and social-first.</p>
-        </div>
+          <div class="style-box">
+            <h4>Bold Promo</h4>
+            <p>Stronger headline, faster visual energy, more aggressive offer-led presentation.</p>
+          </div>
 
-        <div class="template-box">
-          <h4>Product Showcase</h4>
-          <p>Strong focus on product visuals, benefits, packaging, results, and direct CTA.</p>
-        </div>
+          <div class="style-box">
+            <h4>Elegant Premium</h4>
+            <p>Softer luxury look, richer spacing, premium product-led styling, refined presence.</p>
+          </div>
 
-        <div class="template-box">
-          <h4>Best Starting Durations</h4>
-          <p>15 sec for fast ads, 30 sec for balanced promos, 45 sec for stronger storytelling and benefit breakdown.</p>
-        </div>
+          <div class="style-box">
+            <h4>UGC / Social Proof</h4>
+            <p>More relatable and conversational. Best for founder talk, reviews, and organic social feel.</p>
+          </div>
 
-        <div class="template-box">
-          <h4>Next Upgrade</h4>
-          <p>After this blueprint stage, Bariq AI can move to voiceover generation, subtitle timing, stock visual selection, and MP4 export.</p>
+          <div class="style-box">
+            <h4>Product Showcase</h4>
+            <p>Clean product-forward structure with benefits, packaging emphasis, and direct CTA.</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
+    function buildPreviewTheme(templateStyle) {
+      const screen = document.getElementById("previewScreen");
+
+      if (templateStyle === "Elegant Premium") {
+        screen.style.background = "linear-gradient(180deg, #4a245f 0%, #24142f 50%, #c9a53a 180%)";
+      } else if (templateStyle === "UGC / Social Proof") {
+        screen.style.background = "linear-gradient(180deg, #6a3c86 0%, #362245 50%, #d8b65a 180%)";
+      } else if (templateStyle === "Product Showcase") {
+        screen.style.background = "linear-gradient(180deg, #522d7c 0%, #1f162b 48%, #dcb64d 180%)";
+      } else {
+        screen.style.background = "linear-gradient(180deg, #4c2277 0%, #22132f 52%, #d4af37 180%)";
+      }
+    }
+
+    function updatePreviewOnly() {
+      const brandName = document.getElementById("brandName").value || "Your Brand";
+      const productName = document.getElementById("productName").value || "Your Product";
+      const videoType = document.getElementById("videoType").value || "Instagram Reel";
+      const duration = document.getElementById("duration").value || "15 sec";
+      const templateStyle = document.getElementById("templateStyle").value || "Bold Promo";
+      const tone = document.getElementById("tone").value || "Premium";
+      const audience = document.getElementById("audience").value || "your audience";
+      const cta = document.getElementById("cta").value || "Shop Now";
+      const offer = document.getElementById("offer").value || "Special offer available now";
+
+      document.getElementById("previewChip").textContent = duration + " • " + templateStyle;
+      document.getElementById("previewTopText").textContent = videoType + " for " + audience;
+      document.getElementById("previewHeadline").textContent = productName;
+      document.getElementById("previewSub").textContent = offer;
+      document.getElementById("previewCTA").textContent = cta;
+      document.getElementById("previewBrand").textContent = brandName;
+      document.getElementById("previewMeta").textContent = videoType + " • " + tone + " Tone";
+
+      buildPreviewTheme(templateStyle);
+    }
+
     function generateVideoPlan() {
       const brandName = document.getElementById("brandName").value || "Your Brand";
       const productName = document.getElementById("productName").value || "Your Product";
@@ -446,7 +635,6 @@
       const prompt = document.getElementById("prompt").value || "Keep it premium and engaging.";
 
       const title = brandName + " " + videoType + " for " + productName;
-
       const hook = "Stop scrolling — " + productName + " by " + brandName + " is made for " + audience + ".";
 
       let scenePlan = "";
@@ -509,7 +697,7 @@ ${cta}.
 ${prompt}`;
 
       const caption =
-`${productName} by ${brandName} is here for ${audience}. ${offer}. 
+`${productName} by ${brandName} is here for ${audience}. ${offer}.
 Style: ${templateStyle} | Duration: ${duration}
 ${cta}
 
@@ -521,6 +709,8 @@ ${cta}
       document.getElementById("voiceoverScript").textContent = voiceover;
       document.getElementById("captionText").textContent = caption;
       document.getElementById("resultBadge").textContent = "Video blueprint generated";
+
+      updatePreviewOnly();
     }
 
     function clearForm() {
@@ -541,7 +731,19 @@ ${cta}
       document.getElementById("voiceoverScript").textContent = "Your voiceover script will appear here.";
       document.getElementById("captionText").textContent = "Your caption will appear here.";
       document.getElementById("resultBadge").textContent = "Ready";
+
+      document.getElementById("previewChip").textContent = "15 sec • Bold Promo";
+      document.getElementById("previewTopText").textContent = "Instagram Reel for your next campaign";
+      document.getElementById("previewHeadline").textContent = "Your headline will appear here";
+      document.getElementById("previewSub").textContent = "Premium gold-purple short video layout";
+      document.getElementById("previewCTA").textContent = "Shop Now";
+      document.getElementById("previewBrand").textContent = "Your Brand";
+      document.getElementById("previewMeta").textContent = "Product Promo • Premium Tone";
+
+      buildPreviewTheme("Bold Promo");
     }
+
+    buildPreviewTheme("Bold Promo");
   </script>
 </body>
 </html>
