@@ -454,14 +454,9 @@ Redirecting to business dashboard...`;
 </html>
 <button onclick="clearPlan()">Reset Plan</button>
 
-<script>
-  function clearPlan() {
-    localStorage.removeItem("bariq_selected_plan");
-    location.reload();
   }
 </script>
-<script>
-function selectPlan(planName, price, credits) {
+
 
   const selectedPlan = {
     name: planName,
