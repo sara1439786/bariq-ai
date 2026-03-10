@@ -1,169 +1,554 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI - Creator Earnings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root{
+      --gold:#D6A13A;
+      --gold-soft:#F1D28B;
+      --purple:#7D63B8;
+      --purple-deep:#5D468F;
+      --bg1:#fffaf4;
+      --bg2:#fff5fb;
+      --bg3:#fbf7ff;
+      --text:#352b40;
+      --muted:#7d728c;
+      --line:rgba(214,161,58,.18);
+      --white:#ffffff;
+      --shadow:0 18px 40px rgba(93,70,143,.08);
+      --shadow2:0 10px 22px rgba(70,45,95,.06);
+      --radius-xl:28px;
+      --radius-lg:20px;
+    }
 
-<title>Bariq AI Creator Earnings</title>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Inter,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left,#fff0d8 0%,transparent 24%),
+        radial-gradient(circle at top right,#f7e9ff 0%,transparent 24%),
+        linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 48%,var(--bg3) 100%);
+      min-height:100vh;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1220px,calc(100% - 32px));margin:auto}
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    .topbar{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(255,255,255,.9);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;gap:16px;
+      padding:16px 0;flex-wrap:wrap;
+    }
+    .logo{
+      font-family:Manrope,sans-serif;
+      font-size:34px;font-weight:800;letter-spacing:-0.8px;
+      background:linear-gradient(90deg,var(--gold) 0%,var(--gold-soft) 18%,var(--purple) 58%,var(--purple-deep) 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .nav-links{
+      display:flex;gap:16px;flex-wrap:wrap;align-items:center;
+    }
+    .nav-links a{
+      color:#786d87;font-size:14px;font-weight:700;
+    }
 
-<style>
+    .page{padding:34px 0 42px}
 
-body{
-font-family:Inter;
-background:#f7f6ff;
-margin:0;
-}
+    .hero,.section,.card,.table-wrap{
+      background:rgba(255,255,255,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+    }
 
-.header{
-background:white;
-padding:20px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 4px 10px rgba(0,0,0,0.05);
-}
+    .hero{
+      padding:30px;
+      margin-bottom:18px;
+    }
 
-.logo{
-font-size:26px;
-font-weight:700;
-color:#6b4ce6;
-}
+    .badge{
+      display:inline-flex;
+      padding:10px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+      color:var(--purple-deep);
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:14px;
+    }
 
-.container{
-padding:40px;
-}
+    .hero h1{
+      font-family:Manrope,sans-serif;
+      font-size:42px;
+      color:var(--purple-deep);
+      margin-bottom:8px;
+    }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-}
+    .hero p{
+      color:var(--muted);
+      line-height:1.85;
+      font-size:15px;
+      max-width:900px;
+    }
 
-.card{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 6px 14px rgba(0,0,0,0.08);
-}
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
 
-.card h3{
-color:#666;
-margin:0;
-}
+    .btn,.btn-outline,.small-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 20px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:800;
+      transition:.2s ease;
+      border:none;
+      cursor:pointer;
+    }
 
-.card p{
-font-size:28px;
-font-weight:700;
-color:#6b4ce6;
-}
+    .btn{
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(125,99,184,.18);
+    }
 
-.section{
-margin-top:40px;
-}
+    .btn-outline,.small-btn{
+      background:#fff;
+      color:var(--purple-deep);
+      border:1px solid var(--line);
+    }
 
-.table{
-width:100%;
-background:white;
-border-radius:10px;
-overflow:hidden;
-box-shadow:0 6px 14px rgba(0,0,0,0.08);
-}
+    .btn:hover,.btn-outline:hover,.small-btn:hover,.stat-card:hover,.info-card:hover{
+      transform:translateY(-2px);
+    }
 
-.table th{
-background:#6b4ce6;
-color:white;
-padding:14px;
-text-align:left;
-}
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-bottom:18px;
+    }
 
-.table td{
-padding:14px;
-border-bottom:1px solid #eee;
-}
+    .stat-card,.info-card{
+      background:linear-gradient(135deg,#fffaf2,#fff8fd);
+      border:1px solid var(--line);
+      border-radius:20px;
+      box-shadow:var(--shadow2);
+      padding:22px;
+      transition:.2s ease;
+    }
 
-.button{
-background:#6b4ce6;
-color:white;
-border:none;
-padding:8px 16px;
-border-radius:6px;
-cursor:pointer;
-}
+    .stat-top{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
 
-</style>
+    .icon-box{
+      width:52px;
+      height:52px;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg,#fff3dc,#f3e9ff);
+    }
+
+    .stat-card h4{
+      color:#866fb3;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .num{
+      font-family:Manrope,sans-serif;
+      font-size:30px;
+      color:var(--purple-deep);
+      font-weight:800;
+      margin-bottom:6px;
+    }
+
+    .stat-card p,.info-card p{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .section{
+      padding:26px;
+      margin-bottom:18px;
+    }
+
+    .section h2{
+      font-family:Manrope,sans-serif;
+      font-size:28px;
+      color:var(--purple-deep);
+      margin-bottom:8px;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.75;
+      margin-bottom:16px;
+    }
+
+    .list{
+      display:grid;
+      gap:12px;
+    }
+
+    .list-item{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+    }
+
+    .list-item strong{
+      display:block;
+      color:var(--purple-deep);
+      font-size:15px;
+      margin-bottom:6px;
+    }
+
+    .list-item span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .table-wrap{
+      padding:20px;
+      overflow:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:760px;
+      background:#fff;
+      border-radius:18px;
+      overflow:hidden;
+    }
+
+    th{
+      text-align:left;
+      padding:14px;
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      color:#fff;
+      font-size:13px;
+      letter-spacing:.02em;
+    }
+
+    td{
+      padding:14px;
+      border-bottom:1px solid #eee6f8;
+      font-size:14px;
+      color:var(--text);
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:11px;
+      font-weight:800;
+      border:1px solid var(--line);
+      background:#fff;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+    }
+
+    .paid{color:#2b8b57}
+    .pending{color:#c07f14}
+    .review{color:#7d63b8}
+
+    .footer{
+      background:#1f1829;
+      color:#f4ecff;
+      margin-top:20px;
+      padding:34px 0 20px;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr .9fr .9fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .footer h4{
+      font-family:Manrope,sans-serif;
+      font-size:16px;
+      margin-bottom:10px;
+    }
+
+    .footer p,.footer a{
+      color:#d7cde8;
+      font-size:13px;
+      line-height:1.9;
+    }
+
+    .footer a{display:block}
+
+    .footer-bottom{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-top:14px;
+      text-align:center;
+      color:#cabfe1;
+      font-size:12px;
+    }
+
+    @media (max-width:1100px){
+      .stats,.grid,.footer-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:768px){
+      .hero h1{font-size:34px}
+      .nav{justify-content:center}
+      .nav-links{justify-content:center}
+    }
+  </style>
 </head>
-
 <body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="index.html" class="logo">Bariq AI</a>
 
-<div class="header">
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="business-dashboard.html">Business</a>
+        <a href="ai-generator.html">AI Generator</a>
+        <a href="campaign-studio-pro.html">Campaign</a>
+        <a href="creator-marketplace.html">Marketplace</a>
+        <a href="creator-dashboard.html">Creators</a>
+        <a href="payments.html">Payments</a>
+        <a href="admin-dashboard.html">Admin</a>
+      </nav>
+    </div>
+  </header>
 
-<div class="logo">Bariq AI Creator Earnings</div>
+  <main class="page">
+    <div class="container">
 
-</div>
+      <section class="hero">
+        <div class="badge">Creator Wallet & Earnings</div>
+        <h1>Creator Earnings</h1>
+        <p>
+          Track completed campaigns, pending payouts, approved payouts, and the creator-side earning workflow inside Bariq AI.
+        </p>
 
-<div class="container">
+        <div class="hero-actions">
+          <a href="creator-dashboard.html" class="btn">Open Creator Dashboard</a>
+          <a href="creator-marketplace.html" class="btn-outline">Open Marketplace</a>
+          <a href="payments.html" class="btn-outline">Open Payments</a>
+        </div>
+      </section>
 
-<div class="grid">
+      <section class="stats">
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="icon-box">💰</div>
+            <h4>Total Earnings</h4>
+          </div>
+          <div class="num">₹38,400</div>
+          <p>Total lifetime earnings tracked across creator campaigns and collaborations.</p>
+        </div>
 
-<div class="card">
-<h3>Total Earnings</h3>
-<p>₹38,400</p>
-</div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="icon-box">⏳</div>
+            <h4>Pending Payout</h4>
+          </div>
+          <div class="num">₹9,200</div>
+          <p>Amount waiting for approval, review, or scheduled payout release.</p>
+        </div>
 
-<div class="card">
-<h3>Pending Payout</h3>
-<p>₹9,200</p>
-</div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="icon-box">✅</div>
+            <h4>Paid Campaigns</h4>
+          </div>
+          <div class="num">12</div>
+          <p>Creator campaigns completed and marked as successfully paid.</p>
+        </div>
 
-<div class="card">
-<h3>Completed Campaigns</h3>
-<p>12</p>
-</div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="icon-box">🎥</div>
+            <h4>Active Work</h4>
+          </div>
+          <div class="num">3</div>
+          <p>Campaign jobs currently under review, edit, or payout processing.</p>
+        </div>
+      </section>
 
-</div>
+      <section class="grid">
+        <div class="section">
+          <h2>Earnings Summary</h2>
+          <div class="sub">Use this section to quickly understand creator-side revenue flow.</div>
 
-<div class="section">
+          <div class="list">
+            <div class="list-item">
+              <strong>Best earning campaign</strong>
+              <span>Clinic Transformation Reel — ₹4,000</span>
+            </div>
+            <div class="list-item">
+              <strong>Last payout date</strong>
+              <span>08 March 2026 — ₹3,200 released</span>
+            </div>
+            <div class="list-item">
+              <strong>Current payout mode</strong>
+              <span>UPI / Bank transfer placeholder for testing phase</span>
+            </div>
+          </div>
+        </div>
 
-<h2>Campaign Earnings</h2>
+        <div class="section">
+          <h2>Next Actions</h2>
+          <div class="sub">These are the next platform actions for creator monetization flow.</div>
 
-<table class="table">
+          <div class="list">
+            <div class="list-item">
+              <strong>Review pending jobs</strong>
+              <span>Move submitted creator work into approval and payout flow.</span>
+            </div>
+            <div class="list-item">
+              <strong>Connect admin approval</strong>
+              <span>Allow founder/admin to release creator payments from control panel.</span>
+            </div>
+            <div class="list-item">
+              <strong>Go live in test mode first</strong>
+              <span>Validate business payments and creator payouts before public launch.</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<tr>
-<th>Campaign</th>
-<th>Business</th>
-<th>Earnings</th>
-<th>Status</th>
-</tr>
+      <section class="table-wrap">
+        <h2 style="font-family:Manrope,sans-serif;color:#5D468F;margin-bottom:14px;">Campaign Earnings Table</h2>
 
-<tr>
-<td>Laser Hair Removal Reel</td>
-<td>Glow Clinic</td>
-<td>₹3,200</td>
-<td>Paid</td>
-</tr>
+        <table>
+          <thead>
+            <tr>
+              <th>Campaign</th>
+              <th>Business</th>
+              <th>Earnings</th>
+              <th>Status</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Laser Hair Removal Reel</td>
+              <td>Glow Clinic</td>
+              <td>₹3,200</td>
+              <td><span class="status paid">Paid</span></td>
+              <td>Reel</td>
+            </tr>
+            <tr>
+              <td>Weight Loss Offer Video</td>
+              <td>SkinCare Hub</td>
+              <td>₹2,000</td>
+              <td><span class="status pending">Pending</span></td>
+              <td>Video</td>
+            </tr>
+            <tr>
+              <td>Clinic Transformation Reel</td>
+              <td>Beauty Studio</td>
+              <td>₹4,000</td>
+              <td><span class="status review">In Review</span></td>
+              <td>Reel</td>
+            </tr>
+            <tr>
+              <td>Offer Launch Story Set</td>
+              <td>Glow Clinic</td>
+              <td>₹1,800</td>
+              <td><span class="status pending">Pending</span></td>
+              <td>Stories</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
-<tr>
-<td>Weight Loss Offer Video</td>
-<td>SkinCare Hub</td>
-<td>₹2,000</td>
-<td>Pending</td>
-</tr>
+    </div>
+  </main>
 
-<tr>
-<td>Clinic Transformation Reel</td>
-<td>Beauty Studio</td>
-<td>₹4,000</td>
-<td>Pending</td>
-</tr>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Bariq AI</h4>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, and execution systems.</p>
+        </div>
 
-</table>
+        <div>
+          <h4>Platform</h4>
+          <a href="ai-generator.html">AI Generator</a>
+          <a href="business-dashboard.html">Business Dashboard</a>
+          <a href="creator-dashboard.html">Creator Dashboard</a>
+          <a href="creator-marketplace.html">Marketplace</a>
+        </div>
 
-</div>
+        <div>
+          <h4>Legal</h4>
+          <a href="terms.html">Terms</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="refund-policy.html">Refund Policy</a>
+          <a href="creator-policy.html">Creator Policy</a>
+          <a href="business-policy.html">Business Policy</a>
+        </div>
 
-</div>
+        <div>
+          <h4>Contact</h4>
+          <a href="contact.html">Contact Us</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="payments.html">Payments</a>
+          <p>support@bariqai.com</p>
+        </div>
+      </div>
 
+      <div class="footer-bottom">
+        © <span id="year"></span> Bariq AI. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
