@@ -1,778 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI - Admin Dashboard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    :root{
-      --gold:#D6A13A;
-      --gold-soft:#F1D28B;
-      --metal:#7D63B8;
-      --metal-deep:#5D468F;
-      --rose:#B97AA7;
-      --bg1:#fffaf4;
-      --bg2:#fff5fb;
-      --bg3:#fbf7ff;
-      --text:#3b2f45;
-      --muted:#7d728c;
-      --line:rgba(214,161,58,.18);
-      --success:#3f9968;
-      --warning:#c28a2c;
-      --danger:#c85d72;
-      --shadow:0 20px 50px rgba(95,70,120,.08);
-      --shadow2:0 10px 24px rgba(70,45,95,.06);
-      --radius-xl:30px;
-      --radius-lg:22px;
-    }
+<title>Bariq AI Admin Panel</title>
 
-    *{box-sizing:border-box;margin:0;padding:0}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-    body{
-      font-family:Inter,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left,#fff0d8 0%,transparent 24%),
-        radial-gradient(circle at top right,#f8e8ff 0%,transparent 24%),
-        linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 48%,var(--bg3) 100%);
-      min-height:100vh;
-    }
+<style>
 
-    a{text-decoration:none;color:inherit}
+body{
+font-family:Inter;
+background:#f8f6ff;
+margin:0;
+padding:0;
+}
 
-    .container{
-      width:min(1240px,calc(100% - 40px));
-      margin:auto;
-    }
+.header{
+background:white;
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
 
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      background:rgba(255,255,255,.88);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--line);
-    }
+.logo{
+font-size:28px;
+font-weight:700;
+color:#6b4ce6;
+}
 
-    .nav{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:18px;
-      padding:16px 0;
-      flex-wrap:wrap;
-    }
+.menu a{
+margin-left:20px;
+text-decoration:none;
+color:#333;
+font-weight:600;
+}
 
-    .logo{
-      font-family:Manrope,sans-serif;
-      font-size:31px;
-      font-weight:800;
-      letter-spacing:-0.8px;
-      background:linear-gradient(90deg,var(--gold) 0%,var(--gold-soft) 18%,var(--metal) 58%,var(--metal-deep) 100%);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-    }
+.container{
+padding:40px;
+}
 
-    .nav-links{
-      display:flex;
-      gap:18px;
-      flex-wrap:wrap;
-    }
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
 
-    .nav-links a{
-      color:#776b83;
-      font-size:14px;
-      font-weight:600;
-      position:relative;
-    }
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 6px 14px rgba(0,0,0,0.08);
+}
 
-    .nav-links a:hover{
-      color:var(--metal-deep);
-    }
+.card h3{
+margin:0;
+font-size:18px;
+color:#666;
+}
 
-    .nav-links a.active{
-      color:var(--metal-deep);
-    }
+.card p{
+font-size:28px;
+font-weight:700;
+margin-top:10px;
+color:#6b4ce6;
+}
 
-    .nav-links a.active::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:-8px;
-      width:100%;
-      height:2px;
-      border-radius:999px;
-      background:linear-gradient(90deg,var(--gold),var(--metal));
-    }
+.section{
+margin-top:40px;
+}
 
-    .page{padding:34px 0 40px}
+.table{
+width:100%;
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 6px 14px rgba(0,0,0,0.08);
+}
 
-    .hero{
-      background:rgba(255,255,255,.94);
-      border:1px solid var(--line);
-      border-radius:var(--radius-xl);
-      box-shadow:var(--shadow);
-      padding:32px;
-      margin-bottom:18px;
-      position:relative;
-      overflow:hidden;
-    }
+.table th{
+background:#6b4ce6;
+color:white;
+padding:14px;
+text-align:left;
+}
 
-    .hero::after{
-      content:"";
-      position:absolute;
-      width:240px;
-      height:240px;
-      right:-90px;
-      top:-90px;
-      background:radial-gradient(circle,var(--gold-soft),transparent 70%);
-      opacity:.35;
-    }
+.table td{
+padding:14px;
+border-bottom:1px solid #eee;
+}
 
-    .badge{
-      display:inline-flex;
-      padding:10px 15px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background:#fff;
-      color:var(--metal-deep);
-      font-size:12px;
-      font-weight:700;
-      margin-bottom:14px;
-      position:relative;
-      z-index:1;
-    }
+.button{
+background:#6b4ce6;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:6px;
+cursor:pointer;
+}
 
-    .hero h1{
-      font-family:Manrope,sans-serif;
-      font-size:42px;
-      color:var(--metal-deep);
-      margin-bottom:8px;
-      position:relative;
-      z-index:1;
-    }
-
-    .hero .tagline{
-      font-family:"Cormorant Garamond",serif;
-      font-style:italic;
-      font-size:28px;
-      color:#7c61ae;
-      margin-bottom:14px;
-      position:relative;
-      z-index:1;
-    }
-
-    .hero p{
-      color:var(--muted);
-      line-height:1.8;
-      max-width:920px;
-      font-size:15px;
-      position:relative;
-      z-index:1;
-    }
-
-    .hero-actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:20px;
-      position:relative;
-      z-index:1;
-    }
-
-    .btn,.btn-outline,.small-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:12px 20px;
-      border-radius:999px;
-      font-size:14px;
-      font-weight:700;
-      cursor:pointer;
-      transition:.2s ease;
-      border:none;
-    }
-
-    .btn{
-      background:linear-gradient(135deg,var(--gold),var(--metal));
-      color:#fff;
-      box-shadow:0 12px 24px rgba(125,99,184,.18);
-    }
-
-    .btn-outline,.small-btn{
-      background:#fff;
-      color:var(--metal-deep);
-      border:1px solid var(--line);
-    }
-
-    .btn:hover,.btn-outline:hover,.small-btn:hover,.panel:hover,.stat-card:hover,.feed-item:hover,.table-card:hover{
-      transform:translateY(-2px);
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
-      margin-bottom:18px;
-    }
-
-    .stat-card{
-      background:linear-gradient(135deg,#fffaf2,#fff8fd);
-      border:1px solid var(--line);
-      border-radius:var(--radius-lg);
-      padding:22px;
-      box-shadow:var(--shadow2);
-      transition:.2s ease;
-    }
-
-    .stat-top{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:12px;
-    }
-
-    .icon-box{
-      width:52px;
-      height:52px;
-      border-radius:16px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:23px;
-      border:1px solid var(--line);
-      background:linear-gradient(135deg,#fff3dc,#f3e9ff);
-    }
-
-    .stat-card h4{
-      color:#866fb3;
-      font-size:13px;
-      font-weight:700;
-    }
-
-    .num{
-      font-family:Manrope,sans-serif;
-      font-size:30px;
-      color:var(--metal-deep);
-      font-weight:800;
-      margin-bottom:6px;
-    }
-
-    .stat-card p{
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.65;
-    }
-
-    .trend{
-      margin-top:10px;
-      font-size:12px;
-      font-weight:700;
-      color:#7f68b8;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns:1.08fr .92fr;
-      gap:18px;
-      margin-bottom:18px;
-    }
-
-    .grid-3{
-      display:grid;
-      grid-template-columns:1fr 1fr 1fr;
-      gap:18px;
-      margin-bottom:18px;
-    }
-
-    .panel,.table-card{
-      background:rgba(255,255,255,.94);
-      border:1px solid var(--line);
-      border-radius:var(--radius-xl);
-      padding:24px;
-      box-shadow:var(--shadow2);
-      transition:.2s ease;
-    }
-
-    .panel h2,.table-card h2{
-      font-family:Manrope,sans-serif;
-      font-size:24px;
-      color:var(--metal-deep);
-      margin-bottom:8px;
-    }
-
-    .sub{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.7;
-      margin-bottom:16px;
-    }
-
-    .table-wrap{
-      overflow:auto;
-      border:1px solid var(--line);
-      border-radius:20px;
-      background:#fff;
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:760px;
-    }
-
-    th,td{
-      padding:14px 16px;
-      text-align:left;
-      border-bottom:1px solid rgba(214,161,58,.12);
-      font-size:14px;
-    }
-
-    th{
-      color:#7f68b8;
-      background:linear-gradient(180deg,#fffaf2,#fff);
-    }
-
-    td{
-      color:var(--text);
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:999px;
-      padding:7px 11px;
-      font-size:11px;
-      font-weight:800;
-      letter-spacing:.03em;
-      text-transform:uppercase;
-      border:1px solid var(--line);
-      background:#fff;
-    }
-
-    .pill.success{color:var(--success)}
-    .pill.warning{color:var(--warning)}
-    .pill.danger{color:var(--danger)}
-
-    .action-row{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-
-    .feed-list{
-      display:grid;
-      gap:12px;
-    }
-
-    .feed-item{
-      background:linear-gradient(135deg,#fffaf2,#fff8fd);
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-      box-shadow:var(--shadow2);
-      transition:.2s ease;
-    }
-
-    .feed-item strong{
-      display:block;
-      color:var(--metal-deep);
-      font-size:15px;
-      margin-bottom:6px;
-    }
-
-    .feed-item span{
-      display:block;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.7;
-    }
-
-    .feed-meta{
-      margin-top:8px;
-      color:#8d7cb2;
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .mini-stats{
-      display:grid;
-      gap:12px;
-    }
-
-    .mini-card{
-      background:linear-gradient(135deg,#fffaf2,#fff8fd);
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-    }
-
-    .mini-card strong{
-      display:block;
-      color:var(--metal-deep);
-      font-size:15px;
-      margin-bottom:6px;
-    }
-
-    .mini-card span{
-      display:block;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.7;
-    }
-
-    .empty{
-      text-align:center;
-      padding:28px 18px;
-      border:1px dashed var(--line);
-      border-radius:18px;
-      color:#8a7fa5;
-      background:#fff;
-    }
-
-    .footer{
-      text-align:center;
-      color:#8a7fa5;
-      padding:34px 0 26px;
-    }
-
-    @media (max-width: 1080px){
-      .stats,.grid-2,.grid-3{
-        grid-template-columns:1fr;
-      }
-    }
-
-    @media (max-width: 768px){
-      .container{width:min(100% - 24px,1240px)}
-      .nav{justify-content:space-between;align-items:flex-start}
-      .nav-links{
-        width:100%;
-        overflow-x:auto;
-        flex-wrap:nowrap;
-        white-space:nowrap;
-        padding-bottom:4px;
-        scrollbar-width:none;
-      }
-      .nav-links::-webkit-scrollbar{display:none}
-      .hero{padding:24px}
-      .hero h1{font-size:31px}
-      .hero .tagline{font-size:22px;line-height:1.35}
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="container nav">
-      <a href="index.html" class="logo">Bariq AI</a>
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="business-dashboard.html">Business</a>
-        <a href="creator-dashboard.html">Creator</a>
-        <a href="ai-generator.html">AI Generator</a>
-        <a href="creator-marketplace.html">Marketplace</a>
-        <a href="campaign-studio-pro.html">Campaign Studio</a>
-        <a href="admin-dashboard.html" class="active">Admin</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="page">
-    <div class="container">
-      <section class="hero">
-        <div class="badge">Platform Control Center</div>
-        <h1>Admin Dashboard</h1>
-        <div class="tagline">Control creators, businesses, campaigns, and marketplace activity from one premium command center</div>
-        <p>
-          This is the founder control layer of Bariq AI. Monitor exported campaigns, creator applications, platform activity, and business-creator flow from one connected admin view.
-        </p>
-        <div class="hero-actions">
-          <button class="btn" onclick="refreshAdminData()">Refresh Dashboard</button>
-          <button class="btn-outline" onclick="window.location.href='creator-marketplace.html'">Open Marketplace</button>
-          <button class="btn-outline" onclick="window.location.href='campaign-studio-pro.html'">Open Campaign Studio</button>
-        </div>
-      </section>
+<div class="header">
 
-      <section class="stats">
-        <div class="stat-card">
-          <div class="stat-top">
-            <div class="icon-box">🏢</div>
-            <h4>Total Businesses</h4>
-          </div>
-          <div class="num">248</div>
-          <p>Registered brands, clinics, cafés, fitness studios, and D2C businesses on Bariq AI.</p>
-          <div class="trend">+18 this week</div>
-        </div>
+<div class="logo">Bariq AI Admin</div>
 
-        <div class="stat-card">
-          <div class="stat-top">
-            <div class="icon-box">🎥</div>
-            <h4>Total Creators</h4>
-          </div>
-          <div class="num">1,426</div>
-          <p>Creators available for campaigns, collaborations, and marketplace discovery.</p>
-          <div class="trend">+73 this week</div>
-        </div>
+<div class="menu">
 
-        <div class="stat-card">
-          <div class="stat-top">
-            <div class="icon-box">📣</div>
-            <h4>Latest Campaigns</h4>
-          </div>
-          <div class="num" id="campaignCount">0</div>
-          <p>Connected campaign count based on latest exported campaign and system defaults.</p>
-          <div class="trend">Updated live from local workflow</div>
-        </div>
+<a href="index.html">Home</a>
+<a href="ai-generator.html">AI Generator</a>
+<a href="business-dashboard.html">Businesses</a>
+<a href="creator-dashboard.html">Creators</a>
+<a href="campaign-studio-pro.html">Campaigns</a>
+<a href="payments.html">Payments</a>
 
-        <div class="stat-card">
-          <div class="stat-top">
-            <div class="icon-box">📝</div>
-            <h4>Marketplace Applications</h4>
-          </div>
-          <div class="num" id="applicationCount">0</div>
-          <p>Applications submitted by creators from the marketplace into the Bariq AI flow.</p>
-          <div class="trend">Connected to creator dashboard</div>
-        </div>
-      </section>
+</div>
 
-      <section class="grid-2">
-        <div class="table-card">
-          <h2>Latest Exported Campaign</h2>
-          <div class="sub">This section reads the latest campaign exported from Campaign Studio.</div>
-          <div id="latestCampaignSection"></div>
-        </div>
+</div>
 
-        <div class="panel">
-          <h2>Platform Activity Feed</h2>
-          <div class="sub">A founder-friendly snapshot of the current platform state.</div>
-          <div class="feed-list" id="activityFeed">
-            <div class="feed-item">
-              <strong>No recent connected events yet</strong>
-              <span>Export a campaign or submit a creator application to populate live admin activity.</span>
-              <div class="feed-meta">Waiting for activity</div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section class="grid-3">
-        <div class="panel">
-          <h2>Creator Application Snapshot</h2>
-          <div class="sub">Quick founder view of creator-side demand and application health.</div>
-          <div class="mini-stats">
-            <div class="mini-card">
-              <strong>Total Applications</strong>
-              <span id="miniApplicationCount">0 applications recorded from creator marketplace.</span>
-            </div>
-            <div class="mini-card">
-              <strong>Most Recent Apply Date</strong>
-              <span id="recentApplyDate">No applications yet.</span>
-            </div>
-            <div class="mini-card">
-              <strong>Admin Action</strong>
-              <span>Review creator demand, shortlist quality campaigns, and improve matching logic.</span>
-            </div>
-          </div>
-        </div>
+<div class="container">
 
-        <div class="panel">
-          <h2>Campaign Oversight</h2>
-          <div class="sub">Connected insights from exported campaign structure.</div>
-          <div class="mini-stats">
-            <div class="mini-card">
-              <strong>Current Focus</strong>
-              <span id="campaignFocus">No exported campaign detected yet.</span>
-            </div>
-            <div class="mini-card">
-              <strong>Execution Stage</strong>
-              <span id="executionStage">Waiting for campaign export from Campaign Studio.</span>
-            </div>
-            <div class="mini-card">
-              <strong>Recommended Move</strong>
-              <span>Export campaign → open marketplace → invite creators → track admin activity.</span>
-            </div>
-          </div>
-        </div>
+<div class="grid">
 
-        <div class="panel">
-          <h2>Revenue Snapshot</h2>
-          <div class="sub">Illustrative founder view of how Bariq AI monetizes the flow.</div>
-          <div class="mini-stats">
-            <div class="mini-card">
-              <strong>Subscriptions</strong>
-              <span>₹3.2L estimated from active business plans and premium tools.</span>
-            </div>
-            <div class="mini-card">
-              <strong>Marketplace Fee Potential</strong>
-              <span>Applications and campaign matches can become platform commission revenue.</span>
-            </div>
-            <div class="mini-card">
-              <strong>Upsell Path</strong>
-              <span>Managed campaigns, featured creators, and premium AI packs increase revenue.</span>
-            </div>
-          </div>
-        </div>
-      </section>
+<div class="card">
+<h3>Total Businesses</h3>
+<p id="businessCount">24</p>
+</div>
 
-      <section class="table-card">
-        <h2>Creator Applications Table</h2>
-        <div class="sub">This table is connected to the Creator Marketplace and Creator Dashboard application flow.</div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Campaign</th>
-                <th>Applied On</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody id="applicationTableBody"></tbody>
-          </table>
-        </div>
-      </section>
+<div class="card">
+<h3>Total Creators</h3>
+<p id="creatorCount">142</p>
+</div>
 
-      <div class="footer">© Bariq AI • Founder control with connected campaign and creator intelligence</div>
-    </div>
-  </main>
+<div class="card">
+<h3>Total Campaigns</h3>
+<p id="campaignCount">61</p>
+</div>
 
-  <script>
-    const defaultCampaignCount = 4;
+<div class="card">
+<h3>Total Revenue</h3>
+<p>₹2,84,500</p>
+</div>
 
-    function getLatestCampaign() {
-      const raw = localStorage.getItem("bariq_latest_campaign");
-      return raw ? JSON.parse(raw) : null;
-    }
+</div>
 
-    function getApplications() {
-      return JSON.parse(localStorage.getItem("bariq_marketplace_applications") || "[]");
-    }
 
-    function formatDate(isoDate) {
-      if (!isoDate) return "—";
-      return new Date(isoDate).toLocaleDateString();
-    }
+<div class="section">
 
-    function renderLatestCampaign() {
-      const latest = getLatestCampaign();
-      const section = document.getElementById("latestCampaignSection");
+<h2>Recent Businesses</h2>
 
-      if (!latest) {
-        section.innerHTML = `<div class="empty">No exported campaign found yet. Export a campaign from Campaign Studio to make the admin dashboard fully connected.</div>`;
-        document.getElementById("campaignFocus").textContent = "No exported campaign detected yet.";
-        document.getElementById("executionStage").textContent = "Waiting for campaign export from Campaign Studio.";
-        document.getElementById("campaignCount").textContent = defaultCampaignCount;
-        return;
-      }
+<table class="table">
 
-      document.getElementById("campaignFocus").textContent = `${latest.campaignName || "Latest campaign"} in ${latest.campaignCity || "selected city"}`;
-      document.getElementById("executionStage").textContent = `Campaign exported with goal "${latest.campaignGoal || "Lead Generation"}" and ready for creator execution.`;
-      document.getElementById("campaignCount").textContent = defaultCampaignCount + 1;
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Plan</th>
+<th>Status</th>
+</tr>
 
-      section.innerHTML = `
-        <div class="feed-item">
-          <strong>${latest.campaignName || "Latest Campaign"}</strong>
-          <span>${latest.campaignMessage || "Imported from Campaign Studio."}</span>
-          <div class="feed-meta">Category: ${latest.businessCategory || "—"} • Goal: ${latest.campaignGoal || "—"} • City: ${latest.campaignCity || "—"} • Budget: ₹${latest.campaignBudget || "—"}</div>
+<tr>
+<td>Glow Clinic</td>
+<td>glow@gmail.com</td>
+<td>Growth</td>
+<td>Active</td>
+</tr>
 
-          <div class="action-row" style="margin-top:12px;">
-            <button class="small-btn" onclick="window.location.href='campaign-studio-pro.html'">Open Studio</button>
-            <button class="small-btn" onclick="window.location.href='creator-marketplace.html'">Open Marketplace</button>
-          </div>
-        </div>
-      `;
-    }
+<tr>
+<td>SkinCare Hub</td>
+<td>skin@gmail.com</td>
+<td>Starter</td>
+<td>Active</td>
+</tr>
 
-    function renderApplications() {
-      const applications = getApplications();
-      const tbody = document.getElementById("applicationTableBody");
+<tr>
+<td>Beauty Studio</td>
+<td>beauty@gmail.com</td>
+<td>Pro</td>
+<td>Active</td>
+</tr>
 
-      document.getElementById("applicationCount").textContent = applications.length;
-      document.getElementById("miniApplicationCount").textContent = `${applications.length} application${applications.length === 1 ? "" : "s"} recorded from creator marketplace.`;
+</table>
 
-      if (!applications.length) {
-        document.getElementById("recentApplyDate").textContent = "No applications yet.";
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="5">
-              <div class="empty">No creator applications found yet. Apply to a campaign from the marketplace to populate this table.</div>
-            </td>
-          </tr>
-        `;
-        return;
-      }
+</div>
 
-      const latestDate = applications[applications.length - 1].appliedAt;
-      document.getElementById("recentApplyDate").textContent = formatDate(latestDate);
 
-      tbody.innerHTML = applications.map((app, index) => `
-        <tr>
-          <td>${index + 1}</td>
-          <td>${app.campaignTitle || "Campaign Application"}</td>
-          <td>${formatDate(app.appliedAt)}</td>
-          <td><span class="pill success">Applied</span></td>
-          <td>
-            <div class="action-row">
-              <button class="small-btn" onclick="window.location.href='creator-dashboard.html'">Open Creator Side</button>
-            </div>
-          </td>
-        </tr>
-      `).join("");
-    }
+<div class="section">
 
-    function renderActivityFeed() {
-      const latest = getLatestCampaign();
-      const applications = getApplications();
-      const feed = document.getElementById("activityFeed");
-      const items = [];
+<h2>Recent Campaigns</h2>
 
-      if (latest) {
-        items.push(`
-          <div class="feed-item">
-            <strong>Campaign exported from Campaign Studio</strong>
-            <span>${latest.campaignName || "Latest campaign"} was exported with goal "${latest.campaignGoal || "Lead Generation"}" for ${latest.campaignCity || "selected city"}.</span>
-            <div class="feed-meta">Connected business flow</div>
-          </div>
-        `);
-      }
+<table class="table">
 
-      if (applications.length) {
-        const lastApp = applications[applications.length - 1];
-        items.push(`
-          <div class="feed-item">
-            <strong>Creator application received</strong>
-            <span>A creator applied to "${lastApp.campaignTitle || "campaign"}" from the Creator Marketplace.</span>
-            <div class="feed-meta">${formatDate(lastApp.appliedAt)}</div>
-          </div>
-        `);
-      }
+<tr>
+<th>Campaign</th>
+<th>Business</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
 
-      if (!items.length) {
-        items.push(`
-          <div class="feed-item">
-            <strong>No recent connected events yet</strong>
-            <span>Export a campaign or submit a creator application to populate live admin activity.</span>
-            <div class="feed-meta">Waiting for activity</div>
-          </div>
-        `);
-      }
+<tr>
+<td>Laser Hair Removal Ads</td>
+<td>Glow Clinic</td>
+<td>Running</td>
+<td><button class="button">View</button></td>
+</tr>
 
-      feed.innerHTML = items.join("");
-    }
+<tr>
+<td>Weight Loss Offer</td>
+<td>SkinCare Hub</td>
+<td>Draft</td>
+<td><button class="button">View</button></td>
+</tr>
 
-    function refreshAdminData() {
-      renderLatestCampaign();
-      renderApplications();
-      renderActivityFeed();
-      alert("Admin dashboard refreshed");
-    }
+</table>
 
-    refreshAdminData();
-  </script>
+</div>
+
+
+</div>
+
 </body>
 </html>
