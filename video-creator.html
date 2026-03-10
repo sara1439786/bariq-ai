@@ -221,15 +221,23 @@
       font-weight: 700;
     }
 
+    .preview-frame {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 22px;
+      min-height: 680px;
+    }
+
     .preview-phone {
       width: 100%;
       max-width: 360px;
-      margin: 0 auto 22px;
       background: #1d1326;
       border-radius: 34px;
       padding: 14px;
       box-shadow: 0 18px 40px rgba(63, 34, 92, 0.16);
       border: 1px solid #e9d79b;
+      transition: all 0.25s ease;
     }
 
     .preview-screen {
@@ -238,6 +246,7 @@
       border-radius: 24px;
       overflow: hidden;
       background: linear-gradient(180deg, #4c2277 0%, #22132f 52%, #d4af37 180%);
+      transition: all 0.25s ease;
     }
 
     .preview-overlay {
@@ -356,31 +365,6 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.18);
     }
 
-    .style-list {
-      display: grid;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .style-box {
-      background: #fffaf0;
-      border: 1px solid #f1df9f;
-      border-radius: 18px;
-      padding: 14px;
-    }
-
-    .style-box h4 {
-      color: #5f2396;
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
-
-    .style-box p {
-      color: #5d536a;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
     .music-card {
       margin-bottom: 18px;
       background: #fffdf8;
@@ -413,6 +397,26 @@
       font-weight: 700;
       margin-right: 8px;
       margin-top: 8px;
+    }
+
+    .ratio-card {
+      margin-bottom: 18px;
+      background: #fffdf8;
+      border: 1px solid #f1df9f;
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .ratio-card h4 {
+      color: #5f2396;
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .ratio-meta {
+      color: #5d536a;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
     .scene-board {
@@ -562,20 +566,16 @@
         font-size: 25px;
       }
 
-      .preview-screen {
-        height: 560px;
-      }
-
-      .preview-headline {
-        font-size: 28px;
-      }
-
       .scene-card {
         grid-template-columns: 1fr;
       }
 
       .scene-thumb {
         height: 180px;
+      }
+
+      .preview-frame {
+        min-height: 520px;
       }
     }
   </style>
@@ -597,8 +597,8 @@
     <div class="hero-box">
       <h2>Create Short Videos Step by Step</h2>
       <p>
-        Start with Instagram Reels, offer promos, product showcases, inserts, and social ads.
-        Generate a reel blueprint, preview the visual style, pick music mood, and see subtitle strips before building export.
+        Start with Instagram Reels, square posts, story ads, product promos, and landscape ads.
+        Generate a reel blueprint, preview the visual style, pick ratio, music mood, and subtitle feel before export.
       </p>
     </div>
 
@@ -637,6 +637,15 @@
               <option value="15 sec">15 sec</option>
               <option value="30 sec">30 sec</option>
               <option value="45 sec">45 sec</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="ratio">Ratio</label>
+            <select id="ratio">
+              <option value="9:16">9:16</option>
+              <option value="1:1">1:1</option>
+              <option value="16:9">16:9</option>
             </select>
           </div>
 
@@ -733,38 +742,47 @@
       <div class="panel">
         <h3>Visual Template Preview</h3>
 
-        <div class="preview-phone">
-          <div class="preview-screen" id="previewScreen">
-            <div class="preview-overlay"></div>
+        <div class="preview-frame" id="previewFrame">
+          <div class="preview-phone" id="previewShell">
+            <div class="preview-screen" id="previewScreen">
+              <div class="preview-overlay"></div>
 
-            <div class="preview-chip" id="previewChip">15 sec • Bold Promo</div>
+              <div class="preview-chip" id="previewChip">15 sec • Bold Promo • 9:16</div>
 
-            <div class="preview-toptext" id="previewTopText">
-              Instagram Reel for your next campaign
-            </div>
+              <div class="preview-toptext" id="previewTopText">
+                Instagram Reel for your next campaign
+              </div>
 
-            <div class="preview-center">
-              <div>
-                <div class="preview-headline" id="previewHeadline">
-                  Your headline will appear here
-                </div>
-                <div class="preview-sub" id="previewSub">
-                  Premium gold-purple short video layout
+              <div class="preview-center">
+                <div>
+                  <div class="preview-headline" id="previewHeadline">
+                    Your headline will appear here
+                  </div>
+                  <div class="preview-sub" id="previewSub">
+                    Premium gold-purple short video layout
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="subtitle-strip">
-              <div class="subtitle-pill" id="previewSubtitle">
-                Your subtitle preview appears here
+              <div class="subtitle-strip">
+                <div class="subtitle-pill" id="previewSubtitle">
+                  Your subtitle preview appears here
+                </div>
+              </div>
+
+              <div class="preview-bottom">
+                <div class="preview-cta" id="previewCTA">Shop Now</div>
+                <div class="preview-brand" id="previewBrand">Your Brand</div>
+                <div class="preview-meta" id="previewMeta">Product Promo • Premium Tone</div>
               </div>
             </div>
+          </div>
+        </div>
 
-            <div class="preview-bottom">
-              <div class="preview-cta" id="previewCTA">Shop Now</div>
-              <div class="preview-brand" id="previewBrand">Your Brand</div>
-              <div class="preview-meta" id="previewMeta">Product Promo • Premium Tone</div>
-            </div>
+        <div class="ratio-card">
+          <h4>Format Direction</h4>
+          <div class="ratio-meta" id="ratioDescription">
+            9:16 selected for Reels, Shorts, Stories, and vertical ad creatives.
           </div>
         </div>
 
@@ -776,33 +794,6 @@
           <span class="music-tag" id="musicTag1">Luxury Ambient</span>
           <span class="music-tag" id="musicTag2">Premium Pace</span>
           <span class="music-tag" id="musicTag3">Soft Rise</span>
-        </div>
-
-        <div class="style-list">
-          <div class="style-box">
-            <h4>Preview Purpose</h4>
-            <p>This mockup shows how your short video may feel visually before we move into subtitles, voiceover, stock clips, and MP4 export.</p>
-          </div>
-
-          <div class="style-box">
-            <h4>Bold Promo</h4>
-            <p>Stronger headline, faster visual energy, more aggressive offer-led presentation.</p>
-          </div>
-
-          <div class="style-box">
-            <h4>Elegant Premium</h4>
-            <p>Softer luxury look, richer spacing, premium product-led styling, refined presence.</p>
-          </div>
-
-          <div class="style-box">
-            <h4>UGC / Social Proof</h4>
-            <p>More relatable and conversational. Best for founder talk, reviews, and organic social feel.</p>
-          </div>
-
-          <div class="style-box">
-            <h4>Product Showcase</h4>
-            <p>Clean product-forward structure with benefits, packaging emphasis, and direct CTA.</p>
-          </div>
         </div>
 
         <div class="scene-board">
@@ -849,6 +840,38 @@
       }
     }
 
+    function updateRatioPreview() {
+      const ratio = document.getElementById("ratio").value || "9:16";
+      const previewShell = document.getElementById("previewShell");
+      const previewScreen = document.getElementById("previewScreen");
+      const ratioDescription = document.getElementById("ratioDescription");
+
+      if (ratio === "1:1") {
+        previewShell.style.maxWidth = "420px";
+        previewShell.style.borderRadius = "28px";
+        previewScreen.style.width = "100%";
+        previewScreen.style.height = "392px";
+        previewScreen.style.borderRadius = "20px";
+        ratioDescription.textContent = "1:1 selected for square feed posts, catalog creatives, and social ads.";
+      } else if (ratio === "16:9") {
+        previewShell.style.maxWidth = "100%";
+        previewShell.style.width = "100%";
+        previewShell.style.borderRadius = "24px";
+        previewScreen.style.width = "100%";
+        previewScreen.style.height = "280px";
+        previewScreen.style.borderRadius = "18px";
+        ratioDescription.textContent = "16:9 selected for landscape ads, presentations, YouTube-style promos, and widescreen campaigns.";
+      } else {
+        previewShell.style.maxWidth = "360px";
+        previewShell.style.width = "100%";
+        previewShell.style.borderRadius = "34px";
+        previewScreen.style.width = "100%";
+        previewScreen.style.height = "640px";
+        previewScreen.style.borderRadius = "24px";
+        ratioDescription.textContent = "9:16 selected for Reels, Shorts, Stories, and vertical ad creatives.";
+      }
+    }
+
     function getMusicData(musicStyle) {
       if (musicStyle === "Bold Beat") {
         return {
@@ -877,105 +900,30 @@
     function getSceneData(duration, productName, audience, offer, cta, brandName) {
       if (duration === "15 sec") {
         return [
-          {
-            title: "Hook Scene",
-            time: "0-3 sec",
-            desc: "Fast opening visual with a bold attention-grabbing product entry.",
-            text: productName + " you need to notice today"
-          },
-          {
-            title: "Offer Scene",
-            time: "3-8 sec",
-            desc: "Highlight the product or service in a premium visual setting.",
-            text: offer
-          },
-          {
-            title: "Benefit Scene",
-            time: "8-12 sec",
-            desc: "Show the main result, transformation, or reason to care.",
-            text: "Better results. Better brand feel."
-          },
-          {
-            title: "CTA Scene",
-            time: "12-15 sec",
-            desc: "Close with a strong final frame and action message.",
-            text: cta
-          }
+          { title: "Hook Scene", time: "0-3 sec", desc: "Fast opening visual with a bold attention-grabbing product entry.", text: productName + " you need to notice today" },
+          { title: "Offer Scene", time: "3-8 sec", desc: "Highlight the product or service in a premium visual setting.", text: offer },
+          { title: "Benefit Scene", time: "8-12 sec", desc: "Show the main result, transformation, or reason to care.", text: "Better results. Better brand feel." },
+          { title: "CTA Scene", time: "12-15 sec", desc: "Close with a strong final frame and action message.", text: cta }
         ];
       }
 
       if (duration === "30 sec") {
         return [
-          {
-            title: "Problem Hook",
-            time: "0-4 sec",
-            desc: "Start with a curiosity-led question or audience pain point.",
-            text: "Why is everyone talking about " + productName + "?"
-          },
-          {
-            title: "Product Focus",
-            time: "4-10 sec",
-            desc: "Show the product or service being used or presented.",
-            text: "Built for " + audience
-          },
-          {
-            title: "Offer Highlight",
-            time: "10-16 sec",
-            desc: "Bring in the main value proposition or limited-time offer.",
-            text: offer
-          },
-          {
-            title: "Trust Build",
-            time: "16-23 sec",
-            desc: "Reinforce quality, trust, elegance, or emotional pull.",
-            text: "Premium. Effective. Easy."
-          },
-          {
-            title: "Final CTA",
-            time: "23-30 sec",
-            desc: "End with brand lockup and strong action instruction.",
-            text: cta
-          }
+          { title: "Problem Hook", time: "0-4 sec", desc: "Start with a curiosity-led question or audience pain point.", text: "Why is everyone talking about " + productName + "?" },
+          { title: "Product Focus", time: "4-10 sec", desc: "Show the product or service being used or presented.", text: "Built for " + audience },
+          { title: "Offer Highlight", time: "10-16 sec", desc: "Bring in the main value proposition or limited-time offer.", text: offer },
+          { title: "Trust Build", time: "16-23 sec", desc: "Reinforce quality, trust, elegance, or emotional pull.", text: "Premium. Effective. Easy." },
+          { title: "Final CTA", time: "23-30 sec", desc: "End with brand lockup and strong action instruction.", text: cta }
         ];
       }
 
       return [
-        {
-          title: "Premium Opening",
-          time: "0-5 sec",
-          desc: "Open with a refined visual and elegant brand reveal.",
-          text: "Meet " + productName
-        },
-        {
-          title: "Audience Need",
-          time: "5-12 sec",
-          desc: "Show the real need, desire, or lifestyle fit for the audience.",
-          text: "Designed for " + audience
-        },
-        {
-          title: "Offer Frame",
-          time: "12-20 sec",
-          desc: "Introduce the key offer, benefit, or core selling point.",
-          text: offer
-        },
-        {
-          title: "Benefit Breakdown",
-          time: "20-30 sec",
-          desc: "Present clear reasons why the viewer should care.",
-          text: "Smart. Elegant. Effective."
-        },
-        {
-          title: "Brand Trust",
-          time: "30-38 sec",
-          desc: "Reinforce premium positioning and confident brand identity.",
-          text: brandName + " delivers confidence"
-        },
-        {
-          title: "Closing CTA",
-          time: "38-45 sec",
-          desc: "Finish with direct action and premium end frame.",
-          text: cta
-        }
+        { title: "Premium Opening", time: "0-5 sec", desc: "Open with a refined visual and elegant brand reveal.", text: "Meet " + productName },
+        { title: "Audience Need", time: "5-12 sec", desc: "Show the real need, desire, or lifestyle fit for the audience.", text: "Designed for " + audience },
+        { title: "Offer Frame", time: "12-20 sec", desc: "Introduce the key offer, benefit, or core selling point.", text: offer },
+        { title: "Benefit Breakdown", time: "20-30 sec", desc: "Present clear reasons why the viewer should care.", text: "Smart. Elegant. Effective." },
+        { title: "Brand Trust", time: "30-38 sec", desc: "Reinforce premium positioning and confident brand identity.", text: brandName + " delivers confidence" },
+        { title: "Closing CTA", time: "38-45 sec", desc: "Finish with direct action and premium end frame.", text: cta }
       ];
     }
 
@@ -992,7 +940,6 @@
       sceneData.forEach(function(scene, index) {
         const card = document.createElement("div");
         card.className = "scene-card";
-
         card.innerHTML = `
           <div class="scene-thumb">
             <div class="scene-index">Scene ${index + 1}</div>
@@ -1005,7 +952,6 @@
             <div class="scene-text-tag">${scene.text}</div>
           </div>
         `;
-
         sceneCards.appendChild(card);
       });
     }
@@ -1013,7 +959,6 @@
     function renderSubtitleLines(lines) {
       const subtitleLines = document.getElementById("subtitleLines");
       subtitleLines.innerHTML = "";
-
       lines.forEach(function(line) {
         const div = document.createElement("div");
         div.className = "subtitle-line";
@@ -1025,7 +970,6 @@
     function updateMusicPreview() {
       const musicStyle = document.getElementById("musicStyle").value || "Luxury Ambient";
       const music = getMusicData(musicStyle);
-
       document.getElementById("musicDescription").textContent = music.description;
       document.getElementById("musicTag1").textContent = music.tags[0];
       document.getElementById("musicTag2").textContent = music.tags[1];
@@ -1037,13 +981,14 @@
       const productName = document.getElementById("productName").value || "Your Product";
       const videoType = document.getElementById("videoType").value || "Instagram Reel";
       const duration = document.getElementById("duration").value || "15 sec";
+      const ratio = document.getElementById("ratio").value || "9:16";
       const templateStyle = document.getElementById("templateStyle").value || "Bold Promo";
       const tone = document.getElementById("tone").value || "Premium";
-      const audience = document.getElementById("audience").value || "your audience";
       const cta = document.getElementById("cta").value || "Shop Now";
       const offer = document.getElementById("offer").value || "Special offer available now";
+      const audience = document.getElementById("audience").value || "your audience";
 
-      document.getElementById("previewChip").textContent = duration + " • " + templateStyle;
+      document.getElementById("previewChip").textContent = duration + " • " + templateStyle + " • " + ratio;
       document.getElementById("previewTopText").textContent = videoType + " for " + audience;
       document.getElementById("previewHeadline").textContent = productName;
       document.getElementById("previewSub").textContent = offer;
@@ -1054,6 +999,7 @@
 
       buildPreviewTheme(templateStyle);
       updateMusicPreview();
+      updateRatioPreview();
 
       const sceneData = getSceneData(duration, productName, audience, offer, cta, brandName);
       renderSceneCards(sceneData);
@@ -1065,6 +1011,7 @@
       const productName = document.getElementById("productName").value || "Your Product";
       const videoType = document.getElementById("videoType").value || "Instagram Reel";
       const duration = document.getElementById("duration").value || "30 sec";
+      const ratio = document.getElementById("ratio").value || "9:16";
       const templateStyle = document.getElementById("templateStyle").value || "Bold Promo";
       const tone = document.getElementById("tone").value || "Premium";
       const musicStyle = document.getElementById("musicStyle").value || "Luxury Ambient";
@@ -1073,7 +1020,7 @@
       const offer = document.getElementById("offer").value || "Special offer available now";
       const prompt = document.getElementById("prompt").value || "Keep it premium and engaging.";
 
-      const title = brandName + " " + videoType + " for " + productName;
+      const title = brandName + " " + videoType + " for " + productName + " (" + ratio + ")";
       const hook = "Stop scrolling — " + productName + " by " + brandName + " is made for " + audience + ".";
 
       let scenePlan = "";
@@ -1130,6 +1077,7 @@ On-screen text: ${cta}`;
       const voiceover =
 `${brandName} presents ${productName}.
 Created for ${audience}, this ${videoType.toLowerCase()} follows a ${templateStyle.toLowerCase()} style with a ${tone.toLowerCase()} tone.
+Output ratio: ${ratio}.
 Music mood: ${musicStyle.toLowerCase()}.
 ${offer}.
 Bring attention, build trust, and make your audience take action.
@@ -1138,7 +1086,7 @@ ${prompt}`;
 
       const caption =
 `${productName} by ${brandName} is here for ${audience}. ${offer}.
-Style: ${templateStyle} | Duration: ${duration} | Music: ${musicStyle}
+Style: ${templateStyle} | Duration: ${duration} | Ratio: ${ratio} | Music: ${musicStyle}
 ${cta}
 
 #${brandName.replace(/\s+/g, "")} #VideoMarketing #Reels #ContentCreation #BrandGrowth`;
@@ -1158,6 +1106,7 @@ ${cta}
       document.getElementById("productName").value = "";
       document.getElementById("videoType").value = "Instagram Reel";
       document.getElementById("duration").value = "15 sec";
+      document.getElementById("ratio").value = "9:16";
       document.getElementById("templateStyle").value = "Bold Promo";
       document.getElementById("tone").value = "Premium";
       document.getElementById("musicStyle").value = "Luxury Ambient";
@@ -1173,7 +1122,7 @@ ${cta}
       document.getElementById("captionText").textContent = "Your caption will appear here.";
       document.getElementById("resultBadge").textContent = "Ready";
 
-      document.getElementById("previewChip").textContent = "15 sec • Bold Promo";
+      document.getElementById("previewChip").textContent = "15 sec • Bold Promo • 9:16";
       document.getElementById("previewTopText").textContent = "Instagram Reel for your next campaign";
       document.getElementById("previewHeadline").textContent = "Your headline will appear here";
       document.getElementById("previewSub").textContent = "Premium gold-purple short video layout";
@@ -1184,6 +1133,7 @@ ${cta}
 
       buildPreviewTheme("Bold Promo");
       updateMusicPreview();
+      updateRatioPreview();
       renderSceneCards([
         {
           title: "Opening Scene",
@@ -1197,6 +1147,7 @@ ${cta}
 
     buildPreviewTheme("Bold Promo");
     updateMusicPreview();
+    updateRatioPreview();
     renderSceneCards([
       {
         title: "Opening Scene",
