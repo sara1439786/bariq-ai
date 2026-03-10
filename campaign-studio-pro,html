@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI - Campaign Studio Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --gold:#D6A13A;
+      --gold-soft:#F1D28B;
+      --metal:#7D63B8;
+      --metal-deep:#5D468F;
+      --rose:#B97AA7;
+      --bg1:#fffaf4;
+      --bg2:#fff5fb;
+      --bg3:#fbf7ff;
+      --text:#3b2f45;
+      --muted:#7d728c;
+      --line:rgba(214,161,58,.18);
+      --success:#3f9968;
+      --warning:#c28a2c;
+      --danger:#c85d72;
+      --shadow:0 20px 50px rgba(95,70,120,.08);
+      --shadow2:0 10px 24px rgba(70,45,95,.06);
+      --radius-xl:30px;
+      --radius-lg:22px;
+      --radius-md:18px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      font-family:Inter,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left,#fff0d8 0%,transparent 24%),
+        radial-gradient(circle at top right,#f8e8ff 0%,transparent 24%),
+        linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 48%,var(--bg3) 100%);
+      min-height:100vh;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    .container{
+      width:min(1240px, calc(100% - 40px));
+      margin:auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      padding:16px 0;
+      flex-wrap:wrap;
+    }
+
+    .logo{
+      font-family:Manrope,sans-serif;
+      font-size:31px;
+      font-weight:800;
+      letter-spacing:-0.8px;
+      background:linear-gradient(90deg,var(--gold) 0%,var(--gold-soft) 18%,var(--metal) 58%,var(--metal-deep) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      color:#776b83;
+      font-size:14px;
+      font-weight:600;
+      position:relative;
+    }
+
+    .nav-links a:hover{
+      color:var(--metal-deep);
+    }
+
+    .nav-links a.active{
+      color:var(--metal-deep);
+    }
+
+    .nav-links a.active::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-8px;
+      width:100%;
+      height:2px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--gold),var(--metal));
+    }
+
+    .page{
+      padding:34px 0 40px;
+    }
+
+    .hero{
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+      padding:32px;
+      margin-bottom:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      width:240px;
+      height:240px;
+      right:-90px;
+      top:-90px;
+      background:radial-gradient(circle,var(--gold-soft),transparent 70%);
+      opacity:.35;
+    }
+
+    .badge{
+      display:inline-flex;
+      padding:10px 15px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+      color:var(--metal-deep);
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero h1{
+      font-family:Manrope,sans-serif;
+      font-size:42px;
+      color:var(--metal-deep);
+      margin-bottom:8px;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero .tagline{
+      font-family:"Cormorant Garamond",serif;
+      font-style:italic;
+      font-size:28px;
+      color:#7c61ae;
+      margin-bottom:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero p{
+      color:var(--muted);
+      line-height:1.8;
+      max-width:900px;
+      font-size:15px;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:20px;
+      position:relative;
+      z-index:1;
+    }
+
+    .btn,.btn-outline,.small-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 20px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s ease;
+      border:none;
+    }
+
+    .btn{
+      background:linear-gradient(135deg,var(--gold),var(--metal));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(125,99,184,.18);
+    }
+
+    .btn-outline,.small-btn{
+      background:#fff;
+      color:var(--metal-deep);
+      border:1px solid var(--line);
+    }
+
+    .btn:hover,.btn-outline:hover,.small-btn:hover,.stat-card:hover,.panel:hover,.card:hover,.creator-card:hover,.asset-card:hover{
+      transform:translateY(-2px);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .stat-card{
+      background:linear-gradient(135deg,#fffaf2,#fff8fd);
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      padding:22px;
+      box-shadow:var(--shadow2);
+      transition:.2s ease;
+    }
+
+    .stat-top{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .icon-box{
+      width:52px;
+      height:52px;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:23px;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg,#fff3dc,#f3e9ff);
+    }
+
+    .stat-card h4{
+      color:#866fb3;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .num{
+      font-family:Manrope,sans-serif;
+      font-size:30px;
+      color:var(--metal-deep);
+      font-weight:800;
+      margin-bottom:6px;
+    }
+
+    .stat-card p{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    .trend{
+      margin-top:10px;
+      font-size:12px;
+      font-weight:700;
+      color:#7f68b8;
+    }
+
+    .stages{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .stage{
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:16px;
+      box-shadow:var(--shadow2);
+    }
+
+    .stage.active{
+      background:linear-gradient(135deg,var(--gold),var(--metal));
+      color:#fff;
+    }
+
+    .stage strong{
+      display:block;
+      font-size:14px;
+      margin-bottom:6px;
+    }
+
+    .stage span{
+      display:block;
+      font-size:12px;
+      line-height:1.6;
+      color:inherit;
+      opacity:.95;
+    }
+
+    .workspace{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      align-items:start;
+      margin-bottom:18px;
+    }
+
+    .bottom-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .panel,.card{
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      padding:24px;
+      box-shadow:var(--shadow2);
+      transition:.2s ease;
+    }
+
+    .panel h2,.card h2{
+      font-family:Manrope,sans-serif;
+      font-size:24px;
+      color:var(--metal-deep);
+      margin-bottom:8px;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+      margin-bottom:16px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    .field label{
+      font-size:13px;
+      font-weight:700;
+      color:#7f68b8;
+    }
+
+    .input,.select,.textarea{
+      width:100%;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
+      border-radius:16px;
+      padding:14px 15px;
+      font-size:14px;
+      outline:none;
+      transition:.2s ease;
+      font-family:Inter,sans-serif;
+    }
+
+    .textarea{
+      min-height:110px;
+      resize:vertical;
+      line-height:1.6;
+    }
+
+    .input:focus,.select:focus,.textarea:focus{
+      border-color:#b99add;
+      box-shadow:0 0 0 4px rgba(125,99,184,.08);
+    }
+
+    .quick-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .quick-box{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:15px;
+      background:#fff;
+    }
+
+    .quick-box strong{
+      display:block;
+      color:#7f68b8;
+      font-size:12px;
+      margin-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .quick-box span{
+      display:block;
+      color:var(--text);
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .asset-list,.creator-list,.notes-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .asset-card,.creator-card,.note-card{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      background:linear-gradient(135deg,#fffaf2,#fff8fd);
+      transition:.2s ease;
+    }
+
+    .asset-card strong,.creator-card strong,.note-card strong{
+      display:block;
+      color:var(--metal-deep);
+      font-size:15px;
+      margin-bottom:6px;
+    }
+
+    .asset-card span,.creator-card span,.note-card span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .tags{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .tag{
+      background:#fff;
+      color:#6f59a5;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .summary-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      color:var(--text);
+      line-height:1.75;
+      font-size:14px;
+      white-space:pre-line;
+      min-height:210px;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:760px;
+    }
+
+    th,td{
+      padding:14px 16px;
+      text-align:left;
+      border-bottom:1px solid rgba(214,161,58,.12);
+      font-size:14px;
+    }
+
+    th{
+      color:#7f68b8;
+      background:linear-gradient(180deg,#fffaf2,#fff);
+    }
+
+    td{
+      color:var(--text);
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+
+    .pill.success{color:var(--success)}
+    .pill.warning{color:var(--warning)}
+    .pill.danger{color:var(--danger)}
+
+    .footer{
+      text-align:center;
+      color:#8a7fa5;
+      padding:34px 0 26px;
+    }
+
+    @media (max-width: 1080px){
+      .stats,.stages,.workspace,.bottom-grid,.form-grid,.quick-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 768px){
+      .container{width:min(100% - 24px,1240px)}
+      .nav{justify-content:space-between;align-items:flex-start}
+      .nav-links{
+        width:100%;
+        overflow-x:auto;
+        flex-wrap:nowrap;
+        white-space:nowrap;
+        padding-bottom:4px;
+        scrollbar-width:none;
+      }
+      .nav-links::-webkit-scrollbar{display:none}
+      .hero{padding:24px}
+      .hero h1{font-size:31px}
+      .hero .tagline{font-size:22px;line-height:1.35}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="index.html" class="logo">Bariq AI</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="business-dashboard.html">Business</a>
+        <a href="creator-dashboard.html">Creator</a>
+        <a href="ai-generator.html">AI Generator</a>
+        <a href="creator-marketplace.html">Marketplace</a>
+        <a href="campaign-studio-pro.html" class="active">Campaign Studio</a>
+        <a href="admin-dashboard.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <section class="hero">
+        <div class="badge">Execution Layer</div>
+        <h1>Campaign Studio Pro</h1>
+        <div class="tagline">Turn generated ideas into real campaigns with creators, budget, assets, and launch flow</div>
+        <p>
+          This is where Bariq AI moves from content generation to campaign execution. Import your AI output, structure the campaign, assign budget, review creator-fit, and push the campaign toward launch.
+        </p>
+        <div class="hero-actions">
+          <button class="btn" id="buildCampaignBtnTop">Build Campaign</button>
+          <button class="btn-outline" id="loadAiBtn">Load AI Data</button>
+          <button class="btn-outline" id="exportCampaignBtn">Export to Business Dashboard</button>
+          <button class="btn-outline" id="launchCampaignBtn">Launch Campaign</button>
+        </div>
+      </section>
+
+      <section class="stats">
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="icon-box">📣</div>
+            <h4>Campaign Drafts</h4>
+          </div>
+          <div class="num">6</div>
+          <p>Campaigns waiting for review, creator outreach, or launch readiness.</p>
+          <div class="trend">2 ready for business approval</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="icon-box">🤝</div>
+            <h4>Creator Shortlist</h4>
+          </div>
+          <div class="num" id="shortlistCount">5</div>
+          <p>Creators currently aligned to the campaign category and audience fit.</p>
+          <div class="trend">Can be increased in marketplace</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="icon-box">💰</div>
+            <h4>Budget Ready</h4>
+          </div>
+          <div class="num" id="budgetStat">₹25K</div>
+          <p>Current campaign budget reserved for content, creator cost, and distribution.</p>
+          <div class="trend">Editable in studio</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="icon-box">🚀</div>
+            <h4>Launch Readiness</h4>
+          </div>
+          <div class="num" id="launchReadiness">84%</div>
+          <p>How close your campaign is to creator execution and live rollout.</p>
+          <div class="trend">Needs final review</div>
+        </div>
+      </section>
+
+      <section class="stages">
+        <div class="stage active">
+          <strong>1. AI Output</strong>
+          <span>Generated from AI Generator</span>
+        </div>
+        <div class="stage active">
+          <strong>2. Campaign Setup</strong>
+          <span>Name, goal, city, offer, budget</span>
+        </div>
+        <div class="stage">
+          <strong>3. Creator Matching</strong>
+          <span>Shortlist aligned creators</span>
+        </div>
+        <div class="stage">
+          <strong>4. Review</strong>
+          <span>Check summary and assets</span>
+        </div>
+        <div class="stage">
+          <strong>5. Launch</strong>
+          <span>Push campaign live</span>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <div class="panel">
+          <h2>Campaign Builder</h2>
+          <div class="sub">Fill the campaign details below or use “Load AI Data” to import from the AI Generator page.</div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label>Campaign Name</label>
+              <input class="input" id="campaignName" value="Laser Hair Reduction Launch" />
+            </div>
+
+            <div class="field">
+              <label>Business Category</label>
+              <select class="select" id="businessCategory">
+                <option>Clinic / Aesthetic Center</option>
+                <option>Restaurant / Cafe</option>
+                <option>Salon / Spa</option>
+                <option>Fitness Studio</option>
+                <option>D2C Product Brand</option>
+                <option>Real Estate / Services</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Campaign Goal</label>
+              <select class="select" id="campaignGoal">
+                <option>Lead Generation</option>
+                <option>Walk-ins</option>
+                <option>Brand Awareness</option>
+                <option>Sales / Conversions</option>
+                <option>Launch Promotion</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Target City</label>
+              <input class="input" id="campaignCity" value="Hyderabad" />
+            </div>
+
+            <div class="field">
+              <label>Campaign Budget</label>
+              <input class="input" id="campaignBudget" value="25000" />
+            </div>
+
+            <div class="field">
+              <label>Timeline</label>
+              <select class="select" id="campaignTimeline">
+                <option>7 Days</option>
+                <option>15 Days</option>
+                <option>30 Days</option>
+                <option>45 Days</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Main Offer</label>
+              <input class="input" id="campaignOffer" value="Unlimited sessions from ₹8,999" />
+            </div>
+
+            <div class="field">
+              <label>Collaboration Type</label>
+              <select class="select" id="collabType">
+                <option>Reels + Stories</option>
+                <option>Reels Only</option>
+                <option>Stories Only</option>
+                <option>UGC Content</option>
+                <option>Hybrid Creator Campaign</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label>Audience Description</label>
+              <textarea class="textarea" id="campaignAudience">Women 23-45 seeking a safer, smarter alternative to waxing with better convenience and confidence.</textarea>
+            </div>
+
+            <div class="field full">
+              <label>Core Campaign Message</label>
+              <textarea class="textarea" id="campaignMessage">Promote safe, women-focused Laser Hair Reduction in Hyderabad with strong offer communication, local trust, and creator-led content.</textarea>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn" id="buildCampaignBtn">Build Campaign Summary</button>
+            <button class="btn-outline" id="saveCampaignBtn">Save Draft</button>
+            <button class="btn-outline" id="resetCampaignBtn">Reset</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Campaign Summary</h2>
+          <div class="sub">This converts the inputs into an execution-ready campaign brief.</div>
+
+          <div class="quick-grid">
+            <div class="quick-box">
+              <strong>Status</strong>
+              <span id="campaignStatus">Draft</span>
+            </div>
+            <div class="quick-box">
+              <strong>Creator Need</strong>
+              <span id="creatorNeed">3 beauty creators + 2 local lifestyle creators</span>
+            </div>
+            <div class="quick-box">
+              <strong>AI Asset Link</strong>
+              <span id="assetConnection">Ready to import from AI Generator</span>
+            </div>
+            <div class="quick-box">
+              <strong>Launch Path</strong>
+              <span>AI Generator → Studio → Business → Marketplace → Admin</span>
+            </div>
+          </div>
+
+          <div class="summary-box" id="campaignSummaryOutput">Click “Build Campaign Summary” to prepare a campaign brief.</div>
+        </div>
+      </section>
+
+      <section class="bottom-grid">
+        <div class="card">
+          <h2>Imported AI Assets</h2>
+          <div class="sub">This section loads the generated content pushed from the AI Generator page.</div>
+
+          <div class="asset-list" id="assetList">
+            <div class="asset-card">
+              <strong>Meta Ad Copy</strong>
+              <span>No AI data loaded yet.</span>
+              <div class="tags">
+                <div class="tag">Waiting</div>
+              </div>
+            </div>
+
+            <div class="asset-card">
+              <strong>Reel Direction</strong>
+              <span>Load AI data to see imported marketing script and flow.</span>
+              <div class="tags">
+                <div class="tag">Waiting</div>
+              </div>
+            </div>
+
+            <div class="asset-card">
+              <strong>Campaign Export Note</strong>
+              <span>Generated AI campaign insight will appear here.</span>
+              <div class="tags">
+                <div class="tag">Waiting</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Recommended Creators</h2>
+          <div class="sub">These are starter creator recommendations aligned to the campaign type.</div>
+
+          <div class="creator-list" id="creatorList">
+            <div class="creator-card">
+              <strong>Rhea Beauty Journal</strong>
+              <span>Beauty & Lifestyle • Hyderabad • 48K followers • Great for treatment explainers and women confidence campaigns.</span>
+              <div class="tags">
+                <div class="tag">Beauty</div>
+                <div class="tag">Hyderabad</div>
+                <div class="tag">Reels</div>
+              </div>
+            </div>
+
+            <div class="creator-card">
+              <strong>Anya Wellness</strong>
+              <span>Wellness & confidence creator • 31K followers • Strong fit for before-after and trust-led content.</span>
+              <div class="tags">
+                <div class="tag">Wellness</div>
+                <div class="tag">Women</div>
+                <div class="tag">Conversions</div>
+              </div>
+            </div>
+
+            <div class="creator-card">
+              <strong>City Luxe Stories</strong>
+              <span>Premium local audience • 22K followers • Good for city-level awareness and premium brand angle.</span>
+              <div class="tags">
+                <div class="tag">Premium</div>
+                <div class="tag">Local</div>
+                <div class="tag">Awareness</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bottom-grid">
+        <div class="card">
+          <h2>Campaign Tracking</h2>
+          <div class="sub">Operational view of campaign progress inside Bariq AI.</div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Campaign</th>
+                  <th>Goal</th>
+                  <th>Budget</th>
+                  <th>Creators</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="trackingBody">
+                <tr>
+                  <td>Laser Hair Reduction Launch</td>
+                  <td>Lead Generation</td>
+                  <td>₹25,000</td>
+                  <td>5 shortlisted</td>
+                  <td><span class="pill warning">Draft</span></td>
+                </tr>
+                <tr>
+                  <td>Festival Offer Push</td>
+                  <td>Awareness</td>
+                  <td>₹18,000</td>
+                  <td>3 shortlisted</td>
+                  <td><span class="pill success">Ready</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Studio Notes</h2>
+          <div class="sub">Why this page matters inside the Bariq AI flow.</div>
+
+          <div class="notes-list">
+            <div class="note-card">
+              <strong>1. Makes AI usable</strong>
+              <span>Without Campaign Studio, the AI output remains text only. This page turns it into a structured campaign.</span>
+            </div>
+
+            <div class="note-card">
+              <strong>2. Connects creators to execution</strong>
+              <span>Businesses can move from generated hooks to creator collaboration in a clear flow.</span>
+            </div>
+
+            <div class="note-card">
+              <strong>3. Supports founder control</strong>
+              <span>Admin Dashboard can monitor campaigns only when this studio layer exists properly.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">© Bariq AI • Smart campaign building and creator execution</div>
+    </div>
+  </main>
+
+  <script>
+    const categoryData = {
+      "Clinic / Aesthetic Center": {
+        need: "3 beauty creators + 2 local lifestyle creators",
+        creators: [
+          { name: "Rhea Beauty Journal", text: "Beauty & Lifestyle • Hyderabad • 48K followers • Great for treatment explainers and women confidence campaigns.", tags: ["Beauty","Hyderabad","Reels"] },
+          { name: "Anya Wellness", text: "Wellness & confidence creator • 31K followers • Strong fit for before-after and trust-led content.", tags: ["Wellness","Women","Conversions"] },
+          { name: "City Luxe Stories", text: "Premium local audience • 22K followers • Good for city-level awareness and premium brand angle.", tags: ["Premium","Local","Awareness"] }
+        ]
+      },
+      "Restaurant / Cafe": {
+        need: "2 food creators + 1 city lifestyle page",
+        creators: [
+          { name: "Foodie Hyderabad Trails", text: "Food & local dining • Hyderabad • 62K followers • Great for walk-ins and menu content.", tags: ["Food","Walk-ins","Local"] },
+          { name: "Weekend City Bites", text: "Lifestyle + café hopping • 27K followers • Good for local buzz and ambience-based promotion.", tags: ["Cafe","Lifestyle","Reels"] },
+          { name: "Plates of Hyderabad", text: "Food review page • 33K followers • Strong fit for offer-driven restaurant promos.", tags: ["Offers","Food","City"] }
+        ]
+      },
+      "Salon / Spa": {
+        need: "3 beauty creators + 1 bridal page",
+        creators: [
+          { name: "Glow By Sana", text: "Beauty & bridal • 36K followers • Great for premium beauty service promotions.", tags: ["Beauty","Bridal","Women"] },
+          { name: "Soft Luxe Diaries", text: "Self-care creator • 21K followers • Strong fit for aesthetic salon campaigns.", tags: ["Self-care","Premium","Reels"] },
+          { name: "Bridal Edit Hyderabad", text: "Wedding-focused page • 40K followers • Useful for bridal package promotion.", tags: ["Bridal","Glow","Awareness"] }
+        ]
+      },
+      "Fitness Studio": {
+        need: "2 fitness creators + 2 transformation storytellers",
+        creators: [
+          { name: "FitWithAanya", text: "Fitness & motivation • 44K followers • Strong fit for challenge and body-goal campaigns.", tags: ["Fitness","Transformation","Coaching"] },
+          { name: "Body Reset India", text: "Fitness lifestyle • 29K followers • Good for urgency-led challenge content.", tags: ["Results","Fitness","Reels"] },
+          { name: "Coach Life Hyderabad", text: "Local fitness page • 19K followers • Best for accountability and local credibility.", tags: ["Local","Fitness","Motivation"] }
+        ]
+      },
+      "D2C Product Brand": {
+        need: "3 UGC creators + 2 product reviewers",
+        creators: [
+          { name: "The Honest Product Edit", text: "UGC and reviews • 53K followers • Great for benefit-led product storytelling.", tags: ["UGC","Product","Conversions"] },
+          { name: "Everyday Wellness Finds", text: "Lifestyle wellness page • 18K followers • Strong for trust-led recommendations.", tags: ["Wellness","Reviews","Sales"] },
+          { name: "Creator Cart Picks", text: "Shopping recommendation page • 24K followers • Good for offer-led product pushes.", tags: ["Offers","Products","UGC"] }
+        ]
+      },
+      "Real Estate / Services": {
+        need: "2 authority creators + 1 local premium page",
+        creators: [
+          { name: "City Smart Living", text: "Local premium lifestyle • 24K followers • Great for trust-led service discovery.", tags: ["Local","Premium","Education"] },
+          { name: "Explain With Neha", text: "Educational content creator • 17K followers • Good for service explainers.", tags: ["Education","Trust","Services"] },
+          { name: "Urban Property Lens", text: "Local awareness page • 31K followers • Best for premium positioning and local visibility.", tags: ["Authority","Local","Awareness"] }
+        ]
+      }
+    };
+
+    function formatBudget(value) {
+      const num = Number(value || 0);
+      if (!num) return "₹0";
+      return `₹${Math.round(num / 1000)}K`;
+    }
+
+    function updateCreatorRecommendations() {
+      const category = document.getElementById("businessCategory").value;
+      const data = categoryData[category];
+      document.getElementById("creatorNeed").textContent = data.need;
+      document.getElementById("shortlistCount").textContent = data.creators.length;
+
+      document.getElementById("creatorList").innerHTML = data.creators.map(c => `
+        <div class="creator-card">
+          <strong>${c.name}</strong>
+          <span>${c.text}</span>
+          <div class="tags">${c.tags.map(tag => `<div class="tag">${tag}</div>`).join("")}</div>
+        </div>
+      `).join("");
+    }
+
+    function buildCampaignSummary() {
+      const name = document.getElementById("campaignName").value;
+      const category = document.getElementById("businessCategory").value;
+      const goal = document.getElementById("campaignGoal").value;
+      const city = document.getElementById("campaignCity").value;
+      const budget = document.getElementById("campaignBudget").value;
+      const timeline = document.getElementById("campaignTimeline").value;
+      const offer = document.getElementById("campaignOffer").value;
+      const collab = document.getElementById("collabType").value;
+      const audience = document.getElementById("campaignAudience").value;
+      const message = document.getElementById("campaignMessage").value;
+
+      document.getElementById("campaignSummaryOutput").textContent =
+`Campaign Summary
+
+Campaign Name: ${name}
+Business Category: ${category}
+Goal: ${goal}
+Target City: ${city}
+Budget: ₹${Number(budget).toLocaleString("en-IN")}
+Timeline: ${timeline}
+Collaboration Type: ${collab}
+
+Offer:
+${offer}
+
+Audience:
+${audience}
+
+Core Message:
+${message}
+
+Execution Direction:
+1. Import AI assets into campaign flow
+2. Match creators by category and audience
+3. Share brief and content expectations
+4. Move to business review
+5. Launch and track from admin dashboard`;
+
+      document.getElementById("campaignStatus").textContent = "Ready for Review";
+      document.getElementById("budgetStat").textContent = formatBudget(budget);
+      document.getElementById("launchReadiness").textContent = "92%";
+
+      document.getElementById("trackingBody").innerHTML = `
+        <tr>
+          <td>${name}</td>
+          <td>${goal}</td>
+          <td>₹${Number(budget).toLocaleString("en-IN")}</td>
+          <td>${document.getElementById("creatorNeed").textContent}</td>
+          <td><span class="pill warning">Review</span></td>
+        </tr>
+        <tr>
+          <td>Festival Offer Push</td>
+          <td>Awareness</td>
+          <td>₹18,000</td>
+          <td>3 shortlisted</td>
+          <td><span class="pill success">Ready</span></td>
+        </tr>
+      `;
+    }
+
+    function saveDraft() {
+      const draft = {
+        campaignName: document.getElementById("campaignName").value,
+        businessCategory: document.getElementById("businessCategory").value,
+        campaignGoal: document.getElementById("campaignGoal").value,
+        campaignCity: document.getElementById("campaignCity").value,
+        campaignBudget: document.getElementById("campaignBudget").value,
+        campaignTimeline: document.getElementById("campaignTimeline").value,
+        campaignOffer: document.getElementById("campaignOffer").value,
+        collabType: document.getElementById("collabType").value,
+        campaignAudience: document.getElementById("campaignAudience").value,
+        campaignMessage: document.getElementById("campaignMessage").value
+      };
+
+      localStorage.setItem("bariq_campaign_draft", JSON.stringify(draft));
+      document.getElementById("campaignStatus").textContent = "Draft Saved";
+      alert("Campaign draft saved");
+    }
+
+    function loadAiData() {
+      const aiOutput = localStorage.getItem("aiOutput") || "";
+      const aiBusiness = localStorage.getItem("aiBusiness") || "";
+      const aiOffer = localStorage.getItem("aiOffer") || "";
+
+      if (aiBusiness) {
+        document.getElementById("campaignName").value = aiBusiness + " Launch";
+        document.getElementById("campaignMessage").value = aiOutput || document.getElementById("campaignMessage").value;
+      }
+
+      if (aiOffer) {
+        document.getElementById("campaignOffer").value = aiOffer;
+      }
+
+      document.getElementById("assetConnection").textContent = aiOutput ? "AI Generator content imported successfully" : "No AI output found yet";
+
+      document.getElementById("assetList").innerHTML = `
+        <div class="asset-card">
+          <strong>Meta Ad Copy</strong>
+          <span>${aiOutput || "No AI data found yet. Go to AI Generator and click Generate first."}</span>
+          <div class="tags">
+            <div class="tag">${aiOutput ? "Imported" : "Waiting"}</div>
+            <div class="tag">AI Output</div>
+          </div>
+        </div>
+
+        <div class="asset-card">
+          <strong>Offer Input</strong>
+          <span>${aiOffer || "No offer imported yet."}</span>
+          <div class="tags">
+            <div class="tag">Offer</div>
+            <div class="tag">Connected</div>
+          </div>
+        </div>
+
+        <div class="asset-card">
+          <strong>Business Input</strong>
+          <span>${aiBusiness || "No business type imported yet."}</span>
+          <div class="tags">
+            <div class="tag">Business</div>
+            <div class="tag">Connected</div>
+          </div>
+        </div>
+      `;
+
+      alert(aiOutput ? "AI data loaded successfully" : "No AI data found. Generate content first.");
+    }
+
+    function exportToBusinessDashboard() {
+      const latestCampaign = {
+        campaignName: document.getElementById("campaignName").value,
+        businessCategory: document.getElementById("businessCategory").value,
+        campaignGoal: document.getElementById("campaignGoal").value,
+        campaignCity: document.getElementById("campaignCity").value,
+        campaignBudget: document.getElementById("campaignBudget").value,
+        campaignOffer: document.getElementById("campaignOffer").value,
+        campaignAudience: document.getElementById("campaignAudience").value,
+        campaignMessage: document.getElementById("campaignMessage").value
+      };
+
+      localStorage.setItem("bariq_latest_campaign", JSON.stringify(latestCampaign));
+      alert("Campaign exported to Business Dashboard");
+    }
+
+    function launchCampaign() {
+      saveDraft();
+      alert("Campaign launched successfully");
+      document.getElementById("campaignStatus").textContent = "Live";
+      document.getElementById("launchReadiness").textContent = "100%";
+    }
+
+    function resetCampaign() {
+      document.getElementById("campaignName").value = "Laser Hair Reduction Launch";
+      document.getElementById("businessCategory").value = "Clinic / Aesthetic Center";
+      document.getElementById("campaignGoal").value = "Lead Generation";
+      document.getElementById("campaignCity").value = "Hyderabad";
+      document.getElementById("campaignBudget").value = "25000";
+      document.getElementById("campaignTimeline").value = "7 Days";
+      document.getElementById("campaignOffer").value = "Unlimited sessions from ₹8,999";
+      document.getElementById("collabType").value = "Reels + Stories";
+      document.getElementById("campaignAudience").value = "Women 23-45 seeking a safer, smarter alternative to waxing with better convenience and confidence.";
+      document.getElementById("campaignMessage").value = "Promote safe, women-focused Laser Hair Reduction in Hyderabad with strong offer communication, local trust, and creator-led content.";
+      document.getElementById("campaignStatus").textContent = "Draft";
+      document.getElementById("assetConnection").textContent = "Ready to import from AI Generator";
+      document.getElementById("budgetStat").textContent = "₹25K";
+      document.getElementById("launchReadiness").textContent = "84%";
+      updateCreatorRecommendations();
+      buildCampaignSummary();
+    }
+
+    document.getElementById("businessCategory").addEventListener("change", updateCreatorRecommendations);
+    document.getElementById("buildCampaignBtn").addEventListener("click", buildCampaignSummary);
+    document.getElementById("buildCampaignBtnTop").addEventListener("click", buildCampaignSummary);
+    document.getElementById("saveCampaignBtn").addEventListener("click", saveDraft);
+    document.getElementById("loadAiBtn").addEventListener("click", loadAiData);
+    document.getElementById("exportCampaignBtn").addEventListener("click", exportToBusinessDashboard);
+    document.getElementById("launchCampaignBtn").addEventListener("click", launchCampaign);
+    document.getElementById("resetCampaignBtn").addEventListener("click", resetCampaign);
+
+    updateCreatorRecommendations();
+    buildCampaignSummary();
+  </script>
+</body>
+</html>
