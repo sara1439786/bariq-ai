@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI Video</title>
+  <title>Bariq AI Video Creator</title>
   <style>
     * {
       margin: 0;
@@ -16,21 +16,21 @@
       background: linear-gradient(135deg, #faf7ff 0%, #fff9ef 50%, #f8f2ff 100%);
       min-height: 100vh;
       color: #241f31;
-      padding: 36px 20px;
+      padding: 32px 18px;
     }
 
     .container {
-      max-width: 980px;
+      max-width: 1150px;
       margin: 0 auto;
     }
 
     .topbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: 26px;
-      gap: 12px;
+      align-items: center;
+      gap: 14px;
       flex-wrap: wrap;
+      margin-bottom: 24px;
     }
 
     .brand {
@@ -54,7 +54,7 @@
     }
 
     .brand-text h1 {
-      font-size: 28px;
+      font-size: 30px;
       color: #5f2396;
       margin-bottom: 4px;
     }
@@ -74,48 +74,62 @@
       font-weight: 700;
     }
 
-    .workspace {
+    .hero-box {
       background: rgba(255, 255, 255, 0.96);
       border: 1px solid #f1df9f;
       border-radius: 28px;
-      padding: 30px;
+      padding: 28px;
       box-shadow: 0 16px 40px rgba(78, 38, 112, 0.08);
+      margin-bottom: 24px;
     }
 
-    .workspace h2 {
+    .hero-box h2 {
       color: #5f2396;
       font-size: 30px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    .workspace p {
+    .hero-box p {
       color: #5c5369;
-      line-height: 1.6;
-      margin-bottom: 22px;
+      line-height: 1.7;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 22px;
     }
 
-    .field-box {
-      background: #fffdf8;
-      border: 1px solid #f4e6bb;
-      border-radius: 20px;
-      padding: 20px;
+    .panel {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid #f1df9f;
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: 0 16px 40px rgba(78, 38, 112, 0.08);
     }
 
-    .field-box.full {
+    .panel h3 {
+      color: #5f2396;
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field.full {
       grid-column: 1 / -1;
     }
 
     label {
       display: block;
+      margin-bottom: 8px;
+      color: #4d425b;
       font-weight: 700;
-      color: #4a4057;
-      margin-bottom: 10px;
+      font-size: 14px;
     }
 
     input,
@@ -124,28 +138,28 @@
       width: 100%;
       border: 1px solid #e4d7ee;
       border-radius: 14px;
-      padding: 14px 14px;
+      padding: 14px;
       font-size: 15px;
       color: #241f31;
-      background: white;
+      background: #ffffff;
       outline: none;
     }
 
     textarea {
-      min-height: 130px;
       resize: vertical;
+      min-height: 110px;
     }
 
     .action-row {
       display: flex;
-      gap: 12px;
       flex-wrap: wrap;
-      margin-top: 22px;
+      gap: 12px;
+      margin-top: 20px;
     }
 
     .btn {
       border: none;
-      padding: 14px 20px;
+      padding: 14px 18px;
       border-radius: 14px;
       cursor: pointer;
       font-size: 15px;
@@ -154,7 +168,7 @@
 
     .btn-primary {
       background: linear-gradient(135deg, #5f2396 0%, #8a3ffc 60%, #d4af37 130%);
-      color: white;
+      color: #fff;
       box-shadow: 0 10px 24px rgba(95, 35, 150, 0.18);
     }
 
@@ -164,25 +178,55 @@
       border: 1px solid #e7d7ff;
     }
 
-    .result-box {
-      margin-top: 26px;
+    .template-box {
       background: #fffaf0;
+      border: 1px solid #f1df9f;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .template-box h4 {
+      color: #5f2396;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .template-box p {
+      color: #5d536a;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .result-card {
+      margin-top: 22px;
+      background: #fffdf8;
       border: 1px solid #f1df9f;
       border-radius: 22px;
       padding: 22px;
     }
 
-    .result-box h3 {
+    .result-card h4 {
       color: #5f2396;
-      margin-bottom: 12px;
       font-size: 22px;
+      margin-bottom: 14px;
     }
 
-    .result-box pre {
-      white-space: pre-wrap;
-      line-height: 1.7;
-      color: #453d52;
+    .result-block {
+      margin-bottom: 18px;
+    }
+
+    .result-block-title {
       font-size: 15px;
+      font-weight: 700;
+      color: #7b5b05;
+      margin-bottom: 8px;
+    }
+
+    .result-content {
+      color: #453d52;
+      line-height: 1.7;
+      white-space: pre-wrap;
     }
 
     .badge {
@@ -197,16 +241,17 @@
       font-weight: 700;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .grid {
         grid-template-columns: 1fr;
       }
 
-      .workspace {
-        padding: 22px;
+      .form-grid {
+        grid-template-columns: 1fr;
       }
 
-      .workspace h2 {
+      .hero-box h2,
+      .brand-text h1 {
         font-size: 25px;
       }
     }
@@ -219,111 +264,282 @@
         <div class="brand-icon">✦</div>
         <div class="brand-text">
           <h1>Bariq AI</h1>
-          <p>Premium AI Video Workspace</p>
+          <p>Short Video Creator</p>
         </div>
       </div>
 
       <a href="business-dashboard.html" class="back-btn">← Back to Dashboard</a>
     </div>
 
-    <div class="workspace">
-      <h2>AI Video</h2>
+    <div class="hero-box">
+      <h2>Create Short Videos Step by Step</h2>
       <p>
-        Describe your campaign and create a premium AI video concept, script, hook, and CTA for your brand.
+        Start with short-form content for Instagram Reels, product promos, offer videos, inserts, and social ads.
+        Bariq AI will generate a structured reel blueprint for 15 sec, 30 sec, or 45 sec video formats.
       </p>
+    </div>
 
-      <div class="grid">
-        <div class="field-box">
-          <label for="brandName">Brand Name</label>
-          <input type="text" id="brandName" placeholder="Example: Bariq AI" />
+    <div class="grid">
+      <div class="panel">
+        <h3>Video Setup</h3>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="brandName">Brand Name</label>
+            <input type="text" id="brandName" placeholder="Example: SipnFit" />
+          </div>
+
+          <div class="field">
+            <label for="productName">Product / Service</label>
+            <input type="text" id="productName" placeholder="Example: Glutathione Tablets" />
+          </div>
+
+          <div class="field">
+            <label for="videoType">Video Type</label>
+            <select id="videoType">
+              <option value="Instagram Reel">Instagram Reel</option>
+              <option value="Product Promo">Product Promo</option>
+              <option value="Offer Ad">Offer Ad</option>
+              <option value="Festival Promo">Festival Promo</option>
+              <option value="Founder Intro">Founder Intro</option>
+              <option value="Before / After Promo">Before / After Promo</option>
+              <option value="WhatsApp Status Video">WhatsApp Status Video</option>
+              <option value="Product Insert Video">Product Insert Video</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="duration">Duration</label>
+            <select id="duration">
+              <option value="15 sec">15 sec</option>
+              <option value="30 sec">30 sec</option>
+              <option value="45 sec">45 sec</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="templateStyle">Template Style</label>
+            <select id="templateStyle">
+              <option value="Bold Promo">Bold Promo</option>
+              <option value="Elegant Premium">Elegant Premium</option>
+              <option value="UGC / Social Proof">UGC / Social Proof</option>
+              <option value="Product Showcase">Product Showcase</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="tone">Tone</label>
+            <select id="tone">
+              <option value="Premium">Premium</option>
+              <option value="Bold">Bold</option>
+              <option value="Emotional">Emotional</option>
+              <option value="Friendly">Friendly</option>
+              <option value="Trust-Building">Trust-Building</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="audience">Target Audience</label>
+            <input type="text" id="audience" placeholder="Example: women aged 25 to 40" />
+          </div>
+
+          <div class="field">
+            <label for="cta">CTA</label>
+            <input type="text" id="cta" placeholder="Example: Order Now on WhatsApp" />
+          </div>
+
+          <div class="field full">
+            <label for="offer">Offer / Key Message</label>
+            <input type="text" id="offer" placeholder="Example: Flat 20% Off + Free Shipping" />
+          </div>
+
+          <div class="field full">
+            <label for="prompt">Extra Prompt / Brand Direction</label>
+            <textarea id="prompt" placeholder="Example: Use luxury visuals, strong opening hook, and focus on visible product benefits."></textarea>
+          </div>
         </div>
 
-        <div class="field-box">
-          <label for="industry">Industry</label>
-          <input type="text" id="industry" placeholder="Example: AI Marketing" />
+        <div class="action-row">
+          <button class="btn btn-primary" onclick="generateVideoPlan()">Generate Video Blueprint</button>
+          <button class="btn btn-light" onclick="clearForm()">Clear</button>
         </div>
 
-        <div class="field-box">
-          <label for="videoType">Video Type</label>
-          <select id="videoType">
-            <option value="Product Promo">Product Promo</option>
-            <option value="Brand Awareness">Brand Awareness</option>
-            <option value="Social Media Ad">Social Media Ad</option>
-            <option value="Festival Campaign">Festival Campaign</option>
-            <option value="Founder Story">Founder Story</option>
-          </select>
-        </div>
+        <div class="result-card">
+          <h4>Generated Output</h4>
 
-        <div class="field-box">
-          <label for="audience">Target Audience</label>
-          <input type="text" id="audience" placeholder="Example: small business owners" />
-        </div>
+          <div class="result-block">
+            <div class="result-block-title">Video Title</div>
+            <div class="result-content" id="videoTitle">Your video title will appear here.</div>
+          </div>
 
-        <div class="field-box full">
-          <label for="prompt">Campaign Prompt</label>
-          <textarea id="prompt" placeholder="Example: Create a premium launch video for Bariq AI that helps businesses generate branded marketing content quickly."></textarea>
+          <div class="result-block">
+            <div class="result-block-title">Hook</div>
+            <div class="result-content" id="videoHook">Your hook will appear here.</div>
+          </div>
+
+          <div class="result-block">
+            <div class="result-block-title">Scene-by-Scene Blueprint</div>
+            <div class="result-content" id="scenePlan">Your scene plan will appear here.</div>
+          </div>
+
+          <div class="result-block">
+            <div class="result-block-title">Voiceover Script</div>
+            <div class="result-content" id="voiceoverScript">Your voiceover script will appear here.</div>
+          </div>
+
+          <div class="result-block">
+            <div class="result-block-title">Caption</div>
+            <div class="result-content" id="captionText">Your caption will appear here.</div>
+          </div>
+
+          <div class="badge" id="resultBadge">Ready</div>
         </div>
       </div>
 
-      <div class="action-row">
-        <button class="btn btn-primary" onclick="generateVideoScript()">Generate AI Video</button>
-        <button class="btn btn-light" onclick="clearForm()">Clear</button>
-      </div>
+      <div class="panel">
+        <h3>MVP Template Styles</h3>
 
-      <div class="result-box">
-        <h3>Generated Output</h3>
-        <pre id="resultText">Your AI-generated script will appear here.</pre>
-        <div class="badge" id="resultBadge">Ready</div>
+        <div class="template-box">
+          <h4>Bold Promo</h4>
+          <p>Fast hook, strong problem-solution flow, offer-led messaging, high attention-grabbing style.</p>
+        </div>
+
+        <div class="template-box">
+          <h4>Elegant Premium</h4>
+          <p>Luxury visual tone, softer transitions, rich emotional appeal, premium positioning.</p>
+        </div>
+
+        <div class="template-box">
+          <h4>UGC / Social Proof</h4>
+          <p>Human, relatable, conversational style that feels organic and social-first.</p>
+        </div>
+
+        <div class="template-box">
+          <h4>Product Showcase</h4>
+          <p>Strong focus on product visuals, benefits, packaging, results, and direct CTA.</p>
+        </div>
+
+        <div class="template-box">
+          <h4>Best Starting Durations</h4>
+          <p>15 sec for fast ads, 30 sec for balanced promos, 45 sec for stronger storytelling and benefit breakdown.</p>
+        </div>
+
+        <div class="template-box">
+          <h4>Next Upgrade</h4>
+          <p>After this blueprint stage, Bariq AI can move to voiceover generation, subtitle timing, stock visual selection, and MP4 export.</p>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    function generateVideoScript() {
+    function generateVideoPlan() {
       const brandName = document.getElementById("brandName").value || "Your Brand";
-      const industry = document.getElementById("industry").value || "your industry";
-      const videoType = document.getElementById("videoType").value || "Product Promo";
-      const audience = document.getElementById("audience").value || "your target audience";
-      const prompt = document.getElementById("prompt").value || "Create a strong premium marketing campaign.";
+      const productName = document.getElementById("productName").value || "Your Product";
+      const videoType = document.getElementById("videoType").value || "Instagram Reel";
+      const duration = document.getElementById("duration").value || "30 sec";
+      const templateStyle = document.getElementById("templateStyle").value || "Bold Promo";
+      const tone = document.getElementById("tone").value || "Premium";
+      const audience = document.getElementById("audience").value || "your audience";
+      const cta = document.getElementById("cta").value || "Shop Now";
+      const offer = document.getElementById("offer").value || "Special offer available now";
+      const prompt = document.getElementById("prompt").value || "Keep it premium and engaging.";
 
-      const output =
-`Video Type: ${videoType}
+      const title = brandName + " " + videoType + " for " + productName;
 
-Brand: ${brandName}
-Industry: ${industry}
-Target Audience: ${audience}
+      const hook = "Stop scrolling — " + productName + " by " + brandName + " is made for " + audience + ".";
 
-Hook:
-Stop scrolling — ${brandName} is redefining ${industry} with smarter, faster, premium-quality results.
+      let scenePlan = "";
+      if (duration === "15 sec") {
+        scenePlan =
+`Scene 1 (0-3 sec): Bold hook with fast opening visual and headline
+On-screen text: ${productName} you need to notice today
 
-Opening Scene:
-Show a clean luxury visual with soft gold and royal purple tones. Present the main business pain point clearly, then transition into confidence, speed, and brand power.
+Scene 2 (3-8 sec): Product or service highlight with premium visual
+On-screen text: ${offer}
 
-Core Script:
-Introducing ${brandName} — a smarter way for ${audience} to create premium brand presence without complexity.
-Built for modern businesses, ${brandName} transforms ideas into polished campaigns that feel high-value, elegant, and effective.
-${prompt}
+Scene 3 (8-12 sec): Key benefit or transformation
+On-screen text: Better results. Better brand feel.
 
-Benefits Highlight:
-• Faster content creation
-• Premium branded output
-• Easier campaign execution
-• Better customer attention
+Scene 4 (12-15 sec): Strong CTA ending
+On-screen text: ${cta}`;
+      } else if (duration === "30 sec") {
+        scenePlan =
+`Scene 1 (0-4 sec): Strong hook and pain point
+On-screen text: Why is everyone talking about ${productName}?
 
-CTA:
-Start with ${brandName} today and elevate your next campaign with AI-powered creative confidence.`;
+Scene 2 (4-10 sec): Show product/service in action
+On-screen text: Built for ${audience}
 
-      document.getElementById("resultText").textContent = output;
-      document.getElementById("resultBadge").textContent = "AI video generated successfully";
+Scene 3 (10-16 sec): Highlight main benefit
+On-screen text: ${offer}
+
+Scene 4 (16-23 sec): Build trust and desirability
+On-screen text: Premium. Effective. Easy.
+
+Scene 5 (23-30 sec): Final CTA with logo end frame
+On-screen text: ${cta}`;
+      } else {
+        scenePlan =
+`Scene 1 (0-5 sec): Hook with premium visual opening
+On-screen text: Meet ${productName}
+
+Scene 2 (5-12 sec): Introduce problem and market need
+On-screen text: Designed for ${audience}
+
+Scene 3 (12-20 sec): Show product/service experience
+On-screen text: ${offer}
+
+Scene 4 (20-30 sec): Explain the main benefits
+On-screen text: Smart. Elegant. Effective.
+
+Scene 5 (30-38 sec): Reinforce trust and premium positioning
+On-screen text: ${brandName} delivers confidence
+
+Scene 6 (38-45 sec): Closing CTA with brand lockup
+On-screen text: ${cta}`;
+      }
+
+      const voiceover =
+`${brandName} presents ${productName}.
+Created for ${audience}, this ${videoType.toLowerCase()} follows a ${templateStyle.toLowerCase()} style with a ${tone.toLowerCase()} tone.
+${offer}.
+Bring attention, build trust, and make your audience take action.
+${cta}.
+${prompt}`;
+
+      const caption =
+`${productName} by ${brandName} is here for ${audience}. ${offer}. 
+Style: ${templateStyle} | Duration: ${duration}
+${cta}
+
+#${brandName.replace(/\s+/g, "")} #VideoMarketing #Reels #ContentCreation #BrandGrowth`;
+
+      document.getElementById("videoTitle").textContent = title;
+      document.getElementById("videoHook").textContent = hook;
+      document.getElementById("scenePlan").textContent = scenePlan;
+      document.getElementById("voiceoverScript").textContent = voiceover;
+      document.getElementById("captionText").textContent = caption;
+      document.getElementById("resultBadge").textContent = "Video blueprint generated";
     }
 
     function clearForm() {
       document.getElementById("brandName").value = "";
-      document.getElementById("industry").value = "";
-      document.getElementById("videoType").value = "Product Promo";
+      document.getElementById("productName").value = "";
+      document.getElementById("videoType").value = "Instagram Reel";
+      document.getElementById("duration").value = "15 sec";
+      document.getElementById("templateStyle").value = "Bold Promo";
+      document.getElementById("tone").value = "Premium";
       document.getElementById("audience").value = "";
+      document.getElementById("cta").value = "";
+      document.getElementById("offer").value = "";
       document.getElementById("prompt").value = "";
-      document.getElementById("resultText").textContent = "Your AI-generated script will appear here.";
+
+      document.getElementById("videoTitle").textContent = "Your video title will appear here.";
+      document.getElementById("videoHook").textContent = "Your hook will appear here.";
+      document.getElementById("scenePlan").textContent = "Your scene plan will appear here.";
+      document.getElementById("voiceoverScript").textContent = "Your voiceover script will appear here.";
+      document.getElementById("captionText").textContent = "Your caption will appear here.";
       document.getElementById("resultBadge").textContent = "Ready";
     }
   </script>
