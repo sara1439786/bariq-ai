@@ -24,7 +24,68 @@
 
     *{box-sizing:border-box;margin:0;padding:0}
 
-    body{
+    <body style="font-family: Arial, sans-serif; background: #f7f8fc; margin: 0; padding: 40px;">
+
+  <div style="max-width: 1200px; margin: auto;">
+    <h1 style="text-align: center; margin-bottom: 10px;">Stable Payment Testing</h1>
+    <h2 style="text-align: center; margin-bottom: 40px;">Payments & Plans</h2>
+
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+
+      <div style="background: white; border-radius: 16px; padding: 24px; width: 300px; box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
+        <h3>Starter</h3>
+        <p>Perfect for small businesses</p>
+        <h2>₹999/month</h2>
+        <p>50 Credits</p>
+        <button onclick="selectPlan('Starter','₹999/month','50 Credits')" style="width: 100%; padding: 12px; border: none; border-radius: 10px; background: black; color: white; cursor: pointer;">
+          Choose Starter
+        </button>
+      </div>
+
+      <div style="background: white; border-radius: 16px; padding: 24px; width: 300px; box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
+        <h3>Growth</h3>
+        <p>Best for scaling brands</p>
+        <h2>₹2499/month</h2>
+        <p>150 Credits</p>
+        <button onclick="selectPlan('Growth','₹2499/month','150 Credits')" style="width: 100%; padding: 12px; border: none; border-radius: 10px; background: black; color: white; cursor: pointer;">
+          Choose Growth
+        </button>
+      </div>
+
+      <div style="background: white; border-radius: 16px; padding: 24px; width: 300px; box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
+        <h3>Pro</h3>
+        <p>For advanced businesses</p>
+        <h2>₹4999/month</h2>
+        <p>500 Credits</p>
+        <button onclick="selectPlan('Pro','₹4999/month','500 Credits')" style="width: 100%; padding: 12px; border: none; border-radius: 10px; background: black; color: white; cursor: pointer;">
+          Choose Pro
+        </button>
+      </div>
+
+    </div>
+
+    <div id="statusBox" style="margin: 30px auto 0; max-width: 500px; background: white; padding: 20px; border-radius: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); text-align: center;">
+      <h3>Plan Status Console</h3>
+      <p id="statusMessage">Plan selected carefully.</p>
+    </div>
+  </div>
+
+  <script>
+    function selectPlan(planName, price, credits) {
+      const selectedPlan = {
+        name: planName,
+        price: price,
+        credits: credits
+      };
+
+      localStorage.setItem("bariq_selected_plan", JSON.stringify(selectedPlan));
+
+      document.getElementById("statusMessage").innerText =
+        "Plan " + planName + " selected successfully | Amount " + price + " | Testing mode activated";
+    }
+  </script>
+
+</body>
       font-family:Inter,sans-serif;
       background:
         radial-gradient(circle at top left,#fff0d8 0%,transparent 22%),
