@@ -377,5 +377,30 @@ Message: ${offer}`;
       setStatus("Waiting for input...", "Idle");
     }
   </script>
+  function renderVideos(videos){
+
+const container = document.getElementById("videoResults");
+container.innerHTML = "";
+
+videos.forEach(v => {
+
+const file = v.video_files.find(f => f.file_type === "video/mp4");
+
+if(!file) return;
+
+const card = document.createElement("div");
+card.style.marginBottom = "20px";
+
+card.innerHTML = `
+<video width="100%" controls autoplay muted loop>
+<source src="${file.link}" type="video/mp4">
+</video>
+`;
+
+container.appendChild(card);
+
+});
+
+}
 </body>
 </html>
