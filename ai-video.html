@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI Video Generator</title>
+  <title>Bariq AI Video</title>
   <style>
     * {
       margin: 0;
@@ -227,10 +227,9 @@
     </div>
 
     <div class="workspace">
-      <h2>Generate AI Video</h2>
+      <h2>AI Video</h2>
       <p>
-        Describe your campaign and Bariq AI will generate a premium marketing video concept,
-        script, hook, and CTA for your brand.
+        Describe your campaign and create a premium AI video concept, script, hook, and CTA for your brand.
       </p>
 
       <div class="grid">
@@ -267,7 +266,7 @@
       </div>
 
       <div class="action-row">
-        <button class="btn btn-primary" onclick="generateVideoScript()">Generate Video Script</button>
+        <button class="btn btn-primary" onclick="generateVideoScript()">Generate AI Video</button>
         <button class="btn btn-light" onclick="clearForm()">Clear</button>
       </div>
 
@@ -315,7 +314,7 @@ CTA:
 Start with ${brandName} today and elevate your next campaign with AI-powered creative confidence.`;
 
       document.getElementById("resultText").textContent = output;
-      document.getElementById("resultBadge").textContent = "Script generated successfully";
+      document.getElementById("resultBadge").textContent = "AI video generated successfully";
     }
 
     function clearForm() {
@@ -330,5 +329,3 @@ Start with ${brandName} today and elevate your next campaign with AI-powered cre
   </script>
 </body>
 </html>
-<button class="btn btn-primary" onclick="window.location.href='ai-video.html'">Generate AI Video</button>
-
