@@ -6,153 +6,109 @@
   <title>Bariq AI Video Creator</title>
   <style>
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
       font-family: Arial, sans-serif;
     }
 
     body {
+      margin: 0;
       background: linear-gradient(135deg, #faf7ff 0%, #fff9ef 50%, #f8f2ff 100%);
-      min-height: 100vh;
       color: #241f31;
-      padding: 32px 18px;
+      padding: 24px;
     }
 
-    .container {
-      max-width: 1280px;
+    .wrap {
+      max-width: 1100px;
       margin: 0 auto;
     }
 
-    .hero-box,
-    .panel,
-    .card {
-      background: rgba(255, 255, 255, 0.96);
+    .box {
+      background: #fff;
       border: 1px solid #f1df9f;
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: 0 16px 40px rgba(78, 38, 112, 0.08);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 12px 30px rgba(78, 38, 112, 0.08);
+      margin-bottom: 20px;
     }
 
-    .hero-box {
-      margin-bottom: 24px;
-    }
-
-    .hero-box h1,
-    .panel h2,
-    .card h3 {
+    h1, h2, h3 {
+      margin-top: 0;
       color: #5f2396;
-      margin-bottom: 12px;
     }
 
-    .hero-box p,
-    .muted {
-      color: #5c5369;
-      line-height: 1.7;
-      font-size: 14px;
-    }
-
-    .main-grid {
+    .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 22px;
+      gap: 20px;
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 14px;
     }
 
-    .field.full {
+    .full {
       grid-column: 1 / -1;
     }
 
     label {
       display: block;
-      margin-bottom: 8px;
-      color: #4d425b;
+      margin-bottom: 6px;
       font-weight: 700;
       font-size: 14px;
     }
 
-    input,
-    select,
-    textarea {
+    input, select, textarea {
       width: 100%;
-      border: 1px solid #e4d7ee;
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 15px;
-      color: #241f31;
-      background: #ffffff;
-      outline: none;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      font-size: 14px;
     }
 
     textarea {
-      min-height: 100px;
+      min-height: 90px;
       resize: vertical;
     }
 
-    .action-row {
+    .actions {
       display: flex;
       gap: 12px;
+      margin-top: 16px;
       flex-wrap: wrap;
-      margin-top: 20px;
     }
 
-    .btn {
+    button {
       border: none;
-      padding: 14px 18px;
-      border-radius: 14px;
-      cursor: pointer;
+      border-radius: 12px;
+      padding: 12px 18px;
       font-size: 15px;
       font-weight: 700;
+      cursor: pointer;
     }
 
-    .btn-primary {
+    .primary {
       background: linear-gradient(135deg, #5f2396 0%, #8a3ffc 60%, #d4af37 130%);
-      color: #fff;
-      box-shadow: 0 10px 24px rgba(95, 35, 150, 0.18);
+      color: white;
     }
 
-    .btn-light {
+    .light {
       background: #f6eeff;
       color: #5f2396;
       border: 1px solid #e7d7ff;
     }
 
-    .card {
-      margin-top: 22px;
-    }
-
     .badge {
       display: inline-block;
       margin-top: 10px;
-      background: #fff4d2;
-      color: #8b6500;
-      border: 1px solid #efd889;
-      padding: 8px 14px;
+      padding: 8px 12px;
       border-radius: 999px;
+      background: #fff4d2;
+      border: 1px solid #efd889;
+      color: #8b6500;
+      font-weight: 700;
       font-size: 13px;
-      font-weight: 700;
-    }
-
-    .result-block {
-      margin-bottom: 18px;
-    }
-
-    .result-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #7b5b05;
-      margin-bottom: 8px;
-    }
-
-    .result-content {
-      color: #453d52;
-      line-height: 1.7;
-      white-space: pre-wrap;
     }
 
     .video-grid {
@@ -161,70 +117,39 @@
       gap: 14px;
     }
 
-    .video-tile {
-      background: #fff;
+    .tile {
       border: 1px solid #f1df9f;
-      border-radius: 18px;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 8px 20px rgba(78, 38, 112, 0.06);
+      background: #fff;
     }
 
-    .video-tile video {
+    .tile video {
       width: 100%;
       height: 220px;
       object-fit: cover;
-      background: #000;
       display: block;
+      background: #000;
     }
 
-    .video-info {
+    .tile-body {
       padding: 12px;
     }
 
-    .video-title {
-      color: #5f2396;
-      font-weight: 700;
-      margin-bottom: 6px;
-      font-size: 14px;
-    }
-
-    .video-meta {
+    .muted {
       color: #6b6179;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    .scene-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .scene-item {
-      background: #fff;
-      border: 1px solid #f1df9f;
-      border-radius: 16px;
-      padding: 14px;
-    }
-
-    .scene-item h4 {
-      color: #5f2396;
-      margin-bottom: 6px;
-      font-size: 15px;
-    }
-
-    .scene-item p {
-      color: #52485f;
       font-size: 14px;
       line-height: 1.6;
     }
 
-    @media (max-width: 980px) {
-      .main-grid {
-        grid-template-columns: 1fr;
-      }
+    pre {
+      white-space: pre-wrap;
+      margin: 0;
+      line-height: 1.6;
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 900px) {
+      .grid,
       .form-grid,
       .video-grid {
         grid-template-columns: 1fr;
@@ -233,129 +158,90 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="hero-box">
+  <div class="wrap">
+    <div class="box">
       <h1>Bariq AI Video Creator</h1>
-      <p>Enter product details and fetch real stock video clips from Pexels.</p>
+      <p class="muted">This is a clean minimal version to fetch real video clips from Pexels.</p>
     </div>
 
-    <div class="main-grid">
-      <div class="panel">
-        <h2>Video Input</h2>
+    <div class="grid">
+      <div>
+        <div class="box">
+          <h2>Video Input</h2>
 
-        <div class="form-grid">
-          <div class="field">
-            <label for="brandName">Brand Name</label>
-            <input type="text" id="brandName" placeholder="Example: Bariq AI" />
+          <div class="form-grid">
+            <div>
+              <label for="brandName">Brand Name</label>
+              <input id="brandName" type="text" placeholder="Example: Bariq AI" />
+            </div>
+
+            <div>
+              <label for="productName">Product / Service</label>
+              <input id="productName" type="text" placeholder="Example: coffee" />
+            </div>
+
+            <div>
+              <label for="videoType">Video Type</label>
+              <select id="videoType">
+                <option value="Instagram Reel">Instagram Reel</option>
+                <option value="Product Promo">Product Promo</option>
+                <option value="Offer Ad">Offer Ad</option>
+                <option value="Founder Intro">Founder Intro</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="audience">Audience</label>
+              <input id="audience" type="text" placeholder="Example: coffee lovers" />
+            </div>
+
+            <div class="full">
+              <label for="offer">Offer / Message</label>
+              <input id="offer" type="text" placeholder="Example: Premium coffee moments" />
+            </div>
           </div>
 
-          <div class="field">
-            <label for="productName">Product / Service</label>
-            <input type="text" id="productName" placeholder="Example: coffee" />
-          </div>
-
-          <div class="field">
-            <label for="videoType">Video Type</label>
-            <select id="videoType">
-              <option value="Instagram Reel">Instagram Reel</option>
-              <option value="Product Promo">Product Promo</option>
-              <option value="Offer Ad">Offer Ad</option>
-              <option value="Founder Intro">Founder Intro</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="duration">Duration</label>
-            <select id="duration">
-              <option value="15 sec">15 sec</option>
-              <option value="30 sec">30 sec</option>
-              <option value="45 sec">45 sec</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="audience">Target Audience</label>
-            <input type="text" id="audience" placeholder="Example: coffee lovers" />
-          </div>
-
-          <div class="field">
-            <label for="cta">CTA</label>
-            <input type="text" id="cta" placeholder="Example: Start Now" />
-          </div>
-
-          <div class="field full">
-            <label for="offer">Offer / Key Message</label>
-            <input type="text" id="offer" placeholder="Example: Premium coffee moments" />
-          </div>
-
-          <div class="field full">
-            <label for="prompt">Extra Prompt</label>
-            <textarea id="prompt" placeholder="Example: premium gold-purple style, modern startup feel"></textarea>
+          <div class="actions">
+            <button class="primary" type="button" onclick="generateRealVideoClips()">Generate Real Video</button>
+            <button class="light" type="button" onclick="clearAll()">Clear</button>
           </div>
         </div>
 
-        <div class="action-row">
-          <button class="btn btn-primary" type="button" onclick="generateRealVideoClips()">Generate Real Video</button>
-          <button class="btn btn-light" type="button" onclick="clearAll()">Clear</button>
-        </div>
-
-        <div class="card">
+        <div class="box">
           <h3>Status</h3>
           <div id="statusText" class="muted">Waiting for input...</div>
-          <div class="badge" id="statusBadge">Idle</div>
+          <div id="statusBadge" class="badge">Idle</div>
         </div>
 
-        <div class="card">
+        <div class="box">
           <h3>AI Blueprint</h3>
-
-          <div class="result-block">
-            <div class="result-title">Video Title</div>
-            <div class="result-content" id="videoTitle">Your title will appear here.</div>
-          </div>
-
-          <div class="result-block">
-            <div class="result-title">Hook</div>
-            <div class="result-content" id="videoHook">Your hook will appear here.</div>
-          </div>
-
-          <div class="result-block">
-            <div class="result-title">Scene Plan</div>
-            <div class="result-content" id="scenePlan">Your scene plan will appear here.</div>
-          </div>
+          <pre id="blueprintText">Your blueprint will appear here.</pre>
         </div>
       </div>
 
-      <div class="panel">
-        <h2>Real Video Clips</h2>
-        <p class="muted">Bariq AI will search real stock footage and place it here scene by scene.</p>
-
-        <div class="card">
-          <h3>Fetched Clips</h3>
+      <div>
+        <div class="box">
+          <h2>Fetched Clips</h2>
           <div id="videoResults" class="video-grid">
-            <div class="video-tile">
-              <div class="video-info">
-                <div class="video-title">No clips yet</div>
-                <div class="video-meta">Enter details and click Generate Real Video.</div>
+            <div class="tile">
+              <div class="tile-body">
+                <strong>No clips yet</strong>
+                <div class="muted">Enter details and click Generate Real Video.</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="card">
+        <div class="box">
           <h3>Scene Mapping</h3>
-          <div id="sceneMapping" class="scene-list">
-            <div class="scene-item">
-              <h4>Scene 1</h4>
-              <p>Real scene suggestions will appear here after video search.</p>
-            </div>
-          </div>
+          <div id="sceneMapping" class="muted">Scene mapping will appear here.</div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    const PEXELS_API_KEY =  6qOa2IzSU0hP6cnDLdXWbawLFB8cYWErHYGnehF9IPmce1AJqxPF2FYj;
+    const PEXELS_API_KEY = "PASTE_YOUR_REAL_PEXELS_KEY_HERE";
 
     function setStatus(text, badge) {
       document.getElementById("statusText").textContent = text;
@@ -364,63 +250,62 @@
 
     function buildQueries(productName, videoType, audience) {
       const base = productName || "business";
-      const audienceText = audience || "customers";
+      const people = audience || "customers";
 
       if (videoType === "Founder Intro") {
         return [
-          `${base} entrepreneur`,
-          `${base} office meeting`,
-          `${audienceText} business presentation`
+          base + " entrepreneur",
+          base + " office",
+          people + " business"
         ];
       }
 
       if (videoType === "Offer Ad") {
         return [
-          `${base} promotion`,
-          `${base} product close up`,
-          `${audienceText} shopping`
+          base + " promotion",
+          base + " product close up",
+          people + " shopping"
         ];
       }
 
       if (videoType === "Product Promo") {
         return [
-          `${base} product`,
-          `${base} close up`,
-          `${base} packaging`
+          base + " product",
+          base + " close up",
+          base + " packaging"
         ];
       }
 
       return [
-        `${base} social media`,
-        `${base} startup`,
-        `${base} product promo`
+        base + " social media",
+        base + " startup",
+        base + " promo"
       ];
     }
 
     function buildBlueprint() {
       const brandName = document.getElementById("brandName").value || "Your Brand";
       const productName = document.getElementById("productName").value || "Your Product";
-      const duration = document.getElementById("duration").value || "15 sec";
       const audience = document.getElementById("audience").value || "your audience";
-      const cta = document.getElementById("cta").value || "Start Now";
-      const offer = document.getElementById("offer").value || "Special offer available now";
+      const offer = document.getElementById("offer").value || "Special message";
 
-      document.getElementById("videoTitle").textContent = `${brandName} Reel for ${productName}`;
-      document.getElementById("videoHook").textContent = `Stop scrolling — ${productName} is built for ${audience}.`;
-      document.getElementById("scenePlan").textContent =
-`Duration: ${duration}
+      const text =
+`Brand: ${brandName}
+Product: ${productName}
+Audience: ${audience}
 
 Scene 1: Hook visual
-Scene 2: Product / service focus
-Scene 3: Offer or value message
+Scene 2: Product focus
+Scene 3: Offer/value
 Scene 4: CTA
 
-Offer: ${offer}
-CTA: ${cta}`;
+Message: ${offer}`;
+
+      document.getElementById("blueprintText").textContent = text;
     }
 
     async function fetchPexelsVideos(query) {
-      const url = `https://api.pexels.com/videos/search?query=${encodeURIComponent(query)}&per_page=4`;
+      const url = "https://api.pexels.com/videos/search?query=" + encodeURIComponent(query) + "&per_page=3";
 
       const response = await fetch(url, {
         headers: {
@@ -429,7 +314,7 @@ CTA: ${cta}`;
       });
 
       if (!response.ok) {
-        throw new Error(`Pexels request failed with status ${response.status}`);
+        throw new Error("Pexels request failed: " + response.status);
       }
 
       const data = await response.json();
@@ -439,9 +324,13 @@ CTA: ${cta}`;
     function pickPlayableVideoFile(videoFiles) {
       if (!videoFiles || !videoFiles.length) return null;
 
-      let chosen = videoFiles.find(file => file.quality === "sd");
-      if (!chosen) chosen = videoFiles.find(file => file.width >= 720);
-      if (!chosen) chosen = videoFiles[0];
+      let chosen = videoFiles.find(function(file) {
+        return file.quality === "sd";
+      });
+
+      if (!chosen) {
+        chosen = videoFiles[0];
+      }
 
       return chosen ? chosen.link : null;
     }
@@ -452,66 +341,59 @@ CTA: ${cta}`;
 
       if (!clips.length) {
         container.innerHTML = `
-          <div class="video-tile">
-            <div class="video-info">
-              <div class="video-title">No clips found</div>
-              <div class="video-meta">Try a broader product or service term.</div>
+          <div class="tile">
+            <div class="tile-body">
+              <strong>No clips found</strong>
+              <div class="muted">Try a broader keyword.</div>
             </div>
           </div>
         `;
         return;
       }
 
-      clips.forEach((clip, index) => {
-        const videoUrl = pickPlayableVideoFile(clip.video_files);
-        const card = document.createElement("div");
-        card.className = "video-tile";
+      clips.forEach(function(clip, index) {
+        const src = pickPlayableVideoFile(clip.video_files);
 
-        card.innerHTML = `
-          ${videoUrl ? `<video controls muted playsinline preload="metadata" src="${videoUrl}"></video>` : ""}
-          <div class="video-info">
-            <div class="video-title">Scene Clip ${index + 1}</div>
-            <div class="video-meta">
-              Duration: ${clip.duration || "--"} sec<br>
-              Pexels ID: ${clip.id || "--"}
-            </div>
+        const tile = document.createElement("div");
+        tile.className = "tile";
+
+        tile.innerHTML = `
+          ${src ? `<video controls muted playsinline preload="metadata" src="${src}"></video>` : ""}
+          <div class="tile-body">
+            <strong>Scene Clip ${index + 1}</strong>
+            <div class="muted">Pexels ID: ${clip.id || "--"} | Duration: ${clip.duration || "--"} sec</div>
           </div>
         `;
 
-        container.appendChild(card);
+        container.appendChild(tile);
       });
     }
 
     function renderSceneMapping(clips, queries) {
-      const mapping = document.getElementById("sceneMapping");
-      mapping.innerHTML = "";
+      const box = document.getElementById("sceneMapping");
 
       if (!clips.length) {
-        mapping.innerHTML = `
-          <div class="scene-item">
-            <h4>No scene mapping yet</h4>
-            <p>No usable clips were found for the entered query.</p>
-          </div>
-        `;
+        box.textContent = "No usable clips were found.";
         return;
       }
 
-      clips.slice(0, 4).forEach((clip, index) => {
-        const item = document.createElement("div");
-        item.className = "scene-item";
-        item.innerHTML = `
-          <h4>Scene ${index + 1}</h4>
-          <p>
-            Query: <strong>${queries[index % queries.length]}</strong><br>
-            Clip ID: ${clip.id || "--"}<br>
-            Suggested usage: real footage scene for hook / benefit / offer / CTA flow.
-          </p>
+      let html = "";
+      clips.forEach(function(clip, index) {
+        html += `
+          <div style="margin-bottom:12px; padding:12px; border:1px solid #f1df9f; border-radius:12px;">
+            <strong style="color:#5f2396;">Scene ${index + 1}</strong><br>
+            Query: ${queries[index % queries.length]}<br>
+            Clip ID: ${clip.id || "--"}
+          </div>
         `;
-        mapping.appendChild(item);
       });
+
+      box.innerHTML = html;
     }
 
     async function generateRealVideoClips() {
+      setStatus("Button clicked. Starting...", "Running");
+
       const productName = document.getElementById("productName").value.trim();
       const videoType = document.getElementById("videoType").value;
       const audience = document.getElementById("audience").value.trim();
@@ -521,7 +403,7 @@ CTA: ${cta}`;
         return;
       }
 
-      if (PEXELS_API_KEY === 6qOa2IzSU0hP6cnDLdXWbawLFB8cYWErHYGnehF9IPmce1AJqxPF2FYj") {
+      if (PEXELS_API_KEY ===6qOa2IzSU0hP6cnDLdXWbawLFB8cYWErHYGnehF9IPmce1AJqxPF2FYj  {
         setStatus("Add your real Pexels API key in the code first.", "API Key Needed");
         return;
       }
@@ -534,9 +416,9 @@ CTA: ${cta}`;
       try {
         const allResults = [];
 
-        for (const query of queries) {
-          const videos = await fetchPexelsVideos(query);
-          if (videos.length) {
+        for (let i = 0; i < queries.length; i++) {
+          const videos = await fetchPexelsVideos(queries[i]);
+          if (videos.length > 0) {
             allResults.push(videos[0]);
           }
         }
@@ -544,7 +426,7 @@ CTA: ${cta}`;
         renderVideoResults(allResults);
         renderSceneMapping(allResults, queries);
 
-        if (allResults.length) {
+        if (allResults.length > 0) {
           setStatus("Real video clips fetched successfully.", "Success");
         } else {
           setStatus("No good clips found. Try broader keywords.", "No Results");
@@ -559,32 +441,18 @@ CTA: ${cta}`;
       document.getElementById("brandName").value = "";
       document.getElementById("productName").value = "";
       document.getElementById("videoType").value = "Instagram Reel";
-      document.getElementById("duration").value = "15 sec";
       document.getElementById("audience").value = "";
-      document.getElementById("cta").value = "";
       document.getElementById("offer").value = "";
-      document.getElementById("prompt").value = "";
-
-      document.getElementById("videoTitle").textContent = "Your title will appear here.";
-      document.getElementById("videoHook").textContent = "Your hook will appear here.";
-      document.getElementById("scenePlan").textContent = "Your scene plan will appear here.";
-
+      document.getElementById("blueprintText").textContent = "Your blueprint will appear here.";
       document.getElementById("videoResults").innerHTML = `
-        <div class="video-tile">
-          <div class="video-info">
-            <div class="video-title">No clips yet</div>
-            <div class="video-meta">Enter details and click Generate Real Video.</div>
+        <div class="tile">
+          <div class="tile-body">
+            <strong>No clips yet</strong>
+            <div class="muted">Enter details and click Generate Real Video.</div>
           </div>
         </div>
       `;
-
-      document.getElementById("sceneMapping").innerHTML = `
-        <div class="scene-item">
-          <h4>Scene 1</h4>
-          <p>Real scene suggestions will appear here after video search.</p>
-        </div>
-      `;
-
+      document.getElementById("sceneMapping").textContent = "Scene mapping will appear here.";
       setStatus("Waiting for input...", "Idle");
     }
   </script>
