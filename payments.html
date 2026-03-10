@@ -80,6 +80,31 @@ alert("Payment Gateway Coming Soon for "+plan+" ₹"+price);
 }
 
 </script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
+<script>
+const RAZORPAY_KEY = "rzp_test_yourkeyhere"; // paste your Razorpay Key ID
+
+function buyPlan(plan, price){
+
+  const options = {
+    key: RAZORPAY_KEY,
+    amount: price * 100, 
+    currency: "INR",
+    name: "Bariq AI",
+    description: plan + " Plan",
+    handler: function (response){
+      alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+      localStorage.setItem("bariq_plan", plan);
+    },
+    theme: {
+      color: "#6b4de6"
+    }
+  };
+
+  const rzp = new Razorpay(options);
+  rzp.open();
+}
+</script>
 </body>
 </html>
