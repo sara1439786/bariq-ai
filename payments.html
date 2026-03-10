@@ -143,6 +143,12 @@ rzp.open();
 }
 
 </script>
-
+<script>
+function buyPlan(plan, price){
+  alert(plan + " plan selected - ₹" + price + "/month");
+  localStorage.setItem("bariq_user_plan", plan);
+  window.location.href = "business-dashboard.html";
+}
+</script>
 </body>
 </html>
