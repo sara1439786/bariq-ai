@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI - Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --gold:#D6A13A;
+      --gold-soft:#F1D28B;
+      --metal:#7D63B8;
+      --metal-deep:#5D468F;
+      --rose:#B97AA7;
+      --bg1:#fffaf4;
+      --bg2:#fff5fb;
+      --bg3:#fbf7ff;
+      --text:#3b2f45;
+      --muted:#7d728c;
+      --line:rgba(214,161,58,.18);
+      --shadow:0 20px 50px rgba(95,70,120,.08);
+      --shadow2:0 10px 24px rgba(70,45,95,.06);
+      --radius-xl:30px;
+      --radius-lg:22px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Inter,sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top left,#fff0d8 0%,transparent 24%),
+        radial-gradient(circle at top right,#f8e8ff 0%,transparent 24%),
+        linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 48%,var(--bg3) 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .login-wrap{
+      width:min(980px,100%);
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:20px;
+      align-items:stretch;
+    }
+
+    .brand-card,
+    .login-card{
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+    }
+
+    .brand-card{
+      padding:34px 30px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .brand-card:after{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      right:-80px;
+      top:-80px;
+      background:radial-gradient(circle,var(--gold-soft),transparent 70%);
+      opacity:.35;
+    }
+
+    .logo{
+      font-family:Manrope,sans-serif;
+      font-size:34px;
+      font-weight:800;
+      letter-spacing:-0.8px;
+      background:linear-gradient(90deg,var(--gold) 0%,var(--gold-soft) 18%,var(--metal) 58%,var(--metal-deep) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      position:relative;
+      z-index:1;
+    }
+
+    .tagline{
+      font-family:"Cormorant Garamond",serif;
+      font-style:italic;
+      font-size:28px;
+      color:var(--metal-deep);
+      margin-top:4px;
+      margin-bottom:16px;
+      position:relative;
+      z-index:1;
+    }
+
+    .brand-card h2{
+      font-family:Manrope,sans-serif;
+      font-size:34px;
+      line-height:1.15;
+      color:var(--metal-deep);
+      margin-bottom:12px;
+      position:relative;
+      z-index:1;
+    }
+
+    .brand-card p{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.8;
+      margin-bottom:18px;
+      position:relative;
+      z-index:1;
+    }
+
+    .point-list{
+      display:grid;
+      gap:12px;
+      position:relative;
+      z-index:1;
+    }
+
+    .point{
+      background:linear-gradient(135deg,#fffaf2,#fff8fd);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px 16px;
+      box-shadow:var(--shadow2);
+    }
+
+    .point strong{
+      display:block;
+      color:var(--metal-deep);
+      margin-bottom:4px;
+      font-size:15px;
+    }
+
+    .point span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .login-card{
+      padding:32px 28px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .pill{
+      display:inline-flex;
+      width:max-content;
+      padding:9px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--metal-deep);
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:14px;
+    }
+
+    .login-card h1{
+      font-family:Manrope,sans-serif;
+      font-size:34px;
+      color:var(--metal-deep);
+      margin-bottom:8px;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+      margin-bottom:18px;
+    }
+
+    .field{
+      margin-bottom:14px;
+    }
+
+    .field label{
+      display:block;
+      margin-bottom:7px;
+      font-size:13px;
+      font-weight:700;
+      color:var(--metal-deep);
+    }
+
+    .field input,
+    .field select{
+      width:100%;
+      padding:13px 14px;
+      border-radius:12px;
+      border:1px solid #e8e1f2;
+      background:#fff;
+      font-size:14px;
+      outline:none;
+    }
+
+    .role-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:10px;
+      margin-bottom:16px;
+    }
+
+    .role-card{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:linear-gradient(135deg,#fffaf2,#fff8fd);
+      padding:14px 10px;
+      text-align:center;
+      cursor:pointer;
+      transition:.2s ease;
+      box-shadow:var(--shadow2);
+    }
+
+    .role-card.active{
+      border-color:rgba(125,99,184,.4);
+      background:linear-gradient(135deg,#fff4df,#f3ebff);
+      transform:translateY(-2px);
+    }
+
+    .role-card .icon{
+      font-size:22px;
+      margin-bottom:6px;
+    }
+
+    .role-card strong{
+      display:block;
+      color:var(--metal-deep);
+      font-size:14px;
+      margin-bottom:4px;
+    }
+
+    .role-card span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.5;
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+
+    .btn,
+    .btn-outline{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 20px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      border:none;
+      transition:.2s ease;
+    }
+
+    .btn{
+      background:linear-gradient(135deg,var(--gold),var(--metal));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(125,99,184,.18);
+    }
+
+    .btn-outline{
+      background:#fff;
+      color:var(--metal-deep);
+      border:1px solid var(--line);
+    }
+
+    .btn:hover,.btn-outline:hover{
+      transform:translateY(-2px);
+    }
+
+    .note{
+      margin-top:14px;
+      color:#8b7f9b;
+      font-size:12px;
+      line-height:1.7;
+    }
+
+    @media (max-width: 900px){
+      .login-wrap{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrap">
+    <section class="brand-card">
+      <div class="logo">Bariq AI</div>
+      <div class="tagline">Your marketing in your hand</div>
+
+      <h2>Log in and enter the right workspace instantly.</h2>
+      <p>
+        Bariq AI routes each user into the correct dashboard so the platform behaves like a real product, not just a group of pages.
+      </p>
+
+      <div class="point-list">
+        <div class="point">
+          <strong>Business Workspace</strong>
+          <span>Campaigns, creators, AI marketing, and lead flow in one place.</span>
+        </div>
+        <div class="point">
+          <strong>Creator Workspace</strong>
+          <span>Creator profiles, collaboration visibility, and campaign participation.</span>
+        </div>
+        <div class="point">
+          <strong>Admin Workspace</strong>
+          <span>Platform-level control over creators, leads, campaigns, and growth.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="login-card">
+      <div class="pill">Login + Role Routing</div>
+      <h1>Welcome back</h1>
+      <div class="sub">Choose a role and Bariq AI will take you to the right dashboard.</div>
+
+      <div class="field">
+        <label>Email</label>
+        <input id="email" type="email" placeholder="you@example.com" />
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        <input id="password" type="password" placeholder="Enter password" />
+      </div>
+
+      <div class="field">
+        <label>Choose role</label>
+        <div class="role-grid">
+          <div class="role-card active" data-role="business" onclick="selectRole('business', this)">
+            <div class="icon">🏢</div>
+            <strong>Business</strong>
+            <span>Campaign and growth</span>
+          </div>
+          <div class="role-card" data-role="creator" onclick="selectRole('creator', this)">
+            <div class="icon">🎬</div>
+            <strong>Creator</strong>
+            <span>Profile and collabs</span>
+          </div>
+          <div class="role-card" data-role="admin" onclick="selectRole('admin', this)">
+            <div class="icon">⚙️</div>
+            <strong>Admin</strong>
+            <span>Platform control</span>
+          </div>
+        </div>
+        <select id="role" style="display:none;">
+          <option value="business">Business</option>
+          <option value="creator">Creator</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <div class="actions">
+        <button class="btn" onclick="loginUser()">Login</button>
+        <button class="btn-outline" onclick="fillDemo()">Use Demo Login</button>
+      </div>
+
+      <div class="note">
+        Demo routing:
+        Business → <b>business-dashboard.html</b><br>
+        Creator → <b>creator-dashboard.html</b><br>
+        Admin → <b>admin.html</b>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function selectRole(role, el){
+      document.getElementById("role").value = role;
+      document.querySelectorAll(".role-card").forEach(card => card.classList.remove("active"));
+      el.classList.add("active");
+    }
+
+    function fillDemo(){
+      document.getElementById("email").value = "demo@bariqai.com";
+      document.getElementById("password").value = "123456";
+    }
+
+    function loginUser(){
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const role = document.getElementById("role").value;
+
+      if(!email || !password){
+        alert("Please enter email and password.");
+        return;
+      }
+
+      localStorage.setItem("bariq_user_email", email);
+      localStorage.setItem("bariq_user_role", role);
+
+      if(role === "business"){
+        window.location.href = "business-dashboard.html";
+      } else if(role === "creator"){
+        window.location.href = "creator-dashboard.html";
+      } else if(role === "admin"){
+        window.location.href = "admin.html";
+      }
+    }
+  </script>
+</body>
+</html>
