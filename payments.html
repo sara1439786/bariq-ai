@@ -1,154 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI - Payments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 
-<title>Bariq AI Plans</title>
+  <style>
+    :root{
+      --gold:#d8a63c;
+      --purple:#7f66bb;
+      --purple-deep:#5e4792;
+      --bg:#faf7ff;
+      --card:#ffffff;
+      --text:#352c43;
+      --muted:#7e7590;
+      --line:rgba(127,102,187,.14);
+      --shadow:0 16px 40px rgba(94,71,146,.08);
+      --radius:24px;
+    }
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    *{box-sizing:border-box;margin:0;padding:0}
 
-<style>
+    body{
+      font-family:Inter,sans-serif;
+      background:
+        radial-gradient(circle at top left,#fff0d8 0%,transparent 22%),
+        radial-gradient(circle at top right,#f4ebff 0%,transparent 22%),
+        linear-gradient(180deg,#fffaf4 0%,#fff8fc 50%,#fbf9ff 100%);
+      color:var(--text);
+      min-height:100vh;
+    }
 
-body{
-font-family: Arial, sans-serif;
-background:#f5f7ff;
-margin:0;
-padding:40px;
-}
+    a{text-decoration:none;color:inherit}
 
-.container{
-max-width:900px;
-margin:auto;
-}
+    .container{
+      width:min(1180px, calc(100% - 32px));
+      margin:auto;
+    }
 
-.title{
-text-align:center;
-font-size:32px;
-color:#4b57ff;
-margin-bottom:40px;
-}
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
 
-.plan{
-background:white;
-padding:25px;
-margin-bottom:20px;
-border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.08);
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:16px 0;
+      flex-wrap:wrap;
+    }
 
-.plan h3{
-margin:0;
-font-size:20px;
-}
+    .logo{
+      font-family:Manrope,sans-serif;
+      font-size:34px;
+      font-weight:800;
+      letter-spacing:-0.8px;
+      background:linear-gradient(90deg,var(--gold) 0%,#efc56b 18%,var(--purple) 58%,var(--purple-deep) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
 
-.price{
-font-size:22px;
-font-weight:bold;
-}
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      align-items:center;
+    }
 
-button{
-background:#4b57ff;
-border:none;
-color:white;
-padding:10px 18px;
-border-radius:6px;
-cursor:pointer;
-font-size:15px;
-}
+    .nav-links a{
+      font-size:14px;
+      font-weight:700;
+      color:#776e88;
+    }
 
-button:hover{
-background:#3a46e0;
-}
+    .page{
+      padding:34px 0 48px;
+    }
 
-</style>
+    .hero{
+      background:rgba(255,255,255,.94);
+      border:1px solid var(--line);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      padding:32px;
+      margin-bottom:18px;
+    }
+
+    .badge{
+      display:inline-flex;
+      padding:10px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+      color:var(--purple-deep);
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    .hero h1{
+      font-family:Manrope,sans-serif;
+      font-size:44px;
+      color:var(--purple-deep);
+      margin-bottom:10px;
+    }
+
+    .hero p{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.85;
+      max-width:860px;
+    }
+
+    .plans{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .plan-card,
+    .status-card{
+      background:rgba(255,255,255,.95);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .plan-card{
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .plan-card h3{
+      font-family:Manrope,sans-serif;
+      font-size:24px;
+      color:var(--purple-deep);
+    }
+
+    .price{
+      font-family:Manrope,sans-serif;
+      font-size:38px;
+      color:var(--text);
+      font-weight:800;
+      line-height:1;
+    }
+
+    .price span{
+      font-size:15px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .plan-card p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.75;
+    }
+
+    .feature{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:13px;
+      color:#655b76;
+      font-weight:600;
+    }
+
+    .btn{
+      border:none;
+      border-radius:999px;
+      padding:13px 18px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(94,71,146,.14);
+    }
+
+    .status-card{
+      padding:24px;
+    }
+
+    .status-card h2{
+      font-family:Manrope,sans-serif;
+      font-size:28px;
+      color:var(--purple-deep);
+      margin-bottom:10px;
+    }
+
+    .status-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      min-height:120px;
+      white-space:pre-line;
+      font-size:14px;
+      line-height:1.8;
+      color:var(--text);
+    }
+
+    .footer{
+      margin-top:18px;
+      border-top:1px solid var(--line);
+      padding-top:18px;
+      text-align:center;
+      color:#9489a8;
+      font-size:13px;
+    }
+
+    @media (max-width:1024px){
+      .plans{grid-template-columns:1fr}
+    }
+
+    @media (max-width:768px){
+      .hero h1{font-size:34px}
+      .nav{justify-content:center}
+      .nav-links{justify-content:center}
+      .price{font-size:32px}
+    }
+  </style>
 </head>
-
-
 <body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="index.html" class="logo">Bariq AI</a>
 
-<div class="container">
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="business-dashboard.html">Business</a>
+        <a href="ai-generator.html">AI Generator</a>
+        <a href="campaign-studio-pro.html">Campaign</a>
+        <a href="creator-marketplace.html">Marketplace</a>
+        <a href="creator-dashboard.html">Creators</a>
+        <a href="payments.html">Payments</a>
+        <a href="admin-dashboard.html">Admin</a>
+      </nav>
+    </div>
+  </header>
 
-<div class="title">Bariq AI Plans</div>
+  <main class="page">
+    <div class="container">
 
-<div class="plan">
-<div>
-<h3>Starter</h3>
-<div class="price">₹1,999 / month</div>
-</div>
+      <section class="hero">
+        <div class="badge">Stable Test Billing Mode</div>
+        <h1>Payments & Plans</h1>
+        <p>
+          Select a Bariq AI plan and move into the platform in stable testing mode. This version is intentionally simple and reliable so the site stays smooth during final testing before live payment gateway integration.
+        </p>
+      </section>
 
-<button onclick="buyPlan('Starter',1999)">Buy Plan</button>
-</div>
+      <section class="plans">
+        <div class="plan-card">
+          <h3>Starter</h3>
+          <div class="price">₹1,999 <span>/ month</span></div>
+          <p>Best for early businesses testing AI content generation and basic campaign planning.</p>
+          <div class="feature">AI campaign generation</div>
+          <div class="feature">Basic business dashboard</div>
+          <div class="feature">Stable testing mode access</div>
+          <button class="btn" onclick="buyPlan('Starter',1999)">Choose Starter</button>
+        </div>
 
+        <div class="plan-card">
+          <h3>Growth</h3>
+          <div class="price">₹4,999 <span>/ month</span></div>
+          <p>Best for active brands that want stronger creator workflow and campaign execution testing.</p>
+          <div class="feature">Everything in Starter</div>
+          <div class="feature">Marketplace workflow</div>
+          <div class="feature">Expanded campaign tools</div>
+          <button class="btn" onclick="buyPlan('Growth',4999)">Choose Growth</button>
+        </div>
 
-<div class="plan">
-<div>
-<h3>Growth</h3>
-<div class="price">₹4,999 / month</div>
-</div>
+        <div class="plan-card">
+          <h3>Pro</h3>
+          <div class="price">₹9,999 <span>/ month</span></div>
+          <p>For premium businesses preparing for larger scale execution and deeper automation later.</p>
+          <div class="feature">Everything in Growth</div>
+          <div class="feature">Priority workflow mode</div>
+          <div class="feature">Advanced expansion readiness</div>
+          <button class="btn" onclick="buyPlan('Pro',9999)">Choose Pro</button>
+        </div>
+      </section>
 
-<button onclick="buyPlan('Growth',4999)">Buy Plan</button>
-</div>
+      <section class="status-card">
+        <h2>Plan Status Console</h2>
+        <div class="status-box" id="paymentStatusBox">No plan selected yet.</div>
+      </section>
 
+      <div class="footer">
+        © <span id="year"></span> Bariq AI. All rights reserved.
+      </div>
+    </div>
+  </main>
 
-<div class="plan">
-<div>
-<h3>Pro</h3>
-<div class="price">₹9,999 / month</div>
-</div>
+  <script>
+    function buyPlan(plan, price){
+      localStorage.setItem("bariq_user_plan", plan);
+      localStorage.setItem("bariq_plan_price", price);
 
-<button onclick="buyPlan('Pro',9999)">Buy Plan</button>
-</div>
+      document.getElementById("paymentStatusBox").textContent = `Plan selected successfully
 
-</div>
+Plan: ${plan}
+Amount: ₹${price} / month
 
+Status:
+Stable testing mode activated
 
-<script>
+Next step:
+Redirecting to business dashboard...`;
 
-const RAZORPAY_KEY = "rzp_test_XXXXXXXX";   // PUT YOUR TEST KEY HERE
+      setTimeout(function(){
+        window.location.href = "business-dashboard.html";
+      }, 1200);
+    }
 
-
-function buyPlan(plan, price){
-
-var options = {
-key: RAZORPAY_KEY,
-amount: price * 100,
-currency: "INR",
-name: "Bariq AI",
-description: plan + " Plan Subscription",
-
-handler: function (response){
-
-alert("Payment Successful");
-
-localStorage.setItem("bariq_user_plan", plan);
-localStorage.setItem("bariq_payment_id", response.razorpay_payment_id);
-
-window.location.href="business-dashboard.html";
-
-},
-
-theme:{
-color:"#4b57ff"
-}
-
-};
-
-var rzp = new Razorpay(options);
-rzp.open();
-
-}
-
-</script>
-<script>
-function buyPlan(plan, price){
-  alert(plan + " plan selected - ₹" + price + "/month");
-  localStorage.setItem("bariq_user_plan", plan);
-  window.location.href = "business-dashboard.html";
-}
-</script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
