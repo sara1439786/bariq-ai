@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+--primary:#6A4DFF;
+--secondary:#F25CA2;
+--gold:#F2B24C;
+--dark:#2F2542;
+--light:#F7F2FF;
+--card:#FFFFFF;
+--border:#E8DDF7;
+}
+
+body{
+font-family:Inter;
+background:linear-gradient(180deg,#fff8f2,#fff2fb,#f4efff);
+margin:0;
+color:var(--dark);
+}
+
+.logo{
+font-family:Sora;
+font-size:34px;
+font-weight:800;
+background:linear-gradient(90deg,var(--primary),var(--secondary),var(--gold));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+letter-spacing:-1px;
+}
+
+.nav a{
+font-weight:600;
+color:#6d5d8a;
+text-decoration:none;
+margin:0 10px;
+}
+
+.card{
+background:var(--card);
+border-radius:18px;
+padding:20px;
+border:1px solid var(--border);
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.button{
+background:linear-gradient(135deg,var(--gold),var(--secondary));
+padding:12px 20px;
+border-radius:30px;
+border:none;
+font-weight:700;
+cursor:pointer;
+color:white;
+}
+
+.dashboard-card{
+background:white;
+border-radius:20px;
+padding:25px;
+border:1px solid var(--border);
+box-shadow:0 12px 25px rgba(0,0,0,0.05);
+}
+
+.title{
+font-family:Sora;
+font-size:38px;
+color:#5c35c7;
+}
