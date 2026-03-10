@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI - Creator Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#fff9f5;
+      --bg2:#fff4fb;
+      --bg3:#f6f1ff;
+      --line:#eadff5;
+      --text:#3a3148;
+      --muted:#7c748d;
+      --brand:#6a47c8;
+      --brand-dark:#5632b3;
+      --pink:#d96aa7;
+      --gold:#e9b35b;
+      --white:#ffffff;
+      --shadow:0 18px 45px rgba(92,66,160,.08);
+      --shadow2:0 10px 24px rgba(60,30,110,.06);
+      --radius-xl:30px;
+      --radius-lg:22px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Inter',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left,#fff1da 0%,transparent 24%),
+        radial-gradient(circle at top right,#ffe9f4 0%,transparent 24%),
+        linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 52%,var(--bg3) 100%);
+      min-height:100vh;
+    }
+
+    a{text-decoration:none;color:inherit}
+    button,input,select{font:inherit}
+    .container{width:min(1180px, calc(100% - 40px));margin:0 auto}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,.84);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:16px 0;
+      flex-wrap:wrap;
+    }
+
+    .logo{
+      font-family:'Manrope',sans-serif;
+      font-size:31px;
+      font-weight:700;
+      letter-spacing:-0.8px;
+      color:var(--brand-dark);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .nav-links a{
+      font-size:14px;
+      font-weight:600;
+      color:#6f6488;
+    }
+
+    .page{
+      padding:36px 0 40px;
+    }
+
+    .hero{
+      background:rgba(255,255,255,.9);
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+      padding:34px 30px;
+      margin-bottom:20px;
+    }
+
+    .mini-label{
+      display:inline-block;
+      padding:9px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+      color:#8368c8;
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:16px;
+    }
+
+    .hero h1{
+      font-family:'Manrope',sans-serif;
+      font-size:36px;
+      color:var(--brand-dark);
+      margin-bottom:10px;
+      font-weight:700;
+      letter-spacing:-0.8px;
+    }
+
+    .hero p{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.8;
+      max-width:860px;
+    }
+
+    .top-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .filters{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .filter-btn,
+    .btn-primary,
+    .btn-outline,
+    .small-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .filter-btn,
+    .btn-outline,
+    .small-btn{
+      background:#fff;
+      color:var(--brand-dark);
+      border:1px solid var(--line);
+    }
+
+    .filter-btn.active{
+      background:linear-gradient(135deg,#fff6ec,#fff1fa);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--pink));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(217,106,167,.18);
+    }
+
+    .small-btn{
+      padding:9px 14px;
+      font-size:12px;
+    }
+
+    .btn-primary:hover,.btn-outline:hover,.small-btn:hover,.filter-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px;
+    }
+
+    .creator-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+
+    .creator-card,
+    .side-card,
+    .saved-item,
+    .profile-modal{
+      background:rgba(255,255,255,.9);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow2);
+    }
+
+    .creator-card{
+      border-radius:24px;
+      padding:20px;
+      background:linear-gradient(135deg,#fffaf3,#fff6fb);
+    }
+
+    .creator-top{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      margin-bottom:14px;
+    }
+
+    .avatar{
+      width:62px;
+      height:62px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),var(--pink));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-family:'Manrope',sans-serif;
+      font-size:20px;
+      font-weight:700;
+      flex-shrink:0;
+    }
+
+    .creator-card h3{
+      font-family:'Manrope',sans-serif;
+      color:#6648ba;
+      font-size:20px;
+      margin-bottom:4px;
+      font-weight:700;
+    }
+
+    .creator-meta{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+      margin-bottom:10px;
+    }
+
+    .creator-desc{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.75;
+    }
+
+    .price{
+      font-family:'Manrope',sans-serif;
+      font-size:22px;
+      color:var(--brand-dark);
+      margin:14px 0 8px;
+      font-weight:700;
+    }
+
+    .tags{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .tag{
+      font-size:11px;
+      font-weight:700;
+      color:#6a4db7;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:7px 10px;
+      border-radius:999px;
+    }
+
+    .card-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .side-card{
+      border-radius:var(--radius-xl);
+      padding:22px;
+      height:max-content;
+    }
+
+    .side-card h2{
+      font-family:'Manrope',sans-serif;
+      color:var(--brand-dark);
+      font-size:24px;
+      margin-bottom:8px;
+      font-weight:700;
+    }
+
+    .side-card p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+      margin-bottom:16px;
+    }
+
+    .saved-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .saved-item{
+      border-radius:18px;
+      padding:16px;
+      background:linear-gradient(135deg,#fffaf3,#fff6fb);
+    }
+
+    .saved-item strong{
+      display:block;
+      color:#6648ba;
+      margin-bottom:6px;
+      font-size:15px;
+      font-weight:700;
+    }
+
+    .saved-item span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    .empty{
+      padding:18px;
+      border:1px dashed var(--line);
+      border-radius:18px;
+      color:var(--muted);
+      font-size:14px;
+      background:#fff;
+    }
+
+    .notice{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:#7a4bb7;
+      font-size:14px;
+      font-weight:700;
+      display:none;
+    }
+
+    .notice.show{display:block}
+
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(45,30,80,.25);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:2000;
+    }
+
+    .modal-overlay.show{
+      display:flex;
+    }
+
+    .profile-modal{
+      width:min(560px,100%);
+      border-radius:28px;
+      padding:24px;
+      background:linear-gradient(135deg,#fffdfb,#fff7fc);
+      position:relative;
+    }
+
+    .modal-close{
+      position:absolute;
+      top:12px;
+      right:12px;
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#6a4db7;
+      font-size:20px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .profile-modal h3{
+      font-family:'Manrope',sans-serif;
+      color:var(--brand-dark);
+      font-size:28px;
+      margin-bottom:10px;
+      font-weight:700;
+    }
+
+    .profile-modal p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.8;
+      margin-bottom:12px;
+    }
+
+    .profile-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:10px;
+    }
+
+    .profile-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+    }
+
+    .profile-box strong{
+      display:block;
+      color:#7b63bd;
+      font-size:12px;
+      margin-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    .profile-box span{
+      color:var(--text);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .footer{
+      margin-top:30px;
+      padding:24px 0 14px;
+      border-top:1px solid var(--line);
+      text-align:center;
+      color:#988fab;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    @media(max-width:1000px){
+      .layout{grid-template-columns:1fr}
+    }
+
+    @media(max-width:640px){
+      .container{width:min(100% - 24px,1180px)}
+      .nav{justify-content:center}
+      .hero h1{font-size:28px}
+      .creator-grid,.profile-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container nav">
+      <div class="logo">Bariq AI</div>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="business-dashboard.html">Business</a>
+        <a href="ai-generator.html">AI Generator</a>
+        <a href="campaigns.html">Campaigns</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="leads.html">Leads</a>
+        <a href="templates.html">Templates</a>
+        <a href="creator-register.html">Creators Join</a>
+        <a href="login.html">Login</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <section class="hero">
+        <div class="mini-label">Creator Discovery Engine</div>
+        <h1>Find creators that actually match your campaign.</h1>
+        <p>
+          Browse creators by niche, shortlist them, view quick profiles, and move them into your campaign workflow.
+        </p>
+      </section>
+
+      <div class="top-row">
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="beauty">Beauty</button>
+          <button class="filter-btn" data-filter="fitness">Fitness</button>
+          <button class="filter-btn" data-filter="food">Food</button>
+        </div>
+
+        <a class="btn-primary" href="creator-register.html">Creator Registration</a>
+      </div>
+
+      <section class="layout">
+        <div class="creator-grid">
+          <div class="creator-card" data-category="beauty">
+            <div class="creator-top">
+              <div class="avatar">BN</div>
+              <div>
+                <h3>Beauty by Naina</h3>
+                <div class="creator-meta">Beauty & Skincare • Hyderabad • 42K followers</div>
+              </div>
+            </div>
+            <div class="creator-desc">
+              Great for salons, skin clinics, treatment awareness, beauty reels, and transformation campaigns.
+            </div>
+            <div class="price">₹4,500 / reel</div>
+            <div class="tags">
+              <span class="tag">Beauty</span>
+              <span class="tag">Skincare</span>
+              <span class="tag">Hyderabad</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-primary save-btn" data-name="Beauty by Naina" data-meta="Beauty & Skincare • Hyderabad • 42K followers">Save Creator</button>
+              <button class="small-btn profile-btn"
+                data-name="Beauty by Naina"
+                data-category="Beauty & Skincare"
+                data-followers="42K followers"
+                data-location="Hyderabad"
+                data-price="₹4,500 / reel"
+                data-desc="Best suited for clinic promotions, beauty treatments, reels, and premium service awareness campaigns."
+              >View Profile</button>
+            </div>
+          </div>
+
+          <div class="creator-card" data-category="fitness">
+            <div class="creator-top">
+              <div class="avatar">FR</div>
+              <div>
+                <h3>Fit Reels Pro</h3>
+                <div class="creator-meta">Fitness & Lifestyle • 33K followers</div>
+              </div>
+            </div>
+            <div class="creator-desc">
+              Ideal for gyms, slimming clinics, body transformation content, lifestyle programs, and health offers.
+            </div>
+            <div class="price">₹3,800 / reel</div>
+            <div class="tags">
+              <span class="tag">Fitness</span>
+              <span class="tag">Lifestyle</span>
+              <span class="tag">Video</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-primary save-btn" data-name="Fit Reels Pro" data-meta="Fitness & Lifestyle • 33K followers">Save Creator</button>
+              <button class="small-btn profile-btn"
+                data-name="Fit Reels Pro"
+                data-category="Fitness & Lifestyle"
+                data-followers="33K followers"
+                data-location="Hyderabad"
+                data-price="₹3,800 / reel"
+                data-desc="Works well for transformation reels, gym promotions, weight-loss plans, and energetic awareness campaigns."
+              >View Profile</button>
+            </div>
+          </div>
+
+          <div class="creator-card" data-category="food">
+            <div class="creator-top">
+              <div class="avatar">FH</div>
+              <div>
+                <h3>Foodie Hyderabad</h3>
+                <div class="creator-meta">Food Blogger • Hyderabad • 55K followers</div>
+              </div>
+            </div>
+            <div class="creator-desc">
+              Perfect for restaurants, cafes, new launches, tasting menus, food stories, and festive offers.
+            </div>
+            <div class="price">₹5,200 / reel</div>
+            <div class="tags">
+              <span class="tag">Food</span>
+              <span class="tag">Restaurant</span>
+              <span class="tag">Hyderabad</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-primary save-btn" data-name="Foodie Hyderabad" data-meta="Food Blogger • Hyderabad • 55K followers">Save Creator</button>
+              <button class="small-btn profile-btn"
+                data-name="Foodie Hyderabad"
+                data-category="Food Blogger"
+                data-followers="55K followers"
+                data-location="Hyderabad"
+                data-price="₹5,200 / reel"
+                data-desc="Strong fit for restaurant launches, food promotions, dining experiences, and offer-based campaign content."
+              >View Profile</button>
+            </div>
+          </div>
+
+          <div class="creator-card" data-category="beauty">
+            <div class="creator-top">
+              <div class="avatar">AS</div>
+              <div>
+                <h3>Ashi Skin Studio</h3>
+                <div class="creator-meta">Skincare Creator • 18K followers</div>
+              </div>
+            </div>
+            <div class="creator-desc">
+              Good for facials, skincare routines, consultation campaigns, and premium wellness promotions.
+            </div>
+            <div class="price">₹2,500 / post</div>
+            <div class="tags">
+              <span class="tag">Skin</span>
+              <span class="tag">Clinic</span>
+              <span class="tag">Beauty</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-primary save-btn" data-name="Ashi Skin Studio" data-meta="Skincare Creator • 18K followers">Save Creator</button>
+              <button class="small-btn profile-btn"
+                data-name="Ashi Skin Studio"
+                data-category="Skincare Creator"
+                data-followers="18K followers"
+                data-location="Hyderabad"
+                data-price="₹2,500 / post"
+                data-desc="Useful for consultation awareness, premium skin care messaging, and soft aesthetic content."
+              >View Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="side-card">
+          <h2>Saved Creators</h2>
+          <p>Shortlisted creators stay here after refresh so you can use them in future campaigns.</p>
+
+          <div class="saved-list" id="savedList">
+            <div class="empty" id="emptyState">No creators saved yet.</div>
+          </div>
+
+          <div class="notice" id="saveNotice"></div>
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 Bariq AI • Creator Marketplace • info@bariqai.com
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="profileModal">
+    <div class="profile-modal">
+      <button class="modal-close" onclick="closeProfile()">×</button>
+      <h3 id="modalName">Creator Name</h3>
+      <p id="modalDesc">Creator description</p>
+
+      <div class="profile-grid">
+        <div class="profile-box">
+          <strong>Category</strong>
+          <span id="modalCategory">-</span>
+        </div>
+        <div class="profile-box">
+          <strong>Followers</strong>
+          <span id="modalFollowers">-</span>
+        </div>
+        <div class="profile-box">
+          <strong>Location</strong>
+          <span id="modalLocation">-</span>
+        </div>
+        <div class="profile-box">
+          <strong>Pricing</strong>
+          <span id="modalPrice">-</span>
+        </div>
+      </div>
+
+      <div class="card-actions" style="margin-top:18px;">
+        <a class="btn-primary" href="campaigns.html">Hire via Campaign</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "bariq_saved_creators_v1";
+    const savedList = document.getElementById("savedList");
+    const emptyState = document.getElementById("emptyState");
+    const saveNotice = document.getElementById("saveNotice");
+
+    function getSavedCreators(){
+      try{
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      }catch(e){
+        return [];
+      }
+    }
+
+    function saveCreators(creators){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(creators));
+    }
+
+    function showNotice(message){
+      saveNotice.textContent = message;
+      saveNotice.classList.add("show");
+      setTimeout(() => saveNotice.classList.remove("show"), 2200);
+    }
+
+    function renderSavedCreators(){
+      const creators = getSavedCreators();
+      savedList.innerHTML = "";
+
+      if(!creators.length){
+        savedList.appendChild(emptyState);
+        return;
+      }
+
+      creators.forEach((creator) => {
+        const item = document.createElement("div");
+        item.className = "saved-item";
+        item.innerHTML = `
+          <strong>${creator.name}</strong>
+          <span>${creator.meta}</span>
+        `;
+        savedList.appendChild(item);
+      });
+    }
+
+    document.querySelectorAll(".save-btn").forEach((btn) => {
+      btn.addEventListener("click", function(){
+        const name = this.dataset.name;
+        const meta = this.dataset.meta;
+
+        const creators = getSavedCreators();
+        const exists = creators.some((c) => c.name === name);
+
+        if(!exists){
+          creators.unshift({ name, meta });
+          saveCreators(creators);
+          renderSavedCreators();
+          showNotice(name + " saved successfully.");
+        } else {
+          showNotice(name + " is already saved.");
+        }
+      });
+    });
+
+    document.querySelectorAll(".filter-btn").forEach((btn) => {
+      btn.addEventListener("click", function(){
+        document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+        this.classList.add("active");
+
+        const filter = this.dataset.filter;
+        document.querySelectorAll(".creator-card").forEach((card) => {
+          if(filter === "all" || card.dataset.category === filter){
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
+
+    document.querySelectorAll(".profile-btn").forEach((btn) => {
+      btn.addEventListener("click", function(){
+        document.getElementById("modalName").textContent = this.dataset.name;
+        document.getElementById("modalDesc").textContent = this.dataset.desc;
+        document.getElementById("modalCategory").textContent = this.dataset.category;
+        document.getElementById("modalFollowers").textContent = this.dataset.followers;
+        document.getElementById("modalLocation").textContent = this.dataset.location;
+        document.getElementById("modalPrice").textContent = this.dataset.price;
+        document.getElementById("profileModal").classList.add("show");
+      });
+    });
+
+    function closeProfile(){
+      document.getElementById("profileModal").classList.remove("show");
+    }
+
+    document.getElementById("profileModal").addEventListener("click", function(e){
+      if(e.target === this){
+        closeProfile();
+      }
+    });
+
+    renderSavedCreators();
+  </script>
+
+</body>
+</html>
