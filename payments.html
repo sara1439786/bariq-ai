@@ -332,3 +332,89 @@ Redirecting to business dashboard...`;
   </script>
 </body>
 </html>
+<script>
+  function selectPlan(planName, price, credits, features) {
+    const selectedPlan = {
+      name: planName,
+      price: price,
+      credits: credits,
+      features: features
+    };
+
+    localStorage.setItem("bariq_selected_plan", JSON.stringify(selectedPlan));
+    window.location.href = "business-dashboard.html";
+  }
+</script>
+</body>
+</html>
+<button onclick="selectPlan('Starter', '₹999/month', '50 Credits', ['5 AI Videos', 'Basic Support', '1 Brand Kit'])">
+  Choose Starter
+</button>
+
+<button onclick="selectPlan('Growth', '₹2499/month', '150 Credits', ['20 AI Videos', 'Priority Support', '3 Brand Kits'])">
+  Choose Growth
+</button>
+
+<button onclick="selectPlan('Pro', '₹4999/month', '500 Credits', ['Unlimited Campaigns', 'Premium Support', '10 Brand Kits'])">
+  Choose Pro
+</button>
+</body>
+</html>
+<div class="plan-card">
+  <h2 id="planName">No Plan Selected</h2>
+  <p id="planPrice">Price: --</p>
+  <p id="planCredits">Credits: --</p>
+  <ul id="planFeatures"></ul>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const storedPlan = localStorage.getItem("bariq_selected_plan");
+
+    if (storedPlan) {
+      const plan = JSON.parse(storedPlan);
+
+      document.getElementById("planName").textContent = plan.name;
+      document.getElementById("planPrice").textContent = "Price: " + plan.price;
+      document.getElementById("planCredits").textContent = "Credits: " + plan.credits;
+
+      const featureList = document.getElementById("planFeatures");
+      featureList.innerHTML = "";
+
+      if (plan.features && Array.isArray(plan.features)) {
+        plan.features.forEach(feature => {
+          const li = document.createElement("li");
+          li.textContent = feature;
+          featureList.appendChild(li);
+        });
+      }
+    }
+  });
+</script>
+</body>
+</html>
+<button onclick="clearPlan()">Reset Plan</button>
+
+<script>
+  function clearPlan() {
+    localStorage.removeItem("bariq_selected_plan");
+    location.reload();
+  }
+</script>
+<script>
+function selectPlan(planName, price, credits) {
+
+  const selectedPlan = {
+    name: planName,
+    price: price,
+    credits: credits,
+    features: ["20 AI Videos", "Priority Support", "3 Brand Kits"]
+  };
+
+  localStorage.setItem("bariq_selected_plan", JSON.stringify(selectedPlan));
+
+  window.location.href = "business-dashboard.html";
+}
+</script>
+</body>
+</html>
