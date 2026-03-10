@@ -1,90 +1,332 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Bariq AI Video Generator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI Video Generator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-<style>
+    body {
+      background: linear-gradient(135deg, #faf7ff 0%, #fff9ef 50%, #f8f2ff 100%);
+      min-height: 100vh;
+      color: #241f31;
+      padding: 36px 20px;
+    }
 
-body{
-font-family:Arial;
-background:linear-gradient(135deg,#faf7ff,#fff9ef,#f8f2ff);
-margin:0;
-padding:40px;
-}
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
 
-.container{
-max-width:900px;
-margin:auto;
-background:white;
-padding:30px;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-border:1px solid #f1df9f;
-}
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 26px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
-h1{
-color:#5f2396;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-input,textarea{
-width:100%;
-padding:12px;
-margin-top:10px;
-margin-bottom:20px;
-border-radius:8px;
-border:1px solid #ddd;
-}
+    .brand-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #5f2396 0%, #8a3ffc 60%, #d4af37 130%);
+      color: #fff6d9;
+      font-size: 22px;
+      font-weight: 700;
+      box-shadow: 0 12px 28px rgba(95, 35, 150, 0.18);
+    }
 
-button{
-background:linear-gradient(135deg,#5f2396,#8a3ffc,#d4af37);
-color:white;
-border:none;
-padding:14px 20px;
-border-radius:10px;
-cursor:pointer;
-font-weight:700;
-}
+    .brand-text h1 {
+      font-size: 28px;
+      color: #5f2396;
+      margin-bottom: 4px;
+    }
 
-.result{
-margin-top:20px;
-padding:15px;
-background:#fff4d2;
-border-radius:8px;
-}
+    .brand-text p {
+      color: #6f6680;
+      font-size: 14px;
+    }
 
-</style>
+    .back-btn {
+      text-decoration: none;
+      background: #f6eeff;
+      color: #5f2396;
+      border: 1px solid #e7d7ff;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .workspace {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid #f1df9f;
+      border-radius: 28px;
+      padding: 30px;
+      box-shadow: 0 16px 40px rgba(78, 38, 112, 0.08);
+    }
+
+    .workspace h2 {
+      color: #5f2396;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .workspace p {
+      color: #5c5369;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .field-box {
+      background: #fffdf8;
+      border: 1px solid #f4e6bb;
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    .field-box.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      color: #4a4057;
+      margin-bottom: 10px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #e4d7ee;
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-size: 15px;
+      color: #241f31;
+      background: white;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .btn {
+      border: none;
+      padding: 14px 20px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #5f2396 0%, #8a3ffc 60%, #d4af37 130%);
+      color: white;
+      box-shadow: 0 10px 24px rgba(95, 35, 150, 0.18);
+    }
+
+    .btn-light {
+      background: #f6eeff;
+      color: #5f2396;
+      border: 1px solid #e7d7ff;
+    }
+
+    .result-box {
+      margin-top: 26px;
+      background: #fffaf0;
+      border: 1px solid #f1df9f;
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .result-box h3 {
+      color: #5f2396;
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+
+    .result-box pre {
+      white-space: pre-wrap;
+      line-height: 1.7;
+      color: #453d52;
+      font-size: 15px;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 10px;
+      background: #fff4d2;
+      color: #8b6500;
+      border: 1px solid #efd889;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .workspace {
+        padding: 22px;
+      }
+
+      .workspace h2 {
+        font-size: 25px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-icon">✦</div>
+        <div class="brand-text">
+          <h1>Bariq AI</h1>
+          <p>Premium AI Video Workspace</p>
+        </div>
+      </div>
 
-<div class="container">
+      <a href="business-dashboard.html" class="back-btn">← Back to Dashboard</a>
+    </div>
 
-<h1>Generate AI Video</h1>
+    <div class="workspace">
+      <h2>Generate AI Video</h2>
+      <p>
+        Describe your campaign and Bariq AI will generate a premium marketing video concept,
+        script, hook, and CTA for your brand.
+      </p>
 
-<p>Describe your video and Bariq AI will generate a marketing script.</p>
+      <div class="grid">
+        <div class="field-box">
+          <label for="brandName">Brand Name</label>
+          <input type="text" id="brandName" placeholder="Example: Bariq AI" />
+        </div>
 
-<textarea id="prompt" placeholder="Example: Create a skincare product promotion video"></textarea>
+        <div class="field-box">
+          <label for="industry">Industry</label>
+          <input type="text" id="industry" placeholder="Example: AI Marketing" />
+        </div>
 
-<button onclick="generate()">Generate Video Script</button>
+        <div class="field-box">
+          <label for="videoType">Video Type</label>
+          <select id="videoType">
+            <option value="Product Promo">Product Promo</option>
+            <option value="Brand Awareness">Brand Awareness</option>
+            <option value="Social Media Ad">Social Media Ad</option>
+            <option value="Festival Campaign">Festival Campaign</option>
+            <option value="Founder Story">Founder Story</option>
+          </select>
+        </div>
 
-<div class="result" id="result">
-Your generated video script will appear here.
-</div>
+        <div class="field-box">
+          <label for="audience">Target Audience</label>
+          <input type="text" id="audience" placeholder="Example: small business owners" />
+        </div>
 
-</div>
+        <div class="field-box full">
+          <label for="prompt">Campaign Prompt</label>
+          <textarea id="prompt" placeholder="Example: Create a premium launch video for Bariq AI that helps businesses generate branded marketing content quickly."></textarea>
+        </div>
+      </div>
 
-<script>
+      <div class="action-row">
+        <button class="btn btn-primary" onclick="generateVideoScript()">Generate Video Script</button>
+        <button class="btn btn-light" onclick="clearForm()">Clear</button>
+      </div>
 
-function generate(){
+      <div class="result-box">
+        <h3>Generated Output</h3>
+        <pre id="resultText">Your AI-generated script will appear here.</pre>
+        <div class="badge" id="resultBadge">Ready</div>
+      </div>
+    </div>
+  </div>
 
-const prompt=document.getElementById("prompt").value;
+  <script>
+    function generateVideoScript() {
+      const brandName = document.getElementById("brandName").value || "Your Brand";
+      const industry = document.getElementById("industry").value || "your industry";
+      const videoType = document.getElementById("videoType").value || "Product Promo";
+      const audience = document.getElementById("audience").value || "your target audience";
+      const prompt = document.getElementById("prompt").value || "Create a strong premium marketing campaign.";
 
-document.getElementById("result").innerText=
-"AI Script:\n\nIntroducing our revolutionary product designed to transform your daily routine. Experience premium quality, unmatched results, and a lifestyle upgrade today.";
+      const output =
+`Video Type: ${videoType}
 
-}
+Brand: ${brandName}
+Industry: ${industry}
+Target Audience: ${audience}
 
-</script>
+Hook:
+Stop scrolling — ${brandName} is redefining ${industry} with smarter, faster, premium-quality results.
 
+Opening Scene:
+Show a clean luxury visual with soft gold and royal purple tones. Present the main business pain point clearly, then transition into confidence, speed, and brand power.
+
+Core Script:
+Introducing ${brandName} — a smarter way for ${audience} to create premium brand presence without complexity.
+Built for modern businesses, ${brandName} transforms ideas into polished campaigns that feel high-value, elegant, and effective.
+${prompt}
+
+Benefits Highlight:
+• Faster content creation
+• Premium branded output
+• Easier campaign execution
+• Better customer attention
+
+CTA:
+Start with ${brandName} today and elevate your next campaign with AI-powered creative confidence.`;
+
+      document.getElementById("resultText").textContent = output;
+      document.getElementById("resultBadge").textContent = "Script generated successfully";
+    }
+
+    function clearForm() {
+      document.getElementById("brandName").value = "";
+      document.getElementById("industry").value = "";
+      document.getElementById("videoType").value = "Product Promo";
+      document.getElementById("audience").value = "";
+      document.getElementById("prompt").value = "";
+      document.getElementById("resultText").textContent = "Your AI-generated script will appear here.";
+      document.getElementById("resultBadge").textContent = "Ready";
+    }
+  </script>
 </body>
 </html>
