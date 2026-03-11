@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI Video Creator</title>
+  <title>Bariq AI Video Studio</title>
   <style>
     * { box-sizing: border-box; font-family: Arial, sans-serif; }
 
     :root {
       --bg: #f7f4ff;
-      --card: rgba(255,255,255,0.95);
+      --card: rgba(255,255,255,0.96);
       --border: #eadfb7;
       --purple: #5a3fff;
-      --purple-dark: #31206f;
-      --gold: #d7b25a;
-      --gold-soft: #f6e7bc;
-      --text: #231942;
+      --purple-dark: #2f216f;
+      --gold: #d9b35f;
+      --gold-soft: #f7ebc5;
+      --text: #241a45;
       --muted: #6f6885;
       --shadow: 0 18px 50px rgba(66, 36, 102, 0.10);
     }
@@ -27,11 +27,11 @@
         radial-gradient(circle at top right, rgba(215,178,90,0.14), transparent 22%),
         linear-gradient(135deg, #faf8ff 0%, #fffaf0 45%, #f8f5ff 100%);
       color: var(--text);
-      padding: 24px;
+      padding: 22px;
     }
 
     .shell {
-      max-width: 1420px;
+      max-width: 1440px;
       margin: 0 auto;
     }
 
@@ -39,7 +39,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      gap: 18px;
       background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,240,0.95));
       border: 1px solid var(--border);
       border-radius: 28px;
@@ -72,7 +72,7 @@
 
     .top-grid {
       display: grid;
-      grid-template-columns: 460px 1fr;
+      grid-template-columns: 470px 1fr;
       gap: 22px;
       align-items: start;
     }
@@ -96,9 +96,7 @@
       gap: 14px;
     }
 
-    .full {
-      grid-column: 1 / -1;
-    }
+    .full { grid-column: 1 / -1; }
 
     label {
       display: block;
@@ -147,9 +145,7 @@
       transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-    }
+    .btn:hover { transform: translateY(-1px); }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--purple-dark), var(--purple), #d89b72 140%);
@@ -191,7 +187,36 @@
       border: 1px solid #edd28d;
       font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.2px;
+    }
+
+    .idea-box {
+      border: 1px solid #eadfb7;
+      background: linear-gradient(135deg, #fff, #fcf7ea);
+      border-radius: 20px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .idea-box h3 {
+      margin: 0 0 8px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .chip {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: #f4eeda;
+      color: #715304;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
     }
 
     .phone-panel {
@@ -213,19 +238,9 @@
       padding: 18px;
       background: linear-gradient(180deg, #4e36c9 0%, #261b5f 85%);
       border: 8px solid #1f1b2f;
-      box-shadow:
-        0 20px 60px rgba(36, 25, 66, 0.22),
-        inset 0 1px 0 rgba(255,255,255,0.18);
+      box-shadow: 0 20px 60px rgba(36, 25, 66, 0.22);
       position: relative;
       overflow: hidden;
-    }
-
-    .phone::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(255,255,255,0.14), transparent 42%);
-      pointer-events: none;
     }
 
     .phone-top {
@@ -277,7 +292,7 @@
     .phone-kicker {
       font-size: 14px;
       opacity: 0.95;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
 
     .phone-headline {
@@ -322,22 +337,6 @@
       padding: 18px;
     }
 
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .chip {
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: #f4eeda;
-      color: #715304;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
     .storyboard-grid {
       margin-top: 24px;
       display: grid;
@@ -351,12 +350,6 @@
       border-radius: 24px;
       box-shadow: var(--shadow);
       overflow: hidden;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .scene-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 20px 50px rgba(58, 42, 96, 0.12);
     }
 
     .scene-card video,
@@ -462,6 +455,7 @@
       margin: 0 0 14px;
       color: var(--muted);
       line-height: 1.6;
+      white-space: pre-wrap;
     }
 
     @media (max-width: 1200px) {
@@ -472,10 +466,7 @@
       .footer-tools {
         grid-template-columns: 1fr;
       }
-
-      .phone-wrap {
-        justify-content: flex-start;
-      }
+      .phone-wrap { justify-content: flex-start; }
     }
 
     @media (max-width: 640px) {
@@ -492,7 +483,7 @@
     <div class="hero">
       <div>
         <h1>Bariq AI Video Studio</h1>
-        <p>Generate premium short-form ad videos with AI scene planning, clip sourcing, storyboard flow, and export-ready direction.</p>
+        <p>Create aesthetic ad reels with AI ideas, automatic prompts, real stock clips, storyboard mapping, captions, and export-ready direction.</p>
       </div>
       <div class="hero-pill">AI Reel Builder</div>
     </div>
@@ -583,7 +574,15 @@
         <div class="action-row">
           <button class="btn btn-primary" onclick="generateVideo()">Generate Video Blueprint</button>
           <button class="btn btn-secondary" onclick="updatePreviewOnly()">Update Preview</button>
+          <button class="btn btn-secondary" onclick="generateCaptions()">Generate Ad Captions</button>
+          <button class="btn btn-secondary" onclick="exportStoryboard()">Export Video</button>
           <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
+        </div>
+
+        <div class="idea-box">
+          <h3>AI Prompt Suggestions</h3>
+          <div class="status-line" id="ideaSummary">Start typing product, audience, or offer and Bariq AI will suggest reel ideas automatically.</div>
+          <div class="chips" id="ideaChips"></div>
         </div>
 
         <div class="stack">
@@ -603,7 +602,7 @@
       <div class="panel">
         <div class="phone-panel">
           <div class="phone-wrap">
-            <div class="phone" id="phonePreview">
+            <div class="phone">
               <div class="phone-top">
                 <div class="scene-pill" id="previewSceneTag">15 sec • Bold Promo • 9:16</div>
                 <div class="logo-box" id="logoPreviewBox">LOGO</div>
@@ -613,7 +612,6 @@
                 <div class="phone-kicker" id="previewKicker">Instagram Reel for your next campaign</div>
                 <div class="phone-headline" id="previewHeadline">Your headline will appear here</div>
                 <div class="phone-subline" id="previewSubline">Premium gold-purple short video layout</div>
-
                 <div class="phone-image" id="productPreviewBox"></div>
               </div>
             </div>
@@ -622,7 +620,7 @@
           <div class="preview-tools">
             <div class="tool-card">
               <h3>Brand Asset Status</h3>
-              <div class="status-line">Uploaded assets and brand colors will be reflected directly in the preview.</div>
+              <div class="status-line">Uploaded assets and brand colors reflect directly in the preview.</div>
               <div class="chips">
                 <div class="chip" id="logoStatusChip">Logo: Not uploaded</div>
                 <div class="chip" id="productStatusChip">Product: Not uploaded</div>
@@ -632,17 +630,12 @@
 
             <div class="tool-card">
               <h3>Format Direction</h3>
-              <div class="status-line" id="formatDirectionText">9:16 selected for Reels, Shorts, Stories, and vertical ad creatives.</div>
+              <div class="status-line" id="formatDirectionText">9:16 selected for premium short-form campaign delivery.</div>
             </div>
 
             <div class="tool-card">
               <h3>Music Direction</h3>
               <div class="status-line" id="musicDirectionText">Luxury Ambient selected for premium, smooth, elegant short-form videos.</div>
-              <div class="chips">
-                <div class="chip">Luxury Ambient</div>
-                <div class="chip">Premium Pace</div>
-                <div class="chip">Soft Rise</div>
-              </div>
             </div>
 
             <div class="tool-card">
@@ -679,19 +672,16 @@
       <div class="export-card">
         <h3>AI Caption Overlay</h3>
         <p id="captionOverlayText">Auto-generated captions will appear here for your scenes.</p>
-        <button class="btn btn-secondary" onclick="generateCaptions()">Generate Ad Captions</button>
       </div>
 
       <div class="export-card">
         <h3>Export Direction</h3>
-        <p>Prepare this storyboard for reels, paid ads, product promos, and premium vertical campaigns.</p>
-        <button class="btn btn-secondary">Generate Final Ad Video</button>
+        <p id="exportDirectionText">Generate a storyboard first, then export your current ad plan as a branded text file.</p>
       </div>
 
       <div class="export-card">
-        <h3>Download Ready Flow</h3>
-        <p>Next phase will add clip stitching, transitions, captions, music, and final MP4 download.</p>
-        <button class="btn btn-primary">Export Video</button>
+        <h3>Final Ad Flow</h3>
+        <p>Next phase will add clip stitching, transitions, captions, music, and final MP4 export.</p>
       </div>
     </div>
   </div>
@@ -699,10 +689,16 @@
   <script>
     let logoDataUrl = "";
     let productDataUrl = "";
+    let latestVideos = [];
+    let latestQueries = [];
 
     function setStatus(text, badge) {
       document.getElementById("statusText").textContent = text;
       document.getElementById("statusBadge").textContent = badge;
+    }
+
+    function getValue(id) {
+      return document.getElementById(id).value.trim();
     }
 
     function buildQueries(productName, videoType, audience) {
@@ -740,14 +736,67 @@
       ];
     }
 
+    function buildIdeaSuggestions() {
+      const product = getValue("productName") || "your product";
+      const audience = getValue("audience") || "your audience";
+      const offer = getValue("offer") || "special offer";
+      const videoType = document.getElementById("videoType").value;
+
+      const ideas = [
+        `Stop scrolling — ${product} is made for ${audience}`,
+        `${product}: premium results without complexity`,
+        `${offer} — make your next ${videoType.toLowerCase()} convert better`,
+        `Why ${audience} are switching to ${product}`,
+        `${product} in 15 seconds: hook, benefit, offer, CTA`
+      ];
+
+      const chips = document.getElementById("ideaChips");
+      chips.innerHTML = "";
+
+      ideas.forEach((idea) => {
+        const btn = document.createElement("button");
+        btn.className = "chip";
+        btn.textContent = idea;
+        btn.onclick = function () {
+          document.getElementById("headline").value = idea;
+          updatePreviewOnly();
+        };
+        chips.appendChild(btn);
+      });
+
+      document.getElementById("ideaSummary").textContent =
+        `Bariq AI suggests these reel directions for ${product} targeting ${audience}. Tap any idea to auto-fill the headline.`;
+    }
+
+    function autoGenerateDefaults() {
+      const product = getValue("productName");
+      const audience = getValue("audience");
+      const offer = getValue("offer");
+      const videoType = document.getElementById("videoType").value;
+
+      if (product && !getValue("headline")) {
+        document.getElementById("headline").value = `${product} that ${audience || "your audience"} will notice instantly`;
+      }
+
+      if (product && !getValue("subline")) {
+        document.getElementById("subline").value = `${videoType} designed for premium, high-converting short-form marketing.`;
+      }
+
+      if (offer && !getValue("offer")) {
+        document.getElementById("offer").value = offer;
+      }
+    }
+
     function buildBlueprint() {
-      const brandName = document.getElementById("brandName").value || "Your Brand";
-      const productName = document.getElementById("productName").value || "Your Product";
-      const audience = document.getElementById("audience").value || "your audience";
-      const offer = document.getElementById("offer").value || "Your offer";
+      const brandName = getValue("brandName") || "Your Brand";
+      const productName = getValue("productName") || "Your Product";
+      const audience = getValue("audience") || "your audience";
+      const offer = getValue("offer") || "Your offer";
       const format = document.getElementById("format").value;
       const musicMood = document.getElementById("musicMood").value;
       const duration = document.getElementById("sceneDuration").value;
+      const headline = getValue("headline") || "Your headline";
+      const subline = getValue("subline") || "Your subline";
 
       const text =
 `Brand: ${brandName}
@@ -756,6 +805,9 @@ Audience: ${audience}
 Format: ${format}
 Music: ${musicMood}
 Duration: ${duration}
+
+Headline: ${headline}
+Subline: ${subline}
 
 Scene 1: Hook visual
 Scene 2: Product benefit
@@ -814,8 +866,8 @@ Offer: ${offer}`;
               Duration: ${v.duration || "--"} sec
             </div>
             <div class="scene-actions">
-              <button class="tiny-btn tiny-primary">Selected Clip</button>
-              <button class="tiny-btn tiny-gold">Replace Clip</button>
+              <button class="tiny-btn tiny-primary" onclick="useSceneAsPreview(${index})">Use in Preview</button>
+              <button class="tiny-btn tiny-gold" onclick="alert('Clip replacement can be added in next upgrade.')">Replace Clip</button>
             </div>
           </div>
         `;
@@ -853,13 +905,16 @@ Offer: ${offer}`;
     }
 
     function updatePreviewOnly() {
-      const brandName = document.getElementById("brandName").value || "Your Brand";
+      autoGenerateDefaults();
+      buildIdeaSuggestions();
+
+      const brandName = getValue("brandName") || "Your Brand";
       const videoType = document.getElementById("videoType").value || "Instagram Reel";
-      const headline = document.getElementById("headline").value || "Your headline will appear here";
-      const subline = document.getElementById("subline").value || "Premium gold-purple short video layout";
+      const headline = getValue("headline") || "Your headline will appear here";
+      const subline = getValue("subline") || "Premium gold-purple short video layout";
       const duration = document.getElementById("sceneDuration").value || "15 sec";
       const format = document.getElementById("format").value || "9:16 Reel";
-      const productName = document.getElementById("productName").value || "your next campaign";
+      const productName = getValue("productName") || "your next campaign";
       const musicMood = document.getElementById("musicMood").value || "Luxury Ambient";
 
       document.getElementById("previewSceneTag").textContent = `${duration} • ${videoType} • ${format.replace(" Reel", "")}`;
@@ -882,30 +937,72 @@ Offer: ${offer}`;
       } else {
         productBox.innerHTML = "";
       }
+
+      setStatus("Preview updated", "Preview");
+    }
+
+    function useSceneAsPreview(index) {
+      const video = latestVideos[index];
+      if (!video) return;
+
+      const image = video.image || "";
+      if (image) {
+        document.getElementById("productPreviewBox").innerHTML = `<img src="${image}" alt="Scene preview" />`;
+      }
+
+      document.getElementById("previewSceneTag").textContent = `Scene ${index + 1}`;
+      setStatus(`Scene ${index + 1} applied to preview`, "Selected");
     }
 
     function generateCaptions() {
-      const product = document.getElementById("productName").value || "your product";
-      const offer = document.getElementById("offer").value || "limited offer";
-      const audience = document.getElementById("audience").value || "your audience";
+      const product = getValue("productName") || "your product";
+      const offer = getValue("offer") || "limited offer";
+      const audience = getValue("audience") || "your audience";
 
-      document.getElementById("captionOverlayText").textContent =
-        `Scene 1: Stop scrolling — ${product} is built for ${audience}.
+      const text =
+`Scene 1: Stop scrolling — ${product} is made for ${audience}.
 Scene 2: Smarter, cleaner, more premium results.
 Scene 3: ${offer}
 Scene 4: Order now and transform your campaign.`;
+
+      document.getElementById("captionOverlayText").textContent = text;
+      setStatus("Captions generated", "Captions");
+    }
+
+    function exportStoryboard() {
+      const content =
+`Bariq AI Export
+
+${document.getElementById("blueprintText").textContent}
+
+Captions:
+${document.getElementById("captionOverlayText").textContent}`;
+
+      const blob = new Blob([content], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "bariq-ai-storyboard.txt";
+      a.click();
+      URL.revokeObjectURL(url);
+
+      document.getElementById("exportDirectionText").textContent =
+        "Storyboard exported successfully. Next upgrade can export real stitched MP4 videos.";
+      setStatus("Storyboard exported", "Exported");
     }
 
     async function generateVideo() {
-      const product = document.getElementById("productName").value.trim();
+      const product = getValue("productName");
       const videoType = document.getElementById("videoType").value;
-      const audience = document.getElementById("audience").value.trim();
+      const audience = getValue("audience");
 
       if (!product) {
         setStatus("Please enter Product / Service first.", "Missing Input");
         return;
       }
 
+      autoGenerateDefaults();
+      buildIdeaSuggestions();
       setStatus("Generating premium storyboard...", "Working");
       buildBlueprint();
       updatePreviewOnly();
@@ -918,6 +1015,9 @@ Scene 4: Order now and transform your campaign.`;
           const result = await fetchVideosFromBackend(q);
           videos = videos.concat(result.slice(0, 1));
         }
+
+        latestVideos = videos;
+        latestQueries = queries;
 
         renderVideos(videos);
         renderSceneMapping(videos, queries);
@@ -949,9 +1049,14 @@ Scene 4: Order now and transform your campaign.`;
       document.getElementById("productUpload").value = "";
       logoDataUrl = "";
       productDataUrl = "";
+      latestVideos = [];
+      latestQueries = [];
 
       document.getElementById("blueprintText").textContent = "Your video blueprint will appear here.";
       document.getElementById("captionOverlayText").textContent = "Auto-generated captions will appear here for your scenes.";
+      document.getElementById("exportDirectionText").textContent = "Generate a storyboard first, then export your current ad plan as a branded text file.";
+      document.getElementById("ideaSummary").textContent = "Start typing product, audience, or offer and Bariq AI will suggest reel ideas automatically.";
+      document.getElementById("ideaChips").innerHTML = "";
       document.getElementById("logoStatusChip").textContent = "Logo: Not uploaded";
       document.getElementById("productStatusChip").textContent = "Product: Not uploaded";
       document.getElementById("videoResults").innerHTML = `
@@ -1006,6 +1111,22 @@ Scene 4: Order now and transform your campaign.`;
       };
       reader.readAsDataURL(file);
     });
+
+    ["brandName", "productName", "audience", "offer", "headline", "subline"].forEach((id) => {
+      document.getElementById(id).addEventListener("input", function () {
+        buildIdeaSuggestions();
+        autoGenerateDefaults();
+      });
+    });
+
+    ["videoType", "format", "musicMood", "sceneDuration"].forEach((id) => {
+      document.getElementById(id).addEventListener("change", function () {
+        buildIdeaSuggestions();
+        updatePreviewOnly();
+      });
+    });
+
+    buildIdeaSuggestions();
   </script>
 </body>
 </html>
