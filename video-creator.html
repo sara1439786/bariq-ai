@@ -325,55 +325,58 @@
       white-space: pre-wrap;
     }
 
-    @media (max-width: 1100px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
+    .clips-section {
+      margin-top: 24px;
+    }
 
-      .output-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+    .clips-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #35296f;
+      margin: 0 0 14px;
+    }
+
+    .clips-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .clip-card {
+      padding: 14px;
+    }
+
+    .clip-card video {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 16px;
+      background: #000;
+    }
+
+    .clip-meta {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #6e6782;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .output-grid { grid-template-columns: 1fr 1fr; }
+      .clips-grid { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 768px) {
-      .container {
-        width: min(100% - 20px, 1280px);
-      }
-
-      .hero {
-        padding: 16px;
-        border-radius: 22px;
-      }
-
-      .panel {
-        padding: 18px;
-      }
-
-      .grid,
-      .output-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .button-row {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .preview-phone {
-        min-height: auto;
-        padding: 16px;
-      }
-
-      .phone-headline {
-        font-size: 32px;
-      }
-
-      .phone-subline {
-        font-size: 15px;
-      }
+      .container { width: min(100% - 20px, 1280px); }
+      .hero { padding: 16px; border-radius: 22px; }
+      .panel { padding: 18px; }
+      .grid, .output-grid, .clips-grid { grid-template-columns: 1fr; }
+      .button-row { flex-direction: column; }
+      .btn { width: 100%; }
+      .preview-phone { min-height: auto; padding: 16px; }
+      .phone-headline { font-size: 32px; }
+      .phone-subline { font-size: 15px; }
     }
   </style>
 </head>
@@ -397,12 +400,13 @@
 
             <div class="voice-box">
               <div class="voice-label">Say or type your campaign idea</div>
-              <textarea id="smartBrief" placeholder="Example: Create a reel for my slimming clinic for women weight loss with WhatsApp booking"></textarea>
+              <textarea id="smartBrief" placeholder="Example: Create a reel for my slimming clinic with WhatsApp booking"></textarea>
 
               <div class="button-row">
                 <button class="btn btn-gold" onclick="startVoiceInput()">🎤 Speak</button>
                 <button class="btn btn-primary" onclick="autoFillFromBrief()">✨ Auto Fill with AI</button>
                 <button class="btn btn-light" onclick="clearAll()">Clear</button>
+                <button class="btn btn-light" onclick="fetchClips()">🎬 Fetch Pexels Clips</button>
               </div>
 
               <div class="status-bar" id="statusText">Waiting for your idea...</div>
@@ -494,6 +498,11 @@ Scene 3: Offer
 Scene 4: CTA</div>
           </div>
         </div>
+
+        <div class="clips-section">
+          <h2 class="clips-title">Fetched Pexels Clips</h2>
+          <div class="clips-grid" id="clipsGrid"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -519,7 +528,7 @@ Scene 4: CTA</div>
         document.getElementById("headline").value || "Your headline will appear here";
 
       document.getElementById("previewSubline").textContent =
-        document.getElementById("subline").value || "Premium short video layout generated with Bariq AI";
+        document.getElementById("subline").value || "Premium short-form ad created from your brief";
 
       document.getElementById("previewOffer").textContent =
         "Offer: " + (document.getElementById("offer").value || "Your message here");
@@ -533,8 +542,7 @@ Scene 4: CTA</div>
       const headline = document.getElementById("headline").value || "Your next result starts now";
 
       document.getElementById("captionBox").textContent =
-        headline + ". " + brand + " brings " + product + " for " + audience + ". " +
-        offer + ". DM now to get started.";
+        `${headline}. ${brand} brings ${product} for ${audience}. ${offer}. DM now to get started.`;
     }
 
     function buildHook() {
@@ -542,7 +550,7 @@ Scene 4: CTA</div>
       const product = document.getElementById("productName").value || "your service";
 
       document.getElementById("hookBox").textContent =
-        "Stop scrolling — " + product + " is made for " + audience + ".";
+        `Stop scrolling — ${product} is made for ${audience}.`;
     }
 
     function buildScenes() {
@@ -565,41 +573,52 @@ Scene 4: CTA with ${brand}`;
         return;
       }
 
+      document.getElementById("brandName").value = "";
+      document.getElementById("productName").value = "";
+      document.getElementById("audience").value = "";
+      document.getElementById("offer").value = "";
+      document.getElementById("headline").value = "";
+      document.getElementById("subline").value = "";
+
       if (brief.includes("clinic") || brief.includes("salon")) {
-        document.getElementById("brandName").value ||= "Your Clinic";
-        document.getElementById("productName").value ||= "Clinic Services";
+        document.getElementById("brandName").value = "Your Clinic";
+        document.getElementById("productName").value = "Clinic Services";
         document.getElementById("videoType").value = "Offer Ad";
+      }
+
+      if (brief.includes("rss")) {
+        document.getElementById("brandName").value = "RSS";
       }
 
       if (brief.includes("weight loss") || brief.includes("slimming")) {
         document.getElementById("productName").value = "Weight Loss Program";
-        document.getElementById("audience").value ||= "women weight loss";
-        document.getElementById("headline").value ||= "Start your transformation with expert support";
-        document.getElementById("subline").value ||= "Premium clinic offer designed for women wellness";
+        document.getElementById("audience").value = "women weight loss";
+        document.getElementById("headline").value = "Start your transformation with expert support";
+        document.getElementById("subline").value = "Premium clinic offer designed for women wellness";
       }
 
       if (brief.includes("whatsapp")) {
-        document.getElementById("offer").value ||= "Book appointment on WhatsApp";
+        document.getElementById("offer").value = "Book appointment on WhatsApp";
       }
 
       if (brief.includes("glow") || brief.includes("glutathione") || brief.includes("skin")) {
-        document.getElementById("brandName").value ||= "Your Beauty Brand";
+        document.getElementById("brandName").value = "Your Beauty Brand";
         document.getElementById("productName").value = "Glutathione Tablets";
         document.getElementById("videoType").value = "Product Promo";
-        document.getElementById("audience").value ||= "women skincare audience";
-        document.getElementById("headline").value ||= "Glow with confidence";
-        document.getElementById("subline").value ||= "Daily beauty support designed for visible confidence";
-        document.getElementById("offer").value ||= "Order now on WhatsApp";
+        document.getElementById("audience").value = "women skincare audience";
+        document.getElementById("headline").value = "Glow with confidence";
+        document.getElementById("subline").value = "Daily beauty support designed for visible confidence";
+        document.getElementById("offer").value = "Order now on WhatsApp";
       }
 
       if (brief.includes("jewellery") || brief.includes("jewelry") || brief.includes("bangles")) {
-        document.getElementById("brandName").value ||= "Your Jewellery Brand";
+        document.getElementById("brandName").value = "Your Jewellery Brand";
         document.getElementById("productName").value = "Festive Jewellery Collection";
         document.getElementById("videoType").value = "Festival Offer";
-        document.getElementById("audience").value ||= "women festive shoppers";
-        document.getElementById("headline").value ||= "Add sparkle to your festive look";
-        document.getElementById("subline").value ||= "Elegant styles for everyday and occasion wear";
-        document.getElementById("offer").value ||= "Shop now on WhatsApp";
+        document.getElementById("audience").value = "women festive shoppers";
+        document.getElementById("headline").value = "Add sparkle to your festive look";
+        document.getElementById("subline").value = "Elegant styles for everyday and occasion wear";
+        document.getElementById("offer").value = "Shop now on WhatsApp";
       }
 
       if (brief.includes("offer") || brief.includes("discount") || brief.includes("sale")) {
@@ -635,6 +654,63 @@ Scene 4: CTA with ${brand}`;
       buildHook();
       buildScenes();
       setStatus("Campaign auto-filled from your brief.");
+      fetchClips();
+    }
+
+    async function fetchClips() {
+      const query =
+        document.getElementById("productName").value ||
+        document.getElementById("smartBrief").value ||
+        "business";
+
+      setStatus("Fetching Pexels clips...");
+
+      try {
+        const response = await fetch(`/api/videos?q=${encodeURIComponent(query)}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Could not fetch clips");
+        }
+
+        renderClips(data.videos || []);
+        setStatus("Pexels clips loaded successfully.");
+      } catch (error) {
+        document.getElementById("clipsGrid").innerHTML =
+          `<div class="mini-box"><h3>Error</h3><div>${error.message}</div></div>`;
+        setStatus("Could not fetch Pexels clips.");
+      }
+    }
+
+    function pickPlayableFile(videoFiles) {
+      if (!videoFiles || !videoFiles.length) return null;
+      let chosen = videoFiles.find(file => file.quality === "sd");
+      if (!chosen) chosen = videoFiles[0];
+      return chosen ? chosen.link : null;
+    }
+
+    function renderClips(videos) {
+      const grid = document.getElementById("clipsGrid");
+
+      if (!videos.length) {
+        grid.innerHTML = `<div class="mini-box"><h3>No clips found</h3><div>Try a different brief or product name.</div></div>`;
+        return;
+      }
+
+      grid.innerHTML = videos.map(video => {
+        const file = pickPlayableFile(video.video_files);
+        return `
+          <div class="clip-card">
+            <video controls muted playsinline>
+              <source src="${file || ""}" type="video/mp4">
+            </video>
+            <div class="clip-meta">
+              <strong>Pexels ID:</strong> ${video.id}<br>
+              <strong>Duration:</strong> ${video.duration || 0} sec
+            </div>
+          </div>
+        `;
+      }).join("");
     }
 
     function clearAll() {
@@ -652,6 +728,7 @@ Scene 4: CTA with ${brand}`;
 Scene 2: Product / service
 Scene 3: Offer
 Scene 4: CTA`;
+      document.getElementById("clipsGrid").innerHTML = "";
       setStatus("Waiting for your idea...");
       updatePreview();
     }
@@ -689,15 +766,7 @@ Scene 4: CTA`;
       };
     }
 
-    [
-      "brandName",
-      "productName",
-      "videoType",
-      "audience",
-      "offer",
-      "headline",
-      "subline"
-    ].forEach(function(id) {
+    ["brandName","productName","videoType","audience","offer","headline","subline"].forEach(function(id) {
       document.addEventListener("input", function(e) {
         if (e.target && e.target.id === id) {
           updatePreview();
@@ -706,6 +775,7 @@ Scene 4: CTA`;
           buildScenes();
         }
       });
+
       document.addEventListener("change", function(e) {
         if (e.target && e.target.id === id) {
           updatePreview();
