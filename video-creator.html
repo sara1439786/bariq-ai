@@ -250,6 +250,7 @@ Message: ${offer}`;
         throw new Error("Backend request failed");
       }
       const data = await response.json();
+      renderVideos(data.videos || []);
       return data.videos || [];
     }
 
