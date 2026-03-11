@@ -378,15 +378,16 @@ Message: ${offer}`;
       setStatus("Waiting for input...", "Idle");
     }
   </script>
-  function renderVideos(videos){
+  <script>
+
+function renderVideos(videos){
 
 const container = document.getElementById("videoResults");
 container.innerHTML = "";
 
 videos.forEach(v => {
 
-const file = v.video_files.find(f => f.file_type === "video/mp4");
-
+const file = v.video_files[0];
 if(!file) return;
 
 const card = document.createElement("div");
@@ -403,5 +404,7 @@ container.appendChild(card);
 });
 
 }
+
+</script>
 </body>
 </html>
