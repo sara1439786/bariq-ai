@@ -5,6 +5,237 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bariq AI Video Studio</title>
   <style>
+    /* ===== MOBILE FIX START ===== */
+
+html, body {
+  overflow-x: hidden;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+.shell {
+  width: 100%;
+  max-width: 100%;
+}
+
+.top-grid,
+.phone-panel,
+.storyboard-grid,
+.mapping-grid,
+.footer-tools {
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .phone-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .storyboard-grid,
+  .mapping-grid,
+  .footer-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .phone-wrap {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 12px;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .hero-pill {
+    width: 100%;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .panel,
+  .mini-card,
+  .tool-card,
+  .export-card,
+  .mapping-card,
+  .scene-card {
+    border-radius: 18px;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full {
+    grid-column: auto;
+  }
+
+  .action-row {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+    padding: 14px 16px;
+  }
+
+  .chips {
+    gap: 8px;
+  }
+
+  .chip {
+    width: 100%;
+    text-align: center;
+  }
+
+  .phone {
+    width: 100%;
+    min-height: auto;
+    border-radius: 28px;
+    padding: 14px;
+    border-width: 6px;
+  }
+
+  .phone-top {
+    margin-bottom: 18px;
+  }
+
+  .scene-pill {
+    font-size: 11px;
+    padding: 7px 10px;
+  }
+
+  .logo-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    font-size: 10px;
+  }
+
+  .phone-copy {
+    padding: 6px 4px;
+  }
+
+  .phone-kicker {
+    font-size: 12px;
+    margin-bottom: 18px;
+  }
+
+  .phone-headline {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .phone-subline {
+    font-size: 13px;
+  }
+
+  .phone-image {
+    margin-top: 18px;
+    height: 180px;
+    border-radius: 16px;
+  }
+
+  .scene-card video,
+  .scene-card img {
+    height: 190px;
+  }
+
+  .scene-body {
+    padding: 14px;
+  }
+
+  .scene-title {
+    font-size: 18px;
+  }
+
+  .scene-actions {
+    flex-direction: column;
+  }
+
+  .tiny-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .stack {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .hero {
+    padding: 16px;
+  }
+
+  .hero h1 {
+    font-size: 22px;
+  }
+
+  .panel {
+    padding: 14px;
+  }
+
+  .phone {
+    padding: 12px;
+  }
+
+  .phone-headline {
+    font-size: 18px;
+  }
+
+  .phone-subline,
+  .status-line,
+  .mapping-card p,
+  .scene-meta,
+  .export-card p {
+    font-size: 13px;
+  }
+
+  .scene-card video,
+  .scene-card img {
+    height: 170px;
+  }
+
+  .preview-tools,
+  .stack {
+    gap: 10px;
+  }
+}
+
+/* ===== MOBILE FIX END ===== */
     * { box-sizing: border-box; font-family: Arial, sans-serif; }
 
     :root {
