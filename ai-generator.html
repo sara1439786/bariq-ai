@@ -1,1 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI Generator</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; }
 
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #fffaf3 0%, #faf7ff 45%, #f6f0ff 100%);
+      color: #2c235c;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: min(1280px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #eee2bf;
+    }
+
+    .nav-wrap {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-block;
+      white-space: nowrap;
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(90deg, #d8b05b, #5a3fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .top-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      font-weight: 700;
+      color: #45388c;
+    }
+
+    .top-links a {
+      padding: 10px 12px;
+      border-radius: 12px;
+    }
+
+    .top-links a:hover,
+    .top-links a.active {
+      background: #f4eeff;
+    }
+
+    .page {
+      padding: 24px 0 40px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.95));
+      border: 1px solid #ecdcb4;
+      border-radius: 30px;
+      padding: 22px;
+      box-shadow: 0 16px 40px rgba(75, 45, 120, 0.08);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 420px);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel, .preview-phone, .output-card, .footer-note {
+      background: rgba(255,255,255,0.94);
+      border: 1px solid #f0e6c9;
+      border-radius: 24px;
+      box-shadow: 0 10px 24px rgba(83, 57, 139, 0.05);
+      min-width: 0;
+    }
+
+    .panel {
+      padding: 22px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 800;
+      color: #4a3b92;
+      border: 1px solid #ece1bf;
+      background: #fff;
+      border-radius: 999px;
+      padding: 10px 16px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.02;
+      color: #312668;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      margin: 0 0 20px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #6c6483;
+      max-width: 760px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #433685;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid #e6ddc4;
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 14px;
+      font-size: 15px;
+      color: #2c235c;
+      outline: none;
+      font-family: Arial, sans-serif;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 18px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #d7b15e, #5a3fff);
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(90,63,255,0.2);
+    }
+
+    .btn-light {
+      background: #f4eeff;
+      color: #34296a;
+      border: 1px solid #e4d7ff;
+    }
+
+    .status-bar {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #fbf8ff;
+      border: 1px solid #ece2ff;
+      color: #4a3b92;
+      font-weight: 700;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #f6f1ff;
+      border: 1px solid #e7dcff;
+      color: #45388c;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .preview-phone {
+      padding: 18px;
+      background: linear-gradient(180deg, #5d43d8 0%, #2b1f64 100%);
+      border: 8px solid #1f1b2f;
+      min-height: 560px;
+      color: #fff;
+    }
+
+    .phone-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .pill {
+      background: #f8e9be;
+      color: #6c5104;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .logo-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .preview-kicker {
+      font-size: 14px;
+      color: #efe6b7;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .preview-headline {
+      font-size: 40px;
+      line-height: 1.05;
+      font-weight: 800;
+      color: #fff3c8;
+      text-align: center;
+      margin: 0 0 14px;
+    }
+
+    .preview-subline {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #f5e9b5;
+      text-align: center;
+      margin: 0 0 18px;
+    }
+
+    .preview-offer {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .outputs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .output-card {
+      padding: 18px;
+    }
+
+    .output-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .output-card h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #433685;
+    }
+
+    .copy-btn {
+      border: none;
+      background: #f4eeff;
+      color: #4a3b92;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .output-card div {
+      color: #6e6782;
+      line-height: 1.7;
+      font-size: 15px;
+      white-space: pre-wrap;
+    }
+
+    .footer-note {
+      margin-top: 22px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .footer-note strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+      color: #433685;
+    }
+
+    .footer-note span {
+      color: #6e6782;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .outputs-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .container { width: min(100% - 20px, 1280px); }
+      .nav-wrap { flex-direction: column; align-items: flex-start; padding: 12px 0; }
+      .hero { padding: 16px; border-radius: 22px; }
+      .panel { padding: 18px; }
+      .grid, .outputs-grid { grid-template-columns: 1fr; }
+      .button-row { flex-direction: column; }
+      .btn { width: 100%; }
+      .preview-phone { min-height: auto; padding: 16px; }
+      .preview-headline { font-size: 32px; }
+      .preview-subline { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">Bariq AI</a>
+      <div class="top-links">
+        <a href="index.html">Home</a>
+        <a href="campaign.html">Campaign</a>
+        <a href="video-creator.html">Video Creator</a>
+        <a href="ai-generator.html" class="active">AI Generator</a>
+        <a href="business-dashboard.html">Business</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="page">
+    <div class="container">
+      <div class="hero">
+        <div class="hero-grid">
+          <div class="panel">
+            <div class="eyebrow">AI Generator</div>
+            <h1>Generate ad content in one click.</h1>
+            <p class="subtitle">
+              Create hooks, captions, reel scripts, WhatsApp promos, Google ad copy, and carousel ideas from one simple prompt.
+            </p>
+
+            <div class="grid">
+              <div class="full">
+                <label>What do you want Bariq to create?</label>
+                <textarea id="prompt" placeholder="Example: Create an Instagram ad for laser hair removal clinic for women with 50% offer and WhatsApp booking"></textarea>
+              </div>
+
+              <div>
+                <label>Content Type</label>
+                <select id="contentType">
+                  <option>Instagram / Meta Ad</option>
+                  <option>Reel Script</option>
+                  <option>WhatsApp Promo</option>
+                  <option>Google Ad Copy</option>
+                  <option>Carousel Ideas</option>
+                  <option>Full Campaign Pack</option>
+                </select>
+              </div>
+
+              <div>
+                <label>Main Goal</label>
+                <select id="goal">
+                  <option>Lead Generation</option>
+                  <option>Bookings</option>
+                  <option>Sales</option>
+                  <option>Awareness</option>
+                </select>
+              </div>
+
+              <div>
+                <label>Brand Name</label>
+                <input id="brandName" placeholder="Your brand name" />
+              </div>
+
+              <div>
+                <label>Audience</label>
+                <input id="audience" placeholder="Women 25-45, students, music lovers" />
+              </div>
+            </div>
+
+            <div class="chips">
+              <button class="chip" onclick="usePrompt('Create an Instagram ad for laser hair removal clinic for women with 50% offer and WhatsApp booking')">Laser clinic ad</button>
+              <button class="chip" onclick="usePrompt('Create a reel script for glutathione tablets for women glow and confidence')">Glutathione reel</button>
+              <button class="chip" onclick="usePrompt('Create WhatsApp promo content for festive jewellery sale')">Jewellery WhatsApp promo</button>
+              <button class="chip" onclick="usePrompt('Create Google ad copy for bluetooth speaker for music lovers')">Bluetooth Google ad</button>
+            </div>
+
+            <div class="button-row">
+              <button class="btn btn-primary" onclick="generateContent()">Generate with AI</button>
+              <button class="btn btn-light" onclick="clearGenerator()">Clear</button>
+            </div>
+
+            <div class="status-bar" id="statusText">Waiting for your prompt...</div>
+          </div>
+
+          <div class="preview-phone">
+            <div class="phone-top">
+              <div class="pill" id="previewType">Instagram / Meta Ad</div>
+              <div class="logo-box">LOGO</div>
+            </div>
+
+            <div class="preview-kicker" id="previewBrand">Your Brand</div>
+            <div class="preview-headline" id="previewHeadline">Your generated headline will appear here</div>
+            <div class="preview-subline" id="previewSubline">Your supporting line will appear here</div>
+            <div class="preview-offer" id="previewOffer">Goal: Lead Generation</div>
+          </div>
+        </div>
+
+        <div class="outputs-grid">
+          <div class="output-card">
+            <div class="output-top">
+              <h3>Hook</h3>
+              <button class="copy-btn" onclick="copyText('hookBox')">Copy</button>
+            </div>
+            <div id="hookBox">Your hook will appear here.</div>
+          </div>
+
+          <div class="output-card">
+            <div class="output-top">
+              <h3>Caption</h3>
+              <button class="copy-btn" onclick="copyText('captionBox')">Copy</button>
+            </div>
+            <div id="captionBox">Your caption will appear here.</div>
+          </div>
+
+          <div class="output-card">
+            <div class="output-top">
+              <h3>Reel Script</h3>
+              <button class="copy-btn" onclick="copyText('scriptBox')">Copy</button>
+            </div>
+            <div id="scriptBox">Your reel script will appear here.</div>
+          </div>
+
+          <div class="output-card">
+            <div class="output-top">
+              <h3>WhatsApp Promo</h3>
+              <button class="copy-btn" onclick="copyText('whatsappBox')">Copy</button>
+            </div>
+            <div id="whatsappBox">Your WhatsApp promo will appear here.</div>
+          </div>
+
+          <div class="output-card">
+            <div class="output-top">
+              <h3>Google Ad Copy</h3>
+              <button class="copy-btn" onclick="copyText('googleBox')">Copy</button>
+            </div>
+            <div id="googleBox">Your Google ad copy will appear here.</div>
+          </div>
+
+          <div class="output-card">
+            <div class="output-top">
+              <h3>Carousel Ideas</h3>
+              <button class="copy-btn" onclick="copyText('carouselBox')">Copy</button>
+            </div>
+            <div id="carouselBox">Your carousel ideas will appear here.</div>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          <strong>Bariq AI Content Engine</strong>
+          <span>One prompt can now create multiple marketing assets so businesses don’t need to think from zero every time.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function setStatus(text) {
+      document.getElementById("statusText").textContent = text;
+    }
+
+    function usePrompt(text) {
+      document.getElementById("prompt").value = text;
+      generateContent();
+    }
+
+    function detectBrand(prompt) {
+      if (document.getElementById("brandName").value.trim()) {
+        return document.getElementById("brandName").value.trim();
+      }
+      if (prompt.includes("clinic")) return "Your Clinic";
+      if (prompt.includes("salon")) return "Your Salon";
+      if (prompt.includes("bluetooth")) return "Your Electronics Brand";
+      if (prompt.includes("glutathione")) return "Your Beauty Brand";
+      if (prompt.includes("jewellery") || prompt.includes("jewelry")) return "Your Jewellery Brand";
+      return "Your Brand";
+    }
+
+    function detectAudience(prompt) {
+      if (document.getElementById("audience").value.trim()) {
+        return document.getElementById("audience").value.trim();
+      }
+      if (prompt.includes("women")) return "women audience";
+      if (prompt.includes("men")) return "men audience";
+      if (prompt.includes("students")) return "students";
+      if (prompt.includes("music")) return "music lovers";
+      return "your ideal audience";
+    }
+
+    function detectProduct(prompt) {
+      if (prompt.includes("laser")) return "laser hair removal";
+      if (prompt.includes("glutathione")) return "glutathione tablets";
+      if (prompt.includes("bluetooth speaker")) return "Bluetooth Speaker";
+      if (prompt.includes("bluetooth")) return "Bluetooth Speaker";
+      if (prompt.includes("jewellery") || prompt.includes("jewelry")) return "festive jewellery collection";
+      if (prompt.includes("salon")) return "premium salon services";
+      if (prompt.includes("clinic")) return "clinic services";
+      return "your offer";
+    }
+
+    function detectHeadline(product, prompt) {
+      if (prompt.includes("laser")) return "Say goodbye to unwanted hair with confidence";
+      if (prompt.includes("glutathione")) return "Glow with confidence every day";
+      if (prompt.includes("bluetooth")) return "Turn up your sound with Bluetooth Speaker";
+      if (prompt.includes("jewellery") || prompt.includes("jewelry")) return "Celebrate with sparkle and style";
+      if (prompt.includes("salon")) return "Your next salon result starts here";
+      if (prompt.includes("clinic")) return "Start your transformation with expert care";
+      return "Your next campaign can convert better";
+    }
+
+    function detectSubline(product, prompt) {
+      if (prompt.includes("laser")) return "Advanced care, smoother skin, and direct booking in one campaign";
+      if (prompt.includes("glutathione")) return "Daily support for beauty, glow, and visible confidence";
+      if (prompt.includes("bluetooth")) return "Powerful sound and smart style built for everyday use";
+      if (prompt.includes("jewellery") || prompt.includes("jewelry")) return "Elegant festive styles your audience will love";
+      if (prompt.includes("salon")) return "Premium beauty services with strong visual appeal and easy booking";
+      if (prompt.includes("clinic")) return "Premium care designed for trust, urgency, and action";
+      return "Premium short-form marketing copy generated for your business";
+    }
+
+    function updatePreview(headline, subline, brand) {
+      document.getElementById("previewType").textContent =
+        document.getElementById("contentType").value || "Instagram / Meta Ad";
+
+      document.getElementById("previewBrand").textContent = brand || "Your Brand";
+      document.getElementById("previewHeadline").textContent = headline || "Your generated headline will appear here";
+      document.getElementById("previewSubline").textContent = subline || "Your supporting line will appear here";
+      document.getElementById("previewOffer").textContent =
+        "Goal: " + (document.getElementById("goal").value || "Lead Generation");
+    }
+
+    function generateContent() {
+      const prompt = document.getElementById("prompt").value.toLowerCase().trim();
+
+      if (!prompt) {
+        setStatus("Please enter a prompt first.");
+        return;
+      }
+
+      const brand = detectBrand(prompt);
+      const audience = detectAudience(prompt);
+      const product = detectProduct(prompt);
+      const headline = detectHeadline(product, prompt);
+      const subline = detectSubline(product, prompt);
+      const goal = document.getElementById("goal").value;
+      const contentType = document.getElementById("contentType").value;
+
+      document.getElementById("brandName").value = brand;
+      document.getElementById("audience").value = audience;
+
+      document.getElementById("hookBox").textContent =
+        `Stop scrolling — ${product} is made for ${audience}.`;
+
+      document.getElementById("captionBox").textContent =
+        `${headline}. ${brand} brings ${product} for ${audience}. ${subline}. Perfect for ${goal.toLowerCase()}. DM now to get started.`;
+
+      document.getElementById("scriptBox").textContent =
+`Scene 1: Problem / attention hook
+Scene 2: Show ${product}
+Scene 3: Highlight key benefit
+Scene 4: Add offer or urgency
+Scene 5: CTA for ${goal}`;
+
+      document.getElementById("whatsappBox").textContent =
+        `${headline}\n${subline}\n${brand} is now offering ${product} for ${audience}.\nMessage us now to know more.`;
+
+      document.getElementById("googleBox").textContent =
+`Headline 1: ${headline}
+Headline 2: ${brand} for ${audience}
+Headline 3: ${goal} Starts Here
+Description: ${subline}. Contact ${brand} today.`;
+
+      document.getElementById("carouselBox").textContent =
+`Slide 1: Big problem / hook
+Slide 2: Introduce ${product}
+Slide 3: Show benefit for ${audience}
+Slide 4: Add social proof / trust
+Slide 5: CTA for ${goal}`;
+
+      updatePreview(headline, subline, brand);
+      setStatus(`Content generated successfully for ${contentType}.`);
+    }
+
+    function clearGenerator() {
+      document.getElementById("prompt").value = "";
+      document.getElementById("contentType").value = "Instagram / Meta Ad";
+      document.getElementById("goal").value = "Lead Generation";
+      document.getElementById("brandName").value = "";
+      document.getElementById("audience").value = "";
+
+      document.getElementById("hookBox").textContent = "Your hook will appear here.";
+      document.getElementById("captionBox").textContent = "Your caption will appear here.";
+      document.getElementById("scriptBox").textContent = "Your reel script will appear here.";
+      document.getElementById("whatsappBox").textContent = "Your WhatsApp promo will appear here.";
+      document.getElementById("googleBox").textContent = "Your Google ad copy will appear here.";
+      document.getElementById("carouselBox").textContent = "Your carousel ideas will appear here.";
+
+      updatePreview("", "", "");
+      setStatus("Waiting for your prompt...");
+    }
+
+    function copyText(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text);
+      setStatus("Copied to clipboard.");
+    }
+
+    updatePreview("", "", "");
+  </script>
+</body>
+</html>
