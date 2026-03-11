@@ -88,7 +88,7 @@
     }
     .video-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 14px;
     }
     .tile {
@@ -99,7 +99,7 @@
     }
     .tile video {
       width: 100%;
-      height: 220px;
+      height: 260px;
       object-fit: cover;
       display: block;
       background: #000;
@@ -118,7 +118,7 @@
       line-height: 1.6;
     }
     @media (max-width: 900px) {
-      .grid, .form-grid, .video-grid {
+      .grid, .form-grid {
         grid-template-columns: 1fr;
       }
     }
