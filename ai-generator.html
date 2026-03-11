@@ -1,43 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bariq AI Generator</title>
-</head>
-
-<body style="font-family:Arial;padding:40px">
-
-<h1>Bariq AI Generator</h1>
-
-<textarea id="prompt" style="width:400px;height:120px" placeholder="Type your marketing prompt"></textarea>
-
-<br><br>
-
-<button onclick="generate()">Generate</button>
-
-<h3>Hook</h3>
-<div id="hook"></div>
-
-<h3>Caption</h3>
-<div id="caption"></div>
-
-<script>
-
-function generate(){
-
-const prompt = document.getElementById("prompt").value
-
-document.getElementById("hook").innerText =
-"Stop scrolling — this offer is made for you."
-
-document.getElementById("caption").innerText =
-prompt + " — DM now to know more."
-
-}
-
-</script>
-
-</body>
-</html>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bariq AI Generator</title>
@@ -240,24 +203,6 @@ prompt + " — DM now to know more."
       border: 1px solid #ece2ff;
       color: #4a3b92;
       font-weight: 700;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .chip {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #f6f1ff;
-      border: 1px solid #e7dcff;
-      color: #45388c;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
     }
 
     .preview-phone {
@@ -473,13 +418,6 @@ prompt + " — DM now to know more."
               </div>
             </div>
 
-            <div class="chips">
-              <button class="chip" onclick="usePrompt('Create an Instagram ad for laser hair removal clinic for women with 50% offer and WhatsApp booking')">Laser clinic ad</button>
-              <button class="chip" onclick="usePrompt('Create a reel script for glutathione tablets for women glow and confidence')">Glutathione reel</button>
-              <button class="chip" onclick="usePrompt('Create WhatsApp promo content for festive jewellery sale')">Jewellery WhatsApp promo</button>
-              <button class="chip" onclick="usePrompt('Create Google ad copy for bluetooth speaker for music lovers')">Bluetooth Google ad</button>
-            </div>
-
             <div class="button-row">
               <button class="btn btn-primary" onclick="generateContent()">Generate with AI</button>
               <button class="btn btn-light" onclick="clearGenerator()">Clear</button>
@@ -564,126 +502,58 @@ prompt + " — DM now to know more."
       document.getElementById("statusText").textContent = text;
     }
 
-    function usePrompt(text) {
-      document.getElementById("prompt").value = text;
-      generateContent();
-    }
-
-    function detectBrand(prompt) {
-      if (document.getElementById("brandName").value.trim()) {
-        return document.getElementById("brandName").value.trim();
-      }
-      if (prompt.includes("clinic")) return "Your Clinic";
-      if (prompt.includes("salon")) return "Your Salon";
-      if (prompt.includes("bluetooth")) return "Your Electronics Brand";
-      if (prompt.includes("glutathione")) return "Your Beauty Brand";
-      if (prompt.includes("jewellery") || prompt.includes("jewelry")) return "Your Jewellery Brand";
-      return "Your Brand";
-    }
-
-    function detectAudience(prompt) {
-      if (document.getElementById("audience").value.trim()) {
-        return document.getElementById("audience").value.trim();
-      }
-      if (prompt.includes("women")) return "women audience";
-      if (prompt.includes("men")) return "men audience";
-      if (prompt.includes("students")) return "students";
-      if (prompt.includes("music")) return "music lovers";
-      return "your ideal audience";
-    }
-
-    function detectProduct(prompt) {
-      if (prompt.includes("laser")) return "laser hair removal";
-      if (prompt.includes("glutathione")) return "glutathione tablets";
-      if (prompt.includes("bluetooth speaker")) return "Bluetooth Speaker";
-      if (prompt.includes("bluetooth")) return "Bluetooth Speaker";
-      if (prompt.includes("jewellery") || prompt.includes("jewelry")) return "festive jewellery collection";
-      if (prompt.includes("salon")) return "premium salon services";
-      if (prompt.includes("clinic")) return "clinic services";
-      return "your offer";
-    }
-
-    function detectHeadline(product, prompt) {
-      if (prompt.includes("laser")) return "Say goodbye to unwanted hair with confidence";
-      if (prompt.includes("glutathione")) return "Glow with confidence every day";
-      if (prompt.includes("bluetooth")) return "Turn up your sound with Bluetooth Speaker";
-      if (prompt.includes("jewellery") || prompt.includes("jewelry")) return "Celebrate with sparkle and style";
-      if (prompt.includes("salon")) return "Your next salon result starts here";
-      if (prompt.includes("clinic")) return "Start your transformation with expert care";
-      return "Your next campaign can convert better";
-    }
-
-    function detectSubline(product, prompt) {
-      if (prompt.includes("laser")) return "Advanced care, smoother skin, and direct booking in one campaign";
-      if (prompt.includes("glutathione")) return "Daily support for beauty, glow, and visible confidence";
-      if (prompt.includes("bluetooth")) return "Powerful sound and smart style built for everyday use";
-      if (prompt.includes("jewellery") || prompt.includes("jewelry")) return "Elegant festive styles your audience will love";
-      if (prompt.includes("salon")) return "Premium beauty services with strong visual appeal and easy booking";
-      if (prompt.includes("clinic")) return "Premium care designed for trust, urgency, and action";
-      return "Premium short-form marketing copy generated for your business";
-    }
-
-    function updatePreview(headline, subline, brand) {
-      document.getElementById("previewType").textContent =
-        document.getElementById("contentType").value || "Instagram / Meta Ad";
-
-      document.getElementById("previewBrand").textContent = brand || "Your Brand";
-      document.getElementById("previewHeadline").textContent = headline || "Your generated headline will appear here";
-      document.getElementById("previewSubline").textContent = subline || "Your supporting line will appear here";
-      document.getElementById("previewOffer").textContent =
-        "Goal: " + (document.getElementById("goal").value || "Lead Generation");
-    }
-
-    function generateContent() {
-      const prompt = document.getElementById("prompt").value.toLowerCase().trim();
+    async function generateContent() {
+      const prompt = document.getElementById("prompt").value.trim();
+      const contentType = document.getElementById("contentType").value;
+      const goal = document.getElementById("goal").value;
+      const brandName = document.getElementById("brandName").value.trim();
+      const audience = document.getElementById("audience").value.trim();
 
       if (!prompt) {
         setStatus("Please enter a prompt first.");
         return;
       }
 
-      const brand = detectBrand(prompt);
-      const audience = detectAudience(prompt);
-      const product = detectProduct(prompt);
-      const headline = detectHeadline(product, prompt);
-      const subline = detectSubline(product, prompt);
-      const goal = document.getElementById("goal").value;
-      const contentType = document.getElementById("contentType").value;
+      setStatus("Generating with AI...");
 
-      document.getElementById("brandName").value = brand;
-      document.getElementById("audience").value = audience;
+      try {
+        const response = await fetch("/api/ai-generator", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            prompt,
+            contentType,
+            goal,
+            brandName,
+            audience
+          })
+        });
 
-      document.getElementById("hookBox").textContent =
-        `Stop scrolling — ${product} is made for ${audience}.`;
+        const data = await response.json();
 
-      document.getElementById("captionBox").textContent =
-        `${headline}. ${brand} brings ${product} for ${audience}. ${subline}. Perfect for ${goal.toLowerCase()}. DM now to get started.`;
+        if (!response.ok) {
+          throw new Error(data.error || "AI generation failed");
+        }
 
-      document.getElementById("scriptBox").textContent =
-`Scene 1: Problem / attention hook
-Scene 2: Show ${product}
-Scene 3: Highlight key benefit
-Scene 4: Add offer or urgency
-Scene 5: CTA for ${goal}`;
+        document.getElementById("hookBox").textContent = data.hook || "";
+        document.getElementById("captionBox").textContent = data.caption || "";
+        document.getElementById("scriptBox").textContent = data.reelScript || "";
+        document.getElementById("whatsappBox").textContent = data.whatsAppPromo || "";
+        document.getElementById("googleBox").textContent = data.googleAdCopy || "";
+        document.getElementById("carouselBox").textContent = data.carouselIdeas || "";
 
-      document.getElementById("whatsappBox").textContent =
-        `${headline}\n${subline}\n${brand} is now offering ${product} for ${audience}.\nMessage us now to know more.`;
+        document.getElementById("previewType").textContent = contentType;
+        document.getElementById("previewBrand").textContent = brandName || "Your Brand";
+        document.getElementById("previewHeadline").textContent = data.headline || "Generated headline";
+        document.getElementById("previewSubline").textContent = data.subline || "Generated supporting line";
+        document.getElementById("previewOffer").textContent = "Goal: " + goal;
 
-      document.getElementById("googleBox").textContent =
-`Headline 1: ${headline}
-Headline 2: ${brand} for ${audience}
-Headline 3: ${goal} Starts Here
-Description: ${subline}. Contact ${brand} today.`;
-
-      document.getElementById("carouselBox").textContent =
-`Slide 1: Big problem / hook
-Slide 2: Introduce ${product}
-Slide 3: Show benefit for ${audience}
-Slide 4: Add social proof / trust
-Slide 5: CTA for ${goal}`;
-
-      updatePreview(headline, subline, brand);
-      setStatus(`Content generated successfully for ${contentType}.`);
+        setStatus("AI content generated successfully.");
+      } catch (error) {
+        setStatus("Error: " + error.message);
+      }
     }
 
     function clearGenerator() {
@@ -700,7 +570,12 @@ Slide 5: CTA for ${goal}`;
       document.getElementById("googleBox").textContent = "Your Google ad copy will appear here.";
       document.getElementById("carouselBox").textContent = "Your carousel ideas will appear here.";
 
-      updatePreview("", "", "");
+      document.getElementById("previewType").textContent = "Instagram / Meta Ad";
+      document.getElementById("previewBrand").textContent = "Your Brand";
+      document.getElementById("previewHeadline").textContent = "Your generated headline will appear here";
+      document.getElementById("previewSubline").textContent = "Your supporting line will appear here";
+      document.getElementById("previewOffer").textContent = "Goal: Lead Generation";
+
       setStatus("Waiting for your prompt...");
     }
 
@@ -709,8 +584,6 @@ Slide 5: CTA for ${goal}`;
       navigator.clipboard.writeText(text);
       setStatus("Copied to clipboard.");
     }
-
-    updatePreview("", "", "");
   </script>
 </body>
 </html>
