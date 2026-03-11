@@ -6,201 +6,700 @@
   <title>Bariq AI Video Creator</title>
   <style>
     * { box-sizing: border-box; font-family: Arial, sans-serif; }
+
+    :root {
+      --bg: #f7f4ff;
+      --card: rgba(255,255,255,0.95);
+      --border: #eadfb7;
+      --purple: #5a3fff;
+      --purple-dark: #31206f;
+      --gold: #d7b25a;
+      --gold-soft: #f6e7bc;
+      --text: #231942;
+      --muted: #6f6885;
+      --shadow: 0 18px 50px rgba(66, 36, 102, 0.10);
+    }
+
     body {
       margin: 0;
-      background: linear-gradient(135deg, #faf7ff 0%, #fff9ef 50%, #f8f2ff 100%);
-      color: #241f31;
+      background:
+        radial-gradient(circle at top left, rgba(122,94,255,0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(215,178,90,0.14), transparent 22%),
+        linear-gradient(135deg, #faf8ff 0%, #fffaf0 45%, #f8f5ff 100%);
+      color: var(--text);
       padding: 24px;
     }
-    .wrap {
-      max-width: 1100px;
+
+    .shell {
+      max-width: 1420px;
       margin: 0 auto;
     }
-    .box {
-      background: #fff;
-      border: 1px solid #f1df9f;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 12px 30px rgba(78, 38, 112, 0.08);
-      margin-bottom: 20px;
-    }
-    h1, h2, h3 {
-      margin-top: 0;
-      color: #5f2396;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,240,0.95));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 24px 28px;
+      margin-bottom: 22px;
     }
-    .form-grid {
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      color: var(--purple-dark);
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .hero-pill {
+      white-space: nowrap;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--purple), #8767ff);
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 12px 24px rgba(90,63,255,0.18);
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .panel h2, .panel h3 {
+      margin: 0 0 14px;
+      color: var(--purple-dark);
+    }
+
+    .input-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
     }
-    .full { grid-column: 1 / -1; }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
     label {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      font-size: 13px;
       font-weight: 700;
-      font-size: 14px;
+      color: #433464;
     }
-    input, select {
+
+    input, select, textarea {
       width: 100%;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid #ddd;
+      border: 1px solid #e5dbf7;
+      background: #fff;
+      border-radius: 16px;
+      padding: 13px 14px;
       font-size: 14px;
+      color: var(--text);
+      outline: none;
+      transition: 0.2s ease;
     }
-    .actions {
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #a88fff;
+      box-shadow: 0 0 0 4px rgba(122, 94, 255, 0.10);
+    }
+
+    textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    .action-row {
       display: flex;
       gap: 12px;
       margin-top: 16px;
       flex-wrap: wrap;
     }
-    button {
-      padding: 12px 20px;
+
+    .btn {
       border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: bold;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
-    .primary {
-      background: linear-gradient(135deg, #5f2396 0%, #8a3ffc 60%, #d4af37 130%);
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple), #d89b72 140%);
       color: white;
+      box-shadow: 0 14px 24px rgba(90,63,255,0.18);
     }
-    .light {
-      background: #f6eeff;
-      color: #5f2396;
-      border: 1px solid #e7d7ff;
+
+    .btn-secondary {
+      background: #f4eeff;
+      color: var(--purple-dark);
+      border: 1px solid #e3d8ff;
     }
+
+    .stack {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .mini-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(250,246,255,0.96));
+      border: 1px solid #eee1bf;
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .status-line {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
     .badge {
       display: inline-block;
       margin-top: 10px;
-      padding: 8px 12px;
+      padding: 8px 14px;
       border-radius: 999px;
-      background: #fff4d2;
-      border: 1px solid #efd889;
-      color: #8b6500;
-      font-weight: 700;
-      font-size: 13px;
+      background: var(--gold-soft);
+      color: #8a6509;
+      border: 1px solid #edd28d;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
     }
-    .video-grid {
+
+    .phone-panel {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
+      grid-template-columns: 360px 1fr;
+      gap: 24px;
+      align-items: start;
     }
-    .tile {
-      border: 1px solid #f1df9f;
-      border-radius: 16px;
+
+    .phone-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone {
+      width: 320px;
+      min-height: 620px;
+      border-radius: 38px;
+      padding: 18px;
+      background: linear-gradient(180deg, #4e36c9 0%, #261b5f 85%);
+      border: 8px solid #1f1b2f;
+      box-shadow:
+        0 20px 60px rgba(36, 25, 66, 0.22),
+        inset 0 1px 0 rgba(255,255,255,0.18);
+      position: relative;
       overflow: hidden;
-      background: #fff;
     }
-    .tile video {
+
+    .phone::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.14), transparent 42%);
+      pointer-events: none;
+    }
+
+    .phone-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 26px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .scene-pill {
+      background: var(--gold-soft);
+      color: #6c5104;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .logo-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.16);
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      overflow: hidden;
+    }
+
+    .logo-box img {
       width: 100%;
-      height: 260px;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .phone-copy {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      padding: 10px 8px;
+    }
+
+    .phone-kicker {
+      font-size: 14px;
+      opacity: 0.95;
+      margin-bottom: 30px;
+    }
+
+    .phone-headline {
+      font-size: 24px;
+      line-height: 1.15;
+      font-weight: 800;
+      margin-bottom: 18px;
+      color: #fff2c2;
+    }
+
+    .phone-subline {
+      font-size: 15px;
+      color: #f8e9b4;
+      opacity: 0.96;
+    }
+
+    .phone-image {
+      margin: 28px auto 0;
+      width: 100%;
+      height: 210px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.10);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .phone-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .preview-tools {
+      display: grid;
+      gap: 16px;
+    }
+
+    .tool-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(249,245,255,0.96));
+      border: 1px solid #ecdfbb;
+      border-radius: 22px;
+      padding: 18px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .chip {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: #f4eeda;
+      color: #715304;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .storyboard-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .scene-card {
+      background: rgba(255,255,255,0.96);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .scene-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 50px rgba(58, 42, 96, 0.12);
+    }
+
+    .scene-card video,
+    .scene-card img {
+      width: 100%;
+      height: 220px;
       object-fit: cover;
       display: block;
-      background: #000;
+      background: #111;
     }
-    .tile-body {
-      padding: 12px;
+
+    .scene-body {
+      padding: 16px;
     }
-    .muted {
-      color: #6b6179;
-      font-size: 14px;
+
+    .scene-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--purple-dark);
+      margin-bottom: 6px;
+    }
+
+    .scene-meta {
+      color: var(--muted);
+      font-size: 13px;
       line-height: 1.6;
+      margin-bottom: 10px;
     }
-    pre {
-      white-space: pre-wrap;
+
+    .scene-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tiny-btn {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tiny-primary {
+      background: #efe9ff;
+      color: var(--purple-dark);
+    }
+
+    .tiny-gold {
+      background: #faedc4;
+      color: #78570b;
+    }
+
+    .mapping-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .mapping-card {
+      background: white;
+      border: 1px solid #eadfb7;
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 10px 25px rgba(64, 42, 108, 0.06);
+    }
+
+    .mapping-card h4 {
+      margin: 0 0 8px;
+      color: var(--purple-dark);
+      font-size: 18px;
+    }
+
+    .mapping-card p {
       margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .footer-tools {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .export-card {
+      background: linear-gradient(135deg, #fff, #fcf7ea);
+      border: 1px solid #eadfb7;
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .export-card h3 {
+      margin: 0 0 8px;
+    }
+
+    .export-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
       line-height: 1.6;
     }
-    @media (max-width: 900px) {
-      .grid, .form-grid {
+
+    @media (max-width: 1200px) {
+      .top-grid,
+      .phone-panel,
+      .storyboard-grid,
+      .mapping-grid,
+      .footer-tools {
         grid-template-columns: 1fr;
       }
+
+      .phone-wrap {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 14px; }
+      .hero { padding: 20px; }
+      .hero h1 { font-size: 28px; }
+      .phone { width: 100%; min-height: 560px; }
+      .input-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="box">
-      <h1>Bariq AI Video Creator</h1>
-      <p class="muted">Clean working version with backend-powered real video fetching.</p>
+  <div class="shell">
+    <div class="hero">
+      <div>
+        <h1>Bariq AI Video Studio</h1>
+        <p>Generate premium short-form ad videos with AI scene planning, clip sourcing, storyboard flow, and export-ready direction.</p>
+      </div>
+      <div class="hero-pill">AI Reel Builder</div>
     </div>
 
-    <div class="grid">
-      <div>
-        <div class="box">
-          <h2>Video Input</h2>
+    <div class="top-grid">
+      <div class="panel">
+        <h2>Campaign Input</h2>
 
-          <div class="form-grid">
-            <div>
-              <label for="brandName">Brand Name</label>
-              <input id="brandName" type="text" placeholder="Example: Bariq AI" />
-            </div>
-
-            <div>
-              <label for="productName">Product / Service</label>
-              <input id="productName" type="text" placeholder="Example: coffee" />
-            </div>
-
-            <div>
-              <label for="videoType">Video Type</label>
-              <select id="videoType">
-                <option value="Instagram Reel">Instagram Reel</option>
-                <option value="Product Promo">Product Promo</option>
-                <option value="Offer Ad">Offer Ad</option>
-                <option value="Founder Intro">Founder Intro</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="audience">Audience</label>
-              <input id="audience" type="text" placeholder="Example: coffee lovers" />
-            </div>
-
-            <div class="full">
-              <label for="offer">Offer / Message</label>
-              <input id="offer" type="text" placeholder="Example: Premium coffee moments" />
-            </div>
+        <div class="input-grid">
+          <div>
+            <label for="brandName">Brand Name</label>
+            <input id="brandName" type="text" placeholder="Example: Sipnfit" />
           </div>
 
-          <div class="actions">
-            <button class="primary" type="button" onclick="generateVideo()">Generate Real Video</button>
-            <button class="light" type="button" onclick="clearAll()">Clear</button>
+          <div>
+            <label for="productName">Product / Service</label>
+            <input id="productName" type="text" placeholder="Example: Effervescent Tablets" />
+          </div>
+
+          <div>
+            <label for="videoType">Video Type</label>
+            <select id="videoType">
+              <option value="Instagram Reel">Instagram Reel</option>
+              <option value="Product Promo">Product Promo</option>
+              <option value="Offer Ad">Offer Ad</option>
+              <option value="Founder Intro">Founder Intro</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="audience">Audience</label>
+            <input id="audience" type="text" placeholder="Example: women wellness buyers" />
+          </div>
+
+          <div class="full">
+            <label for="offer">Offer / Key Message</label>
+            <input id="offer" type="text" placeholder="Example: Order Now on WhatsApp" />
+          </div>
+
+          <div class="full">
+            <label for="headline">Headline Overlay</label>
+            <input id="headline" type="text" placeholder="Example: Your daily wellness just got easier" />
+          </div>
+
+          <div>
+            <label for="subline">Subline</label>
+            <input id="subline" type="text" placeholder="Example: Premium short-form ad layout" />
+          </div>
+
+          <div>
+            <label for="format">Format Direction</label>
+            <select id="format">
+              <option value="9:16 Reel">9:16 Reel</option>
+              <option value="1:1 Feed">1:1 Feed</option>
+              <option value="16:9 Wide">16:9 Wide</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="musicMood">Music Direction</label>
+            <select id="musicMood">
+              <option value="Luxury Ambient">Luxury Ambient</option>
+              <option value="Premium Pace">Premium Pace</option>
+              <option value="Soft Rise">Soft Rise</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="sceneDuration">Primary Scene Duration</label>
+            <select id="sceneDuration">
+              <option value="15 sec">15 sec</option>
+              <option value="30 sec">30 sec</option>
+              <option value="45 sec">45 sec</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="logoUpload">Upload Logo</label>
+            <input id="logoUpload" type="file" accept="image/*" />
+          </div>
+
+          <div>
+            <label for="productUpload">Upload Product Image</label>
+            <input id="productUpload" type="file" accept="image/*" />
           </div>
         </div>
 
-        <div class="box">
-          <h3>Status</h3>
-          <div id="statusText" class="muted">Waiting for input...</div>
-          <div id="statusBadge" class="badge">Idle</div>
+        <div class="action-row">
+          <button class="btn btn-primary" onclick="generateVideo()">Generate Video Blueprint</button>
+          <button class="btn btn-secondary" onclick="updatePreviewOnly()">Update Preview</button>
+          <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
         </div>
 
-        <div class="box">
-          <h3>AI Blueprint</h3>
-          <pre id="blueprintText">Your blueprint will appear here.</pre>
+        <div class="stack">
+          <div class="mini-card">
+            <h3>Status</h3>
+            <div id="statusText" class="status-line">Waiting for input...</div>
+            <div id="statusBadge" class="badge">Idle</div>
+          </div>
+
+          <div class="mini-card">
+            <h3>Generated Output</h3>
+            <pre id="blueprintText">Your video blueprint will appear here.</pre>
+          </div>
         </div>
       </div>
 
-      <div>
-        <div class="box">
-          <h2>Fetched Clips</h2>
-          <div id="videoResults" class="video-grid"></div>
-        </div>
+      <div class="panel">
+        <div class="phone-panel">
+          <div class="phone-wrap">
+            <div class="phone" id="phonePreview">
+              <div class="phone-top">
+                <div class="scene-pill" id="previewSceneTag">15 sec • Bold Promo • 9:16</div>
+                <div class="logo-box" id="logoPreviewBox">LOGO</div>
+              </div>
 
-        <div class="box">
-          <h3>Scene Mapping</h3>
-          <div id="sceneMapping" class="muted">Scene mapping will appear here.</div>
+              <div class="phone-copy">
+                <div class="phone-kicker" id="previewKicker">Instagram Reel for your next campaign</div>
+                <div class="phone-headline" id="previewHeadline">Your headline will appear here</div>
+                <div class="phone-subline" id="previewSubline">Premium gold-purple short video layout</div>
+
+                <div class="phone-image" id="productPreviewBox"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview-tools">
+            <div class="tool-card">
+              <h3>Brand Asset Status</h3>
+              <div class="status-line">Uploaded assets and brand colors will be reflected directly in the preview.</div>
+              <div class="chips">
+                <div class="chip" id="logoStatusChip">Logo: Not uploaded</div>
+                <div class="chip" id="productStatusChip">Product: Not uploaded</div>
+                <div class="chip">Colors: Default theme</div>
+              </div>
+            </div>
+
+            <div class="tool-card">
+              <h3>Format Direction</h3>
+              <div class="status-line" id="formatDirectionText">9:16 selected for Reels, Shorts, Stories, and vertical ad creatives.</div>
+            </div>
+
+            <div class="tool-card">
+              <h3>Music Direction</h3>
+              <div class="status-line" id="musicDirectionText">Luxury Ambient selected for premium, smooth, elegant short-form videos.</div>
+              <div class="chips">
+                <div class="chip">Luxury Ambient</div>
+                <div class="chip">Premium Pace</div>
+                <div class="chip">Soft Rise</div>
+              </div>
+            </div>
+
+            <div class="tool-card">
+              <h3>Scene Frame Sequence</h3>
+              <div class="status-line">
+                <strong>Scene 1:</strong> Hook<br>
+                <strong>Scene 2:</strong> Product Focus<br>
+                <strong>Scene 3:</strong> Offer / Value<br>
+                <strong>Scene 4:</strong> CTA
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <div class="storyboard-grid" id="videoResults">
+      <div class="scene-card">
+        <div class="scene-body">
+          <div class="scene-title">No clips yet</div>
+          <div class="scene-meta">Generate a video blueprint to fetch real clips and create your storyboard.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mapping-grid" id="sceneMapping">
+      <div class="mapping-card">
+        <h4>Scene Mapping</h4>
+        <p>Scene mapping will appear here after you generate the video.</p>
+      </div>
+    </div>
+
+    <div class="footer-tools">
+      <div class="export-card">
+        <h3>AI Caption Overlay</h3>
+        <p id="captionOverlayText">Auto-generated captions will appear here for your scenes.</p>
+        <button class="btn btn-secondary" onclick="generateCaptions()">Generate Ad Captions</button>
+      </div>
+
+      <div class="export-card">
+        <h3>Export Direction</h3>
+        <p>Prepare this storyboard for reels, paid ads, product promos, and premium vertical campaigns.</p>
+        <button class="btn btn-secondary">Generate Final Ad Video</button>
+      </div>
+
+      <div class="export-card">
+        <h3>Download Ready Flow</h3>
+        <p>Next phase will add clip stitching, transitions, captions, music, and final MP4 download.</p>
+        <button class="btn btn-primary">Export Video</button>
       </div>
     </div>
   </div>
 
   <script>
+    let logoDataUrl = "";
+    let productDataUrl = "";
+
     function setStatus(text, badge) {
       document.getElementById("statusText").textContent = text;
       document.getElementById("statusBadge").textContent = badge;
@@ -245,19 +744,25 @@
       const brandName = document.getElementById("brandName").value || "Your Brand";
       const productName = document.getElementById("productName").value || "Your Product";
       const audience = document.getElementById("audience").value || "your audience";
-      const offer = document.getElementById("offer").value || "Special message";
+      const offer = document.getElementById("offer").value || "Your offer";
+      const format = document.getElementById("format").value;
+      const musicMood = document.getElementById("musicMood").value;
+      const duration = document.getElementById("sceneDuration").value;
 
       const text =
 `Brand: ${brandName}
 Product: ${productName}
 Audience: ${audience}
+Format: ${format}
+Music: ${musicMood}
+Duration: ${duration}
 
 Scene 1: Hook visual
-Scene 2: Product focus
-Scene 3: Offer/value
+Scene 2: Product benefit
+Scene 3: Offer / value
 Scene 4: CTA
 
-Message: ${offer}`;
+Offer: ${offer}`;
 
       document.getElementById("blueprintText").textContent = text;
     }
@@ -279,10 +784,10 @@ Message: ${offer}`;
 
       if (!videos.length) {
         container.innerHTML = `
-          <div class="tile">
-            <div class="tile-body">
-              <strong>No clips found</strong>
-              <div class="muted">Try a broader keyword.</div>
+          <div class="scene-card">
+            <div class="scene-body">
+              <div class="scene-title">No clips found</div>
+              <div class="scene-meta">Try a broader keyword or different video type.</div>
             </div>
           </div>
         `;
@@ -291,18 +796,27 @@ Message: ${offer}`;
 
       videos.forEach((v, index) => {
         const file = v.video_files && v.video_files.length ? v.video_files[0] : null;
-        if (!file) return;
+        const image = v.image || "";
 
         const card = document.createElement("div");
-        card.className = "tile";
+        card.className = "scene-card";
 
         card.innerHTML = `
-          <video controls autoplay muted loop playsinline>
-            <source src="${file.link}" type="video/mp4">
-          </video>
-          <div class="tile-body">
-            <strong>Scene Clip ${index + 1}</strong>
-            <div class="muted">Pexels ID: ${v.id || "--"} | Duration: ${v.duration || "--"} sec</div>
+          ${file ? `
+            <video controls muted playsinline preload="metadata" poster="${image}">
+              <source src="${file.link}" type="video/mp4">
+            </video>
+          ` : image ? `<img src="${image}" alt="Scene preview" />` : ""}
+          <div class="scene-body">
+            <div class="scene-title">Scene Clip ${index + 1}</div>
+            <div class="scene-meta">
+              Pexels ID: ${v.id || "--"}<br>
+              Duration: ${v.duration || "--"} sec
+            </div>
+            <div class="scene-actions">
+              <button class="tiny-btn tiny-primary">Selected Clip</button>
+              <button class="tiny-btn tiny-gold">Replace Clip</button>
+            </div>
           </div>
         `;
 
@@ -312,24 +826,74 @@ Message: ${offer}`;
 
     function renderSceneMapping(videos, queries) {
       const box = document.getElementById("sceneMapping");
+      box.innerHTML = "";
 
       if (!videos.length) {
-        box.textContent = "No usable clips were found.";
+        box.innerHTML = `
+          <div class="mapping-card">
+            <h4>Scene Mapping</h4>
+            <p>No usable clips were found.</p>
+          </div>
+        `;
         return;
       }
 
-      let html = "";
       videos.forEach((video, index) => {
-        html += `
-          <div style="margin-bottom:12px; padding:12px; border:1px solid #f1df9f; border-radius:12px;">
-            <strong style="color:#5f2396;">Scene ${index + 1}</strong><br>
+        const card = document.createElement("div");
+        card.className = "mapping-card";
+        card.innerHTML = `
+          <h4>Scene ${index + 1}</h4>
+          <p>
             Query: ${queries[index % queries.length]}<br>
             Clip ID: ${video.id || "--"}
-          </div>
+          </p>
         `;
+        box.appendChild(card);
       });
+    }
 
-      box.innerHTML = html;
+    function updatePreviewOnly() {
+      const brandName = document.getElementById("brandName").value || "Your Brand";
+      const videoType = document.getElementById("videoType").value || "Instagram Reel";
+      const headline = document.getElementById("headline").value || "Your headline will appear here";
+      const subline = document.getElementById("subline").value || "Premium gold-purple short video layout";
+      const duration = document.getElementById("sceneDuration").value || "15 sec";
+      const format = document.getElementById("format").value || "9:16 Reel";
+      const productName = document.getElementById("productName").value || "your next campaign";
+      const musicMood = document.getElementById("musicMood").value || "Luxury Ambient";
+
+      document.getElementById("previewSceneTag").textContent = `${duration} • ${videoType} • ${format.replace(" Reel", "")}`;
+      document.getElementById("previewKicker").textContent = `${videoType} for ${productName}`;
+      document.getElementById("previewHeadline").textContent = headline;
+      document.getElementById("previewSubline").textContent = subline;
+      document.getElementById("formatDirectionText").textContent = `${format} selected for premium short-form campaign delivery.`;
+      document.getElementById("musicDirectionText").textContent = `${musicMood} selected for premium, smooth, elegant short-form videos.`;
+
+      const logoBox = document.getElementById("logoPreviewBox");
+      if (logoDataUrl) {
+        logoBox.innerHTML = `<img src="${logoDataUrl}" alt="Logo" />`;
+      } else {
+        logoBox.textContent = (brandName || "LOGO").slice(0, 4).toUpperCase();
+      }
+
+      const productBox = document.getElementById("productPreviewBox");
+      if (productDataUrl) {
+        productBox.innerHTML = `<img src="${productDataUrl}" alt="Product" />`;
+      } else {
+        productBox.innerHTML = "";
+      }
+    }
+
+    function generateCaptions() {
+      const product = document.getElementById("productName").value || "your product";
+      const offer = document.getElementById("offer").value || "limited offer";
+      const audience = document.getElementById("audience").value || "your audience";
+
+      document.getElementById("captionOverlayText").textContent =
+        `Scene 1: Stop scrolling — ${product} is built for ${audience}.
+Scene 2: Smarter, cleaner, more premium results.
+Scene 3: ${offer}
+Scene 4: Order now and transform your campaign.`;
     }
 
     async function generateVideo() {
@@ -342,8 +906,9 @@ Message: ${offer}`;
         return;
       }
 
-      setStatus("Generating clips...", "Working");
+      setStatus("Generating premium storyboard...", "Working");
       buildBlueprint();
+      updatePreviewOnly();
 
       const queries = buildQueries(product, videoType, audience);
       let videos = [];
@@ -356,11 +921,12 @@ Message: ${offer}`;
 
         renderVideos(videos);
         renderSceneMapping(videos, queries);
+        generateCaptions();
 
         if (videos.length) {
-          setStatus("Videos ready", "Done");
+          setStatus("Storyboard ready", "Done");
         } else {
-          setStatus("No good clips found.", "No Results");
+          setStatus("No strong clips found.", "No Results");
         }
       } catch (error) {
         console.error(error);
@@ -374,11 +940,72 @@ Message: ${offer}`;
       document.getElementById("videoType").value = "Instagram Reel";
       document.getElementById("audience").value = "";
       document.getElementById("offer").value = "";
-      document.getElementById("blueprintText").textContent = "Your blueprint will appear here.";
-      document.getElementById("videoResults").innerHTML = "";
-      document.getElementById("sceneMapping").textContent = "Scene mapping will appear here.";
+      document.getElementById("headline").value = "";
+      document.getElementById("subline").value = "";
+      document.getElementById("format").value = "9:16 Reel";
+      document.getElementById("musicMood").value = "Luxury Ambient";
+      document.getElementById("sceneDuration").value = "15 sec";
+      document.getElementById("logoUpload").value = "";
+      document.getElementById("productUpload").value = "";
+      logoDataUrl = "";
+      productDataUrl = "";
+
+      document.getElementById("blueprintText").textContent = "Your video blueprint will appear here.";
+      document.getElementById("captionOverlayText").textContent = "Auto-generated captions will appear here for your scenes.";
+      document.getElementById("logoStatusChip").textContent = "Logo: Not uploaded";
+      document.getElementById("productStatusChip").textContent = "Product: Not uploaded";
+      document.getElementById("videoResults").innerHTML = `
+        <div class="scene-card">
+          <div class="scene-body">
+            <div class="scene-title">No clips yet</div>
+            <div class="scene-meta">Generate a video blueprint to fetch real clips and create your storyboard.</div>
+          </div>
+        </div>
+      `;
+      document.getElementById("sceneMapping").innerHTML = `
+        <div class="mapping-card">
+          <h4>Scene Mapping</h4>
+          <p>Scene mapping will appear here after you generate the video.</p>
+        </div>
+      `;
+
+      document.getElementById("logoPreviewBox").textContent = "LOGO";
+      document.getElementById("productPreviewBox").innerHTML = "";
+      document.getElementById("previewSceneTag").textContent = "15 sec • Bold Promo • 9:16";
+      document.getElementById("previewKicker").textContent = "Instagram Reel for your next campaign";
+      document.getElementById("previewHeadline").textContent = "Your headline will appear here";
+      document.getElementById("previewSubline").textContent = "Premium gold-purple short video layout";
+      document.getElementById("formatDirectionText").textContent = "9:16 selected for premium short-form campaign delivery.";
+      document.getElementById("musicDirectionText").textContent = "Luxury Ambient selected for premium, smooth, elegant short-form videos.";
+
       setStatus("Waiting for input...", "Idle");
     }
+
+    document.getElementById("logoUpload").addEventListener("change", function (event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        logoDataUrl = e.target.result;
+        document.getElementById("logoStatusChip").textContent = "Logo: Uploaded";
+        updatePreviewOnly();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById("productUpload").addEventListener("change", function (event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        productDataUrl = e.target.result;
+        document.getElementById("productStatusChip").textContent = "Product: Uploaded";
+        updatePreviewOnly();
+      };
+      reader.readAsDataURL(file);
+    });
   </script>
 </body>
 </html>
