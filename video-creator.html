@@ -12,7 +12,10 @@
       color: #241f31;
       padding: 24px;
     }
-    .wrap { max-width: 1100px; margin: 0 auto; }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
     .box {
       background: #fff;
       border: 1px solid #f1df9f;
@@ -21,7 +24,10 @@
       box-shadow: 0 12px 30px rgba(78, 38, 112, 0.08);
       margin-bottom: 20px;
     }
-    h1, h2, h3 { margin-top: 0; color: #5f2396; }
+    h1, h2, h3 {
+      margin-top: 0;
+      color: #5f2396;
+    }
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -39,14 +45,13 @@
       font-weight: 700;
       font-size: 14px;
     }
-    input, select, textarea {
+    input, select {
       width: 100%;
       padding: 12px;
       border-radius: 12px;
       border: 1px solid #ddd;
       font-size: 14px;
     }
-    textarea { min-height: 90px; resize: vertical; }
     .actions {
       display: flex;
       gap: 12px;
@@ -99,7 +104,9 @@
       display: block;
       background: #000;
     }
-    .tile-body { padding: 12px; }
+    .tile-body {
+      padding: 12px;
+    }
     .muted {
       color: #6b6179;
       font-size: 14px;
@@ -111,7 +118,9 @@
       line-height: 1.6;
     }
     @media (max-width: 900px) {
-      .grid, .form-grid, .video-grid { grid-template-columns: 1fr; }
+      .grid, .form-grid, .video-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -119,7 +128,7 @@
   <div class="wrap">
     <div class="box">
       <h1>Bariq AI Video Creator</h1>
-      <p class="muted">Generate real stock video clips for your product ideas.</p>
+      <p class="muted">Clean working version with backend-powered real video fetching.</p>
     </div>
 
     <div class="grid">
@@ -160,9 +169,7 @@
           </div>
 
           <div class="actions">
-            <button class="primary" onclick="generateVideo()">
-            Generate Real Video
-            </button>
+            <button class="primary" type="button" onclick="generateVideo()">Generate Real Video</button>
             <button class="light" type="button" onclick="clearAll()">Clear</button>
           </div>
         </div>
@@ -182,14 +189,7 @@
       <div>
         <div class="box">
           <h2>Fetched Clips</h2>
-          <div id="videoResults" class="video-grid">
-            <div class="tile">
-              <div class="tile-body">
-                <strong>No clips yet</strong>
-                <div class="muted">Enter details and click Generate Real Video.</div>
-              </div>
-            </div>
-          </div>
+          <div id="videoResults" class="video-grid"></div>
         </div>
 
         <div class="box">
@@ -211,18 +211,34 @@
       const people = audience || "customers";
 
       if (videoType === "Founder Intro") {
-        return [base + " entrepreneur", base + " office", people + " business"];
+        return [
+          base + " entrepreneur",
+          base + " office",
+          people + " business"
+        ];
       }
 
       if (videoType === "Offer Ad") {
-        return [base + " promotion", base + " product close up", people + " shopping"];
+        return [
+          base + " promotion",
+          base + " product close up",
+          people + " shopping"
+        ];
       }
 
       if (videoType === "Product Promo") {
-        return [base + " product", base + " close up", base + " packaging"];
+        return [
+          base + " product",
+          base + " close up",
+          base + " packaging"
+        ];
       }
 
-      return [base + " social media", base + " startup", base + " promo"];
+      return [
+        base + " social media",
+        base + " startup",
+        base + " promo"
+      ];
     }
 
     function buildBlueprint() {
@@ -247,29 +263,21 @@ Message: ${offer}`;
     }
 
     async function fetchVideosFromBackend(query) {
-        const response = await fetch("/api/generate-video?q=" + encodeURIComponent(query));
+      const response = await fetch("/api/videos?q=" + encodeURIComponent(query));
+
       if (!response.ok) {
         throw new Error("Backend request failed");
       }
+
       const data = await response.json();
-      renderVideos(data.videos || []);
       return data.videos || [];
     }
 
-    function pickPlayableVideoFile(videoFiles) {
-      if (!videoFiles || !videoFiles.length) return null;
-
-      let chosen = videoFiles.find(file => file.quality === "sd");
-      if (!chosen) chosen = videoFiles[0];
-
-      return chosen ? chosen.link : null;
-    }
-
-    function renderVideoResults(clips) {
+    function renderVideos(videos) {
       const container = document.getElementById("videoResults");
       container.innerHTML = "";
 
-      if (!clips.length) {
+      if (!videos.length) {
         container.innerHTML = `
           <div class="tile">
             <div class="tile-body">
@@ -281,38 +289,42 @@ Message: ${offer}`;
         return;
       }
 
-      clips.forEach((clip, index) => {
-        const src = pickPlayableVideoFile(clip.video_files);
-        const tile = document.createElement("div");
-        tile.className = "tile";
+      videos.forEach((v, index) => {
+        const file = v.video_files && v.video_files.length ? v.video_files[0] : null;
+        if (!file) return;
 
-        tile.innerHTML = `
-          ${src ? `<video controls muted playsinline preload="metadata" src="${src}"></video>` : ""}
+        const card = document.createElement("div");
+        card.className = "tile";
+
+        card.innerHTML = `
+          <video controls autoplay muted loop playsinline>
+            <source src="${file.link}" type="video/mp4">
+          </video>
           <div class="tile-body">
             <strong>Scene Clip ${index + 1}</strong>
-            <div class="muted">Pexels ID: ${clip.id || "--"} | Duration: ${clip.duration || "--"} sec</div>
+            <div class="muted">Pexels ID: ${v.id || "--"} | Duration: ${v.duration || "--"} sec</div>
           </div>
         `;
 
-        container.appendChild(tile);
+        container.appendChild(card);
       });
     }
 
-    function renderSceneMapping(clips, queries) {
+    function renderSceneMapping(videos, queries) {
       const box = document.getElementById("sceneMapping");
 
-      if (!clips.length) {
+      if (!videos.length) {
         box.textContent = "No usable clips were found.";
         return;
       }
 
       let html = "";
-      clips.forEach((clip, index) => {
+      videos.forEach((video, index) => {
         html += `
           <div style="margin-bottom:12px; padding:12px; border:1px solid #f1df9f; border-radius:12px;">
             <strong style="color:#5f2396;">Scene ${index + 1}</strong><br>
             Query: ${queries[index % queries.length]}<br>
-            Clip ID: ${clip.id || "--"}
+            Clip ID: ${video.id || "--"}
           </div>
         `;
       });
@@ -320,40 +332,35 @@ Message: ${offer}`;
       box.innerHTML = html;
     }
 
-    async function generateRealVideoClips() {
-      setStatus("Button clicked. Starting...", "Running");
-
-      const productName = document.getElementById("productName").value.trim();
+    async function generateVideo() {
+      const product = document.getElementById("productName").value.trim();
       const videoType = document.getElementById("videoType").value;
       const audience = document.getElementById("audience").value.trim();
 
-      if (!productName) {
+      if (!product) {
         setStatus("Please enter Product / Service first.", "Missing Input");
         return;
       }
 
+      setStatus("Generating clips...", "Working");
       buildBlueprint();
-      setStatus("Searching real video clips from Bariq backend...", "Searching");
 
-      const queries = buildQueries(productName, videoType, audience);
+      const queries = buildQueries(product, videoType, audience);
+      let videos = [];
 
       try {
-        const allResults = [];
-
-        for (let i = 0; i < queries.length; i++) {
-          const videos = await fetchVideosFromBackend(queries[i]);
-          if (videos.length > 0) {
-            allResults.push(videos[0]);
-          }
+        for (const q of queries) {
+          const result = await fetchVideosFromBackend(q);
+          videos = videos.concat(result.slice(0, 1));
         }
 
-        renderVideoResults(allResults);
-        renderSceneMapping(allResults, queries);
+        renderVideos(videos);
+        renderSceneMapping(videos, queries);
 
-        if (allResults.length > 0) {
-          setStatus("Real video clips fetched successfully.", "Success");
+        if (videos.length) {
+          setStatus("Videos ready", "Done");
         } else {
-          setStatus("No good clips found. Try broader keywords.", "No Results");
+          setStatus("No good clips found.", "No Results");
         }
       } catch (error) {
         console.error(error);
@@ -368,45 +375,10 @@ Message: ${offer}`;
       document.getElementById("audience").value = "";
       document.getElementById("offer").value = "";
       document.getElementById("blueprintText").textContent = "Your blueprint will appear here.";
-      document.getElementById("videoResults").innerHTML = `
-        <div class="tile">
-          <div class="tile-body">
-            <strong>No clips yet</strong>
-            <div class="muted">Enter details and click Generate Real Video.</div>
-          </div>
-        </div>
-      `;
+      document.getElementById("videoResults").innerHTML = "";
       document.getElementById("sceneMapping").textContent = "Scene mapping will appear here.";
       setStatus("Waiting for input...", "Idle");
     }
   </script>
-  <script>
-
-function renderVideos(videos){
-
-const container = document.getElementById("videoResults");
-container.innerHTML = "";
-
-videos.forEach(v => {
-
-const file = v.video_files[0];
-if(!file) return;
-
-const card = document.createElement("div");
-card.style.marginBottom = "20px";
-
-card.innerHTML = `
-<video width="100%" controls autoplay muted loop>
-<source src="${file.link}" type="video/mp4">
-</video>
-`;
-
-container.appendChild(card);
-
-});
-
-}
-
-</script>
 </body>
 </html>
