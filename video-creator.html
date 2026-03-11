@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI Voice Ad Creator</title>
+  <title>Bariq AI Video Creator</title>
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; overflow-x: hidden; }
+
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(180deg, #fffaf3 0%, #faf7ff 45%, #f6f0ff 100%);
@@ -35,6 +36,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 18px;
+      position: relative;
     }
 
     .brand {
@@ -47,6 +49,24 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+
+    .top-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      font-weight: 700;
+      color: #45388c;
+    }
+
+    .top-links a {
+      padding: 10px 12px;
+      border-radius: 12px;
+    }
+
+    .top-links a:hover {
+      background: #f4eeff;
     }
 
     .page {
@@ -68,7 +88,7 @@
       align-items: start;
     }
 
-    .panel, .preview-phone, .mini-box, .clip-card {
+    .panel, .preview-phone, .mini-box, .clip-card, .footer-note {
       background: rgba(255,255,255,0.94);
       border: 1px solid #f0e6c9;
       border-radius: 24px;
@@ -361,6 +381,25 @@
       line-height: 1.6;
     }
 
+    .footer-note {
+      margin-top: 22px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .footer-note strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+      color: #433685;
+    }
+
+    .footer-note span {
+      color: #6e6782;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
     @media (max-width: 1100px) {
       .hero-grid { grid-template-columns: 1fr; }
       .output-grid { grid-template-columns: 1fr 1fr; }
@@ -369,6 +408,8 @@
 
     @media (max-width: 768px) {
       .container { width: min(100% - 20px, 1280px); }
+      .nav-wrap { flex-direction: column; align-items: flex-start; padding: 12px 0; }
+      .top-links { gap: 8px; }
       .hero { padding: 16px; border-radius: 22px; }
       .panel { padding: 18px; }
       .grid, .output-grid, .clips-grid { grid-template-columns: 1fr; }
@@ -384,6 +425,12 @@
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="brand">Bariq AI</a>
+      <div class="top-links">
+        <a href="index.html">Home</a>
+        <a href="campaign.html">Campaign</a>
+        <a href="ai-generator.html">AI Generator</a>
+        <a href="business-dashboard.html">Business</a>
+      </div>
     </div>
   </header>
 
@@ -395,12 +442,12 @@
             <div class="eyebrow">Voice Ad Creator</div>
             <h1>Speak one idea. Bariq fills the ad.</h1>
             <p class="subtitle">
-              Perfect for salons, clinics, boutiques, home businesses, and anyone who does not want to fill long forms manually.
+              Perfect for salons, clinics, boutiques, home businesses, electronics stores, fashion sellers, beauty brands, and anyone who does not want to fill long forms manually.
             </p>
 
             <div class="voice-box">
               <div class="voice-label">Say or type your campaign idea</div>
-              <textarea id="smartBrief" placeholder="Example: Create a reel for my slimming clinic with WhatsApp booking"></textarea>
+              <textarea id="smartBrief" placeholder="Example: Create a product promo for my bluetooth speaker for young music lovers with WhatsApp order"></textarea>
 
               <div class="button-row">
                 <button class="btn btn-gold" onclick="startVoiceInput()">🎤 Speak</button>
@@ -441,7 +488,7 @@
 
               <div class="full">
                 <label>Offer / Key Message</label>
-                <input id="offer" placeholder="Example: Book appointment on WhatsApp" />
+                <input id="offer" placeholder="Example: Order now on WhatsApp" />
               </div>
 
               <div class="full">
@@ -457,11 +504,11 @@
 
             <div class="suggestions">
               <h3>AI Prompt Suggestions</h3>
-              <div class="chips" id="chipsBox">
+              <div class="chips">
                 <button class="chip" onclick="useSuggestion('Create a reel for my slimming clinic with WhatsApp booking')">Slimming clinic reel</button>
                 <button class="chip" onclick="useSuggestion('Create a product promo for glutathione tablets for women glow and confidence')">Glutathione promo</button>
                 <button class="chip" onclick="useSuggestion('Create a jewellery festive offer reel for home business')">Jewellery festive offer</button>
-                <button class="chip" onclick="useSuggestion('Create a salon offer ad for hair smoothening with limited offer')">Salon offer ad</button>
+                <button class="chip" onclick="useSuggestion('Create a product promo for my bluetooth speaker for young music lovers')">Bluetooth speaker promo</button>
               </div>
             </div>
           </div>
@@ -474,7 +521,7 @@
 
             <div class="phone-kicker" id="previewBrand">Your Brand</div>
             <div class="phone-headline" id="previewHeadline">Your headline will appear here</div>
-            <div class="phone-subline" id="previewSubline">Premium short video layout generated with Bariq AI</div>
+            <div class="phone-subline" id="previewSubline">Premium short-form ad created from your brief</div>
             <div class="phone-offer" id="previewOffer">Offer: Your message here</div>
           </div>
         </div>
@@ -501,7 +548,17 @@ Scene 4: CTA</div>
 
         <div class="clips-section">
           <h2 class="clips-title">Fetched Pexels Clips</h2>
-          <div class="clips-grid" id="clipsGrid"></div>
+          <div class="clips-grid" id="clipsGrid">
+            <div class="mini-box">
+              <h3>No clips yet</h3>
+              <div>Click “Fetch Pexels Clips” or use “Auto Fill with AI” to load matching stock videos.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          <strong>Bariq AI Smart Reel Flow</strong>
+          <span>Describe your business idea once. Bariq fills the ad, builds the caption, suggests the hook, and fetches relevant stock clips for your campaign.</span>
         </div>
       </div>
     </div>
@@ -536,33 +593,80 @@ Scene 4: CTA</div>
 
     function buildCaption() {
       const brand = document.getElementById("brandName").value || "Your Brand";
-      const product = document.getElementById("productName").value || "our service";
-      const audience = document.getElementById("audience").value || "your audience";
-      const offer = document.getElementById("offer").value || "message us today";
-      const headline = document.getElementById("headline").value || "Your next result starts now";
+      const product = document.getElementById("productName").value || "your product";
+      const audience = document.getElementById("audience").value || "your ideal customers";
+      const offer = document.getElementById("offer").value || "DM now for details";
+      const headline = document.getElementById("headline").value || "Your next reel can convert better";
 
       document.getElementById("captionBox").textContent =
         `${headline}. ${brand} brings ${product} for ${audience}. ${offer}. DM now to get started.`;
     }
 
     function buildHook() {
-      const audience = document.getElementById("audience").value || "your customers";
-      const product = document.getElementById("productName").value || "your service";
+      const audience = document.getElementById("audience").value || "your ideal customers";
+      const product = document.getElementById("productName").value || "your product";
 
       document.getElementById("hookBox").textContent =
         `Stop scrolling — ${product} is made for ${audience}.`;
     }
 
     function buildScenes() {
-      const product = document.getElementById("productName").value || "product";
-      const offer = document.getElementById("offer").value || "Contact now";
-      const brand = document.getElementById("brandName").value || "Brand";
+      const product = document.getElementById("productName").value || "your product";
+      const offer = document.getElementById("offer").value || "DM now for details";
+      const brand = document.getElementById("brandName").value || "Your Brand";
 
       document.getElementById("sceneBox").textContent =
 `Scene 1: Strong hook visual
 Scene 2: Show ${product}
 Scene 3: Highlight offer - ${offer}
 Scene 4: CTA with ${brand}`;
+    }
+
+    function detectAudience(brief) {
+      if (brief.includes("women")) return "women audience";
+      if (brief.includes("men")) return "men audience";
+      if (brief.includes("kids")) return "kids audience";
+      if (brief.includes("music")) return "music lovers";
+      if (brief.includes("student")) return "students";
+      return "your ideal customers";
+    }
+
+    function detectProduct(brief) {
+      if (brief.includes("bluetooth")) return "Bluetooth Speaker";
+      if (brief.includes("speaker")) return "Bluetooth Speaker";
+      if (brief.includes("headphone")) return "Wireless Headphones";
+      if (brief.includes("earbuds")) return "Wireless Earbuds";
+      if (brief.includes("clinic")) return "Clinic Services";
+      if (brief.includes("salon")) return "Salon Services";
+      if (brief.includes("glutathione")) return "Glutathione Tablets";
+      if (brief.includes("jewellery") || brief.includes("jewelry") || brief.includes("bangles")) return "Festive Jewellery Collection";
+      if (brief.includes("dress")) return "Fashion Collection";
+      if (brief.includes("shoe")) return "Shoes Collection";
+      return "Your Product";
+    }
+
+    function detectHeadline(product, brief) {
+      if (brief.includes("offer")) return `Special offer on ${product}`;
+      if (brief.includes("bluetooth")) return `Turn up your sound with ${product}`;
+      if (brief.includes("clinic")) return "Start your transformation with expert support";
+      if (brief.includes("salon")) return "Your next salon result starts here";
+      if (brief.includes("glow")) return "Glow with confidence";
+      return `Discover ${product} today`;
+    }
+
+    function detectSubline(product, brief) {
+      if (brief.includes("bluetooth")) return `Powerful sound and smart style built for everyday use`;
+      if (brief.includes("clinic")) return `Premium care designed for visible results and confidence`;
+      if (brief.includes("salon")) return `Beauty, shine, and confidence packed into one premium offer`;
+      return `Premium short-form ad created for ${product}`;
+    }
+
+    function detectOffer(brief) {
+      if (brief.includes("whatsapp")) return "Order now on WhatsApp";
+      if (brief.includes("book")) return "Book now";
+      if (brief.includes("discount")) return "Limited period discount available";
+      if (brief.includes("sale")) return "Shop now before the offer ends";
+      return "DM now for details";
     }
 
     function autoFillFromBrief() {
@@ -573,80 +677,29 @@ Scene 4: CTA with ${brand}`;
         return;
       }
 
-      document.getElementById("brandName").value = "";
-      document.getElementById("productName").value = "";
-      document.getElementById("audience").value = "";
-      document.getElementById("offer").value = "";
-      document.getElementById("headline").value = "";
-      document.getElementById("subline").value = "";
+      const product = detectProduct(brief);
+      const audience = detectAudience(brief);
+      const offer = detectOffer(brief);
+      const headline = detectHeadline(product, brief);
+      const subline = detectSubline(product, brief);
 
-      if (brief.includes("clinic") || brief.includes("salon")) {
-        document.getElementById("brandName").value = "Your Clinic";
-        document.getElementById("productName").value = "Clinic Services";
-        document.getElementById("videoType").value = "Offer Ad";
-      }
+      let brand = "Your Brand";
+      if (brief.includes("rss")) brand = "RSS";
+      if (brief.includes("clinic")) brand = "Your Clinic";
+      if (brief.includes("salon")) brand = "Your Salon";
+      if (brief.includes("bluetooth")) brand = "Your Electronics Brand";
 
-      if (brief.includes("rss")) {
-        document.getElementById("brandName").value = "RSS";
-      }
+      document.getElementById("brandName").value = brand;
+      document.getElementById("productName").value = product;
+      document.getElementById("audience").value = audience;
+      document.getElementById("offer").value = offer;
+      document.getElementById("headline").value = headline;
+      document.getElementById("subline").value = subline;
 
-      if (brief.includes("weight loss") || brief.includes("slimming")) {
-        document.getElementById("productName").value = "Weight Loss Program";
-        document.getElementById("audience").value = "women weight loss";
-        document.getElementById("headline").value = "Start your transformation with expert support";
-        document.getElementById("subline").value = "Premium clinic offer designed for women wellness";
-      }
-
-      if (brief.includes("whatsapp")) {
-        document.getElementById("offer").value = "Book appointment on WhatsApp";
-      }
-
-      if (brief.includes("glow") || brief.includes("glutathione") || brief.includes("skin")) {
-        document.getElementById("brandName").value = "Your Beauty Brand";
-        document.getElementById("productName").value = "Glutathione Tablets";
+      if (brief.includes("promo") || brief.includes("product")) {
         document.getElementById("videoType").value = "Product Promo";
-        document.getElementById("audience").value = "women skincare audience";
-        document.getElementById("headline").value = "Glow with confidence";
-        document.getElementById("subline").value = "Daily beauty support designed for visible confidence";
-        document.getElementById("offer").value = "Order now on WhatsApp";
-      }
-
-      if (brief.includes("jewellery") || brief.includes("jewelry") || brief.includes("bangles")) {
-        document.getElementById("brandName").value = "Your Jewellery Brand";
-        document.getElementById("productName").value = "Festive Jewellery Collection";
-        document.getElementById("videoType").value = "Festival Offer";
-        document.getElementById("audience").value = "women festive shoppers";
-        document.getElementById("headline").value = "Add sparkle to your festive look";
-        document.getElementById("subline").value = "Elegant styles for everyday and occasion wear";
-        document.getElementById("offer").value = "Shop now on WhatsApp";
-      }
-
-      if (brief.includes("offer") || brief.includes("discount") || brief.includes("sale")) {
+      } else {
         document.getElementById("videoType").value = "Offer Ad";
-      }
-
-      if (!document.getElementById("brandName").value) {
-        document.getElementById("brandName").value = "Your Brand";
-      }
-
-      if (!document.getElementById("productName").value) {
-        document.getElementById("productName").value = "Your Product";
-      }
-
-      if (!document.getElementById("audience").value) {
-        document.getElementById("audience").value = "your ideal customers";
-      }
-
-      if (!document.getElementById("headline").value) {
-        document.getElementById("headline").value = "Your next reel can convert better";
-      }
-
-      if (!document.getElementById("subline").value) {
-        document.getElementById("subline").value = "Premium short-form ad created from your brief";
-      }
-
-      if (!document.getElementById("offer").value) {
-        document.getElementById("offer").value = "DM now for details";
       }
 
       updatePreview();
@@ -677,7 +730,7 @@ Scene 4: CTA with ${brand}`;
         setStatus("Pexels clips loaded successfully.");
       } catch (error) {
         document.getElementById("clipsGrid").innerHTML =
-          `<div class="mini-box"><h3>Error</h3><div>${error.message}</div></div>`;
+          `<div class="mini-box"><h3>Pexels API Error</h3><div>${error.message}</div></div>`;
         setStatus("Could not fetch Pexels clips.");
       }
     }
@@ -693,7 +746,7 @@ Scene 4: CTA with ${brand}`;
       const grid = document.getElementById("clipsGrid");
 
       if (!videos.length) {
-        grid.innerHTML = `<div class="mini-box"><h3>No clips found</h3><div>Try a different brief or product name.</div></div>`;
+        grid.innerHTML = `<div class="mini-box"><h3>No clips found</h3><div>Try a different product or brief.</div></div>`;
         return;
       }
 
@@ -728,7 +781,8 @@ Scene 4: CTA with ${brand}`;
 Scene 2: Product / service
 Scene 3: Offer
 Scene 4: CTA`;
-      document.getElementById("clipsGrid").innerHTML = "";
+      document.getElementById("clipsGrid").innerHTML =
+        `<div class="mini-box"><h3>No clips yet</h3><div>Click “Fetch Pexels Clips” or use “Auto Fill with AI” to load matching stock videos.</div></div>`;
       setStatus("Waiting for your idea...");
       updatePreview();
     }
