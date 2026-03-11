@@ -1,6 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<title>Bariq AI Generator</title>
+</head>
+
+<body style="font-family:Arial;padding:40px">
+
+<h1>Bariq AI Generator</h1>
+
+<textarea id="prompt" style="width:400px;height:120px" placeholder="Type your marketing prompt"></textarea>
+
+<br><br>
+
+<button onclick="generate()">Generate</button>
+
+<h3>Hook</h3>
+<div id="hook"></div>
+
+<h3>Caption</h3>
+<div id="caption"></div>
+
+<script>
+
+function generate(){
+
+const prompt = document.getElementById("prompt").value
+
+document.getElementById("hook").innerText =
+"Stop scrolling — this offer is made for you."
+
+document.getElementById("caption").innerText =
+prompt + " — DM now to know more."
+
+}
+
+</script>
+
+</body>
+</html>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bariq AI Generator</title>
