@@ -9,42 +9,50 @@
     html, body { margin: 0; padding: 0; overflow-x: hidden; }
 
     :root{
-      --bg1:#fffaf3;
-      --bg2:#faf7ff;
-      --bg3:#f6f0ff;
-      --card:rgba(255,255,255,0.96);
-      --border:#ecdcb4;
-      --border-soft:#f0e6c9;
-      --purple:#5a3fff;
-      --purple-dark:#312668;
-      --purple-soft:#f4eeff;
+      --bg1:#fffaf5;
+      --bg2:#fbf8ff;
+      --bg3:#f6f1ff;
+      --card:#ffffff;
+      --card-soft:rgba(255,255,255,0.94);
+      --border:#eadfbe;
+      --border-soft:#f1e8cf;
+      --purple:#6b57d9;
+      --purple-dark:#372d69;
+      --purple-soft:#f3efff;
       --gold:#d8b05b;
-      --text:#2c235c;
-      --muted:#6c6483;
-      --shadow:0 16px 40px rgba(75,45,120,0.08);
+      --gold-soft:#f8ecd0;
+      --text:#2f2954;
+      --muted:#746d8e;
+      --shadow:0 18px 40px rgba(83,57,139,0.08);
       --card-shadow:0 10px 24px rgba(83,57,139,0.05);
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
     }
 
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
       color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,239,207,0.55), transparent 26%),
+        radial-gradient(circle at top right, rgba(110,87,217,0.08), transparent 20%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 48%, var(--bg3) 100%);
     }
 
-    a { text-decoration: none; color: inherit; }
+    a { color: inherit; text-decoration: none; }
 
     .container {
-      width: min(1280px, calc(100% - 32px));
+      width: min(1260px, calc(100% - 28px));
       margin: 0 auto;
     }
 
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 999;
-      background: rgba(255,255,255,0.97);
+      z-index: 1000;
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid #eee2bf;
+      border-bottom: 1px solid #efe5c8;
     }
 
     .nav-wrap {
@@ -58,11 +66,10 @@
     }
 
     .brand {
-      display: inline-block;
-      white-space: nowrap;
       font-size: 30px;
       font-weight: 800;
       line-height: 1;
+      white-space: nowrap;
       background: linear-gradient(90deg, var(--gold), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -77,22 +84,22 @@
       border-radius:12px;
       padding:12px 14px;
       font-size:18px;
-      font-weight:800;
+      font-weight:700;
       cursor:pointer;
     }
 
     .top-links {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      font-size: 14px;
-      font-weight: 700;
-      color: #45388c;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      font-size:14px;
+      font-weight:700;
+      color:#4e438a;
     }
 
     .top-links a {
-      padding: 10px 14px;
-      border-radius: 12px;
+      padding:10px 14px;
+      border-radius:12px;
     }
 
     .top-links a:hover,
@@ -101,26 +108,26 @@
     }
 
     .page {
-      padding: 24px 0 40px;
+      padding: 22px 0 40px;
     }
 
-    .hero-shell {
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.95));
+    .shell {
+      background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,251,245,0.95));
       border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 22px;
+      border-radius: var(--radius-xl);
+      padding: 20px;
       box-shadow: var(--shadow);
     }
 
     .subnav {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-      padding: 14px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+      padding:14px;
       background: rgba(255,255,255,0.85);
       border: 1px solid var(--border-soft);
-      border-radius: 22px;
+      border-radius: var(--radius-lg);
       box-shadow: var(--card-shadow);
     }
 
@@ -128,328 +135,314 @@
       padding: 10px 14px;
       border-radius: 12px;
       font-size: 14px;
-      font-weight: 800;
-      color: #4a3b92;
+      font-weight: 700;
+      color: #4d428a;
       background: #fff;
-      border: 1px solid #eee2bf;
+      border: 1px solid #eee3c4;
     }
 
     .subnav a.active,
     .subnav a:hover {
       background: var(--purple-soft);
-      border-color: #e3d5ff;
+      border-color: #e6dbff;
+    }
+
+    .panel {
+      background: var(--card-soft);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--card-shadow);
+      padding: 20px;
     }
 
     .eyebrow {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 800;
-      color: #4a3b92;
-      border: 1px solid #ece1bf;
-      background: #fff;
-      border-radius: 999px;
-      padding: 10px 16px;
-      margin-bottom: 14px;
+      display:inline-block;
+      padding:9px 14px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #ede2c5;
+      color:#554b8f;
+      font-size:13px;
+      font-weight:700;
+      margin-bottom:12px;
     }
 
     h1 {
       margin: 0 0 10px;
-      font-size: clamp(34px, 4vw, 52px);
-      line-height: 1.02;
-      color: var(--purple-dark);
+      font-size: clamp(34px, 4vw, 48px);
+      line-height: 1.06;
       letter-spacing: -0.04em;
+      color: var(--purple-dark);
+      font-weight: 700;
     }
 
     .subtitle {
-      margin: 0 0 22px;
+      margin: 0 0 20px;
+      max-width: 820px;
+      color: var(--muted);
       font-size: 16px;
       line-height: 1.7;
-      color: var(--muted);
-      max-width: 780px;
-    }
-
-    .top-panel {
-      background: var(--card);
-      border: 1px solid var(--border-soft);
-      border-radius: 24px;
-      box-shadow: var(--card-shadow);
-      padding: 22px;
-      margin-bottom: 22px;
     }
 
     .search-row {
-      display: grid;
+      display:grid;
       grid-template-columns: minmax(0, 1fr) auto;
-      gap: 14px;
-      align-items: center;
-      margin-bottom: 16px;
+      gap:14px;
+      align-items:center;
+      margin-bottom:16px;
     }
 
     .search-row input {
-      width: 100%;
-      border: 1px solid #e6ddc4;
-      background: #fff;
-      border-radius: 16px;
-      padding: 14px;
-      font-size: 15px;
-      color: var(--text);
-      outline: none;
+      width:100%;
+      border:1px solid #e8dec2;
+      background:#fff;
+      border-radius:16px;
+      padding:14px 14px;
+      color:var(--text);
+      font-size:15px;
+      outline:none;
+      font-family: Arial, sans-serif;
     }
 
-    .clear-btn {
-      border: none;
-      background: var(--purple-soft);
-      color: var(--purple-dark);
-      border-radius: 14px;
-      padding: 14px 16px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
+    .search-row input:focus {
+      border-color:#d7c4ff;
+      box-shadow: 0 0 0 4px rgba(106,87,217,0.08);
     }
 
     .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:6px;
     }
 
     .chip {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #fff;
-      border: 1px solid #eadfbd;
-      color: #45388c;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
+      border:none;
+      background:#fff;
+      border:1px solid #ebdfc0;
+      color:#52498d;
+      font-size:13px;
+      font-weight:700;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
     }
 
     .chip.active,
     .chip:hover {
       background: var(--purple-soft);
-      border-color: #e3d5ff;
-    }
-
-    .templates-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .template-card {
-      background: var(--card);
-      border: 1px solid var(--border-soft);
-      border-radius: 24px;
-      box-shadow: var(--card-shadow);
-      overflow: hidden;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .template-preview {
-      min-height: 240px;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      color: white;
-    }
-
-    .preview-reel { background: linear-gradient(180deg, #6046dc 0%, #2b1f64 100%); }
-    .preview-meta { background: linear-gradient(180deg, #6a4dff 0%, #35296f 100%); }
-    .preview-clinic { background: linear-gradient(180deg, #5f43d9 0%, #241c5d 100%); }
-    .preview-salon { background: linear-gradient(180deg, #9158ff 0%, #46237e 100%); }
-    .preview-jewellery { background: linear-gradient(180deg, #d8b05b 0%, #6d4c11 100%); }
-    .preview-product { background: linear-gradient(180deg, #4d6bff 0%, #23357e 100%); }
-    .preview-whatsapp { background: linear-gradient(180deg, #2cb86a 0%, #11643a 100%); }
-    .preview-festival { background: linear-gradient(180deg, #ff8a5b 0%, #8a2d13 100%); }
-
-    .preview-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .preview-pill {
-      display: inline-block;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.18);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .preview-format {
-      display: inline-block;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.16);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .preview-copy {
-      text-align: left;
-    }
-
-    .preview-copy h3 {
-      margin: 0 0 10px;
-      font-size: 28px;
-      line-height: 1.06;
-      color: #fff7d4;
-    }
-
-    .preview-copy p {
-      margin: 0;
-      color: rgba(255,255,255,0.9);
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    .template-body {
-      padding: 18px;
-    }
-
-    .template-title {
-      margin: 0 0 8px;
-      font-size: 19px;
-      color: #433685;
-    }
-
-    .template-meta {
-      margin: 0 0 12px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 14px;
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .tag {
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: #f6f1ff;
-      color: #4a3b92;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .template-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      border-color:#dfd2ff;
     }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 14px;
-      border-radius: 14px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      border: none;
+      border:none;
+      border-radius:16px;
+      padding:14px 18px;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #d7b15e, #5a3fff);
-      color: white;
-      box-shadow: 0 10px 22px rgba(90,63,255,0.2);
+      color:#fff;
+      background: linear-gradient(135deg, #d6b05a, #6b57d9);
+      box-shadow:0 10px 22px rgba(107,87,217,0.18);
     }
 
     .btn-light {
       background: var(--purple-soft);
       color: var(--purple-dark);
-      border: 1px solid #e4d7ff;
+      border: 1px solid #e4d8ff;
     }
 
-    .footer-note {
-      margin-top: 22px;
-      padding: 18px;
-      text-align: center;
-      background: var(--card);
-      border: 1px solid var(--border-soft);
-      border-radius: 24px;
+    .templates-grid {
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:18px;
+    }
+
+    .template-card {
+      background: var(--card-soft);
+      border:1px solid var(--border-soft);
+      border-radius:22px;
       box-shadow: var(--card-shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
     }
 
-    .footer-note strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 18px;
-      color: #433685;
+    .template-preview {
+      min-height:220px;
+      padding:16px;
+      color:#fff;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
 
-    .footer-note span {
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
+    .preview-meta { background: linear-gradient(180deg, #6a56de 0%, #2b225a 100%); }
+    .preview-gold { background: linear-gradient(180deg, #d9b260 0%, #6e4c12 100%); }
+    .preview-green { background: linear-gradient(180deg, #2eb86e 0%, #145638 100%); }
+    .preview-rose { background: linear-gradient(180deg, #c76ae9 0%, #5b2772 100%); }
+    .preview-orange { background: linear-gradient(180deg, #ff9566 0%, #8b3415 100%); }
+    .preview-blue { background: linear-gradient(180deg, #5375ff 0%, #23357f 100%); }
+
+    .preview-top {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .preview-pill,
+    .preview-format {
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.16);
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .preview-copy h3 {
+      margin:0 0 10px;
+      font-size:28px;
+      line-height:1.08;
+      letter-spacing:-0.03em;
+      color:#fff5d0;
+      font-weight:700;
+    }
+
+    .preview-copy p {
+      margin:0;
+      font-size:14px;
+      line-height:1.6;
+      color:rgba(255,255,255,0.92);
+    }
+
+    .template-body {
+      padding:18px;
+    }
+
+    .template-body h3 {
+      margin:0 0 8px;
+      font-size:20px;
+      color:#493f86;
+      font-weight:700;
+    }
+
+    .template-body p {
+      margin:0 0 14px;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .tag-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:14px;
+    }
+
+    .tag {
+      padding:8px 10px;
+      border-radius:999px;
+      background:#f6f1ff;
+      color:#4a3b92;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .template-actions {
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .empty-state,
+    .footer-note {
+      margin-top:18px;
+      text-align:center;
+      padding:18px;
+      background: var(--card-soft);
+      border:1px solid var(--border-soft);
+      border-radius:22px;
+      box-shadow: var(--card-shadow);
     }
 
     .empty-state {
-      display: none;
-      margin-top: 18px;
-      padding: 22px;
-      border-radius: 22px;
-      background: var(--card);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--card-shadow);
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.7;
-      text-align: center;
+      display:none;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .footer-note strong {
+      display:block;
+      margin-bottom:8px;
+      color:#483f86;
+      font-size:18px;
+      font-weight:700;
+    }
+
+    .footer-note span {
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
     }
 
     @media (max-width: 1100px) {
-      .templates-grid { grid-template-columns: 1fr 1fr; }
+      .templates-grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
-    @media (max-width: 768px) {
-      .container { width: min(100% - 20px, 1280px); }
-      .menu-toggle{ display:block; }
+    @media (max-width: 760px) {
+      .container { width: min(100% - 18px, 1260px); }
+      .menu-toggle { display:block; }
 
-      .top-links{
+      .top-links {
         display:none;
         width:100%;
         flex-direction:column;
         gap:8px;
       }
 
-      .top-links.show{ display:flex; }
+      .top-links.show { display:flex; }
 
-      .top-links a{
+      .top-links a {
         width:100%;
         background:#fff;
-        border:1px solid #efe4c7;
+        border:1px solid #efe5c8;
       }
 
-      .subnav{
+      .subnav {
         flex-direction:column;
       }
 
-      .subnav a{
+      .subnav a {
         width:100%;
       }
 
-      .hero-shell { padding: 16px; border-radius: 22px; }
-      .top-panel { padding: 18px; }
       .search-row {
         grid-template-columns: 1fr;
       }
-      .templates-grid { grid-template-columns: 1fr; }
-      .template-actions {
-        flex-direction: column;
+
+      .templates-grid {
+        grid-template-columns: 1fr;
       }
+
+      .template-actions {
+        flex-direction:column;
+      }
+
       .btn {
-        width: 100%;
+        width:100%;
       }
     }
   </style>
@@ -473,7 +466,7 @@
 
   <section class="page">
     <div class="container">
-      <div class="hero-shell">
+      <div class="shell">
 
         <div class="subnav">
           <a href="business-dashboard.html">Dashboard</a>
@@ -484,346 +477,354 @@
           <a href="marketplace.html">Marketplace</a>
         </div>
 
-        <div class="top-panel">
+        <div class="panel">
           <div class="eyebrow">Template Library</div>
-          <h1>Choose a template and start faster.</h1>
+          <h1>Choose beautiful templates faster.</h1>
           <p class="subtitle">
-            Browse Canva-style ready templates for ads, reels, WhatsApp promos, clinic campaigns, salon offers, festive sales, and product launches. Later these can auto-fill Bariq AI pages.
+            Pick from a larger Bariq template library for clinics, salons, jewellery, products, festivals, WhatsApp offers, Meta ads, and reels. Clean layout, not clutter.
           </p>
 
           <div class="search-row">
             <input
-              type="text"
               id="searchInput"
-              placeholder="Search templates like clinic, salon, jewellery, WhatsApp, reel..."
+              type="text"
+              placeholder="Search clinic, salon, jewellery, product, WhatsApp, festival..."
               oninput="filterTemplates()"
             />
-            <button class="clear-btn" onclick="clearFilters()">Clear Filters</button>
+            <button class="btn btn-light" onclick="clearFilters()">Clear Filters</button>
           </div>
 
           <div class="chips">
             <button class="chip active" data-category="all" onclick="setCategory('all', this)">All</button>
-            <button class="chip" data-category="meta" onclick="setCategory('meta', this)">Meta Ads</button>
-            <button class="chip" data-category="reels" onclick="setCategory('reels', this)">Reels</button>
-            <button class="chip" data-category="whatsapp" onclick="setCategory('whatsapp', this)">WhatsApp</button>
             <button class="chip" data-category="clinic" onclick="setCategory('clinic', this)">Clinic</button>
             <button class="chip" data-category="salon" onclick="setCategory('salon', this)">Salon</button>
+            <button class="chip" data-category="jewellery" onclick="setCategory('jewellery', this)">Jewellery</button>
             <button class="chip" data-category="product" onclick="setCategory('product', this)">Product</button>
             <button class="chip" data-category="festival" onclick="setCategory('festival', this)">Festival</button>
-            <button class="chip" data-category="jewellery" onclick="setCategory('jewellery', this)">Jewellery</button>
+            <button class="chip" data-category="whatsapp" onclick="setCategory('whatsapp', this)">WhatsApp</button>
+            <button class="chip" data-category="meta" onclick="setCategory('meta', this)">Meta Ads</button>
+            <button class="chip" data-category="reel" onclick="setCategory('reel', this)">Reels</button>
           </div>
         </div>
 
         <div class="templates-grid" id="templatesGrid">
 
-          <div class="template-card" data-category="reels clinic meta" data-title="Clinic Transformation Reel">
-            <div class="template-preview preview-clinic">
-              <div class="preview-top">
-                <span class="preview-pill">Clinic Reel</span>
-                <span class="preview-format">9:16</span>
-              </div>
-              <div class="preview-copy">
-                <h3>Transform with expert care</h3>
-                <p>Perfect for slimming, aesthetic, and wellness clinics</p>
-              </div>
+          <div class="template-card" data-category="clinic meta reel" data-title="Clinic Lead Ad">
+            <div class="template-preview preview-meta">
+              <div class="preview-top"><span class="preview-pill">Clinic Ad</span><span class="preview-format">1:1</span></div>
+              <div class="preview-copy"><h3>Trusted care starts here</h3><p>Lead generation style creative for clinics</p></div>
             </div>
             <div class="template-body">
-              <h3 class="template-title">Clinic Transformation Reel</h3>
-              <p class="template-meta">Best for clinics that want bookings, trust, and a strong before-after or premium care story.</p>
-              <div class="tag-row">
-                <span class="tag">Clinic</span>
-                <span class="tag">Reel</span>
-                <span class="tag">Bookings</span>
-              </div>
-              <div class="template-actions">
-                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
-                <a class="btn btn-light" href="campaign.html">Open in Campaign</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="template-card" data-category="meta salon" data-title="Salon Offer Ad">
-            <div class="template-preview preview-salon">
-              <div class="preview-top">
-                <span class="preview-pill">Salon Ad</span>
-                <span class="preview-format">1:1</span>
-              </div>
-              <div class="preview-copy">
-                <h3>Your next salon result starts here</h3>
-                <p>Built for premium beauty offers and booking campaigns</p>
-              </div>
-            </div>
-            <div class="template-body">
-              <h3 class="template-title">Salon Offer Ad</h3>
-              <p class="template-meta">A strong Meta ad layout for beauty salons, makeovers, hair treatments, and premium service promotions.</p>
-              <div class="tag-row">
-                <span class="tag">Salon</span>
-                <span class="tag">Meta Ad</span>
-                <span class="tag">Beauty</span>
-              </div>
-              <div class="template-actions">
-                <a class="btn btn-primary" href="ai-generator.html">Use Template</a>
-                <a class="btn btn-light" href="campaign.html">Open in Campaign</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="template-card" data-category="product reels" data-title="Product Launch Reel">
-            <div class="template-preview preview-product">
-              <div class="preview-top">
-                <span class="preview-pill">Product Reel</span>
-                <span class="preview-format">9:16</span>
-              </div>
-              <div class="preview-copy">
-                <h3>Launch your product with impact</h3>
-                <p>Great for D2C, beauty, wellness, gadgets, and ecommerce</p>
-              </div>
-            </div>
-            <div class="template-body">
-              <h3 class="template-title">Product Launch Reel</h3>
-              <p class="template-meta">A clean launch-focused reel structure that highlights product value, urgency, and call to action.</p>
-              <div class="tag-row">
-                <span class="tag">Product</span>
-                <span class="tag">Launch</span>
-                <span class="tag">Reel</span>
-              </div>
-              <div class="template-actions">
-                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
-                <a class="btn btn-light" href="ai-generator.html">Open in AI Studio</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="template-card" data-category="whatsapp product" data-title="WhatsApp Promo Blast">
-            <div class="template-preview preview-whatsapp">
-              <div class="preview-top">
-                <span class="preview-pill">WhatsApp</span>
-                <span class="preview-format">9:16</span>
-              </div>
-              <div class="preview-copy">
-                <h3>Offer live now</h3>
-                <p>Fast status-style creative for sales and quick inquiries</p>
-              </div>
-            </div>
-            <div class="template-body">
-              <h3 class="template-title">WhatsApp Promo Blast</h3>
-              <p class="template-meta">Use this for quick sales pushes, status updates, and direct message-driven offers for local businesses.</p>
-              <div class="tag-row">
-                <span class="tag">WhatsApp</span>
-                <span class="tag">Promo</span>
-                <span class="tag">Sales</span>
-              </div>
-              <div class="template-actions">
-                <a class="btn btn-primary" href="ai-generator.html">Use Template</a>
-                <a class="btn btn-light" href="video-creator.html">Open in Video Creator</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="template-card" data-category="festival jewellery" data-title="Festive Jewellery Sale">
-            <div class="template-preview preview-jewellery">
-              <div class="preview-top">
-                <span class="preview-pill">Jewellery</span>
-                <span class="preview-format">1:1</span>
-              </div>
-              <div class="preview-copy">
-                <h3>Celebrate with sparkle</h3>
-                <p>Designed for festive collections, gifting, and premium offers</p>
-              </div>
-            </div>
-            <div class="template-body">
-              <h3 class="template-title">Festive Jewellery Sale</h3>
-              <p class="template-meta">A festive promotion card for jewellery brands, gifting campaigns, and elegant seasonal marketing.</p>
-              <div class="tag-row">
-                <span class="tag">Jewellery</span>
-                <span class="tag">Festival</span>
-                <span class="tag">Retail</span>
-              </div>
+              <h3>Clinic Lead Ad</h3>
+              <p>Premium lead-focused template for consultation, treatment bookings, and confidence-led clinic campaigns.</p>
+              <div class="tag-row"><span class="tag">Clinic</span><span class="tag">Meta</span><span class="tag">Leads</span></div>
               <div class="template-actions">
                 <a class="btn btn-primary" href="campaign.html">Use Template</a>
-                <a class="btn btn-light" href="ai-generator.html">Open in AI Studio</a>
+                <a class="btn btn-light" href="ai-generator-tool.html">Open AI</a>
               </div>
             </div>
           </div>
 
-          <div class="template-card" data-category="festival reels" data-title="Festival Sale Reel">
-            <div class="template-preview preview-festival">
-              <div class="preview-top">
-                <span class="preview-pill">Festival Reel</span>
-                <span class="preview-format">9:16</span>
-              </div>
-              <div class="preview-copy">
-                <h3>Limited festive offer</h3>
-                <p>Strong urgency + celebration format for seasonal campaigns</p>
-              </div>
+          <div class="template-card" data-category="clinic whatsapp" data-title="Clinic WhatsApp Status">
+            <div class="template-preview preview-green">
+              <div class="preview-top"><span class="preview-pill">Clinic Status</span><span class="preview-format">9:16</span></div>
+              <div class="preview-copy"><h3>Book today on WhatsApp</h3><p>Simple status format for clinics</p></div>
             </div>
             <div class="template-body">
-              <h3 class="template-title">Festival Sale Reel</h3>
-              <p class="template-meta">Use for Diwali, Eid, wedding season, gifting, or limited-time festive sale promotions.</p>
-              <div class="tag-row">
-                <span class="tag">Festival</span>
-                <span class="tag">Reel</span>
-                <span class="tag">Urgency</span>
-              </div>
+              <h3>Clinic WhatsApp Status</h3>
+              <p>Short, direct, mobile-friendly status creative for offers, appointments, and local clinic promotion.</p>
+              <div class="tag-row"><span class="tag">Clinic</span><span class="tag">WhatsApp</span><span class="tag">Status</span></div>
               <div class="template-actions">
                 <a class="btn btn-primary" href="video-creator.html">Use Template</a>
-                <a class="btn btn-light" href="campaign.html">Open in Campaign</a>
+                <a class="btn btn-light" href="campaign.html">Campaign</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="clinic reel" data-title="Treatment Transformation Reel">
+            <div class="template-preview preview-blue">
+              <div class="preview-top"><span class="preview-pill">Transformation Reel</span><span class="preview-format">9:16</span></div>
+              <div class="preview-copy"><h3>See the difference</h3><p>Designed for before-after or trust-led stories</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Treatment Transformation Reel</h3>
+              <p>Reel layout for beauty clinics, wellness services, and visible transformation storytelling.</p>
+              <div class="tag-row"><span class="tag">Reel</span><span class="tag">Clinic</span><span class="tag">Results</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
+                <a class="btn btn-light" href="ai-generator-tool.html">Open AI</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="salon meta" data-title="Salon Offer Ad">
+            <div class="template-preview preview-rose">
+              <div class="preview-top"><span class="preview-pill">Salon Ad</span><span class="preview-format">1:1</span></div>
+              <div class="preview-copy"><h3>Your next glow starts here</h3><p>Soft premium design for salon offers</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Salon Offer Ad</h3>
+              <p>Meta ad template for salon bookings, beauty offers, makeover campaigns, and local service promotions.</p>
+              <div class="tag-row"><span class="tag">Salon</span><span class="tag">Meta</span><span class="tag">Beauty</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="campaign.html">Use Template</a>
+                <a class="btn btn-light" href="marketplace.html">Find Creator</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="salon reel" data-title="Salon Makeover Reel">
+            <div class="template-preview preview-meta">
+              <div class="preview-top"><span class="preview-pill">Makeover Reel</span><span class="preview-format">9:16</span></div>
+              <div class="preview-copy"><h3>Fresh look, fresh confidence</h3><p>For reels with beauty and transformation theme</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Salon Makeover Reel</h3>
+              <p>Elegant reel structure for beauty, salon, bridal looks, grooming, and local premium service marketing.</p>
+              <div class="tag-row"><span class="tag">Salon</span><span class="tag">Reel</span><span class="tag">Makeover</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
+                <a class="btn btn-light" href="campaign.html">Campaign</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="salon whatsapp" data-title="Beauty WhatsApp Promo">
+            <div class="template-preview preview-green">
+              <div class="preview-top"><span class="preview-pill">Beauty Status</span><span class="preview-format">9:16</span></div>
+              <div class="preview-copy"><h3>Offer live today</h3><p>Quick mobile promo for salon bookings</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Beauty WhatsApp Promo</h3>
+              <p>Simple status and WhatsApp-friendly format for beauty offers, weekend packages, and instant inquiries.</p>
+              <div class="tag-row"><span class="tag">Salon</span><span class="tag">WhatsApp</span><span class="tag">Promo</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
+                <a class="btn btn-light" href="ai-generator-tool.html">Open AI</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="jewellery meta festival" data-title="Jewellery Festive Sale">
+            <div class="template-preview preview-gold">
+              <div class="preview-top"><span class="preview-pill">Jewellery Sale</span><span class="preview-format">1:1</span></div>
+              <div class="preview-copy"><h3>Celebrate with sparkle</h3><p>Luxury festive campaign look</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Jewellery Festive Sale</h3>
+              <p>Premium festive sale card for jewellery launches, gifting, wedding season, and festive collections.</p>
+              <div class="tag-row"><span class="tag">Jewellery</span><span class="tag">Festival</span><span class="tag">Retail</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="campaign.html">Use Template</a>
+                <a class="btn btn-light" href="marketplace.html">Find Creator</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="jewellery reel" data-title="Jewellery Showcase Reel">
+            <div class="template-preview preview-gold">
+              <div class="preview-top"><span class="preview-pill">Showcase Reel</span><span class="preview-format">9:16</span></div>
+              <div class="preview-copy"><h3>Shine in every frame</h3><p>Elegant reel for collections and styling</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Jewellery Showcase Reel</h3>
+              <p>Built for collection launches, close-up product highlights, festive styling, and luxury visual storytelling.</p>
+              <div class="tag-row"><span class="tag">Jewellery</span><span class="tag">Reel</span><span class="tag">Luxury</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
+                <a class="btn btn-light" href="campaign.html">Campaign</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="jewellery whatsapp" data-title="Gold Offer Status">
+            <div class="template-preview preview-gold">
+              <div class="preview-top"><span class="preview-pill">Gold Status</span><span class="preview-format">9:16</span></div>
+              <div class="preview-copy"><h3>Limited festive gold offer</h3><p>Mobile-first message for quick reach</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Gold Offer Status</h3>
+              <p>Short-form status design for store offers, festive promotions, and WhatsApp-driven traffic.</p>
+              <div class="tag-row"><span class="tag">Jewellery</span><span class="tag">WhatsApp</span><span class="tag">Offer</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
+                <a class="btn btn-light" href="ai-generator-tool.html">Open AI</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="product meta" data-title="Product Launch Ad">
+            <div class="template-preview preview-blue">
+              <div class="preview-top"><span class="preview-pill">Launch Ad</span><span class="preview-format">1:1</span></div>
+              <div class="preview-copy"><h3>Launch with impact</h3><p>Product-first design with clean messaging</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Product Launch Ad</h3>
+              <p>Premium format for product launch, ecommerce campaigns, and brand-first value communication.</p>
+              <div class="tag-row"><span class="tag">Product</span><span class="tag">Launch</span><span class="tag">Meta</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="campaign.html">Use Template</a>
+                <a class="btn btn-light" href="ai-generator-tool.html">Open AI</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="product reel" data-title="Feature Highlight Reel">
+            <div class="template-preview preview-blue">
+              <div class="preview-top"><span class="preview-pill">Feature Reel</span><span class="preview-format">9:16</span></div>
+              <div class="preview-copy"><h3>Why this product wins</h3><p>Show one core feature beautifully</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Feature Highlight Reel</h3>
+              <p>Useful for D2C, consumer products, gadgets, wellness products, and strong benefit-focused reels.</p>
+              <div class="tag-row"><span class="tag">Product</span><span class="tag">Reel</span><span class="tag">Feature</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
+                <a class="btn btn-light" href="marketplace.html">Find Creator</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="product whatsapp" data-title="Order Now Status">
+            <div class="template-preview preview-green">
+              <div class="preview-top"><span class="preview-pill">Order Status</span><span class="preview-format">9:16</span></div>
+              <div class="preview-copy"><h3>Order directly today</h3><p>Simple WhatsApp-first product promo</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Order Now Status</h3>
+              <p>Great for direct ordering products on WhatsApp, limited offers, and quick sales pushes.</p>
+              <div class="tag-row"><span class="tag">Product</span><span class="tag">WhatsApp</span><span class="tag">Sales</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
+                <a class="btn btn-light" href="campaign.html">Campaign</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="festival meta" data-title="Festive Sale Ad">
+            <div class="template-preview preview-orange">
+              <div class="preview-top"><span class="preview-pill">Festive Sale</span><span class="preview-format">1:1</span></div>
+              <div class="preview-copy"><h3>Limited festive offer</h3><p>Warm premium look with urgency</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Festive Sale Ad</h3>
+              <p>Versatile festive ad design for local shops, boutiques, gifting brands, and seasonal campaigns.</p>
+              <div class="tag-row"><span class="tag">Festival</span><span class="tag">Meta</span><span class="tag">Offer</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="campaign.html">Use Template</a>
+                <a class="btn btn-light" href="ai-generator-tool.html">Open AI</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="festival reel" data-title="Festival Countdown Reel">
+            <div class="template-preview preview-orange">
+              <div class="preview-top"><span class="preview-pill">Countdown Reel</span><span class="preview-format">9:16</span></div>
+              <div class="preview-copy"><h3>Only few days left</h3><p>Urgency-led reel for sale countdown</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Festival Countdown Reel</h3>
+              <p>Strong countdown format for festive promotions, limited-time sales, and celebration-led urgency.</p>
+              <div class="tag-row"><span class="tag">Festival</span><span class="tag">Reel</span><span class="tag">Urgency</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
+                <a class="btn btn-light" href="campaign.html">Campaign</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="festival whatsapp" data-title="Festival WhatsApp Card">
+            <div class="template-preview preview-orange">
+              <div class="preview-top"><span class="preview-pill">Festive Status</span><span class="preview-format">9:16</span></div>
+              <div class="preview-copy"><h3>Celebrate and save today</h3><p>WhatsApp card with warm festive appeal</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Festival WhatsApp Card</h3>
+              <p>Short festive greeting plus offer format for brands that want traffic and quick festive attention.</p>
+              <div class="tag-row"><span class="tag">Festival</span><span class="tag">WhatsApp</span><span class="tag">Greeting</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
+                <a class="btn btn-light" href="ai-generator-tool.html">Open AI</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="meta reel lifestyle" data-title="Influencer Promo Template">
+            <div class="template-preview preview-meta">
+              <div class="preview-top"><span class="preview-pill">Influencer Promo</span><span class="preview-format">9:16</span></div>
+              <div class="preview-copy"><h3>Creator-led promotion</h3><p>Best for collab style brand content</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Influencer Promo Template</h3>
+              <p>Useful for creator campaigns, testimonials, influencer-led product storytelling, and trust marketing.</p>
+              <div class="tag-row"><span class="tag">Influencer</span><span class="tag">Collab</span><span class="tag">Reel</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="marketplace.html">Use Template</a>
+                <a class="btn btn-light" href="campaign.html">Campaign</a>
               </div>
             </div>
           </div>
 
           <div class="template-card" data-category="meta clinic" data-title="Consultation Booking Ad">
             <div class="template-preview preview-meta">
-              <div class="preview-top">
-                <span class="preview-pill">Consultation Ad</span>
-                <span class="preview-format">1:1</span>
-              </div>
-              <div class="preview-copy">
-                <h3>Book your consultation now</h3>
-                <p>Built to increase inquiries and WhatsApp bookings fast</p>
-              </div>
+              <div class="preview-top"><span class="preview-pill">Booking Ad</span><span class="preview-format">1:1</span></div>
+              <div class="preview-copy"><h3>Book your consultation now</h3><p>Clean conversion-focused layout</p></div>
             </div>
             <div class="template-body">
-              <h3 class="template-title">Consultation Booking Ad</h3>
-              <p class="template-meta">A clean conversion-focused ad structure for clinics, experts, and premium appointment-led services.</p>
-              <div class="tag-row">
-                <span class="tag">Consultation</span>
-                <span class="tag">Meta</span>
-                <span class="tag">Leads</span>
-              </div>
-              <div class="template-actions">
-                <a class="btn btn-primary" href="ai-generator.html">Use Template</a>
-                <a class="btn btn-light" href="leads.html">View Leads Flow</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="template-card" data-category="product meta" data-title="Feature Highlight Ad">
-            <div class="template-preview preview-product">
-              <div class="preview-top">
-                <span class="preview-pill">Feature Ad</span>
-                <span class="preview-format">1:1</span>
-              </div>
-              <div class="preview-copy">
-                <h3>Why this product stands out</h3>
-                <p>Use this to spotlight benefits and create instant need</p>
-              </div>
-            </div>
-            <div class="template-body">
-              <h3 class="template-title">Feature Highlight Ad</h3>
-              <p class="template-meta">Ideal for product businesses that want to communicate one strong feature or benefit with clean visual direction.</p>
-              <div class="tag-row">
-                <span class="tag">Feature</span>
-                <span class="tag">Product</span>
-                <span class="tag">Ad</span>
-              </div>
-              <div class="template-actions">
-                <a class="btn btn-primary" href="ai-generator.html">Use Template</a>
-                <a class="btn btn-light" href="video-creator.html">Open in Video Creator</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="template-card" data-category="reels salon" data-title="Beauty Service Reel">
-            <div class="template-preview preview-salon">
-              <div class="preview-top">
-                <span class="preview-pill">Beauty Reel</span>
-                <span class="preview-format">9:16</span>
-              </div>
-              <div class="preview-copy">
-                <h3>Glow, shine, confidence</h3>
-                <p>Perfect for salon services and transformation storytelling</p>
-              </div>
-            </div>
-            <div class="template-body">
-              <h3 class="template-title">Beauty Service Reel</h3>
-              <p class="template-meta">A visual-first reel template for salons and beauty businesses that want premium, attractive service presentation.</p>
-              <div class="tag-row">
-                <span class="tag">Salon</span>
-                <span class="tag">Beauty</span>
-                <span class="tag">Reel</span>
-              </div>
-              <div class="template-actions">
-                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
-                <a class="btn btn-light" href="ai-generator.html">Open in AI Studio</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="template-card" data-category="clinic whatsapp" data-title="Clinic WhatsApp Status">
-            <div class="template-preview preview-whatsapp">
-              <div class="preview-top">
-                <span class="preview-pill">Clinic Status</span>
-                <span class="preview-format">9:16</span>
-              </div>
-              <div class="preview-copy">
-                <h3>Expert care now available</h3>
-                <p>Great for quick trust-building and direct inquiries</p>
-              </div>
-            </div>
-            <div class="template-body">
-              <h3 class="template-title">Clinic WhatsApp Status</h3>
-              <p class="template-meta">For fast visibility and WhatsApp status promotion of clinic offers, appointments, and seasonal service pushes.</p>
-              <div class="tag-row">
-                <span class="tag">Clinic</span>
-                <span class="tag">WhatsApp</span>
-                <span class="tag">Status</span>
-              </div>
-              <div class="template-actions">
-                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
-                <a class="btn btn-light" href="campaign.html">Open in Campaign</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="template-card" data-category="meta reels product" data-title="Influencer Product Promo">
-            <div class="template-preview preview-reel">
-              <div class="preview-top">
-                <span class="preview-pill">Influencer Promo</span>
-                <span class="preview-format">9:16</span>
-              </div>
-              <div class="preview-copy">
-                <h3>Creator-led product push</h3>
-                <p>Built for product promotion with creator or testimonial angle</p>
-              </div>
-            </div>
-            <div class="template-body">
-              <h3 class="template-title">Influencer Product Promo</h3>
-              <p class="template-meta">A template designed for creator collabs, product demos, influencer storytelling, and testimonial-style reels.</p>
-              <div class="tag-row">
-                <span class="tag">Influencer</span>
-                <span class="tag">Product</span>
-                <span class="tag">Reel</span>
-              </div>
-              <div class="template-actions">
-                <a class="btn btn-primary" href="creator-marketplace.html">Use Template</a>
-                <a class="btn btn-light" href="video-creator.html">Open in Video Creator</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="template-card" data-category="meta reels whatsapp festival" data-title="Mega Sale Countdown">
-            <div class="template-preview preview-festival">
-              <div class="preview-top">
-                <span class="preview-pill">Countdown Offer</span>
-                <span class="preview-format">9:16</span>
-              </div>
-              <div class="preview-copy">
-                <h3>Only a few days left</h3>
-                <p>Urgency-driven format for sale countdowns and offer ending alerts</p>
-              </div>
-            </div>
-            <div class="template-body">
-              <h3 class="template-title">Mega Sale Countdown</h3>
-              <p class="template-meta">Use this for countdown-style campaigns when you want urgency, attention, and fast action across channels.</p>
-              <div class="tag-row">
-                <span class="tag">Countdown</span>
-                <span class="tag">Urgency</span>
-                <span class="tag">Sale</span>
-              </div>
+              <h3>Consultation Booking Ad</h3>
+              <p>For clinics, experts, and premium services where consultation is the first important conversion step.</p>
+              <div class="tag-row"><span class="tag">Consultation</span><span class="tag">Clinic</span><span class="tag">Bookings</span></div>
               <div class="template-actions">
                 <a class="btn btn-primary" href="campaign.html">Use Template</a>
-                <a class="btn btn-light" href="ai-generator.html">Open in AI Studio</a>
+                <a class="btn btn-light" href="leads.html">Leads</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="salon meta" data-title="Bridal Package Ad">
+            <div class="template-preview preview-rose">
+              <div class="preview-top"><span class="preview-pill">Bridal Ad</span><span class="preview-format">1:1</span></div>
+              <div class="preview-copy"><h3>Your bridal look begins here</h3><p>Elegant premium package promotion</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Bridal Package Ad</h3>
+              <p>Ideal for bridal studio, salon packages, wedding season campaigns, and look transformation offers.</p>
+              <div class="tag-row"><span class="tag">Salon</span><span class="tag">Bridal</span><span class="tag">Wedding</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="campaign.html">Use Template</a>
+                <a class="btn btn-light" href="video-creator.html">Video</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="product meta" data-title="Benefit First Ad">
+            <div class="template-preview preview-blue">
+              <div class="preview-top"><span class="preview-pill">Benefit Ad</span><span class="preview-format">1:1</span></div>
+              <div class="preview-copy"><h3>One strong reason to buy</h3><p>Minimal product ad with clear value</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Benefit First Ad</h3>
+              <p>Use this when you want one core benefit, one message, and a non-cluttered premium product presentation.</p>
+              <div class="tag-row"><span class="tag">Product</span><span class="tag">Ad</span><span class="tag">Benefit</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="campaign.html">Use Template</a>
+                <a class="btn btn-light" href="ai-generator-tool.html">Open AI</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-category="whatsapp clinic salon product" data-title="Direct DM Status">
+            <div class="template-preview preview-green">
+              <div class="preview-top"><span class="preview-pill">DM Status</span><span class="preview-format">9:16</span></div>
+              <div class="preview-copy"><h3>DM now for details</h3><p>Super simple action-first mobile format</p></div>
+            </div>
+            <div class="template-body">
+              <h3>Direct DM Status</h3>
+              <p>One of the most useful quick templates for businesses that rely on WhatsApp or Instagram DMs for leads.</p>
+              <div class="tag-row"><span class="tag">WhatsApp</span><span class="tag">DM</span><span class="tag">Fast Action</span></div>
+              <div class="template-actions">
+                <a class="btn btn-primary" href="video-creator.html">Use Template</a>
+                <a class="btn btn-light" href="campaign.html">Campaign</a>
               </div>
             </div>
           </div>
@@ -831,13 +832,14 @@
         </div>
 
         <div class="empty-state" id="emptyState">
-          No templates match your search right now. Try another keyword or choose a different category.
+          No templates match your search right now. Try another keyword or another category.
         </div>
 
         <div class="footer-note">
-          <strong>Bariq AI Template Layer</strong>
-          <span>This page should feel like a Canva-style starter library so users can quickly choose a template before moving into AI Studio, Campaigns, or Video Creator.</span>
+          <strong>Bariq AI Templates</strong>
+          <span>This page should feel like a softer premium Canva-style template library where users can browse and move into AI, video, campaigns, and marketplace without confusion.</span>
         </div>
+
       </div>
     </div>
   </section>
@@ -876,18 +878,21 @@
         }
       });
 
-      document.getElementById("emptyState").style.display = visibleCount === 0 ? "block" : "none";
+      document.getElementById("emptyState").style.display = visibleCount === 0 ? "block" : "block";
+      if (visibleCount > 0) {
+        document.getElementById("emptyState").style.display = "none";
+      }
     }
 
     function clearFilters() {
       document.getElementById("searchInput").value = "";
       activeCategory = "all";
-
       document.querySelectorAll(".chip").forEach(chip => chip.classList.remove("active"));
       document.querySelector('.chip[data-category="all"]').classList.add("active");
-
       filterTemplates();
     }
+
+    filterTemplates();
   </script>
 </body>
 </html>
