@@ -3,148 +3,754 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Payment Successful | Bariq AI</title>
+  <title>Bariq AI | Payments</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    :root{
+      --bg1:#fffaf5;
+      --bg2:#fbf8ff;
+      --purple:#6b57d9;
+      --purple-dark:#372d69;
+      --purple-soft:#f3efff;
+      --gold:#d8b05b;
+      --text:#2f2954;
+      --muted:#746d8e;
+      --card:#ffffff;
+      --border:#eadfbe;
+      --radius:24px;
+      --green:#1f8a52;
+      --orange:#c37b14;
+      --red:#b84d4d;
     }
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: linear-gradient(135deg, #faf7ff 0%, #fff9ef 50%, #f8f2ff 100%);
-      color: #241f31;
+    body{
+      font-family:Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:var(--text);
     }
 
-    .card {
-      width: 100%;
-      max-width: 520px;
-      background: rgba(255, 255, 255, 0.96);
-      border: 1px solid #f1df9f;
-      border-radius: 28px;
-      padding: 38px 30px;
-      text-align: center;
-      box-shadow: 0 16px 40px rgba(78, 38, 112, 0.1);
+    a{text-decoration:none;color:inherit}
+
+    .container{
+      width:min(1280px,92%);
+      margin:auto;
     }
 
-    .icon-wrap {
-      width: 88px;
-      height: 88px;
-      margin: 0 auto 22px;
-      border-radius: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #5f2396 0%, #8a3ffc 60%, #d4af37 130%);
-      color: #fff6d9;
-      font-size: 38px;
-      font-weight: 700;
-      box-shadow: 0 12px 28px rgba(95, 35, 150, 0.2);
+    header{
+      background:#fff;
+      border-bottom:1px solid #eee;
+      position:sticky;
+      top:0;
+      z-index:100;
     }
 
-    h1 {
-      font-size: 34px;
-      color: #5f2396;
-      margin-bottom: 12px;
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      padding:16px 0;
     }
 
-    p {
-      color: #5c5369;
-      font-size: 16px;
-      line-height: 1.7;
-      margin-bottom: 14px;
+    .brand{
+      font-size:30px;
+      font-weight:800;
+      background:linear-gradient(90deg,var(--gold),var(--purple));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
     }
 
-    .plan-box {
-      margin: 24px 0;
-      padding: 18px;
-      border-radius: 18px;
-      background: #fffaf0;
-      border: 1px solid #f1df9f;
-      text-align: left;
+    .menu{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
-    .plan-line {
-      margin-bottom: 8px;
-      color: #4c445a;
-      line-height: 1.6;
+    .menu a{
+      padding:10px 14px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      color:#4c4289;
     }
 
-    .plan-line:last-child {
-      margin-bottom: 0;
+    .menu a:hover,
+    .menu a.active{
+      background:var(--purple-soft);
     }
 
-    .badge {
-      display: inline-block;
-      margin-bottom: 18px;
-      background: #fff4d2;
-      color: #8b6500;
-      border: 1px solid #efd889;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
+    .page{
+      padding:28px 0 40px;
     }
 
-    .btn {
-      border: none;
-      padding: 14px 22px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #5f2396 0%, #8a3ffc 60%, #d4af37 130%);
-      color: white;
-      box-shadow: 0 10px 24px rgba(95, 35, 150, 0.18);
+    .shell{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:22px;
+      box-shadow:0 16px 40px rgba(83,57,139,.06);
     }
 
-    .btn:hover {
-      opacity: 0.96;
+    .hero{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .panel,.preview-card,.section-card,.footer-note{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:20px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #eee2c7;
+      color:#584d92;
+      font-size:13px;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+
+    h1{
+      font-size:42px;
+      line-height:1.06;
+      color:var(--purple-dark);
+      margin-bottom:10px;
+      font-weight:700;
+    }
+
+    .subtitle{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.8;
+      margin-bottom:16px;
+      max-width:780px;
+    }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .mini-box{
+      border:1px solid #efe3c6;
+      border-radius:18px;
+      padding:16px;
+      background:#fffdf9;
+    }
+
+    .mini-box h3{
+      font-size:16px;
+      color:#4d428b;
+      margin-bottom:6px;
+      font-weight:700;
+    }
+
+    .mini-box p{
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .preview-card{
+      overflow:hidden;
+      padding:0;
+    }
+
+    .preview-frame{
+      position:relative;
+      min-height:500px;
+      background:
+        linear-gradient(180deg, rgba(31,22,62,.16) 0%, rgba(31,22,62,.72) 62%, rgba(22,16,44,.92) 100%),
+        url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      border-radius:24px;
+      overflow:hidden;
+    }
+
+    .preview-content{
+      min-height:500px;
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      color:#fff;
+    }
+
+    .preview-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .preview-pill,
+    .preview-badge{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .preview-pill{
+      background:rgba(255,255,255,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .preview-badge{
+      background:#f7e8be;
+      color:#6d5104;
+    }
+
+    .preview-main{
+      max-width:82%;
+    }
+
+    .preview-kicker{
+      font-size:13px;
+      color:#f2e4b6;
+      margin-bottom:10px;
+      font-weight:700;
+    }
+
+    .preview-title{
+      font-size:42px;
+      line-height:1.02;
+      color:#fff6d5;
+      margin-bottom:12px;
+      font-weight:700;
+      letter-spacing:-0.04em;
+    }
+
+    .preview-subtitle{
+      font-size:15px;
+      line-height:1.75;
+      color:rgba(255,255,255,.94);
+      max-width:90%;
+    }
+
+    .preview-bottom{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .preview-cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 16px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      color:#fff;
+      font-size:14px;
+      font-weight:700;
+      box-shadow:0 10px 22px rgba(107,87,217,.18);
+    }
+
+    .preview-note{
+      font-size:13px;
+      color:rgba(255,255,255,.88);
+      background:rgba(255,255,255,.12);
+      padding:10px 12px;
+      border-radius:14px;
+      backdrop-filter:blur(4px);
+    }
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .stat-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:18px;
+    }
+
+    .stat-card strong{
+      display:block;
+      font-size:28px;
+      color:#473d87;
+      margin-bottom:6px;
+    }
+
+    .stat-card span{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .sections-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .section-card h3{
+      font-size:22px;
+      color:#493f86;
+      margin-bottom:12px;
+      font-weight:700;
+    }
+
+    .section-card p{
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.75;
+      margin-bottom:14px;
+    }
+
+    .list{
+      display:grid;
+      gap:12px;
+    }
+
+    .list-item{
+      border:1px solid #efe3c6;
+      border-radius:18px;
+      padding:14px;
+      background:#fffdf9;
+    }
+
+    .list-item strong{
+      display:block;
+      font-size:15px;
+      color:#473d87;
+      margin-bottom:6px;
+    }
+
+    .list-item span{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .status-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+
+    .status-badge{
+      display:inline-block;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .paid{ background:#eaf8f0; color:var(--green); }
+    .pending{ background:#fff5e7; color:var(--orange); }
+    .hold{ background:#fdeeee; color:var(--red); }
+
+    .action-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      border-radius:16px;
+      padding:13px 16px;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      color:white;
+      box-shadow:0 10px 22px rgba(107,87,217,.18);
+    }
+
+    .btn-light{
+      background:var(--purple-soft);
+      color:var(--purple-dark);
+      border:1px solid #e4d8ff;
+    }
+
+    .footer-note{
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .footer-note strong{
+      display:block;
+      margin-bottom:8px;
+      color:#483f86;
+      font-size:18px;
+      font-weight:700;
+    }
+
+    .site-footer{
+      margin-top:24px;
+      border-top:1px solid #eadfbe;
+      background:#fffaf8;
+      border-radius:24px;
+      overflow:hidden;
+    }
+
+    .footer-wrap{
+      display:grid;
+      grid-template-columns:1.2fr 2fr;
+      gap:24px;
+      padding:24px;
+    }
+
+    .footer-brand h3{
+      font-size:24px;
+      margin-bottom:10px;
+      color:#372d69;
+    }
+
+    .footer-brand p{
+      color:#746d8e;
+      line-height:1.7;
+      font-size:14px;
+    }
+
+    .footer-links{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .footer-links h4{
+      font-size:15px;
+      margin-bottom:10px;
+      color:#4c4289;
+    }
+
+    .footer-links a{
+      display:block;
+      margin-bottom:8px;
+      font-size:14px;
+      color:#746d8e;
+    }
+
+    .footer-links a:hover{
+      color:#372d69;
+    }
+
+    .footer-bottom{
+      border-top:1px solid #eee3c8;
+      padding:14px 24px;
+      text-align:center;
+      font-size:13px;
+      color:#746d8e;
+      background:#fff;
+    }
+
+    @media(max-width:1100px){
+      .hero,.stats-grid,.sections-grid,.mini-grid{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media(max-width:850px){
+      .hero{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:760px){
+      .stats-grid,.sections-grid,.mini-grid,.footer-wrap,.footer-links{
+        grid-template-columns:1fr;
+      }
+      .action-row{
+        flex-direction:column;
+      }
+      .btn{
+        width:100%;
+      }
+      h1{
+        font-size:34px;
+      }
+      .preview-title{
+        font-size:30px;
+      }
+      .preview-main{
+        max-width:100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="icon-wrap">✓</div>
-    <div class="badge">Payment Verified</div>
-    <h1>Payment Successful</h1>
-    <p>Your Bariq AI plan has been activated successfully.</p>
-    <p>You can now continue to your premium workspace.</p>
+  <header>
+    <div class="container nav">
+      <div class="brand">Bariq AI</div>
 
-    <div class="plan-box">
-      <div class="plan-line" id="successPlan">Plan: Loading...</div>
-      <div class="plan-line" id="successPrice">Amount: --</div>
-      <div class="plan-line" id="successCredits">Credits: --</div>
+      <nav class="menu">
+        <a href="index.html">Home</a>
+        <a href="business.html">Business</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="influencers.html">Influencers Panel</a>
+        <a href="marketing-ai.html">Marketing AI</a>
+        <a href="login.html">Login</a>
+      </nav>
     </div>
+  </header>
 
-    <button class="btn" onclick="goDashboard()">Go to Dashboard</button>
-  </div>
+  <section class="page">
+    <div class="container">
+      <div class="shell">
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const storedPlan = localStorage.getItem("bariq_selected_plan");
+        <div class="hero">
+          <div class="panel">
+            <div class="eyebrow">Payments Panel</div>
+            <h1>Keep payments simple and easy to understand.</h1>
+            <p class="subtitle">
+              Bariq should first collect money from businesses into your account, then separately track what needs to be paid out to creators. This keeps the system cleaner and safer in the early stage.
+            </p>
 
-      if (storedPlan) {
-        try {
-          const plan = JSON.parse(storedPlan);
-          document.getElementById("successPlan").innerText = "Plan: " + (plan.name || "Starter");
-          document.getElementById("successPrice").innerText = "Amount: " + (plan.price || "₹999/month");
-          document.getElementById("successCredits").innerText = "Credits: " + (plan.credits || "50 Credits");
-        } catch (e) {
-          document.getElementById("successPlan").innerText = "Plan: Activated";
-        }
-      }
-    });
+            <div class="mini-grid">
+              <div class="mini-box">
+                <h3>Business Payments</h3>
+                <p>Businesses pay Bariq for plans, campaigns, and services.</p>
+              </div>
+              <div class="mini-box">
+                <h3>Creator Payouts</h3>
+                <p>Creator amounts can be tracked separately and released after completion.</p>
+              </div>
+              <div class="mini-box">
+                <h3>Platform Revenue</h3>
+                <p>Keep your revenue visible without mixing it with payout obligations.</p>
+              </div>
+            </div>
+          </div>
 
-    function goDashboard() {
-      window.location.href  = "payment-success.html";
-    }
-  </script>
+          <div class="preview-card">
+            <div class="preview-frame">
+              <div class="preview-content">
+                <div class="preview-top">
+                  <span class="preview-pill">Bariq Payments</span>
+                  <span class="preview-badge">Simple Flow</span>
+                </div>
+
+                <div class="preview-main">
+                  <div class="preview-kicker">Collection → Tracking → Release</div>
+                  <div class="preview-title">Businesses pay Bariq first</div>
+                  <div class="preview-subtitle">
+                    Keep payment collection, platform revenue, and creator releases clearly separated so the system remains understandable and safe.
+                  </div>
+                </div>
+
+                <div class="preview-bottom">
+                  <span class="preview-cta">Manage Payments</span>
+                  <span class="preview-note">Collected • Pending • Creator Release • Revenue</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <strong>₹1,28,000</strong>
+            <span>Total business payments collected this cycle</span>
+          </div>
+          <div class="stat-card">
+            <strong>₹42,000</strong>
+            <span>Pending creator payouts after campaign completion</span>
+          </div>
+          <div class="stat-card">
+            <strong>₹86,000</strong>
+            <span>Current platform-side retained revenue and service collections</span>
+          </div>
+          <div class="stat-card">
+            <strong>14</strong>
+            <span>Total paid transactions processed in current period</span>
+          </div>
+        </div>
+
+        <div class="sections-grid">
+          <div class="section-card">
+            <h3>Business Payments Received</h3>
+            <p>This section shows money that has already come into Bariq from businesses purchasing services or packages.</p>
+            <div class="list">
+              <div class="list-item">
+                <strong>Marketing AI Premium Plan — ₹9,999</strong>
+                <span>Paid by business client for AI marketing, templates, and campaign access.</span>
+                <div class="status-row">
+                  <span class="status-badge paid">Paid</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <strong>Influencer Campaign Fee — ₹25,000</strong>
+                <span>Collected from business for creator collaboration and campaign setup.</span>
+                <div class="status-row">
+                  <span class="status-badge paid">Paid</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <strong>Business Dashboard Pro — ₹14,999</strong>
+                <span>Subscription payment for premium business tools and lead dashboard access.</span>
+                <div class="status-row">
+                  <span class="status-badge paid">Paid</span>
+                </div>
+              </div>
+            </div>
+            <div class="action-row">
+              <a class="btn btn-primary" href="login.html">Connect Payment Gateway</a>
+              <a class="btn btn-light" href="business.html">Back to Business</a>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Creator Payout Tracking</h3>
+            <p>This section shows what is owed to creators after campaign delivery, approval, or completion confirmation.</p>
+            <div class="list">
+              <div class="list-item">
+                <strong>Ayesha Glow — ₹12,000</strong>
+                <span>2 reels delivered for clinic campaign. Waiting for final confirmation before payout release.</span>
+                <div class="status-row">
+                  <span class="status-badge pending">Pending Release</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <strong>Rhea Styles — ₹18,000</strong>
+                <span>Luxury styling campaign completed. Payment still on hold for brand sign-off.</span>
+                <div class="status-row">
+                  <span class="status-badge hold">On Hold</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <strong>Fit with Neha — ₹5,500</strong>
+                <span>Wellness collaboration completed and ready for payout processing.</span>
+                <div class="status-row">
+                  <span class="status-badge pending">Ready to Release</span>
+                </div>
+              </div>
+            </div>
+            <div class="action-row">
+              <a class="btn btn-primary" href="creators-earnings.html">Open Creator Earnings</a>
+              <a class="btn btn-light" href="influencers.html">Influencers Panel</a>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>How the Payment Flow Should Work</h3>
+            <p>Keep this early-stage payment model simple so Bariq remains manageable while you scale.</p>
+            <div class="list">
+              <div class="list-item">
+                <strong>Step 1 — Business Pays Bariq</strong>
+                <span>Use Razorpay to collect platform payments directly into your business bank account.</span>
+              </div>
+              <div class="list-item">
+                <strong>Step 2 — Bariq Tracks Delivery</strong>
+                <span>Campaign, creator, and completion status should decide when creator payout is released.</span>
+              </div>
+              <div class="list-item">
+                <strong>Step 3 — Creator Paid Separately</strong>
+                <span>In the beginning, keep creator payouts manual or admin-approved instead of full automation.</span>
+              </div>
+            </div>
+            <div class="action-row">
+              <a class="btn btn-primary" href="admin.html">Admin Payment View</a>
+              <a class="btn btn-light" href="marketplace.html">Marketplace</a>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>What You Need Technically</h3>
+            <p>For early Bariq launch, keep payment setup realistic and easy to manage.</p>
+            <div class="list">
+              <div class="list-item">
+                <strong>Gateway Collection</strong>
+                <span>Use Razorpay Payment Gateway connected to your Bariq business bank account.</span>
+              </div>
+              <div class="list-item">
+                <strong>Business Payment Page</strong>
+                <span>Users choose a plan or campaign and pay Bariq directly through a checkout button.</span>
+              </div>
+              <div class="list-item">
+                <strong>Payout Logic Later</strong>
+                <span>Once Bariq scales, you can introduce split payouts, escrow, or payout automation later.</span>
+              </div>
+            </div>
+            <div class="action-row">
+              <a class="btn btn-primary" href="marketing-ai.html">Use Marketing AI</a>
+              <a class="btn btn-light" href="business.html">Business Dashboard</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          <strong>Bariq Payments</strong>
+          Payment flow should feel understandable, safe, and founder-controlled in the early stage.
+        </div>
+
+        <footer class="site-footer">
+          <div class="footer-wrap">
+            <div class="footer-brand">
+              <h3>Bariq AI</h3>
+              <p>
+                AI-powered marketing, influencer discovery, and campaign management made simple for modern businesses and creators.
+              </p>
+            </div>
+
+            <div class="footer-links">
+              <div>
+                <h4>Platform</h4>
+                <a href="index.html">Home</a>
+                <a href="business.html">Business</a>
+                <a href="marketplace.html">Marketplace</a>
+                <a href="influencers.html">Influencers Panel</a>
+                <a href="marketing-ai.html">Marketing AI</a>
+              </div>
+
+              <div>
+                <h4>Account</h4>
+                <a href="login.html">Login</a>
+                <a href="payments.html">Payments</a>
+                <a href="admin.html">Admin</a>
+              </div>
+
+              <div>
+                <h4>Legal</h4>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Refund Policy</a>
+                <a href="#">Contact</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            © 2026 Bariq AI. All rights reserved.
+          </div>
+        </footer>
+
+      </div>
+    </div>
+  </section>
 </body>
 </html>
