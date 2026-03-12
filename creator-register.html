@@ -1,90 +1,831 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bariq AI Creator Registration</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sora:wght@700&display=swap" rel="stylesheet"><style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI | Creator Register</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; }
 
-body{
-font-family:Inter;
-margin:0;
-background:#faf7ff;
-}
+    :root{
+      --bg1:#fffaf5;
+      --bg2:#fbf8ff;
+      --bg3:#f6f1ff;
+      --card:#ffffff;
+      --card-soft:rgba(255,255,255,0.94);
+      --border:#eadfbe;
+      --border-soft:#f1e8cf;
+      --purple:#6b57d9;
+      --purple-dark:#372d69;
+      --purple-soft:#f3efff;
+      --gold:#d8b05b;
+      --text:#2f2954;
+      --muted:#746d8e;
+      --shadow:0 18px 40px rgba(83,57,139,0.08);
+      --card-shadow:0 10px 24px rgba(83,57,139,0.05);
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
+    }
 
-header{
-display:flex;
-justify-content:space-between;
-padding:20px 40px;
-background:white;
-border-bottom:1px solid #eee;
-}
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,239,207,0.55), transparent 26%),
+        radial-gradient(circle at top right, rgba(110,87,217,0.08), transparent 20%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 48%, var(--bg3) 100%);
+    }
 
-.logo{
-font-family:Sora;
-font-size:28px;
-font-weight:800;
-background:linear-gradient(90deg,#6c63ff,#ff7ac6,#f5b54c);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
+    a { color: inherit; text-decoration: none; }
 
-.container{
-max-width:800px;
-margin:auto;
-padding:50px;
-}
+    .container {
+      width: min(1260px, calc(100% - 28px));
+      margin: 0 auto;
+    }
 
-form{
-background:white;
-padding:30px;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,0.05);
-}
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #efe5c8;
+    }
 
-input{
-width:100%;
-padding:12px;
-margin-bottom:15px;
-border-radius:10px;
-border:1px solid #ddd;
-}
+    .nav-wrap {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
 
-button{
-background:linear-gradient(90deg,#ffb347,#ff7ac6);
-border:none;
-padding:12px 20px;
-border-radius:20px;
-font-weight:700;
-cursor:pointer;
-}
+    .brand {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+      background: linear-gradient(90deg, var(--gold), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-</style></head><body><header>
-<div class="logo">Bariq AI</div>
-</header><div class="container"><h2>Creator Registration</h2><form onsubmit="saveCreator(event)"><input id="name" placeholder="Creator Name" required><input id="instagram" placeholder="Instagram Link"><input id="followers" placeholder="Followers"><input id="niche" placeholder="Niche (Beauty / Food / Fitness)"><input id="price" placeholder="Price per Reel"><input id="city" placeholder="City"><button type="submit">Register Creator</button>
+    .menu-toggle{
+      display:none;
+      border:none;
+      background:var(--purple-soft);
+      color:var(--purple-dark);
+      border-radius:12px;
+      padding:12px 14px;
+      font-size:18px;
+      font-weight:700;
+      cursor:pointer;
+    }
 
-</form></div><script>
+    .top-links {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      font-size:14px;
+      font-weight:700;
+      color:#4e438a;
+    }
 
-function saveCreator(e){
+    .top-links a {
+      padding:10px 14px;
+      border-radius:12px;
+    }
 
-e.preventDefault()
+    .top-links a:hover,
+    .top-links a.active {
+      background: var(--purple-soft);
+    }
 
-let creators=JSON.parse(localStorage.getItem("creators"))||[]
+    .page {
+      padding: 22px 0 40px;
+    }
 
-let creator={
-name:document.getElementById("name").value,
-instagram:document.getElementById("instagram").value,
-followers:document.getElementById("followers").value,
-niche:document.getElementById("niche").value,
-price:document.getElementById("price").value,
-city:document.getElementById("city").value
-}
+    .shell {
+      background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,251,245,0.95));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
 
-creators.push(creator)
+    .subnav {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+      padding:14px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--card-shadow);
+    }
 
-localStorage.setItem("creators",JSON.stringify(creators))
+    .subnav a {
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #4d428a;
+      background: #fff;
+      border: 1px solid #eee3c4;
+    }
 
-alert("Creator Registered Successfully")
+    .subnav a.active,
+    .subnav a:hover {
+      background: var(--purple-soft);
+      border-color: #e6dbff;
+    }
 
-}
+    .hero {
+      display:grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 390px);
+      gap:18px;
+      align-items:start;
+    }
 
-</script></body>
+    .panel,
+    .card,
+    .preview-card,
+    .footer-note {
+      background: var(--card-soft);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--card-shadow);
+      min-width: 0;
+    }
+
+    .panel,
+    .card,
+    .preview-card,
+    .footer-note {
+      padding: 20px;
+    }
+
+    .eyebrow {
+      display:inline-block;
+      padding:9px 14px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #ede2c5;
+      color:#554b8f;
+      font-size:13px;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(32px, 4vw, 46px);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      color: var(--purple-dark);
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 760px;
+    }
+
+    .soft-grid {
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .soft-box {
+      background:#fff;
+      border:1px solid #f0e7cb;
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .soft-box h3 {
+      margin:0 0 6px;
+      font-size:17px;
+      color:#4b4187;
+      font-weight:700;
+    }
+
+    .soft-box p {
+      margin:0;
+      font-size:14px;
+      line-height:1.65;
+      color:var(--muted);
+    }
+
+    .preview-card {
+      background: linear-gradient(180deg, #664de1 0%, #2d225c 100%);
+      border: 8px solid #211b32;
+      color:#fff;
+      min-height: 470px;
+    }
+
+    .preview-top {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    }
+
+    .pill {
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#f7e8be;
+      color:#6d5104;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .logo-box {
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      background: rgba(255,255,255,0.14);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .preview-kicker {
+      text-align:center;
+      color:#efe2b4;
+      font-size:14px;
+      margin-bottom:12px;
+    }
+
+    .preview-headline {
+      text-align:center;
+      color:#fff4cd;
+      font-size:32px;
+      line-height:1.1;
+      margin:0 0 12px;
+      font-weight:700;
+      letter-spacing:-0.03em;
+    }
+
+    .preview-subline {
+      text-align:center;
+      color:rgba(255,255,255,0.92);
+      line-height:1.7;
+      font-size:15px;
+      margin:0 0 18px;
+    }
+
+    .preview-cta {
+      text-align:center;
+      color:#fff;
+      font-size:15px;
+      font-weight:700;
+      margin-top:10px;
+    }
+
+    .studio {
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 350px);
+      gap:18px;
+      align-items:start;
+    }
+
+    .form-grid {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+
+    .field,
+    .full-width {
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      min-width:0;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size:14px;
+      font-weight:700;
+      color:#4c4289;
+    }
+
+    input,
+    select,
+    textarea {
+      width:100%;
+      border:1px solid #e8dec2;
+      background:#fff;
+      border-radius:16px;
+      padding:14px 14px;
+      color:var(--text);
+      font-size:15px;
+      outline:none;
+      font-family: Arial, sans-serif;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color:#d7c4ff;
+      box-shadow: 0 0 0 4px rgba(106,87,217,0.08);
+    }
+
+    .chips {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:6px;
+    }
+
+    .chip {
+      border:none;
+      background:#fff;
+      border:1px solid #ebdfc0;
+      color:#52498d;
+      font-size:13px;
+      font-weight:700;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+    }
+
+    .chip:hover {
+      background: var(--purple-soft);
+      border-color:#dfd2ff;
+    }
+
+    .action-row {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .btn {
+      border:none;
+      border-radius:16px;
+      padding:14px 18px;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .btn-primary {
+      color:#fff;
+      background: linear-gradient(135deg, #d6b05a, #6b57d9);
+      box-shadow:0 10px 22px rgba(107,87,217,0.18);
+    }
+
+    .btn-light {
+      background: var(--purple-soft);
+      color: var(--purple-dark);
+      border: 1px solid #e4d8ff;
+    }
+
+    .status-line {
+      margin-top:14px;
+      padding:14px 16px;
+      background:#fff;
+      border:1px solid #efe6cb;
+      border-radius:16px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .results-grid {
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:16px;
+    }
+
+    .card h3 {
+      margin:0 0 10px;
+      font-size:20px;
+      color:#493f86;
+      font-weight:700;
+    }
+
+    .card p,
+    .card ul {
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .card ul {
+      padding-left:18px;
+    }
+
+    .footer-note {
+      margin-top:18px;
+      text-align:center;
+    }
+
+    .footer-note strong {
+      display:block;
+      margin-bottom:8px;
+      color:#483f86;
+      font-size:18px;
+      font-weight:700;
+    }
+
+    .footer-note span {
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    @media (max-width: 1100px) {
+      .hero,
+      .studio {
+        grid-template-columns: 1fr;
+      }
+      .soft-grid,
+      .results-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container { width: min(100% - 18px, 1260px); }
+      .menu-toggle { display:block; }
+
+      .top-links {
+        display:none;
+        width:100%;
+        flex-direction:column;
+        gap:8px;
+      }
+
+      .top-links.show { display:flex; }
+
+      .top-links a {
+        width:100%;
+        background:#fff;
+        border:1px solid #efe5c8;
+      }
+
+      .subnav {
+        flex-direction:column;
+      }
+
+      .subnav a {
+        width:100%;
+      }
+
+      .form-grid,
+      .soft-grid,
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .action-row {
+        flex-direction:column;
+      }
+
+      .btn {
+        width:100%;
+      }
+
+      .preview-card {
+        min-height:auto;
+      }
+
+      .preview-headline {
+        font-size:28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">Bariq AI</a>
+
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+      <nav class="top-links" id="topLinks">
+        <a href="business-dashboard.html">Business</a>
+        <a href="creator-dashboard.html" class="active">Influencers</a>
+        <a href="admin-dashboard.html">Admin</a>
+        <a href="ai-generator.html">AI Studio</a>
+        <a href="login.html">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page">
+    <div class="container">
+      <div class="shell">
+
+        <div class="subnav">
+          <a href="creator-dashboard.html">Dashboard</a>
+          <a href="marketplace.html">Marketplace</a>
+          <a href="creator-register.html" class="active">Register</a>
+          <a href="creators-earnings.html">Earnings</a>
+          <a href="creator-profile.html">My Profile</a>
+        </div>
+
+        <div class="hero">
+          <div class="panel">
+            <div class="eyebrow">Creator Registration</div>
+            <h1>Build your creator profile properly.</h1>
+            <p class="subtitle">
+              Let influencers register inside Bariq with a clear niche, city, audience, pricing, and collaboration style so businesses can discover them with confidence.
+            </p>
+
+            <div class="soft-grid">
+              <div class="soft-box">
+                <h3>Niche</h3>
+                <p>Choose the category where your content fits naturally and feels trustworthy.</p>
+              </div>
+              <div class="soft-box">
+                <h3>Audience</h3>
+                <p>Share your follower size, city, and audience type in a clean business-friendly way.</p>
+              </div>
+              <div class="soft-box">
+                <h3>Pricing</h3>
+                <p>Keep collaboration pricing simple so brands know where you fit quickly.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview-card">
+            <div class="preview-top">
+              <span class="pill" id="previewCategoryPill">Beauty Creator</span>
+              <div class="logo-box">Bariq</div>
+            </div>
+            <div class="preview-kicker" id="previewName">Your Creator Name</div>
+            <h2 class="preview-headline" id="previewHeadline">A creator profile that brands can trust</h2>
+            <p class="preview-subline" id="previewSubline">Your niche, city, audience, and collaboration style will appear here</p>
+            <div class="preview-cta" id="previewPrice">Starting at ₹0 / Reel</div>
+          </div>
+        </div>
+
+        <div class="studio">
+          <div class="card">
+            <div class="eyebrow">Registration Form</div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="creatorName">Creator Name</label>
+                <input id="creatorName" type="text" placeholder="Your creator name" />
+              </div>
+
+              <div class="field">
+                <label for="city">City</label>
+                <input id="city" type="text" placeholder="Hyderabad, Mumbai, Chennai..." />
+              </div>
+
+              <div class="field">
+                <label for="category">Primary Category</label>
+                <select id="category">
+                  <option>Beauty Creator</option>
+                  <option>Fashion Creator</option>
+                  <option>Wellness Creator</option>
+                  <option>Food Creator</option>
+                  <option>Lifestyle Creator</option>
+                  <option>Local Business Creator</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="followers">Followers</label>
+                <input id="followers" type="text" placeholder="Example: 25K" />
+              </div>
+
+              <div class="field">
+                <label for="engagement">Engagement Rate</label>
+                <input id="engagement" type="text" placeholder="Example: 5.2%" />
+              </div>
+
+              <div class="field">
+                <label for="price">Starting Price / Reel</label>
+                <input id="price" type="text" placeholder="Example: ₹5,000" />
+              </div>
+
+              <div class="full-width">
+                <label for="audienceType">Audience Type</label>
+                <input id="audienceType" type="text" placeholder="Women 20-35, local families, students, beauty audience..." />
+              </div>
+
+              <div class="full-width">
+                <label for="nicheSummary">Creator Summary</label>
+                <textarea id="nicheSummary" placeholder="Describe your content style, niche, collaboration fit, and what kind of brands you work best with."></textarea>
+              </div>
+            </div>
+
+            <div class="chips">
+              <button class="chip" onclick="applyCreatorPreset('beauty')">Beauty Profile</button>
+              <button class="chip" onclick="applyCreatorPreset('fashion')">Fashion Profile</button>
+              <button class="chip" onclick="applyCreatorPreset('wellness')">Wellness Profile</button>
+              <button class="chip" onclick="applyCreatorPreset('food')">Food Profile</button>
+            </div>
+
+            <div class="action-row">
+              <button class="btn btn-primary" onclick="generateProfileSummary()">Generate Profile Summary</button>
+              <button class="btn btn-light" onclick="clearCreatorForm()">Clear</button>
+            </div>
+
+            <div class="status-line" id="statusLine">
+              Waiting for creator registration details...
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="eyebrow">Why it matters</div>
+            <p style="margin:0; color:var(--muted); font-size:14px; line-height:1.75;">
+              A clean creator registration flow helps Bariq feel more like a serious influencer marketplace. Brands should be able to understand profile fit, audience, and pricing quickly without messy pages.
+            </p>
+          </div>
+        </div>
+
+        <div class="results-grid">
+          <div class="card">
+            <h3>Profile Summary</h3>
+            <p id="profileSummary">Your creator profile summary will appear here.</p>
+          </div>
+
+          <div class="card">
+            <h3>Best Brand Fit</h3>
+            <p id="brandFit">Your best brand fit will appear here.</p>
+          </div>
+
+          <div class="card">
+            <h3>Marketplace Positioning</h3>
+            <p id="marketFit">Your creator positioning for Bariq marketplace will appear here.</p>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          <strong>Bariq AI Creator Registration</strong>
+          <span>This page should help creators join the platform clearly, while giving businesses confidence that each profile is structured and useful.</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const creatorPreviewFields = [
+      "creatorName",
+      "city",
+      "category",
+      "price",
+      "audienceType"
+    ];
+
+    creatorPreviewFields.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener("input", updateCreatorPreview);
+        el.addEventListener("change", updateCreatorPreview);
+      }
+    });
+
+    function toggleMenu() {
+      document.getElementById("topLinks").classList.toggle("show");
+    }
+
+    function updateCreatorPreview() {
+      const creatorName = document.getElementById("creatorName").value.trim() || "Your Creator Name";
+      const city = document.getElementById("city").value.trim() || "Your City";
+      const category = document.getElementById("category").value || "Beauty Creator";
+      const price = document.getElementById("price").value.trim() || "₹0";
+      const audienceType = document.getElementById("audienceType").value.trim() || "Your niche, city, audience, and collaboration style will appear here";
+
+      document.getElementById("previewCategoryPill").textContent = category;
+      document.getElementById("previewName").textContent = creatorName + " • " + city;
+      document.getElementById("previewHeadline").textContent = "A creator profile that brands can trust";
+      document.getElementById("previewSubline").textContent = audienceType;
+      document.getElementById("previewPrice").textContent = "Starting at " + price + " / Reel";
+    }
+
+    function applyCreatorPreset(type) {
+      if (type === "beauty") {
+        document.getElementById("creatorName").value = "Ayesha Glow";
+        document.getElementById("city").value = "Hyderabad";
+        document.getElementById("category").value = "Beauty Creator";
+        document.getElementById("followers").value = "48K";
+        document.getElementById("engagement").value = "5.8%";
+        document.getElementById("price").value = "₹6,000";
+        document.getElementById("audienceType").value = "Women 20-35 interested in beauty, skincare, salons, confidence, and aesthetics";
+        document.getElementById("nicheSummary").value = "I create beauty and self-care content that fits salons, clinics, skincare products, and confidence-led women-focused campaigns.";
+      }
+
+      if (type === "fashion") {
+        document.getElementById("creatorName").value = "Rhea Styles";
+        document.getElementById("city").value = "Mumbai";
+        document.getElementById("category").value = "Fashion Creator";
+        document.getElementById("followers").value = "92K";
+        document.getElementById("engagement").value = "4.6%";
+        document.getElementById("price").value = "₹12,000";
+        document.getElementById("audienceType").value = "Women 18-34 interested in fashion, styling, festive looks, jewellery, and luxury shopping";
+        document.getElementById("nicheSummary").value = "I create premium fashion and styling content ideal for boutiques, festive promotions, luxury looks, and jewellery campaigns.";
+      }
+
+      if (type === "wellness") {
+        document.getElementById("creatorName").value = "Fit with Neha";
+        document.getElementById("city").value = "Hyderabad";
+        document.getElementById("category").value = "Wellness Creator";
+        document.getElementById("followers").value = "36K";
+        document.getElementById("engagement").value = "6.2%";
+        document.getElementById("price").value = "₹5,500";
+        document.getElementById("audienceType").value = "Women and men interested in wellness, fitness, lifestyle improvement, and health support";
+        document.getElementById("nicheSummary").value = "My content is best for health, slimming, wellness products, and brands focused on transformation and better living.";
+      }
+
+      if (type === "food") {
+        document.getElementById("creatorName").value = "Foodie Arjun";
+        document.getElementById("city").value = "Bangalore";
+        document.getElementById("category").value = "Food Creator";
+        document.getElementById("followers").value = "58K";
+        document.getElementById("engagement").value = "5.1%";
+        document.getElementById("price").value = "₹7,500";
+        document.getElementById("audienceType").value = "Local food lovers, cafe audience, restaurant explorers, and lifestyle buyers";
+        document.getElementById("nicheSummary").value = "I create food-first local discovery content ideal for cafes, restaurants, dessert brands, and local promotions.";
+      }
+
+      updateCreatorPreview();
+      generateProfileSummary();
+    }
+
+    function generateProfileSummary() {
+      const creatorName = document.getElementById("creatorName").value.trim() || "This creator";
+      const city = document.getElementById("city").value.trim() || "their city";
+      const category = document.getElementById("category").value || "Beauty Creator";
+      const followers = document.getElementById("followers").value.trim() || "a growing audience";
+      const engagement = document.getElementById("engagement").value.trim() || "good engagement";
+      const price = document.getElementById("price").value.trim() || "a flexible rate";
+      const audienceType = document.getElementById("audienceType").value.trim() || "a relevant target audience";
+      const nicheSummary = document.getElementById("nicheSummary").value.trim() || "a useful creator collaboration style";
+
+      document.getElementById("statusLine").textContent =
+        "Creator profile summary generated for " + creatorName + ".";
+
+      document.getElementById("profileSummary").textContent =
+        creatorName + " is a " + category.toLowerCase() + " based in " + city + " with " + followers + " followers and " + engagement + " engagement. Starting rate: " + price + ". " + nicheSummary;
+
+      document.getElementById("brandFit").textContent =
+        "Best fit for brands targeting " + audienceType + ". This creator is suitable for campaigns that need trust, niche alignment, and a clear content angle.";
+
+      document.getElementById("marketFit").textContent =
+        creatorName + " can be positioned in Bariq marketplace as a " + category.toLowerCase() + " with city-based relevance, collaboration readiness, and business-friendly visibility.";
+
+      updateCreatorPreview();
+    }
+
+    function clearCreatorForm() {
+      document.getElementById("creatorName").value = "";
+      document.getElementById("city").value = "";
+      document.getElementById("category").selectedIndex = 0;
+      document.getElementById("followers").value = "";
+      document.getElementById("engagement").value = "";
+      document.getElementById("price").value = "";
+      document.getElementById("audienceType").value = "";
+      document.getElementById("nicheSummary").value = "";
+
+      document.getElementById("statusLine").textContent = "Waiting for creator registration details...";
+      document.getElementById("profileSummary").textContent = "Your creator profile summary will appear here.";
+      document.getElementById("brandFit").textContent = "Your best brand fit will appear here.";
+      document.getElementById("marketFit").textContent = "Your creator positioning for Bariq marketplace will appear here.";
+
+      updateCreatorPreview();
+    }
+
+    updateCreatorPreview();
+  </script>
+</body>
 </html>
