@@ -7,7 +7,7 @@
 
 <style>
 body{
-font-family: Arial;
+font-family:Arial;
 text-align:center;
 margin-top:120px;
 }
@@ -32,7 +32,7 @@ cursor:pointer;
 <input type="email" id="email" placeholder="Email">
 <input type="password" id="password" placeholder="Password">
 
-<button id="signupBtn">Sign Up</button>
+<button onclick="signup()">Sign Up</button>
 
 <br><br>
 <a href="login.html">Already have account? Login</a>
@@ -40,12 +40,12 @@ cursor:pointer;
 <script>
 
 const supabaseUrl = https://bariq-ai-three.vercel.app
-const supabaseKey = sb_publishable_npll8QpLghinRC6gMO4_wA_ZgM-ogRd
+const supabaseKey = ""sb_publishable_npll8QpLghinRC6gMO4_wA_ZgM-ogRd
 
 const { createClient } = supabase
 const supabaseClient = createClient(supabaseUrl, supabaseKey)
 
-document.getElementById("signupBtn").addEventListener("click", async () => {
+async function signup(){
 
 const email = document.getElementById("email").value
 const password = document.getElementById("password").value
@@ -60,10 +60,10 @@ alert(error.message)
 return
 }
 
-alert("Signup successful. Please login.")
-window.location.href = "login.html"
+alert("Signup successful")
+window.location.href="login.html"
 
-})
+}
 
 </script>
 
