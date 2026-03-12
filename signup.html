@@ -1,64 +1,116 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Create BariqAI Account</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-body{
-font-family:Arial;
-text-align:center;
-margin-top:120px;
-}
-input{
-display:block;
-margin:10px auto;
-padding:10px;
-width:260px;
-}
-button{
-padding:10px 20px;
-cursor:pointer;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create User - BariqAI</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .box {
+      width: 360px;
+      background: white;
+      padding: 30px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background: black;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .msg {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #333;
+    }
+    a {
+      display: inline-block;
+      margin-top: 14px;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
+  <div class="box">
+    <h2>Create BariqAI User</h2>
 
-<h2>Create BariqAI Account</h2>
+    <input type="email" id="email" placeholder="Enter email" />
+    <input type="password" id="password" placeholder="Enter password" />
 
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Password">
+    <button id="createUserBtn">Create User</button>
 
-<button onclick="signup()">Sign Up</button>
+    <div class="msg" id="message"></div>
 
-<br><br>
-<a href="login.html">Already have account? Login</a>
+    <a href="login.html">Already have account? Login</a>
+  </div>
 
-<script>
-const supabaseUrl = https://bariq-ai-three.vercel.app
-const supabaseKey = "sb_publishable_npll8QpLghinRC6gMO4_wA_ZgM-ogRd
+  <script>
+    const supabaseUrl = "https://bariq-ai-three.vercel.app";
+    const supabaseKey = "sb_publishable_npll8QpLghinRC6gMO4_wA_ZgM-ogRd";
 
-const { createClient } = supabase
-const supabaseClient = createClient(supabaseUrl, supabaseKey)
+    const { createClient } = supabase;
+    const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
-async function signup() {
-  const email = document.getElementById("email").value
-  const password = document.getElementById("password").value
+    document.getElementById("createUserBtn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const message = document.getElementById("message");
 
-  const { data, error } = await supabaseClient.auth.signUp({
-    email: email,
-    password: password
-  })
+      message.textContent = "";
 
-  if (error) {
-    alert(error.message)
-    return
-  }
+      if (!email || !password) {
+        message.textContent = "Please enter email and password.";
+        return;
+      }
 
-  alert("Signup successful")
-  window.location.href = "login.html"
-}
-</script>
+      if (password.length < 6) {
+        message.textContent = "Password must be at least 6 characters.";
+        return;
+      }
 
+      const { data, error } = await supabaseClient.auth.signUp({
+        email,
+        password
+      });
+
+      if (error) {
+        message.textContent = error.message;
+        return;
+      }
+
+      message.textContent = "User created successfully. Now go to login.";
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 1500);
+    });
+  </script>
 </body>
 </html>
