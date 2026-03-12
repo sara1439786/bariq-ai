@@ -13,31 +13,31 @@
     }
 
     :root{
-      --bg1:#fffdf9;
-      --bg2:#fff8f6;
-      --bg3:#fbf5ff;
+      --bg1:#fffdfa;
+      --bg2:#fff7f8;
+      --bg3:#faf5ff;
       --white:#ffffff;
-      --text:#413768;
-      --muted:#8d85a6;
-      --purple:#7a68df;
+      --text:#4a416f;
+      --muted:#8b83a2;
+      --purple:#7b68d9;
+      --purple-dark:#5b4da6;
       --purple-soft:#f3efff;
-      --gold:#d8b15d;
-      --gold-soft:#f8edd6;
-      --pink-soft:#fff1f4;
-      --pink:#f7dce4;
-      --border:#eee2d2;
-      --shadow:0 18px 45px rgba(99,72,145,.07);
-      --radius-xl:32px;
+      --gold:#d7b05f;
+      --gold-soft:#f8ecd1;
+      --pink-soft:#fff1f5;
+      --border:#eee1d2;
+      --shadow:0 18px 40px rgba(97,75,141,.08);
+      --radius-xl:34px;
       --radius-lg:24px;
       --radius-md:18px;
     }
 
     body{
-      color:var(--text);
       background:
-        radial-gradient(circle at top left, rgba(216,177,93,.15), transparent 25%),
-        radial-gradient(circle at top right, rgba(247,220,228,.32), transparent 30%),
+        radial-gradient(circle at top left, rgba(215,176,95,.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,221,230,.25), transparent 30%),
         linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
+      color:var(--text);
       overflow-x:hidden;
     }
 
@@ -55,9 +55,9 @@
       position:sticky;
       top:0;
       z-index:100;
-      backdrop-filter:blur(12px);
       background:rgba(255,255,255,.88);
-      border-bottom:1px solid rgba(238,226,210,.85);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(238,225,210,.9);
     }
 
     .nav{
@@ -72,17 +72,17 @@
     .brand{
       font-size:31px;
       font-weight:800;
-      letter-spacing:-0.03em;
       background:linear-gradient(90deg,var(--gold),var(--purple));
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
+      letter-spacing:-0.03em;
     }
 
     .menu{
       display:flex;
-      align-items:center;
-      gap:10px;
       flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
     }
 
     .menu a{
@@ -90,22 +90,22 @@
       border-radius:12px;
       font-size:14px;
       font-weight:700;
-      color:#5d548f;
+      color:#665b96;
       transition:.25s ease;
     }
 
     .menu a:hover,
     .menu a.active{
       background:var(--purple-soft);
-      color:#392f67;
+      color:var(--purple-dark);
     }
 
     .page{
-      padding:26px 0 40px;
+      padding:24px 0 40px;
     }
 
     .shell{
-      background:rgba(255,255,255,.84);
+      background:rgba(255,255,255,.82);
       border:1px solid var(--border);
       border-radius:var(--radius-xl);
       box-shadow:var(--shadow);
@@ -114,104 +114,102 @@
 
     .hero{
       display:grid;
-      grid-template-columns:1.08fr .92fr;
-      gap:22px;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
       align-items:center;
-      margin-bottom:20px;
+      margin-bottom:18px;
     }
 
     .hero-left,
     .hero-right,
-    .soft-card,
-    .soft-strip,
-    .footer-box{
+    .card,
+    .footer-wrap-box{
       background:rgba(255,255,255,.96);
       border:1px solid var(--border);
       border-radius:var(--radius-lg);
-      box-shadow:0 8px 24px rgba(87,67,122,.04);
+      box-shadow:0 8px 22px rgba(90,67,128,.04);
     }
 
     .hero-left{
-      padding:34px 30px;
-      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,248,249,.98));
+      padding:30px 28px;
+      background:linear-gradient(180deg,#fffefd,#fff8fb);
     }
 
     .eyebrow{
       display:inline-flex;
-      align-items:center;
       padding:8px 12px;
       border-radius:999px;
-      background:linear-gradient(90deg,#fff8eb,#fff1f4);
-      border:1px solid #f0e2cb;
-      color:#7b6f9b;
+      background:linear-gradient(90deg,#fff9ee,#fff3f6);
+      border:1px solid #efe1ca;
+      color:#7c7397;
       font-size:13px;
       font-weight:700;
       margin-bottom:16px;
     }
 
     h1{
-      font-size:38px;
-      line-height:1.12;
+      font-size:32px;
+      line-height:1.18;
       font-weight:600;
-      letter-spacing:-0.035em;
-      color:#403665;
-      max-width:620px;
+      letter-spacing:-0.03em;
       margin-bottom:10px;
+      color:var(--purple-dark);
+      max-width:580px;
     }
 
     .rotating-line{
-      font-size:18px;
-      color:#a88d97;
+      min-height:26px;
+      font-size:17px;
+      color:#9a8797;
       font-weight:600;
-      min-height:28px;
-      margin-bottom:16px;
+      margin-bottom:14px;
       transition:opacity .25s ease;
     }
 
     .subtitle{
-      max-width:650px;
       font-size:15px;
       line-height:1.9;
       color:var(--muted);
-      margin-bottom:22px;
+      max-width:610px;
+      margin-bottom:20px;
     }
 
     .hero-actions{
       display:flex;
-      gap:12px;
       flex-wrap:wrap;
-      margin-bottom:22px;
+      gap:12px;
+      margin-bottom:18px;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      border:none;
-      border-radius:16px;
       padding:13px 18px;
+      border-radius:16px;
       font-size:14px;
       font-weight:700;
-      cursor:pointer;
       transition:.25s ease;
+      border:none;
+      cursor:pointer;
     }
 
     .btn-primary{
       background:linear-gradient(135deg,var(--gold),var(--purple));
       color:#fff;
-      box-shadow:0 12px 24px rgba(122,104,223,.16);
+      box-shadow:0 10px 22px rgba(123,104,217,.16);
     }
 
-    .btn-light{
-      background:linear-gradient(180deg,#fff8fb,#f4efff);
-      color:#5a4e90;
-      border:1px solid #eadff7;
+    .btn-secondary{
+      background:linear-gradient(180deg,#fff9fb,#f6f0ff);
+      color:var(--purple-dark);
+      border:1px solid #e9def8;
     }
 
-    .btn-soft-gold{
-      background:linear-gradient(135deg,#f6ddb6,#d8b15d);
-      color:#5c430f;
-      border:1px solid #edd7ab;
+    .btn-gold{
+      background:linear-gradient(135deg,#f7dfb8,#d7b05f);
+      color:#62470f;
+      border:1px solid #ead6a8;
     }
 
     .btn:hover{
@@ -225,17 +223,17 @@
     }
 
     .mini-point{
-      border:1px solid #f0e5d5;
-      border-radius:18px;
-      padding:15px;
-      background:linear-gradient(180deg,#fffdfa,#fff8fb);
+      padding:14px;
+      border:1px solid #f0e4d4;
+      border-radius:16px;
+      background:linear-gradient(180deg,#fffdfb,#fff8fb);
     }
 
     .mini-point h3{
-      font-size:15px;
+      font-size:14px;
+      margin-bottom:5px;
+      color:#625694;
       font-weight:700;
-      color:#5a4e90;
-      margin-bottom:6px;
     }
 
     .mini-point p{
@@ -246,112 +244,142 @@
 
     .hero-right{
       padding:16px;
-      background:linear-gradient(180deg,#fff7f8,#fffdfa);
+      background:linear-gradient(180deg,#fff8f8,#fffdfb);
     }
 
-    .hero-visual{
+    .slider{
       position:relative;
       height:390px;
       border-radius:22px;
       overflow:hidden;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.16) 100%),
-        url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-      border:1px solid #eadfd0;
+      background:#f7f0ff;
     }
 
-    .hero-visual::after{
+    .slide{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transition:opacity .8s ease;
+      background-size:cover;
+      background-position:center;
+    }
+
+    .slide.active{
+      opacity:1;
+    }
+
+    .slide::after{
       content:"";
       position:absolute;
       inset:0;
-      background:linear-gradient(180deg, rgba(255,244,247,.10), rgba(91,73,132,.06));
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.22));
     }
 
-    .hero-overlay{
+    .slide-card{
       position:absolute;
-      left:18px;
-      right:18px;
-      bottom:18px;
+      left:20px;
+      bottom:20px;
+      right:20px;
       z-index:2;
       background:rgba(255,255,255,.84);
       backdrop-filter:blur(10px);
       border:1px solid rgba(255,255,255,.7);
       border-radius:20px;
       padding:18px;
+      max-width:78%;
     }
 
-    .hero-overlay h3{
-      font-size:26px;
+    .slide-card h3{
+      font-size:24px;
       line-height:1.12;
-      color:#4c416f;
-      margin-bottom:8px;
+      color:#56498f;
       font-weight:600;
-      letter-spacing:-0.03em;
+      margin-bottom:8px;
     }
 
-    .hero-overlay p{
+    .slide-card p{
       font-size:14px;
-      line-height:1.75;
-      color:#867d9c;
+      line-height:1.7;
+      color:#8a819f;
     }
 
-    .soft-strip{
-      padding:14px 0;
+    .dots{
+      position:absolute;
+      right:18px;
+      bottom:18px;
+      z-index:3;
+      display:flex;
+      gap:8px;
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:rgba(255,255,255,.55);
+      border:1px solid rgba(107,87,160,.15);
+    }
+
+    .dot.active{
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+    }
+
+    .ticker-wrap{
       overflow:hidden;
       margin-bottom:18px;
-      background:linear-gradient(90deg,#fff9ee,#fff5f7,#f7f1ff);
+      border:1px solid var(--border);
+      border-radius:22px;
+      background:linear-gradient(90deg,#fff9ee,#fff4f7,#f8f1ff);
     }
 
-    .marquee{
+    .ticker{
       display:flex;
-      width:max-content;
-      animation:marquee 24s linear infinite;
       gap:14px;
-      padding-left:14px;
+      width:max-content;
+      padding:14px 0;
+      animation:ticker 24s linear infinite;
     }
 
-    .marquee span{
+    .ticker span{
       display:inline-flex;
-      align-items:center;
-      padding:11px 18px;
+      padding:10px 16px;
       border-radius:999px;
-      background:rgba(255,255,255,.85);
-      border:1px solid #eedfc8;
-      color:#786e96;
+      border:1px solid #eedfc9;
+      background:rgba(255,255,255,.88);
+      color:#7b7095;
       font-size:14px;
       font-weight:600;
       white-space:nowrap;
     }
 
-    @keyframes marquee{
+    @keyframes ticker{
       from{transform:translateX(0);}
       to{transform:translateX(-50%);}
     }
 
-    .soft-grid{
+    .grid3{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:18px;
       margin-bottom:18px;
     }
 
-    .soft-card{
+    .card{
       padding:22px;
       background:linear-gradient(180deg,#fffefd,#fff8fb);
     }
 
-    .soft-card h2{
-      font-size:21px;
-      margin-bottom:10px;
-      color:#4b3f76;
+    .card h2{
+      font-size:20px;
+      color:#574a90;
       font-weight:600;
-      letter-spacing:-0.02em;
+      margin-bottom:10px;
     }
 
-    .soft-card p{
+    .card p{
       font-size:14px;
-      line-height:1.8;
       color:var(--muted);
+      line-height:1.8;
       margin-bottom:14px;
     }
 
@@ -364,50 +392,50 @@
     .soft-list div{
       padding:12px 13px;
       border-radius:15px;
-      background:linear-gradient(180deg,#fffaf1,#fff);
       border:1px solid #f0e2cd;
+      background:linear-gradient(180deg,#fffaf2,#fff);
+      color:#7c748f;
       font-size:13px;
       line-height:1.65;
-      color:#746d89;
     }
 
     .soft-list strong{
-      color:#564a86;
       display:block;
+      color:#5f5391;
       margin-bottom:4px;
       font-size:14px;
     }
 
-    .middle-band{
+    .mid-grid{
       display:grid;
-      grid-template-columns:.92fr .78fr;
+      grid-template-columns:.9fr .78fr;
       gap:18px;
       margin-bottom:18px;
       align-items:start;
     }
 
-    .left-narrow{
+    .narrow{
       max-width:720px;
     }
 
-    .footer-box{
-      padding:26px;
-      background:linear-gradient(180deg,#fffdfa,#fff7fa);
-    }
-
     .site-footer{
-      margin-top:6px;
-      border-top:1px solid #eadfbe;
-      background:linear-gradient(180deg,#fff9f8,#fff);
+      border:1px solid var(--border);
       border-radius:24px;
       overflow:hidden;
+      background:linear-gradient(180deg,#fff9f8,#fff);
     }
 
-    .footer-wrap{
+    .footer-wrap-box{
+      padding:26px;
+      border:none;
+      box-shadow:none;
+      background:transparent;
+    }
+
+    .footer-grid{
       display:grid;
       grid-template-columns:1.1fr 1.9fr;
       gap:24px;
-      padding:26px;
     }
 
     .footer-brand h3{
@@ -433,33 +461,33 @@
     .footer-links h4{
       font-size:15px;
       margin-bottom:10px;
-      color:#5d548f;
+      color:#625894;
     }
 
     .footer-links a{
       display:block;
       margin-bottom:8px;
       font-size:14px;
-      color:#8b84a3;
+      color:#8a82a0;
     }
 
     .footer-links a:hover{
-      color:#4b3f76;
+      color:#584d8d;
     }
 
     .footer-bottom{
-      border-top:1px solid #efe4d1;
+      border-top:1px solid #eee2d2;
       padding:14px 24px;
       text-align:center;
       font-size:13px;
-      color:#9189a8;
+      color:#9289a8;
       background:#fff;
     }
 
     @media(max-width:1100px){
       .hero,
-      .soft-grid,
-      .middle-band,
+      .grid3,
+      .mid-grid,
       .mini-points{
         grid-template-columns:1fr 1fr;
       }
@@ -467,44 +495,46 @@
 
     @media(max-width:880px){
       .hero,
-      .middle-band{
+      .mid-grid{
         grid-template-columns:1fr;
       }
-
-      .hero-visual{
+      .slider{
         height:320px;
       }
     }
 
     @media(max-width:760px){
-      .menu{
-        gap:6px;
-      }
-
       .menu a{
         font-size:13px;
         padding:9px 12px;
       }
 
       h1{
-        font-size:30px;
+        font-size:28px;
       }
 
-      .hero-overlay h3{
-        font-size:22px;
+      .slide-card{
+        max-width:100%;
+        left:14px;
+        right:14px;
+        bottom:14px;
       }
 
-      .soft-grid,
+      .slide-card h3{
+        font-size:21px;
+      }
+
+      .grid3,
       .mini-points,
-      .footer-wrap,
+      .footer-grid,
       .footer-links{
         grid-template-columns:1fr;
       }
 
       .hero-left,
       .hero-right,
-      .soft-card,
-      .footer-box{
+      .card,
+      .footer-wrap-box{
         padding:18px;
       }
 
@@ -542,14 +572,14 @@
           <div class="hero-left">
             <div class="eyebrow">Simple AI Marketing</div>
             <h1>Create better marketing with a calmer, simpler flow.</h1>
-            <div class="rotating-line" id="rotatingLine">One idea in. Clear direction out.</div>
+            <div class="rotating-line" id="rotatingLine">Create first. Continue calmly.</div>
             <p class="subtitle">
               Bariq is made for business owners and creators who want a softer way to build ads, reels, and campaign direction without feeling lost in complicated tools.
             </p>
 
             <div class="hero-actions">
               <a class="btn btn-primary" href="create.html">Start Creating</a>
-              <a class="btn btn-light" href="marketplace.html">Explore Marketplace</a>
+              <a class="btn btn-secondary" href="marketplace.html">Explore Marketplace</a>
             </div>
 
             <div class="mini-points">
@@ -557,12 +587,10 @@
                 <h3>Simple start</h3>
                 <p>Write one idea and let Bariq shape the message.</p>
               </div>
-
               <div class="mini-point">
                 <h3>Cleaner flow</h3>
                 <p>Create first, then move only where needed.</p>
               </div>
-
               <div class="mini-point">
                 <h3>App ready</h3>
                 <p>A lighter structure that can support app integration too.</p>
@@ -571,156 +599,142 @@
           </div>
 
           <div class="hero-right">
-            <div class="hero-visual">
-              <div class="hero-overlay">
-                <h3 id="heroSlideTitle">Create first, then continue.</h3>
-                <p id="heroSlideText">Users should understand the first step immediately and move calmly into the next stage.</p>
+            <div class="slider" id="slider">
+              <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80');">
+                <div class="slide-card">
+                  <h3>Create first, then continue.</h3>
+                  <p>Users should understand the first step immediately and move calmly into the next stage.</p>
+                </div>
+              </div>
+
+              <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');">
+                <div class="slide-card">
+                  <h3>Less confusion. Better action.</h3>
+                  <p>Softer visuals and simpler steps make the homepage feel more premium and alive.</p>
+                </div>
+              </div>
+
+              <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80');">
+                <div class="slide-card">
+                  <h3>Built for founders and creators.</h3>
+                  <p>Bariq should guide both businesses and influencers without overwhelming them.</p>
+                </div>
+              </div>
+
+              <div class="dots" id="dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="soft-strip">
-          <div class="marquee">
+        <div class="ticker-wrap">
+          <div class="ticker">
             <span>Simple prompts</span>
             <span>Cleaner campaigns</span>
-            <span>Premium design flow</span>
-            <span>Creator discovery</span>
-            <span>Better business direction</span>
-            <span>Ads, reels, and ideas</span>
+            <span>Premium creator discovery</span>
+            <span>Better ad direction</span>
+            <span>Reels, ideas, and flow</span>
             <span>Simple prompts</span>
             <span>Cleaner campaigns</span>
-            <span>Premium design flow</span>
-            <span>Creator discovery</span>
-            <span>Better business direction</span>
-            <span>Ads, reels, and ideas</span>
+            <span>Premium creator discovery</span>
+            <span>Better ad direction</span>
+            <span>Reels, ideas, and flow</span>
           </div>
         </div>
 
-        <div class="soft-grid">
-          <div class="soft-card">
+        <div class="grid3">
+          <div class="card">
             <h2>Create</h2>
             <p>Start here when you want to build an ad, reel, or campaign in one guided place.</p>
             <div class="soft-list">
-              <div>
-                <strong>One prompt</strong>
-                Start with your simple idea.
-              </div>
-              <div>
-                <strong>Better output</strong>
-                Get clearer headline, caption, and content flow.
-              </div>
+              <div><strong>One prompt</strong>Start with your simple idea.</div>
+              <div><strong>Better output</strong>Get clearer headline, caption, and content flow.</div>
             </div>
             <a class="btn btn-primary" href="create.html">Open Create</a>
           </div>
 
-          <div class="soft-card">
+          <div class="card">
             <h2>Marketplace</h2>
             <p>When you need creators or influencer support, move here after your idea becomes clear.</p>
             <div class="soft-list">
-              <div>
-                <strong>Discover creators</strong>
-                Browse simple creator profiles.
-              </div>
-              <div>
-                <strong>Choose better fit</strong>
-                Match by audience and style.
-              </div>
+              <div><strong>Discover creators</strong>Browse simple creator profiles.</div>
+              <div><strong>Choose better fit</strong>Match by audience and style.</div>
             </div>
-            <a class="btn btn-soft-gold" href="marketplace.html">Open Marketplace</a>
+            <a class="btn btn-gold" href="marketplace.html">Open Marketplace</a>
           </div>
 
-          <div class="soft-card">
+          <div class="card">
             <h2>Business</h2>
             <p>Use Business only when you want to manage leads, campaigns, saved work, and payments.</p>
             <div class="soft-list">
-              <div>
-                <strong>Track work</strong>
-                Keep campaigns and leads together.
-              </div>
-              <div>
-                <strong>See payments</strong>
-                Understand collection and payout flow.
-              </div>
+              <div><strong>Track work</strong>Keep campaigns and leads together.</div>
+              <div><strong>See payments</strong>Understand collection and payout flow.</div>
             </div>
-            <a class="btn btn-light" href="business.html">Open Business</a>
+            <a class="btn btn-secondary" href="business.html">Open Business</a>
           </div>
         </div>
 
-        <div class="middle-band">
-          <div class="soft-card left-narrow">
+        <div class="mid-grid">
+          <div class="card narrow">
             <h2>Why Bariq should feel calmer</h2>
             <p>
               A premium website should feel guided, soft, and live. Bariq works better when the user sees one next step instead of too many headings and buttons.
             </p>
             <div class="soft-list">
-              <div>
-                <strong>Less noise</strong>
-                Fewer modules on screen makes the product feel stronger.
-              </div>
-              <div>
-                <strong>Less darkness</strong>
-                Softer tones feel more premium and welcoming.
-              </div>
-              <div>
-                <strong>Less confusion</strong>
-                Clear navigation improves trust and action.
-              </div>
+              <div><strong>Less noise</strong>Fewer modules on screen makes the product feel stronger.</div>
+              <div><strong>Less darkness</strong>Softer tones feel more premium and welcoming.</div>
+              <div><strong>Less confusion</strong>Clear navigation improves trust and action.</div>
             </div>
           </div>
 
-          <div class="soft-card">
+          <div class="card">
             <h2>Ideal flow</h2>
             <p>Keep Bariq simple:</p>
             <div class="soft-list">
-              <div>
-                <strong>Step 1</strong>
-                Create your idea
-              </div>
-              <div>
-                <strong>Step 2</strong>
-                Choose creator if needed
-              </div>
-              <div>
-                <strong>Step 3</strong>
-                Manage it in Business
-              </div>
+              <div><strong>Step 1</strong>Create your idea</div>
+              <div><strong>Step 2</strong>Choose creator if needed</div>
+              <div><strong>Step 3</strong>Manage it in Business</div>
             </div>
           </div>
         </div>
 
-        <footer class="site-footer">
-          <div class="footer-wrap">
-            <div class="footer-brand">
-              <h3>Bariq AI</h3>
-              <p>
-                AI-powered marketing, creator discovery, and campaign building made simple for businesses and influencers.
-              </p>
-            </div>
-
-            <div class="footer-links">
-              <div>
-                <h4>Platform</h4>
-                <a href="index.html">Home</a>
-                <a href="create.html">Create</a>
-                <a href="marketplace.html">Marketplace</a>
-                <a href="business.html">Business</a>
-                <a href="influencers.html">Influencers</a>
+        <div class="site-footer">
+          <div class="footer-wrap-box">
+            <div class="footer-grid">
+              <div class="footer-brand">
+                <h3>Bariq AI</h3>
+                <p>
+                  AI-powered marketing, creator discovery, and campaign building made simple for businesses and influencers.
+                </p>
               </div>
 
-              <div>
-                <h4>Account</h4>
-                <a href="login.html">Login</a>
-                <a href="payments.html">Payments</a>
-                <a href="admin.html">Admin</a>
-              </div>
+              <div class="footer-links">
+                <div>
+                  <h4>Platform</h4>
+                  <a href="index.html">Home</a>
+                  <a href="create.html">Create</a>
+                  <a href="marketplace.html">Marketplace</a>
+                  <a href="business.html">Business</a>
+                  <a href="influencers.html">Influencers</a>
+                </div>
 
-              <div>
-                <h4>Legal</h4>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms & Conditions</a>
-                <a href="#">Refund Policy</a>
-                <a href="#">Contact</a>
+                <div>
+                  <h4>Account</h4>
+                  <a href="login.html">Login</a>
+                  <a href="payments.html">Payments</a>
+                  <a href="admin.html">Admin</a>
+                </div>
+
+                <div>
+                  <h4>Legal</h4>
+                  <a href="#">Privacy Policy</a>
+                  <a href="#">Terms & Conditions</a>
+                  <a href="#">Refund Policy</a>
+                  <a href="#">Contact</a>
+                </div>
               </div>
             </div>
           </div>
@@ -728,7 +742,7 @@
           <div class="footer-bottom">
             © 2026 Bariq AI. All rights reserved.
           </div>
-        </footer>
+        </div>
 
       </div>
     </div>
@@ -736,9 +750,9 @@
 
   <script>
     const rotatingTexts = [
+      "Create first. Continue calmly.",
       "One idea in. Clear direction out.",
       "Softer flow feels more premium.",
-      "Create first. Continue calmly.",
       "Less noise. Better action."
     ];
 
@@ -752,39 +766,21 @@
         rotatingLine.textContent = rotatingTexts[rotatingIndex];
         rotatingLine.style.opacity = 1;
       }, 250);
-    }, 2500);
+    }, 2400);
 
-    const slides = [
-      {
-        title: "Create first, then continue.",
-        text: "Users should understand the first step immediately and move calmly into the next stage."
-      },
-      {
-        title: "A softer website feels premium.",
-        text: "Clean spacing, lighter overlays, and live motion make the homepage feel stronger."
-      },
-      {
-        title: "Simple flow improves action.",
-        text: "People respond better when the path is clear and visually calmer."
-      }
-    ];
-
-    let slideIndex = 0;
-    const heroSlideTitle = document.getElementById("heroSlideTitle");
-    const heroSlideText = document.getElementById("heroSlideText");
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+    let currentSlide = 0;
 
     setInterval(() => {
-      heroSlideTitle.style.opacity = 0;
-      heroSlideText.style.opacity = 0;
+      slides[currentSlide].classList.remove("active");
+      dots[currentSlide].classList.remove("active");
 
-      setTimeout(() => {
-        slideIndex = (slideIndex + 1) % slides.length;
-        heroSlideTitle.textContent = slides[slideIndex].title;
-        heroSlideText.textContent = slides[slideIndex].text;
-        heroSlideTitle.style.opacity = 1;
-        heroSlideText.style.opacity = 1;
-      }, 250);
-    }, 3300);
+      currentSlide = (currentSlide + 1) % slides.length;
+
+      slides[currentSlide].classList.add("active");
+      dots[currentSlide].classList.add("active");
+    }, 3200);
   </script>
 </body>
 </html>
