@@ -8,10 +8,13 @@
 <body>
   <div style="max-width:420px;margin:60px auto;padding:20px;">
     <h2>Create BariqAI Account</h2>
+
     <input id="email" type="email" placeholder="Email" style="width:100%;padding:12px;margin:10px 0;">
     <input id="password" type="password" placeholder="Password" style="width:100%;padding:12px;margin:10px 0;">
-    <button id="signupBtn" style="width:100%;padding:12px;">Sign Up</button>
-    <p id="message"></p>
+
+    <button id="signupBtn" type="button" style="width:100%;padding:12px;">Sign Up</button>
+
+    <p id="message" style="margin-top:12px;"></p>
     <p><a href="login.html">Already have an account? Login</a></p>
   </div>
 
@@ -21,7 +24,12 @@
     const signupBtn = document.getElementById('signupBtn')
     const message = document.getElementById('message')
 
+    console.log('signup page loaded')
+    console.log('button found:', signupBtn)
+
     signupBtn.addEventListener('click', async () => {
+      console.log('signup button clicked')
+
       const email = document.getElementById('email').value.trim()
       const password = document.getElementById('password').value.trim()
 
@@ -30,19 +38,30 @@
         return
       }
 
+      if (password.length < 6) {
+        message.textContent = 'Password must be at least 6 characters.'
+        return
+      }
+
+      message.textContent = 'Creating account...'
+
       const { data, error } = await supabase.auth.signUp({
         email,
         password
       })
 
+      console.log('signup response:', { data, error })
+
       if (error) {
         message.textContent = error.message
-      } else {
-        message.textContent = 'Signup successful. Now go to login.'
-        setTimeout(() => {
-          window.location.href = 'login.html'
-        }, 1500)
+        return
       }
+
+      message.textContent = 'Signup successful! Redirecting to login...'
+
+      setTimeout(() => {
+        window.location.href = 'login.html'
+      }, 1500)
     })
   </script>
 </body>
