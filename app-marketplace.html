@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BariqAI Marketplace</title>
+  <style>
+    :root{
+      --bg: linear-gradient(135deg, #faf7ff 0%, #f7f1ff 40%, #fff9ef 100%);
+      --card: rgba(255,255,255,0.82);
+      --border: rgba(139,92,246,0.14);
+      --text: #24163b;
+      --muted: #6f6484;
+      --purple: #5b21b6;
+      --purple-soft: #8b5cf6;
+      --gold: #d4a63a;
+      --gold-deep: #b88316;
+      --shadow: 0 18px 48px rgba(91, 33, 182, 0.12);
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .shell{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 22px 16px 100px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(18px);
+      border:1px solid rgba(255,255,255,0.8);
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      padding: 18px 20px;
+      margin-bottom: 22px;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--purple), var(--purple-soft), var(--gold));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .brand p{
+      margin:4px 0 0;
+      color: var(--muted);
+      font-size:14px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      padding:12px 16px;
+      border-radius:14px;
+      border:none;
+      cursor:pointer;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .btn-purple{
+      color:white;
+      background: linear-gradient(135deg, var(--purple), var(--purple-soft));
+    }
+
+    .hero{
+      background:
+        radial-gradient(circle at top right, rgba(212,166,58,0.18), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(139,92,246,0.18), transparent 30%),
+        linear-gradient(135deg, #2a1144 0%, #4b1d79 60%, #6d28d9 100%);
+      color:white;
+      border-radius: 28px;
+      padding: 30px 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .hero h2{
+      margin:0 0 10px;
+      font-size: 30px;
+      line-height:1.2;
+    }
+
+    .hero p{
+      margin:0;
+      color: rgba(255,255,255,0.85);
+      max-width: 760px;
+      line-height:1.6;
+    }
+
+    .filters{
+      display:grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap:14px;
+      margin: 22px 0 26px;
+    }
+
+    .field{
+      background: rgba(255,255,255,0.82);
+      border:1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .field input,
+    .field select{
+      width:100%;
+      border:none;
+      outline:none;
+      background:transparent;
+      font-size:14px;
+      color:var(--text);
+    }
+
+    .section-title{
+      margin: 6px 0 14px;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--purple);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+    }
+
+    .card{
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      border:1px solid var(--border);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:4px;
+      background: linear-gradient(90deg, var(--purple-soft), var(--gold));
+    }
+
+    .avatar{
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      background: linear-gradient(135deg, #efe7ff, #fff1cb);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:26px;
+      margin-bottom: 14px;
+    }
+
+    .name{
+      font-size:20px;
+      font-weight:800;
+      margin:0 0 6px;
+    }
+
+    .meta{
+      color: var(--muted);
+      font-size:14px;
+      margin-bottom: 14px;
+      line-height:1.5;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:10px;
+      margin-bottom: 16px;
+    }
+
+    .stat{
+      background: rgba(109,40,217,0.06);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .stat-label{
+      font-size:12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .stat-value{
+      font-size:16px;
+      font-weight:800;
+      color: var(--text);
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      margin-top: 10px;
+    }
+
+    .btn-gold{
+      flex:1;
+      color:#2e2000;
+      background: linear-gradient(135deg, #f6df9b, var(--gold), var(--gold-deep));
+    }
+
+    .btn-light{
+      flex:1;
+      color: var(--purple);
+      background: rgba(109,40,217,0.08);
+    }
+
+    .bottom-nav{
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      width: min(760px, calc(100% - 24px));
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(20px);
+      border:1px solid rgba(255,255,255,0.8);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 10px;
+    }
+
+    .nav-item{
+      text-align:center;
+      padding:10px 8px;
+      border-radius:16px;
+      color: var(--muted);
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .nav-item.active{
+      background: linear-gradient(135deg, rgba(109,40,217,0.14), rgba(212,166,58,0.18));
+      color: var(--purple);
+    }
+
+    @media (max-width: 980px){
+      .filters{ grid-template-columns: 1fr 1fr; }
+      .grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px){
+      .topbar{ flex-direction:column; align-items:flex-start; }
+      .hero h2{ font-size:24px; }
+      .filters{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <div class="topbar">
+      <div class="brand">
+        <h1>BariqAI Marketplace</h1>
+        <p>Discover premium creators for luxury growth campaigns</p>
+      </div>
+      <a class="btn btn-purple" href="app-dashboard.html">Back to Dashboard</a>
+    </div>
+
+    <section class="hero">
+      <h2>Hire the right influencer for your next premium campaign.</h2>
+      <p>Browse creators by niche, city, and audience style. BariqAI helps you find talent that feels aligned with your brand and campaign goals.</p>
+    </section>
+
+    <div class="filters">
+      <div class="field"><input type="text" placeholder="Search influencer, niche, or city"></div>
+      <div class="field">
+        <select>
+          <option>All Categories</option>
+          <option>Beauty</option>
+          <option>Fashion</option>
+          <option>Food</option>
+          <option>Fitness</option>
+          <option>Luxury Lifestyle</option>
+        </select>
+      </div>
+      <div class="field">
+        <select>
+          <option>All Cities</option>
+          <option>Hyderabad</option>
+          <option>Mumbai</option>
+          <option>Delhi</option>
+          <option>Bangalore</option>
+        </select>
+      </div>
+      <div class="field">
+        <select>
+          <option>All Budgets</option>
+          <option>Under ₹5,000</option>
+          <option>₹5,000 - ₹15,000</option>
+          <option>₹15,000 - ₹50,000</option>
+        </select>
+      </div>
+    </div>
+
+    <h3 class="section-title">Featured Creators</h3>
+
+    <div class="grid">
+      <div class="card">
+        <div class="avatar">💄</div>
+        <div class="name">Aisha Khan</div>
+        <div class="meta">Beauty Creator • Hyderabad</div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-label">Followers</div>
+            <div class="stat-value">48K</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Starting Price</div>
+            <div class="stat-value">₹6,000</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-gold">Hire Now</button>
+          <button class="btn btn-light">View Profile</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="avatar">👗</div>
+        <div class="name">Riya Mehta</div>
+        <div class="meta">Fashion Influencer • Mumbai</div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-label">Followers</div>
+            <div class="stat-value">82K</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Starting Price</div>
+            <div class="stat-value">₹12,000</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-gold">Hire Now</button>
+          <button class="btn btn-light">View Profile</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="avatar">🍽️</div>
+        <div class="name">Foodie Neha</div>
+        <div class="meta">Food Creator • Bangalore</div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-label">Followers</div>
+            <div class="stat-value">35K</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Starting Price</div>
+            <div class="stat-value">₹5,500</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-gold">Hire Now</button>
+          <button class="btn btn-light">View Profile</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="avatar">🏋️</div>
+        <div class="name">Fit Aryan</div>
+        <div class="meta">Fitness Creator • Delhi</div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-label">Followers</div>
+            <div class="stat-value">61K</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Starting Price</div>
+            <div class="stat-value">₹8,500</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-gold">Hire Now</button>
+          <button class="btn btn-light">View Profile</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="avatar">✨</div>
+        <div class="name">Sana Luxe</div>
+        <div class="meta">Luxury Lifestyle • Hyderabad</div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-label">Followers</div>
+            <div class="stat-value">94K</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Starting Price</div>
+            <div class="stat-value">₹18,000</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-gold">Hire Now</button>
+          <button class="btn btn-light">View Profile</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="avatar">📸</div>
+        <div class="name">Maya Visuals</div>
+        <div class="meta">Creator + UGC • Chennai</div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-label">Followers</div>
+            <div class="stat-value">27K</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Starting Price</div>
+            <div class="stat-value">₹4,500</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-gold">Hire Now</button>
+          <button class="btn btn-light">View Profile</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item">Home</div>
+    <div class="nav-item">Create</div>
+    <div class="nav-item active">Campaigns</div>
+    <div class="nav-item">Profile</div>
+  </div>
+</body>
+</html>
