@@ -9,37 +9,33 @@
       box-sizing:border-box;
       margin:0;
       padding:0;
+      font-family:Inter, Arial, sans-serif;
     }
 
     :root{
-      --bg1:#fffaf5;
-      --bg2:#fbf8ff;
-      --bg3:#f8f3ff;
-      --purple:#6b57d9;
-      --purple-dark:#34285f;
-      --purple-soft:#f2edff;
-      --gold:#d7b05f;
-      --gold-deep:#b88b2d;
-      --text:#2f2954;
-      --muted:#746d8e;
+      --bg1:#fffdfa;
+      --bg2:#fff7f8;
+      --bg3:#faf5ff;
       --white:#ffffff;
-      --border:#eadfbe;
-      --card-shadow:0 20px 50px rgba(83,57,139,.08);
-      --radius-xl:30px;
+      --text:#312b55;
+      --muted:#7d7698;
+      --purple:#7260df;
+      --purple-soft:#f3efff;
+      --gold:#d8b15d;
+      --gold-soft:#f8ecd1;
+      --pink-soft:#fff0f3;
+      --border:#eee2d2;
+      --shadow:0 18px 45px rgba(99,72,145,.07);
+      --radius-xl:32px;
       --radius-lg:24px;
       --radius-md:18px;
     }
 
-    html{
-      scroll-behavior:smooth;
-    }
-
     body{
-      font-family:Inter, Arial, Helvetica, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at top left, rgba(215,176,95,.12), transparent 30%),
-        radial-gradient(circle at top right, rgba(107,87,217,.12), transparent 30%),
+        radial-gradient(circle at top left, rgba(216,177,93,.16), transparent 26%),
+        radial-gradient(circle at top right, rgba(255,214,224,.28), transparent 30%),
         linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
       overflow-x:hidden;
     }
@@ -50,64 +46,17 @@
     }
 
     .container{
-      width:min(1280px,92%);
+      width:min(1220px,92%);
       margin:auto;
-    }
-
-    .ambient{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:0;
-      overflow:hidden;
-    }
-
-    .blob{
-      position:absolute;
-      border-radius:50%;
-      filter:blur(50px);
-      opacity:.22;
-      animation:floatBlob 14s ease-in-out infinite;
-    }
-
-    .blob.one{
-      width:280px;
-      height:280px;
-      background:rgba(107,87,217,.22);
-      top:80px;
-      left:-60px;
-    }
-
-    .blob.two{
-      width:320px;
-      height:320px;
-      background:rgba(215,176,95,.20);
-      top:420px;
-      right:-100px;
-      animation-delay:2s;
-    }
-
-    .blob.three{
-      width:260px;
-      height:260px;
-      background:rgba(107,87,217,.16);
-      bottom:100px;
-      left:20%;
-      animation-delay:4s;
-    }
-
-    @keyframes floatBlob{
-      0%,100%{transform:translateY(0) translateX(0) scale(1);}
-      50%{transform:translateY(-20px) translateX(16px) scale(1.05);}
     }
 
     header{
       position:sticky;
       top:0;
       z-index:100;
-      backdrop-filter:blur(14px);
-      background:rgba(255,255,255,.92);
-      border-bottom:1px solid #eadfbe;
+      backdrop-filter:blur(12px);
+      background:rgba(255,255,255,.86);
+      border-bottom:1px solid rgba(238,226,210,.9);
     }
 
     .nav{
@@ -115,12 +64,12 @@
       align-items:center;
       justify-content:space-between;
       gap:16px;
-      padding:16px 0;
       flex-wrap:wrap;
+      padding:16px 0;
     }
 
     .brand{
-      font-size:30px;
+      font-size:31px;
       font-weight:800;
       letter-spacing:-0.03em;
       background:linear-gradient(90deg,var(--gold),var(--purple));
@@ -130,9 +79,9 @@
 
     .menu{
       display:flex;
-      flex-wrap:wrap;
-      gap:10px;
       align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
     .menu a{
@@ -140,99 +89,102 @@
       border-radius:12px;
       font-size:14px;
       font-weight:700;
-      color:#4d438a;
+      color:#5a518d;
       transition:.25s ease;
     }
 
     .menu a:hover,
     .menu a.active{
       background:var(--purple-soft);
-      color:var(--purple-dark);
+      color:#352d61;
     }
 
     .page{
-      position:relative;
-      z-index:1;
       padding:26px 0 40px;
     }
 
     .shell{
-      background:rgba(255,255,255,.86);
-      border:1px solid rgba(234,223,190,.9);
+      background:rgba(255,255,255,.82);
+      border:1px solid var(--border);
       border-radius:var(--radius-xl);
-      box-shadow:var(--card-shadow);
+      box-shadow:var(--shadow);
       padding:22px;
     }
 
     .hero{
       display:grid;
-      grid-template-columns:1.02fr .98fr;
-      gap:18px;
+      grid-template-columns:1.12fr .88fr;
+      gap:22px;
+      align-items:center;
       margin-bottom:18px;
-    }
-
-    .card{
-      background:rgba(255,255,255,.96);
-      border:1px solid var(--border);
-      border-radius:var(--radius-lg);
-      box-shadow:0 10px 28px rgba(83,57,139,.04);
     }
 
     .hero-left,
     .hero-right,
-    .section-card,
+    .soft-card,
     .footer-note{
-      padding:22px;
+      background:rgba(255,255,255,.95);
+      border:1px solid var(--border);
+      border-radius:var(--radius-lg);
+      box-shadow:0 8px 24px rgba(87,67,122,.04);
+    }
+
+    .hero-left{
+      padding:34px 30px;
+      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,248,249,.98));
     }
 
     .eyebrow{
       display:inline-flex;
       align-items:center;
-      gap:8px;
       padding:8px 12px;
       border-radius:999px;
-      border:1px solid #eee2c8;
-      background:#fffdf8;
-      color:#5b4e93;
+      background:linear-gradient(90deg,#fff8eb,#fff1f4);
+      border:1px solid #f0e2cb;
+      color:#6d5d96;
       font-size:13px;
       font-weight:700;
-      margin-bottom:14px;
+      margin-bottom:16px;
     }
 
     h1{
-      font-size:48px;
-      line-height:1.02;
+      font-size:42px;
+      line-height:1.06;
+      font-weight:700;
       letter-spacing:-0.04em;
-      color:var(--purple-dark);
+      color:#362f63;
+      max-width:630px;
       margin-bottom:12px;
-      max-width:720px;
     }
 
     .rotating-line{
-      min-height:28px;
-      margin-bottom:14px;
       font-size:17px;
+      color:#7a6bdd;
       font-weight:700;
-      color:#6a54cd;
+      min-height:28px;
+      margin-bottom:16px;
       transition:opacity .25s ease;
     }
 
     .subtitle{
-      max-width:760px;
-      color:var(--muted);
+      max-width:650px;
       font-size:15px;
-      line-height:1.82;
-      margin-bottom:18px;
+      line-height:1.9;
+      color:var(--muted);
+      margin-bottom:22px;
     }
 
     .hero-actions{
       display:flex;
       gap:12px;
       flex-wrap:wrap;
-      margin-bottom:18px;
+      margin-bottom:22px;
     }
 
     .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       border:none;
       border-radius:16px;
       padding:13px 18px;
@@ -240,51 +192,46 @@
       font-weight:700;
       cursor:pointer;
       transition:.25s ease;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
     }
 
     .btn-primary{
-      color:#fff;
       background:linear-gradient(135deg,var(--gold),var(--purple));
-      box-shadow:0 12px 24px rgba(107,87,217,.18);
+      color:#fff;
+      box-shadow:0 12px 24px rgba(114,96,223,.16);
     }
 
     .btn-primary:hover{
       transform:translateY(-1px);
-      box-shadow:0 16px 28px rgba(107,87,217,.22);
     }
 
     .btn-light{
-      background:var(--purple-soft);
-      color:var(--purple-dark);
-      border:1px solid #e6dbff;
+      background:linear-gradient(180deg,#fff8fb,#f4efff);
+      color:#4d4487;
+      border:1px solid #eadff7;
     }
 
     .btn-light:hover{
-      background:#ebe3ff;
+      background:#f7f1ff;
     }
 
-    .hero-points{
+    .mini-points{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:12px;
     }
 
     .mini-point{
-      border:1px solid #efe3c6;
+      border:1px solid #f0e5d5;
       border-radius:18px;
-      padding:16px;
-      background:#fffdf9;
+      padding:15px;
+      background:linear-gradient(180deg,#fffdfa,#fff8fb);
     }
 
     .mini-point h3{
       font-size:15px;
-      color:#4f458d;
-      margin-bottom:6px;
       font-weight:700;
+      color:#4b4286;
+      margin-bottom:6px;
     }
 
     .mini-point p{
@@ -294,146 +241,106 @@
     }
 
     .hero-right{
-      position:relative;
-      overflow:hidden;
-      min-height:520px;
-      background:
-        linear-gradient(180deg, rgba(32,24,63,.10) 0%, rgba(32,24,63,.72) 58%, rgba(24,17,47,.92) 100%),
-        url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-      color:#fff;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
+      padding:16px;
+      background:linear-gradient(180deg,#fff7f8,#fffdfa);
     }
 
-    .hero-right::after{
+    .hero-visual{
+      position:relative;
+      height:420px;
+      border-radius:22px;
+      overflow:hidden;
+      background:
+        linear-gradient(180deg, rgba(56,42,95,.08) 0%, rgba(56,42,95,.30) 100%),
+        url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      border:1px solid #eadfd0;
+    }
+
+    .hero-visual::after{
       content:"";
       position:absolute;
-      inset:auto -60px -60px auto;
-      width:220px;
-      height:220px;
-      background:radial-gradient(circle, rgba(255,255,255,.18), transparent 65%);
-      pointer-events:none;
+      inset:0;
+      background:linear-gradient(180deg, rgba(255,248,240,.18), rgba(84,65,126,.18));
     }
 
-    .preview-top,
-    .preview-bottom{
-      position:relative;
+    .hero-overlay{
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:18px;
       z-index:2;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
+      background:rgba(255,255,255,.78);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.65);
+      border-radius:20px;
+      padding:18px;
     }
 
-    .preview-pill,
-    .preview-badge{
-      display:inline-flex;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px;
+    .hero-overlay h3{
+      font-size:28px;
+      line-height:1.08;
+      color:#3a325f;
+      margin-bottom:8px;
       font-weight:700;
+      letter-spacing:-0.03em;
     }
 
-    .preview-pill{
-      background:rgba(255,255,255,.15);
-      backdrop-filter:blur(6px);
-      color:#fff;
+    .hero-overlay p{
+      font-size:14px;
+      line-height:1.75;
+      color:#6f688a;
     }
 
-    .preview-badge{
-      background:#f7e8be;
-      color:#6f5606;
-    }
-
-    .preview-main{
-      position:relative;
-      z-index:2;
-      max-width:82%;
-    }
-
-    .preview-kicker{
-      font-size:13px;
-      font-weight:700;
-      color:#f0dfaf;
-      margin-bottom:10px;
-    }
-
-    .preview-title{
-      font-size:40px;
-      line-height:1.03;
-      letter-spacing:-0.04em;
-      color:#fff7da;
-      margin-bottom:12px;
-      font-weight:700;
-    }
-
-    .preview-subtitle{
-      font-size:15px;
-      line-height:1.78;
-      color:rgba(255,255,255,.93);
-      max-width:92%;
-    }
-
-    .preview-note{
-      font-size:13px;
-      color:rgba(255,255,255,.9);
-      background:rgba(255,255,255,.12);
-      padding:10px 12px;
-      border-radius:14px;
-      backdrop-filter:blur(5px);
-    }
-
-    .simple-grid{
+    .soft-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:18px;
       margin-bottom:18px;
     }
 
-    .section-card h2{
-      font-size:23px;
-      color:#4a3f87;
+    .soft-card{
+      padding:22px;
+      background:linear-gradient(180deg,#fffefd,#fff8fb);
+    }
+
+    .soft-card h2{
+      font-size:22px;
       margin-bottom:10px;
+      color:#433977;
       font-weight:700;
       letter-spacing:-0.02em;
     }
 
-    .section-card p{
+    .soft-card p{
       font-size:14px;
-      line-height:1.78;
+      line-height:1.8;
       color:var(--muted);
       margin-bottom:14px;
     }
 
-    .list{
+    .soft-list{
       display:grid;
-      gap:12px;
-      margin-top:8px;
+      gap:10px;
     }
 
-    .list-item{
-      border:1px solid #efe3c6;
-      border-radius:18px;
-      padding:14px;
-      background:#fffdf9;
-    }
-
-    .list-item strong{
-      display:block;
-      color:#4a4186;
-      font-size:15px;
-      margin-bottom:5px;
-    }
-
-    .list-item span{
-      display:block;
+    .soft-list div{
+      padding:12px 13px;
+      border-radius:15px;
+      background:linear-gradient(180deg,#fffaf1,#fff);
+      border:1px solid #f0e2cd;
       font-size:13px;
       line-height:1.65;
-      color:var(--muted);
+      color:#6c6685;
     }
 
-    .founder-note{
+    .soft-list strong{
+      color:#483f83;
+      display:block;
+      margin-bottom:4px;
+      font-size:14px;
+    }
+
+    .middle-band{
       display:grid;
       grid-template-columns:1.15fr .85fr;
       gap:18px;
@@ -441,18 +348,20 @@
     }
 
     .footer-note{
+      padding:20px;
       text-align:center;
       color:var(--muted);
       font-size:14px;
       line-height:1.75;
       margin-bottom:18px;
+      background:linear-gradient(180deg,#fffdfa,#fff7fa);
     }
 
     .footer-note strong{
       display:block;
       font-size:18px;
-      color:#493f86;
-      margin-bottom:8px;
+      color:#463d80;
+      margin-bottom:7px;
       font-weight:700;
     }
 
@@ -466,20 +375,20 @@
 
     .footer-wrap{
       display:grid;
-      grid-template-columns:1.2fr 2fr;
+      grid-template-columns:1.1fr 1.9fr;
       gap:24px;
       padding:24px;
     }
 
     .footer-brand h3{
       font-size:24px;
-      color:#372d69;
       margin-bottom:10px;
+      color:#3b3467;
     }
 
     .footer-brand p{
       font-size:14px;
-      line-height:1.75;
+      line-height:1.78;
       color:var(--muted);
     }
 
@@ -491,47 +400,47 @@
 
     .footer-links h4{
       font-size:15px;
-      color:#4d4389;
       margin-bottom:10px;
+      color:#4f458b;
     }
 
     .footer-links a{
       display:block;
+      margin-bottom:8px;
       font-size:14px;
       color:var(--muted);
-      margin-bottom:8px;
     }
 
     .footer-links a:hover{
-      color:#372d69;
+      color:#3b3467;
     }
 
     .footer-bottom{
-      text-align:center;
+      border-top:1px solid #efe4d1;
       padding:14px 24px;
-      border-top:1px solid #eee4ca;
+      text-align:center;
       font-size:13px;
       color:var(--muted);
       background:#fff;
     }
 
-    @media(max-width:1150px){
+    @media(max-width:1100px){
       .hero,
-      .simple-grid,
-      .founder-note,
-      .hero-points{
+      .soft-grid,
+      .middle-band,
+      .mini-points{
         grid-template-columns:1fr 1fr;
       }
     }
 
-    @media(max-width:900px){
+    @media(max-width:880px){
       .hero,
-      .founder-note{
+      .middle-band{
         grid-template-columns:1fr;
       }
 
-      .preview-main{
-        max-width:100%;
+      .hero-visual{
+        height:340px;
       }
     }
 
@@ -546,15 +455,15 @@
       }
 
       h1{
-        font-size:34px;
+        font-size:32px;
       }
 
-      .preview-title{
-        font-size:30px;
+      .hero-overlay h3{
+        font-size:24px;
       }
 
-      .simple-grid,
-      .hero-points,
+      .soft-grid,
+      .mini-points,
       .footer-wrap,
       .footer-links{
         grid-template-columns:1fr;
@@ -562,7 +471,7 @@
 
       .hero-left,
       .hero-right,
-      .section-card,
+      .soft-card,
       .footer-note{
         padding:18px;
       }
@@ -574,20 +483,10 @@
       .btn{
         width:100%;
       }
-
-      .hero-right{
-        min-height:420px;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="ambient">
-    <div class="blob one"></div>
-    <div class="blob two"></div>
-    <div class="blob three"></div>
-  </div>
-
   <header>
     <div class="container nav">
       <div class="brand">Bariq AI</div>
@@ -608,12 +507,12 @@
       <div class="shell">
 
         <div class="hero">
-          <div class="card hero-left">
+          <div class="hero-left">
             <div class="eyebrow">Simple AI Marketing</div>
-            <h1>Create better marketing without learning complicated tools.</h1>
-            <div class="rotating-line" id="rotatingLine">Type one idea. Bariq helps you shape it.</div>
+            <h1>Create better marketing with a softer, simpler flow.</h1>
+            <div class="rotating-line" id="rotatingLine">One idea in. Clear direction out.</div>
             <p class="subtitle">
-              Bariq is made for business owners and creators who want a simpler way to build ads, reels, and campaign direction. No heavy dashboard feeling. No confusing flow. Just start with one idea and continue clearly.
+              Bariq is made for business owners and creators who want a calmer way to create ads, reels, and campaign direction without learning complicated systems.
             </p>
 
             <div class="hero-actions">
@@ -621,57 +520,46 @@
               <a class="btn btn-light" href="marketplace.html">Explore Marketplace</a>
             </div>
 
-            <div class="hero-points">
+            <div class="mini-points">
               <div class="mini-point">
                 <h3>Simple start</h3>
-                <p>Write your idea once and let Bariq organize the message.</p>
+                <p>Write one idea and let Bariq shape the message.</p>
               </div>
+
               <div class="mini-point">
                 <h3>Cleaner flow</h3>
-                <p>Create first, then move to creators, business, or payments only if needed.</p>
+                <p>Create first, then move only where needed.</p>
               </div>
+
               <div class="mini-point">
-                <h3>Website + app ready</h3>
-                <p>The structure is simple enough to support app integration later.</p>
+                <h3>App ready</h3>
+                <p>A light structure that can support app integration too.</p>
               </div>
             </div>
           </div>
 
-          <div class="card hero-right">
-            <div class="preview-top">
-              <span class="preview-pill">Bariq Live Flow</span>
-              <span class="preview-badge">Premium</span>
-            </div>
-
-            <div class="preview-main">
-              <div class="preview-kicker" id="heroKicker">Create from one idea</div>
-              <div class="preview-title" id="heroTitle">Ads, reels, and campaign direction in one cleaner flow</div>
-              <div class="preview-subtitle" id="heroSubtitle">
-                Bariq should feel guided and light, especially for founders and users who do not want technical systems.
+          <div class="hero-right">
+            <div class="hero-visual">
+              <div class="hero-overlay">
+                <h3 id="heroSlideTitle">Less confusion. Better action.</h3>
+                <p id="heroSlideText">Bariq should guide people softly instead of overwhelming them with too many tools and heavy screens.</p>
               </div>
-            </div>
-
-            <div class="preview-bottom">
-              <span class="btn btn-primary" style="width:auto;">Start Creating</span>
-              <span class="preview-note">Create • Marketplace • Business</span>
             </div>
           </div>
         </div>
 
-        <div class="simple-grid">
-          <div class="card section-card">
+        <div class="soft-grid">
+          <div class="soft-card">
             <h2>Create</h2>
-            <p>
-              Start here when you want to make an ad, reel, or campaign. Bariq keeps the input simple and gives you a clearer direction.
-            </p>
-            <div class="list">
-              <div class="list-item">
-                <strong>One idea in</strong>
-                <span>Type what you want to promote without using heavy prompts.</span>
+            <p>Start here when you want to build an ad, reel, or campaign in one guided place.</p>
+            <div class="soft-list">
+              <div>
+                <strong>One prompt</strong>
+                Start with your simple idea.
               </div>
-              <div class="list-item">
-                <strong>Clear output</strong>
-                <span>Get headline, caption, flow, and next step.</span>
+              <div>
+                <strong>Better output</strong>
+                Get clearer headline, caption, and content flow.
               </div>
             </div>
             <div style="margin-top:14px;">
@@ -679,19 +567,17 @@
             </div>
           </div>
 
-          <div class="card section-card">
+          <div class="soft-card">
             <h2>Marketplace</h2>
-            <p>
-              If you need creators or influencer support, move here after your idea is clear. This keeps the journey easier.
-            </p>
-            <div class="list">
-              <div class="list-item">
+            <p>When you need creators or influencer support, move here after your idea becomes clear.</p>
+            <div class="soft-list">
+              <div>
                 <strong>Discover creators</strong>
-                <span>Browse simpler creator profiles without confusion.</span>
+                Browse simple creator profiles.
               </div>
-              <div class="list-item">
+              <div>
                 <strong>Choose better fit</strong>
-                <span>Pick based on campaign style, category, and audience.</span>
+                Match by audience and style.
               </div>
             </div>
             <div style="margin-top:14px;">
@@ -699,19 +585,17 @@
             </div>
           </div>
 
-          <div class="card section-card">
+          <div class="soft-card">
             <h2>Business</h2>
-            <p>
-              Use Business when you want to manage your saved work, leads, payments, and campaign progress after creation starts.
-            </p>
-            <div class="list">
-              <div class="list-item">
-                <strong>Leads and campaigns</strong>
-                <span>Track follow-up and active work in one place.</span>
+            <p>Use Business only when you want to manage leads, campaigns, saved work, and payments.</p>
+            <div class="soft-list">
+              <div>
+                <strong>Track work</strong>
+                Keep campaigns and leads together.
               </div>
-              <div class="list-item">
-                <strong>Payments</strong>
-                <span>See what is collected and what still needs action.</span>
+              <div>
+                <strong>See payments</strong>
+                Understand collection and payout flow.
               </div>
             </div>
             <div style="margin-top:14px;">
@@ -720,53 +604,51 @@
           </div>
         </div>
 
-        <div class="founder-note">
-          <div class="card section-card">
-            <h2>Why Bariq should feel different</h2>
+        <div class="middle-band">
+          <div class="soft-card">
+            <h2>Why Bariq should feel calmer</h2>
             <p>
-              Many websites try to show too many tools at once. Bariq should feel more guided. A user should first understand what to do, then take the next step calmly.
+              A premium website should not feel noisy. It should feel easy, aesthetic, and guided. Bariq works better when the user sees one next step instead of too many headings and buttons.
             </p>
-            <div class="list">
-              <div class="list-item">
-                <strong>Not too many headings</strong>
-                <span>Simple navigation makes the platform feel more premium.</span>
+            <div class="soft-list">
+              <div>
+                <strong>Less noise</strong>
+                Fewer modules on screen makes the product feel stronger.
               </div>
-              <div class="list-item">
-                <strong>Not too many jumps</strong>
-                <span>Users should stay focused instead of moving through many broken flows.</span>
+              <div>
+                <strong>Less darkness</strong>
+                Softer tones feel more premium and welcoming.
               </div>
-              <div class="list-item">
-                <strong>Not too technical</strong>
-                <span>Bariq is for real businesses and creators, not only marketers.</span>
+              <div>
+                <strong>Less confusion</strong>
+                Clear navigation improves trust and action.
               </div>
             </div>
           </div>
 
-          <div class="card section-card">
-            <h2>Ideal Bariq journey</h2>
-            <p>
-              Keep the main product journey light:
-            </p>
-            <div class="list">
-              <div class="list-item">
+          <div class="soft-card">
+            <h2>Ideal flow</h2>
+            <p>Keep Bariq simple:</p>
+            <div class="soft-list">
+              <div>
                 <strong>Step 1</strong>
-                <span>Start on Create and shape the message.</span>
+                Create your idea
               </div>
-              <div class="list-item">
+              <div>
                 <strong>Step 2</strong>
-                <span>Move to Marketplace if creator support is needed.</span>
+                Choose creator if needed
               </div>
-              <div class="list-item">
+              <div>
                 <strong>Step 3</strong>
-                <span>Use Business to track work, leads, and payment flow.</span>
+                Manage it in Business
               </div>
             </div>
           </div>
         </div>
 
-        <div class="card footer-note">
+        <div class="footer-note">
           <strong>Bariq Home</strong>
-          The homepage should promise clarity, not show too many modules.
+          Softer colors, less boldness, smaller image blocks, and simpler sections make the homepage feel more premium.
         </div>
 
         <footer class="site-footer">
@@ -809,16 +691,17 @@
             © 2026 Bariq AI. All rights reserved.
           </div>
         </footer>
+
       </div>
     </div>
   </section>
 
   <script>
     const rotatingTexts = [
-      "Type one idea. Bariq helps you shape it.",
-      "Create first. Then move to creators or business.",
-      "Simple flow makes the product feel stronger.",
-      "Less confusion. Better action."
+      "One idea in. Clear direction out.",
+      "Create first. Continue calmly.",
+      "Less noise. Better action.",
+      "Simple flow feels more premium."
     ];
 
     let rotatingIndex = 0;
@@ -833,43 +716,35 @@
       }, 250);
     }, 2600);
 
-    const heroSlides = [
+    const slides = [
       {
-        kicker: "Create from one idea",
-        title: "Ads, reels, and campaign direction in one cleaner flow",
-        subtitle: "Bariq should feel guided and light, especially for founders and users who do not want technical systems."
+        title: "Less confusion. Better action.",
+        text: "Bariq should guide people softly instead of overwhelming them with too many tools and heavy screens."
       },
       {
-        kicker: "For business owners",
-        title: "Get marketing direction without feeling lost in too many tools",
-        subtitle: "The homepage should guide people toward action instead of overwhelming them with separate modules."
+        title: "Create first, then continue.",
+        text: "Users should understand the first step immediately and move calmly into the next stage."
       },
       {
-        kicker: "For creators too",
-        title: "Discover campaigns, profiles, and payments in a simpler way",
-        subtitle: "Bariq works best when both businesses and influencers understand the flow immediately."
+        title: "A cleaner website feels stronger.",
+        text: "Simple layout, softer colors, and fewer bold blocks make the product feel more premium."
       }
     ];
 
-    let heroIndex = 0;
-    const heroKicker = document.getElementById("heroKicker");
-    const heroTitle = document.getElementById("heroTitle");
-    const heroSubtitle = document.getElementById("heroSubtitle");
+    let slideIndex = 0;
+    const heroSlideTitle = document.getElementById("heroSlideTitle");
+    const heroSlideText = document.getElementById("heroSlideText");
 
     setInterval(() => {
-      heroTitle.style.opacity = 0;
-      heroSubtitle.style.opacity = 0;
-      heroKicker.style.opacity = 0;
+      heroSlideTitle.style.opacity = 0;
+      heroSlideText.style.opacity = 0;
 
       setTimeout(() => {
-        heroIndex = (heroIndex + 1) % heroSlides.length;
-        heroKicker.textContent = heroSlides[heroIndex].kicker;
-        heroTitle.textContent = heroSlides[heroIndex].title;
-        heroSubtitle.textContent = heroSlides[heroIndex].subtitle;
-
-        heroTitle.style.opacity = 1;
-        heroSubtitle.style.opacity = 1;
-        heroKicker.style.opacity = 1;
+        slideIndex = (slideIndex + 1) % slides.length;
+        heroSlideTitle.textContent = slides[slideIndex].title;
+        heroSlideText.textContent = slides[slideIndex].text;
+        heroSlideTitle.style.opacity = 1;
+        heroSlideText.style.opacity = 1;
       }, 250);
     }, 3400);
   </script>
