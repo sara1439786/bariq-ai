@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI | Creator Profile</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; }
+
+    :root{
+      --bg1:#fffaf5;
+      --bg2:#fbf8ff;
+      --bg3:#f6f1ff;
+      --card:#ffffff;
+      --card-soft:rgba(255,255,255,0.94);
+      --border:#eadfbe;
+      --border-soft:#f1e8cf;
+      --purple:#6b57d9;
+      --purple-dark:#372d69;
+      --purple-soft:#f3efff;
+      --gold:#d8b05b;
+      --text:#2f2954;
+      --muted:#746d8e;
+      --shadow:0 18px 40px rgba(83,57,139,0.08);
+      --card-shadow:0 10px 24px rgba(83,57,139,0.05);
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,239,207,0.55), transparent 26%),
+        radial-gradient(circle at top right, rgba(110,87,217,0.08), transparent 20%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 48%, var(--bg3) 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1260px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #efe5c8;
+    }
+
+    .nav-wrap {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
+
+    .brand {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+      background: linear-gradient(90deg, var(--gold), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .menu-toggle{
+      display:none;
+      border:none;
+      background:var(--purple-soft);
+      color:var(--purple-dark);
+      border-radius:12px;
+      padding:12px 14px;
+      font-size:18px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .top-links {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      font-size:14px;
+      font-weight:700;
+      color:#4e438a;
+    }
+
+    .top-links a {
+      padding:10px 14px;
+      border-radius:12px;
+    }
+
+    .top-links a:hover,
+    .top-links a.active {
+      background: var(--purple-soft);
+    }
+
+    .page {
+      padding: 22px 0 40px;
+    }
+
+    .shell {
+      background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,251,245,0.95));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .subnav {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+      padding:14px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--card-shadow);
+    }
+
+    .subnav a {
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #4d428a;
+      background: #fff;
+      border: 1px solid #eee3c4;
+    }
+
+    .subnav a.active,
+    .subnav a:hover {
+      background: var(--purple-soft);
+      border-color: #e6dbff;
+    }
+
+    .profile-hero {
+      display:grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(300px, 390px);
+      gap:18px;
+      align-items:start;
+    }
+
+    .panel,
+    .card,
+    .stat-card,
+    .preview-card,
+    .footer-note {
+      background: var(--card-soft);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--card-shadow);
+      min-width: 0;
+    }
+
+    .panel,
+    .card,
+    .preview-card,
+    .footer-note {
+      padding: 20px;
+    }
+
+    .eyebrow {
+      display:inline-block;
+      padding:9px 14px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #ede2c5;
+      color:#554b8f;
+      font-size:13px;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(32px, 4vw, 46px);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      color: var(--purple-dark);
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 760px;
+    }
+
+    .creator-top {
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .avatar {
+      width:88px;
+      height:88px;
+      border-radius:24px;
+      background: linear-gradient(180deg, #6a56de 0%, #2b225a 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff4cd;
+      font-size:30px;
+      font-weight:700;
+      flex-shrink:0;
+      box-shadow: 0 12px 24px rgba(83,57,139,0.18);
+    }
+
+    .creator-name {
+      margin:0 0 6px;
+      font-size:28px;
+      line-height:1.1;
+      color:#433985;
+      font-weight:700;
+    }
+
+    .creator-meta {
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .badge-row,
+    .tag-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .badge,
+    .tag {
+      padding:8px 10px;
+      border-radius:999px;
+      background:#f6f1ff;
+      color:#4a3b92;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .summary {
+      margin-top:16px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.75;
+    }
+
+    .action-row {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .btn {
+      border:none;
+      border-radius:16px;
+      padding:14px 18px;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .btn-primary {
+      color:#fff;
+      background: linear-gradient(135deg, #d6b05a, #6b57d9);
+      box-shadow:0 10px 22px rgba(107,87,217,0.18);
+    }
+
+    .btn-light {
+      background: var(--purple-soft);
+      color: var(--purple-dark);
+      border: 1px solid #e4d8ff;
+    }
+
+    .preview-card {
+      background: linear-gradient(180deg, #664de1 0%, #2d225c 100%);
+      border: 8px solid #211b32;
+      color:#fff;
+      min-height: 430px;
+    }
+
+    .preview-top {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    }
+
+    .pill {
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#f7e8be;
+      color:#6d5104;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .logo-box {
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      background: rgba(255,255,255,0.14);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .preview-kicker {
+      text-align:center;
+      color:#efe2b4;
+      font-size:14px;
+      margin-bottom:12px;
+    }
+
+    .preview-headline {
+      text-align:center;
+      color:#fff4cd;
+      font-size:34px;
+      line-height:1.1;
+      margin:0 0 12px;
+      font-weight:700;
+      letter-spacing:-0.03em;
+    }
+
+    .preview-subline {
+      text-align:center;
+      color:rgba(255,255,255,0.92);
+      line-height:1.7;
+      font-size:15px;
+      margin:0 0 18px;
+    }
+
+    .preview-price {
+      text-align:center;
+      color:#fff;
+      font-size:16px;
+      font-weight:700;
+      margin-top:10px;
+    }
+
+    .stats-grid {
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:16px;
+    }
+
+    .stat-card {
+      padding:18px;
+    }
+
+    .stat-label {
+      font-size:13px;
+      color:var(--muted);
+      font-weight:700;
+      margin-bottom:8px;
+    }
+
+    .stat-value {
+      font-size:28px;
+      color:var(--purple-dark);
+      font-weight:700;
+      line-height:1.1;
+      margin-bottom:8px;
+    }
+
+    .stat-note {
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    .content-grid {
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:16px;
+    }
+
+    .card h3 {
+      margin:0 0 10px;
+      font-size:20px;
+      color:#493f86;
+      font-weight:700;
+    }
+
+    .card p,
+    .card ul {
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .card ul {
+      padding-left:18px;
+    }
+
+    .soft-grid {
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:16px;
+    }
+
+    .soft-box {
+      background: var(--card-soft);
+      border:1px solid var(--border-soft);
+      border-radius:20px;
+      padding:18px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .step-no {
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(135deg, #f7e8bf, #e0ba63);
+      color:#664c08;
+      font-weight:700;
+      margin-bottom:12px;
+      font-size:15px;
+    }
+
+    .soft-box h4 {
+      margin:0 0 8px;
+      font-size:18px;
+      color:#4b4187;
+      font-weight:700;
+    }
+
+    .soft-box p {
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .footer-note {
+      margin-top:18px;
+      text-align:center;
+    }
+
+    .footer-note strong {
+      display:block;
+      margin-bottom:8px;
+      color:#483f86;
+      font-size:18px;
+      font-weight:700;
+    }
+
+    .footer-note span {
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    @media (max-width: 1100px) {
+      .profile-hero {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid,
+      .content-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .soft-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container { width: min(100% - 18px, 1260px); }
+      .menu-toggle { display:block; }
+
+      .top-links {
+        display:none;
+        width:100%;
+        flex-direction:column;
+        gap:8px;
+      }
+
+      .top-links.show { display:flex; }
+
+      .top-links a {
+        width:100%;
+        background:#fff;
+        border:1px solid #efe5c8;
+      }
+
+      .subnav {
+        flex-direction:column;
+      }
+
+      .subnav a {
+        width:100%;
+      }
+
+      .creator-top {
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .action-row {
+        flex-direction:column;
+      }
+
+      .btn {
+        width:100%;
+      }
+
+      .stats-grid,
+      .content-grid,
+      .soft-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-headline {
+        font-size:28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">Bariq AI</a>
+
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+      <nav class="top-links" id="topLinks">
+        <a href="business-dashboard.html" class="active">Business</a>
+        <a href="creator-dashboard.html">Influencers</a>
+        <a href="admin-dashboard.html">Admin</a>
+        <a href="ai-generator.html">AI Studio</a>
+        <a href="login.html">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page">
+    <div class="container">
+      <div class="shell">
+
+        <div class="subnav">
+          <a href="marketplace.html" class="active">Marketplace</a>
+          <a href="creator-dashboard.html">Influencer Home</a>
+          <a href="creator-register.html">Register</a>
+          <a href="creators-earnings.html">Earnings</a>
+          <a href="campaign.html">Campaigns</a>
+        </div>
+
+        <div class="profile-hero">
+          <div class="panel">
+            <div class="eyebrow">Creator Profile</div>
+
+            <div class="creator-top">
+              <div class="avatar">AG</div>
+              <div>
+                <h1 class="creator-name">Ayesha Glow</h1>
+                <p class="creator-meta">Hyderabad • Beauty & Aesthetics • Female Audience • Reels & Promotions</p>
+                <div class="badge-row" style="margin-top:10px;">
+                  <span class="badge">Beauty</span>
+                  <span class="badge">Clinic Fit</span>
+                  <span class="badge">Salon Fit</span>
+                  <span class="badge">Local Reach</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="summary">
+              Ayesha Glow is a beauty and aesthetics focused creator ideal for clinics, salons, skincare brands, and confidence-led women campaigns. Her profile suits businesses looking for premium-looking reels, service-based promotional content, and local trust-building collaborations.
+            </p>
+
+            <div class="action-row">
+              <a class="btn btn-primary" href="login.html">Hire Influencer</a>
+              <a class="btn btn-light" href="marketplace.html">Back to Marketplace</a>
+            </div>
+          </div>
+
+          <div class="preview-card">
+            <div class="preview-top">
+              <span class="pill">Creator Match</span>
+              <div class="logo-box">Bariq</div>
+            </div>
+            <div class="preview-kicker">Beauty Influencer • Hyderabad</div>
+            <h2 class="preview-headline">A creator businesses can trust for beauty promotions</h2>
+            <p class="preview-subline">Strong for clinic offers, salon campaigns, skincare promotions, premium women audience storytelling, and local campaign reach.</p>
+            <div class="preview-price">Starting Rate: ₹6,000 / Reel</div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Followers</div>
+            <div class="stat-value">48K</div>
+            <div class="stat-note">Balanced creator size for trust and local campaign fit</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Engagement</div>
+            <div class="stat-value">5.8%</div>
+            <div class="stat-note">Healthy engagement for targeted audience-based campaigns</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Primary Niche</div>
+            <div class="stat-value">Beauty</div>
+            <div class="stat-note">Best for aesthetics, salon, skincare, and premium women services</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Price Range</div>
+            <div class="stat-value">₹6K–₹10K</div>
+            <div class="stat-note">Depending on reel, story, package, and campaign requirement</div>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="card">
+            <h3>Best Fit Campaigns</h3>
+            <ul>
+              <li>Beauty clinic consultation promotions</li>
+              <li>Salon makeover or service packages</li>
+              <li>Skincare and glow product promotions</li>
+              <li>Women-focused confidence campaigns</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Audience Summary</h3>
+            <p>
+              Primarily women audience with strong interest in beauty, self-care, premium grooming, confidence, and local service discovery.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Content Strength</h3>
+            <p>
+              Soft premium visuals, clean product/service integration, transformation-friendly reels, and audience trust-building storytelling.
+            </p>
+          </div>
+        </div>
+
+        <div class="soft-grid">
+          <div class="soft-box">
+            <div class="step-no">1</div>
+            <h4>Review</h4>
+            <p>Businesses can understand niche, city, pricing, and campaign suitability quickly from one clean profile page.</p>
+          </div>
+
+          <div class="soft-box">
+            <div class="step-no">2</div>
+            <h4>Match</h4>
+            <p>Choose influencers based on category fit like beauty, clinic, fashion, local promotion, or product campaigns.</p>
+          </div>
+
+          <div class="soft-box">
+            <div class="step-no">3</div>
+            <h4>Hire</h4>
+            <p>Move into the next step through hiring, login, or campaign coordination flow without confusion.</p>
+          </div>
+
+          <div class="soft-box">
+            <div class="step-no">4</div>
+            <h4>Launch</h4>
+            <p>Use this profile as the creator decision layer before campaign execution and collaboration begins.</p>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          <strong>Bariq AI Creator Profiles</strong>
+          <span>This page should help businesses feel confident before hiring, while also making Bariq look like a real creator marketplace platform.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("topLinks").classList.toggle("show");
+    }
+  </script>
+</body>
+</html>
