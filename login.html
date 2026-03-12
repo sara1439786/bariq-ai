@@ -1,45 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - BariqAI</title>
+<title>Login BariqAI</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<style>
+body{
+font-family:Arial;
+text-align:center;
+margin-top:120px;
+}
+input{
+display:block;
+margin:10px auto;
+padding:10px;
+width:260px;
+}
+button{
+padding:10px 20px;
+cursor:pointer;
+}
+</style>
+
 </head>
+
 <body>
-  <div style="max-width:420px;margin:60px auto;padding:20px;">
-    <h2>Login to BariqAI</h2>
-    <input id="email" type="email" placeholder="Email" style="width:100%;padding:12px;margin:10px 0;">
-    <input id="password" type="password" placeholder="Password" style="width:100%;padding:12px;margin:10px 0;">
-    <button id="loginBtn" style="width:100%;padding:12px;">Login</button>
-    <p id="message"></p>
-    <p><a href="signup.html">Create account</a></p>
-  </div>
 
-  <script type="module">
-import { supabase } from './supabase.js'
+<h2>Login to BariqAI</h2>
 
-const loginBtn = document.querySelector("button")
+<input type="email" id="email" placeholder="Email">
 
-loginBtn.addEventListener("click", async () => {
+<input type="password" id="password" placeholder="Password">
 
-  const email = document.querySelector('input[type="email"]').value
-  const password = document.querySelector('input[type="password"]').value
+<button onclick="login()">Login</button>
 
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-  })
+<br><br>
 
-  if(error){
-    alert(error.message)
-    return
-  }
+<a href="signup.html">Create account</a>
 
-  alert("Login successful!")
 
-  window.location.href = "business-dashboard.html"
+<script>
 
+const supabaseUrl = "PASTE_YOUR_SUPABASE_URL"
+const supabaseKey = "PASTE_YOUR_SUPABASE_ANON_KEY"
+
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
+
+async function login(){
+
+const email = document.getElementById("email").value
+const password = document.getElementById("password").value
+
+const { data, error } = await supabase.auth.signInWithPassword({
+email: email,
+password: password
 })
+
+if(error){
+alert(error.message)
+}else{
+alert("Login successful")
+window.location.href="business-dashboard.html"
+}
+
+}
+
 </script>
+
 </body>
 </html>
