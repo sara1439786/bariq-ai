@@ -1,1 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Bariq AI | Admin Panel</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+:root{
+--purple:#6b57d9;
+--gold:#d8b05b;
+--border:#eadfbe;
+--text:#2f2954;
+--muted:#746d8e;
+--radius:24px;
+}
+
+body{
+font-family:Arial;
+background:#fbf8ff;
+color:var(--text);
+}
+
+.container{
+width:min(1280px,92%);
+margin:auto;
+}
+
+header{
+background:white;
+border-bottom:1px solid #eee;
+}
+
+.nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:16px 0;
+}
+
+.brand{
+font-size:28px;
+font-weight:800;
+background:linear-gradient(90deg,var(--gold),var(--purple));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.menu{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.menu a{
+padding:10px 14px;
+border-radius:12px;
+font-weight:700;
+font-size:14px;
+color:#4c4289;
+}
+
+.menu a:hover{
+background:#f3efff;
+}
+
+.page{
+padding:30px 0;
+}
+
+.shell{
+background:white;
+border:1px solid var(--border);
+border-radius:30px;
+padding:24px;
+}
+
+h1{
+font-size:38px;
+margin-bottom:10px;
+color:#372d69;
+}
+
+.subtitle{
+color:var(--muted);
+margin-bottom:20px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:16px;
+margin-bottom:20px;
+}
+
+.card{
+background:white;
+border:1px solid var(--border);
+border-radius:20px;
+padding:16px;
+}
+
+.card strong{
+font-size:26px;
+display:block;
+margin-bottom:6px;
+color:#473d87;
+}
+
+.card span{
+font-size:13px;
+color:var(--muted);
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+}
+
+.list{
+display:grid;
+gap:12px;
+}
+
+.item{
+border:1px solid var(--border);
+padding:12px;
+border-radius:14px;
+background:#fffdf9;
+}
+
+.item strong{
+display:block;
+margin-bottom:4px;
+}
+
+.badge{
+display:inline-block;
+padding:6px 10px;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+margin-top:6px;
+}
+
+.green{background:#eaf8f0;color:#1f8a52;}
+.orange{background:#fff5e7;color:#c37b14;}
+.red{background:#fdeeee;color:#b84d4d;}
+
+.btn-row{
+margin-top:12px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:12px 14px;
+border-radius:14px;
+font-weight:700;
+font-size:14px;
+border:none;
+cursor:pointer;
+}
+
+.primary{
+background:linear-gradient(135deg,var(--gold),var(--purple));
+color:white;
+}
+
+.light{
+background:#f3efff;
+color:#372d69;
+}
+
+footer{
+margin-top:20px;
+text-align:center;
+color:var(--muted);
+font-size:14px;
+}
+
+@media(max-width:900px){
+
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+
+<div class="brand">Bariq AI</div>
+
+<nav class="menu">
+<a href="index.html">Home</a>
+<a href="business.html">Business</a>
+<a href="marketplace.html">Marketplace</a>
+<a href="influencers.html">Influencers</a>
+<a href="marketing-ai.html">Marketing AI</a>
+<a href="payments.html">Payments</a>
+</nav>
+
+</div>
+</header>
+
+<section class="page">
+
+<div class="container">
+<div class="shell">
+
+<h1>Admin Dashboard</h1>
+<p class="subtitle">
+Founder control panel to monitor Bariq platform activity.
+</p>
+
+<div class="stats">
+
+<div class="card">
+<strong>128</strong>
+<span>Total Businesses Registered</span>
+</div>
+
+<div class="card">
+<strong>72</strong>
+<span>Total Influencers Registered</span>
+</div>
+
+<div class="card">
+<strong>₹2.4L</strong>
+<span>Total Platform Revenue</span>
+</div>
+
+<div class="card">
+<strong>14</strong>
+<span>Active Campaigns</span>
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>Recent Business Payments</h3>
+
+<div class="list">
+
+<div class="item">
+<strong>AI Marketing Plan — ₹9,999</strong>
+<span>Paid by Glow Clinic</span>
+<span class="badge green">Paid</span>
+</div>
+
+<div class="item">
+<strong>Influencer Campaign — ₹25,000</strong>
+<span>Paid by Urban Salon</span>
+<span class="badge green">Paid</span>
+</div>
+
+<div class="item">
+<strong>Marketing AI Premium — ₹14,999</strong>
+<span>Paid by Jewel Hub</span>
+<span class="badge green">Paid</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Creator Payouts</h3>
+
+<div class="list">
+
+<div class="item">
+<strong>Ayesha Glow — ₹12,000</strong>
+<span>Beauty campaign</span>
+<span class="badge orange">Pending</span>
+</div>
+
+<div class="item">
+<strong>Rhea Styles — ₹18,000</strong>
+<span>Luxury jewellery campaign</span>
+<span class="badge red">On Hold</span>
+</div>
+
+<div class="item">
+<strong>Fit with Neha — ₹5,500</strong>
+<span>Wellness campaign</span>
+<span class="badge orange">Pending</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Campaign Monitoring</h3>
+
+<div class="list">
+
+<div class="item">
+<strong>Clinic Lead Campaign</strong>
+<span>Running in Hyderabad</span>
+</div>
+
+<div class="item">
+<strong>Festive Jewellery Campaign</strong>
+<span>Creator shortlisting stage</span>
+</div>
+
+<div class="item">
+<strong>Salon Glow Campaign</strong>
+<span>Campaign ready for publishing</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Admin Actions</h3>
+
+<div class="btn-row">
+
+<button class="btn primary">Approve Creator</button>
+
+<button class="btn primary">Release Payout</button>
+
+<button class="btn light">Review Campaign</button>
+
+<button class="btn light">View Revenue</button>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Bariq AI Admin Panel
+</footer>
+
+</div>
+</div>
+
+</section>
+
+</body>
+</html>
