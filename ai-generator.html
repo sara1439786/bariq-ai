@@ -3,15 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI Generator</title>
+  <title>Bariq AI | AI Studio</title>
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; overflow-x: hidden; }
 
+    :root{
+      --bg1:#fffaf3;
+      --bg2:#faf7ff;
+      --bg3:#f6f0ff;
+      --card:rgba(255,255,255,0.96);
+      --border:#ecdcb4;
+      --border-soft:#f0e6c9;
+      --purple:#5a3fff;
+      --purple-dark:#312668;
+      --purple-soft:#f4eeff;
+      --gold:#d8b05b;
+      --text:#2c235c;
+      --muted:#6c6483;
+      --shadow:0 16px 40px rgba(75,45,120,0.08);
+      --card-shadow:0 10px 24px rgba(83,57,139,0.05);
+    }
+
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #fffaf3 0%, #faf7ff 45%, #f6f0ff 100%);
-      color: #2c235c;
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+      color: var(--text);
     }
 
     a { text-decoration: none; color: inherit; }
@@ -37,6 +54,7 @@
       justify-content: space-between;
       gap: 18px;
       flex-wrap: wrap;
+      padding: 8px 0;
     }
 
     .brand {
@@ -45,15 +63,27 @@
       font-size: 30px;
       font-weight: 800;
       line-height: 1;
-      background: linear-gradient(90deg, #d8b05b, #5a3fff);
+      background: linear-gradient(90deg, var(--gold), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
+    .menu-toggle{
+      display:none;
+      border:none;
+      background:var(--purple-soft);
+      color:var(--purple-dark);
+      border-radius:12px;
+      padding:12px 14px;
+      font-size:18px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
     .top-links {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
       font-size: 14px;
       font-weight: 700;
@@ -61,45 +91,71 @@
     }
 
     .top-links a {
-      padding: 10px 12px;
+      padding: 10px 14px;
       border-radius: 12px;
     }
 
     .top-links a:hover,
     .top-links a.active {
-      background: #f4eeff;
+      background: var(--purple-soft);
     }
 
     .page {
       padding: 24px 0 40px;
     }
 
-    .hero {
+    .hero-shell {
       background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.95));
-      border: 1px solid #ecdcb4;
+      border: 1px solid var(--border);
       border-radius: 30px;
       padding: 22px;
-      box-shadow: 0 16px 40px rgba(75, 45, 120, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .subnav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      padding: 14px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid var(--border-soft);
+      border-radius: 22px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .subnav a {
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #4a3b92;
+      background: #fff;
+      border: 1px solid #eee2bf;
+    }
+
+    .subnav a.active,
+    .subnav a:hover {
+      background: var(--purple-soft);
+      border-color: #e3d5ff;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 420px);
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 420px);
       gap: 18px;
       align-items: start;
     }
 
-    .panel, .preview-phone, .output-card, .footer-note {
-      background: rgba(255,255,255,0.94);
-      border: 1px solid #f0e6c9;
+    .panel, .mini-card, .metric-card, .quick-card, .footer-note, .phone-preview {
+      background: var(--card);
+      border: 1px solid var(--border-soft);
       border-radius: 24px;
-      box-shadow: 0 10px 24px rgba(83, 57, 139, 0.05);
+      box-shadow: var(--card-shadow);
       min-width: 0;
     }
 
-    .panel {
-      padding: 22px;
-    }
+    .panel { padding: 22px; }
 
     .eyebrow {
       display: inline-block;
@@ -117,54 +173,19 @@
       margin: 0 0 10px;
       font-size: clamp(34px, 4vw, 52px);
       line-height: 1.02;
-      color: #312668;
+      color: var(--purple-dark);
       letter-spacing: -0.04em;
     }
 
     .subtitle {
-      margin: 0 0 20px;
+      margin: 0 0 22px;
       font-size: 16px;
       line-height: 1.7;
-      color: #6c6483;
+      color: var(--muted);
       max-width: 760px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      display: block;
-      margin: 0 0 8px;
-      font-size: 14px;
-      font-weight: 800;
-      color: #433685;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      border: 1px solid #e6ddc4;
-      background: #fff;
-      border-radius: 16px;
-      padding: 14px 14px;
-      font-size: 15px;
-      color: #2c235c;
-      outline: none;
-      font-family: Arial, sans-serif;
-    }
-
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .button-row {
+    .hero-actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
@@ -185,32 +206,166 @@
 
     .btn-primary {
       background: linear-gradient(135deg, #d7b15e, #5a3fff);
-      color: #fff;
+      color: white;
       box-shadow: 0 10px 22px rgba(90,63,255,0.2);
     }
 
     .btn-light {
-      background: #f4eeff;
-      color: #34296a;
+      background: var(--purple-soft);
+      color: var(--purple-dark);
       border: 1px solid #e4d7ff;
     }
 
-    .status-bar {
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: #fbf8ff;
-      border: 1px solid #ece2ff;
-      color: #4a3b92;
-      font-weight: 700;
+    .side-stack {
+      display: grid;
+      gap: 14px;
     }
 
-    .preview-phone {
+    .mini-card {
+      padding: 18px;
+    }
+
+    .mini-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: #433685;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .metric-card {
+      padding: 18px;
+    }
+
+    .metric-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .metric-value {
+      font-size: 38px;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--purple-dark);
+      margin-bottom: 10px;
+    }
+
+    .metric-sub {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      margin: 28px 0 12px;
+      font-size: 34px;
+      line-height: 1.1;
+      color: var(--purple-dark);
+      letter-spacing: -0.03em;
+    }
+
+    .section-sub {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .quick-card {
+      padding: 20px;
+    }
+
+    .quick-card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #433685;
+    }
+
+    .quick-card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .quick-card .card-link {
+      display: inline-block;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #f6f1ff;
+      color: #45388c;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .workflow-step {
+      padding: 18px;
+      border-radius: 22px;
+      background: var(--card);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--card-shadow);
+    }
+
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f7e8ba, #e2b85a);
+      color: #5f4710;
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .workflow-step h4 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #433685;
+    }
+
+    .workflow-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .phone-preview {
       padding: 18px;
       background: linear-gradient(180deg, #5d43d8 0%, #2b1f64 100%);
       border: 8px solid #1f1b2f;
-      min-height: 560px;
-      color: #fff;
+      min-height: 480px;
+      color: white;
     }
 
     .phone-top {
@@ -270,50 +425,7 @@
       margin-top: 18px;
       font-size: 15px;
       font-weight: 700;
-      color: #ffffff;
-    }
-
-    .outputs-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 22px;
-    }
-
-    .output-card {
-      padding: 18px;
-    }
-
-    .output-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .output-card h3 {
-      margin: 0;
-      font-size: 18px;
-      color: #433685;
-    }
-
-    .copy-btn {
-      border: none;
-      background: #f4eeff;
-      color: #4a3b92;
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-size: 12px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .output-card div {
-      color: #6e6782;
-      line-height: 1.7;
-      font-size: 15px;
-      white-space: pre-wrap;
+      color: white;
     }
 
     .footer-note {
@@ -330,25 +442,47 @@
     }
 
     .footer-note span {
-      color: #6e6782;
+      color: var(--muted);
       line-height: 1.7;
       font-size: 15px;
     }
 
     @media (max-width: 1100px) {
       .hero-grid { grid-template-columns: 1fr; }
-      .outputs-grid { grid-template-columns: 1fr 1fr; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .platform-grid { grid-template-columns: 1fr 1fr; }
+      .workflow-grid { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 768px) {
       .container { width: min(100% - 20px, 1280px); }
-      .nav-wrap { flex-direction: column; align-items: flex-start; padding: 12px 0; }
-      .hero { padding: 16px; border-radius: 22px; }
+      .menu-toggle{ display:block; }
+      .top-links{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        gap:8px;
+      }
+      .top-links.show{ display:flex; }
+      .top-links a{
+        width:100%;
+        background:#fff;
+        border:1px solid #efe4c7;
+      }
+      .subnav{
+        flex-direction:column;
+      }
+      .subnav a{
+        width:100%;
+      }
+      .hero-shell { padding: 16px; border-radius: 22px; }
       .panel { padding: 18px; }
-      .grid, .outputs-grid { grid-template-columns: 1fr; }
-      .button-row { flex-direction: column; }
+      .metrics-grid,
+      .platform-grid,
+      .workflow-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
       .btn { width: 100%; }
-      .preview-phone { min-height: auto; padding: 16px; }
+      .phone-preview { min-height: auto; padding: 16px; }
       .preview-headline { font-size: 32px; }
       .preview-subline { font-size: 15px; }
     }
@@ -358,231 +492,192 @@
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="brand">Bariq AI</a>
-      <div class="top-links">
-        <a href="index.html">Home</a>
-        <a href="campaign.html">Campaign</a>
-        <a href="video-creator.html">Video Creator</a>
-        <a href="ai-generator.html" class="active">AI Generator</a>
+
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+      <nav class="top-links" id="topLinks">
         <a href="business-dashboard.html">Business</a>
-      </div>
+        <a href="creator-dashboard.html">Influencers</a>
+        <a href="admin-dashboard.html">Admin</a>
+        <a href="ai-generator.html" class="active">AI Studio</a>
+        <a href="login.html">Login</a>
+      </nav>
     </div>
   </header>
 
   <section class="page">
     <div class="container">
-      <div class="hero">
+      <div class="hero-shell">
+
+        <div class="subnav">
+          <a href="ai-generator.html" class="active">Studio Home</a>
+          <a href="ai-generator-tool.html">AI Generator</a>
+          <a href="video-creator.html">Video Creator</a>
+          <a href="campaign.html">Campaign Studio</a>
+        </div>
+
         <div class="hero-grid">
           <div class="panel">
-            <div class="eyebrow">AI Generator</div>
-            <h1>Generate ad content in one click.</h1>
+            <div class="eyebrow">AI Studio</div>
+            <h1>Create marketing faster with one AI engine.</h1>
             <p class="subtitle">
-              Create hooks, captions, reel scripts, WhatsApp promos, Google ad copy, and carousel ideas from one simple prompt.
+              Bariq AI Studio combines ad writing, reel creation, and campaign building in one place so businesses don’t have to jump between disconnected tools.
             </p>
 
-            <div class="grid">
-              <div class="full">
-                <label>What do you want Bariq to create?</label>
-                <textarea id="prompt" placeholder="Example: Create an Instagram ad for laser hair removal clinic for women with 50% offer and WhatsApp booking"></textarea>
-              </div>
-
-              <div>
-                <label>Content Type</label>
-                <select id="contentType">
-                  <option>Instagram / Meta Ad</option>
-                  <option>Reel Script</option>
-                  <option>WhatsApp Promo</option>
-                  <option>Google Ad Copy</option>
-                  <option>Carousel Ideas</option>
-                  <option>Full Campaign Pack</option>
-                </select>
-              </div>
-
-              <div>
-                <label>Main Goal</label>
-                <select id="goal">
-                  <option>Lead Generation</option>
-                  <option>Bookings</option>
-                  <option>Sales</option>
-                  <option>Awareness</option>
-                </select>
-              </div>
-
-              <div>
-                <label>Brand Name</label>
-                <input id="brandName" placeholder="Your brand name" />
-              </div>
-
-              <div>
-                <label>Audience</label>
-                <input id="audience" placeholder="Women 25-45, students, music lovers" />
-              </div>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="ai-generator-tool.html">Open AI Generator</a>
+              <a class="btn btn-light" href="video-creator.html">Open Video Creator</a>
+              <a class="btn btn-light" href="campaign.html">Open Campaign Studio</a>
             </div>
-
-            <div class="button-row">
-              <button class="btn btn-primary" onclick="generateContent()">Generate with AI</button>
-              <button class="btn btn-light" onclick="clearGenerator()">Clear</button>
-            </div>
-
-            <div class="status-bar" id="statusText">Waiting for your prompt...</div>
           </div>
 
-          <div class="preview-phone">
-            <div class="phone-top">
-              <div class="pill" id="previewType">Instagram / Meta Ad</div>
-              <div class="logo-box">LOGO</div>
+          <div class="side-stack">
+            <div class="mini-card">
+              <h3>AI Generator</h3>
+              <p>Create hooks, captions, WhatsApp promos, Google ad copy, and carousel ideas from one prompt.</p>
             </div>
-
-            <div class="preview-kicker" id="previewBrand">Your Brand</div>
-            <div class="preview-headline" id="previewHeadline">Your generated headline will appear here</div>
-            <div class="preview-subline" id="previewSubline">Your supporting line will appear here</div>
-            <div class="preview-offer" id="previewOffer">Goal: Lead Generation</div>
+            <div class="mini-card">
+              <h3>Video Creator</h3>
+              <p>Generate business reel direction using prompts, stock clips, preview flow, and marketing structure.</p>
+            </div>
+            <div class="mini-card">
+              <h3>Campaign Studio</h3>
+              <p>Build your audience, offer, CTA, and execution flow before ads and creators go live.</p>
+            </div>
           </div>
         </div>
 
-        <div class="outputs-grid">
-          <div class="output-card">
-            <div class="output-top">
-              <h3>Hook</h3>
-              <button class="copy-btn" onclick="copyText('hookBox')">Copy</button>
-            </div>
-            <div id="hookBox">Your hook will appear here.</div>
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-label">AI Tools</div>
+            <div class="metric-value">3</div>
+            <div class="metric-sub">Ad generation, video creation, and campaign planning connected in one studio flow.</div>
           </div>
 
-          <div class="output-card">
-            <div class="output-top">
-              <h3>Caption</h3>
-              <button class="copy-btn" onclick="copyText('captionBox')">Copy</button>
-            </div>
-            <div id="captionBox">Your caption will appear here.</div>
+          <div class="metric-card">
+            <div class="metric-label">Prompt Speed</div>
+            <div class="metric-value">Fast</div>
+            <div class="metric-sub">Move from one idea to multiple marketing outputs without needing multiple apps.</div>
           </div>
 
-          <div class="output-card">
-            <div class="output-top">
-              <h3>Reel Script</h3>
-              <button class="copy-btn" onclick="copyText('scriptBox')">Copy</button>
-            </div>
-            <div id="scriptBox">Your reel script will appear here.</div>
+          <div class="metric-card">
+            <div class="metric-label">Use Cases</div>
+            <div class="metric-value">Multi</div>
+            <div class="metric-sub">Useful for clinics, salons, products, retail, wellness, and local business promotions.</div>
           </div>
 
-          <div class="output-card">
-            <div class="output-top">
-              <h3>WhatsApp Promo</h3>
-              <button class="copy-btn" onclick="copyText('whatsappBox')">Copy</button>
-            </div>
-            <div id="whatsappBox">Your WhatsApp promo will appear here.</div>
+          <div class="metric-card">
+            <div class="metric-label">Launch Stack</div>
+            <div class="metric-value">Ready</div>
+            <div class="metric-sub">AI tools can now sit under one clear studio instead of cluttering the top menu.</div>
+          </div>
+        </div>
+
+        <h2 class="section-title">AI Studio tools</h2>
+        <p class="section-sub">Choose the right tool depending on whether you want text, video, or campaign structure.</p>
+
+        <div class="platform-grid">
+          <div class="quick-card">
+            <h3>AI Generator</h3>
+            <p>Generate ad copy, captions, hooks, reel scripts, WhatsApp promos, and Google ads using one prompt input.</p>
+            <a class="card-link" href="ai-generator-tool.html">Open AI Generator</a>
           </div>
 
-          <div class="output-card">
-            <div class="output-top">
-              <h3>Google Ad Copy</h3>
-              <button class="copy-btn" onclick="copyText('googleBox')">Copy</button>
-            </div>
-            <div id="googleBox">Your Google ad copy will appear here.</div>
+          <div class="quick-card">
+            <h3>Video Creator</h3>
+            <p>Create reels with prompts, video clips, preview layout, and stock-based ad storytelling flow.</p>
+            <a class="card-link" href="video-creator.html">Open Video Creator</a>
           </div>
 
-          <div class="output-card">
-            <div class="output-top">
-              <h3>Carousel Ideas</h3>
-              <button class="copy-btn" onclick="copyText('carouselBox')">Copy</button>
+          <div class="quick-card">
+            <h3>Campaign Studio</h3>
+            <p>Build campaigns with audience, CTA, offer, and execution structure before launch or creator matching.</p>
+            <a class="card-link" href="campaign.html">Open Campaign Studio</a>
+          </div>
+
+          <div class="quick-card">
+            <h3>Templates</h3>
+            <p>Browse Canva-style starter templates and move into AI generation or campaign creation faster.</p>
+            <a class="card-link" href="templates.html">Open Templates</a>
+          </div>
+
+          <div class="quick-card">
+            <h3>Prompt Flow</h3>
+            <p>Use one business idea and repurpose it across captions, ads, reels, and structured campaigns.</p>
+            <a class="card-link" href="ai-generator-tool.html">Try Prompt Flow</a>
+          </div>
+
+          <div class="quick-card">
+            <h3>Marketing Engine</h3>
+            <p>This is the core SaaS layer of Bariq AI and should feel like the content brain of the platform.</p>
+            <a class="card-link" href="ai-generator-tool.html">Explore Engine</a>
+          </div>
+        </div>
+
+        <h2 class="section-title">How AI Studio works</h2>
+        <p class="section-sub">Keep the studio journey simple: prompt, create, structure, launch.</p>
+
+        <div class="workflow-grid">
+          <div class="workflow-step">
+            <div class="step-num">1</div>
+            <h4>Prompt</h4>
+            <p>Start with one business idea, product, service, or offer you want to promote.</p>
+          </div>
+
+          <div class="workflow-step">
+            <div class="step-num">2</div>
+            <h4>Create</h4>
+            <p>Generate text outputs, ad directions, captions, hooks, and scripts from one AI flow.</p>
+          </div>
+
+          <div class="workflow-step">
+            <div class="step-num">3</div>
+            <h4>Structure</h4>
+            <p>Move into Campaign Studio or Templates to organize your message before execution.</p>
+          </div>
+
+          <div class="workflow-step">
+            <div class="step-num">4</div>
+            <h4>Launch</h4>
+            <p>Use the outputs for ads, reels, creator work, and business marketing across channels.</p>
+          </div>
+        </div>
+
+        <h2 class="section-title">AI Studio preview</h2>
+        <p class="section-sub">This side is the creative engine of Bariq AI and should feel powerful but simple.</p>
+
+        <div class="hero-grid" style="margin-top: 10px;">
+          <div class="panel">
+            <div class="eyebrow">Studio Mode</div>
+            <h1 style="font-size: clamp(30px, 3.2vw, 46px);">One idea can now become multiple marketing assets.</h1>
+            <p class="subtitle" style="margin-bottom: 0;">
+              Bariq AI Studio helps business owners move from one concept into captions, ads, reels, and campaigns without overthinking every step.
+            </p>
+          </div>
+
+          <div class="phone-preview">
+            <div class="phone-top">
+              <div class="pill">AI Studio</div>
+              <div class="logo-box">LOGO</div>
             </div>
-            <div id="carouselBox">Your carousel ideas will appear here.</div>
+            <div class="preview-kicker">Bariq AI</div>
+            <div class="preview-headline">Generate, create, and structure from one engine</div>
+            <div class="preview-subline">AI Generator, Video Creator, and Campaign Studio are now grouped into one cleaner workflow</div>
+            <div class="preview-offer">Action: Create faster</div>
           </div>
         </div>
 
         <div class="footer-note">
-          <strong>Bariq AI Content Engine</strong>
-          <span>One prompt can now create multiple marketing assets so businesses don’t need to think from zero every time.</span>
+          <strong>Bariq AI Studio Layer</strong>
+          <span>This page should be the one clear home for all AI creation tools, while individual tools stay inside AI Studio sub-tabs instead of cluttering the main navigation.</span>
         </div>
       </div>
     </div>
   </section>
 
   <script>
-    function setStatus(text) {
-      document.getElementById("statusText").textContent = text;
-    }
-
-    async function generateContent() {
-      const prompt = document.getElementById("prompt").value.trim();
-      const contentType = document.getElementById("contentType").value;
-      const goal = document.getElementById("goal").value;
-      const brandName = document.getElementById("brandName").value.trim();
-      const audience = document.getElementById("audience").value.trim();
-
-      if (!prompt) {
-        setStatus("Please enter a prompt first.");
-        return;
-      }
-
-      setStatus("Generating with AI...");
-
-      try {
-        const response = await fetch("/api/ai-generator", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            prompt,
-            contentType,
-            goal,
-            brandName,
-            audience
-          })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || "AI generation failed");
-        }
-
-        document.getElementById("hookBox").textContent = data.hook || "";
-        document.getElementById("captionBox").textContent = data.caption || "";
-        document.getElementById("scriptBox").textContent = data.reelScript || "";
-        document.getElementById("whatsappBox").textContent = data.whatsAppPromo || "";
-        document.getElementById("googleBox").textContent = data.googleAdCopy || "";
-        document.getElementById("carouselBox").textContent = data.carouselIdeas || "";
-
-        document.getElementById("previewType").textContent = contentType;
-        document.getElementById("previewBrand").textContent = brandName || "Your Brand";
-        document.getElementById("previewHeadline").textContent = data.headline || "Generated headline";
-        document.getElementById("previewSubline").textContent = data.subline || "Generated supporting line";
-        document.getElementById("previewOffer").textContent = "Goal: " + goal;
-
-        setStatus("AI content generated successfully.");
-      } catch (error) {
-        setStatus("Error: " + error.message);
-      }
-    }
-
-    function clearGenerator() {
-      document.getElementById("prompt").value = "";
-      document.getElementById("contentType").value = "Instagram / Meta Ad";
-      document.getElementById("goal").value = "Lead Generation";
-      document.getElementById("brandName").value = "";
-      document.getElementById("audience").value = "";
-
-      document.getElementById("hookBox").textContent = "Your hook will appear here.";
-      document.getElementById("captionBox").textContent = "Your caption will appear here.";
-      document.getElementById("scriptBox").textContent = "Your reel script will appear here.";
-      document.getElementById("whatsappBox").textContent = "Your WhatsApp promo will appear here.";
-      document.getElementById("googleBox").textContent = "Your Google ad copy will appear here.";
-      document.getElementById("carouselBox").textContent = "Your carousel ideas will appear here.";
-
-      document.getElementById("previewType").textContent = "Instagram / Meta Ad";
-      document.getElementById("previewBrand").textContent = "Your Brand";
-      document.getElementById("previewHeadline").textContent = "Your generated headline will appear here";
-      document.getElementById("previewSubline").textContent = "Your supporting line will appear here";
-      document.getElementById("previewOffer").textContent = "Goal: Lead Generation";
-
-      setStatus("Waiting for your prompt...");
-    }
-
-    function copyText(id) {
-      const text = document.getElementById(id).textContent;
-      navigator.clipboard.writeText(text);
-      setStatus("Copied to clipboard.");
+    function toggleMenu() {
+      document.getElementById("topLinks").classList.toggle("show");
     }
   </script>
 </body>
