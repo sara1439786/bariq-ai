@@ -3,15 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI Campaign Studio</title>
+  <title>Bariq AI | Influencer Marketplace</title>
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; overflow-x: hidden; }
 
+    :root{
+      --bg1:#fffaf3;
+      --bg2:#faf7ff;
+      --bg3:#f6f0ff;
+      --card:rgba(255,255,255,0.96);
+      --border:#ecdcb4;
+      --border-soft:#f0e6c9;
+      --purple:#5a3fff;
+      --purple-dark:#312668;
+      --purple-soft:#f4eeff;
+      --gold:#d8b05b;
+      --text:#2c235c;
+      --muted:#6c6483;
+      --shadow:0 16px 40px rgba(75,45,120,0.08);
+      --card-shadow:0 10px 24px rgba(83,57,139,0.05);
+    }
+
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #fffaf3 0%, #faf7ff 45%, #f6f0ff 100%);
-      color: #2c235c;
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+      color: var(--text);
     }
 
     a { text-decoration: none; color: inherit; }
@@ -37,6 +54,7 @@
       justify-content: space-between;
       gap: 18px;
       flex-wrap: wrap;
+      padding: 8px 0;
     }
 
     .brand {
@@ -45,15 +63,27 @@
       font-size: 30px;
       font-weight: 800;
       line-height: 1;
-      background: linear-gradient(90deg, #d8b05b, #5a3fff);
+      background: linear-gradient(90deg, var(--gold), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
+    .menu-toggle{
+      display:none;
+      border:none;
+      background:var(--purple-soft);
+      color:var(--purple-dark);
+      border-radius:12px;
+      padding:12px 14px;
+      font-size:18px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
     .top-links {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
       font-size: 14px;
       font-weight: 700;
@@ -61,44 +91,62 @@
     }
 
     .top-links a {
-      padding: 10px 12px;
+      padding: 10px 14px;
       border-radius: 12px;
     }
 
     .top-links a:hover,
     .top-links a.active {
-      background: #f4eeff;
+      background: var(--purple-soft);
     }
 
     .page {
       padding: 24px 0 40px;
     }
 
-    .hero {
+    .hero-shell {
       background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.95));
-      border: 1px solid #ecdcb4;
+      border: 1px solid var(--border);
       border-radius: 30px;
       padding: 22px;
-      box-shadow: 0 16px 40px rgba(75, 45, 120, 0.08);
+      box-shadow: var(--shadow);
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 420px);
-      gap: 18px;
-      align-items: start;
+    .subnav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      padding: 14px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid var(--border-soft);
+      border-radius: 22px;
+      box-shadow: var(--card-shadow);
     }
 
-    .panel, .phone-preview, .mini-box, .section-card {
-      background: rgba(255,255,255,0.94);
-      border: 1px solid #f0e6c9;
+    .subnav a {
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #4a3b92;
+      background: #fff;
+      border: 1px solid #eee2bf;
+    }
+
+    .subnav a.active,
+    .subnav a:hover {
+      background: var(--purple-soft);
+      border-color: #e3d5ff;
+    }
+
+    .top-panel {
+      background: var(--card);
+      border: 1px solid var(--border-soft);
       border-radius: 24px;
-      box-shadow: 0 10px 24px rgba(83, 57, 139, 0.05);
-      min-width: 0;
-    }
-
-    .panel {
+      box-shadow: var(--card-shadow);
       padding: 22px;
+      margin-bottom: 22px;
     }
 
     .eyebrow {
@@ -117,7 +165,7 @@
       margin: 0 0 10px;
       font-size: clamp(34px, 4vw, 52px);
       line-height: 1.02;
-      color: #312668;
+      color: var(--purple-dark);
       letter-spacing: -0.04em;
     }
 
@@ -125,58 +173,210 @@
       margin: 0 0 20px;
       font-size: 16px;
       line-height: 1.7;
-      color: #6c6483;
-      max-width: 760px;
+      color: var(--muted);
+      max-width: 860px;
     }
 
-    .grid {
+    .search-row {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 14px;
+      align-items: center;
+      margin-bottom: 16px;
     }
 
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      display: block;
-      margin: 0 0 8px;
-      font-size: 14px;
-      font-weight: 800;
-      color: #433685;
-    }
-
-    input, textarea, select {
+    .search-row input {
       width: 100%;
       border: 1px solid #e6ddc4;
       background: #fff;
       border-radius: 16px;
-      padding: 14px 14px;
+      padding: 14px;
       font-size: 15px;
-      color: #2c235c;
+      color: var(--text);
       outline: none;
-      font-family: Arial, sans-serif;
     }
 
-    textarea {
-      min-height: 110px;
-      resize: vertical;
+    .clear-btn {
+      border: none;
+      background: var(--purple-soft);
+      color: var(--purple-dark);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
     }
 
-    .button-row {
+    .chips {
       display: flex;
-      gap: 12px;
       flex-wrap: wrap;
-      margin-top: 18px;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid #eadfbd;
+      color: #45388c;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .chip.active,
+    .chip:hover {
+      background: var(--purple-soft);
+      border-color: #e3d5ff;
+    }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .creator-card {
+      background: var(--card);
+      border: 1px solid var(--border-soft);
+      border-radius: 24px;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .creator-top {
+      padding: 18px;
+      background: linear-gradient(180deg, #6046dc 0%, #2b1f64 100%);
+      color: white;
+    }
+
+    .creator-top.alt1 { background: linear-gradient(180deg, #9158ff 0%, #46237e 100%); }
+    .creator-top.alt2 { background: linear-gradient(180deg, #2cb86a 0%, #11643a 100%); }
+    .creator-top.alt3 { background: linear-gradient(180deg, #d8b05b 0%, #6d4c11 100%); }
+    .creator-top.alt4 { background: linear-gradient(180deg, #ff8a5b 0%, #8a2d13 100%); }
+    .creator-top.alt5 { background: linear-gradient(180deg, #4d6bff 0%, #23357e 100%); }
+
+    .creator-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .avatar {
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff7d4;
+      flex-shrink: 0;
+    }
+
+    .creator-name {
+      margin: 0 0 4px;
+      font-size: 20px;
+      line-height: 1.1;
+      color: #fff7d4;
+    }
+
+    .creator-location {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.4;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .creator-body {
+      padding: 18px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .stat-box {
+      background: #faf7ff;
+      border: 1px solid #ece2ff;
+      border-radius: 16px;
+      padding: 12px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      color: var(--purple-dark);
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .creator-desc {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: #f6f1ff;
+      color: #4a3b92;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 18px;
-      border-radius: 16px;
+      padding: 12px 14px;
+      border-radius: 14px;
       font-size: 14px;
       font-weight: 800;
       cursor: pointer;
@@ -185,155 +385,24 @@
 
     .btn-primary {
       background: linear-gradient(135deg, #d7b15e, #5a3fff);
-      color: #fff;
+      color: white;
       box-shadow: 0 10px 22px rgba(90,63,255,0.2);
     }
 
     .btn-light {
-      background: #f4eeff;
-      color: #34296a;
+      background: var(--purple-soft);
+      color: var(--purple-dark);
       border: 1px solid #e4d7ff;
-    }
-
-    .status-bar {
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: #fbf8ff;
-      border: 1px solid #ece2ff;
-      color: #4a3b92;
-      font-weight: 700;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .chip {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #f6f1ff;
-      border: 1px solid #e7dcff;
-      color: #45388c;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .phone-preview {
-      padding: 18px;
-      background: linear-gradient(180deg, #5d43d8 0%, #2b1f64 100%);
-      border: 8px solid #1f1b2f;
-      min-height: 560px;
-      color: #fff;
-    }
-
-    .phone-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 22px;
-    }
-
-    .pill {
-      background: #f8e9be;
-      color: #6c5104;
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .logo-box {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.14);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .preview-kicker {
-      font-size: 14px;
-      color: #efe6b7;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    .preview-headline {
-      font-size: 40px;
-      line-height: 1.05;
-      font-weight: 800;
-      color: #fff3c8;
-      text-align: center;
-      margin: 0 0 14px;
-    }
-
-    .preview-subline {
-      font-size: 16px;
-      line-height: 1.7;
-      color: #f5e9b5;
-      text-align: center;
-      margin: 0 0 18px;
-    }
-
-    .preview-offer {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 15px;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    .three-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 22px;
-    }
-
-    .mini-box, .section-card {
-      padding: 18px;
-    }
-
-    .mini-box h3,
-    .section-card h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      color: #433685;
-    }
-
-    .mini-box div,
-    .section-card div,
-    .section-card p {
-      color: #6e6782;
-      line-height: 1.7;
-      font-size: 15px;
-      white-space: pre-wrap;
-      margin: 0;
-    }
-
-    .campaign-flow {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 22px;
     }
 
     .footer-note {
       margin-top: 22px;
       padding: 18px;
       text-align: center;
-      background: rgba(255,255,255,0.94);
-      border: 1px solid #f0e6c9;
+      background: var(--card);
+      border: 1px solid var(--border-soft);
       border-radius: 24px;
-      box-shadow: 0 10px 24px rgba(83, 57, 139, 0.05);
+      box-shadow: var(--card-shadow);
     }
 
     .footer-note strong {
@@ -344,28 +413,68 @@
     }
 
     .footer-note span {
-      color: #6e6782;
+      color: var(--muted);
       line-height: 1.7;
       font-size: 15px;
     }
 
+    .empty-state {
+      display: none;
+      margin-top: 18px;
+      padding: 22px;
+      border-radius: 22px;
+      background: var(--card);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--card-shadow);
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
     @media (max-width: 1100px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .three-grid { grid-template-columns: 1fr 1fr; }
-      .campaign-flow { grid-template-columns: 1fr 1fr; }
+      .market-grid { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 768px) {
       .container { width: min(100% - 20px, 1280px); }
-      .nav-wrap { flex-direction: column; align-items: flex-start; padding: 12px 0; }
-      .hero { padding: 16px; border-radius: 22px; }
-      .panel { padding: 18px; }
-      .grid, .three-grid, .campaign-flow { grid-template-columns: 1fr; }
-      .button-row { flex-direction: column; }
-      .btn { width: 100%; }
-      .phone-preview { min-height: auto; padding: 16px; }
-      .preview-headline { font-size: 32px; }
-      .preview-subline { font-size: 15px; }
+      .menu-toggle{ display:block; }
+
+      .top-links{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        gap:8px;
+      }
+
+      .top-links.show{ display:flex; }
+
+      .top-links a{
+        width:100%;
+        background:#fff;
+        border:1px solid #efe4c7;
+      }
+
+      .subnav{
+        flex-direction:column;
+      }
+
+      .subnav a{
+        width:100%;
+      }
+
+      .hero-shell { padding: 16px; border-radius: 22px; }
+      .top-panel { padding: 18px; }
+      .search-row {
+        grid-template-columns: 1fr;
+      }
+      .market-grid { grid-template-columns: 1fr; }
+      .action-row {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -373,338 +482,404 @@
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="brand">Bariq AI</a>
-      <div class="top-links">
-        <a href="index.html">Home</a>
-        <a href="campaign.html" class="active">Campaign</a>
-        <a href="video-creator.html">Video Creator</a>
-        <a href="ai-generator.html">AI Generator</a>
-        <a href="business-dashboard.html">Business</a>
-      </div>
+
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+      <nav class="top-links" id="topLinks">
+        <a href="business-dashboard.html" class="active">Business</a>
+        <a href="creator-dashboard.html">Influencers</a>
+        <a href="admin-dashboard.html">Admin</a>
+        <a href="ai-generator.html">AI Studio</a>
+        <a href="login.html">Login</a>
+      </nav>
     </div>
   </header>
 
   <section class="page">
     <div class="container">
-      <div class="hero">
-        <div class="hero-grid">
-          <div class="panel">
-            <div class="eyebrow">Campaign Studio</div>
-            <h1>Build a full campaign in one place.</h1>
-            <p class="subtitle">
-              Plan your audience, offer, messaging, channel direction, and CTA so your campaign is clear before ads, reels, and creators go live.
-            </p>
+      <div class="hero-shell">
 
-            <div class="grid">
-              <div>
-                <label>Brand Name</label>
-                <input id="brandName" placeholder="Your brand name" />
-              </div>
+        <div class="subnav">
+          <a href="business-dashboard.html">Dashboard</a>
+          <a href="campaign.html">Campaigns</a>
+          <a href="leads.html">Leads</a>
+          <a href="templates.html">Templates</a>
+          <a href="payments.html">Payments</a>
+          <a href="marketplace.html" class="active">Marketplace</a>
+        </div>
 
-              <div>
-                <label>Business Type</label>
-                <input id="businessType" placeholder="Clinic, salon, boutique, product brand" />
-              </div>
+        <div class="top-panel">
+          <div class="eyebrow">Influencer Marketplace</div>
+          <h1>Find creators for your next campaign.</h1>
+          <p class="subtitle">
+            Browse influencers by niche, city, followers, engagement, and pricing. Bariq AI should feel like Instagram + Fiverr + marketing hiring in one place.
+          </p>
 
-              <div>
-                <label>Campaign Goal</label>
-                <select id="campaignGoal">
-                  <option>Lead Generation</option>
-                  <option>Bookings</option>
-                  <option>Sales</option>
-                  <option>Brand Awareness</option>
-                  <option>Festival Promotion</option>
-                </select>
-              </div>
-
-              <div>
-                <label>Primary Audience</label>
-                <input id="audience" placeholder="Women 25-45, students, music lovers" />
-              </div>
-
-              <div class="full">
-                <label>Offer / Main Message</label>
-                <input id="offer" placeholder="Example: Flat 30% off / Book now / Limited seats" />
-              </div>
-
-              <div class="full">
-                <label>Campaign Brief</label>
-                <textarea id="brief" placeholder="Describe what you want this campaign to do"></textarea>
-              </div>
-
-              <div>
-                <label>Main Platform</label>
-                <select id="platform">
-                  <option>Instagram + Facebook</option>
-                  <option>WhatsApp + Instagram</option>
-                  <option>Meta Ads</option>
-                  <option>Google Ads</option>
-                  <option>Multi-Channel</option>
-                </select>
-              </div>
-
-              <div>
-                <label>Call To Action</label>
-                <select id="cta">
-                  <option>Book on WhatsApp</option>
-                  <option>DM Now</option>
-                  <option>Buy Now</option>
-                  <option>Call Now</option>
-                  <option>Register Today</option>
-                </select>
-              </div>
-
-              <div class="full">
-                <label>Campaign Headline</label>
-                <input id="headline" placeholder="Main campaign headline" />
-              </div>
-
-              <div class="full">
-                <label>Supporting Line</label>
-                <input id="subline" placeholder="Short supporting line" />
-              </div>
-            </div>
-
-            <div class="chips">
-              <button class="chip" onclick="usePreset('clinic')">Clinic Lead Campaign</button>
-              <button class="chip" onclick="usePreset('salon')">Salon Offer Campaign</button>
-              <button class="chip" onclick="usePreset('product')">Product Launch</button>
-              <button class="chip" onclick="usePreset('festival')">Festival Sale</button>
-            </div>
-
-            <div class="button-row">
-              <button class="btn btn-primary" onclick="generateCampaign()">Generate Campaign Plan</button>
-              <button class="btn btn-light" onclick="clearCampaign()">Clear</button>
-            </div>
-
-            <div class="status-bar" id="statusText">Waiting for campaign details...</div>
+          <div class="search-row">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search creators like Hyderabad, beauty, salon, fashion, food, wellness..."
+              oninput="filterCreators()"
+            />
+            <button class="clear-btn" onclick="clearFilters()">Clear Filters</button>
           </div>
 
-          <div class="phone-preview">
-            <div class="phone-top">
-              <div class="pill" id="previewGoal">Lead Generation</div>
-              <div class="logo-box">LOGO</div>
-            </div>
-
-            <div class="preview-kicker" id="previewBrand">Your Brand</div>
-            <div class="preview-headline" id="previewHeadline">Your campaign headline will appear here</div>
-            <div class="preview-subline" id="previewSubline">Your campaign supporting line will appear here</div>
-            <div class="preview-offer" id="previewOffer">CTA: Book on WhatsApp</div>
+          <div class="chips">
+            <button class="chip active" data-category="all" onclick="setCategory('all', this)">All</button>
+            <button class="chip" data-category="beauty" onclick="setCategory('beauty', this)">Beauty</button>
+            <button class="chip" data-category="fashion" onclick="setCategory('fashion', this)">Fashion</button>
+            <button class="chip" data-category="wellness" onclick="setCategory('wellness', this)">Wellness</button>
+            <button class="chip" data-category="food" onclick="setCategory('food', this)">Food</button>
+            <button class="chip" data-category="local" onclick="setCategory('local', this)">Local</button>
+            <button class="chip" data-category="lifestyle" onclick="setCategory('lifestyle', this)">Lifestyle</button>
           </div>
         </div>
 
-        <div class="three-grid">
-          <div class="mini-box">
-            <h3>Campaign Summary</h3>
-            <div id="summaryBox">Your campaign summary will appear here.</div>
+        <div class="market-grid" id="marketGrid">
+
+          <div class="creator-card" data-category="beauty lifestyle hyderabad" data-title="Ayesha Glow">
+            <div class="creator-top">
+              <div class="creator-header">
+                <div class="avatar">AG</div>
+                <div>
+                  <h3 class="creator-name">Ayesha Glow</h3>
+                  <p class="creator-location">Hyderabad • Beauty & Aesthetics</p>
+                </div>
+              </div>
+              <div class="badge-row">
+                <span class="badge">Beauty</span>
+                <span class="badge">Reels</span>
+                <span class="badge">Female Audience</span>
+              </div>
+            </div>
+            <div class="creator-body">
+              <div class="stat-grid">
+                <div class="stat-box">
+                  <div class="stat-label">Followers</div>
+                  <div class="stat-value">48K</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Engagement</div>
+                  <div class="stat-value">5.8%</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Category</div>
+                  <div class="stat-value">Beauty</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Price</div>
+                  <div class="stat-value">₹6,000</div>
+                </div>
+              </div>
+              <p class="creator-desc">Great for clinics, salons, skincare, slimming, beauty confidence campaigns, and transformation-style promotions.</p>
+              <div class="tag-row">
+                <span class="tag">Hyderabad</span>
+                <span class="tag">Beauty</span>
+                <span class="tag">Clinic Fit</span>
+              </div>
+              <div class="action-row">
+                <a class="btn btn-primary" href="creator-profile.html">Hire Influencer</a>
+                <a class="btn btn-light" href="creator-profile.html">View Profile</a>
+              </div>
+            </div>
           </div>
 
-          <div class="mini-box">
-            <h3>Hook Direction</h3>
-            <div id="hookBox">Your campaign hook will appear here.</div>
+          <div class="creator-card" data-category="fashion lifestyle mumbai" data-title="Rhea Styles">
+            <div class="creator-top alt1">
+              <div class="creator-header">
+                <div class="avatar">RS</div>
+                <div>
+                  <h3 class="creator-name">Rhea Styles</h3>
+                  <p class="creator-location">Mumbai • Fashion & Premium Looks</p>
+                </div>
+              </div>
+              <div class="badge-row">
+                <span class="badge">Fashion</span>
+                <span class="badge">Luxury</span>
+                <span class="badge">Female Audience</span>
+              </div>
+            </div>
+            <div class="creator-body">
+              <div class="stat-grid">
+                <div class="stat-box">
+                  <div class="stat-label">Followers</div>
+                  <div class="stat-value">92K</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Engagement</div>
+                  <div class="stat-value">4.6%</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Category</div>
+                  <div class="stat-value">Fashion</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Price</div>
+                  <div class="stat-value">₹12,000</div>
+                </div>
+              </div>
+              <p class="creator-desc">Best for boutique launches, festive collections, jewellery styling, lifestyle promos, and premium product shoots.</p>
+              <div class="tag-row">
+                <span class="tag">Mumbai</span>
+                <span class="tag">Fashion</span>
+                <span class="tag">Retail Fit</span>
+              </div>
+              <div class="action-row">
+                <a class="btn btn-primary" href="creator-profile.html">Hire Influencer</a>
+                <a class="btn btn-light" href="creator-profile.html">View Profile</a>
+              </div>
+            </div>
           </div>
 
-          <div class="mini-box">
-            <h3>Ad Caption Direction</h3>
-            <div id="captionBox">Your caption direction will appear here.</div>
+          <div class="creator-card" data-category="wellness local hyderabad" data-title="Fit with Neha">
+            <div class="creator-top alt2">
+              <div class="creator-header">
+                <div class="avatar">FN</div>
+                <div>
+                  <h3 class="creator-name">Fit with Neha</h3>
+                  <p class="creator-location">Hyderabad • Wellness & Fitness</p>
+                </div>
+              </div>
+              <div class="badge-row">
+                <span class="badge">Wellness</span>
+                <span class="badge">Fitness</span>
+                <span class="badge">Trust Creator</span>
+              </div>
+            </div>
+            <div class="creator-body">
+              <div class="stat-grid">
+                <div class="stat-box">
+                  <div class="stat-label">Followers</div>
+                  <div class="stat-value">36K</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Engagement</div>
+                  <div class="stat-value">6.2%</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Category</div>
+                  <div class="stat-value">Wellness</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Price</div>
+                  <div class="stat-value">₹5,500</div>
+                </div>
+              </div>
+              <p class="creator-desc">Strong for slimming, health, wellness products, gym partnerships, transformation journeys, and trust-based local campaigns.</p>
+              <div class="tag-row">
+                <span class="tag">Hyderabad</span>
+                <span class="tag">Fitness</span>
+                <span class="tag">Wellness</span>
+              </div>
+              <div class="action-row">
+                <a class="btn btn-primary" href="creator-profile.html">Hire Influencer</a>
+                <a class="btn btn-light" href="creator-profile.html">View Profile</a>
+              </div>
+            </div>
           </div>
+
+          <div class="creator-card" data-category="food local bangalore" data-title="Foodie Arjun">
+            <div class="creator-top alt3">
+              <div class="creator-header">
+                <div class="avatar">FA</div>
+                <div>
+                  <h3 class="creator-name">Foodie Arjun</h3>
+                  <p class="creator-location">Bangalore • Food & Local Reviews</p>
+                </div>
+              </div>
+              <div class="badge-row">
+                <span class="badge">Food</span>
+                <span class="badge">Local Business</span>
+                <span class="badge">Reviews</span>
+              </div>
+            </div>
+            <div class="creator-body">
+              <div class="stat-grid">
+                <div class="stat-box">
+                  <div class="stat-label">Followers</div>
+                  <div class="stat-value">58K</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Engagement</div>
+                  <div class="stat-value">5.1%</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Category</div>
+                  <div class="stat-value">Food</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Price</div>
+                  <div class="stat-value">₹7,500</div>
+                </div>
+              </div>
+              <p class="creator-desc">Useful for cafes, local restaurants, dessert brands, bakery launches, and highly visual local discovery content.</p>
+              <div class="tag-row">
+                <span class="tag">Bangalore</span>
+                <span class="tag">Food</span>
+                <span class="tag">Local Reach</span>
+              </div>
+              <div class="action-row">
+                <a class="btn btn-primary" href="creator-profile.html">Hire Influencer</a>
+                <a class="btn btn-light" href="creator-profile.html">View Profile</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="creator-card" data-category="lifestyle local chennai" data-title="Shreya Living">
+            <div class="creator-top alt4">
+              <div class="creator-header">
+                <div class="avatar">SL</div>
+                <div>
+                  <h3 class="creator-name">Shreya Living</h3>
+                  <p class="creator-location">Chennai • Lifestyle & Home Content</p>
+                </div>
+              </div>
+              <div class="badge-row">
+                <span class="badge">Lifestyle</span>
+                <span class="badge">Home</span>
+                <span class="badge">Women Audience</span>
+              </div>
+            </div>
+            <div class="creator-body">
+              <div class="stat-grid">
+                <div class="stat-box">
+                  <div class="stat-label">Followers</div>
+                  <div class="stat-value">41K</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Engagement</div>
+                  <div class="stat-value">5.4%</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Category</div>
+                  <div class="stat-value">Lifestyle</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Price</div>
+                  <div class="stat-value">₹6,800</div>
+                </div>
+              </div>
+              <p class="creator-desc">Ideal for household brands, women-focused products, gifting, ecommerce promotions, and lifestyle-friendly marketing.</p>
+              <div class="tag-row">
+                <span class="tag">Chennai</span>
+                <span class="tag">Lifestyle</span>
+                <span class="tag">Home</span>
+              </div>
+              <div class="action-row">
+                <a class="btn btn-primary" href="creator-profile.html">Hire Influencer</a>
+                <a class="btn btn-light" href="creator-profile.html">View Profile</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="creator-card" data-category="beauty local hyderabad" data-title="Nida Beauty Hub">
+            <div class="creator-top alt5">
+              <div class="creator-header">
+                <div class="avatar">NB</div>
+                <div>
+                  <h3 class="creator-name">Nida Beauty Hub</h3>
+                  <p class="creator-location">Hyderabad • Salon & Bridal Content</p>
+                </div>
+              </div>
+              <div class="badge-row">
+                <span class="badge">Salon</span>
+                <span class="badge">Beauty</span>
+                <span class="badge">Local Reach</span>
+              </div>
+            </div>
+            <div class="creator-body">
+              <div class="stat-grid">
+                <div class="stat-box">
+                  <div class="stat-label">Followers</div>
+                  <div class="stat-value">29K</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Engagement</div>
+                  <div class="stat-value">6.8%</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Category</div>
+                  <div class="stat-value">Beauty</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Price</div>
+                  <div class="stat-value">₹4,800</div>
+                </div>
+              </div>
+              <p class="creator-desc">Strong fit for bridal services, salon promos, beauty packages, and visual short-form promotions targeting women locally.</p>
+              <div class="tag-row">
+                <span class="tag">Hyderabad</span>
+                <span class="tag">Salon</span>
+                <span class="tag">Bridal</span>
+              </div>
+              <div class="action-row">
+                <a class="btn btn-primary" href="creator-profile.html">Hire Influencer</a>
+                <a class="btn btn-light" href="creator-profile.html">View Profile</a>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <div class="campaign-flow">
-          <div class="section-card">
-            <h3>Step 1</h3>
-            <div id="flow1">Audience + offer direction will appear here.</div>
-          </div>
-
-          <div class="section-card">
-            <h3>Step 2</h3>
-            <div id="flow2">Creative message direction will appear here.</div>
-          </div>
-
-          <div class="section-card">
-            <h3>Step 3</h3>
-            <div id="flow3">Platform execution direction will appear here.</div>
-          </div>
-
-          <div class="section-card">
-            <h3>Step 4</h3>
-            <div id="flow4">CTA and conversion direction will appear here.</div>
-          </div>
+        <div class="empty-state" id="emptyState">
+          No creators match your search right now. Try another niche, city, or category.
         </div>
 
         <div class="footer-note">
-          <strong>Bariq AI Campaign Flow</strong>
-          <span>One clean campaign structure helps your ads, reels, captions, and creator execution feel connected instead of random.</span>
+          <strong>Bariq AI Marketplace Layer</strong>
+          <span>This page should help businesses browse and hire creators easily, so Bariq starts feeling like an influencer hiring platform and not just a content tool.</span>
         </div>
       </div>
     </div>
   </section>
 
   <script>
-    function setStatus(text) {
-      document.getElementById("statusText").textContent = text;
+    let activeCategory = "all";
+
+    function toggleMenu() {
+      document.getElementById("topLinks").classList.toggle("show");
     }
 
-    function updatePreview() {
-      document.getElementById("previewGoal").textContent =
-        document.getElementById("campaignGoal").value || "Lead Generation";
-
-      document.getElementById("previewBrand").textContent =
-        document.getElementById("brandName").value || "Your Brand";
-
-      document.getElementById("previewHeadline").textContent =
-        document.getElementById("headline").value || "Your campaign headline will appear here";
-
-      document.getElementById("previewSubline").textContent =
-        document.getElementById("subline").value || "Your campaign supporting line will appear here";
-
-      document.getElementById("previewOffer").textContent =
-        "CTA: " + (document.getElementById("cta").value || "Book on WhatsApp");
+    function setCategory(category, el) {
+      activeCategory = category;
+      document.querySelectorAll(".chip").forEach(chip => chip.classList.remove("active"));
+      el.classList.add("active");
+      filterCreators();
     }
 
-    function usePreset(type) {
-      if (type === "clinic") {
-        document.getElementById("brandName").value = "Your Clinic";
-        document.getElementById("businessType").value = "Slimming / Aesthetic Clinic";
-        document.getElementById("campaignGoal").value = "Lead Generation";
-        document.getElementById("audience").value = "Women 25-45 looking for transformation";
-        document.getElementById("offer").value = "Book consultation now on WhatsApp";
-        document.getElementById("brief").value = "Run a premium clinic campaign that creates trust, urgency, and bookings.";
-        document.getElementById("platform").value = "Instagram + Facebook";
-        document.getElementById("cta").value = "Book on WhatsApp";
-        document.getElementById("headline").value = "Start your transformation with expert care";
-        document.getElementById("subline").value = "Premium results, guided support, and direct booking from one campaign";
-      }
+    function filterCreators() {
+      const query = document.getElementById("searchInput").value.toLowerCase().trim();
+      const cards = document.querySelectorAll(".creator-card");
+      let visibleCount = 0;
 
-      if (type === "salon") {
-        document.getElementById("brandName").value = "Your Salon";
-        document.getElementById("businessType").value = "Beauty Salon";
-        document.getElementById("campaignGoal").value = "Bookings";
-        document.getElementById("audience").value = "Women beauty audience";
-        document.getElementById("offer").value = "Limited offer on premium salon services";
-        document.getElementById("brief").value = "Drive salon bookings with attractive visual messaging and a simple CTA.";
-        document.getElementById("platform").value = "WhatsApp + Instagram";
-        document.getElementById("cta").value = "Book on WhatsApp";
-        document.getElementById("headline").value = "Your next salon result starts here";
-        document.getElementById("subline").value = "Glow, shine, and confidence packed into one premium beauty offer";
-      }
+      cards.forEach(card => {
+        const title = card.getAttribute("data-title").toLowerCase();
+        const category = card.getAttribute("data-category").toLowerCase();
 
-      if (type === "product") {
-        document.getElementById("brandName").value = "Your Brand";
-        document.getElementById("businessType").value = "Product Brand";
-        document.getElementById("campaignGoal").value = "Sales";
-        document.getElementById("audience").value = "Young digital shoppers";
-        document.getElementById("offer").value = "Order now before stock runs out";
-        document.getElementById("brief").value = "Launch a product campaign with clear benefit, strong hook, and conversion CTA.";
-        document.getElementById("platform").value = "Meta Ads";
-        document.getElementById("cta").value = "Buy Now";
-        document.getElementById("headline").value = "Discover the product people will notice";
-        document.getElementById("subline").value = "Built for attention, trust, and better conversions";
-      }
+        const matchesSearch = !query || title.includes(query) || category.includes(query);
+        const matchesCategory = activeCategory === "all" || category.includes(activeCategory);
 
-      if (type === "festival") {
-        document.getElementById("brandName").value = "Your Brand";
-        document.getElementById("businessType").value = "Retail / Fashion / Jewellery";
-        document.getElementById("campaignGoal").value = "Festival Promotion";
-        document.getElementById("audience").value = "Festival shoppers and gifting buyers";
-        document.getElementById("offer").value = "Festive sale live now with limited-time offer";
-        document.getElementById("brief").value = "Run a festive campaign that feels premium, urgent, and shareable.";
-        document.getElementById("platform").value = "Multi-Channel";
-        document.getElementById("cta").value = "Buy Now";
-        document.getElementById("headline").value = "Celebrate with a festive offer your audience will love";
-        document.getElementById("subline").value = "Elegant campaign direction for festive shopping, gifting, and quick action";
-      }
-
-      updatePreview();
-      generateCampaign();
-    }
-
-    function generateCampaign() {
-      const brand = document.getElementById("brandName").value || "Your Brand";
-      const business = document.getElementById("businessType").value || "your business";
-      const goal = document.getElementById("campaignGoal").value || "Lead Generation";
-      const audience = document.getElementById("audience").value || "your ideal audience";
-      const offer = document.getElementById("offer").value || "Contact us now";
-      const brief = document.getElementById("brief").value || "Create a campaign that is clear and action-driven.";
-      const platform = document.getElementById("platform").value || "Instagram + Facebook";
-      const cta = document.getElementById("cta").value || "Book on WhatsApp";
-      const headline = document.getElementById("headline").value || "Your campaign headline";
-      const subline = document.getElementById("subline").value || "Your supporting line";
-
-      document.getElementById("summaryBox").textContent =
-        `${brand} is running a ${goal.toLowerCase()} campaign for ${business}. The target audience is ${audience}. Main campaign message: ${offer}. Platform focus: ${platform}.`;
-
-      document.getElementById("hookBox").textContent =
-        `Stop scrolling — ${brand} is built for ${audience}. This campaign should make the audience feel that now is the right moment to act.`;
-
-      document.getElementById("captionBox").textContent =
-        `${headline}. ${subline}. ${offer}. ${cta}. Built for ${audience} on ${platform}.`;
-
-      document.getElementById("flow1").textContent =
-        `Define audience: ${audience}\nClarify goal: ${goal}\nAnchor the message in one strong benefit.`;
-
-      document.getElementById("flow2").textContent =
-        `Creative direction: ${headline}\nSupport line: ${subline}\nBrief: ${brief}`;
-
-      document.getElementById("flow3").textContent =
-        `Platform execution: ${platform}\nUse visuals, hooks, captions, and creator outputs aligned to one message.`;
-
-      document.getElementById("flow4").textContent =
-        `Main conversion message: ${offer}\nFinal CTA: ${cta}\nPush urgency and clarity in every ad and reel.`;
-
-      updatePreview();
-      setStatus("Campaign plan generated successfully.");
-    }
-
-    function clearCampaign() {
-      document.getElementById("brandName").value = "";
-      document.getElementById("businessType").value = "";
-      document.getElementById("campaignGoal").value = "Lead Generation";
-      document.getElementById("audience").value = "";
-      document.getElementById("offer").value = "";
-      document.getElementById("brief").value = "";
-      document.getElementById("platform").value = "Instagram + Facebook";
-      document.getElementById("cta").value = "Book on WhatsApp";
-      document.getElementById("headline").value = "";
-      document.getElementById("subline").value = "";
-
-      document.getElementById("summaryBox").textContent = "Your campaign summary will appear here.";
-      document.getElementById("hookBox").textContent = "Your campaign hook will appear here.";
-      document.getElementById("captionBox").textContent = "Your caption direction will appear here.";
-      document.getElementById("flow1").textContent = "Audience + offer direction will appear here.";
-      document.getElementById("flow2").textContent = "Creative message direction will appear here.";
-      document.getElementById("flow3").textContent = "Platform execution direction will appear here.";
-      document.getElementById("flow4").textContent = "CTA and conversion direction will appear here.";
-
-      updatePreview();
-      setStatus("Waiting for campaign details...");
-    }
-
-    [
-      "brandName",
-      "businessType",
-      "campaignGoal",
-      "audience",
-      "offer",
-      "brief",
-      "platform",
-      "cta",
-      "headline",
-      "subline"
-    ].forEach(function(id) {
-      document.addEventListener("input", function(e) {
-        if (e.target && e.target.id === id) {
-          updatePreview();
+        if (matchesSearch && matchesCategory) {
+          card.style.display = "flex";
+          visibleCount++;
+        } else {
+          card.style.display = "none";
         }
       });
 
-      document.addEventListener("change", function(e) {
-        if (e.target && e.target.id === id) {
-          updatePreview();
-        }
-      });
-    });
+      document.getElementById("emptyState").style.display = visibleCount === 0 ? "block" : "none";
+    }
 
-    updatePreview();
+    function clearFilters() {
+      document.getElementById("searchInput").value = "";
+      activeCategory = "all";
+
+      document.querySelectorAll(".chip").forEach(chip => chip.classList.remove("active"));
+      document.querySelector('.chip[data-category="all"]').classList.add("active");
+
+      filterCreators();
+    }
   </script>
 </body>
 </html>
