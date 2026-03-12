@@ -5,249 +5,305 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bariq AI | Creator Profile</title>
   <style>
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; overflow-x: hidden; }
+    *{box-sizing:border-box;margin:0;padding:0}
 
     :root{
       --bg1:#fffaf5;
       --bg2:#fbf8ff;
-      --bg3:#f6f1ff;
-      --card:#ffffff;
-      --card-soft:rgba(255,255,255,0.94);
-      --border:#eadfbe;
-      --border-soft:#f1e8cf;
       --purple:#6b57d9;
       --purple-dark:#372d69;
       --purple-soft:#f3efff;
       --gold:#d8b05b;
       --text:#2f2954;
       --muted:#746d8e;
-      --shadow:0 18px 40px rgba(83,57,139,0.08);
-      --card-shadow:0 10px 24px rgba(83,57,139,0.05);
-      --radius-xl:28px;
-      --radius-lg:22px;
-      --radius-md:16px;
+      --card:#ffffff;
+      --border:#eadfbe;
+      --radius:24px;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(255,239,207,0.55), transparent 26%),
-        radial-gradient(circle at top right, rgba(110,87,217,0.08), transparent 20%),
-        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 48%, var(--bg3) 100%);
+    body{
+      font-family:Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:var(--text);
     }
 
-    a { color: inherit; text-decoration: none; }
+    a{text-decoration:none;color:inherit}
 
-    .container {
-      width: min(1260px, calc(100% - 28px));
-      margin: 0 auto;
+    .container{
+      width:min(1260px,92%);
+      margin:auto;
     }
 
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #efe5c8;
+    header{
+      background:#fff;
+      border-bottom:1px solid #eee;
+      position:sticky;
+      top:0;
+      z-index:100;
     }
 
-    .nav-wrap {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-      padding: 8px 0;
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      padding:16px 0;
     }
 
-    .brand {
-      font-size: 30px;
-      font-weight: 800;
-      line-height: 1;
-      white-space: nowrap;
-      background: linear-gradient(90deg, var(--gold), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .brand{
+      font-size:30px;
+      font-weight:800;
+      background:linear-gradient(90deg,var(--gold),var(--purple));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
     }
 
-    .menu-toggle{
-      display:none;
-      border:none;
-      background:var(--purple-soft);
-      color:var(--purple-dark);
+    .menu{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .menu a{
+      padding:10px 14px;
       border-radius:12px;
-      padding:12px 14px;
-      font-size:18px;
+      font-size:14px;
       font-weight:700;
-      cursor:pointer;
+      color:#4c4289;
     }
 
-    .top-links {
+    .menu a:hover,
+    .menu a.active{
+      background:var(--purple-soft);
+    }
+
+    .page{
+      padding:28px 0 40px;
+    }
+
+    .shell{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:22px;
+      box-shadow:0 16px 40px rgba(83,57,139,.06);
+    }
+
+    .subnav{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      font-size:14px;
-      font-weight:700;
-      color:#4e438a;
+      margin-bottom:18px;
     }
 
-    .top-links a {
+    .subnav a{
       padding:10px 14px;
       border-radius:12px;
+      background:#faf7ff;
+      border:1px solid #eee2ff;
+      font-size:13px;
+      font-weight:700;
+      color:#51468f;
     }
 
-    .top-links a:hover,
-    .top-links a.active {
-      background: var(--purple-soft);
+    .subnav a.active{
+      background:var(--purple-soft);
     }
 
-    .page {
-      padding: 22px 0 40px;
-    }
-
-    .shell {
-      background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,251,245,0.95));
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .subnav {
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:18px;
-      padding:14px;
-      background: rgba(255,255,255,0.85);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--card-shadow);
-    }
-
-    .subnav a {
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #4d428a;
-      background: #fff;
-      border: 1px solid #eee3c4;
-    }
-
-    .subnav a.active,
-    .subnav a:hover {
-      background: var(--purple-soft);
-      border-color: #e6dbff;
-    }
-
-    .profile-hero {
+    .hero{
       display:grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(300px, 390px);
+      grid-template-columns:.95fr 1.05fr;
       gap:18px;
-      align-items:start;
+      margin-bottom:18px;
     }
 
-    .panel,
+    .profile-visual,
+    .profile-info,
     .card,
-    .stat-card,
-    .preview-card,
-    .footer-note {
-      background: var(--card-soft);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--card-shadow);
-      min-width: 0;
+    .footer-note{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:20px;
     }
 
-    .panel,
-    .card,
-    .preview-card,
-    .footer-note {
-      padding: 20px;
+    .profile-visual{
+      overflow:hidden;
+      padding:0;
     }
 
-    .eyebrow {
+    .cover{
+      position:relative;
+      min-height:520px;
+      background:
+        linear-gradient(180deg, rgba(25,18,45,.12) 0%, rgba(25,18,45,.65) 58%, rgba(22,16,40,.92) 100%),
+        url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      border-radius:24px;
+      overflow:hidden;
+    }
+
+    .cover-content{
+      min-height:520px;
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      color:#fff;
+    }
+
+    .cover-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .pill,
+    .rate-pill{
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .pill{
+      background:rgba(255,255,255,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .rate-pill{
+      background:#f7e8be;
+      color:#6d5104;
+    }
+
+    .cover-main{
+      max-width:84%;
+    }
+
+    .cover-kicker{
+      font-size:13px;
+      color:#f2e4b6;
+      margin-bottom:10px;
+      font-weight:700;
+    }
+
+    .cover-main h1{
+      font-size:44px;
+      line-height:1.02;
+      color:#fff6d5;
+      margin-bottom:12px;
+      letter-spacing:-0.04em;
+      font-weight:700;
+    }
+
+    .cover-main p{
+      font-size:15px;
+      line-height:1.75;
+      color:rgba(255,255,255,.94);
+    }
+
+    .cover-bottom{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .mini-badge{
       display:inline-block;
-      padding:9px 14px;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.12);
+      font-size:13px;
+      font-weight:700;
+      backdrop-filter:blur(4px);
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding:8px 12px;
       border-radius:999px;
       background:#fff;
-      border:1px solid #ede2c5;
-      color:#554b8f;
+      border:1px solid #eee2c7;
+      color:#584d92;
       font-size:13px;
       font-weight:700;
       margin-bottom:12px;
     }
 
-    h1 {
-      margin: 0 0 8px;
-      font-size: clamp(32px, 4vw, 46px);
-      line-height: 1.06;
-      letter-spacing: -0.04em;
-      color: var(--purple-dark);
-      font-weight: 700;
+    h2{
+      font-size:36px;
+      line-height:1.08;
+      color:var(--purple-dark);
+      margin-bottom:10px;
+      font-weight:700;
     }
 
-    .subtitle {
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.7;
-      max-width: 760px;
-    }
-
-    .creator-top {
-      display:flex;
-      align-items:center;
-      gap:16px;
+    .subtitle{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.75;
       margin-bottom:18px;
     }
 
-    .avatar {
-      width:88px;
-      height:88px;
-      border-radius:24px;
-      background: linear-gradient(180deg, #6a56de 0%, #2b225a 100%);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff4cd;
-      font-size:30px;
-      font-weight:700;
-      flex-shrink:0;
-      box-shadow: 0 12px 24px rgba(83,57,139,0.18);
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-bottom:18px;
     }
 
-    .creator-name {
-      margin:0 0 6px;
-      font-size:28px;
-      line-height:1.1;
-      color:#433985;
-      font-weight:700;
+    .stat{
+      background:#fffdf9;
+      border:1px solid #efe3c6;
+      border-radius:18px;
+      padding:14px;
     }
 
-    .creator-meta {
-      margin:0;
+    .stat strong{
+      display:block;
+      font-size:24px;
+      color:#473d87;
+      margin-bottom:6px;
+    }
+
+    .stat span{
+      font-size:12px;
       color:var(--muted);
-      font-size:14px;
       line-height:1.6;
     }
 
-    .badge-row,
-    .tag-row {
+    .about-box{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:16px;
+      margin-bottom:16px;
+    }
+
+    .about-box h3{
+      font-size:18px;
+      color:#4d428b;
+      margin-bottom:8px;
+      font-weight:700;
+    }
+
+    .about-box p{
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    .tag-row{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
+      margin-bottom:16px;
     }
 
-    .badge,
-    .tag {
-      padding:8px 10px;
+    .tag{
+      padding:8px 11px;
       border-radius:999px;
       background:#f6f1ff;
       color:#4a3b92;
@@ -255,220 +311,161 @@
       font-weight:700;
     }
 
-    .summary {
-      margin-top:16px;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.75;
-    }
-
-    .action-row {
+    .action-row{
       display:flex;
       gap:12px;
       flex-wrap:wrap;
-      margin-top:18px;
     }
 
-    .btn {
-      border:none;
-      border-radius:16px;
-      padding:14px 18px;
-      font-size:14px;
-      font-weight:700;
-      cursor:pointer;
+    .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-    }
-
-    .btn-primary {
-      color:#fff;
-      background: linear-gradient(135deg, #d6b05a, #6b57d9);
-      box-shadow:0 10px 22px rgba(107,87,217,0.18);
-    }
-
-    .btn-light {
-      background: var(--purple-soft);
-      color: var(--purple-dark);
-      border: 1px solid #e4d8ff;
-    }
-
-    .preview-card {
-      background: linear-gradient(180deg, #664de1 0%, #2d225c 100%);
-      border: 8px solid #211b32;
-      color:#fff;
-      min-height: 430px;
-    }
-
-    .preview-top {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:20px;
-    }
-
-    .pill {
-      display:inline-block;
-      padding:8px 12px;
-      border-radius:999px;
-      background:#f7e8be;
-      color:#6d5104;
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .logo-box {
-      width:48px;
-      height:48px;
+      border:none;
       border-radius:16px;
-      background: rgba(255,255,255,0.14);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .preview-kicker {
-      text-align:center;
-      color:#efe2b4;
+      padding:13px 16px;
       font-size:14px;
-      margin-bottom:12px;
-    }
-
-    .preview-headline {
-      text-align:center;
-      color:#fff4cd;
-      font-size:34px;
-      line-height:1.1;
-      margin:0 0 12px;
       font-weight:700;
-      letter-spacing:-0.03em;
+      cursor:pointer;
     }
 
-    .preview-subline {
-      text-align:center;
-      color:rgba(255,255,255,0.92);
-      line-height:1.7;
-      font-size:15px;
-      margin:0 0 18px;
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      color:white;
+      box-shadow:0 10px 22px rgba(107,87,217,.18);
     }
 
-    .preview-price {
-      text-align:center;
-      color:#fff;
-      font-size:16px;
-      font-weight:700;
-      margin-top:10px;
-    }
-
-    .stats-grid {
-      margin-top:18px;
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap:16px;
-    }
-
-    .stat-card {
-      padding:18px;
-    }
-
-    .stat-label {
-      font-size:13px;
-      color:var(--muted);
-      font-weight:700;
-      margin-bottom:8px;
-    }
-
-    .stat-value {
-      font-size:28px;
+    .btn-light{
+      background:var(--purple-soft);
       color:var(--purple-dark);
-      font-weight:700;
-      line-height:1.1;
-      margin-bottom:8px;
+      border:1px solid #e4d8ff;
     }
 
-    .stat-note {
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.6;
-    }
-
-    .content-grid {
-      margin-top:18px;
+    .section-grid{
       display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap:16px;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-bottom:18px;
     }
 
-    .card h3 {
-      margin:0 0 10px;
+    .card h3{
       font-size:20px;
       color:#493f86;
-      font-weight:700;
-    }
-
-    .card p,
-    .card ul {
-      margin:0;
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.7;
-    }
-
-    .card ul {
-      padding-left:18px;
-    }
-
-    .soft-grid {
-      margin-top:18px;
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap:16px;
-    }
-
-    .soft-box {
-      background: var(--card-soft);
-      border:1px solid var(--border-soft);
-      border-radius:20px;
-      padding:18px;
-      box-shadow: var(--card-shadow);
-    }
-
-    .step-no {
-      width:36px;
-      height:36px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: linear-gradient(135deg, #f7e8bf, #e0ba63);
-      color:#664c08;
-      font-weight:700;
       margin-bottom:12px;
-      font-size:15px;
-    }
-
-    .soft-box h4 {
-      margin:0 0 8px;
-      font-size:18px;
-      color:#4b4187;
       font-weight:700;
     }
 
-    .soft-box p {
-      margin:0;
+    .list{
+      display:grid;
+      gap:12px;
+    }
+
+    .list-item{
+      border:1px solid #efe3c6;
+      border-radius:18px;
+      padding:14px;
+      background:#fffdf9;
+    }
+
+    .list-item strong{
+      display:block;
+      font-size:15px;
+      color:#473d87;
+      margin-bottom:6px;
+    }
+
+    .list-item span{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .portfolio-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .portfolio-card{
+      border:1px solid var(--border);
+      border-radius:22px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 10px 24px rgba(83,57,139,.05);
+    }
+
+    .portfolio-visual{
+      position:relative;
+      min-height:220px;
+      background-size:cover;
+      background-position:center;
+    }
+
+    .portfolio-visual::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(25,18,45,.12) 0%, rgba(25,18,45,.68) 70%, rgba(22,16,40,.9) 100%);
+    }
+
+    .portfolio-inner{
+      position:relative;
+      z-index:2;
+      min-height:220px;
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      color:#fff;
+    }
+
+    .portfolio-inner span{
+      display:inline-block;
+      align-self:flex-start;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      background:rgba(255,255,255,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .portfolio-inner h4{
+      font-size:24px;
+      line-height:1.08;
+      color:#fff6d5;
+      font-weight:700;
+      max-width:86%;
+    }
+
+    .portfolio-body{
+      padding:16px;
+    }
+
+    .portfolio-body h4{
+      font-size:18px;
+      color:#493f86;
+      margin-bottom:8px;
+      font-weight:700;
+    }
+
+    .portfolio-body p{
       font-size:14px;
       color:var(--muted);
       line-height:1.7;
+      margin-bottom:12px;
     }
 
-    .footer-note {
+    .footer-note{
       margin-top:18px;
       text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
     }
 
-    .footer-note strong {
+    .footer-note strong{
       display:block;
       margin-bottom:8px;
       color:#483f86;
@@ -476,89 +473,51 @@
       font-weight:700;
     }
 
-    .footer-note span {
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.7;
-    }
-
-    @media (max-width: 1100px) {
-      .profile-hero {
-        grid-template-columns: 1fr;
-      }
-      .stats-grid,
-      .content-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .soft-grid {
-        grid-template-columns: 1fr 1fr;
+    @media(max-width:1100px){
+      .hero,.section-grid,.portfolio-grid,.stats{
+        grid-template-columns:1fr 1fr;
       }
     }
 
-    @media (max-width: 760px) {
-      .container { width: min(100% - 18px, 1260px); }
-      .menu-toggle { display:block; }
-
-      .top-links {
-        display:none;
-        width:100%;
-        flex-direction:column;
-        gap:8px;
+    @media(max-width:850px){
+      .hero{
+        grid-template-columns:1fr;
       }
+    }
 
-      .top-links.show { display:flex; }
-
-      .top-links a {
-        width:100%;
-        background:#fff;
-        border:1px solid #efe5c8;
+    @media(max-width:760px){
+      .section-grid,.portfolio-grid,.stats{
+        grid-template-columns:1fr;
       }
-
-      .subnav {
+      .action-row{
         flex-direction:column;
       }
-
-      .subnav a {
+      .btn{
         width:100%;
       }
-
-      .creator-top {
-        flex-direction:column;
-        align-items:flex-start;
+      .cover-main{
+        max-width:100%;
       }
-
-      .action-row {
-        flex-direction:column;
+      .cover-main h1{
+        font-size:34px;
       }
-
-      .btn {
-        width:100%;
-      }
-
-      .stats-grid,
-      .content-grid,
-      .soft-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .preview-headline {
-        font-size:28px;
+      h2{
+        font-size:30px;
       }
     }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <a href="index.html" class="brand">Bariq AI</a>
+  <header>
+    <div class="container nav">
+      <div class="brand">Bariq AI</div>
 
-      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-      <nav class="top-links" id="topLinks">
+      <nav class="menu">
+        <a href="index.html">Home</a>
+        <a href="ai-generator.html">AI Studio</a>
         <a href="business-dashboard.html" class="active">Business</a>
         <a href="creator-dashboard.html">Influencers</a>
         <a href="admin-dashboard.html">Admin</a>
-        <a href="ai-generator.html">AI Studio</a>
         <a href="login.html">Login</a>
       </nav>
     </div>
@@ -569,143 +528,220 @@
       <div class="shell">
 
         <div class="subnav">
-          <a href="marketplace.html" class="active">Marketplace</a>
-          <a href="creator-dashboard.html">Influencer Home</a>
-          <a href="creator-register.html">Register</a>
-          <a href="creators-earnings.html">Earnings</a>
-          <a href="campaign.html">Campaigns</a>
+          <a href="marketplace.html">Marketplace</a>
+          <a href="creator-profile.html" class="active">Creator Profile</a>
+          <a href="creator-register.html">Creator Register</a>
+          <a href="creators-earnings.html">Creator Earnings</a>
         </div>
 
-        <div class="profile-hero">
-          <div class="panel">
-            <div class="eyebrow">Creator Profile</div>
+        <div class="hero">
+          <div class="profile-visual">
+            <div class="cover">
+              <div class="cover-content">
+                <div class="cover-top">
+                  <span class="pill">Beauty Creator</span>
+                  <span class="rate-pill">₹6,000 / Reel</span>
+                </div>
 
-            <div class="creator-top">
-              <div class="avatar">AG</div>
-              <div>
-                <h1 class="creator-name">Ayesha Glow</h1>
-                <p class="creator-meta">Hyderabad • Beauty & Aesthetics • Female Audience • Reels & Promotions</p>
-                <div class="badge-row" style="margin-top:10px;">
-                  <span class="badge">Beauty</span>
-                  <span class="badge">Clinic Fit</span>
-                  <span class="badge">Salon Fit</span>
-                  <span class="badge">Local Reach</span>
+                <div class="cover-main">
+                  <div class="cover-kicker">Hyderabad • Premium Creator Match</div>
+                  <h1>Ayesha Glow</h1>
+                  <p>
+                    Beauty and aesthetics creator ideal for clinics, salons, skincare, and premium women-focused campaigns that need trust, elegance, and stronger local appeal.
+                  </p>
+                </div>
+
+                <div class="cover-bottom">
+                  <span class="mini-badge">48K Followers</span>
+                  <span class="mini-badge">5.8% Engagement</span>
+                  <span class="mini-badge">Women Audience</span>
                 </div>
               </div>
             </div>
+          </div>
 
-            <p class="summary">
-              Ayesha Glow is a beauty and aesthetics focused creator ideal for clinics, salons, skincare brands, and confidence-led women campaigns. Her profile suits businesses looking for premium-looking reels, service-based promotional content, and local trust-building collaborations.
+          <div class="profile-info">
+            <div class="eyebrow">Creator Overview</div>
+            <h2>Premium creator profile for business collaboration.</h2>
+            <p class="subtitle">
+              This profile helps a business quickly understand if the creator is a strong fit for their campaign, category, audience, and visual style.
             </p>
 
+            <div class="stats">
+              <div class="stat">
+                <strong>48K</strong>
+                <span>Followers across main platform audience</span>
+              </div>
+              <div class="stat">
+                <strong>5.8%</strong>
+                <span>Average engagement rate on recent posts</span>
+              </div>
+              <div class="stat">
+                <strong>₹6K</strong>
+                <span>Starting price for 1 reel collaboration</span>
+              </div>
+              <div class="stat">
+                <strong>82%</strong>
+                <span>Women audience relevance for beauty campaigns</span>
+              </div>
+            </div>
+
+            <div class="about-box">
+              <h3>About Creator</h3>
+              <p>
+                Ayesha creates beauty-led reels with a soft premium visual tone. She is best suited for clinics, salons, skincare, makeup, confidence-focused campaigns, and women-led service businesses that want relatable but polished content.
+              </p>
+            </div>
+
+            <div class="tag-row">
+              <span class="tag">Beauty</span>
+              <span class="tag">Clinic</span>
+              <span class="tag">Salon</span>
+              <span class="tag">Skincare</span>
+              <span class="tag">Women Audience</span>
+              <span class="tag">Hyderabad</span>
+            </div>
+
             <div class="action-row">
-              <a class="btn btn-primary" href="login.html">Hire Influencer</a>
+              <a class="btn btn-primary" href="login.html">Hire Creator</a>
+              <a class="btn btn-light" href="campaign.html">Attach to Campaign</a>
               <a class="btn btn-light" href="marketplace.html">Back to Marketplace</a>
             </div>
           </div>
+        </div>
 
-          <div class="preview-card">
-            <div class="preview-top">
-              <span class="pill">Creator Match</span>
-              <div class="logo-box">Bariq</div>
+        <div class="section-grid">
+          <div class="card">
+            <h3>Audience Fit</h3>
+            <div class="list">
+              <div class="list-item">
+                <strong>Main Audience</strong>
+                <span>Women aged 22–40 interested in beauty, skincare, confidence, and premium service experiences.</span>
+              </div>
+              <div class="list-item">
+                <strong>Best Categories</strong>
+                <span>Beauty clinics, salon brands, skincare products, wellness women campaigns, and aesthetic service launches.</span>
+              </div>
+              <div class="list-item">
+                <strong>Location Strength</strong>
+                <span>Strong fit for Hyderabad city campaigns and local service businesses wanting regional visibility.</span>
+              </div>
             </div>
-            <div class="preview-kicker">Beauty Influencer • Hyderabad</div>
-            <h2 class="preview-headline">A creator businesses can trust for beauty promotions</h2>
-            <p class="preview-subline">Strong for clinic offers, salon campaigns, skincare promotions, premium women audience storytelling, and local campaign reach.</p>
-            <div class="preview-price">Starting Rate: ₹6,000 / Reel</div>
-          </div>
-        </div>
-
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-label">Followers</div>
-            <div class="stat-value">48K</div>
-            <div class="stat-note">Balanced creator size for trust and local campaign fit</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-label">Engagement</div>
-            <div class="stat-value">5.8%</div>
-            <div class="stat-note">Healthy engagement for targeted audience-based campaigns</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-label">Primary Niche</div>
-            <div class="stat-value">Beauty</div>
-            <div class="stat-note">Best for aesthetics, salon, skincare, and premium women services</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-label">Price Range</div>
-            <div class="stat-value">₹6K–₹10K</div>
-            <div class="stat-note">Depending on reel, story, package, and campaign requirement</div>
-          </div>
-        </div>
-
-        <div class="content-grid">
-          <div class="card">
-            <h3>Best Fit Campaigns</h3>
-            <ul>
-              <li>Beauty clinic consultation promotions</li>
-              <li>Salon makeover or service packages</li>
-              <li>Skincare and glow product promotions</li>
-              <li>Women-focused confidence campaigns</li>
-            </ul>
           </div>
 
           <div class="card">
-            <h3>Audience Summary</h3>
-            <p>
-              Primarily women audience with strong interest in beauty, self-care, premium grooming, confidence, and local service discovery.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Content Strength</h3>
-            <p>
-              Soft premium visuals, clean product/service integration, transformation-friendly reels, and audience trust-building storytelling.
-            </p>
+            <h3>Collaboration Details</h3>
+            <div class="list">
+              <div class="list-item">
+                <strong>Deliverables</strong>
+                <span>1 reel, 3 stories, product mention, service walkthrough, testimonial style content, campaign CTA integration.</span>
+              </div>
+              <div class="list-item">
+                <strong>Turnaround Time</strong>
+                <span>Typically 3 to 5 working days depending on campaign type and revision scope.</span>
+              </div>
+              <div class="list-item">
+                <strong>Ideal Use Case</strong>
+                <span>When a business wants trust-building content rather than loud influencer-only promotion.</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="soft-grid">
-          <div class="soft-box">
-            <div class="step-no">1</div>
-            <h4>Review</h4>
-            <p>Businesses can understand niche, city, pricing, and campaign suitability quickly from one clean profile page.</p>
+        <div class="card" style="margin-bottom:18px;">
+          <h3>Sample Portfolio</h3>
+          <div class="portfolio-grid">
+
+            <div class="portfolio-card">
+              <div class="portfolio-visual" style="background:url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;">
+                <div class="portfolio-inner">
+                  <span>Salon Reel</span>
+                  <h4>Glow makeover story</h4>
+                </div>
+              </div>
+              <div class="portfolio-body">
+                <h4>Salon Glow Campaign</h4>
+                <p>Short-form beauty reel showing transformation, soft confidence, and direct booking CTA.</p>
+                <a class="btn btn-light" href="video-creator.html">Open Similar Flow</a>
+              </div>
+            </div>
+
+            <div class="portfolio-card">
+              <div class="portfolio-visual" style="background:url('https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;">
+                <div class="portfolio-inner">
+                  <span>Clinic Ad</span>
+                  <h4>Consultation trust campaign</h4>
+                </div>
+              </div>
+              <div class="portfolio-body">
+                <h4>Clinic Consultation Promo</h4>
+                <p>Premium trust-led visual content designed for consultation booking and local clinic awareness.</p>
+                <a class="btn btn-light" href="campaign.html">Build Similar Campaign</a>
+              </div>
+            </div>
+
+            <div class="portfolio-card">
+              <div class="portfolio-visual" style="background:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;">
+                <div class="portfolio-inner">
+                  <span>Skincare Reel</span>
+                  <h4>Product-led beauty storytelling</h4>
+                </div>
+              </div>
+              <div class="portfolio-body">
+                <h4>Skincare Product Feature</h4>
+                <p>Product-first beauty content made for premium skincare and women-focused lifestyle campaigns.</p>
+                <a class="btn btn-light" href="ai-generator-tool.html">Generate Copy</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="section-grid">
+          <div class="card">
+            <h3>Why Businesses Can Choose This Creator</h3>
+            <div class="list">
+              <div class="list-item">
+                <strong>Premium Visual Tone</strong>
+                <span>Best for businesses that do not want loud low-quality influencer content.</span>
+              </div>
+              <div class="list-item">
+                <strong>Category Relevance</strong>
+                <span>Beauty and confidence-based service campaigns are a natural fit.</span>
+              </div>
+              <div class="list-item">
+                <strong>Campaign Compatibility</strong>
+                <span>Can fit well inside Bariq campaign flows, reel plans, local brand execution, and service offers.</span>
+              </div>
+            </div>
           </div>
 
-          <div class="soft-box">
-            <div class="step-no">2</div>
-            <h4>Match</h4>
-            <p>Choose influencers based on category fit like beauty, clinic, fashion, local promotion, or product campaigns.</p>
-          </div>
-
-          <div class="soft-box">
-            <div class="step-no">3</div>
-            <h4>Hire</h4>
-            <p>Move into the next step through hiring, login, or campaign coordination flow without confusion.</p>
-          </div>
-
-          <div class="soft-box">
-            <div class="step-no">4</div>
-            <h4>Launch</h4>
-            <p>Use this profile as the creator decision layer before campaign execution and collaboration begins.</p>
+          <div class="card">
+            <h3>Suggested Bariq Actions</h3>
+            <div class="list">
+              <div class="list-item">
+                <strong>Use for Campaign Builder</strong>
+                <span>Attach this creator to clinic, beauty, or women-focused campaigns inside Bariq.</span>
+              </div>
+              <div class="list-item">
+                <strong>Use for Templates</strong>
+                <span>Match with beauty or clinic templates for a stronger execution flow.</span>
+              </div>
+              <div class="list-item">
+                <strong>Use for Marketplace Hiring</strong>
+                <span>Good creator to feature as a top recommendation in the Bariq marketplace.</span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="footer-note">
-          <strong>Bariq AI Creator Profiles</strong>
-          <span>This page should help businesses feel confident before hiring, while also making Bariq look like a real creator marketplace platform.</span>
+          <strong>Bariq Creator Profile</strong>
+          A creator page should feel like a business decision page, not just a social profile.
         </div>
+
       </div>
     </div>
   </section>
-
-  <script>
-    function toggleMenu() {
-      document.getElementById("topLinks").classList.toggle("show");
-    }
-  </script>
 </body>
 </html>
