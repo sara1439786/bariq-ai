@@ -1,68 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign Up - BariqAI</title>
+<title>Create BariqAI Account</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<style>
+body{
+font-family:Arial;
+text-align:center;
+margin-top:100px;
+}
+
+input{
+display:block;
+margin:10px auto;
+padding:10px;
+width:250px;
+}
+
+button{
+padding:10px 20px;
+cursor:pointer;
+}
+</style>
+
 </head>
+
 <body>
-  <div style="max-width:420px;margin:60px auto;padding:20px;">
-    <h2>Create BariqAI Account</h2>
 
-    <input id="email" type="email" placeholder="Email" style="width:100%;padding:12px;margin:10px 0;">
-    <input id="password" type="password" placeholder="Password" style="width:100%;padding:12px;margin:10px 0;">
+<h2>Create BariqAI Account</h2>
 
-    <button id="signupBtn" type="button" style="width:100%;padding:12px;">Sign Up</button>
+<input type="email" id="email" placeholder="Email">
 
-    <p id="message" style="margin-top:12px;"></p>
-    <p><a href="login.html">Already have an account? Login</a></p>
-  </div>
+<input type="password" id="password" placeholder="Password">
 
-  <script type="module">
-    import { supabase } from './supabase.js'
+<button onclick="signup()">Sign Up</button>
 
-    const signupBtn = document.getElementById('signupBtn')
-    const message = document.getElementById('message')
+<br><br>
 
-    console.log('signup page loaded')
-    console.log('button found:', signupBtn)
+<a href="login.html">Already have account? Login</a>
 
-    signupBtn.addEventListener('click', async () => {
-      console.log('signup button clicked')
 
-      const email = document.getElementById('email').value.trim()
-      const password = document.getElementById('password').value.trim()
+<script>
 
-      if (!email || !password) {
-        message.textContent = 'Please enter email and password.'
-        return
-      }
+const supabaseUrl = "PASTE_SUPABASE_URL_HERE"
+const supabaseKey = "PASTE_SUPABASE_ANON_KEY_HERE"
 
-      if (password.length < 6) {
-        message.textContent = 'Password must be at least 6 characters.'
-        return
-      }
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 
-      message.textContent = 'Creating account...'
+async function signup(){
 
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password
-      })
+const email = document.getElementById("email").value
+const password = document.getElementById("password").value
 
-      console.log('signup response:', { data, error })
+const { data, error } = await supabase.auth.signUp({
+email: email,
+password: password
+})
 
-      if (error) {
-        message.textContent = error.message
-        return
-      }
+if(error){
+alert(error.message)
+}else{
+alert("Signup successful!")
+window.location.href = "login.html"
+}
 
-      message.textContent = 'Signup successful! Redirecting to login...'
+}
 
-      setTimeout(() => {
-        window.location.href = 'login.html'
-      }, 1500)
-    })
-  </script>
+</script>
+
 </body>
 </html>
