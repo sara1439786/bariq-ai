@@ -2,7 +2,6 @@
 <html>
 <head>
 <title>Create BariqAI Account</title>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
@@ -22,9 +21,7 @@ padding:10px 20px;
 cursor:pointer;
 }
 </style>
-
 </head>
-
 <body>
 
 <h2>Create BariqAI Account</h2>
@@ -38,33 +35,29 @@ cursor:pointer;
 <a href="login.html">Already have account? Login</a>
 
 <script>
-
 const supabaseUrl = https://bariq-ai-three.vercel.app
-const supabaseKey = ""sb_publishable_npll8QpLghinRC6gMO4_wA_ZgM-ogRd
+const supabaseKey = "sb_publishable_npll8QpLghinRC6gMO4_wA_ZgM-ogRd
 
 const { createClient } = supabase
 const supabaseClient = createClient(supabaseUrl, supabaseKey)
 
-async function signup(){
+async function signup() {
+  const email = document.getElementById("email").value
+  const password = document.getElementById("password").value
 
-const email = document.getElementById("email").value
-const password = document.getElementById("password").value
+  const { data, error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: password
+  })
 
-const { data, error } = await supabaseClient.auth.signUp({
-email: email,
-password: password
-})
+  if (error) {
+    alert(error.message)
+    return
+  }
 
-if(error){
-alert(error.message)
-return
+  alert("Signup successful")
+  window.location.href = "login.html"
 }
-
-alert("Signup successful")
-window.location.href="login.html"
-
-}
-
 </script>
 
 </body>
