@@ -129,7 +129,8 @@
     .hero-right,
     .mini-card,
     .platform-card,
-    .quick-link {
+    .quick-link,
+    .strip-shell {
       background: rgba(255,255,255,0.92);
       border: 1px solid #f0e6c9;
       border-radius: 24px;
@@ -282,6 +283,88 @@
       font-size: 16px;
     }
 
+    .strip-shell {
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .strip-title {
+      margin: 0 0 14px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #6d6485;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .marquee {
+      overflow: hidden;
+      white-space: nowrap;
+      border-radius: 18px;
+      background: linear-gradient(90deg, #fffdf9, #f7f1ff);
+      border: 1px solid #eee2bf;
+      margin-bottom: 16px;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      padding: 14px 0;
+      animation: marqueeMove 22s linear infinite;
+      font-weight: 800;
+      color: #433685;
+      font-size: 14px;
+    }
+
+    .marquee-track span {
+      margin-right: 36px;
+    }
+
+    @keyframes marqueeMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .creator-strip {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .creator-track {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+      animation: scrollCreators 26s linear infinite;
+    }
+
+    .creator-item {
+      width: 180px;
+      flex: 0 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #efe4c5;
+      box-shadow: 0 8px 20px rgba(83,57,139,0.05);
+    }
+
+    .creator-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .creator-item .creator-name {
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #433685;
+    }
+
+    @keyframes scrollCreators {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
     .platform-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -425,6 +508,14 @@
       .quick-link { text-align: left; }
 
       .section-box h2 { font-size: 24px; }
+
+      .creator-item {
+        width: 150px;
+      }
+
+      .creator-item img {
+        height: 150px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -433,7 +524,8 @@
       .hero-side-card,
       .mini-card,
       .platform-card,
-      .quick-link {
+      .quick-link,
+      .strip-shell {
         border-radius: 18px;
       }
     }
@@ -524,6 +616,77 @@
             <div class="label">💳 Launch Stack</div>
             <div class="big">On</div>
             <p>Payments, policies, pricing, and testing pages can now be finalized for launch.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-box">
+        <div class="strip-shell">
+          <div class="strip-title">Live creator energy</div>
+
+          <div class="marquee">
+            <div class="marquee-track">
+              <span>UGC campaigns live</span>
+              <span>Beauty creators onboarding</span>
+              <span>Clinic campaigns moving</span>
+              <span>Reel scripts powered by AI</span>
+              <span>Marketplace activity rising</span>
+              <span>Brand + creator collaboration layer</span>
+              <span>UGC campaigns live</span>
+              <span>Beauty creators onboarding</span>
+              <span>Clinic campaigns moving</span>
+              <span>Reel scripts powered by AI</span>
+            </div>
+          </div>
+
+          <div class="creator-strip">
+            <div class="creator-track">
+              <div class="creator-item">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80" alt="Creator">
+                <div class="creator-name">Beauty Creator</div>
+              </div>
+              <div class="creator-item">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80" alt="Creator">
+                <div class="creator-name">Fitness Creator</div>
+              </div>
+              <div class="creator-item">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Creator">
+                <div class="creator-name">Fashion Creator</div>
+              </div>
+              <div class="creator-item">
+                <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=800&q=80" alt="Creator">
+                <div class="creator-name">Lifestyle Creator</div>
+              </div>
+              <div class="creator-item">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Creator">
+                <div class="creator-name">Luxury Creator</div>
+              </div>
+              <div class="creator-item">
+                <img src="https://images.unsplash.com/photo-1502767089025-6572583495b0?auto=format&fit=crop&w=800&q=80" alt="Creator">
+                <div class="creator-name">UGC Creator</div>
+              </div>
+
+              <div class="creator-item">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80" alt="Creator">
+                <div class="creator-name">Beauty Creator</div>
+              </div>
+              <div class="creator-item">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80" alt="Creator">
+                <div class="creator-name">Fitness Creator</div>
+              </div>
+              <div class="creator-item">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Creator">
+                <div class="creator-name">Fashion Creator</div>
+              </div>
+              <div class="creator-item">
+                <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=800&q=80" alt="Creator">
+                <div class="creator-name">Lifestyle Creator</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
