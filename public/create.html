@@ -7,19 +7,19 @@
   <style>
     :root{
       --bg:#fbfaf7;
-      --bg-2:#f5efe6;
-      --panel:rgba(255,255,255,0.78);
-      --panel-strong:rgba(255,255,255,0.92);
-      --line:rgba(86,62,124,0.10);
+      --bg-soft:#f6efe5;
+      --panel:rgba(255,255,255,0.82);
+      --panel-strong:rgba(255,255,255,0.94);
+      --line:rgba(94,72,132,0.10);
       --text:#2f2540;
-      --muted:#756d7f;
+      --muted:#776f82;
       --gold:#d8b66a;
       --gold-deep:#b78c35;
       --purple:#6f4aaa;
       --purple-deep:#4f2f85;
       --green:#7ea78d;
       --green-soft:#dfeee6;
-      --shadow:0 18px 50px rgba(88,60,130,0.10);
+      --shadow:0 18px 50px rgba(91,63,136,0.10);
       --radius-xl:30px;
       --radius-lg:24px;
       --radius-md:18px;
@@ -27,20 +27,21 @@
 
     *{box-sizing:border-box}
 
-    body{
+    html,body{
       margin:0;
+      padding:0;
       font-family:Inter, Arial, sans-serif;
       color:var(--text);
-      min-height:100vh;
       background:
-        radial-gradient(circle at 10% 10%, rgba(216,182,106,0.16), transparent 20%),
-        radial-gradient(circle at 90% 14%, rgba(126,167,141,0.14), transparent 18%),
-        radial-gradient(circle at 80% 70%, rgba(111,74,170,0.10), transparent 22%),
-        linear-gradient(180deg,#fcfbf8 0%, #f7f2ea 45%, #faf8f4 100%);
+        radial-gradient(circle at 8% 12%, rgba(216,182,106,0.16), transparent 18%),
+        radial-gradient(circle at 88% 12%, rgba(126,167,141,0.14), transparent 18%),
+        radial-gradient(circle at 82% 72%, rgba(111,74,170,0.08), transparent 20%),
+        linear-gradient(180deg, #fcfbf8 0%, #f7f2ea 48%, #fbfaf7 100%);
+      min-height:100vh;
     }
 
-    .wrap{
-      max-width:1450px;
+    .page{
+      max-width:1460px;
       margin:0 auto;
       padding:22px;
     }
@@ -54,46 +55,47 @@
     }
 
     .brand{
-      font-size:34px;
+      font-size:36px;
       font-weight:800;
       letter-spacing:-0.04em;
       color:var(--purple-deep);
+      line-height:1;
     }
 
     .brand span{
       color:var(--gold-deep);
     }
 
-    .top-chips{
+    .chips{
       display:flex;
-      gap:10px;
       flex-wrap:wrap;
+      gap:10px;
     }
 
     .chip{
       padding:10px 14px;
       border-radius:999px;
-      background:rgba(255,255,255,0.76);
       border:1px solid var(--line);
+      background:rgba(255,255,255,0.76);
       color:var(--purple-deep);
       font-size:13px;
       font-weight:700;
-      box-shadow:0 8px 24px rgba(88,60,130,0.05);
+      box-shadow:0 8px 20px rgba(91,63,136,0.05);
     }
 
     .layout{
       display:grid;
-      grid-template-columns:90px 1.1fr 0.9fr;
+      grid-template-columns:88px 1.1fr 0.9fr;
       gap:22px;
       align-items:start;
     }
 
     .sidebar,
     .panel{
-      background:linear-gradient(180deg,var(--panel-strong),var(--panel));
+      background:linear-gradient(180deg, var(--panel-strong), var(--panel));
       border:1px solid var(--line);
       box-shadow:var(--shadow);
-      backdrop-filter:blur(16px);
+      backdrop-filter:blur(14px);
     }
 
     .sidebar{
@@ -113,10 +115,10 @@
       display:grid;
       place-items:center;
       color:#fff;
-      font-weight:800;
       font-size:24px;
-      background:linear-gradient(135deg,var(--purple),var(--gold));
-      box-shadow:0 16px 34px rgba(111,74,170,0.22);
+      font-weight:800;
+      background:linear-gradient(135deg, var(--purple), var(--gold));
+      box-shadow:0 14px 30px rgba(111,74,170,0.20);
     }
 
     .nav{
@@ -131,16 +133,17 @@
       height:52px;
       border-radius:18px;
       border:1px solid rgba(111,74,170,0.08);
-      background:rgba(255,255,255,0.72);
+      background:rgba(255,255,255,0.74);
       color:var(--purple-deep);
       display:grid;
       place-items:center;
       font-size:18px;
-      box-shadow:0 10px 24px rgba(88,60,130,0.06);
+      box-shadow:0 10px 22px rgba(91,63,136,0.05);
+      user-select:none;
     }
 
     .nav-btn.active{
-      background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(240,232,249,0.96));
+      background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(239,232,248,0.96));
       border-color:rgba(111,74,170,0.16);
     }
 
@@ -150,10 +153,10 @@
     }
 
     .title{
-      font-size:clamp(38px, 5vw, 62px);
-      line-height:0.98;
-      letter-spacing:-0.05em;
       margin:0 0 10px;
+      font-size:clamp(38px, 5vw, 64px);
+      line-height:0.96;
+      letter-spacing:-0.05em;
       font-weight:800;
       color:var(--text);
     }
@@ -162,45 +165,45 @@
       margin:0 0 18px;
       color:var(--muted);
       font-size:15px;
-      line-height:1.7;
-      max-width:780px;
+      line-height:1.72;
+      max-width:760px;
     }
 
     .template-row{
       display:flex;
-      gap:10px;
       flex-wrap:wrap;
+      gap:10px;
       margin-bottom:16px;
     }
 
     .template-btn,
     .main-btn,
     .ghost-btn{
-      border-radius:999px;
-      padding:11px 16px;
       font:inherit;
       font-weight:700;
       cursor:pointer;
-      transition:0.22s ease;
+      border-radius:999px;
+      padding:11px 16px;
+      transition:transform 0.2s ease;
     }
 
     .template-btn,
     .ghost-btn{
       border:1px solid var(--line);
-      background:rgba(255,255,255,0.72);
+      background:rgba(255,255,255,0.74);
       color:var(--purple-deep);
     }
 
     .main-btn{
       border:none;
       color:#fff;
-      background:linear-gradient(135deg,var(--purple),var(--gold));
-      box-shadow:0 16px 30px rgba(111,74,170,0.18);
+      background:linear-gradient(135deg, var(--purple), var(--gold));
+      box-shadow:0 14px 28px rgba(111,74,170,0.18);
     }
 
     .template-btn:hover,
-    .ghost-btn:hover,
-    .main-btn:hover{
+    .main-btn:hover,
+    .ghost-btn:hover{
       transform:translateY(-1px);
     }
 
@@ -208,58 +211,58 @@
     input{
       width:100%;
       border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,0.94), rgba(250,248,244,0.96));
-      color:var(--text);
       border-radius:24px;
       padding:16px 18px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,247,242,0.95));
+      color:var(--text);
       font:inherit;
       outline:none;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,0.6);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.55);
     }
 
     textarea{
       min-height:260px;
       resize:vertical;
-      line-height:1.7;
+      line-height:1.72;
       margin-bottom:16px;
     }
 
     textarea::placeholder,
     input::placeholder{
-      color:#8a8294;
+      color:#8c8596;
     }
 
     .action-row{
       display:flex;
-      gap:12px;
       flex-wrap:wrap;
+      gap:12px;
       margin-bottom:18px;
     }
 
     .section-label{
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:0.12em;
-      color:var(--muted);
       margin-bottom:12px;
+      color:var(--muted);
+      font-size:12px;
       font-weight:700;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
     }
 
     .result-box{
-      min-height:280px;
-      padding:18px;
-      border-radius:24px;
+      min-height:290px;
       border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,0.86), rgba(248,245,239,0.86));
+      border-radius:24px;
+      padding:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.88), rgba(248,245,239,0.90));
       white-space:pre-wrap;
-      line-height:1.75;
+      line-height:1.78;
       color:var(--text);
     }
 
     .status{
+      margin-top:8px;
       color:var(--muted);
       font-size:14px;
-      margin-top:8px;
     }
 
     .search-row{
@@ -274,16 +277,16 @@
 
     .image-grid{
       display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
+      grid-template-columns:repeat(2, minmax(0,1fr));
       gap:14px;
     }
 
     .img-card{
-      border:1px solid var(--line);
-      border-radius:22px;
       overflow:hidden;
-      background:rgba(255,255,255,0.8);
-      box-shadow:0 10px 28px rgba(88,60,130,0.06);
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.82);
+      box-shadow:0 10px 24px rgba(91,63,136,0.06);
     }
 
     .img-card img{
@@ -297,18 +300,24 @@
       padding:12px 14px;
       font-size:13px;
       color:var(--muted);
-      background:rgba(255,255,255,0.85);
+      background:rgba(255,255,255,0.84);
     }
 
     .mini-note{
       margin-top:14px;
       padding:14px 16px;
       border-radius:20px;
-      border:1px solid rgba(126,167,141,0.18);
-      background:linear-gradient(180deg, rgba(223,238,230,0.75), rgba(255,255,255,0.7));
-      color:#507260;
+      border:1px solid rgba(126,167,141,0.20);
+      background:linear-gradient(180deg, rgba(223,238,230,0.78), rgba(255,255,255,0.72));
+      color:#51715f;
       font-size:13px;
-      line-height:1.6;
+      line-height:1.65;
+    }
+
+    .empty-state{
+      color:var(--muted);
+      font-size:14px;
+      padding:10px 2px;
     }
 
     @media (max-width:1100px){
@@ -330,13 +339,37 @@
         grid-template-columns:1fr;
       }
     }
+
+    @media (max-width:680px){
+      .page{
+        padding:14px;
+      }
+
+      .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .search-row{
+        flex-direction:column;
+      }
+
+      .main-btn,
+      .ghost-btn{
+        width:100%;
+      }
+
+      .action-row{
+        flex-direction:column;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="page">
     <div class="topbar">
       <div class="brand">Bariq <span>AI</span></div>
-      <div class="top-chips">
+      <div class="chips">
         <div class="chip">OpenAI Connected</div>
         <div class="chip">Pexels Search</div>
         <div class="chip">Premium Create Studio</div>
@@ -347,19 +380,14 @@
       <aside class="sidebar">
         <div class="logo">B</div>
 
-       <div class="nav">
+        <div class="nav">
+          <div class="nav-btn">⌂</div>
+          <div class="nav-btn active">✦</div>
+          <div class="nav-btn">◌</div>
+          <div class="nav-btn">⌁</div>
+        </div>
 
-  <button class="nav-btn" onclick="goHome()">⌂</button>
-
-  <button class="nav-btn active" onclick="goCreate()">✦</button>
-
-  <button class="nav-btn" onclick="goGenerator()">◌</button>
-
-  <button class="nav-btn" onclick="goCampaign()">⌁</button>
-
-</div>
-
-<button class="nav-btn" onclick="goAdmin()">⚙</button>
+        <div class="nav-btn">⚙</div>
       </aside>
 
       <section class="panel">
@@ -379,8 +407,8 @@
         <textarea id="prompt" placeholder="Write what you want Bariq to create..."></textarea>
 
         <div class="action-row">
-          <button class="main-btn" id="generateBtn">Generate</button>
-          <button class="ghost-btn" id="clearBtn">Clear</button>
+          <button class="main-btn" id="generateBtn" type="button">Generate</button>
+          <button class="ghost-btn" id="clearBtn" type="button">Clear</button>
         </div>
 
         <div class="section-label">Generated Result</div>
@@ -392,8 +420,8 @@
         <div class="section-label">Search Images</div>
 
         <div class="search-row">
-          <input id="imageQuery" placeholder="Search beauty, skincare, clinic, fashion, products..." />
-          <button class="main-btn" id="searchBtn">Search</button>
+          <input id="imageQuery" type="text" placeholder="Search beauty, skincare, clinic, fashion, products..." />
+          <button class="main-btn" id="searchBtn" type="button">Search</button>
         </div>
 
         <div class="image-grid" id="images"></div>
@@ -412,6 +440,9 @@
     const statusBox = document.getElementById("status");
     const imageQuery = document.getElementById("imageQuery");
     const imagesBox = document.getElementById("images");
+    const generateBtn = document.getElementById("generateBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const searchBtn = document.getElementById("searchBtn");
 
     const templates = {
       beauty: "Create a premium Meta ad for women beauty transformation with headline, caption, CTA, offer angle, and 3 visual directions.",
@@ -420,29 +451,51 @@
       social: "Create a high-engagement social media post with headline, caption, CTA, and hashtag suggestions."
     };
 
+    function setEmptyImages() {
+      imagesBox.innerHTML = '<div class="empty-state">Your Pexels image results will appear here.</div>';
+    }
+
+    function setLoading(button, text) {
+      button.disabled = true;
+      button.dataset.oldText = button.textContent;
+      button.textContent = text;
+      button.style.opacity = "0.7";
+      button.style.cursor = "wait";
+    }
+
+    function unsetLoading(button) {
+      button.disabled = false;
+      button.textContent = button.dataset.oldText || button.textContent;
+      button.style.opacity = "1";
+      button.style.cursor = "pointer";
+    }
+
     document.querySelectorAll("[data-template]").forEach((btn) => {
       btn.addEventListener("click", () => {
         const type = btn.getAttribute("data-template");
         promptBox.value = templates[type] || "";
+        promptBox.focus();
       });
     });
 
-    document.getElementById("clearBtn").addEventListener("click", () => {
+    clearBtn.addEventListener("click", () => {
       promptBox.value = "";
+      imageQuery.value = "";
       resultBox.textContent = "Your AI result will appear here.";
       statusBox.textContent = "";
-      imagesBox.innerHTML = "";
-      imageQuery.value = "";
+      setEmptyImages();
     });
 
-    document.getElementById("generateBtn").addEventListener("click", async () => {
+    generateBtn.addEventListener("click", async () => {
       const prompt = promptBox.value.trim();
 
       if (!prompt) {
         resultBox.textContent = "Please enter a prompt first.";
+        statusBox.textContent = "";
         return;
       }
 
+      setLoading(generateBtn, "Generating...");
       resultBox.textContent = "Generating...";
       statusBox.textContent = "Connecting to OpenAI...";
 
@@ -466,18 +519,21 @@
       } catch (error) {
         resultBox.textContent = "Error: " + error.message;
         statusBox.textContent = "Failed";
+      } finally {
+        unsetLoading(generateBtn);
       }
     });
 
-    document.getElementById("searchBtn").addEventListener("click", async () => {
+    searchBtn.addEventListener("click", async () => {
       const query = imageQuery.value.trim();
 
       if (!query) {
-        imagesBox.innerHTML = "<div class='status'>Please enter an image search term.</div>";
+        imagesBox.innerHTML = '<div class="empty-state">Please enter an image search term.</div>';
         return;
       }
 
-      imagesBox.innerHTML = "<div class='status'>Searching images...</div>";
+      setLoading(searchBtn, "Searching...");
+      imagesBox.innerHTML = '<div class="empty-state">Searching images...</div>';
 
       try {
         const response = await fetch("/api/pexels?query=" + encodeURIComponent(query));
@@ -490,20 +546,24 @@
         const photos = data.photos || [];
 
         if (!photos.length) {
-          imagesBox.innerHTML = "<div class='status'>No images found.</div>";
+          imagesBox.innerHTML = '<div class="empty-state">No images found.</div>';
           return;
         }
 
-        imagesBox.innerHTML = photos.map(photo => `
+        imagesBox.innerHTML = photos.map((photo) => `
           <div class="img-card">
             <img src="${photo.image}" alt="${query}">
             <div class="img-meta">${photo.photographer || "Pexels image"}</div>
           </div>
         `).join("");
       } catch (error) {
-        imagesBox.innerHTML = "<div class='status'>Error: " + error.message + "</div>";
+        imagesBox.innerHTML = '<div class="empty-state">Error: ' + error.message + '</div>';
+      } finally {
+        unsetLoading(searchBtn);
       }
     });
+
+    setEmptyImages();
   </script>
 </body>
 </html>
