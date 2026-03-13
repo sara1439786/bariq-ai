@@ -1,54 +1,295 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<title>Bariq AI</title>
-
-<link rel="stylesheet" href="styles.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI — Create</title>
+  <style>
+    :root{
+      --bg:#0b0d12;
+      --panel:#11151d;
+      --panel-2:#171c26;
+      --line:rgba(255,255,255,0.08);
+      --text:#f7f7fb;
+      --muted:#b5bdd1;
+      --gold:#d8b66a;
+      --purple:#7b61c9;
+      --green:#82b29a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(123,97,201,0.16), transparent 22%),
+        radial-gradient(circle at top right, rgba(216,182,106,0.14), transparent 20%),
+        linear-gradient(180deg,#090b10,#0e1218 45%,#0b0d12);
+      color:var(--text);
+      min-height:100vh;
+    }
+    .wrap{
+      max-width:1400px;
+      margin:0 auto;
+      padding:24px;
+    }
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      margin-bottom:24px;
+    }
+    .brand{
+      font-size:28px;
+      font-weight:800;
+      letter-spacing:-0.03em;
+    }
+    .brand span:first-child{color:var(--gold)}
+    .brand span:last-child{color:#8fe0c8}
+    .layout{
+      display:grid;
+      grid-template-columns:84px 1.1fr 0.9fr;
+      gap:22px;
+      min-height:78vh;
+    }
+    .sidebar,.panel{
+      background:rgba(17,21,29,0.88);
+      border:1px solid var(--line);
+      border-radius:28px;
+      backdrop-filter:blur(12px);
+    }
+    .sidebar{
+      padding:18px 12px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .logo{
+      width:52px;
+      height:52px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      font-size:24px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--purple),var(--gold));
+    }
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      align-items:center;
+    }
+    .nav-btn{
+      width:50px;
+      height:50px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.04);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-size:18px;
+    }
+    .panel{
+      padding:24px;
+    }
+    .title{
+      font-size:48px;
+      line-height:1.02;
+      letter-spacing:-0.04em;
+      margin:0 0 10px;
+      font-weight:800;
+    }
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+    }
+    .template-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    .template-btn,.main-btn,.ghost-btn{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:11px 15px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .template-btn,.ghost-btn{
+      background:rgba(255,255,255,0.04);
+      color:#fff;
+    }
+    .main-btn{
+      background:linear-gradient(135deg,var(--purple),var(--gold));
+      color:#fff;
+      border:none;
+    }
+    textarea,input{
+      width:100%;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.04);
+      color:#fff;
+      border-radius:20px;
+      padding:16px;
+      font:inherit;
+      outline:none;
+    }
+    textarea{
+      min-height:220px;
+      resize:vertical;
+      line-height:1.6;
+      margin-bottom:16px;
+    }
+    .action-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:20px;
+    }
+    .result-box{
+      min-height:260px;
+      padding:18px;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.03);
+      white-space:pre-wrap;
+      line-height:1.7;
+      color:#f2f4fa;
+    }
+    .section-label{
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:0.12em;
+      color:var(--muted);
+      margin-bottom:12px;
+    }
+    .search-row{
+      display:flex;
+      gap:10px;
+      margin-bottom:16px;
+    }
+    .search-row input{flex:1}
+    .image-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+    .img-card{
+      border:1px solid var(--line);
+      border-radius:20px;
+      overflow:hidden;
+      background:rgba(255,255,255,0.03);
+    }
+    .img-card img{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      display:block;
+    }
+    .img-meta{
+      padding:12px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .status{
+      color:var(--muted);
+      font-size:14px;
+      margin-top:6px;
+    }
+    @media (max-width:1100px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{
+        flex-direction:row;
+        justify-content:space-between;
+      }
+      .nav{flex-direction:row}
+      .image-grid{grid-template-columns:1fr}
+    }
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand"><span>[Bariq ⚡ </span><span>Bariq-AI]</span></div>
+    </div>
 
-<div class="shell">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="logo">B</div>
+        <div class="nav">
+          <div class="nav-btn">⌂</div>
+          <div class="nav-btn">✦</div>
+          <div class="nav-btn">◌</div>
+          <div class="nav-btn">⌁</div>
+        </div>
+        <div class="nav-btn">⚙</div>
+      </aside>
 
-<div class="sidebar">
+      <section class="panel">
+        <h1 class="title">Create with Bariq</h1>
+        <p class="sub">Generate premium ad copy, reel scripts, captions, offers, and campaign ideas with AI. Search matching image inspiration from Pexels on the same page.</p>
 
-<h2>B</h2>
+        <div class="template-row">
+          <button class="template-btn" data-template="beauty">Beauty Ad</button>
+          <button class="template-btn" data-template="clinic">Clinic Reel</button>
+          <button class="template-btn" data-template="product">Product Launch</button>
+          <button class="template-btn" data-template="social">Social Post</button>
+        </div>
 
-</div>
+        <textarea id="prompt" placeholder="Write what you want Bariq to create..."></textarea>
 
-<div class="main">
+        <div class="action-row">
+          <button class="main-btn" id="generateBtn">Generate</button>
+          <button class="ghost-btn" id="clearBtn">Clear</button>
+        </div>
 
-<h1>Create with Bariq</h1>
+        <div class="section-label">Result</div>
+        <div class="result-box" id="result">Your AI result will appear here.</div>
+        <div class="status" id="status"></div>
+      </section>
 
-<textarea id="prompt" placeholder="Write what you want Bariq to create"></textarea>
+      <section class="panel">
+        <div class="section-label">Search Images</div>
+        <div class="search-row">
+          <input id="imageQuery" placeholder="Search beauty, skincare, clinic, fashion, products..." />
+          <button class="main-btn" id="searchBtn">Search</button>
+        </div>
+        <div class="image-grid" id="images"></div>
+      </section>
+    </div>
+  </div>
 
-<br><br>
+  <script>
+    const promptBox = document.getElementById("prompt");
+    const resultBox = document.getElementById("result");
+    const statusBox = document.getElementById("status");
+    const imageQuery = document.getElementById("imageQuery");
+    const imagesBox = document.getElementById("images");
 
-<button onclick="generate()">Generate</button>
+    const templates = {
+      beauty: "Create a premium Meta ad for women beauty transformation with headline, caption, CTA, offer angle, and 3 visual directions.",
+      clinic: "Create a clinic reel script with 6 scenes, hook, voiceover, on-screen text, CTA, and emotional transformation angle.",
+      product: "Create a luxury product launch concept with headline, body copy, offer, CTA, and 5 social media caption ideas.",
+      social: "Create a high-engagement social media post with headline, caption, CTA, and hashtag suggestions."
+    };
 
-<h3>Result</h3>
+    document.querySelectorAll("[data-template]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const type = btn.getAttribute("data-template");
+        promptBox.value = templates[type] || "";
+      });
+    });
 
-<div id="result"></div>
-
-<hr>
-
-<h3>Search Images</h3>
-
-<input id="imageQuery">
-
-<button onclick="searchImages()">Search</button>
-
-<div id="images"></div>
-
-</div>
-
-</div>
-
-<script src="app.js"></script>
-
-</body>
-
-</html>
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      promptBox.value = "";
+      resultBox.textContent = "Your AI result will appear here.";
+      statusBox.textContent = "";
+      imagesBox.innerHTML = "";
+      image
