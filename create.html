@@ -593,13 +593,13 @@ body {
     <aside class="rail">
       <div class="logo">B</div>
       <nav class="rail-nav">
-        <button class="rail-btn">⌂</button>
-        <button class="rail-btn active">✦</button>
-        <button class="rail-btn">◌</button>
-        <button class="rail-btn">⌁</button>
-        <button class="rail-btn">☰</button>
+        <button class="rail-btn" title="Dashboard" data-nav="index.html">⌂</button>
+        <button class="rail-btn active" title="Create" data-nav="create.html">✦</button>
+        <button class="rail-btn" title="Templates" data-nav="templates.html">◌</button>
+        <button class="rail-btn" title="Media Library" data-nav="media.html">⌁</button>
+        <button class="rail-btn" title="Projects" data-nav="projects.html">☰</button>
       </nav>
-      <button class="rail-btn">⚙</button>
+      <button class="rail-btn" title="Settings" data-nav="settings.html">⚙</button>
     </aside><main class="main">
   <section class="topbar">
     <div class="title-wrap">
@@ -607,9 +607,9 @@ body {
       <p>A real workspace for prompts, outputs, and generation flow — intentionally different from the homepage.</p>
     </div>
     <div class="top-actions">
-      <button class="chip">Realtime Model</button>
-      <button class="ghost-btn">Drafts</button>
-      <button class="btn">New Project</button>
+      <button class="chip" id="modelStatus">OpenAI Ready</button>
+      <button class="ghost-btn" id="pexelsStatus">Pexels Connected</button>
+      <button class="btn" id="templateStatus">Templates Active</button>
     </div>
   </section>
 
@@ -656,9 +656,60 @@ Example: Create a premium Meta ad for women-focused laser treatment with emotion
           <strong>Premium light gold / metallic purple / soft green</strong>
         </div>
         <div class="mini-card">
-          <span>Status</span>
-          <strong>Ready for prompt-led generation</strong>
+          <span>Stack</span>
+          <strong>OpenAI + Pexels + Template Engine</strong>
         </div>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="glass-card">
+        <h3>Quick Start Flows</h3>
+        <div class="quick-list">
+          <div class="quick-item" data-template="meta-ad">
+            <div>
+              <strong>Meta Ad Creative</strong>
+              <small>Generate image concept, hook, CTA, and offer angle</small>
+            </div>
+            <div class="pulse-ring"></div>
+          </div>
+          <div class="quick-item" data-template="reel-script">
+            <div>
+              <strong>Product Reel Script</strong>
+              <small>Short-form video flow with scene prompts</small>
+            </div>
+            <div class="pulse-ring"></div>
+          </div>
+          <div class="quick-item" data-template="landing-copy">
+            <div>
+              <strong>Landing Copy</strong>
+              <small>Headline, subcopy, benefits, FAQs, and CTA blocks</small>
+            </div>
+            <div class="pulse-ring"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card usage-card">
+        <div>
+          <h3>Live Integrations</h3>
+          <p style="margin: 8px 0 12px; color: var(--muted); font-size: 14px;">One shared engine pattern you can now reuse across all pages of Bariq.</p>
+        </div>
+        <div class="usage-stats">
+          <div class="stat">
+            <small>AI Engine</small>
+            <strong>OpenAI</strong>
+          </div>
+          <div class="stat">
+            <small>Media</small>
+            <strong>Pexels</strong>
+          </div>
+          <div class="stat">
+            <small>Layouts</small>
+            <strong>Templates</strong>
+          </div>
+        </div>
+        <div class="meter"><div></div></div>
       </div>
     </div>
 
@@ -756,5 +807,83 @@ Example: Create a premium Meta ad for women-focused laser treatment with emotion
 </main>
 
   </div>
+  <script>
+    const OPENAI_API_KEY = "YOUR_OPENAI_API_KEY";
+    const PEXELS_API_KEY = "YOUR_PEXELS_API_KEY";const templatePrompts = {
+  "meta-ad": "Create a premium Meta ad for women with a compelling hook, emotional angle, offer, caption, and CTA.",
+  "reel-script": "Create a short-form product reel script with 6 scenes, voiceover lines, and visual prompts.",
+  "landing-copy": "Write premium landing page copy with headline, benefits, trust points, FAQ, and CTA."
+};
+
+document.querySelectorAll('[data-nav]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const page = btn.getAttribute('data-nav');
+    window.location.href = page;
+  });
+});
+
+document.querySelectorAll('[data-template]').forEach((item) => {
+  item.addEventListener('click', () => {
+    const promptBox = document.querySelector('.prompt-box');
+    const key = item.getAttribute('data-template');
+    promptBox.value = templatePrompts[key] || '';
+  });
+});
+
+async function callOpenAI(prompt) {
+  if (!OPENAI_API_KEY || OPENAI_API_KEY ===  
+    alert('Add your OpenAI API key first.');
+    return;
+  }
+
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${OPENAI_API_KEY}`
+    },
+    body: JSON.stringify({
+      model: 'gpt-4.1-mini',
+      messages: [
+        { role: 'system', content: 'You are Bariq AI, a premium creative assistant for ads, campaigns, web copy, and branded content.' },
+        { role: 'user', content: prompt }
+      ],
+      temperature: 0.8
+    })
+  });
+
+  const data = await response.json();
+  return data?.choices?.[0]?.message?.content || 'No response received.';
+}
+
+async function searchPexels(query) {
+  if (!PEXELS_API_KEY || PEXELS_API_KEY === 6qOa2IzSU0hP6cnDLdXWbawLFB8cYWErHYGnehF9IPmce1AJqxPF2FYj {
+    return [];
+  }
+
+  const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=6`, {
+    headers: {
+      Authorization: PEXELS_API_KEY
+    }
+  });
+
+  const data = await response.json();
+  return data.photos || [];
+}
+
+document.querySelector('.generate-btn').addEventListener('click', async () => {
+  const prompt = document.querySelector('.prompt-box').value.trim();
+  if (!prompt) {
+    alert('Please enter a prompt first.');
+    return;
+  }
+
+  const result = await callOpenAI(prompt);
+  if (result) {
+    alert(result);
+  }
+});
+
+  </script>
 </body>
 </html>
