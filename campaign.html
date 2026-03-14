@@ -17,6 +17,7 @@
       --gold:#d8b05b;
       --pink:#ff7cc8;
       --blue:#4f8dff;
+      --line:#ece0c0;
       --card-shadow:0 14px 32px rgba(83,57,139,0.07);
     }
 
@@ -66,7 +67,7 @@
     }
 
     .container{
-      width:min(1360px, calc(100% - 32px));
+      width:min(1380px, calc(100% - 28px));
       margin:0 auto;
     }
 
@@ -82,8 +83,8 @@
     .site-header::after{
       content:"";
       position:absolute;
-      bottom:0;
       left:0;
+      bottom:0;
       width:100%;
       height:3px;
       background:linear-gradient(90deg,#d8b05b,#7b5cff,#ff8acc,#d8b05b);
@@ -92,12 +93,12 @@
     }
 
     @keyframes headerFlow{
-      0%{background-position:0%;}
-      100%{background-position:300%;}
+      0%{ background-position:0%; }
+      100%{ background-position:300%; }
     }
 
     .nav-wrap{
-      min-height:78px;
+      min-height:76px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -142,7 +143,6 @@
       display:flex;
       align-items:center;
       gap:6px;
-      flex-wrap:nowrap;
       overflow-x:auto;
       scrollbar-width:none;
       white-space:nowrap;
@@ -172,78 +172,261 @@
     }
 
     .page-section{
-      padding:18px 0 24px;
+      padding:16px 0 24px;
     }
 
-    .hero-shell,
-    .campaign-card,
+    .top-strip,
+    .step-board,
+    .builder-shell,
+    .left-panel,
+    .right-panel,
     .output-card,
-    .tip-card,
-    .mini-stat-box,
+    .stage-card,
+    .status-box,
     .continue-card{
       background:rgba(255,255,255,0.95);
       border:1px solid #f0e6c9;
-      border-radius:26px;
+      border-radius:24px;
       box-shadow:var(--card-shadow);
     }
 
-    .hero-shell{
-      padding:22px;
-      margin-bottom:18px;
+    .top-strip{
+      padding:18px 20px;
+      display:grid;
+      grid-template-columns:1.15fr 0.85fr;
+      gap:16px;
+      margin-bottom:16px;
       background:linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
     }
 
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.04fr 0.96fr;
-      gap:18px;
-      align-items:stretch;
+    .strip-left h1{
+      margin:0 0 8px;
+      font-size:34px;
+      line-height:1.05;
+      color:#2f2567;
+      letter-spacing:-0.03em;
     }
 
-    .hero-left{
-      padding:6px;
-      min-width:0;
-    }
-
-    .hero-tag{
-      display:inline-block;
-      font-size:13px;
-      font-weight:800;
-      color:#4a3b92;
-      border:1px solid #ece1bf;
-      background:#fff;
-      border-radius:999px;
-      padding:10px 16px;
-      margin-bottom:16px;
-    }
-
-    .hero-left h1{
-      margin:0 0 14px;
-      font-size:56px;
-      line-height:0.98;
-      letter-spacing:-0.04em;
-      color:#312668;
-      word-break:break-word;
-    }
-
-    .hero-left p{
-      margin:0 0 20px;
-      font-size:17px;
-      line-height:1.75;
+    .strip-left p{
+      margin:0;
       color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
       max-width:720px;
     }
 
-    .text-gold{ color:var(--gold); }
-    .text-purple{ color:var(--purple); }
-    .text-pink{ color:var(--pink); }
-    .text-blue{ color:var(--blue); }
+    .tool-tag{
+      display:inline-flex;
+      width:max-content;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #ece1bf;
+      color:#4a3b92;
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:12px;
+    }
 
-    .hero-actions{
+    .text-gold{ color:var(--gold); }
+    .text-blue{ color:var(--blue); }
+    .text-pink{ color:var(--pink); }
+    .text-purple{ color:var(--purple); }
+
+    .strip-right{
       display:flex;
-      gap:12px;
+      align-items:center;
+      justify-content:flex-end;
+      gap:10px;
       flex-wrap:wrap;
-      margin-bottom:18px;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid #eadfc2;
+      background:#fff;
+      font-size:13px;
+      font-weight:800;
+      color:#4a3b92;
+      white-space:nowrap;
+    }
+
+    .step-board{
+      padding:14px;
+      margin-bottom:16px;
+      background:#fff;
+    }
+
+    .step-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:12px;
+    }
+
+    .stage-card{
+      padding:14px;
+      background:linear-gradient(135deg,#fff,#f8f2ff);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .stage-card::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      width:4px;
+      height:100%;
+      background:linear-gradient(180deg,var(--gold),var(--purple));
+    }
+
+    .stage-card strong{
+      display:block;
+      font-size:14px;
+      color:#403381;
+      margin-bottom:6px;
+      padding-left:8px;
+    }
+
+    .stage-card span{
+      display:block;
+      font-size:13px;
+      line-height:1.55;
+      color:#726b87;
+      padding-left:8px;
+    }
+
+    .builder-shell{
+      padding:16px;
+      background:linear-gradient(180deg,#fff,#fcf8ff);
+    }
+
+    .builder-grid{
+      display:grid;
+      grid-template-columns:0.95fr 1.05fr;
+      gap:16px;
+      align-items:start;
+    }
+
+    .left-panel,
+    .right-panel{
+      padding:18px;
+      background:#fff;
+    }
+
+    .panel-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .panel-head h2{
+      margin:0 0 4px;
+      font-size:24px;
+      color:#35296f;
+    }
+
+    .panel-head p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .live-pill{
+      flex:0 0 auto;
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      color:#473989;
+      background:#f7f0ff;
+      border:1px solid #e5d8ff;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    .field label{
+      font-size:13px;
+      font-weight:800;
+      color:#433685;
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      border:1px solid #eadfc2;
+      background:#fff;
+      border-radius:16px;
+      padding:13px 14px;
+      font:inherit;
+      color:var(--text);
+      outline:none;
+    }
+
+    .field textarea{
+      min-height:112px;
+      resize:vertical;
+      line-height:1.65;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color:#cdb2ff;
+      box-shadow:0 0 0 4px rgba(90,63,255,0.08);
+    }
+
+    .voice-box{
+      margin-top:14px;
+      padding:16px;
+      border-radius:20px;
+      background:linear-gradient(135deg, rgba(255,249,240,0.98), rgba(246,240,255,0.98));
+      border:1px solid #eadfc2;
+    }
+
+    .voice-box h3{
+      margin:0 0 6px;
+      font-size:18px;
+      color:#403381;
+    }
+
+    .voice-box p{
+      margin:0 0 12px;
+      font-size:13px;
+      color:#6f6983;
+      line-height:1.6;
+    }
+
+    .voice-actions,
+    .main-actions,
+    .continue-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
     .btn{
@@ -251,8 +434,8 @@
       align-items:center;
       justify-content:center;
       gap:8px;
-      padding:14px 18px;
-      border-radius:16px;
+      padding:13px 16px;
+      border-radius:15px;
       font-size:14px;
       font-weight:800;
       cursor:pointer;
@@ -277,278 +460,41 @@
       border:1px solid #e4d7ff;
     }
 
-    .marquee-wrap{
-      width:100%;
-      overflow:hidden;
-      border:1px solid #efe2c3;
-      border-radius:18px;
-      background:rgba(255,255,255,0.9);
-      padding:10px 0;
+    .main-actions{
+      margin-top:14px;
     }
 
-    .marquee-track{
-      display:flex;
-      gap:12px;
-      width:max-content;
-      animation:marqueeMove 24s linear infinite;
-    }
-
-    @keyframes marqueeMove{
-      0%{ transform:translateX(0); }
-      100%{ transform:translateX(-50%); }
-    }
-
-    .mini-chip{
-      flex:0 0 auto;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px 16px;
-      border-radius:999px;
-      border:1px solid #eadfc2;
+    .status-box{
+      margin-top:14px;
+      padding:14px 16px;
       background:#fff;
+    }
+
+    .status-box strong{
+      display:block;
       font-size:14px;
-      font-weight:700;
-      color:#4a3b92;
-      white-space:nowrap;
-    }
-
-    .hero-right{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      min-width:0;
-    }
-
-    .hero-side-panel{
-      background:rgba(255,255,255,0.95);
-      border:1px solid #f0e6c9;
-      border-radius:24px;
-      padding:20px;
-      box-shadow:0 10px 24px rgba(83,57,139,0.05);
-      height:100%;
-      overflow:hidden;
-    }
-
-    .hero-side-panel h3{
-      margin:0 0 10px;
-      font-size:18px;
       color:#433685;
+      margin-bottom:6px;
     }
 
-    .hero-side-panel p{
-      margin:0 0 16px;
-      font-size:15px;
-      line-height:1.7;
-      color:#6f6983;
-    }
-
-    .template-wall{
-      width:100%;
-      overflow:hidden;
-      border-radius:20px;
-      position:relative;
-    }
-
-    .template-track{
-      display:flex;
-      gap:14px;
-      width:max-content;
-      animation:scrollTemplates 26s linear infinite;
-    }
-
-    .template-wall:hover .template-track{
-      animation-play-state:paused;
-    }
-
-    @keyframes scrollTemplates{
-      0%{ transform:translateX(0); }
-      100%{ transform:translateX(-50%); }
-    }
-
-    .template-card{
-      min-width:210px;
-      max-width:210px;
-      height:170px;
-      border-radius:20px;
-      overflow:hidden;
-      position:relative;
-      border:1px solid #eadfc2;
-      background:#fff;
-      box-shadow:0 10px 22px rgba(83,57,139,0.08);
-      flex:0 0 auto;
-    }
-
-    .template-card img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
+    .status-box span{
       display:block;
-      transition:transform 0.35s ease;
+      font-size:14px;
+      line-height:1.65;
+      color:#675f7c;
     }
 
-    .template-card:hover img{
-      transform:scale(1.06);
-    }
-
-    .template-card span{
-      position:absolute;
-      left:12px;
-      bottom:12px;
-      background:rgba(47,33,111,0.82);
-      color:#fff;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:800;
-    }
-
-    .mini-stats-row{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .mini-stat-box{
-      padding:14px 10px;
-      text-align:center;
-      background:#fff;
-    }
-
-    .mini-stat-box strong{
-      display:block;
-      font-size:22px;
-      color:#3f3281;
-      margin-bottom:4px;
-    }
-
-    .mini-stat-box small{
-      color:#776f8a;
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .main-grid{
-      display:grid;
-      grid-template-columns:0.98fr 1.02fr;
-      gap:18px;
-      align-items:start;
-    }
-
-    .campaign-card{
-      padding:22px;
-      background:linear-gradient(180deg,#fff,#fcf8ff);
-    }
-
-    .campaign-card h2{
-      margin:0 0 10px;
-      font-size:30px;
-      color:#35296f;
-    }
-
-    .campaign-sub{
-      margin:0 0 18px;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:15px;
-    }
-
-    .form-grid{
+    .output-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-
-    .field.full{
-      grid-column:1 / -1;
-    }
-
-    .field label{
-      font-size:14px;
-      font-weight:800;
-      color:#433685;
-    }
-
-    .field input,
-    .field select,
-    .field textarea{
-      width:100%;
-      border:1px solid #eadfc2;
-      background:#fff;
-      border-radius:16px;
-      padding:14px;
-      font:inherit;
-      color:var(--text);
-      outline:none;
-    }
-
-    .field textarea{
-      min-height:118px;
-      resize:vertical;
-      line-height:1.65;
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus{
-      border-color:#cdb2ff;
-      box-shadow:0 0 0 4px rgba(90,63,255,0.08);
-    }
-
-    .voice-row{
-      display:flex;
       gap:12px;
-      flex-wrap:wrap;
-      margin-top:-2px;
-      margin-bottom:2px;
-    }
-
-    .action-row{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:16px;
-    }
-
-    .status-bar{
-      margin-top:16px;
-      padding:14px 16px;
-      border-radius:16px;
-      background:#fff;
-      border:1px solid #eee2bf;
-      color:#645c7b;
-      line-height:1.65;
-      font-size:14px;
-    }
-
-    .output-side{
-      display:grid;
-      gap:14px;
-    }
-
-    .tip-card{
-      padding:18px;
-      background:linear-gradient(135deg,#fff,#f8f2ff);
-    }
-
-    .tip-card p{
-      margin:0;
-      color:#6f6983;
-      line-height:1.7;
-      font-size:14px;
     }
 
     .output-card{
-      padding:18px;
       position:relative;
       overflow:hidden;
+      padding:16px;
+      min-height:170px;
       background:#fff;
     }
 
@@ -557,14 +503,14 @@
       position:absolute;
       left:0;
       top:0;
-      width:5px;
+      width:4px;
       height:100%;
       background:linear-gradient(180deg,var(--gold),var(--purple));
     }
 
     .output-card h3{
       margin:0 0 10px;
-      font-size:18px;
+      font-size:17px;
       color:#433685;
       padding-left:8px;
     }
@@ -572,34 +518,29 @@
     .output-card div{
       margin:0;
       color:#5f5876;
-      line-height:1.8;
+      line-height:1.78;
       font-size:14px;
       padding-left:8px;
       white-space:pre-wrap;
     }
 
     .continue-card{
-      padding:18px;
+      margin-top:12px;
+      padding:16px;
       background:linear-gradient(135deg, rgba(255,250,242,0.98), rgba(248,243,255,0.98));
     }
 
     .continue-card h3{
       margin:0 0 8px;
-      font-size:22px;
+      font-size:20px;
       color:#3d317d;
     }
 
     .continue-card p{
-      margin:0 0 14px;
+      margin:0 0 12px;
       color:#6f6983;
       line-height:1.7;
       font-size:14px;
-    }
-
-    .continue-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
     }
 
     .site-footer{
@@ -631,16 +572,21 @@
     }
 
     @media (max-width: 1180px){
-      .hero-grid,
-      .main-grid,
+      .top-strip,
+      .builder-grid,
       .footer-grid{
         grid-template-columns:1fr;
+      }
+
+      .step-grid,
+      .output-grid{
+        grid-template-columns:1fr 1fr;
       }
     }
 
     @media (max-width: 768px){
       .container{
-        width:min(100% - 20px, 1200px);
+        width:min(100% - 18px, 1200px);
       }
 
       .menu-toggle{
@@ -670,43 +616,42 @@
       .main-nav a{
         width:100%;
         background:#faf7ff;
-        justify-content:flex-start;
       }
 
-      .hero-left h1{
-        font-size:36px;
-        line-height:1.06;
+      .strip-left h1{
+        font-size:28px;
+        line-height:1.1;
       }
 
-      .hero-actions,
-      .action-row,
-      .voice-row,
-      .continue-actions{
+      .step-grid,
+      .form-grid,
+      .output-grid,
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+
+      .voice-actions,
+      .main-actions,
+      .continue-actions,
+      .strip-right{
         flex-direction:column;
+        align-items:stretch;
       }
 
       .btn{
         width:100%;
       }
 
-      .template-card{
-        min-width:180px;
-        max-width:180px;
-        height:145px;
-      }
-
-      .mini-stats-row,
-      .form-grid,
-      .footer-grid{
-        grid-template-columns:1fr;
-      }
-
-      .hero-shell,
-      .campaign-card,
+      .top-strip,
+      .step-board,
+      .builder-shell,
+      .left-panel,
+      .right-panel,
       .output-card,
-      .tip-card,
+      .stage-card,
+      .status-box,
       .continue-card{
-        padding:16px;
+        padding:14px;
       }
     }
   </style>
@@ -735,245 +680,195 @@
   <section class="page-section">
     <div class="container">
 
-      <div class="hero-shell">
-        <div class="hero-grid">
+      <div class="top-strip">
+        <div class="strip-left">
+          <div class="tool-tag">📣 Campaign Builder Workspace</div>
+          <h1>
+            Build <span class="text-gold">offers</span>,
+            <span class="text-blue">audience</span>,
+            <span class="text-pink">copy</span> and
+            <span class="text-purple">launch flow</span>
+          </h1>
+          <p>
+            One builder-style workspace to structure campaign brief, audience, goal, outputs, CTA lines, hashtags, and rollout direction without repeating the same hero layout.
+          </p>
+        </div>
 
-          <div class="hero-left">
-            <div class="hero-tag">Campaign Studio Pro</div>
-            <h1>
-              Create <span class="text-gold">beautiful</span>
-              <span class="text-purple">campaigns</span> with
-              <span class="text-blue">voice</span> and
-              <span class="text-pink">strategy</span>
-            </h1>
-
-            <p>
-              Bariq AI helps you turn one campaign idea into Meta ad copy, Google ad copy, reel direction, CTA lines, hashtags, and launch-ready campaign structure from one premium page.
-            </p>
-
-            <div class="hero-actions">
-              <a href="#campaignForm" class="btn btn-primary">✨ Start Campaign</a>
-              <a href="ai-generator.html" class="btn btn-light">✨ Open AI Generator</a>
-              <a href="business-dashboard.html" class="btn btn-light">🏢 Business Dashboard</a>
-            </div>
-
-            <div class="marquee-wrap">
-              <div class="marquee-track">
-                <span class="mini-chip">📍 City Targeting</span>
-                <span class="mini-chip">💜 Easy For Business Owners</span>
-                <span class="mini-chip">🎯 Meta Ads</span>
-                <span class="mini-chip">🎬 Reel Script</span>
-                <span class="mini-chip">🪄 Voice Prompt</span>
-                <span class="mini-chip">🔔 CTA Ideas</span>
-                <span class="mini-chip">✨ Premium Campaign Flow</span>
-                <span class="mini-chip">📦 Launch Ready</span>
-
-                <span class="mini-chip">📍 City Targeting</span>
-                <span class="mini-chip">💜 Easy For Business Owners</span>
-                <span class="mini-chip">🎯 Meta Ads</span>
-                <span class="mini-chip">🎬 Reel Script</span>
-                <span class="mini-chip">🪄 Voice Prompt</span>
-                <span class="mini-chip">🔔 CTA Ideas</span>
-                <span class="mini-chip">✨ Premium Campaign Flow</span>
-                <span class="mini-chip">📦 Launch Ready</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-right">
-            <div class="hero-side-panel">
-              <h3>Live marketing inspiration wall</h3>
-              <p>Campaign visuals here are different from the AI page so Bariq feels like a connected product with unique experiences on each page.</p>
-
-              <div class="template-wall">
-                <div class="template-track">
-                  <div class="template-card">
-                    <img src="https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=900&q=80" alt="Meta Ad Campaign">
-                    <span>Meta Ad Campaign</span>
-                  </div>
-
-                  <div class="template-card">
-                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80" alt="Brand Offer">
-                    <span>Brand Offer</span>
-                  </div>
-
-                  <div class="template-card">
-                    <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80" alt="Promo Launch">
-                    <span>Promo Launch</span>
-                  </div>
-
-                  <div class="template-card">
-                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Growth Campaign">
-                    <span>Growth Campaign</span>
-                  </div>
-
-                  <div class="template-card">
-                    <img src="https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=900&q=80" alt="Meta Ad Campaign">
-                    <span>Meta Ad Campaign</span>
-                  </div>
-
-                  <div class="template-card">
-                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80" alt="Brand Offer">
-                    <span>Brand Offer</span>
-                  </div>
-
-                  <div class="template-card">
-                    <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80" alt="Promo Launch">
-                    <span>Promo Launch</span>
-                  </div>
-
-                  <div class="template-card">
-                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Growth Campaign">
-                    <span>Growth Campaign</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mini-stats-row">
-                <div class="mini-stat-box">
-                  <strong>Launch</strong>
-                  <small>Campaign Ready</small>
-                </div>
-                <div class="mini-stat-box">
-                  <strong>Smart</strong>
-                  <small>Structured Flow</small>
-                </div>
-                <div class="mini-stat-box">
-                  <strong>Voice</strong>
-                  <small>Input Ready</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <div class="strip-right">
+          <span class="chip">📍 City Targeting</span>
+          <span class="chip">🎯 Offer Positioning</span>
+          <span class="chip">🎬 Reel Direction</span>
+          <span class="chip">🚀 Launch Ready</span>
         </div>
       </div>
 
-      <div class="main-grid" id="campaignForm">
+      <div class="step-board">
+        <div class="step-grid">
+          <div class="stage-card">
+            <strong>Step 1 — Brief</strong>
+            <span>Define campaign name, business, service, and one-line voice brief.</span>
+          </div>
+          <div class="stage-card">
+            <strong>Step 2 — Audience</strong>
+            <span>Choose city, audience type, budget, and campaign goal for better targeting.</span>
+          </div>
+          <div class="stage-card">
+            <strong>Step 3 — Generate</strong>
+            <span>Create Meta ad copy, Google copy, reel script, CTA ideas, and hashtags.</span>
+          </div>
+          <div class="stage-card">
+            <strong>Step 4 — Launch</strong>
+            <span>Move into video, templates, or dashboard without losing campaign continuity.</span>
+          </div>
+        </div>
+      </div>
 
-        <div class="campaign-card">
-          <h2>Create Campaign</h2>
-          <p class="campaign-sub">Fill the form or just speak your campaign idea. Bariq will take it forward into complete campaign outputs.</p>
+      <div class="builder-shell">
+        <div class="builder-grid">
 
-          <div class="form-grid">
-            <div class="field">
-              <label for="businessName">Business Name</label>
-              <input id="businessName" type="text" placeholder="e.g. RSCC Clinic">
+          <div class="left-panel">
+            <div class="panel-head">
+              <div>
+                <h2>Campaign brief</h2>
+                <p>Fill the builder inputs below. Bariq converts them into campaign-ready outputs.</p>
+              </div>
+              <div class="live-pill">Builder Mode</div>
             </div>
 
-            <div class="field">
-              <label for="campaignName">Campaign Name</label>
-              <input id="campaignName" type="text" placeholder="e.g. Laser Hair Reduction">
+            <div class="form-grid">
+              <div class="field">
+                <label for="businessName">Business Name</label>
+                <input id="businessName" type="text" placeholder="e.g. RSCC Clinic">
+              </div>
+
+              <div class="field">
+                <label for="campaignName">Campaign Name</label>
+                <input id="campaignName" type="text" placeholder="e.g. Summer Skin Offer">
+              </div>
+
+              <div class="field full">
+                <label for="serviceName">Product / Service</label>
+                <input id="serviceName" type="text" placeholder="e.g. Laser hair reduction">
+              </div>
+
+              <div class="field">
+                <label for="offer">Offer</label>
+                <input id="offer" type="text" placeholder="e.g. Flat 60% off">
+              </div>
+
+              <div class="field">
+                <label for="budget">Budget</label>
+                <input id="budget" type="text" placeholder="e.g. ₹5000">
+              </div>
+
+              <div class="field">
+                <label for="targetAudience">Target Audience</label>
+                <input id="targetAudience" type="text" placeholder="e.g. Women 25-40">
+              </div>
+
+              <div class="field">
+                <label for="targetCity">Target City</label>
+                <input id="targetCity" type="text" placeholder="e.g. Hyderabad">
+              </div>
+
+              <div class="field full">
+                <label for="campaignGoal">Campaign Goal</label>
+                <select id="campaignGoal">
+                  <option value="">Select goal</option>
+                  <option>Leads</option>
+                  <option>Sales</option>
+                  <option>Brand Awareness</option>
+                  <option>Traffic</option>
+                  <option>Appointments</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label for="notes">Extra Direction</label>
+                <textarea id="notes" placeholder="Tone, urgency, style, city relevance, premium feel, local language, conversion angle, etc."></textarea>
+              </div>
             </div>
 
-            <div class="field full">
-              <label for="serviceName">Product / Service</label>
-              <input id="serviceName" type="text" placeholder="e.g. Laser hair reduction">
-            </div>
+            <div class="voice-box">
+              <h3>Voice brief</h3>
+              <p>Speak one simple campaign idea. Bariq uses it as an extra builder input.</p>
 
-            <div class="field full">
-              <label for="offer">Offer</label>
-              <input id="offer" type="text" placeholder="e.g. Flat 60% off">
-            </div>
+              <div class="field full" style="margin-bottom:12px;">
+                <textarea id="voicePrompt" placeholder="Example: Make a campaign for laser hair reduction with flat 60% off for women in Hyderabad."></textarea>
+              </div>
 
-            <div class="field">
-              <label for="targetAudience">Target Audience</label>
-              <input id="targetAudience" type="text" placeholder="e.g. Women 25-40">
-            </div>
-
-            <div class="field">
-              <label for="targetCity">Target City</label>
-              <input id="targetCity" type="text" placeholder="e.g. Hyderabad">
-            </div>
-
-            <div class="field">
-              <label for="budget">Budget</label>
-              <input id="budget" type="text" placeholder="e.g. ₹5000">
-            </div>
-
-            <div class="field">
-              <label for="campaignGoal">Campaign Goal</label>
-              <select id="campaignGoal">
-                <option value="">Select goal</option>
-                <option>Leads</option>
-                <option>Sales</option>
-                <option>Brand Awareness</option>
-                <option>Traffic</option>
-                <option>Appointments</option>
-              </select>
-            </div>
-
-            <div class="field full">
-              <label for="voicePrompt">Voice Campaign Brief</label>
-              <textarea id="voicePrompt" placeholder="Speak or type one simple brief. Example: Make an ad on laser hair reduction for Hyderabad women 25 to 40 years with flat 60% off."></textarea>
-            </div>
-
-            <div class="field full">
-              <div class="voice-row">
+              <div class="voice-actions">
                 <button class="btn btn-light" type="button" onclick="startVoiceInput()">🎤 Start Voice</button>
                 <button class="btn btn-light" type="button" onclick="stopVoiceInput()">⏹ Stop Voice</button>
                 <button class="btn btn-light" type="button" onclick="useVoicePrompt()">✨ Use Voice Brief</button>
               </div>
             </div>
 
-            <div class="field full">
-              <label for="notes">Extra Notes</label>
-              <textarea id="notes" placeholder="Anything special Bariq should know? Tone, urgency, style, local language, premium feel, emotional angle, etc."></textarea>
+            <div class="main-actions">
+              <button class="btn btn-primary" onclick="generateCampaign()">Generate Ads</button>
+              <button class="btn btn-light" onclick="generateVideo()">Generate Video</button>
+              <button class="btn btn-light" onclick="saveCampaign()">Save Campaign</button>
+            </div>
+
+            <div class="status-box">
+              <strong>Campaign status</strong>
+              <span id="statusBar">Ready. Enter a campaign idea or use voice prompt.</span>
             </div>
           </div>
 
-          <div class="action-row">
-            <button class="btn btn-primary" onclick="generateCampaign()">Generate Ads</button>
-            <button class="btn btn-light" onclick="generateVideo()">Generate Video</button>
-            <button class="btn btn-light" onclick="saveCampaign()">Save Campaign</button>
-          </div>
+          <div class="right-panel">
+            <div class="panel-head">
+              <div>
+                <h2>Campaign outputs</h2>
+                <p>Preview structured launch content instantly in a compact builder layout.</p>
+              </div>
+              <div class="live-pill">Output View</div>
+            </div>
 
-          <div class="status-bar" id="statusBar">
-            AI ready. Enter a campaign idea or use voice prompt.
-          </div>
-        </div>
+            <div class="output-grid">
+              <div class="output-card">
+                <h3>Meta Ad Copy</h3>
+                <div id="metaOutput">No output yet.</div>
+              </div>
 
-        <div class="output-side">
-          <div class="tip-card">
-            <p>Live campaign preview area. Even if OpenAI server fails later, Bariq can still show structured fallback output so the page always feels active while testing.</p>
-          </div>
+              <div class="output-card">
+                <h3>Google Ad Copy</h3>
+                <div id="googleOutput">No output yet.</div>
+              </div>
 
-          <div class="output-card">
-            <h3>Meta Ad Copy</h3>
-            <div id="metaOutput">No output yet.</div>
-          </div>
+              <div class="output-card">
+                <h3>Reel Script</h3>
+                <div id="reelOutput">No output yet.</div>
+              </div>
 
-          <div class="output-card">
-            <h3>Google Ad Copy</h3>
-            <div id="googleOutput">No output yet.</div>
-          </div>
+              <div class="output-card">
+                <h3>CTA Suggestions</h3>
+                <div id="ctaOutput">No output yet.</div>
+              </div>
 
-          <div class="output-card">
-            <h3>Reel Script</h3>
-            <div id="reelOutput">No output yet.</div>
-          </div>
+              <div class="output-card">
+                <h3>Hashtags</h3>
+                <div id="hashtagOutput">No output yet.</div>
+              </div>
 
-          <div class="output-card">
-            <h3>CTA Suggestions</h3>
-            <div id="ctaOutput">No output yet.</div>
-          </div>
+              <div class="output-card">
+                <h3>Campaign Summary</h3>
+                <div id="summaryOutput">No output yet.</div>
+              </div>
+            </div>
 
-          <div class="output-card">
-            <h3>Hashtags</h3>
-            <div id="hashtagOutput">No output yet.</div>
-          </div>
-
-          <div class="continue-card">
-            <h3>Continue this campaign</h3>
-            <p>Take this same campaign into video creation, templates, or business dashboard flow without leaving Bariq AI.</p>
-            <div class="continue-actions">
-              <a href="video-creator.html" class="btn btn-primary">🎥 Open Video Creator</a>
-              <a href="templates.html" class="btn btn-light">🧩 Open Templates</a>
-              <a href="business-dashboard.html" class="btn btn-light">🏢 Business Dashboard</a>
+            <div class="continue-card">
+              <h3>Continue this campaign</h3>
+              <p>Move this builder output into video creation, templates, or dashboard flow without losing connected product feel.</p>
+              <div class="continue-actions">
+                <a href="video-creator.html" class="btn btn-primary">🎥 Open Video Creator</a>
+                <a href="templates.html" class="btn btn-light">🧩 Open Templates</a>
+                <a href="business-dashboard.html" class="btn btn-light">🏢 Business Dashboard</a>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
 
     </div>
@@ -1078,7 +973,7 @@
 
       const notes = document.getElementById("notes");
       notes.value = "Voice Brief:\n" + brief + (notes.value.trim() ? "\n\n" + notes.value.trim() : "");
-      document.getElementById("statusBar").textContent = "Voice brief added into notes.";
+      document.getElementById("statusBar").textContent = "Voice brief added into extra direction.";
     }
 
     function getValue(id, fallback) {
@@ -1142,21 +1037,25 @@ Book now. DM today. Limited slots.`;
       const hashtagText =
 `#${serviceName.replace(/\s+/g, "")} #${targetCity.replace(/\s+/g, "")} #BeautyClinic #AestheticCare #WomensWellness #PremiumCare #LimitedOffer #BookNow`;
 
+      const summaryText =
+`Campaign: ${campaignName}
+Goal: ${campaignGoal}
+Budget: ${budget}
+Audience: ${targetAudience}
+City: ${targetCity}
+Tone: ${notes}`;
+
       return {
-        businessName,
         campaignName,
-        serviceName,
-        offer,
-        targetAudience,
-        targetCity,
-        budget,
         campaignGoal,
+        budget,
         notes,
         metaText,
         googleText,
         reelText,
         ctaText,
-        hashtagText
+        hashtagText,
+        summaryText
       };
     }
 
@@ -1168,6 +1067,7 @@ Book now. DM today. Limited slots.`;
       document.getElementById("reelOutput").textContent = data.reelText;
       document.getElementById("ctaOutput").textContent = data.ctaText;
       document.getElementById("hashtagOutput").textContent = data.hashtagText;
+      document.getElementById("summaryOutput").textContent = data.summaryText;
 
       document.getElementById("statusBar").textContent =
         `Campaign "${data.campaignName}" generated successfully. Goal: ${data.campaignGoal}. Budget: ${data.budget}. Tone: ${data.notes}.`;
@@ -1177,13 +1077,14 @@ Book now. DM today. Limited slots.`;
       const data = buildCampaignContent();
       document.getElementById("reelOutput").textContent = data.reelText;
       document.getElementById("statusBar").textContent =
-        `Video script generated for "${data.campaignName}". You can now move this idea into Video Creator.`;
+        `Video script generated for "${data.campaignName}". Move it into Video Creator next.`;
     }
 
     function saveCampaign() {
       const data = buildCampaignContent();
+      document.getElementById("summaryOutput").textContent = data.summaryText;
       document.getElementById("statusBar").textContent =
-        `Campaign "${data.campaignName}" saved locally as a draft concept for ${data.targetCity}.`;
+        `Campaign "${data.campaignName}" saved locally as a draft concept.`;
     }
   </script>
 </body>
