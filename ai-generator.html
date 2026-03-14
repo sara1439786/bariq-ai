@@ -3,38 +3,138 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI | AI Studio</title>
+  <title>Bariq AI — AI Generator</title>
   <style>
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; overflow-x: hidden; }
 
     :root{
       --bg1:#fffaf3;
       --bg2:#faf7ff;
-      --bg3:#f6f0ff;
-      --card:rgba(255,255,255,0.96);
-      --border:#ecdcb4;
-      --border-soft:#f0e6c9;
-      --purple:#5a3fff;
-      --purple-dark:#312668;
-      --purple-soft:#f4eeff;
-      --gold:#d8b05b;
+      --bg3:#f7f0ff;
       --text:#2c235c;
-      --muted:#6c6483;
-      --shadow:0 16px 40px rgba(75,45,120,0.08);
-      --card-shadow:0 10px 24px rgba(83,57,139,0.05);
+      --muted:#6d6684;
+      --line:#ece0c0;
+      --white:#ffffff;
+      --purple:#5a3fff;
+      --purple2:#7a63ff;
+      --gold:#d8b05b;
+      --pink:#ff7cc8;
+      --blue:#4f8dff;
+      --green:#35b36e;
+      --shadow:0 20px 55px rgba(75,45,120,0.08);
+      --card-shadow:0 14px 32px rgba(83,57,139,0.07);
     }
 
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
       color: var(--text);
+    }
+
+    body{ position: relative; }
+
+    body::before{
+      content:"";
+      position:fixed;
+      top:-220px;
+      right:-220px;
+      width:720px;
+      height:720px;
+      background:radial-gradient(circle at center,
+      rgba(120,80,255,0.22),
+      rgba(120,80,255,0.08),
+      transparent 70%);
+      z-index:-3;
+      filter:blur(85px);
+      animation:glowMove 14s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      bottom:-240px;
+      left:-220px;
+      width:700px;
+      height:700px;
+      background:radial-gradient(circle,
+      rgba(216,176,91,0.22),
+      transparent 70%);
+      z-index:-3;
+      filter:blur(95px);
+      animation:goldGlow 16s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+
+    .floating-orb{
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(18px);
+      pointer-events: none;
+      z-index: -2;
+      opacity: 0.35;
+    }
+
+    .orb-1{
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, #8f6bff, #c69cff);
+      left: 8%;
+      top: 20%;
+      animation: floatOrb1 12s ease-in-out infinite alternate;
+    }
+
+    .orb-2{
+      width: 140px;
+      height: 140px;
+      background: linear-gradient(135deg, #ffd28e, #ffb86f);
+      right: 10%;
+      top: 40%;
+      animation: floatOrb2 15s ease-in-out infinite alternate;
+    }
+
+    .orb-3{
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #ff9adf, #d79bff);
+      left: 46%;
+      bottom: 10%;
+      animation: floatOrb3 13s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowMove{
+      0%{transform:translate(0,0);}
+      100%{transform:translate(-80px,60px);}
+    }
+
+    @keyframes goldGlow{
+      0%{transform:translate(0,0);}
+      100%{transform:translate(120px,-80px);}
+    }
+
+    @keyframes floatOrb1{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(40px) translateX(30px);}
+    }
+
+    @keyframes floatOrb2{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(-30px) translateX(-25px);}
+    }
+
+    @keyframes floatOrb3{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(-25px) translateX(35px);}
     }
 
     a { text-decoration: none; color: inherit; }
 
     .container {
-      width: min(1280px, calc(100% - 32px));
+      width: min(1360px, calc(100% - 32px));
       margin: 0 auto;
     }
 
@@ -42,9 +142,26 @@
       position: sticky;
       top: 0;
       z-index: 999;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid #eee2bf;
+    }
+
+    .site-header::after{
+      content:"";
+      position:absolute;
+      bottom:0;
+      left:0;
+      width:100%;
+      height:3px;
+      background:linear-gradient(90deg,#d8b05b,#7b5cff,#ff8acc,#d8b05b);
+      background-size:300% 100%;
+      animation:headerFlow 7s linear infinite;
+    }
+
+    @keyframes headerFlow{
+      0%{background-position:0%;}
+      100%{background-position:300%;}
     }
 
     .nav-wrap {
@@ -53,111 +170,131 @@
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      flex-wrap: wrap;
-      padding: 8px 0;
+      position: relative;
     }
 
     .brand {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       white-space: nowrap;
       font-size: 30px;
       font-weight: 800;
-      line-height: 1;
-      background: linear-gradient(90deg, var(--gold), var(--purple));
+      background: linear-gradient(90deg, var(--gold), var(--purple), var(--blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .menu-toggle{
-      display:none;
-      border:none;
-      background:var(--purple-soft);
-      color:var(--purple-dark);
-      border-radius:12px;
-      padding:12px 14px;
-      font-size:18px;
-      font-weight:800;
-      cursor:pointer;
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--purple));
+      box-shadow: 0 0 16px rgba(90,63,255,0.3);
     }
 
-    .top-links {
+    .menu-toggle {
+      display: none;
+      border: none;
+      background: #f3edff;
+      color: #2f216f;
+      font-size: 28px;
+      line-height: 1;
+      padding: 10px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    .main-nav {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      white-space: nowrap;
+    }
+
+    .main-nav::-webkit-scrollbar { display:none; }
+
+    .main-nav a {
+      padding: 10px 12px;
       font-size: 14px;
       font-weight: 700;
-      color: #45388c;
-    }
-
-    .top-links a {
-      padding: 10px 14px;
+      color: #3a2d77;
       border-radius: 12px;
+      flex: 0 0 auto;
+      transition: 0.18s ease;
     }
 
-    .top-links a:hover,
-    .top-links a.active {
-      background: var(--purple-soft);
+    .main-nav a:hover,
+    .main-nav a.active {
+      background: #f3edff;
     }
 
-    .page {
-      padding: 24px 0 40px;
+    .home-link {
+      background: linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
+      border: 1px solid #eadfc2;
+    }
+
+    .hero-section {
+      padding: 14px 0 12px;
     }
 
     .hero-shell {
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.95));
-      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
+      border: 1px solid var(--line);
       border-radius: 30px;
-      padding: 22px;
+      padding: 16px;
       box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
     }
 
-    .subnav {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-      padding: 14px;
-      background: rgba(255,255,255,0.85);
-      border: 1px solid var(--border-soft);
-      border-radius: 22px;
-      box-shadow: var(--card-shadow);
+    .hero-shell::before {
+      content: "";
+      position: absolute;
+      right: -70px;
+      top: -70px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(216,176,91,0.16), transparent 65%);
+      pointer-events: none;
     }
 
-    .subnav a {
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 800;
-      color: #4a3b92;
-      background: #fff;
-      border: 1px solid #eee2bf;
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap:16px;
+      align-items:stretch;
     }
 
-    .subnav a.active,
-    .subnav a:hover {
-      background: var(--purple-soft);
-      border-color: #e3d5ff;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 420px);
-      gap: 18px;
-      align-items: start;
-    }
-
-    .panel, .mini-card, .metric-card, .quick-card, .footer-note, .phone-preview {
-      background: var(--card);
-      border: 1px solid var(--border-soft);
+    .hero-left,
+    .hero-right{
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #f0e6c9;
       border-radius: 24px;
       box-shadow: var(--card-shadow);
-      min-width: 0;
+      position: relative;
+      overflow: hidden;
     }
 
-    .panel { padding: 22px; }
+    .hero-left{
+      padding: 24px;
+    }
 
-    .eyebrow {
+    .hero-left::after{
+      content:"";
+      position:absolute;
+      inset:auto -40px -40px auto;
+      width:180px;
+      height:180px;
+      background:radial-gradient(circle, rgba(90,63,255,0.10), transparent 70%);
+      pointer-events:none;
+    }
+
+    .hero-tag {
       display: inline-block;
       font-size: 13px;
       font-weight: 800;
@@ -169,516 +306,1098 @@
       margin-bottom: 14px;
     }
 
-    h1 {
-      margin: 0 0 10px;
-      font-size: clamp(34px, 4vw, 52px);
-      line-height: 1.02;
-      color: var(--purple-dark);
-      letter-spacing: -0.04em;
+    .hero-left h1 {
+      margin: 0 0 12px;
+      font-size: 48px;
+      line-height: 1.0;
+      letter-spacing: -0.045em;
+      color: #312668;
+      max-width: 780px;
     }
 
-    .subtitle {
-      margin: 0 0 22px;
-      font-size: 16px;
-      line-height: 1.7;
+    .hero-left p {
+      margin: 0 0 18px;
+      font-size: 17px;
+      line-height: 1.74;
       color: var(--muted);
-      max-width: 760px;
+      max-width: 820px;
     }
+
+    .text-gold{ color: var(--gold); text-shadow: 0 0 18px rgba(216,176,91,0.18); }
+    .text-purple{ color: var(--purple); text-shadow: 0 0 18px rgba(90,63,255,0.14); }
+    .text-pink{ color: var(--pink); text-shadow: 0 0 18px rgba(255,124,200,0.14); }
+    .text-blue{ color: var(--blue); text-shadow: 0 0 18px rgba(79,141,255,0.14); }
 
     .hero-actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-top: 18px;
+      margin-bottom: 14px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       padding: 14px 18px;
       border-radius: 16px;
       font-size: 14px;
       font-weight: 800;
       cursor: pointer;
       border: none;
+      transition: 0.2s ease;
     }
 
+    .btn:hover { transform: translateY(-2px); }
+
     .btn-primary {
-      background: linear-gradient(135deg, #d7b15e, #5a3fff);
-      color: white;
-      box-shadow: 0 10px 22px rgba(90,63,255,0.2);
+      background: linear-gradient(135deg, var(--gold), var(--purple));
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(90,63,255,0.18);
     }
 
     .btn-light {
-      background: var(--purple-soft);
-      color: var(--purple-dark);
+      background: #f4eeff;
+      color: #34296a;
       border: 1px solid #e4d7ff;
     }
 
-    .side-stack {
-      display: grid;
-      gap: 14px;
+    .marquee-wrap {
+      margin-top: 10px;
+      border: 1px solid #eee2bf;
+      border-radius: 16px;
+      background: #fff;
+      overflow: hidden;
+      padding: 10px 0;
     }
 
-    .mini-card {
-      padding: 18px;
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 12px;
+      padding: 0 12px;
+      animation: scrollLeft 28s linear infinite;
     }
 
-    .mini-card h3 {
-      margin: 0 0 8px;
-      font-size: 18px;
-      color: #433685;
-    }
-
-    .mini-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
-    }
-
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 22px;
-    }
-
-    .metric-card {
-      padding: 18px;
-    }
-
-    .metric-label {
+    .mini-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #faf7ff;
+      border: 1px solid #ece1bf;
       font-size: 13px;
-      color: var(--muted);
       font-weight: 700;
-      margin-bottom: 10px;
+      color: #4a3b92;
+      white-space: nowrap;
+      box-shadow: 0 6px 16px rgba(83,57,139,0.04);
     }
 
-    .metric-value {
-      font-size: 38px;
-      line-height: 1;
-      font-weight: 800;
-      color: var(--purple-dark);
-      margin-bottom: 10px;
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    .metric-sub {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
+    .hero-right{
+      padding: 18px;
+      display:grid;
+      gap:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,243,255,0.96));
     }
 
-    .section-title {
-      margin: 28px 0 12px;
-      font-size: 34px;
-      line-height: 1.1;
-      color: var(--purple-dark);
-      letter-spacing: -0.03em;
+    .template-wall{
+      border-radius:22px;
+      border:1px solid #eee2bf;
+      background:#fff;
+      overflow:hidden;
+      padding:10px 0;
     }
 
-    .section-sub {
-      margin: 0 0 16px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
+    .template-track{
+      display:flex;
+      gap:12px;
+      width:max-content;
+      padding:0 10px;
+      animation:imageScroll 30s linear infinite;
     }
 
-    .platform-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+    .template-card{
+      width:190px;
+      height:145px;
+      flex:0 0 auto;
+      border-radius:18px;
+      overflow:hidden;
+      position:relative;
+      box-shadow:0 10px 24px rgba(60,40,110,0.10);
+      border:1px solid #f0e6c9;
+      transition:0.2s ease;
     }
 
-    .quick-card {
+    .template-card:hover{
+      transform: translateY(-4px) scale(1.02);
+      box-shadow:0 18px 30px rgba(60,40,110,0.15);
+    }
+
+    .template-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .template-card span{
+      position:absolute;
+      left:10px;
+      bottom:10px;
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      color:#fff;
+      background:rgba(44,35,92,0.72);
+      backdrop-filter:blur(6px);
+    }
+
+    @keyframes imageScroll{
+      0%{transform:translateX(0);}
+      100%{transform:translateX(-50%);}
+    }
+
+    .right-mini-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+
+    .right-mini{
+      padding:14px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid #eee2bf;
+      text-align:center;
+      box-shadow:0 8px 18px rgba(83,57,139,0.05);
+    }
+
+    .right-mini .num{
+      font-size:22px;
+      font-weight:800;
+      color:#3f3281;
+    }
+
+    .right-mini .lab{
+      margin-top:4px;
+      font-size:12px;
+      font-weight:700;
+      color:#7a7291;
+    }
+
+    .section {
+      padding: 6px 0 18px;
+    }
+
+    .generator-grid{
+      display:grid;
+      grid-template-columns: 500px 1fr;
+      gap:20px;
+      align-items:start;
+    }
+
+    .form-card,
+    .output-card,
+    .status-card,
+    .output-box,
+    .tool-card,
+    .next-step-card {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #f0e6c9;
+      border-radius: 22px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.25s ease;
+    }
+
+    .form-card:hover,
+    .output-card:hover,
+    .tool-card:hover,
+    .next-step-card:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 26px 55px rgba(80,50,150,0.10);
+    }
+
+    .form-card,
+    .output-card {
       padding: 20px;
     }
 
-    .quick-card h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      color: #433685;
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 26px;
+      color: #35296f;
     }
 
-    .quick-card p {
+    .section-text {
       margin: 0 0 16px;
       color: var(--muted);
       line-height: 1.7;
-      font-size: 15px;
+      font-size: 16px;
     }
 
-    .quick-card .card-link {
-      display: inline-block;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: #f6f1ff;
-      color: #45388c;
+    .tool-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .tool-card{
+      padding:14px 16px;
+      cursor:pointer;
+      background:linear-gradient(180deg,#fff,#fbf8ff);
+    }
+
+    .tool-card.active{
+      border-color:#d9c9ff;
+      background:linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
+    }
+
+    .tool-card h4{
+      margin:0 0 6px;
+      font-size:16px;
+      color:#433685;
+    }
+
+    .tool-card p{
+      margin:0;
+      font-size:13px;
+      line-height:1.6;
+      color:var(--muted);
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .field label {
       font-size: 14px;
       font-weight: 800;
+      color: #433685;
     }
 
-    .workflow-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid #eadfc2;
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 14px;
+      font: inherit;
+      color: var(--text);
+      outline: none;
+      transition: 0.18s ease;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: #cdb2ff;
+      box-shadow: 0 0 0 4px rgba(90,63,255,0.08);
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .voice-actions,
+    .action-row,
+    .next-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .action-row {
       margin-top: 16px;
     }
 
-    .workflow-step {
-      padding: 18px;
-      border-radius: 22px;
-      background: var(--card);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--card-shadow);
+    .action-row .btn {
+      min-width: 145px;
     }
 
-    .step-num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #f7e8ba, #e2b85a);
-      color: #5f4710;
+    .status-card{
+      margin-top: 14px;
+      padding: 16px 18px;
+      background:linear-gradient(135deg,#fff,#f6f2ff);
+      border:1px solid #eee;
+    }
+
+    .status-card h4 {
+      margin: 0 0 8px;
+      color: #433685;
       font-size: 16px;
-      font-weight: 800;
-      margin-bottom: 12px;
     }
 
-    .workflow-step h4 {
+    .status-message {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #5f5778;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .output-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,247,255,0.96));
+      overflow: hidden;
+      position: relative;
+    }
+
+    .output-card::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(90,63,255,0.12), transparent 65%);
+      pointer-events: none;
+    }
+
+    .preview-banner {
+      margin-bottom: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fff7e9, #f4eeff);
+      border: 1px solid #ece0c0;
+      color: #564d73;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .output-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .output-box{
+      padding:20px;
+      border-radius:18px;
+      background:white;
+      border:1px solid #eee;
+      box-shadow:0 10px 30px rgba(0,0,0,0.06);
+      transition:0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .output-box::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--purple));
+      opacity: 0.9;
+    }
+
+    .output-box:hover{
+      transform:translateY(-4px);
+      box-shadow:0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    .output-box h3 {
       margin: 0 0 10px;
       font-size: 18px;
-      color: #433685;
+      color: #45388c;
+      padding-left: 8px;
     }
 
-    .workflow-step p {
+    .output-box pre {
       margin: 0;
-      color: var(--muted);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: Arial, sans-serif;
       font-size: 15px;
-      line-height: 1.7;
+      line-height: 1.78;
+      color: #5f5778;
+      padding-left: 8px;
     }
 
-    .phone-preview {
-      padding: 18px;
-      background: linear-gradient(180deg, #5d43d8 0%, #2b1f64 100%);
-      border: 8px solid #1f1b2f;
-      min-height: 480px;
-      color: white;
+    .next-step-card {
+      margin-top: 14px;
+      padding: 16px 18px;
+      background: linear-gradient(135deg, #ffffff, #f8f2ff);
+      border: 1px solid #eadcfb;
     }
 
-    .phone-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 22px;
-    }
-
-    .pill {
-      background: #f8e9be;
-      color: #6c5104;
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .logo-box {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.14);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .preview-kicker {
-      font-size: 14px;
-      color: #efe6b7;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    .preview-headline {
-      font-size: 40px;
-      line-height: 1.05;
-      font-weight: 800;
-      color: #fff3c8;
-      text-align: center;
-      margin: 0 0 14px;
-    }
-
-    .preview-subline {
-      font-size: 16px;
-      line-height: 1.7;
-      color: #f5e9b5;
-      text-align: center;
-      margin: 0 0 18px;
-    }
-
-    .preview-offer {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 15px;
-      font-weight: 700;
-      color: white;
-    }
-
-    .footer-note {
-      margin-top: 22px;
-      padding: 18px;
-      text-align: center;
-    }
-
-    .footer-note strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 18px;
+    .next-step-card h3 {
+      margin: 0 0 8px;
       color: #433685;
+      font-size: 18px;
     }
 
-    .footer-note span {
+    .next-step-card p {
+      margin: 0 0 12px;
       color: var(--muted);
       line-height: 1.7;
       font-size: 15px;
     }
 
-    @media (max-width: 1100px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .metrics-grid { grid-template-columns: 1fr 1fr; }
-      .platform-grid { grid-template-columns: 1fr 1fr; }
-      .workflow-grid { grid-template-columns: 1fr 1fr; }
+    .site-footer {
+      margin-top: 22px;
+      background: #181427;
+      color: #fff;
+      padding: 40px 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .footer-col h3 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      color: #ffffff;
+    }
+
+    .footer-col p,
+    .footer-col a {
+      display: block;
+      margin: 0 0 10px;
+      color: #d9d4ea;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1180px) {
+      .hero-grid,
+      .generator-grid{
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 768px) {
-      .container { width: min(100% - 20px, 1280px); }
-      .menu-toggle{ display:block; }
-      .top-links{
-        display:none;
-        width:100%;
-        flex-direction:column;
-        gap:8px;
+      .container { width: min(100% - 20px, 1200px); }
+      .menu-toggle { display: block; }
+
+      .main-nav {
+        display: none;
+        position: absolute;
+        top: 82px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border: 1px solid #ecdcb4;
+        border-radius: 18px;
+        box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+        padding: 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
       }
-      .top-links.show{ display:flex; }
-      .top-links a{
-        width:100%;
-        background:#fff;
-        border:1px solid #efe4c7;
+
+      .main-nav.show { display: flex; }
+
+      .main-nav a {
+        width: 100%;
+        background: #faf7ff;
+        justify-content: flex-start;
       }
-      .subnav{
-        flex-direction:column;
+
+      .hero-left h1 { font-size: 34px; }
+
+      .hero-actions,
+      .voice-actions,
+      .action-row,
+      .next-links {
+        flex-direction: column;
       }
-      .subnav a{
-        width:100%;
-      }
-      .hero-shell { padding: 16px; border-radius: 22px; }
-      .panel { padding: 18px; }
-      .metrics-grid,
-      .platform-grid,
-      .workflow-grid { grid-template-columns: 1fr; }
-      .hero-actions { flex-direction: column; }
+
       .btn { width: 100%; }
-      .phone-preview { min-height: auto; padding: 16px; }
-      .preview-headline { font-size: 32px; }
-      .preview-subline { font-size: 15px; }
+
+      .tool-grid,
+      .right-mini-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left,
+      .hero-right,
+      .form-card,
+      .output-card {
+        padding: 16px;
+      }
+
+      .template-card{
+        width:170px;
+        height:120px;
+      }
     }
   </style>
 </head>
 <body>
+
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="floating-orb orb-3"></div>
+
   <header class="site-header">
     <div class="container nav-wrap">
-      <a href="index.html" class="brand">Bariq AI</a>
+      <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
 
-      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
 
-      <nav class="top-links" id="topLinks">
-        <a href="business-dashboard.html">Business</a>
-        <a href="creator-dashboard.html">Influencers</a>
-        <a href="admin-dashboard.html">Admin</a>
-        <a href="ai-generator.html" class="active">AI Studio</a>
-        <a href="login.html">Login</a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="home-link">🏠 Home</a>
+        <a href="business-dashboard.html">🏢 Business</a>
+        <a href="ai-generator.html" class="active">✨ AI Generator</a>
+        <a href="campaign.html">📣 Campaign</a>
+        <a href="creator-marketplace.html">🎥 Creators</a>
+        <a href="templates.html">🧩 Templates</a>
+        <a href="payments.html">💳 Payments</a>
+        <a href="login.html">🔐 Login</a>
+        <a href="admin-dashboard.html">⚙️ Admin</a>
       </nav>
     </div>
   </header>
 
-  <section class="page">
+  <section class="hero-section">
     <div class="container">
       <div class="hero-shell">
-
-        <div class="subnav">
-          <a href="ai-generator.html" class="active">Studio Home</a>
-          <a href="ai-generator-tool.html">AI Generator</a>
-          <a href="video-creator.html">Video Creator</a>
-          <a href="campaign.html">Campaign Studio</a>
-        </div>
-
         <div class="hero-grid">
-          <div class="panel">
-            <div class="eyebrow">AI Studio</div>
-            <h1>Create marketing faster with one AI engine.</h1>
-            <p class="subtitle">
-              Bariq AI Studio combines ad writing, reel creation, and campaign building in one place so businesses don’t have to jump between disconnected tools.
+
+          <div class="hero-left">
+            <div class="hero-tag">AI Generator Studio</div>
+            <h1>
+              Generate <span class="text-gold">ads</span>,
+              <span class="text-purple">hooks</span>,
+              <span class="text-pink">reels</span>, and
+              <span class="text-blue">campaign ideas</span>
+            </h1>
+
+            <p>
+              Bariq AI Generator helps you create premium marketing outputs from one simple brief.
+              Use text or voice, choose a content type, and instantly generate ready-to-use content.
             </p>
 
             <div class="hero-actions">
-              <a class="btn btn-primary" href="ai-generator-tool.html">Open AI Generator</a>
-              <a class="btn btn-light" href="video-creator.html">Open Video Creator</a>
-              <a class="btn btn-light" href="campaign.html">Open Campaign Studio</a>
+              <button class="btn btn-primary" onclick="document.getElementById('generatorForm').scrollIntoView({behavior:'smooth'})">✨ Start Generating</button>
+              <a href="campaign.html" class="btn btn-light">📣 Open Campaign Studio</a>
+              <a href="business-dashboard.html" class="btn btn-light">🏢 Business Dashboard</a>
+            </div>
+
+            <div class="marquee-wrap">
+              <div class="marquee-track">
+                <span class="mini-chip">🎯 Meta Ad Copy</span>
+                <span class="mini-chip">📢 Google Headlines</span>
+                <span class="mini-chip">🎥 Reel Scripts</span>
+                <span class="mini-chip">🪄 Voice Prompt</span>
+                <span class="mini-chip">💬 WhatsApp Promo</span>
+                <span class="mini-chip">🔥 Hook Lines</span>
+                <span class="mini-chip">🧩 Captions</span>
+                <span class="mini-chip">📍 Local Offers</span>
+                <span class="mini-chip">🎯 Meta Ad Copy</span>
+                <span class="mini-chip">📢 Google Headlines</span>
+                <span class="mini-chip">🎥 Reel Scripts</span>
+                <span class="mini-chip">🪄 Voice Prompt</span>
+                <span class="mini-chip">💬 WhatsApp Promo</span>
+                <span class="mini-chip">🔥 Hook Lines</span>
+                <span class="mini-chip">🧩 Captions</span>
+                <span class="mini-chip">📍 Local Offers</span>
+              </div>
             </div>
           </div>
 
-          <div class="side-stack">
-            <div class="mini-card">
-              <h3>AI Generator</h3>
-              <p>Create hooks, captions, WhatsApp promos, Google ad copy, and carousel ideas from one prompt.</p>
+          <div class="hero-right">
+            <div class="template-wall">
+              <div class="template-track">
+                <div class="template-card">
+                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Beauty Ad</span>
+                </div>
+                <div class="template-card">
+                  <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Clinic Promo</span>
+                </div>
+                <div class="template-card">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Women Offer</span>
+                </div>
+                <div class="template-card">
+                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Reel Mood</span>
+                </div>
+
+                <div class="template-card">
+                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Beauty Ad</span>
+                </div>
+                <div class="template-card">
+                  <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Clinic Promo</span>
+                </div>
+                <div class="template-card">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Women Offer</span>
+                </div>
+                <div class="template-card">
+                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Reel Mood</span>
+                </div>
+              </div>
             </div>
-            <div class="mini-card">
-              <h3>Video Creator</h3>
-              <p>Generate business reel direction using prompts, stock clips, preview flow, and marketing structure.</p>
+
+            <div class="right-mini-grid">
+              <div class="right-mini">
+                <div class="num">8+</div>
+                <div class="lab">Output Types</div>
+              </div>
+              <div class="right-mini">
+                <div class="num">Voice</div>
+                <div class="lab">Input Ready</div>
+              </div>
+              <div class="right-mini">
+                <div class="num">Fast</div>
+                <div class="lab">AI Workflow</div>
+              </div>
             </div>
-            <div class="mini-card">
-              <h3>Campaign Studio</h3>
-              <p>Build your audience, offer, CTA, and execution flow before ads and creators go live.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="metrics-grid">
-          <div class="metric-card">
-            <div class="metric-label">AI Tools</div>
-            <div class="metric-value">3</div>
-            <div class="metric-sub">Ad generation, video creation, and campaign planning connected in one studio flow.</div>
           </div>
 
-          <div class="metric-card">
-            <div class="metric-label">Prompt Speed</div>
-            <div class="metric-value">Fast</div>
-            <div class="metric-sub">Move from one idea to multiple marketing outputs without needing multiple apps.</div>
-          </div>
-
-          <div class="metric-card">
-            <div class="metric-label">Use Cases</div>
-            <div class="metric-value">Multi</div>
-            <div class="metric-sub">Useful for clinics, salons, products, retail, wellness, and local business promotions.</div>
-          </div>
-
-          <div class="metric-card">
-            <div class="metric-label">Launch Stack</div>
-            <div class="metric-value">Ready</div>
-            <div class="metric-sub">AI tools can now sit under one clear studio instead of cluttering the top menu.</div>
-          </div>
-        </div>
-
-        <h2 class="section-title">AI Studio tools</h2>
-        <p class="section-sub">Choose the right tool depending on whether you want text, video, or campaign structure.</p>
-
-        <div class="platform-grid">
-          <div class="quick-card">
-            <h3>AI Generator</h3>
-            <p>Generate ad copy, captions, hooks, reel scripts, WhatsApp promos, Google ads using one prompt input.</p>
-            <a class="card-link" href="ai-generator-tool.html">Open AI Generator</a>
-          </div>
-
-          <div class="quick-card">
-            <h3>Video Creator</h3>
-            <p>Create reels with prompts, video clips, preview layout, and stock-based ad storytelling flow.</p>
-            <a class="card-link" href="video-creator.html">Open Video Creator</a>
-          </div>
-
-          <div class="quick-card">
-            <h3>Campaign Studio</h3>
-            <p>Build campaigns with audience, CTA, offer, and execution structure before launch or creator matching.</p>
-            <a class="card-link" href="campaign.html">Open Campaign Studio</a>
-          </div>
-
-          <div class="quick-card">
-            <h3>Templates</h3>
-            <p>Browse Canva-style starter templates and move into AI generation or campaign creation faster.</p>
-            <a class="card-link" href="templates.html">Open Templates</a>
-          </div>
-
-          <div class="quick-card">
-            <h3>Prompt Flow</h3>
-            <p>Use one business idea and repurpose it across captions, ads, reels, and structured campaigns.</p>
-            <a class="card-link" href="ai-generator-tool.html">Try Prompt Flow</a>
-          </div>
-
-          <div class="quick-card">
-            <h3>Marketing Engine</h3>
-            <p>This is the core SaaS layer of Bariq AI and should feel like the content brain of the platform.</p>
-            <a class="card-link" href="ai-generator-tool.html">Explore Engine</a>
-          </div>
-        </div>
-
-        <h2 class="section-title">How AI Studio works</h2>
-        <p class="section-sub">Keep the studio journey simple: prompt, create, structure, launch.</p>
-
-        <div class="workflow-grid">
-          <div class="workflow-step">
-            <div class="step-num">1</div>
-            <h4>Prompt</h4>
-            <p>Start with one business idea, product, service, or offer you want to promote.</p>
-          </div>
-
-          <div class="workflow-step">
-            <div class="step-num">2</div>
-            <h4>Create</h4>
-            <p>Generate text outputs, ad directions, captions, hooks, and scripts from one AI flow.</p>
-          </div>
-
-          <div class="workflow-step">
-            <div class="step-num">3</div>
-            <h4>Structure</h4>
-            <p>Move into Campaign Studio or Templates to organize your message before execution.</p>
-          </div>
-
-          <div class="workflow-step">
-            <div class="step-num">4</div>
-            <h4>Launch</h4>
-            <p>Use the outputs for ads, reels, creator work, and business marketing across channels.</p>
-          </div>
-        </div>
-
-        <h2 class="section-title">AI Studio preview</h2>
-        <p class="section-sub">This side is the creative engine of Bariq AI and should feel powerful but simple.</p>
-
-        <div class="hero-grid" style="margin-top: 10px;">
-          <div class="panel">
-            <div class="eyebrow">Studio Mode</div>
-            <h1 style="font-size: clamp(30px, 3.2vw, 46px);">One idea can now become multiple marketing assets.</h1>
-            <p class="subtitle" style="margin-bottom: 0;">
-              Bariq AI Studio helps business owners move from one concept into captions, ads, reels, and campaigns without overthinking every step.
-            </p>
-          </div>
-
-          <div class="phone-preview">
-            <div class="phone-top">
-              <div class="pill">AI Studio</div>
-              <div class="logo-box">LOGO</div>
-            </div>
-            <div class="preview-kicker">Bariq AI</div>
-            <div class="preview-headline">Generate, create, and structure from one engine</div>
-            <div class="preview-subline">AI Generator, Video Creator, and Campaign Studio are now grouped into one cleaner workflow</div>
-            <div class="preview-offer">Action: Create faster</div>
-          </div>
-        </div>
-
-        <div class="footer-note">
-          <strong>Bariq AI Studio Layer</strong>
-          <span>This page should be the one clear home for all AI creation tools, while individual tools stay inside AI Studio sub-tabs instead of cluttering the main navigation.</span>
         </div>
       </div>
     </div>
   </section>
 
+  <section class="section">
+    <div class="container">
+      <div class="generator-grid">
+
+        <div class="form-card" id="generatorForm">
+          <h2 class="section-title">AI Content Generator</h2>
+          <p class="section-text">Choose what you want Bariq to generate and give one short brief.</p>
+
+          <div class="tool-grid">
+            <div class="tool-card active" onclick="setTool('meta')">
+              <h4>🎯 Meta Ad</h4>
+              <p>Primary text, headline, CTA</p>
+            </div>
+            <div class="tool-card" onclick="setTool('google')">
+              <h4>📢 Google Ad</h4>
+              <p>Headlines and description</p>
+            </div>
+            <div class="tool-card" onclick="setTool('reel')">
+              <h4>🎥 Reel Script</h4>
+              <p>Scenes, hook, ending CTA</p>
+            </div>
+            <div class="tool-card" onclick="setTool('whatsapp')">
+              <h4>💬 WhatsApp Promo</h4>
+              <p>Short promo message</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="brandName">Brand / Business Name</label>
+            <input id="brandName" type="text" placeholder="e.g. RSCC Clinic" />
+          </div>
+
+          <div class="field">
+            <label for="category">Category</label>
+            <input id="category" type="text" placeholder="e.g. Aesthetic clinic / Skincare / Product" />
+          </div>
+
+          <div class="field">
+            <label for="offer">Offer / Message</label>
+            <input id="offer" type="text" placeholder="e.g. Flat 60% off on laser hair reduction" />
+          </div>
+
+          <div class="field">
+            <label for="audience">Target Audience</label>
+            <input id="audience" type="text" placeholder="e.g. Women 25-40 in Hyderabad" />
+          </div>
+
+          <div class="field">
+            <label for="tone">Tone</label>
+            <select id="tone">
+              <option value="">Select tone</option>
+              <option>Premium</option>
+              <option>Emotional</option>
+              <option>Bold</option>
+              <option>Trust-building</option>
+              <option>Luxury</option>
+              <option>Friendly</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="prompt">Prompt / Brief</label>
+            <textarea id="prompt" placeholder="Describe what you want. Example: Create a Meta ad for laser hair reduction with flat 60% off targeting Hyderabad women aged 25 to 40."></textarea>
+          </div>
+
+          <div class="field">
+            <div class="voice-actions">
+              <button class="btn btn-light" type="button" onclick="startVoiceInput()">🎤 Start Voice</button>
+              <button class="btn btn-light" type="button" onclick="stopVoiceInput()">⏹ Stop Voice</button>
+              <button class="btn btn-light" type="button" onclick="useVoicePrompt()">✨ Use Voice Prompt</button>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="btn btn-primary" id="generateBtn" type="button">Generate</button>
+            <button class="btn btn-light" id="clearBtn" type="button">Clear</button>
+            <button class="btn btn-light" id="saveBtn" type="button">Save Draft</button>
+          </div>
+
+          <div class="status-card">
+            <h4>Generator Status</h4>
+            <p class="status-message" id="statusBar">AI ready. Select a tool and enter your brief.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="output-card">
+            <div class="preview-banner">
+              Bariq instantly shows structured output here. Even if live AI is not connected, this page still generates smart fallback copy so the experience never feels dead.
+            </div>
+
+            <h2 class="section-title">Generated Output</h2>
+            <p class="section-text">Your selected AI output will appear below in a premium structured format.</p>
+
+            <div class="output-stack">
+              <div class="output-box">
+                <h3>Primary Output</h3>
+                <pre id="primaryOutput">No output yet.</pre>
+              </div>
+
+              <div class="output-box">
+                <h3>Bonus Variations</h3>
+                <pre id="variationOutput">No output yet.</pre>
+              </div>
+
+              <div class="output-box">
+                <h3>Suggested Hashtags / CTA</h3>
+                <pre id="extraOutput">No output yet.</pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="next-step-card">
+            <h3>Continue with this output</h3>
+            <p>Take your generated content into campaign planning, templates, or business execution without leaving Bariq AI.</p>
+            <div class="next-links">
+              <a href="campaign.html" class="btn btn-primary">Open Campaign Studio</a>
+              <a href="templates.html" class="btn btn-light">Open Templates</a>
+              <a href="business-dashboard.html" class="btn btn-light">Business Dashboard</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Bariq AI</h3>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, and execution systems.</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Platform</h3>
+          <a href="index.html">Home</a>
+          <a href="ai-generator.html">AI Generator</a>
+          <a href="business-dashboard.html">Business Dashboard</a>
+          <a href="creator-dashboard.html">Creator Dashboard</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund-policy.html">Refund Policy</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <a href="contact.html">Contact Us</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="payments.html">Payments</a>
+          <p>support@bariqai.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    function toggleMenu() {
-      document.getElementById("topLinks").classList.toggle("show");
+    let recognition;
+    let isListening = false;
+    let selectedTool = "meta";
+
+    function toggleMobileMenu() {
+      document.getElementById("mainNav").classList.toggle("show");
     }
+
+    function setStatus(message) {
+      document.getElementById("statusBar").textContent = message;
+    }
+
+    function setTool(tool) {
+      selectedTool = tool;
+      document.querySelectorAll(".tool-card").forEach(card => card.classList.remove("active"));
+
+      const tools = document.querySelectorAll(".tool-card");
+      if (tool === "meta") tools[0].classList.add("active");
+      if (tool === "google") tools[1].classList.add("active");
+      if (tool === "reel") tools[2].classList.add("active");
+      if (tool === "whatsapp") tools[3].classList.add("active");
+
+      setStatus("Selected tool: " + tool.toUpperCase());
+    }
+
+    function getData() {
+      return {
+        brandName: document.getElementById("brandName").value.trim(),
+        category: document.getElementById("category").value.trim(),
+        offer: document.getElementById("offer").value.trim(),
+        audience: document.getElementById("audience").value.trim(),
+        tone: document.getElementById("tone").value.trim(),
+        prompt: document.getElementById("prompt").value.trim()
+      };
+    }
+
+    function validateData(data) {
+      return data.prompt || data.offer || data.brandName;
+    }
+
+    function startVoiceInput() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        setStatus("Voice input is not supported in this browser. Please use Chrome.");
+        return;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.lang = "en-IN";
+      recognition.interimResults = true;
+      recognition.continuous = true;
+
+      recognition.onstart = function () {
+        isListening = true;
+        setStatus("Listening... speak your brief now.");
+      };
+
+      recognition.onresult = function (event) {
+        let transcript = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        document.getElementById("prompt").value = transcript.trim();
+      };
+
+      recognition.onerror = function (event) {
+        setStatus("Voice input error: " + event.error);
+      };
+
+      recognition.onend = function () {
+        if (isListening) {
+          setStatus("Voice input stopped.");
+        }
+        isListening = false;
+      };
+
+      recognition.start();
+    }
+
+    function stopVoiceInput() {
+      if (recognition && isListening) {
+        recognition.stop();
+        isListening = false;
+        setStatus("Voice recording stopped.");
+      } else {
+        setStatus("Voice input is not currently running.");
+      }
+    }
+
+    function useVoicePrompt() {
+      const prompt = document.getElementById("prompt").value.trim();
+      if (!prompt) {
+        setStatus("Please record or type a prompt first.");
+        return;
+      }
+      setStatus("Voice prompt ready for generation.");
+    }
+
+    function setOutputs(primary, variation, extra) {
+      document.getElementById("primaryOutput").textContent = primary;
+      document.getElementById("variationOutput").textContent = variation;
+      document.getElementById("extraOutput").textContent = extra;
+    }
+
+    function generateContent() {
+      const data = getData();
+
+      if (!validateData(data)) {
+        setStatus("Please enter at least a short prompt, offer, or brand name.");
+        return;
+      }
+
+      const brand = data.brandName || "Your Brand";
+      const category = data.category || "your service";
+      const offer = data.offer || "a special offer";
+      const audience = data.audience || "your target audience";
+      const tone = data.tone || "premium";
+
+      let primary = "";
+      let variation = "";
+      let extra = "";
+
+      if (selectedTool === "meta") {
+        primary = `Headline: ${brand} brings ${offer}
+
+Primary Text:
+Looking for ${category}? ${brand} now offers ${offer} for ${audience}. Designed in a ${tone.toLowerCase()} tone to drive stronger engagement and action.
+
+CTA:
+Book Now | Message Now | Limited Slots Available`;
+
+        variation = `Variation 1:
+Your search for premium ${category} ends here. ${brand} brings ${offer} for ${audience}.
+
+Variation 2:
+Step into confidence with ${brand}. Discover ${category} with ${offer} today.
+
+Variation 3:
+Premium care. Visible results. ${offer} now live with ${brand}.`;
+
+        extra = `Suggested CTA:
+Book Today
+Send Message
+Claim Offer
+
+Suggested Hashtags:
+#${brand.replace(/\s+/g, "")} #${category.replace(/\s+/g, "")} #PremiumOffer #BeautyPromo #BookNow`;
+      }
+
+      if (selectedTool === "google") {
+        primary = `Headline 1: ${category} by ${brand}
+Headline 2: ${offer}
+Headline 3: Trusted Choice For ${audience}
+
+Description:
+Discover ${category} with ${brand}. Enjoy ${offer} in a ${tone.toLowerCase()} style. Enquire now for premium service and better results.`;
+
+        variation = `More Headline Ideas:
+Premium ${category}
+Best ${category} Offer
+Book With ${brand}
+Trusted Local Service
+
+More Description Ideas:
+Explore premium results with ${brand}.
+Fast, polished, and easy enquiry flow.
+Designed for ${audience}.`;
+
+        extra = `Recommended Usage:
+Use for search campaigns
+Add local city name
+Test 3 headline combinations`;
+      }
+
+      if (selectedTool === "reel") {
+        primary = `Hook:
+Still searching for the right ${category}?
+
+Scene 1:
+Show the common pain point for ${audience}.
+
+Scene 2:
+Introduce ${brand} and highlight ${offer}.
+
+Scene 3:
+Show premium result, treatment process, or transformation.
+
+Scene 4:
+Add trust, confidence, and urgency.
+
+Ending CTA:
+Book now with ${brand}. Limited slots available.`;
+
+        variation = `Alternative Hooks:
+1. Your upgrade starts here.
+2. Why wait to feel confident?
+3. Premium results begin with the right choice.
+
+Ending Styles:
+Luxury
+Emotional
+Offer-led`;
+
+        extra = `Suggested Reel Caption:
+${brand} now brings ${offer} for ${audience}. DM now to enquire.
+
+Suggested Overlay Text:
+Premium Care
+Visible Results
+Book Today`;
+      }
+
+      if (selectedTool === "whatsapp") {
+        primary = `Hello! ${brand} is now offering ${offer} on ${category}. This is specially designed for ${audience}. Reply now to know more or book your slot.`;
+
+        variation = `Short Version:
+${brand}: ${offer} on ${category}. Reply now for details.
+
+Warm Version:
+Hi! We would love to help you with ${category}. ${offer} is now live. Message us to book.`;
+
+        extra = `Suggested Quick Replies:
+Send Price
+Book Slot
+Need Details
+Talk To Team`;
+      }
+
+      setOutputs(primary, variation, extra);
+      setStatus("Content generated successfully with Bariq smart fallback AI.");
+    }
+
+    function clearForm() {
+      document.getElementById("brandName").value = "";
+      document.getElementById("category").value = "";
+      document.getElementById("offer").value = "";
+      document.getElementById("audience").value = "";
+      document.getElementById("tone").value = "";
+      document.getElementById("prompt").value = "";
+      setOutputs("No output yet.", "No output yet.", "No output yet.");
+      setStatus("Form cleared.");
+    }
+
+    function saveDraft() {
+      const data = getData();
+      const drafts = JSON.parse(localStorage.getItem("bariq_ai_generator_drafts") || "[]");
+      drafts.push({
+        tool: selectedTool,
+        ...data,
+        savedAt: new Date().toISOString()
+      });
+      localStorage.setItem("bariq_ai_generator_drafts", JSON.stringify(drafts));
+      setStatus("Draft saved locally in this browser.");
+    }
+
+    document.getElementById("generateBtn").addEventListener("click", generateContent);
+    document.getElementById("clearBtn").addEventListener("click", clearForm);
+    document.getElementById("saveBtn").addEventListener("click", saveDraft);
   </script>
 </body>
 </html>
