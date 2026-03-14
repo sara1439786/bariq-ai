@@ -8,97 +8,48 @@
     * { box-sizing: border-box; }
 
     :root{
-      --bg1:#fffaf3;
-      --bg2:#faf7ff;
-      --bg3:#f7f0ff;
-      --text:#2c235c;
-      --muted:#6d6684;
-      --purple:#5a3fff;
-      --gold:#d8b05b;
-      --pink:#ff7cc8;
-      --blue:#4f8dff;
-      --line:#ece0c0;
-      --card-shadow:0 14px 32px rgba(83,57,139,0.07);
+      --bg:#f6f3ff;
+      --surface:#ffffff;
+      --surface-2:#f3efff;
+      --primary:#6b4eff;
+      --primary-soft:#ece6ff;
+      --text:#231b46;
+      --muted:#6e6790;
+      --line:#e7defc;
+      --shadow:0 18px 40px rgba(88,65,168,0.10);
+      --radius:24px;
     }
 
     html, body{
       margin:0;
       padding:0;
-      overflow-x:hidden;
-      scroll-behavior:smooth;
       font-family:Arial, sans-serif;
-      background:linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
+      background:
+        radial-gradient(circle at top right, rgba(107,78,255,0.10), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(107,78,255,0.08), transparent 30%),
+        var(--bg);
       color:var(--text);
+      overflow-x:hidden;
     }
 
-    body{
-      position:relative;
-    }
-
-    body::before{
-      content:"";
-      position:fixed;
-      top:-220px;
-      right:-220px;
-      width:720px;
-      height:720px;
-      background:radial-gradient(circle at center, rgba(120,80,255,0.18), rgba(120,80,255,0.06), transparent 70%);
-      filter:blur(90px);
-      pointer-events:none;
-      z-index:-2;
-    }
-
-    body::after{
-      content:"";
-      position:fixed;
-      bottom:-220px;
-      left:-220px;
-      width:680px;
-      height:680px;
-      background:radial-gradient(circle, rgba(216,176,91,0.18), transparent 70%);
-      filter:blur(90px);
-      pointer-events:none;
-      z-index:-2;
-    }
-
-    a{
-      text-decoration:none;
-      color:inherit;
-    }
+    a{ text-decoration:none; color:inherit; }
 
     .container{
-      width:min(1380px, calc(100% - 28px));
+      width:min(1400px, calc(100% - 28px));
       margin:0 auto;
     }
 
     .site-header{
       position:sticky;
       top:0;
-      z-index:999;
-      background:rgba(255,255,255,0.94);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid #eee2bf;
-    }
-
-    .site-header::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:0;
-      width:100%;
-      height:3px;
-      background:linear-gradient(90deg,#d8b05b,#7b5cff,#ff8acc,#d8b05b);
-      background-size:300% 100%;
-      animation:headerFlow 7s linear infinite;
-    }
-
-    @keyframes headerFlow{
-      0%{ background-position:0%; }
-      100%{ background-position:300%; }
+      z-index:1000;
+      background:rgba(255,255,255,0.82);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--line);
     }
 
     .nav-wrap{
-      min-height:76px;
+      min-height:74px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -107,178 +58,236 @@
     }
 
     .brand{
-      display:inline-flex;
+      display:flex;
       align-items:center;
       gap:10px;
-      white-space:nowrap;
-      font-size:30px;
+      font-size:31px;
       font-weight:800;
-      background:linear-gradient(90deg,var(--gold),var(--purple),var(--blue));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
+      color:var(--primary);
+      white-space:nowrap;
     }
 
     .brand-dot{
-      width:12px;
-      height:12px;
+      width:11px;
+      height:11px;
       border-radius:50%;
-      background:linear-gradient(135deg,var(--gold),var(--purple));
-      box-shadow:0 0 16px rgba(90,63,255,0.3);
+      background:var(--primary);
+      box-shadow:0 0 14px rgba(107,78,255,0.45);
     }
 
     .menu-toggle{
       display:none;
       border:none;
-      background:#f3edff;
-      color:#2f216f;
-      font-size:28px;
-      line-height:1;
-      padding:10px 14px;
+      background:var(--primary-soft);
+      color:var(--primary);
       border-radius:14px;
+      padding:10px 14px;
+      font-size:28px;
       cursor:pointer;
     }
 
     .main-nav{
       display:flex;
       align-items:center;
-      gap:6px;
+      gap:8px;
       overflow-x:auto;
-      scrollbar-width:none;
       white-space:nowrap;
+      scrollbar-width:none;
     }
 
-    .main-nav::-webkit-scrollbar{
-      display:none;
-    }
+    .main-nav::-webkit-scrollbar{ display:none; }
 
     .main-nav a{
-      padding:10px 12px;
+      padding:11px 14px;
+      border-radius:14px;
       font-size:14px;
       font-weight:700;
-      color:#3a2d77;
-      border-radius:12px;
+      color:#4e4580;
       flex:0 0 auto;
     }
 
     .main-nav a:hover,
     .main-nav a.active{
-      background:#f3edff;
+      background:var(--primary-soft);
+      color:var(--primary);
     }
 
-    .home-link{
-      background:linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
-      border:1px solid #eadfc2;
+    .page{
+      padding:18px 0 28px;
     }
 
-    .page-section{
-      padding:16px 0 24px;
-    }
-
-    .tool-topbar{
+    .top-workbar{
       display:grid;
-      grid-template-columns:1.15fr 0.85fr;
+      grid-template-columns:1.15fr .85fr;
       gap:16px;
       margin-bottom:16px;
     }
 
-    .tool-intro,
-    .tool-shortcuts,
-    .workspace-shell,
-    .left-panel,
-    .right-panel,
-    .mini-output,
-    .status-box,
-    .suggestion-card,
-    .continue-card{
-      background:rgba(255,255,255,0.95);
-      border:1px solid #f0e6c9;
-      border-radius:24px;
-      box-shadow:var(--card-shadow);
+    .intro-card,
+    .mini-tools,
+    .workspace,
+    .left-col,
+    .right-col,
+    .prompt-tile,
+    .output-card,
+    .bottom-card{
+      background:rgba(255,255,255,0.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
     }
 
-    .tool-intro{
-      padding:18px 20px;
+    .intro-card{
+      padding:22px;
+      min-height:220px;
       display:flex;
       flex-direction:column;
-      justify-content:center;
-      background:linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
+      justify-content:space-between;
+      background:
+        linear-gradient(135deg, rgba(107,78,255,0.08), rgba(255,255,255,0.95)),
+        #fff;
     }
 
-    .tool-tag{
+    .tiny-tag{
       display:inline-flex;
-      width:max-content;
       align-items:center;
       gap:8px;
+      width:max-content;
       padding:10px 14px;
       border-radius:999px;
-      background:#fff;
-      border:1px solid #ece1bf;
-      color:#4a3b92;
+      background:var(--primary-soft);
+      color:var(--primary);
       font-size:13px;
       font-weight:800;
-      margin-bottom:12px;
     }
 
-    .tool-intro h1{
-      margin:0 0 8px;
-      font-size:34px;
-      line-height:1.05;
-      color:#2f2567;
-      letter-spacing:-0.03em;
+    .intro-card h1{
+      margin:14px 0 10px;
+      font-size:42px;
+      line-height:1.04;
+      letter-spacing:-0.04em;
+      max-width:700px;
+      color:var(--text);
     }
 
-    .tool-intro p{
+    .intro-card p{
       margin:0;
       color:var(--muted);
       font-size:15px;
       line-height:1.7;
-      max-width:720px;
+      max-width:640px;
     }
 
-    .text-gold{ color:var(--gold); }
-    .text-blue{ color:var(--blue); }
-    .text-pink{ color:var(--pink); }
-    .text-purple{ color:var(--purple); }
-
-    .tool-shortcuts{
-      padding:16px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:12px;
-      background:linear-gradient(135deg,#fff,#f8f2ff);
-    }
-
-    .tool-shortcuts h3{
-      margin:0;
-      font-size:18px;
-      color:#433685;
-    }
-
-    .shortcut-row{
+    .hero-actions{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
+      margin-top:18px;
     }
 
-    .shortcut-chip{
+    .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      gap:8px;
+      border:none;
+      border-radius:16px;
+      padding:13px 18px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:0.2s ease;
+    }
+
+    .btn:hover{ transform:translateY(-2px); }
+
+    .btn-primary{
+      background:var(--primary);
+      color:#fff;
+      box-shadow:0 16px 28px rgba(107,78,255,0.25);
+    }
+
+    .btn-light{
+      background:var(--primary-soft);
+      color:var(--primary);
+    }
+
+    .mini-tools{
+      padding:18px;
+      min-height:220px;
+      overflow:hidden;
+      background:linear-gradient(180deg, #fff, #f8f5ff);
+    }
+
+    .mini-tools h3{
+      margin:0 0 12px;
+      font-size:20px;
+      color:var(--text);
+    }
+
+    .tile-marquee{
+      overflow:hidden;
+      border-radius:18px;
+      background:var(--surface-2);
+      padding:12px 0;
+    }
+
+    .tile-track{
+      display:flex;
+      gap:12px;
+      width:max-content;
+      animation:slideTiles 22s linear infinite;
+    }
+
+    @keyframes slideTiles{
+      0%{ transform:translateX(0); }
+      100%{ transform:translateX(-50%); }
+    }
+
+    .mini-pill{
+      flex:0 0 auto;
+      background:#fff;
+      color:var(--primary);
       padding:10px 14px;
       border-radius:999px;
-      border:1px solid #eadfc2;
-      background:#fff;
+      border:1px solid var(--line);
       font-size:13px;
       font-weight:800;
-      color:#4a3b92;
       white-space:nowrap;
     }
 
-    .workspace-shell{
+    .mini-tools-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .stat-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px 12px;
+      text-align:center;
+    }
+
+    .stat-box strong{
+      display:block;
+      font-size:22px;
+      color:var(--primary);
+      margin-bottom:4px;
+    }
+
+    .stat-box span{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .workspace{
       padding:16px;
-      background:linear-gradient(180deg,#fff,#fcf8ff);
+      background:linear-gradient(180deg, #ffffff, #faf8ff);
     }
 
     .workspace-grid{
@@ -288,13 +297,12 @@
       align-items:start;
     }
 
-    .left-panel,
-    .right-panel{
+    .left-col, .right-col{
       padding:18px;
       background:#fff;
     }
 
-    .panel-head{
+    .section-head{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
@@ -302,61 +310,60 @@
       margin-bottom:14px;
     }
 
-    .panel-head h2{
+    .section-head h2{
       margin:0 0 4px;
-      font-size:24px;
-      color:#35296f;
+      font-size:28px;
+      color:var(--text);
     }
 
-    .panel-head p{
+    .section-head p{
       margin:0;
       color:var(--muted);
       font-size:14px;
       line-height:1.6;
     }
 
-    .live-pill{
-      flex:0 0 auto;
-      padding:10px 12px;
+    .live-badge{
+      background:var(--primary-soft);
+      color:var(--primary);
       border-radius:999px;
+      padding:10px 12px;
       font-size:12px;
       font-weight:800;
-      color:#473989;
-      background:#f7f0ff;
-      border:1px solid #e5d8ff;
+      white-space:nowrap;
     }
 
-    .prompt-strip{
+    .prompt-grid{
       display:grid;
-      grid-template-columns:repeat(4, 1fr);
-      gap:10px;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
       margin-bottom:14px;
     }
 
-    .suggestion-card{
-      padding:12px;
+    .prompt-tile{
+      padding:14px;
       cursor:pointer;
       transition:0.2s ease;
       background:#fff;
     }
 
-    .suggestion-card:hover{
+    .prompt-tile:hover{
       transform:translateY(-2px);
-      background:#faf6ff;
+      background:#faf8ff;
     }
 
-    .suggestion-card strong{
+    .prompt-tile strong{
       display:block;
-      font-size:13px;
-      color:#41357f;
+      font-size:14px;
+      color:var(--text);
       margin-bottom:6px;
     }
 
-    .suggestion-card span{
+    .prompt-tile span{
       display:block;
       font-size:12px;
-      line-height:1.5;
-      color:#726b87;
+      line-height:1.55;
+      color:var(--muted);
     }
 
     .form-grid{
@@ -378,17 +385,17 @@
     .field label{
       font-size:13px;
       font-weight:800;
-      color:#433685;
+      color:#443a77;
     }
 
     .field input,
     .field select,
     .field textarea{
       width:100%;
-      border:1px solid #eadfc2;
-      background:#fff;
+      border:1px solid var(--line);
       border-radius:16px;
-      padding:13px 14px;
+      background:#fff;
+      padding:14px;
       font:inherit;
       color:var(--text);
       outline:none;
@@ -403,28 +410,28 @@
     .field input:focus,
     .field select:focus,
     .field textarea:focus{
-      border-color:#cdb2ff;
-      box-shadow:0 0 0 4px rgba(90,63,255,0.08);
+      border-color:var(--primary);
+      box-shadow:0 0 0 4px rgba(107,78,255,0.08);
     }
 
-    .voice-box{
+    .voice-panel{
       margin-top:14px;
       padding:16px;
       border-radius:20px;
-      background:linear-gradient(135deg, rgba(255,249,240,0.98), rgba(246,240,255,0.98));
-      border:1px solid #eadfc2;
+      background:linear-gradient(135deg, #f6f1ff, #ffffff);
+      border:1px solid var(--line);
     }
 
-    .voice-box h3{
+    .voice-panel h3{
       margin:0 0 6px;
-      font-size:18px;
-      color:#403381;
+      font-size:19px;
+      color:var(--text);
     }
 
-    .voice-box p{
+    .voice-panel p{
       margin:0 0 12px;
+      color:var(--muted);
       font-size:13px;
-      color:#6f6983;
       line-height:1.6;
     }
 
@@ -436,148 +443,139 @@
       flex-wrap:wrap;
     }
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:13px 16px;
-      border-radius:15px;
-      font-size:14px;
-      font-weight:800;
-      cursor:pointer;
-      border:none;
-      transition:0.2s ease;
-      text-align:center;
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-    }
-
-    .btn-primary{
-      background:linear-gradient(135deg,var(--gold),var(--purple));
-      color:#fff;
-      box-shadow:0 12px 24px rgba(90,63,255,0.18);
-    }
-
-    .btn-light{
-      background:#f4eeff;
-      color:#34296a;
-      border:1px solid #e4d7ff;
-    }
-
     .main-actions{
       margin-top:14px;
     }
 
-    .status-box{
+    .status-strip{
       margin-top:14px;
+      border-radius:18px;
+      background:var(--surface-2);
+      border:1px solid var(--line);
       padding:14px 16px;
+    }
+
+    .status-strip strong{
+      display:block;
+      margin-bottom:6px;
+      color:var(--text);
+      font-size:14px;
+    }
+
+    .status-strip span{
+      display:block;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .visual-strip{
+      margin-bottom:14px;
+      overflow:hidden;
+      border-radius:20px;
+      background:var(--surface-2);
+      padding:12px 0;
+    }
+
+    .visual-track{
+      display:flex;
+      gap:12px;
+      width:max-content;
+      animation:slideVisuals 20s linear infinite;
+    }
+
+    @keyframes slideVisuals{
+      0%{ transform:translateX(0); }
+      100%{ transform:translateX(-50%); }
+    }
+
+    .visual-card{
+      flex:0 0 auto;
+      width:180px;
+      height:120px;
+      border-radius:18px;
+      overflow:hidden;
+      position:relative;
+      border:1px solid var(--line);
       background:#fff;
     }
 
-    .status-box strong{
+    .visual-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
       display:block;
-      font-size:14px;
-      color:#433685;
-      margin-bottom:6px;
     }
 
-    .status-box span{
-      display:block;
-      font-size:14px;
-      line-height:1.65;
-      color:#675f7c;
-    }
-
-    .output-top{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      margin-bottom:12px;
-    }
-
-    .mini-output{
-      padding:14px;
-      text-align:center;
-      background:linear-gradient(135deg,#fff,#f8f2ff);
-    }
-
-    .mini-output strong{
-      display:block;
-      font-size:20px;
-      color:#3f3281;
-      margin-bottom:4px;
-    }
-
-    .mini-output small{
-      display:block;
-      color:#776f8a;
+    .visual-card span{
+      position:absolute;
+      left:10px;
+      bottom:10px;
+      background:rgba(57,40,128,0.85);
+      color:#fff;
       font-size:12px;
-      font-weight:700;
+      font-weight:800;
+      padding:7px 10px;
+      border-radius:999px;
     }
 
-    .outputs-grid{
+    .output-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
     }
 
     .output-card{
-      position:relative;
-      overflow:hidden;
-      border:1px solid #efe3c5;
-      background:#fff;
-      border-radius:20px;
       padding:16px;
       min-height:170px;
-      box-shadow:0 10px 22px rgba(83,57,139,0.05);
+      position:relative;
+      overflow:hidden;
+      background:#fff;
     }
 
     .output-card::before{
       content:"";
       position:absolute;
-      left:0;
       top:0;
+      left:0;
       width:4px;
       height:100%;
-      background:linear-gradient(180deg,var(--gold),var(--purple));
+      background:var(--primary);
     }
 
     .output-card h3{
       margin:0 0 10px;
-      font-size:17px;
-      color:#433685;
+      font-size:18px;
+      color:var(--text);
       padding-left:8px;
     }
 
     .output-card div{
       margin:0;
-      color:#5f5876;
-      line-height:1.78;
-      font-size:14px;
       padding-left:8px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.75;
       white-space:pre-wrap;
     }
 
-    .continue-card{
+    .bottom-card{
       margin-top:12px;
       padding:16px;
-      background:linear-gradient(135deg, rgba(255,250,242,0.98), rgba(248,243,255,0.98));
+      background:linear-gradient(180deg,#fff,#f8f4ff);
     }
 
-    .continue-card h3{
+    .bottom-card h3{
       margin:0 0 8px;
       font-size:20px;
-      color:#3d317d;
+      color:var(--text);
     }
 
-    .continue-card p{
+    .bottom-card p{
       margin:0 0 12px;
-      color:#6f6983;
-      line-height:1.7;
+      color:var(--muted);
       font-size:14px;
+      line-height:1.65;
     }
 
     .site-footer{
@@ -608,28 +606,25 @@
       line-height:1.7;
     }
 
-    @media (max-width: 1180px){
-      .tool-topbar,
+    @media (max-width:1180px){
+      .top-workbar,
       .workspace-grid,
       .footer-grid{
         grid-template-columns:1fr;
       }
 
-      .prompt-strip,
-      .output-top,
-      .outputs-grid{
+      .prompt-grid,
+      .output-grid{
         grid-template-columns:1fr 1fr;
       }
     }
 
-    @media (max-width: 768px){
+    @media (max-width:768px){
       .container{
         width:min(100% - 18px, 1200px);
       }
 
-      .menu-toggle{
-        display:block;
-      }
+      .menu-toggle{ display:block; }
 
       .main-nav{
         display:none;
@@ -638,7 +633,7 @@
         left:0;
         right:0;
         background:#fff;
-        border:1px solid #ecdcb4;
+        border:1px solid var(--line);
         border-radius:18px;
         box-shadow:0 18px 40px rgba(0,0,0,0.08);
         padding:14px;
@@ -647,28 +642,27 @@
         gap:10px;
       }
 
-      .main-nav.show{
-        display:flex;
-      }
+      .main-nav.show{ display:flex; }
 
       .main-nav a{
         width:100%;
-        background:#faf7ff;
+        background:#faf8ff;
       }
 
-      .tool-intro h1{
-        font-size:28px;
-        line-height:1.1;
+      .intro-card h1{
+        font-size:30px;
+        line-height:1.08;
       }
 
-      .prompt-strip,
+      .mini-tools-grid,
+      .prompt-grid,
       .form-grid,
-      .output-top,
-      .outputs-grid,
+      .output-grid,
       .footer-grid{
         grid-template-columns:1fr;
       }
 
+      .hero-actions,
       .voice-actions,
       .main-actions,
       .continue-actions{
@@ -677,17 +671,6 @@
 
       .btn{
         width:100%;
-      }
-
-      .tool-intro,
-      .tool-shortcuts,
-      .workspace-shell,
-      .left-panel,
-      .right-panel,
-      .status-box,
-      .suggestion-card,
-      .continue-card{
-        padding:14px;
       }
     }
   </style>
@@ -713,64 +696,92 @@
     </div>
   </header>
 
-  <section class="page-section">
+  <section class="page">
     <div class="container">
 
-      <div class="tool-topbar">
-        <div class="tool-intro">
-          <div class="tool-tag">✨ AI Generator Workspace</div>
-          <h1>
-            Generate <span class="text-gold">ads</span>,
-            <span class="text-blue">hooks</span>,
-            <span class="text-pink">captions</span> and
-            <span class="text-purple">campaign copy</span>
-          </h1>
-          <p>
-            One compact tool to create Meta ads, Google headlines, WhatsApp promos, reel scripts, captions, and local offer ideas without typing long briefs again and again.
-          </p>
+      <div class="top-workbar">
+        <div class="intro-card">
+          <div>
+            <div class="tiny-tag">✨ AI Generator</div>
+            <h1>Create marketing copy in one live workspace</h1>
+            <p>Minimal text. Faster generation. More tool feel.</p>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#workspace" class="btn btn-primary">Start Creating</a>
+            <a href="campaign.html" class="btn btn-light">Open Campaign</a>
+            <a href="templates.html" class="btn btn-light">Open Templates</a>
+          </div>
         </div>
 
-        <div class="tool-shortcuts">
+        <div class="mini-tools">
           <h3>Fast modes</h3>
-          <div class="shortcut-row">
-            <span class="shortcut-chip">📢 Meta Ads</span>
-            <span class="shortcut-chip">📊 Google Headlines</span>
-            <span class="shortcut-chip">🎬 Reel Scripts</span>
-            <span class="shortcut-chip">💬 WhatsApp Promo</span>
-            <span class="shortcut-chip">🔥 Hook Lines</span>
-            <span class="shortcut-chip">🌿 Captions</span>
-            <span class="shortcut-chip">🪄 Voice Prompt</span>
-            <span class="shortcut-chip">📍 Local Offers</span>
+
+          <div class="tile-marquee">
+            <div class="tile-track">
+              <span class="mini-pill">📢 Meta Ads</span>
+              <span class="mini-pill">📊 Google Headlines</span>
+              <span class="mini-pill">🎬 Reel Scripts</span>
+              <span class="mini-pill">💬 WhatsApp Promo</span>
+              <span class="mini-pill">🔥 Hook Lines</span>
+              <span class="mini-pill">🌿 Captions</span>
+              <span class="mini-pill">🪄 Voice Prompt</span>
+              <span class="mini-pill">📍 Local Offers</span>
+
+              <span class="mini-pill">📢 Meta Ads</span>
+              <span class="mini-pill">📊 Google Headlines</span>
+              <span class="mini-pill">🎬 Reel Scripts</span>
+              <span class="mini-pill">💬 WhatsApp Promo</span>
+              <span class="mini-pill">🔥 Hook Lines</span>
+              <span class="mini-pill">🌿 Captions</span>
+              <span class="mini-pill">🪄 Voice Prompt</span>
+              <span class="mini-pill">📍 Local Offers</span>
+            </div>
+          </div>
+
+          <div class="mini-tools-grid">
+            <div class="stat-box">
+              <strong>AI</strong>
+              <span>Prompt Powered</span>
+            </div>
+            <div class="stat-box">
+              <strong>Fast</strong>
+              <span>Draft Ready</span>
+            </div>
+            <div class="stat-box">
+              <strong>Live</strong>
+              <span>Workspace Feel</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="workspace-shell">
+      <div class="workspace" id="workspace">
         <div class="workspace-grid">
 
-          <div class="left-panel">
-            <div class="panel-head">
+          <div class="left-col">
+            <div class="section-head">
               <div>
                 <h2>Create output</h2>
                 <p>Enter a short brief or use voice. Bariq turns it into ready marketing content.</p>
               </div>
-              <div class="live-pill">Live Tool</div>
+              <div class="live-badge">Live Tool</div>
             </div>
 
-            <div class="prompt-strip">
-              <div class="suggestion-card" onclick="usePreset('Create a Meta ad for laser hair reduction with flat 60% off for women in Hyderabad.')">
+            <div class="prompt-grid">
+              <div class="prompt-tile" onclick="usePreset('Create a Meta ad for laser hair reduction with flat 60% off for women in Hyderabad.')">
                 <strong>Beauty Ad</strong>
                 <span>Laser, skin, clinic, offers</span>
               </div>
-              <div class="suggestion-card" onclick="usePreset('Write WhatsApp promo and captions for a women wellness treatment launch in Hyderabad.')">
+              <div class="prompt-tile" onclick="usePreset('Write WhatsApp promo and captions for a women wellness treatment launch in Hyderabad.')">
                 <strong>WhatsApp Push</strong>
                 <span>Promo copy and conversion</span>
               </div>
-              <div class="suggestion-card" onclick="usePreset('Create a reel script and hook lines for a premium clinic campaign targeting women 25 to 40.')">
+              <div class="prompt-tile" onclick="usePreset('Create a reel script and hook lines for a premium clinic campaign targeting women 25 to 40.')">
                 <strong>Reel Script</strong>
                 <span>Hook, scenes, CTA</span>
               </div>
-              <div class="suggestion-card" onclick="usePreset('Generate Google ad headlines and local offer copy for an aesthetic clinic in Hyderabad.')">
+              <div class="prompt-tile" onclick="usePreset('Generate Google ad headlines and local offer copy for an aesthetic clinic in Hyderabad.')">
                 <strong>Google Ad</strong>
                 <span>Headlines and local intent</span>
               </div>
@@ -826,9 +837,9 @@
               </div>
             </div>
 
-            <div class="voice-box">
-              <h3>Voice brief</h3>
-              <p>Speak one simple instruction instead of typing a long campaign description.</p>
+            <div class="voice-panel">
+              <h3>Voice prompt</h3>
+              <p>Speak one simple instruction instead of typing a long brief.</p>
 
               <div class="field full" style="margin-bottom:12px;">
                 <textarea id="voicePrompt" placeholder="Example: Make a Meta ad for laser hair reduction with flat 60% off for women in Hyderabad."></textarea>
@@ -844,40 +855,62 @@
             <div class="main-actions">
               <button class="btn btn-primary" onclick="generateAI()">Generate Output</button>
               <button class="btn btn-light" onclick="clearAI()">Clear</button>
-              <a href="campaign.html" class="btn btn-light">📣 Open Campaign Studio</a>
             </div>
 
-            <div class="status-box">
+            <div class="status-strip">
               <strong>Campaign status</strong>
               <span id="statusBar">Ready. Enter a short prompt and generate your marketing outputs.</span>
             </div>
           </div>
 
-          <div class="right-panel">
-            <div class="panel-head">
+          <div class="right-col">
+            <div class="section-head">
               <div>
                 <h2>Live outputs</h2>
                 <p>Preview your generated marketing content in compact premium cards.</p>
               </div>
-              <div class="live-pill">Preview</div>
+              <div class="live-badge">Preview</div>
             </div>
 
-            <div class="output-top">
-              <div class="mini-output">
-                <strong>AI</strong>
-                <small>Prompt Powered</small>
-              </div>
-              <div class="mini-output">
-                <strong>Fast</strong>
-                <small>Draft Ready</small>
-              </div>
-              <div class="mini-output">
-                <strong>Voice</strong>
-                <small>Input Friendly</small>
+            <div class="visual-strip">
+              <div class="visual-track">
+                <div class="visual-card">
+                  <img src="https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Ad Launch</span>
+                </div>
+                <div class="visual-card">
+                  <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Offer Promo</span>
+                </div>
+                <div class="visual-card">
+                  <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Growth Push</span>
+                </div>
+                <div class="visual-card">
+                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Content Flow</span>
+                </div>
+
+                <div class="visual-card">
+                  <img src="https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Ad Launch</span>
+                </div>
+                <div class="visual-card">
+                  <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Offer Promo</span>
+                </div>
+                <div class="visual-card">
+                  <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Growth Push</span>
+                </div>
+                <div class="visual-card">
+                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="">
+                  <span>Content Flow</span>
+                </div>
               </div>
             </div>
 
-            <div class="outputs-grid">
+            <div class="output-grid">
               <div class="output-card">
                 <h3>Meta Ad Copy</h3>
                 <div id="metaOutput">No output yet.</div>
@@ -909,13 +942,13 @@
               </div>
             </div>
 
-            <div class="continue-card">
+            <div class="bottom-card">
               <h3>Continue this idea</h3>
-              <p>Move this generated output into Campaign Studio, Templates, or Business Dashboard without losing flow.</p>
+              <p>Move this generated output into Campaign Studio, Templates, or Business Dashboard.</p>
               <div class="continue-actions">
-                <a href="campaign.html" class="btn btn-primary">📣 Campaign Studio</a>
-                <a href="templates.html" class="btn btn-light">🧩 Templates</a>
-                <a href="business-dashboard.html" class="btn btn-light">🏢 Business Dashboard</a>
+                <a href="campaign.html" class="btn btn-primary">Open Campaign</a>
+                <a href="templates.html" class="btn btn-light">Templates</a>
+                <a href="business-dashboard.html" class="btn btn-light">Business Dashboard</a>
               </div>
             </div>
           </div>
