@@ -17,9 +17,10 @@
       --white:#ffffff;
       --purple:#5a3fff;
       --purple2:#7a63ff;
-      --purple-soft:#efe9ff;
       --gold:#d8b05b;
       --gold2:#f0c977;
+      --pink:#ff7cc8;
+      --blue:#4f8dff;
       --shadow:0 20px 55px rgba(75,45,120,0.08);
       --card-shadow:0 14px 32px rgba(83,57,139,0.07);
     }
@@ -34,19 +35,23 @@
       color: var(--text);
     }
 
+    body{
+      position: relative;
+    }
+
     body::before{
       content:"";
       position:fixed;
       top:-220px;
       right:-220px;
-      width:700px;
-      height:700px;
+      width:720px;
+      height:720px;
       background:radial-gradient(circle at center,
       rgba(120,80,255,0.22),
       rgba(120,80,255,0.08),
       transparent 70%);
-      z-index:-2;
-      filter:blur(80px);
+      z-index:-3;
+      filter:blur(85px);
       animation:glowMove 14s ease-in-out infinite alternate;
       pointer-events:none;
     }
@@ -56,15 +61,51 @@
       position:fixed;
       bottom:-240px;
       left:-220px;
-      width:680px;
-      height:680px;
+      width:700px;
+      height:700px;
       background:radial-gradient(circle,
-      rgba(216,176,91,0.20),
+      rgba(216,176,91,0.22),
       transparent 70%);
-      z-index:-2;
+      z-index:-3;
       filter:blur(95px);
       animation:goldGlow 16s ease-in-out infinite alternate;
       pointer-events:none;
+    }
+
+    .floating-orb{
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(18px);
+      pointer-events: none;
+      z-index: -2;
+      opacity: 0.35;
+    }
+
+    .orb-1{
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, #8f6bff, #c69cff);
+      left: 8%;
+      top: 22%;
+      animation: floatOrb1 12s ease-in-out infinite alternate;
+    }
+
+    .orb-2{
+      width: 140px;
+      height: 140px;
+      background: linear-gradient(135deg, #ffd28e, #ffb86f);
+      right: 12%;
+      top: 42%;
+      animation: floatOrb2 15s ease-in-out infinite alternate;
+    }
+
+    .orb-3{
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #ff9adf, #d79bff);
+      left: 48%;
+      bottom: 12%;
+      animation: floatOrb3 13s ease-in-out infinite alternate;
     }
 
     @keyframes glowMove{
@@ -75,6 +116,21 @@
     @keyframes goldGlow{
       0%{transform:translate(0,0);}
       100%{transform:translate(120px,-80px);}
+    }
+
+    @keyframes floatOrb1{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(40px) translateX(30px);}
+    }
+
+    @keyframes floatOrb2{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(-30px) translateX(-25px);}
+    }
+
+    @keyframes floatOrb3{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(-25px) translateX(35px);}
     }
 
     a { text-decoration: none; color: inherit; }
@@ -89,7 +145,7 @@
       top: 0;
       z-index: 999;
       background: rgba(255,255,255,0.94);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid #eee2bf;
     }
 
@@ -100,9 +156,9 @@
       left:0;
       width:100%;
       height:3px;
-      background:linear-gradient(90deg,#d8b05b,#7b5cff,#d8b05b);
+      background:linear-gradient(90deg,#d8b05b,#7b5cff,#ff8acc,#d8b05b);
       background-size:300% 100%;
-      animation:headerFlow 6s linear infinite;
+      animation:headerFlow 7s linear infinite;
     }
 
     @keyframes headerFlow{
@@ -126,7 +182,7 @@
       white-space: nowrap;
       font-size: 30px;
       font-weight: 800;
-      background: linear-gradient(90deg, var(--gold), var(--purple));
+      background: linear-gradient(90deg, var(--gold), var(--purple), var(--blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -185,13 +241,13 @@
     }
 
     .hero-section {
-      padding: 14px 0 10px;
+      padding: 14px 0 12px;
     }
 
     .hero-shell {
       background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
       border: 1px solid var(--line);
-      border-radius: 28px;
+      border-radius: 30px;
       padding: 16px;
       box-shadow: var(--shadow);
       overflow: hidden;
@@ -203,20 +259,31 @@
       position: absolute;
       right: -70px;
       top: -70px;
-      width: 220px;
-      height: 220px;
+      width: 240px;
+      height: 240px;
       background: radial-gradient(circle, rgba(216,176,91,0.16), transparent 65%);
       pointer-events: none;
     }
 
-    .hero-left {
-      padding: 20px;
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap:16px;
+      align-items:stretch;
+    }
+
+    .hero-left,
+    .hero-visual{
       background: rgba(255,255,255,0.95);
       border: 1px solid #f0e6c9;
       border-radius: 24px;
       box-shadow: var(--card-shadow);
       position: relative;
       overflow: hidden;
+    }
+
+    .hero-left{
+      padding: 22px;
     }
 
     .hero-left::after{
@@ -242,7 +309,7 @@
     }
 
     .hero-left h1 {
-      margin: 0 0 10px;
+      margin: 0 0 12px;
       font-size: 42px;
       line-height: 1.02;
       letter-spacing: -0.04em;
@@ -251,18 +318,33 @@
     }
 
     .hero-left p {
-      margin: 0 0 14px;
+      margin: 0 0 16px;
       font-size: 17px;
       line-height: 1.72;
       color: var(--muted);
       max-width: 820px;
     }
 
+    .text-gold{
+      color: var(--gold);
+      text-shadow: 0 0 18px rgba(216,176,91,0.18);
+    }
+
+    .text-purple{
+      color: var(--purple);
+      text-shadow: 0 0 18px rgba(90,63,255,0.14);
+    }
+
+    .text-pink{
+      color: var(--pink);
+      text-shadow: 0 0 18px rgba(255,124,200,0.14);
+    }
+
     .hero-actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .btn {
@@ -328,6 +410,110 @@
     @keyframes scrollLeft {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
+    }
+
+    .hero-visual{
+      padding: 16px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      justify-content:space-between;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,243,255,0.96));
+    }
+
+    .visual-title{
+      font-size: 18px;
+      font-weight: 800;
+      color: #433685;
+      margin: 0;
+    }
+
+    .visual-sub{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .image-strip{
+      overflow:hidden;
+      border-radius:20px;
+      border:1px solid #eee2bf;
+      background:#fff;
+      padding:10px 0;
+    }
+
+    .image-track{
+      display:flex;
+      gap:12px;
+      width:max-content;
+      animation: imageScroll 30s linear infinite;
+      padding:0 10px;
+    }
+
+    .image-card{
+      width:200px;
+      height:140px;
+      border-radius:18px;
+      overflow:hidden;
+      position:relative;
+      flex:0 0 auto;
+      box-shadow:0 10px 24px rgba(60,40,110,0.10);
+      border:1px solid #f0e6c9;
+    }
+
+    .image-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform:scale(1.02);
+    }
+
+    .image-card span{
+      position:absolute;
+      left:10px;
+      bottom:10px;
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      color:#fff;
+      background:rgba(44,35,92,0.72);
+      backdrop-filter:blur(6px);
+    }
+
+    @keyframes imageScroll{
+      0%{transform:translateX(0);}
+      100%{transform:translateX(-50%);}
+    }
+
+    .glow-stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+
+    .glow-stat{
+      padding:14px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid #eee2bf;
+      text-align:center;
+      box-shadow:0 8px 18px rgba(83,57,139,0.05);
+    }
+
+    .glow-stat .num{
+      font-size:22px;
+      font-weight:800;
+      color:#3f3281;
+    }
+
+    .glow-stat .lab{
+      margin-top:4px;
+      font-size:12px;
+      font-weight:700;
+      color:#7a7291;
     }
 
     .section {
@@ -634,6 +820,10 @@
     }
 
     @media (max-width: 1180px) {
+      .hero-grid{
+        grid-template-columns: 1fr;
+      }
+
       .main-grid {
         grid-template-columns: 1fr;
       }
@@ -687,19 +877,30 @@
       .btn { width: 100%; }
 
       .form-grid,
-      .footer-grid {
+      .footer-grid,
+      .glow-stats {
         grid-template-columns: 1fr;
       }
 
       .form-card,
       .output-card,
-      .hero-left {
+      .hero-left,
+      .hero-visual {
         padding: 16px;
+      }
+
+      .image-card{
+        width:170px;
+        height:120px;
       }
     }
   </style>
 </head>
 <body>
+
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="floating-orb orb-3"></div>
 
   <header class="site-header">
     <div class="container nav-wrap">
@@ -724,44 +925,121 @@
   <section class="hero-section">
     <div class="container">
       <div class="hero-shell">
-        <div class="hero-left">
-          <div class="hero-tag">Campaign Studio Pro</div>
-          <h1>Create beautiful campaigns with voice and AI</h1>
-          <p>
-            Speak one campaign idea and Bariq turns it into ad copy, reel direction,
-            CTA lines, and ready marketing outputs from one connected marketing workspace.
-          </p>
+        <div class="hero-grid">
 
-          <div class="hero-actions">
-            <button class="btn btn-primary" onclick="document.getElementById('campaignForm').scrollIntoView({behavior:'smooth'})">✨ Start Campaign</button>
-            <a href="ai-generator.html" class="btn btn-light">Open AI Generator</a>
-            <a href="business-dashboard.html" class="btn btn-light">Business Dashboard</a>
-          </div>
+          <div class="hero-left">
+            <div class="hero-tag">Campaign Studio Pro</div>
+            <h1>
+              Create <span class="text-gold">beautiful</span> campaigns
+              with <span class="text-purple">voice</span> and
+              <span class="text-pink">AI</span>
+            </h1>
 
-          <div class="marquee-wrap">
-            <div class="marquee-track">
-              <span class="mini-chip">📣 CTA Ideas</span>
-              <span class="mini-chip">✨ Premium Campaign Flow</span>
-              <span class="mini-chip">📍 City Targeting</span>
-              <span class="mini-chip">💜 Easy For Business Owners</span>
-              <span class="mini-chip">🎯 Meta Ads</span>
-              <span class="mini-chip">🎥 Reel Script</span>
-              <span class="mini-chip">🪄 Voice Prompt</span>
-              <span class="mini-chip">💳 Payments Ready</span>
-              <span class="mini-chip">🏢 Business Dashboard</span>
-              <span class="mini-chip">🧩 Templates</span>
-              <span class="mini-chip">📣 CTA Ideas</span>
-              <span class="mini-chip">✨ Premium Campaign Flow</span>
-              <span class="mini-chip">📍 City Targeting</span>
-              <span class="mini-chip">💜 Easy For Business Owners</span>
-              <span class="mini-chip">🎯 Meta Ads</span>
-              <span class="mini-chip">🎥 Reel Script</span>
-              <span class="mini-chip">🪄 Voice Prompt</span>
-              <span class="mini-chip">💳 Payments Ready</span>
-              <span class="mini-chip">🏢 Business Dashboard</span>
-              <span class="mini-chip">🧩 Templates</span>
+            <p>
+              Speak one campaign idea and Bariq turns it into ad copy, reel direction,
+              CTA lines, and ready marketing outputs from one connected, premium marketing workspace.
+            </p>
+
+            <div class="hero-actions">
+              <button class="btn btn-primary" onclick="document.getElementById('campaignForm').scrollIntoView({behavior:'smooth'})">✨ Start Campaign</button>
+              <a href="ai-generator.html" class="btn btn-light">Open AI Generator</a>
+              <a href="business-dashboard.html" class="btn btn-light">Business Dashboard</a>
+            </div>
+
+            <div class="marquee-wrap">
+              <div class="marquee-track">
+                <span class="mini-chip">📣 CTA Ideas</span>
+                <span class="mini-chip">✨ Premium Campaign Flow</span>
+                <span class="mini-chip">📍 City Targeting</span>
+                <span class="mini-chip">💜 Easy For Business Owners</span>
+                <span class="mini-chip">🎯 Meta Ads</span>
+                <span class="mini-chip">🎥 Reel Script</span>
+                <span class="mini-chip">🪄 Voice Prompt</span>
+                <span class="mini-chip">💳 Payments Ready</span>
+                <span class="mini-chip">🏢 Business Dashboard</span>
+                <span class="mini-chip">🧩 Templates</span>
+                <span class="mini-chip">📣 CTA Ideas</span>
+                <span class="mini-chip">✨ Premium Campaign Flow</span>
+                <span class="mini-chip">📍 City Targeting</span>
+                <span class="mini-chip">💜 Easy For Business Owners</span>
+                <span class="mini-chip">🎯 Meta Ads</span>
+                <span class="mini-chip">🎥 Reel Script</span>
+                <span class="mini-chip">🪄 Voice Prompt</span>
+                <span class="mini-chip">💳 Payments Ready</span>
+                <span class="mini-chip">🏢 Business Dashboard</span>
+                <span class="mini-chip">🧩 Templates</span>
+              </div>
             </div>
           </div>
+
+          <div class="hero-visual">
+            <div>
+              <h3 class="visual-title">Live campaign inspiration wall</h3>
+              <p class="visual-sub">Scrolling visuals make the page feel active, modern, and closer to a real AI marketing studio.</p>
+            </div>
+
+            <div class="image-strip">
+              <div class="image-track">
+                <div class="image-card">
+                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Beauty ad">
+                  <span>Beauty Campaign</span>
+                </div>
+                <div class="image-card">
+                  <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="Skincare campaign">
+                  <span>Clinic Creative</span>
+                </div>
+                <div class="image-card">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="Woman campaign">
+                  <span>Women Offer</span>
+                </div>
+                <div class="image-card">
+                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="Premium lifestyle">
+                  <span>Premium Brand</span>
+                </div>
+                <div class="image-card">
+                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="Fashion campaign">
+                  <span>Reel Mood</span>
+                </div>
+
+                <div class="image-card">
+                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Beauty ad">
+                  <span>Beauty Campaign</span>
+                </div>
+                <div class="image-card">
+                  <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="Skincare campaign">
+                  <span>Clinic Creative</span>
+                </div>
+                <div class="image-card">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="Woman campaign">
+                  <span>Women Offer</span>
+                </div>
+                <div class="image-card">
+                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="Premium lifestyle">
+                  <span>Premium Brand</span>
+                </div>
+                <div class="image-card">
+                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="Fashion campaign">
+                  <span>Reel Mood</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="glow-stats">
+              <div class="glow-stat">
+                <div class="num">AI</div>
+                <div class="lab">Prompt Powered</div>
+              </div>
+              <div class="glow-stat">
+                <div class="num">1-Click</div>
+                <div class="lab">Campaign Flow</div>
+              </div>
+              <div class="glow-stat">
+                <div class="num">Voice</div>
+                <div class="lab">Input Ready</div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
