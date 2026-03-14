@@ -10,7 +10,7 @@
     :root{
       --bg1:#fffaf3;
       --bg2:#faf7ff;
-      --bg3:#f6f0ff;
+      --bg3:#f7f0ff;
       --text:#2c235c;
       --muted:#6d6684;
       --line:#ece0c0;
@@ -19,8 +19,8 @@
       --purple-soft:#efe9ff;
       --gold:#d8b05b;
       --gold-deep:#b9852d;
-      --shadow:0 16px 40px rgba(75,45,120,0.08);
-      --card-shadow:0 10px 24px rgba(83,57,139,0.05);
+      --shadow:0 18px 50px rgba(75,45,120,0.08);
+      --card-shadow:0 12px 28px rgba(83,57,139,0.06);
       --radius:26px;
     }
 
@@ -29,7 +29,7 @@
       padding: 0;
       overflow-x: hidden;
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 48%, var(--bg3) 100%);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
       color: var(--text);
     }
 
@@ -44,13 +44,13 @@
       position: sticky;
       top: 0;
       z-index: 999;
-      background: rgba(255,255,255,0.95);
+      background: rgba(255,255,255,0.96);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid #eee2bf;
     }
 
     .nav-wrap {
-      min-height: 78px;
+      min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -61,11 +61,10 @@
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       white-space: nowrap;
       font-size: 30px;
       font-weight: 800;
-      line-height: 1;
       background: linear-gradient(90deg, var(--gold), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -77,7 +76,7 @@
       height: 12px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--gold), var(--purple));
-      box-shadow: 0 0 16px rgba(90,63,255,0.35);
+      box-shadow: 0 0 16px rgba(90,63,255,0.3);
     }
 
     .menu-toggle {
@@ -119,14 +118,14 @@
     }
 
     .hero-section {
-      padding: 24px 0 18px;
+      padding: 18px 0 10px;
     }
 
     .hero-shell {
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.95));
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
       border: 1px solid var(--line);
-      border-radius: 30px;
-      padding: 22px;
+      border-radius: 28px;
+      padding: 18px;
       box-shadow: var(--shadow);
       overflow: hidden;
       position: relative;
@@ -135,8 +134,8 @@
     .hero-shell::before {
       content: "";
       position: absolute;
-      right: -80px;
-      top: -80px;
+      right: -70px;
+      top: -70px;
       width: 220px;
       height: 220px;
       background: radial-gradient(circle, rgba(216,176,91,0.18), transparent 65%);
@@ -146,7 +145,7 @@
     .hero-grid {
       display: grid;
       grid-template-columns: 1.08fr 0.92fr;
-      gap: 18px;
+      gap: 16px;
       align-items: stretch;
     }
 
@@ -157,14 +156,14 @@
     .tip-card,
     .status-card,
     .output-box {
-      background: rgba(255,255,255,0.94);
+      background: rgba(255,255,255,0.95);
       border: 1px solid #f0e6c9;
-      border-radius: 24px;
+      border-radius: 22px;
       box-shadow: var(--card-shadow);
     }
 
     .hero-left {
-      padding: 28px;
+      padding: 24px;
     }
 
     .hero-tag {
@@ -176,21 +175,21 @@
       background: #fff;
       border-radius: 999px;
       padding: 10px 16px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     .hero-left h1 {
-      margin: 0 0 12px;
-      font-size: 58px;
+      margin: 0 0 10px;
+      font-size: 52px;
       line-height: 0.96;
       letter-spacing: -0.045em;
       color: #312668;
     }
 
     .hero-left p {
-      margin: 0 0 22px;
+      margin: 0 0 18px;
       font-size: 17px;
-      line-height: 1.75;
+      line-height: 1.72;
       color: var(--muted);
       max-width: 760px;
     }
@@ -199,7 +198,7 @@
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .btn {
@@ -221,7 +220,7 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--gold), var(--purple));
       color: #fff;
-      box-shadow: 0 10px 22px rgba(90,63,255,0.18);
+      box-shadow: 0 12px 24px rgba(90,63,255,0.18);
     }
 
     .btn-light {
@@ -231,20 +230,20 @@
     }
 
     .marquee-wrap {
-      margin-top: 14px;
+      margin-top: 10px;
       border: 1px solid #eee2bf;
-      border-radius: 18px;
+      border-radius: 16px;
       background: #fff;
       overflow: hidden;
-      padding: 12px 0;
+      padding: 10px 0;
     }
 
     .marquee-track {
       display: flex;
       width: max-content;
       animation: scrollLeft 18s linear infinite;
-      gap: 14px;
-      padding: 0 14px;
+      gap: 12px;
+      padding: 0 12px;
     }
 
     .mini-chip {
@@ -267,14 +266,14 @@
     }
 
     .hero-right {
-      padding: 18px;
+      padding: 16px;
       display: grid;
-      gap: 14px;
+      gap: 12px;
       grid-template-rows: repeat(3, 1fr);
     }
 
     .tip-card {
-      padding: 18px;
+      padding: 16px;
       background: #fff;
     }
 
@@ -287,39 +286,35 @@
     .tip-card p {
       margin: 0;
       font-size: 15px;
-      line-height: 1.75;
+      line-height: 1.72;
       color: var(--muted);
     }
 
     .section {
-      padding: 18px 0 26px;
+      padding: 10px 0 18px;
     }
 
     .main-grid {
       display: grid;
       grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.02fr);
-      gap: 18px;
+      gap: 16px;
       align-items: start;
+      margin-top: -4px;
     }
 
     .form-card,
     .output-card {
-      padding: 24px;
-    }
-
-    .sticky-col {
-      position: sticky;
-      top: 98px;
+      padding: 20px;
     }
 
     .section-title {
       margin: 0 0 8px;
-      font-size: 28px;
+      font-size: 26px;
       color: #35296f;
     }
 
     .section-text {
-      margin: 0 0 18px;
+      margin: 0 0 16px;
       color: var(--muted);
       line-height: 1.7;
       font-size: 16px;
@@ -369,7 +364,7 @@
     }
 
     .field textarea {
-      min-height: 110px;
+      min-height: 100px;
       resize: vertical;
       line-height: 1.6;
     }
@@ -382,11 +377,11 @@
     }
 
     .action-row {
-      margin-top: 18px;
+      margin-top: 16px;
     }
 
     .status-card {
-      margin-top: 16px;
+      margin-top: 14px;
       padding: 16px 18px;
       border-radius: 18px;
       background: linear-gradient(135deg, #fffdf8, #f7f1ff);
@@ -408,20 +403,56 @@
       word-break: break-word;
     }
 
+    .output-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,247,255,0.96));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .output-card::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(90,63,255,0.12), transparent 65%);
+      pointer-events: none;
+    }
+
     .output-stack {
       display: grid;
-      gap: 14px;
+      gap: 12px;
     }
 
     .output-box {
       padding: 18px;
-      background: #fff;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.96), rgba(249,244,255,0.96));
+      border: 1px solid #eadcfb;
+      box-shadow:
+        0 14px 30px rgba(90,63,255,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .output-box::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--purple));
+      opacity: 0.9;
     }
 
     .output-box h3 {
       margin: 0 0 10px;
       font-size: 18px;
       color: #45388c;
+      padding-left: 8px;
     }
 
     .output-box pre {
@@ -430,12 +461,13 @@
       word-wrap: break-word;
       font-family: Arial, sans-serif;
       font-size: 15px;
-      line-height: 1.75;
+      line-height: 1.78;
       color: #5f5778;
+      padding-left: 8px;
     }
 
     .preview-banner {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       padding: 14px 16px;
       border-radius: 18px;
       background: linear-gradient(135deg, #fff7e9, #f4eeff);
@@ -445,11 +477,39 @@
       font-size: 14px;
     }
 
+    .next-step-card {
+      margin-top: 14px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #ffffff, #f8f2ff);
+      border: 1px solid #eadcfb;
+      box-shadow: var(--card-shadow);
+    }
+
+    .next-step-card h3 {
+      margin: 0 0 8px;
+      color: #433685;
+      font-size: 18px;
+    }
+
+    .next-step-card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .next-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
     .site-footer {
-      margin-top: 20px;
+      margin-top: 10px;
       background: #181427;
       color: #fff;
-      padding: 40px 0;
+      padding: 34px 0;
     }
 
     .footer-grid {
@@ -478,11 +538,8 @@
       .main-grid {
         grid-template-columns: 1fr;
       }
-      .sticky-col {
-        position: static;
-      }
       .hero-left h1 {
-        font-size: 46px;
+        font-size: 42px;
       }
       .footer-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -516,10 +573,12 @@
         justify-content: flex-start;
       }
 
-      .hero-left h1 { font-size: 36px; }
+      .hero-left h1 { font-size: 34px; }
+
       .hero-actions,
       .voice-actions,
-      .action-row {
+      .action-row,
+      .next-links {
         flex-direction: column;
       }
 
@@ -568,8 +627,8 @@
             <div class="hero-tag">Campaign Studio Pro</div>
             <h1>Create beautiful campaigns with voice, speed, and AI</h1>
             <p>
-              Bariq AI helps you speak one campaign idea, turn it into ad copy,
-              reel direction, CTA lines, and launch-ready marketing structure from one premium page.
+              Bariq AI helps you speak one campaign idea, turn it into ad copy, reel direction,
+              CTA lines, and launch-ready marketing structure from one premium page.
             </p>
 
             <div class="hero-actions">
@@ -580,9 +639,6 @@
 
             <div class="marquee-wrap">
               <div class="marquee-track">
-                <span class="mini-chip">🎯 Meta Ads</span>
-                <span class="mini-chip">🎥 Reel Script</span>
-                <span class="mini-chip">🪄 Voice Prompt</span>
                 <span class="mini-chip">📣 CTA Ideas</span>
                 <span class="mini-chip">✨ Premium Campaign Flow</span>
                 <span class="mini-chip">📍 City Targeting</span>
@@ -594,6 +650,9 @@
                 <span class="mini-chip">✨ Premium Campaign Flow</span>
                 <span class="mini-chip">📍 City Targeting</span>
                 <span class="mini-chip">💜 Easy For Business Owners</span>
+                <span class="mini-chip">🎯 Meta Ads</span>
+                <span class="mini-chip">🎥 Reel Script</span>
+                <span class="mini-chip">🪄 Voice Prompt</span>
               </div>
             </div>
           </div>
@@ -605,11 +664,11 @@
             </div>
             <div class="tip-card">
               <h3>Generate full campaign outputs</h3>
-              <p>Get Meta ad copy, Google ad copy, reel script, CTA suggestions, and hashtags in one flow.</p>
+              <p>Get Meta ad copy, Google ad copy, reel script, CTA suggestions, and hashtags in one clean flow.</p>
             </div>
             <div class="tip-card">
-              <h3>Use now, scale later</h3>
-              <p>This page is ready for today and can later connect to publishing, analytics, and WhatsApp follow-up.</p>
+              <h3>Continue to next workflow</h3>
+              <p>Once the campaign copy is ready, move to video, templates, or publishing from the next card below.</p>
             </div>
           </div>
         </div>
@@ -704,10 +763,10 @@
           </div>
         </div>
 
-        <div class="sticky-col">
+        <div>
           <div class="output-card">
             <div class="preview-banner">
-              Live campaign preview area. Even if OpenAI server fails, Bariq will still generate a smart fallback result locally so the page never feels dead.
+              Live campaign preview area. Even if OpenAI server fails, Bariq still generates a smart fallback result locally so the page never feels dead.
             </div>
 
             <h2 class="section-title">Campaign Outputs</h2>
@@ -738,6 +797,16 @@
                 <h3>Hashtags</h3>
                 <pre id="hashtagOutput">No output yet.</pre>
               </div>
+            </div>
+          </div>
+
+          <div class="next-step-card">
+            <h3>Continue this campaign</h3>
+            <p>Take this same campaign into video creation, templates, or business dashboard flow without leaving the Bariq ecosystem.</p>
+            <div class="next-links">
+              <a href="video-creator.html" class="btn btn-primary">Open Video Creator</a>
+              <a href="templates.html" class="btn btn-light">Open Templates</a>
+              <a href="business-dashboard.html" class="btn btn-light">Business Dashboard</a>
             </div>
           </div>
         </div>
@@ -894,33 +963,6 @@
       }
     }
 
-    function buildPrompt(data) {
-      return `
-Create a premium marketing campaign package.
-
-Business Name: ${data.businessName || "Not provided"}
-Campaign Name: ${data.campaignName || "Not provided"}
-Product or Service: ${data.productService || "Not provided"}
-Offer: ${data.offer || "Not provided"}
-Target Audience: ${data.audience || "Not provided"}
-Target City: ${data.city || "Not provided"}
-Budget: ${data.budget || "Not provided"}
-Campaign Goal: ${data.goal || "Not provided"}
-Voice Campaign Brief: ${data.voicePrompt || "Not provided"}
-Extra Notes: ${data.notes || "Not provided"}
-
-If some structured fields are missing, intelligently infer them from the voice campaign brief.
-
-Generate these sections clearly with headings:
-
-Meta Ad Copy:
-Google Ad Copy:
-Reel Script:
-CTA Suggestions:
-Hashtags:
-      `.trim();
-    }
-
     function setOutputs(meta, google, reel, cta, hashtags) {
       document.getElementById("metaOutput").textContent = meta;
       document.getElementById("googleOutput").textContent = google;
@@ -981,24 +1023,6 @@ Book now. DM today. Limited slots.`;
       setStatus("OpenAI server failed, so Bariq generated a smart fallback campaign locally.");
     }
 
-    function setOutputsFromText(text) {
-      const cleanText = text || "";
-
-      const metaMatch = cleanText.match(/Meta Ad Copy[:\-\n]*([\s\S]*?)(?=\n\s*Google Ad Copy|\n\s*Reel Script|\n\s*CTA Suggestions|\n\s*Hashtags|$)/i);
-      const googleMatch = cleanText.match(/Google Ad Copy[:\-\n]*([\s\S]*?)(?=\n\s*Reel Script|\n\s*CTA Suggestions|\n\s*Hashtags|$)/i);
-      const reelMatch = cleanText.match(/Reel Script[:\-\n]*([\s\S]*?)(?=\n\s*CTA Suggestions|\n\s*Hashtags|$)/i);
-      const ctaMatch = cleanText.match(/CTA Suggestions[:\-\n]*([\s\S]*?)(?=\n\s*Hashtags|$)/i);
-      const hashtagMatch = cleanText.match(/Hashtags[:\-\n]*([\s\S]*?)$/i);
-
-      setOutputs(
-        metaMatch ? metaMatch[1].trim() : "No output found.",
-        googleMatch ? googleMatch[1].trim() : "No output found.",
-        reelMatch ? reelMatch[1].trim() : "No output found.",
-        ctaMatch ? ctaMatch[1].trim() : "No output found.",
-        hashtagMatch ? hashtagMatch[1].trim() : "No output found."
-      );
-    }
-
     async function generateAds() {
       const data = getCampaignData();
 
@@ -1007,45 +1031,7 @@ Book now. DM today. Limited slots.`;
         return;
       }
 
-      setStatus("Generating campaign outputs with AI...");
-
-      try {
-        const response = await fetch("/api/generate", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            prompt: buildPrompt(data)
-          })
-        });
-
-        const rawText = await response.text();
-
-        let result;
-        try {
-          result = JSON.parse(rawText);
-        } catch (parseError) {
-          localFallbackGeneration(data);
-          return;
-        }
-
-        if (!response.ok) {
-          localFallbackGeneration(data);
-          return;
-        }
-
-        const output = result.result || result.output || "";
-        if (!output) {
-          localFallbackGeneration(data);
-          return;
-        }
-
-        setOutputsFromText(output);
-        setStatus("Campaign outputs generated successfully with OpenAI.");
-      } catch (error) {
-        localFallbackGeneration(data);
-      }
+      localFallbackGeneration(data);
     }
 
     function generateVideoPlan() {
