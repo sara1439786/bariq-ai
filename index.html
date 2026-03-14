@@ -153,6 +153,8 @@
       font-weight:800;
       box-shadow:0 8px 18px rgba(100,70,50,.04);
       margin-bottom:18px;
+      position:relative;
+      z-index:2;
     }
 
     .btn{
@@ -187,14 +189,43 @@
 
     .hero-grid{
       display:grid;
-      grid-template-columns:.9fr 1.1fr;
-      gap:18px;
+      grid-template-columns:.92fr 1.08fr;
+      gap:22px;
       align-items:center;
       min-height:610px;
     }
 
     .hero-copy{
       padding:8px 4px 8px 2px;
+      position:relative;
+    }
+
+    .hero-copy::before{
+      content:"";
+      position:absolute;
+      top:40px;
+      left:40px;
+      width:280px;
+      height:280px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(124,90,203,.12), transparent 60%);
+      filter:blur(12px);
+      z-index:0;
+      pointer-events:none;
+    }
+
+    .hero-copy::after{
+      content:"";
+      position:absolute;
+      top:120px;
+      left:160px;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(200,160,75,.10), transparent 62%);
+      filter:blur(14px);
+      z-index:0;
+      pointer-events:none;
     }
 
     .hero-title{
@@ -206,6 +237,8 @@
       font-weight:700;
       color:#2a2542;
       max-width:620px;
+      position:relative;
+      z-index:2;
     }
 
     .hero-title .gold{
@@ -230,6 +263,8 @@
       flex-wrap:wrap;
       margin-top:18px;
       margin-bottom:20px;
+      position:relative;
+      z-index:2;
     }
 
     .text-ticker{
@@ -239,6 +274,8 @@
       border:1px solid var(--line);
       padding:13px 0;
       box-shadow:0 10px 18px rgba(100,70,50,.04);
+      position:relative;
+      z-index:2;
     }
 
     .text-ticker-track{
@@ -261,7 +298,7 @@
       position:relative;
       min-height:520px;
       border-radius:34px;
-      background:linear-gradient(135deg,#fff3ec 0%, #fff8f0 40%, #f7f2ff 100%);
+      background:linear-gradient(135deg,#fff3ec 0%, #fff8f0 42%, #f7f2ff 100%);
       border:1px solid var(--line);
       overflow:hidden;
       padding:24px;
@@ -269,12 +306,51 @@
 
     .hero-visual-glow{
       position:absolute;
-      inset:auto auto 18% 10%;
+      inset:auto auto 16% 8%;
       width:320px;
       height:320px;
       border-radius:50%;
       background:radial-gradient(circle, rgba(124,90,203,.14), transparent 65%);
       filter:blur(12px);
+    }
+
+    .hero-side-label{
+      position:absolute;
+      top:24px;
+      left:24px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.85);
+      border:1px solid rgba(255,255,255,.9);
+      box-shadow:0 8px 18px rgba(100,70,50,.05);
+      font-size:13px;
+      font-weight:800;
+      color:#645d82;
+      z-index:3;
+    }
+
+    .hero-side-title{
+      position:absolute;
+      top:70px;
+      left:24px;
+      max-width:300px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:42px;
+      line-height:1.02;
+      font-weight:600;
+      color:#2d2947;
+      z-index:3;
+    }
+
+    .hero-side-text{
+      position:absolute;
+      top:160px;
+      left:24px;
+      max-width:290px;
+      font-size:15px;
+      line-height:1.75;
+      color:var(--muted);
+      z-index:3;
     }
 
     .template-box{
@@ -284,6 +360,7 @@
       background:#fff;
       border:1px solid rgba(255,255,255,.85);
       box-shadow:0 16px 30px rgba(0,0,0,.10);
+      animation:floatUpDown 5.5s ease-in-out infinite;
     }
 
     .template-box img{
@@ -293,44 +370,14 @@
       display:block;
     }
 
-    .tb1{top:34px; right:28px; width:220px; height:152px;}
-    .tb2{top:130px; left:48px; width:180px; height:132px;}
-    .tb3{top:214px; right:138px; width:190px; height:142px;}
-    .tb4{bottom:118px; left:180px; width:210px; height:146px;}
+    .tb1{top:36px; right:28px; width:220px; height:152px; animation-delay:0s;}
+    .tb2{top:150px; right:240px; width:170px; height:126px; animation-delay:.6s;}
+    .tb3{top:214px; right:40px; width:190px; height:142px; animation-delay:1.2s;}
+    .tb4{bottom:118px; right:180px; width:210px; height:146px; animation-delay:1.8s;}
 
-    .prompt-caption{
-      position:absolute;
-      left:50%;
-      transform:translateX(-50%);
-      bottom:26px;
-      width:min(82%, 560px);
-      background:#fff;
-      border-radius:20px;
-      padding:8px;
-      display:flex;
-      gap:8px;
-      align-items:center;
-      box-shadow:0 16px 32px rgba(0,0,0,.12);
-    }
-
-    .prompt-caption input{
-      flex:1;
-      border:none;
-      outline:none;
-      padding:13px 14px;
-      font:inherit;
-      color:var(--text);
-      background:transparent;
-    }
-
-    .prompt-caption button{
-      border:none;
-      border-radius:14px;
-      padding:12px 18px;
-      background:linear-gradient(90deg,var(--purple),var(--gold));
-      color:#fff;
-      font-weight:800;
-      cursor:pointer;
+    @keyframes floatUpDown{
+      0%,100%{ transform:translateY(0px); }
+      50%{ transform:translateY(-10px); }
     }
 
     .platform-icons{
@@ -355,6 +402,43 @@
       color:#544c78;
       box-shadow:0 10px 20px rgba(0,0,0,.08);
       border:1px solid rgba(255,255,255,.9);
+      z-index:3;
+    }
+
+    .prompt-caption{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:26px;
+      width:min(82%, 560px);
+      background:#fff;
+      border-radius:20px;
+      padding:8px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      box-shadow:0 16px 32px rgba(0,0,0,.12);
+      z-index:4;
+    }
+
+    .prompt-caption input{
+      flex:1;
+      border:none;
+      outline:none;
+      padding:13px 14px;
+      font:inherit;
+      color:var(--text);
+      background:transparent;
+    }
+
+    .prompt-caption button{
+      border:none;
+      border-radius:14px;
+      padding:12px 18px;
+      background:linear-gradient(90deg,var(--purple),var(--gold));
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
     }
 
     .section-head{
@@ -790,10 +874,18 @@
         height:58px;
         font-size:12px;
       }
-      .tb1{top:26px; right:18px; width:165px; height:118px;}
-      .tb2{top:130px; left:20px; width:135px; height:104px;}
-      .tb3{top:214px; right:70px; width:145px; height:108px;}
-      .tb4{bottom:122px; left:120px; width:155px; height:108px;}
+      .tb1{top:36px; right:18px; width:165px; height:118px;}
+      .tb2{top:150px; right:185px; width:125px; height:96px;}
+      .tb3{top:230px; right:24px; width:145px; height:108px;}
+      .tb4{bottom:122px; right:120px; width:155px; height:108px;}
+      .hero-side-title{
+        font-size:34px;
+        max-width:240px;
+      }
+      .hero-side-text{
+        max-width:220px;
+        font-size:14px;
+      }
     }
   </style>
 </head>
@@ -859,6 +951,10 @@
 
             <div class="hero-visual">
               <div class="hero-visual-glow"></div>
+
+              <div class="hero-side-label">Live visual studio</div>
+              <div class="hero-side-title">Get hands on your marketing in one place</div>
+              <div class="hero-side-text">Simplified campaign planning, content flow, templates and launch visuals — all from one softer premium platform.</div>
 
               <div class="template-box tb1">
                 <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="">
