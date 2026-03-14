@@ -3,35 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI — Create Campaign</title>
+  <title>Bariq AI — Campaign Studio</title>
   <style>
     * { box-sizing: border-box; }
+
+    :root{
+      --bg1:#fffaf3;
+      --bg2:#faf7ff;
+      --bg3:#f6f0ff;
+      --text:#2c235c;
+      --muted:#6d6684;
+      --line:#ece0c0;
+      --white:#ffffff;
+      --purple:#5a3fff;
+      --purple-soft:#efe9ff;
+      --gold:#d8b05b;
+      --gold-deep:#b9852d;
+      --shadow:0 16px 40px rgba(75,45,120,0.08);
+      --card-shadow:0 10px 24px rgba(83,57,139,0.05);
+      --radius:26px;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
       overflow-x: hidden;
-    }
-    body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #fffaf3 0%, #faf7ff 45%, #f6f0ff 100%);
-      color: #2c235c;
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 48%, var(--bg3) 100%);
+      color: var(--text);
     }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+
+    a { text-decoration: none; color: inherit; }
+
     .container {
-      width: min(1320px, calc(100% - 32px));
+      width: min(1360px, calc(100% - 32px));
       margin: 0 auto;
     }
+
     .site-header {
       position: sticky;
       top: 0;
       z-index: 999;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid #eee2bf;
     }
+
     .nav-wrap {
       min-height: 78px;
       display: flex;
@@ -40,18 +57,29 @@
       gap: 18px;
       position: relative;
     }
+
     .brand {
-      display: inline-block;
-      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
       white-space: nowrap;
       font-size: 30px;
       font-weight: 800;
       line-height: 1;
-      background: linear-gradient(90deg, #d8b05b, #5a3fff);
+      background: linear-gradient(90deg, var(--gold), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--purple));
+      box-shadow: 0 0 16px rgba(90,63,255,0.35);
+    }
+
     .menu-toggle {
       display: none;
       border: none;
@@ -63,66 +91,82 @@
       border-radius: 14px;
       cursor: pointer;
     }
+
     .main-nav {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 4px;
-      flex: 1 1 auto;
+      gap: 6px;
       flex-wrap: nowrap;
       overflow-x: auto;
-      overflow-y: hidden;
       scrollbar-width: none;
       white-space: nowrap;
     }
-    .main-nav::-webkit-scrollbar { display: none; }
+
+    .main-nav::-webkit-scrollbar { display:none; }
+
     .main-nav a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-      padding: 10px 10px;
+      padding: 10px 12px;
       font-size: 14px;
       font-weight: 700;
       color: #3a2d77;
       border-radius: 12px;
       flex: 0 0 auto;
     }
+
     .main-nav a:hover,
     .main-nav a.active {
       background: #f3edff;
     }
 
     .hero-section {
-      padding: 26px 0 16px;
+      padding: 24px 0 18px;
     }
+
     .hero-shell {
       background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.95));
-      border: 1px solid #ecdcb4;
+      border: 1px solid var(--line);
       border-radius: 30px;
       padding: 22px;
-      box-shadow: 0 16px 40px rgba(75, 45, 120, 0.08);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
     }
+
+    .hero-shell::before {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(216,176,91,0.18), transparent 65%);
+      pointer-events: none;
+    }
+
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1.08fr 0.92fr;
       gap: 18px;
       align-items: stretch;
     }
+
     .hero-left,
     .hero-right,
     .form-card,
     .output-card,
     .tip-card,
-    .mini-stat {
-      background: rgba(255,255,255,0.92);
+    .status-card,
+    .output-box {
+      background: rgba(255,255,255,0.94);
       border: 1px solid #f0e6c9;
       border-radius: 24px;
-      box-shadow: 0 10px 24px rgba(83, 57, 139, 0.05);
+      box-shadow: var(--card-shadow);
     }
+
     .hero-left {
       padding: 28px;
     }
+
     .hero-tag {
       display: inline-block;
       font-size: 13px;
@@ -134,47 +178,92 @@
       padding: 10px 16px;
       margin-bottom: 18px;
     }
+
     .hero-left h1 {
-      margin: 0 0 14px;
+      margin: 0 0 12px;
       font-size: 58px;
-      line-height: 0.98;
-      letter-spacing: -0.04em;
+      line-height: 0.96;
+      letter-spacing: -0.045em;
       color: #312668;
     }
+
     .hero-left p {
       margin: 0 0 22px;
       font-size: 17px;
-      line-height: 1.7;
-      color: #6c6483;
-      max-width: 720px;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 760px;
     }
+
     .hero-actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+      margin-bottom: 16px;
     }
+
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       padding: 14px 18px;
       border-radius: 16px;
       font-size: 14px;
       font-weight: 800;
       cursor: pointer;
       border: none;
-      transition: 0.2s ease;
+      transition: 0.18s ease;
     }
+
     .btn:hover { transform: translateY(-1px); }
+
     .btn-primary {
-      background: linear-gradient(135deg, #d7b15e, #5a3fff);
+      background: linear-gradient(135deg, var(--gold), var(--purple));
       color: #fff;
-      box-shadow: 0 10px 22px rgba(90,63,255,0.2);
+      box-shadow: 0 10px 22px rgba(90,63,255,0.18);
     }
+
     .btn-light {
       background: #f4eeff;
       color: #34296a;
       border: 1px solid #e4d7ff;
+    }
+
+    .marquee-wrap {
+      margin-top: 14px;
+      border: 1px solid #eee2bf;
+      border-radius: 18px;
+      background: #fff;
+      overflow: hidden;
+      padding: 12px 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: scrollLeft 18s linear infinite;
+      gap: 14px;
+      padding: 0 14px;
+    }
+
+    .mini-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #faf7ff;
+      border: 1px solid #ece1bf;
+      font-size: 13px;
+      font-weight: 700;
+      color: #4a3b92;
+      white-space: nowrap;
+    }
+
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     .hero-right {
@@ -183,71 +272,55 @@
       gap: 14px;
       grid-template-rows: repeat(3, 1fr);
     }
+
     .tip-card {
       padding: 18px;
       background: #fff;
     }
+
     .tip-card h3 {
-      margin: 0 0 10px;
+      margin: 0 0 8px;
       font-size: 18px;
       color: #433685;
     }
+
     .tip-card p {
       margin: 0;
       font-size: 15px;
-      line-height: 1.7;
-      color: #6f6983;
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 18px;
-    }
-    .mini-stat {
-      padding: 20px;
-    }
-    .mini-stat .label {
-      font-size: 13px;
-      font-weight: 700;
-      color: #746c8d;
-      margin-bottom: 12px;
-    }
-    .mini-stat .big {
-      font-size: 24px;
-      font-weight: 800;
-      color: #41357f;
-      margin-bottom: 8px;
-    }
-    .mini-stat p {
-      margin: 0;
-      color: #6f6983;
-      line-height: 1.6;
-      font-size: 15px;
+      line-height: 1.75;
+      color: var(--muted);
     }
 
     .section {
-      padding: 18px 0;
+      padding: 18px 0 26px;
     }
+
     .main-grid {
       display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
+      grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.02fr);
       gap: 18px;
       align-items: start;
     }
+
     .form-card,
     .output-card {
       padding: 24px;
     }
+
+    .sticky-col {
+      position: sticky;
+      top: 98px;
+    }
+
     .section-title {
       margin: 0 0 8px;
       font-size: 28px;
       color: #35296f;
     }
+
     .section-text {
-      margin: 0 0 20px;
-      color: #6f6983;
+      margin: 0 0 18px;
+      color: var(--muted);
       line-height: 1.7;
       font-size: 16px;
     }
@@ -257,19 +330,23 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 14px;
     }
+
     .field {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
+
     .field.full {
       grid-column: 1 / -1;
     }
+
     .field label {
       font-size: 14px;
       font-weight: 800;
       color: #433685;
     }
+
     .field input,
     .field select,
     .field textarea {
@@ -279,85 +356,114 @@
       border-radius: 16px;
       padding: 14px 14px;
       font: inherit;
-      color: #2c235c;
+      color: var(--text);
       outline: none;
+      transition: 0.18s ease;
     }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: #cdb2ff;
+      box-shadow: 0 0 0 4px rgba(90,63,255,0.08);
+    }
+
     .field textarea {
       min-height: 110px;
       resize: vertical;
       line-height: 1.6;
     }
 
+    .voice-actions,
     .action-row {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+    }
+
+    .action-row {
       margin-top: 18px;
     }
 
-    .status-bar {
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: #faf7ff;
-      border: 1px solid #e6dafd;
-      color: #5a4c8d;
+    .status-card {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fffdf8, #f7f1ff);
+      border: 1px solid #eadfc2;
+    }
+
+    .status-card h4 {
+      margin: 0 0 8px;
+      color: #433685;
+      font-size: 16px;
+    }
+
+    .status-message {
+      margin: 0;
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.7;
+      color: #5f5778;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
 
     .output-stack {
       display: grid;
-      gap: 16px;
+      gap: 14px;
     }
+
     .output-box {
-      border: 1px solid #eadfc2;
-      background: #fff;
-      border-radius: 20px;
       padding: 18px;
+      background: #fff;
     }
+
     .output-box h3 {
       margin: 0 0 10px;
       font-size: 18px;
       color: #45388c;
     }
+
     .output-box pre {
       margin: 0;
       white-space: pre-wrap;
       word-wrap: break-word;
       font-family: Arial, sans-serif;
       font-size: 15px;
-      line-height: 1.7;
+      line-height: 1.75;
       color: #5f5778;
     }
 
-    .save-note {
-      margin-top: 16px;
-      padding: 16px;
+    .preview-banner {
+      margin-bottom: 16px;
+      padding: 14px 16px;
       border-radius: 18px;
-      background: linear-gradient(135deg, #fffdf8, #f7f1ff);
-      border: 1px solid #eee2bf;
-      color: #655d7d;
-      font-size: 14px;
+      background: linear-gradient(135deg, #fff7e9, #f4eeff);
+      border: 1px solid #ece0c0;
+      color: #564d73;
       line-height: 1.7;
+      font-size: 14px;
     }
 
     .site-footer {
-      margin-top: 28px;
+      margin-top: 20px;
       background: #181427;
       color: #fff;
-      padding: 42px 0;
+      padding: 40px 0;
     }
+
     .footer-grid {
       display: grid;
       grid-template-columns: 1.2fr 1fr 1fr 1fr;
       gap: 24px;
     }
+
     .footer-col h3 {
       margin: 0 0 14px;
       font-size: 18px;
       color: #ffffff;
     }
+
     .footer-col p,
     .footer-col a {
       display: block;
@@ -367,17 +473,26 @@
       line-height: 1.7;
     }
 
-    @media (max-width: 1100px) {
-      .hero-left h1 { font-size: 46px; }
+    @media (max-width: 1180px) {
       .hero-grid,
-      .main-grid { grid-template-columns: 1fr; }
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+      .sticky-col {
+        position: static;
+      }
+      .hero-left h1 {
+        font-size: 46px;
+      }
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 768px) {
       .container { width: min(100% - 20px, 1200px); }
       .menu-toggle { display: block; }
+
       .main-nav {
         display: none;
         position: absolute;
@@ -392,46 +507,33 @@
         flex-direction: column;
         align-items: stretch;
         gap: 10px;
-        overflow: visible;
       }
+
       .main-nav.show { display: flex; }
       .main-nav a {
         width: 100%;
         background: #faf7ff;
         justify-content: flex-start;
       }
-      .brand { font-size: 28px; }
+
+      .hero-left h1 { font-size: 36px; }
+      .hero-actions,
+      .voice-actions,
+      .action-row {
+        flex-direction: column;
+      }
+
+      .btn { width: 100%; }
+      .form-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
       .hero-shell,
       .form-card,
       .output-card {
         padding: 16px;
         border-radius: 22px;
-      }
-      .hero-left { padding: 20px; }
-      .hero-left h1 {
-        font-size: 36px;
-        line-height: 1.04;
-      }
-      .hero-left p { font-size: 15px; }
-      .hero-actions,
-      .action-row { flex-direction: column; }
-      .btn { width: 100%; }
-      .hero-right { grid-template-rows: auto; }
-      .stats-row,
-      .form-grid,
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-      .section-title { font-size: 24px; }
-    }
-
-    @media (max-width: 480px) {
-      .hero-left h1 { font-size: 30px; }
-      .tip-card,
-      .mini-stat,
-      .form-card,
-      .output-box {
-        border-radius: 18px;
       }
     }
   </style>
@@ -440,18 +542,18 @@
 
   <header class="site-header">
     <div class="container nav-wrap">
-      <a href="index.html" class="brand">Bariq AI</a>
+      <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
 
-      <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Open menu">☰</button>
+      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
 
       <nav class="main-nav" id="mainNav">
         <a href="index.html">Home</a>
         <a href="business-dashboard.html">Business</a>
         <a href="ai-generator.html">AI Generator</a>
         <a href="campaign.html" class="active">Campaign</a>
-        <a href="marketplace.html">Marketplace</a>
-        <a href="templates.html">Templates</a>
         <a href="creator-marketplace.html">Creators</a>
+        <a href="templates.html">Templates</a>
+        <a href="payments.html">Payments</a>
         <a href="login.html">Login</a>
         <a href="admin-dashboard.html">Admin</a>
       </nav>
@@ -459,67 +561,56 @@
   </header>
 
   <section class="hero-section">
-    <div class="container"
+    <div class="container">
       <div class="hero-shell">
         <div class="hero-grid">
-
           <div class="hero-left">
-            <div class="hero-tag">Campaign Builder MVP</div>
-            <h1>Create campaigns with clarity, speed, and AI support</h1>
+            <div class="hero-tag">Campaign Studio Pro</div>
+            <h1>Create beautiful campaigns with voice, speed, and AI</h1>
             <p>
-              Build a marketing campaign in one place, generate ad copy, create video direction,
-              and prepare for publishing without opening multiple tools.
+              Bariq AI helps you speak one campaign idea, turn it into ad copy,
+              reel direction, CTA lines, and launch-ready marketing structure from one premium page.
             </p>
 
             <div class="hero-actions">
-              <button class="btn btn-primary" onclick="document.getElementById('campaignForm').scrollIntoView({behavior:'smooth'})">Start Campaign</button>
+              <button class="btn btn-primary" onclick="document.getElementById('campaignForm').scrollIntoView({behavior:'smooth'})">✨ Start Campaign</button>
               <a href="ai-generator.html" class="btn btn-light">Open AI Generator</a>
               <a href="business-dashboard.html" class="btn btn-light">Business Dashboard</a>
+            </div>
+
+            <div class="marquee-wrap">
+              <div class="marquee-track">
+                <span class="mini-chip">🎯 Meta Ads</span>
+                <span class="mini-chip">🎥 Reel Script</span>
+                <span class="mini-chip">🪄 Voice Prompt</span>
+                <span class="mini-chip">📣 CTA Ideas</span>
+                <span class="mini-chip">✨ Premium Campaign Flow</span>
+                <span class="mini-chip">📍 City Targeting</span>
+                <span class="mini-chip">💜 Easy For Business Owners</span>
+                <span class="mini-chip">🎯 Meta Ads</span>
+                <span class="mini-chip">🎥 Reel Script</span>
+                <span class="mini-chip">🪄 Voice Prompt</span>
+                <span class="mini-chip">📣 CTA Ideas</span>
+                <span class="mini-chip">✨ Premium Campaign Flow</span>
+                <span class="mini-chip">📍 City Targeting</span>
+                <span class="mini-chip">💜 Easy For Business Owners</span>
+              </div>
             </div>
           </div>
 
           <div class="hero-right">
             <div class="tip-card">
-              <h3>Step 1</h3>
-              <p>Enter business details, offer, audience, city, and budget clearly so Bariq can generate stronger campaign directions.</p>
+              <h3>Speak one simple idea</h3>
+              <p>Use voice input to describe the campaign naturally instead of typing large prompts manually.</p>
             </div>
-
             <div class="tip-card">
-              <h3>Step 2</h3>
-              <p>Generate ready-to-use Meta ad copy, Google ad copy, reel script, CTA options, and hashtags from one form.</p>
+              <h3>Generate full campaign outputs</h3>
+              <p>Get Meta ad copy, Google ad copy, reel script, CTA suggestions, and hashtags in one flow.</p>
             </div>
-
             <div class="tip-card">
-              <h3>Step 3</h3>
-              <p>Save the campaign structure now. Later this same page can connect to publishing and analytics.</p>
+              <h3>Use now, scale later</h3>
+              <p>This page is ready for today and can later connect to publishing, analytics, and WhatsApp follow-up.</p>
             </div>
-          </div>
-
-        </div>
-
-        <div class="stats-row">
-          <div class="mini-stat">
-            <div class="label">⚡ Campaign Speed</div>
-            <div class="big">Fast</div>
-            <p>Move from idea to structured campaign in minutes instead of briefing an agency from scratch.</p>
-          </div>
-
-          <div class="mini-stat">
-            <div class="label">📣 Ad Outputs</div>
-            <div class="big">5+</div>
-            <p>Generate multiple outputs from one form including headlines, CTAs, hooks, and scripts.</p>
-          </div>
-
-          <div class="mini-stat">
-            <div class="label">🎥 Video Direction</div>
-            <div class="big">Ready</div>
-            <p>Create a reel structure that can later connect to voice, stock clips, and rendered ads.</p>
-          </div>
-
-          <div class="mini-stat">
-            <div class="label">💾 Workflow</div>
-            <div class="big">Saved</div>
-            <p>This MVP also lets you save campaign data locally so you don’t lose the structure while testing.</p>
           </div>
         </div>
       </div>
@@ -531,8 +622,8 @@
       <div class="main-grid">
 
         <div class="form-card" id="campaignForm">
-          <h2 class="section-title">Campaign Input</h2>
-          <p class="section-text">Fill the basics once and let Bariq structure the campaign for you.</p>
+          <h2 class="section-title">Create Campaign</h2>
+          <p class="section-text">Fill the form or just speak your campaign idea. Bariq will take it forward.</p>
 
           <div class="form-grid">
             <div class="field">
@@ -542,17 +633,17 @@
 
             <div class="field">
               <label for="campaignName">Campaign Name</label>
-              <input id="campaignName" type="text" placeholder="e.g. Laser Hair Removal Offer" />
+              <input id="campaignName" type="text" placeholder="e.g. Laser Hair Reduction Offer" />
             </div>
 
             <div class="field full">
               <label for="productService">Product / Service</label>
-              <input id="productService" type="text" placeholder="e.g. Laser hair removal" />
+              <input id="productService" type="text" placeholder="e.g. Laser hair reduction" />
             </div>
 
             <div class="field full">
               <label for="offer">Offer</label>
-              <input id="offer" type="text" placeholder="e.g. 50% discount on laser hair reduction" />
+              <input id="offer" type="text" placeholder="e.g. Flat 60% off" />
             </div>
 
             <div class="field">
@@ -582,67 +673,72 @@
               </select>
             </div>
 
-              <div class="field full">
-  <label for="voicePrompt">Voice Campaign Brief</label>
-  <textarea id="voicePrompt" placeholder="Speak or type one simple brief. Example: Promote my laser hair removal clinic with flat 60% off for women in Hyderabad."></textarea>
-</div>
+            <div class="field full">
+              <label for="voicePrompt">Voice Campaign Brief</label>
+              <textarea id="voicePrompt" placeholder="Speak or type one simple brief. Example: Make an ad on laser hair reduction for Hyderabad women 25 to 40 years."></textarea>
+            </div>
 
-<div class="field full" style="margin-top:-4px;">
-  <div style="display:flex; gap:12px; flex-wrap:wrap;">
-    <button class="btn btn-light" type="button" onclick="startVoiceInput()">🎤 Start Voice</button>
-    <button class="btn btn-light" type="button" onclick="stopVoiceInput()">⏹ Stop Voice</button>
-    <button class="btn btn-light" type="button" onclick="useVoicePrompt()">✨ Use Voice Brief</button>
-  </div>
-</div>
+            <div class="field full">
+              <div class="voice-actions">
+                <button class="btn btn-light" type="button" onclick="startVoiceInput()">🎤 Start Voice</button>
+                <button class="btn btn-light" type="button" onclick="stopVoiceInput()">⏹ Stop Voice</button>
+                <button class="btn btn-light" type="button" onclick="useVoicePrompt()">✨ Use Voice Brief</button>
+              </div>
+            </div>
 
-<div class="field full">
-  <label for="notes">Extra Notes</label>
-  <textarea id="notes" placeholder="Anything special Bariq should know? Tone, urgency, style, local language, premium feel, etc."></textarea>
-</div>     
-   <div class="action-row">
+            <div class="field full">
+              <label for="notes">Extra Notes</label>
+              <textarea id="notes" placeholder="Anything special Bariq should know? Tone, urgency, style, local language, premium feel, etc."></textarea>
+            </div>
+          </div>
+
+          <div class="action-row">
             <button class="btn btn-primary" id="generateAdsBtn" type="button">Generate Ads</button>
             <button class="btn btn-light" id="generateVideoBtn" type="button">Generate Video</button>
             <button class="btn btn-light" id="saveCampaignBtn" type="button">Save Campaign</button>
           </div>
 
-          <div class="status-bar" id="statusBar">
-            Ready. Fill the campaign inputs and generate outputs.
+          <div class="status-card">
+            <h4>Campaign Status</h4>
+            <p class="status-message" id="statusBar">Ready. Fill the campaign inputs and generate outputs.</p>
           </div>
         </div>
 
-        <div class="output-card">
-          <h2 class="section-title">Campaign Outputs</h2>
-          <p class="section-text">Your generated campaign content will appear here.</p>
-
-          <div class="output-stack">
-            <div class="output-box">
-              <h3>Meta Ad Copy</h3>
-              <pre id="metaOutput">No output yet.</pre>
+        <div class="sticky-col">
+          <div class="output-card">
+            <div class="preview-banner">
+              Live campaign preview area. Even if OpenAI server fails, Bariq will still generate a smart fallback result locally so the page never feels dead.
             </div>
 
-            <div class="output-box">
-              <h3>Google Ad Copy</h3>
-              <pre id="googleOutput">No output yet.</pre>
-            </div>
+            <h2 class="section-title">Campaign Outputs</h2>
+            <p class="section-text">Generated marketing content will appear here in a structured premium layout.</p>
 
-            <div class="output-box">
-              <h3>Reel Script</h3>
-              <pre id="reelOutput">No output yet.</pre>
-            </div>
+            <div class="output-stack">
+              <div class="output-box">
+                <h3>Meta Ad Copy</h3>
+                <pre id="metaOutput">No output yet.</pre>
+              </div>
 
-            <div class="output-box">
-              <h3>CTA Suggestions</h3>
-              <pre id="ctaOutput">No output yet.</pre>
-            </div>
+              <div class="output-box">
+                <h3>Google Ad Copy</h3>
+                <pre id="googleOutput">No output yet.</pre>
+              </div>
 
-            <div class="output-box">
-              <h3>Hashtags</h3>
-              <pre id="hashtagOutput">No output yet.</pre>
-            </div>
-          </div>
+              <div class="output-box">
+                <h3>Reel Script</h3>
+                <pre id="reelOutput">No output yet.</pre>
+              </div>
 
-          <div class="save-note">
-            This is the MVP version. Right now it can generate and save campaign structure. Later we can connect this page to Meta publishing, WhatsApp follow-up, analytics, and creator workflows.
+              <div class="output-box">
+                <h3>CTA Suggestions</h3>
+                <pre id="ctaOutput">No output yet.</pre>
+              </div>
+
+              <div class="output-box">
+                <h3>Hashtags</h3>
+                <pre id="hashtagOutput">No output yet.</pre>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -663,7 +759,7 @@
           <a href="ai-generator.html">AI Generator</a>
           <a href="business-dashboard.html">Business Dashboard</a>
           <a href="creator-dashboard.html">Creator Dashboard</a>
-          <a href="marketplace.html">Marketplace</a>
+          <a href="creator-marketplace.html">Creators</a>
         </div>
 
         <div class="footer-col">
@@ -685,8 +781,15 @@
   </footer>
 
   <script>
+    let recognition;
+    let isListening = false;
+
     function toggleMobileMenu() {
       document.getElementById("mainNav").classList.toggle("show");
+    }
+
+    function setStatus(message) {
+      document.getElementById("statusBar").textContent = message;
     }
 
     function getCampaignData() {
@@ -699,271 +802,114 @@
         city: document.getElementById("city").value.trim(),
         budget: document.getElementById("budget").value.trim(),
         goal: document.getElementById("goal").value.trim(),
+        voicePrompt: document.getElementById("voicePrompt").value.trim(),
         notes: document.getElementById("notes").value.trim()
       };
     }
 
+    function validateData(data) {
+      const hasMainFields =
+        data.businessName &&
+        data.campaignName &&
+        data.productService &&
+        data.offer &&
+        data.audience &&
+        data.city &&
+        data.budget &&
+        data.goal;
+
+      const hasVoiceBrief = data.voicePrompt && data.voicePrompt.length > 5;
+      return hasMainFields || hasVoiceBrief;
+    }
+
+    function useVoicePrompt() {
+      const voicePrompt = document.getElementById("voicePrompt").value.trim();
+
+      if (!voicePrompt) {
+        setStatus("Please record or type a voice campaign brief first.");
+        return;
+      }
+
+      if (!document.getElementById("campaignName").value.trim()) {
+        document.getElementById("campaignName").value = "Voice Campaign";
+      }
+
+      const notes = document.getElementById("notes");
+      if (!notes.value.trim()) {
+        notes.value = "Voice Brief:\n" + voicePrompt;
+      } else if (!notes.value.includes(voicePrompt)) {
+        notes.value += "\n\nVoice Brief:\n" + voicePrompt;
+      }
+
+      setStatus("Voice brief added. You can now generate ads or video.");
+    }
+
+    function startVoiceInput() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        setStatus("Voice input is not supported in this browser. Please use Chrome.");
+        return;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.lang = "en-IN";
+      recognition.interimResults = true;
+      recognition.continuous = true;
+
+      recognition.onstart = function () {
+        isListening = true;
+        setStatus("Listening... speak your campaign brief now.");
+      };
+
+      recognition.onresult = function (event) {
+        let transcript = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        document.getElementById("voicePrompt").value = transcript.trim();
+      };
+
+      recognition.onerror = function (event) {
+        setStatus("Voice input error: " + event.error);
+      };
+
+      recognition.onend = function () {
+        if (isListening) {
+          setStatus("Voice input stopped.");
+        }
+        isListening = false;
+      };
+
+      recognition.start();
+    }
+
+    function stopVoiceInput() {
+      if (recognition && isListening) {
+        recognition.stop();
+        isListening = false;
+        setStatus("Voice recording stopped.");
+      } else {
+        setStatus("Voice input is not currently running.");
+      }
+    }
+
     function buildPrompt(data) {
       return `
-Create a marketing campaign package.
-
-Business Name: ${data.businessName}
-Campaign Name: ${data.campaignName}
-Product or Service: ${data.productService}
-Offer: ${data.offer}
-Target Audience: ${data.audience}
-Target City: ${data.city}
-Budget: ${data.budget}
-Campaign Goal: ${data.goal}
-Extra Notes: ${data.notes}
-
-Generate:
-1. Meta ad copy
-2. Google ad copy
-3. Short reel script
-4. 5 CTA suggestions
-5. 10 hashtags
-
-Keep it practical, premium, and ready to use.
-Return in clear labeled sections.
-      `.trim();
-    }
-
-    function validateData(data) {
-      if (!data.businessName || !data.campaignName || !data.productService || !data.offer || !data.audience || !data.city || !data.budget || !data.goal) {
-        return false;
-      }
-      return true;
-    }
-
-    function setStatus(message) {
-      document.getElementById("statusBar").textContent = message;
-    }
-
-    function setOutputsFromText(text) {
-      const cleanText = text || "";
-
-      const metaMatch = cleanText.match(/Meta Ad Copy[:\-\n]*([\s\S]*?)(?=\n\s*Google Ad Copy|\n\s*Google Ads|\n\s*Reel Script|\n\s*CTA|\n\s*Hashtags|$)/i);
-      const googleMatch = cleanText.match(/Google Ad Copy[:\-\n]*([\s\S]*?)(?=\n\s*Reel Script|\n\s*CTA|\n\s*Hashtags|$)/i) || cleanText.match(/Google Ads?[:\-\n]*([\s\S]*?)(?=\n\s*Reel Script|\n\s*CTA|\n\s*Hashtags|$)/i);
-      const reelMatch = cleanText.match(/Reel Script[:\-\n]*([\s\S]*?)(?=\n\s*CTA|\n\s*Hashtags|$)/i);
-      const ctaMatch = cleanText.match(/CTA(?: Suggestions)?[:\-\n]*([\s\S]*?)(?=\n\s*Hashtags|$)/i);
-      const hashtagMatch = cleanText.match(/Hashtags[:\-\n]*([\s\S]*?)$/i);
-
-      document.getElementById("metaOutput").textContent = metaMatch ? metaMatch[1].trim() : cleanText;
-      document.getElementById("googleOutput").textContent = googleMatch ? googleMatch[1].trim() : "No separate Google ad copy found.";
-      document.getElementById("reelOutput").textContent = reelMatch ? reelMatch[1].trim() : "No separate reel script found.";
-      document.getElementById("ctaOutput").textContent = ctaMatch ? ctaMatch[1].trim() : "No separate CTA suggestions found.";
-      document.getElementById("hashtagOutput").textContent = hashtagMatch ? hashtagMatch[1].trim() : "No separate hashtags found.";
-    }
-
-    async function generateAds() {
-      const data = getCampaignData();
-
-      if (!validateData(data)) {
-        setStatus("Please fill all main campaign fields first.");
-        return;
-      }
-
-      setStatus("Generating campaign outputs with AI...");
-
-      try {
-        const response = await fetch("/api/generate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            prompt: buildPrompt(data)
-          })
-        });
-
-        const result = await response.json();
-
-        if (!response.ok) {
-          throw new Error(result.error || "Generation failed.");
-        }
-
-        const text = result.result || result.output || "No result received.";
-        setOutputsFromText(text);
-        setStatus("Campaign outputs generated successfully.");
-      } catch (error) {
-        setStatus("Error: " + error.message);
-      }
-    }
-
-    function generateVideoPlan() {
-      const data = getCampaignData();
-
-      if (!validateData(data)) {
-        setStatus("Please fill all main campaign fields first.");
-        return;
-      }
-
-      const script = `
-Hook:
-Stop scrolling if you want ${data.productService.toLowerCase()} with ${data.offer.toLowerCase()}.
-
-Scene 1:
-Show the pain point or problem your audience faces.
-
-Scene 2:
-Introduce ${data.businessName} and the offer: ${data.offer}.
-
-Scene 3:
-Highlight why it works for ${data.audience} in ${data.city}.
-
-Scene 4:
-Show trust, confidence, or transformation.
-
-Ending CTA:
-Book now / Message now / Limited slots available.
-      `.trim();
-
-      document.getElementById("reelOutput").textContent = script;
-      setStatus("Video script direction generated.");
-    }
-
-    function saveCampaign() {
-      const data = getCampaignData();
-
-      if (!validateData(data)) {
-        setStatus("Please fill all main campaign fields before saving.");
-        return;
-      }
-
-      const savedCampaigns = JSON.parse(localStorage.getItem("bariq_campaigns") || "[]");
-      savedCampaigns.push({
-        ...data,
-        savedAt: new Date().toISOString()
-      });
-      localStorage.setItem("bariq_campaigns", JSON.stringify(savedCampaigns));
-
-      setStatus("Campaign saved locally in this browser.");
-    }
-
-    document.getElementById("generateAdsBtn").addEventListener("click", generateAds);
-    document.getElementById("generateVideoBtn").addEventListener("click", generateVideoPlan);
-    document.getElementById("saveCampaignBtn").addEventListener("click", saveCampaign);
-  </script>
-  <script>
-  let recognition;
-  let isListening = false;
-
-  function toggleMobileMenu() {
-    document.getElementById("mainNav").classList.toggle("show");
-  }
-
-  function getCampaignData() {
-    return {
-      businessName: document.getElementById("businessName").value.trim(),
-      campaignName: document.getElementById("campaignName").value.trim(),
-      productService: document.getElementById("productService").value.trim(),
-      offer: document.getElementById("offer").value.trim(),
-      audience: document.getElementById("audience").value.trim(),
-      city: document.getElementById("city").value.trim(),
-      budget: document.getElementById("budget").value.trim(),
-      goal: document.getElementById("goal").value.trim(),
-      voicePrompt: document.getElementById("voicePrompt") ? document.getElementById("voicePrompt").value.trim() : "",
-      notes: document.getElementById("notes").value.trim()
-    };
-  }
-
-  function validateData(data) {
-    return !!(
-      data.businessName &&
-      data.campaignName &&
-      data.productService &&
-      data.offer &&
-      data.audience &&
-      data.city &&
-      data.budget &&
-      data.goal
-    );
-  }
-
-  function setStatus(message) {
-    document.getElementById("statusBar").textContent = message;
-  }
-
-  function useVoicePrompt() {
-    const voicePrompt = document.getElementById("voicePrompt").value.trim();
-    if (!voicePrompt) {
-      setStatus("Please record or type a voice campaign brief first.");
-      return;
-    }
-
-    document.getElementById("notes").value =
-      (document.getElementById("notes").value.trim() ? document.getElementById("notes").value.trim() + "\n\n" : "") +
-      "Voice Brief:\n" + voicePrompt;
-
-    setStatus("Voice brief added into campaign notes.");
-  }
-
-  function startVoiceInput() {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-      setStatus("Voice input is not supported in this browser. Please use Chrome.");
-      return;
-    }
-
-    recognition = new SpeechRecognition();
-    recognition.lang = "en-IN";
-    recognition.interimResults = true;
-    recognition.continuous = true;
-
-    recognition.onstart = function () {
-      isListening = true;
-      setStatus("Listening... speak your campaign brief now.");
-    };
-
-    recognition.onresult = function (event) {
-      let transcript = "";
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        transcript += event.results[i][0].transcript;
-      }
-      document.getElementById("voicePrompt").value = transcript.trim();
-    };
-
-    recognition.onerror = function (event) {
-      setStatus("Voice input error: " + event.error);
-    };
-
-    recognition.onend = function () {
-      if (isListening) {
-        setStatus("Voice input stopped.");
-      }
-      isListening = false;
-    };
-
-    recognition.start();
-  }
-
-  function stopVoiceInput() {
-    if (recognition && isListening) {
-      recognition.stop();
-      isListening = false;
-      setStatus("Voice recording stopped.");
-    } else {
-      setStatus("Voice input is not currently running.");
-    }
-  }
-
-  function buildPrompt(data) {
-    const voiceSection = data.voicePrompt
-      ? `Voice Campaign Brief: ${data.voicePrompt}\n`
-      : "";
-
-    return `
 Create a premium marketing campaign package.
 
-Business Name: ${data.businessName}
-Campaign Name: ${data.campaignName}
-Product or Service: ${data.productService}
-Offer: ${data.offer}
-Target Audience: ${data.audience}
-Target City: ${data.city}
-Budget: ${data.budget}
-Campaign Goal: ${data.goal}
-${voiceSection}Extra Notes: ${data.notes}
+Business Name: ${data.businessName || "Not provided"}
+Campaign Name: ${data.campaignName || "Not provided"}
+Product or Service: ${data.productService || "Not provided"}
+Offer: ${data.offer || "Not provided"}
+Target Audience: ${data.audience || "Not provided"}
+Target City: ${data.city || "Not provided"}
+Budget: ${data.budget || "Not provided"}
+Campaign Goal: ${data.goal || "Not provided"}
+Voice Campaign Brief: ${data.voicePrompt || "Not provided"}
+Extra Notes: ${data.notes || "Not provided"}
+
+If some structured fields are missing, intelligently infer them from the voice campaign brief.
 
 Generate these sections clearly with headings:
 
@@ -972,122 +918,195 @@ Google Ad Copy:
 Reel Script:
 CTA Suggestions:
 Hashtags:
-
-Keep the campaign practical, conversion-focused, premium, and easy to use for real ads.
-    `.trim();
-  }
-
-  function setOutputsFromText(text) {
-    const cleanText = text || "";
-
-    const metaMatch = cleanText.match(/Meta Ad Copy[:\-\n]*([\s\S]*?)(?=\n\s*Google Ad Copy|\n\s*Reel Script|\n\s*CTA Suggestions|\n\s*Hashtags|$)/i);
-    const googleMatch = cleanText.match(/Google Ad Copy[:\-\n]*([\s\S]*?)(?=\n\s*Reel Script|\n\s*CTA Suggestions|\n\s*Hashtags|$)/i);
-    const reelMatch = cleanText.match(/Reel Script[:\-\n]*([\s\S]*?)(?=\n\s*CTA Suggestions|\n\s*Hashtags|$)/i);
-    const ctaMatch = cleanText.match(/CTA Suggestions[:\-\n]*([\s\S]*?)(?=\n\s*Hashtags|$)/i);
-    const hashtagMatch = cleanText.match(/Hashtags[:\-\n]*([\s\S]*?)$/i);
-
-    document.getElementById("metaOutput").textContent = metaMatch ? metaMatch[1].trim() : "No output found.";
-    document.getElementById("googleOutput").textContent = googleMatch ? googleMatch[1].trim() : "No output found.";
-    document.getElementById("reelOutput").textContent = reelMatch ? reelMatch[1].trim() : "No output found.";
-    document.getElementById("ctaOutput").textContent = ctaMatch ? ctaMatch[1].trim() : "No output found.";
-    document.getElementById("hashtagOutput").textContent = hashtagMatch ? hashtagMatch[1].trim() : "No output found.";
-  }
-
-  async function generateAds() {
-    const data = getCampaignData();
-
-    if (!validateData(data)) {
-      setStatus("Please fill all main campaign fields first.");
-      return;
+      `.trim();
     }
 
-    setStatus("Generating campaign outputs with AI...");
-
-    try {
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          prompt: buildPrompt(data)
-        })
-      });
-
-      const rawText = await response.text();
-
-      let result;
-      try {
-        result = JSON.parse(rawText);
-      } catch (parseError) {
-        throw new Error("Server returned non-JSON response: " + rawText.slice(0, 140));
-      }
-
-      if (!response.ok) {
-        throw new Error(result.error || result.details || "Generation failed.");
-      }
-
-      const output = result.result || result.output || "No result received.";
-      setOutputsFromText(output);
-      setStatus("Campaign outputs generated successfully.");
-    } catch (error) {
-      setStatus("Error: " + error.message);
-    }
-  }
-
-  function generateVideoPlan() {
-    const data = getCampaignData();
-
-    if (!validateData(data)) {
-      setStatus("Please fill all main campaign fields first.");
-      return;
+    function setOutputs(meta, google, reel, cta, hashtags) {
+      document.getElementById("metaOutput").textContent = meta;
+      document.getElementById("googleOutput").textContent = google;
+      document.getElementById("reelOutput").textContent = reel;
+      document.getElementById("ctaOutput").textContent = cta;
+      document.getElementById("hashtagOutput").textContent = hashtags;
     }
 
-    const script = `
-Hook:
-Still struggling with ${data.productService.toLowerCase()}?
+    function localFallbackGeneration(data) {
+      const product = data.productService || "your service";
+      const offer = data.offer || "a limited time offer";
+      const city = data.city || "your city";
+      const audience = data.audience || "your audience";
+      const business = data.businessName || "your business";
+
+      const meta = `Headline: Get ${product} with ${offer}
+
+Primary Text:
+Looking for ${product} in ${city}? ${business} now brings ${offer} for ${audience}. Book today and take the first step toward visible results.
+
+CTA:
+Book Now | Message Now | Limited Slots Available`;
+
+      const google = `Headline 1: ${product} in ${city}
+Headline 2: ${offer}
+Headline 3: Book With ${business}
+
+Description:
+Discover premium ${product} solutions at ${business}. Designed for ${audience}. Enquire today and grab ${offer}.`;
+
+      const reel = `Hook:
+Still searching for ${product} in ${city}?
 
 Scene 1:
-Show the common pain point faced by ${data.audience} in ${data.city}.
+Show the common pain point faced by ${audience}.
 
 Scene 2:
-Introduce ${data.businessName} and the offer: ${data.offer}.
+Introduce ${business} and highlight ${offer}.
 
 Scene 3:
-Show treatment, product, or service experience in a clean premium way.
+Show service, treatment, or happy customer result.
 
 Scene 4:
-Show confidence, result, or transformation.
+Close with confidence, premium feel, and urgency.
 
 Ending CTA:
-Book now. Limited slots. DM or call today.
-    `.trim();
+Book now. DM today. Limited slots.`;
 
-    document.getElementById("reelOutput").textContent = script;
-    setStatus("Video script direction generated.");
-  }
+      const cta = `1. Book Now
+2. Message For Offer
+3. Claim Your Slot
+4. Enquire Today
+5. Limited Period Offer`;
 
-  function saveCampaign() {
-    const data = getCampaignData();
+      const hashtags = `#${product.replace(/\s+/g, "")} #${city.replace(/\s+/g, "")} #BeautyClinic #AestheticCare #WomensWellness #PremiumCare #LimitedOffer #BookNow`;
 
-    if (!validateData(data)) {
-      setStatus("Please fill all main campaign fields before saving.");
-      return;
+      setOutputs(meta, google, reel, cta, hashtags);
+      setStatus("OpenAI server failed, so Bariq generated a smart fallback campaign locally.");
     }
 
-    const savedCampaigns = JSON.parse(localStorage.getItem("bariq_campaigns") || "[]");
-    savedCampaigns.push({
-      ...data,
-      savedAt: new Date().toISOString()
-    });
+    function setOutputsFromText(text) {
+      const cleanText = text || "";
 
-    localStorage.setItem("bariq_campaigns", JSON.stringify(savedCampaigns));
-    setStatus("Campaign saved locally in this browser.");
-  }
+      const metaMatch = cleanText.match(/Meta Ad Copy[:\-\n]*([\s\S]*?)(?=\n\s*Google Ad Copy|\n\s*Reel Script|\n\s*CTA Suggestions|\n\s*Hashtags|$)/i);
+      const googleMatch = cleanText.match(/Google Ad Copy[:\-\n]*([\s\S]*?)(?=\n\s*Reel Script|\n\s*CTA Suggestions|\n\s*Hashtags|$)/i);
+      const reelMatch = cleanText.match(/Reel Script[:\-\n]*([\s\S]*?)(?=\n\s*CTA Suggestions|\n\s*Hashtags|$)/i);
+      const ctaMatch = cleanText.match(/CTA Suggestions[:\-\n]*([\s\S]*?)(?=\n\s*Hashtags|$)/i);
+      const hashtagMatch = cleanText.match(/Hashtags[:\-\n]*([\s\S]*?)$/i);
 
-  document.getElementById("generateAdsBtn").addEventListener("click", generateAds);
-  document.getElementById("generateVideoBtn").addEventListener("click", generateVideoPlan);
-  document.getElementById("saveCampaignBtn").addEventListener("click", saveCampaign);
-</script>
+      setOutputs(
+        metaMatch ? metaMatch[1].trim() : "No output found.",
+        googleMatch ? googleMatch[1].trim() : "No output found.",
+        reelMatch ? reelMatch[1].trim() : "No output found.",
+        ctaMatch ? ctaMatch[1].trim() : "No output found.",
+        hashtagMatch ? hashtagMatch[1].trim() : "No output found."
+      );
+    }
+
+    async function generateAds() {
+      const data = getCampaignData();
+
+      if (!validateData(data)) {
+        setStatus("Please fill the main fields or at least use a voice campaign brief.");
+        return;
+      }
+
+      setStatus("Generating campaign outputs with AI...");
+
+      try {
+        const response = await fetch("/api/generate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            prompt: buildPrompt(data)
+          })
+        });
+
+        const rawText = await response.text();
+
+        let result;
+        try {
+          result = JSON.parse(rawText);
+        } catch (parseError) {
+          localFallbackGeneration(data);
+          return;
+        }
+
+        if (!response.ok) {
+          localFallbackGeneration(data);
+          return;
+        }
+
+        const output = result.result || result.output || "";
+        if (!output) {
+          localFallbackGeneration(data);
+          return;
+        }
+
+        setOutputsFromText(output);
+        setStatus("Campaign outputs generated successfully with OpenAI.");
+      } catch (error) {
+        localFallbackGeneration(data);
+      }
+    }
+
+    function generateVideoPlan() {
+      const data = getCampaignData();
+
+      if (!validateData(data)) {
+        setStatus("Please fill the main fields or at least use a voice campaign brief.");
+        return;
+      }
+
+      const product = data.productService || "your service";
+      const offer = data.offer || "a special offer";
+      const city = data.city || "your city";
+      const audience = data.audience || "your target audience";
+      const business = data.businessName || "your brand";
+
+      const script = `
+Hook:
+Attention ${audience} in ${city}.
+
+Scene 1:
+Show the problem or concern related to ${product}.
+
+Scene 2:
+Introduce ${business} and present ${offer}.
+
+Scene 3:
+Show how the service works in a premium, trust-building way.
+
+Scene 4:
+Show happy result or confident customer moment.
+
+Ending CTA:
+Book now with ${business}. Limited slots available.
+      `.trim();
+
+      document.getElementById("reelOutput").textContent = script;
+      setStatus("Video script direction generated successfully.");
+    }
+
+    function saveCampaign() {
+      const data = getCampaignData();
+
+      if (!validateData(data)) {
+        setStatus("Please fill the main fields or at least use a voice campaign brief before saving.");
+        return;
+      }
+
+      const savedCampaigns = JSON.parse(localStorage.getItem("bariq_campaigns") || "[]");
+      savedCampaigns.push({
+        ...data,
+        savedAt: new Date().toISOString()
+      });
+
+      localStorage.setItem("bariq_campaigns", JSON.stringify(savedCampaigns));
+      setStatus("Campaign saved locally in this browser.");
+    }
+
+    document.getElementById("generateAdsBtn").addEventListener("click", generateAds);
+    document.getElementById("generateVideoBtn").addEventListener("click", generateVideoPlan);
+    document.getElementById("saveCampaignBtn").addEventListener("click", saveCampaign);
+  </script>
 </body>
 </html>
