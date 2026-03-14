@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI — Refund Policy</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root{
+      --bg1:#fffaf3; --bg2:#faf7ff; --bg3:#f7f0ff;
+      --text:#2c235c; --muted:#6d6684; --line:#ece0c0;
+      --purple:#5a3fff; --gold:#d8b05b; --blue:#4f8dff;
+      --card-shadow:0 14px 32px rgba(83,57,139,0.07);
+    }
+    html, body{
+      margin:0; padding:0; overflow-x:hidden;
+      font-family:Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
+      color:var(--text);
+    }
+    a{ text-decoration:none; color:inherit; }
+    .container{ width:min(1100px, calc(100% - 32px)); margin:0 auto; }
+    .site-header{
+      position:sticky; top:0; z-index:999;
+      background:rgba(255,255,255,0.94);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid #eee2bf;
+    }
+    .nav-wrap{
+      min-height:78px; display:flex; align-items:center; justify-content:space-between; gap:18px; position:relative;
+    }
+    .brand{
+      display:inline-flex; align-items:center; gap:10px; white-space:nowrap;
+      font-size:30px; font-weight:800;
+      background:linear-gradient(90deg,var(--gold),var(--purple),var(--blue));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .brand-dot{
+      width:12px; height:12px; border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      box-shadow:0 0 16px rgba(90,63,255,0.3);
+    }
+    .menu-toggle{
+      display:none; border:none; background:#f3edff; color:#2f216f; font-size:28px;
+      line-height:1; padding:10px 14px; border-radius:14px; cursor:pointer;
+    }
+    .main-nav{
+      display:flex; align-items:center; gap:6px; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; white-space:nowrap;
+    }
+    .main-nav::-webkit-scrollbar{ display:none; }
+    .main-nav a{
+      padding:10px 12px; font-size:14px; font-weight:700; color:#3a2d77; border-radius:12px; flex:0 0 auto;
+    }
+    .main-nav a:hover, .main-nav a.active{ background:#f3edff; }
+    .home-link{
+      background:linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
+      border:1px solid #eadfc2;
+    }
+    .page-section{ padding:18px 0 28px; }
+    .hero-box, .doc-card{
+      background:rgba(255,255,255,0.95);
+      border:1px solid #f0e6c9;
+      border-radius:26px;
+      box-shadow:var(--card-shadow);
+    }
+    .hero-box{
+      padding:24px; margin-bottom:18px;
+      background:linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
+    }
+    .hero-tag{
+      display:inline-block; font-size:13px; font-weight:800; color:#4a3b92;
+      border:1px solid #ece1bf; background:#fff; border-radius:999px; padding:10px 16px; margin-bottom:14px;
+    }
+    .hero-box h1{ margin:0 0 12px; font-size:42px; line-height:1.04; color:#312668; }
+    .hero-box p{ margin:0; font-size:16px; line-height:1.75; color:var(--muted); }
+    .doc-card{ padding:24px; }
+    .doc-card h2{ margin:0 0 10px; font-size:24px; color:#35296f; }
+    .doc-card p, .doc-card li{ font-size:15px; line-height:1.8; color:#564d73; }
+    .doc-card ul{ margin-top:8px; }
+    .doc-card section{ margin-bottom:24px; }
+    .site-footer{ margin-top:22px; background:#181427; color:#fff; padding:40px 0; }
+    .footer-grid{ display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; gap:24px; }
+    .footer-col h3{ margin:0 0 14px; font-size:18px; color:#fff; }
+    .footer-col p, .footer-col a{ display:block; margin:0 0 10px; color:#d9d4ea; font-size:15px; line-height:1.7; }
+    @media (max-width: 768px){
+      .container{ width:min(100% - 20px, 1200px); }
+      .menu-toggle{ display:block; }
+      .main-nav{
+        display:none; position:absolute; top:82px; left:0; right:0;
+        background:#fff; border:1px solid #ecdcb4; border-radius:18px;
+        box-shadow:0 18px 40px rgba(0,0,0,0.08); padding:14px;
+        flex-direction:column; align-items:stretch; gap:10px;
+      }
+      .main-nav.show{ display:flex; }
+      .main-nav a{ width:100%; background:#faf7ff; }
+      .hero-box h1{ font-size:32px; }
+      .hero-box, .doc-card{ padding:16px; }
+      .footer-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
+      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="home-link">🏠 Home</a>
+        <a href="pricing.html">💰 Pricing</a>
+        <a href="payments.html">💳 Payments</a>
+        <a href="terms.html">📄 Terms</a>
+        <a href="privacy.html">🔒 Privacy</a>
+        <a href="refund-policy.html" class="active">↩️ Refunds</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-section">
+    <div class="container">
+      <div class="hero-box">
+        <div class="hero-tag">Legal</div>
+        <h1>Refund Policy</h1>
+        <p>
+          This Refund Policy explains the general approach to subscription fees, cancellations, and refunds for Bariq AI.
+        </p>
+      </div>
+
+      <div class="doc-card">
+        <section>
+          <h2>1. Subscription Nature</h2>
+          <p>Bariq AI primarily provides digital access to software tools, workflows, templates, and related services. Because access may be granted immediately after purchase, refunds may be limited.</p>
+        </section>
+
+        <section>
+          <h2>2. General Refund Position</h2>
+          <p>Unless otherwise required by law or explicitly stated in writing, subscription fees and digital access payments are generally non-refundable once access has been granted.</p>
+        </section>
+
+        <section>
+          <h2>3. Duplicate or Accidental Charges</h2>
+          <p>If you believe you were charged more than once for the same transaction in error, you may contact Bariq AI for review. Verified duplicate billing issues may be corrected where appropriate.</p>
+        </section>
+
+        <section>
+          <h2>4. Failed Access or Technical Billing Issues</h2>
+          <p>If payment was completed but platform access was not reasonably provided due to a technical issue directly attributable to Bariq AI, you may contact support for resolution or billing review.</p>
+        </section>
+
+        <section>
+          <h2>5. Cancellation</h2>
+          <p>You may cancel future renewal of your subscription according to the applicable plan settings. Cancellation generally prevents future billing but does not automatically guarantee refund of fees already charged.</p>
+        </section>
+
+        <section>
+          <h2>6. Custom Services or Manual Work</h2>
+          <p>If Bariq AI later offers customized onboarding, manual setup, consulting, or special implementation services, separate refund terms may apply to those services.</p>
+        </section>
+
+        <section>
+          <h2>7. Review Requests</h2>
+          <p>Any exceptional refund request may be reviewed on a case-by-case basis, but approval remains at Bariq AI’s discretion unless otherwise required by law.</p>
+        </section>
+
+        <section>
+          <h2>8. Contact</h2>
+          <p>For refund or billing-related questions, contact: support@bariqai.com</p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Bariq AI</h3>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation, and execution systems.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund-policy.html">Refund Policy</a>
+        </div>
+        <div class="footer-col">
+          <h3>Platform</h3>
+          <a href="pricing.html">Pricing</a>
+          <a href="payments.html">Payments</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h3>Support</h3>
+          <p>support@bariqai.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() {
+      document.getElementById("mainNav").classList.toggle("show");
+    }
+  </script>
+</body>
+</html>
