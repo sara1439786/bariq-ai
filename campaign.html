@@ -459,7 +459,7 @@
   </header>
 
   <section class="hero-section">
-    <div class="container">
+    <div class="container"
       <div class="hero-shell">
         <div class="hero-grid">
 
@@ -582,7 +582,21 @@
               </select>
             </div>
 
-            <div class="field full">
+              <div class="field full">
+  <label for="voicePrompt">Voice Campaign Brief</label>
+  <textarea id="voicePrompt" placeholder="Speak or type one simple brief. Example: Promote my laser hair removal clinic with flat 60% off for women in Hyderabad."></textarea>
+</div>
+
+<div class="field full" style="margin-top:-4px;">
+  <div style="display:flex; gap:12px; flex-wrap:wrap;">
+    <button class="btn btn-light" type="button" onclick="startVoiceInput()">🎤 Start Voice</button>
+    <button class="btn btn-light" type="button" onclick="stopVoiceInput()">⏹ Stop Voice</button>
+    <button class="btn btn-light" type="button" onclick="useVoicePrompt()">✨ Use Voice Brief</button>
+  </div>
+</div>
+
+<label for="notes">Extra Notes</label>
+<textarea id="notes" placeholder="Anything special Bariq should know? Tone, urgency, style, local language, premium feel, etc."></textarea>
               <label for="notes">Extra Notes</label>
               <textarea id="notes" placeholder="Anything special Bariq should know? Tone, urgency, style, local language, premium feel, etc."></textarea>
             </div>
@@ -832,5 +846,251 @@ Book now / Message now / Limited slots available.
     document.getElementById("generateVideoBtn").addEventListener("click", generateVideoPlan);
     document.getElementById("saveCampaignBtn").addEventListener("click", saveCampaign);
   </script>
+  <script>
+  let recognition;
+  let isListening = false;
+
+  function toggleMobileMenu() {
+    document.getElementById("mainNav").classList.toggle("show");
+  }
+
+  function getCampaignData() {
+    return {
+      businessName: document.getElementById("businessName").value.trim(),
+      campaignName: document.getElementById("campaignName").value.trim(),
+      productService: document.getElementById("productService").value.trim(),
+      offer: document.getElementById("offer").value.trim(),
+      audience: document.getElementById("audience").value.trim(),
+      city: document.getElementById("city").value.trim(),
+      budget: document.getElementById("budget").value.trim(),
+      goal: document.getElementById("goal").value.trim(),
+      voicePrompt: document.getElementById("voicePrompt") ? document.getElementById("voicePrompt").value.trim() : "",
+      notes: document.getElementById("notes").value.trim()
+    };
+  }
+
+  function validateData(data) {
+    return !!(
+      data.businessName &&
+      data.campaignName &&
+      data.productService &&
+      data.offer &&
+      data.audience &&
+      data.city &&
+      data.budget &&
+      data.goal
+    );
+  }
+
+  function setStatus(message) {
+    document.getElementById("statusBar").textContent = message;
+  }
+
+  function useVoicePrompt() {
+    const voicePrompt = document.getElementById("voicePrompt").value.trim();
+    if (!voicePrompt) {
+      setStatus("Please record or type a voice campaign brief first.");
+      return;
+    }
+
+    document.getElementById("notes").value =
+      (document.getElementById("notes").value.trim() ? document.getElementById("notes").value.trim() + "\n\n" : "") +
+      "Voice Brief:\n" + voicePrompt;
+
+    setStatus("Voice brief added into campaign notes.");
+  }
+
+  function startVoiceInput() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      setStatus("Voice input is not supported in this browser. Please use Chrome.");
+      return;
+    }
+
+    recognition = new SpeechRecognition();
+    recognition.lang = "en-IN";
+    recognition.interimResults = true;
+    recognition.continuous = true;
+
+    recognition.onstart = function () {
+      isListening = true;
+      setStatus("Listening... speak your campaign brief now.");
+    };
+
+    recognition.onresult = function (event) {
+      let transcript = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        transcript += event.results[i][0].transcript;
+      }
+      document.getElementById("voicePrompt").value = transcript.trim();
+    };
+
+    recognition.onerror = function (event) {
+      setStatus("Voice input error: " + event.error);
+    };
+
+    recognition.onend = function () {
+      if (isListening) {
+        setStatus("Voice input stopped.");
+      }
+      isListening = false;
+    };
+
+    recognition.start();
+  }
+
+  function stopVoiceInput() {
+    if (recognition && isListening) {
+      recognition.stop();
+      isListening = false;
+      setStatus("Voice recording stopped.");
+    } else {
+      setStatus("Voice input is not currently running.");
+    }
+  }
+
+  function buildPrompt(data) {
+    const voiceSection = data.voicePrompt
+      ? `Voice Campaign Brief: ${data.voicePrompt}\n`
+      : "";
+
+    return `
+Create a premium marketing campaign package.
+
+Business Name: ${data.businessName}
+Campaign Name: ${data.campaignName}
+Product or Service: ${data.productService}
+Offer: ${data.offer}
+Target Audience: ${data.audience}
+Target City: ${data.city}
+Budget: ${data.budget}
+Campaign Goal: ${data.goal}
+${voiceSection}Extra Notes: ${data.notes}
+
+Generate these sections clearly with headings:
+
+Meta Ad Copy:
+Google Ad Copy:
+Reel Script:
+CTA Suggestions:
+Hashtags:
+
+Keep the campaign practical, conversion-focused, premium, and easy to use for real ads.
+    `.trim();
+  }
+
+  function setOutputsFromText(text) {
+    const cleanText = text || "";
+
+    const metaMatch = cleanText.match(/Meta Ad Copy[:\-\n]*([\s\S]*?)(?=\n\s*Google Ad Copy|\n\s*Reel Script|\n\s*CTA Suggestions|\n\s*Hashtags|$)/i);
+    const googleMatch = cleanText.match(/Google Ad Copy[:\-\n]*([\s\S]*?)(?=\n\s*Reel Script|\n\s*CTA Suggestions|\n\s*Hashtags|$)/i);
+    const reelMatch = cleanText.match(/Reel Script[:\-\n]*([\s\S]*?)(?=\n\s*CTA Suggestions|\n\s*Hashtags|$)/i);
+    const ctaMatch = cleanText.match(/CTA Suggestions[:\-\n]*([\s\S]*?)(?=\n\s*Hashtags|$)/i);
+    const hashtagMatch = cleanText.match(/Hashtags[:\-\n]*([\s\S]*?)$/i);
+
+    document.getElementById("metaOutput").textContent = metaMatch ? metaMatch[1].trim() : "No output found.";
+    document.getElementById("googleOutput").textContent = googleMatch ? googleMatch[1].trim() : "No output found.";
+    document.getElementById("reelOutput").textContent = reelMatch ? reelMatch[1].trim() : "No output found.";
+    document.getElementById("ctaOutput").textContent = ctaMatch ? ctaMatch[1].trim() : "No output found.";
+    document.getElementById("hashtagOutput").textContent = hashtagMatch ? hashtagMatch[1].trim() : "No output found.";
+  }
+
+  async function generateAds() {
+    const data = getCampaignData();
+
+    if (!validateData(data)) {
+      setStatus("Please fill all main campaign fields first.");
+      return;
+    }
+
+    setStatus("Generating campaign outputs with AI...");
+
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          prompt: buildPrompt(data)
+        })
+      });
+
+      const rawText = await response.text();
+
+      let result;
+      try {
+        result = JSON.parse(rawText);
+      } catch (parseError) {
+        throw new Error("Server returned non-JSON response: " + rawText.slice(0, 140));
+      }
+
+      if (!response.ok) {
+        throw new Error(result.error || result.details || "Generation failed.");
+      }
+
+      const output = result.result || result.output || "No result received.";
+      setOutputsFromText(output);
+      setStatus("Campaign outputs generated successfully.");
+    } catch (error) {
+      setStatus("Error: " + error.message);
+    }
+  }
+
+  function generateVideoPlan() {
+    const data = getCampaignData();
+
+    if (!validateData(data)) {
+      setStatus("Please fill all main campaign fields first.");
+      return;
+    }
+
+    const script = `
+Hook:
+Still struggling with ${data.productService.toLowerCase()}?
+
+Scene 1:
+Show the common pain point faced by ${data.audience} in ${data.city}.
+
+Scene 2:
+Introduce ${data.businessName} and the offer: ${data.offer}.
+
+Scene 3:
+Show treatment, product, or service experience in a clean premium way.
+
+Scene 4:
+Show confidence, result, or transformation.
+
+Ending CTA:
+Book now. Limited slots. DM or call today.
+    `.trim();
+
+    document.getElementById("reelOutput").textContent = script;
+    setStatus("Video script direction generated.");
+  }
+
+  function saveCampaign() {
+    const data = getCampaignData();
+
+    if (!validateData(data)) {
+      setStatus("Please fill all main campaign fields before saving.");
+      return;
+    }
+
+    const savedCampaigns = JSON.parse(localStorage.getItem("bariq_campaigns") || "[]");
+    savedCampaigns.push({
+      ...data,
+      savedAt: new Date().toISOString()
+    });
+
+    localStorage.setItem("bariq_campaigns", JSON.stringify(savedCampaigns));
+    setStatus("Campaign saved locally in this browser.");
+  }
+
+  document.getElementById("generateAdsBtn").addEventListener("click", generateAds);
+  document.getElementById("generateVideoBtn").addEventListener("click", generateVideoPlan);
+  document.getElementById("saveCampaignBtn").addEventListener("click", saveCampaign);
+</script>
 </body>
 </html>
