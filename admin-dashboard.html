@@ -1,229 +1,1005 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI — Admin Dashboard</title>
+  <style>
+    * { box-sizing: border-box; }
 
-<title>Bariq AI Admin Panel</title>
+    :root{
+      --bg1:#fffaf3;
+      --bg2:#faf7ff;
+      --bg3:#f7f0ff;
+      --text:#2c235c;
+      --muted:#6d6684;
+      --line:#ece0c0;
+      --white:#ffffff;
+      --purple:#5a3fff;
+      --gold:#d8b05b;
+      --pink:#ff7cc8;
+      --blue:#4f8dff;
+      --green:#35b36e;
+      --red:#e35d6a;
+      --shadow:0 20px 55px rgba(75,45,120,0.08);
+      --card-shadow:0 14px 32px rgba(83,57,139,0.07);
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
+      color: var(--text);
+    }
 
-<style>
+    body { position: relative; }
 
-body{
-font-family:Inter;
-background:#f8f6ff;
-margin:0;
-padding:0;
-}
+    body::before{
+      content:"";
+      position:fixed;
+      top:-220px;
+      right:-220px;
+      width:720px;
+      height:720px;
+      background:radial-gradient(circle at center, rgba(120,80,255,0.22), rgba(120,80,255,0.08), transparent 70%);
+      z-index:-3;
+      filter:blur(85px);
+      animation:glowMove 14s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
 
-.header{
-background:white;
-padding:20px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 4px 10px rgba(0,0,0,0.05);
-}
+    body::after{
+      content:"";
+      position:fixed;
+      bottom:-240px;
+      left:-220px;
+      width:700px;
+      height:700px;
+      background:radial-gradient(circle, rgba(216,176,91,0.22), transparent 70%);
+      z-index:-3;
+      filter:blur(95px);
+      animation:goldGlow 16s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
 
-.logo{
-font-size:28px;
-font-weight:700;
-color:#6b4ce6;
-}
+    .floating-orb{
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(18px);
+      pointer-events: none;
+      z-index: -2;
+      opacity: 0.35;
+    }
 
-.menu a{
-margin-left:20px;
-text-decoration:none;
-color:#333;
-font-weight:600;
-}
+    .orb-1{
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, #8f6bff, #c69cff);
+      left: 8%;
+      top: 20%;
+      animation: floatOrb1 12s ease-in-out infinite alternate;
+    }
 
-.container{
-padding:40px;
-}
+    .orb-2{
+      width: 140px;
+      height: 140px;
+      background: linear-gradient(135deg, #ffd28e, #ffb86f);
+      right: 10%;
+      top: 40%;
+      animation: floatOrb2 15s ease-in-out infinite alternate;
+    }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px;
-}
+    .orb-3{
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #ff9adf, #d79bff);
+      left: 46%;
+      bottom: 10%;
+      animation: floatOrb3 13s ease-in-out infinite alternate;
+    }
 
-.card{
-background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 6px 14px rgba(0,0,0,0.08);
-}
+    @keyframes glowMove{
+      0%{transform:translate(0,0);}
+      100%{transform:translate(-80px,60px);}
+    }
+    @keyframes goldGlow{
+      0%{transform:translate(0,0);}
+      100%{transform:translate(120px,-80px);}
+    }
+    @keyframes floatOrb1{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(40px) translateX(30px);}
+    }
+    @keyframes floatOrb2{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(-30px) translateX(-25px);}
+    }
+    @keyframes floatOrb3{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(-25px) translateX(35px);}
+    }
 
-.card h3{
-margin:0;
-font-size:18px;
-color:#666;
-}
+    a { text-decoration: none; color: inherit; }
 
-.card p{
-font-size:28px;
-font-weight:700;
-margin-top:10px;
-color:#6b4ce6;
-}
+    .container {
+      width: min(1360px, calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-.section{
-margin-top:40px;
-}
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid #eee2bf;
+    }
 
-.table{
-width:100%;
-background:white;
-border-radius:10px;
-overflow:hidden;
-box-shadow:0 6px 14px rgba(0,0,0,0.08);
-}
+    .site-header::after{
+      content:"";
+      position:absolute;
+      bottom:0;
+      left:0;
+      width:100%;
+      height:3px;
+      background:linear-gradient(90deg,#d8b05b,#7b5cff,#ff8acc,#d8b05b);
+      background-size:300% 100%;
+      animation:headerFlow 7s linear infinite;
+    }
 
-.table th{
-background:#6b4ce6;
-color:white;
-padding:14px;
-text-align:left;
-}
+    @keyframes headerFlow{
+      0%{background-position:0%;}
+      100%{background-position:300%;}
+    }
 
-.table td{
-padding:14px;
-border-bottom:1px solid #eee;
-}
+    .nav-wrap {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      position: relative;
+    }
 
-.button{
-background:#6b4ce6;
-color:white;
-border:none;
-padding:10px 20px;
-border-radius:6px;
-cursor:pointer;
-}
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      font-size: 30px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--gold), var(--purple), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-</style>
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--purple));
+      box-shadow: 0 0 16px rgba(90,63,255,0.3);
+    }
+
+    .menu-toggle {
+      display: none;
+      border: none;
+      background: #f3edff;
+      color: #2f216f;
+      font-size: 28px;
+      line-height: 1;
+      padding: 10px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      white-space: nowrap;
+    }
+
+    .main-nav::-webkit-scrollbar { display:none; }
+
+    .main-nav a {
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #3a2d77;
+      border-radius: 12px;
+      flex: 0 0 auto;
+      transition: 0.18s ease;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      background: #f3edff;
+    }
+
+    .home-link {
+      background: linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
+      border: 1px solid #eadfc2;
+    }
+
+    .page-section {
+      padding: 18px 0 24px;
+    }
+
+    .hero-box,
+    .metric-card,
+    .panel-card,
+    .activity-card,
+    .quick-card{
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #f0e6c9;
+      border-radius: 26px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .hero-box{
+      padding:24px;
+      margin-bottom:18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-box::before{
+      content:"";
+      position:absolute;
+      right:-60px;
+      top:-60px;
+      width:220px;
+      height:220px;
+      background: radial-gradient(circle, rgba(216,176,91,0.16), transparent 65%);
+      pointer-events:none;
+    }
+
+    .hero-tag{
+      display:inline-block;
+      font-size:13px;
+      font-weight:800;
+      color:#4a3b92;
+      border:1px solid #ece1bf;
+      background:#fff;
+      border-radius:999px;
+      padding:10px 16px;
+      margin-bottom:14px;
+    }
+
+    .hero-box h1{
+      margin:0 0 12px;
+      font-size:48px;
+      line-height:1.02;
+      letter-spacing:-0.04em;
+      color:#312668;
+      max-width:900px;
+    }
+
+    .hero-box p{
+      margin:0 0 18px;
+      font-size:17px;
+      line-height:1.75;
+      color:var(--muted);
+      max-width:860px;
+    }
+
+    .text-gold{ color: var(--gold); text-shadow: 0 0 18px rgba(216,176,91,0.18); }
+    .text-purple{ color: var(--purple); text-shadow: 0 0 18px rgba(90,63,255,0.14); }
+    .text-pink{ color: var(--pink); text-shadow: 0 0 18px rgba(255,124,200,0.14); }
+    .text-blue{ color: var(--blue); text-shadow: 0 0 18px rgba(79,141,255,0.14); }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:14px 18px;
+      border-radius:16px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      border:none;
+      transition:0.2s ease;
+      text-align:center;
+    }
+
+    .btn:hover{ transform:translateY(-2px); }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(90,63,255,0.18);
+    }
+
+    .btn-light{
+      background:#f4eeff;
+      color:#34296a;
+      border:1px solid #e4d7ff;
+    }
+
+    .metrics-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .metric-card{
+      padding:18px;
+      background:#fff;
+    }
+
+    .metric-card .label{
+      font-size:13px;
+      font-weight:700;
+      color:#776f8a;
+      margin-bottom:10px;
+    }
+
+    .metric-card .big{
+      font-size:28px;
+      font-weight:800;
+      color:#3f3281;
+      margin-bottom:8px;
+    }
+
+    .metric-card p{
+      margin:0;
+      font-size:14px;
+      line-height:1.65;
+      color:var(--muted);
+    }
+
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .panel-card,
+    .activity-card,
+    .quick-card{
+      padding:22px;
+    }
+
+    .panel-card h2,
+    .activity-card h2,
+    .quick-card h2{
+      margin:0 0 10px;
+      font-size:26px;
+      color:#35296f;
+    }
+
+    .panel-sub{
+      margin:0 0 16px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    .bar-list{
+      display:grid;
+      gap:14px;
+    }
+
+    .bar-item{
+      display:grid;
+      gap:8px;
+    }
+
+    .bar-head{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      font-size:14px;
+      font-weight:700;
+      color:#4b4177;
+    }
+
+    .bar-track{
+      width:100%;
+      height:12px;
+      border-radius:999px;
+      background:#f2ecff;
+      overflow:hidden;
+      border:1px solid #eadffc;
+    }
+
+    .bar-fill{
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--gold),var(--purple));
+    }
+
+    .split-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .mini-box{
+      padding:18px;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid #eee2bf;
+      box-shadow:0 10px 24px rgba(83,57,139,0.05);
+    }
+
+    .mini-box h3{
+      margin:0 0 8px;
+      font-size:18px;
+      color:#433685;
+    }
+
+    .mini-box p{
+      margin:0;
+      font-size:14px;
+      line-height:1.72;
+      color:var(--muted);
+    }
+
+    .status-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .status-pill{
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      border:1px solid #eadffc;
+      background:#f5f0ff;
+      color:#4a3b92;
+    }
+
+    .status-pill.green{
+      background:#eefaf2;
+      border-color:#d5f1df;
+      color:#1f8a4f;
+    }
+
+    .status-pill.red{
+      background:#fff1f3;
+      border-color:#ffd7dc;
+      color:#c14558;
+    }
+
+    .status-pill.blue{
+      background:#edf5ff;
+      border-color:#d8e7ff;
+      color:#2f6fcb;
+    }
+
+    .activity-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .activity-item{
+      padding:14px 16px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid #eee2bf;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:flex-start;
+      font-size:14px;
+      line-height:1.6;
+      color:#564d73;
+    }
+
+    .activity-left strong{
+      display:block;
+      color:#3f3281;
+      margin-bottom:4px;
+    }
+
+    .activity-tag{
+      flex:0 0 auto;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      background:#f4eeff;
+      color:#4a3b92;
+      border:1px solid #eadffc;
+    }
+
+    .quick-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+
+    .quick-box{
+      padding:18px;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid #eee2bf;
+      box-shadow:0 10px 24px rgba(83,57,139,0.05);
+    }
+
+    .quick-box h3{
+      margin:0 0 8px;
+      font-size:18px;
+      color:#433685;
+    }
+
+    .quick-box p{
+      margin:0 0 12px;
+      font-size:14px;
+      line-height:1.72;
+      color:var(--muted);
+    }
+
+    .quick-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .mini-btn{
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid #e4d7ff;
+      background:#f4eeff;
+      color:#34296a;
+      font-weight:800;
+      font-size:13px;
+      cursor:pointer;
+      transition:0.2s ease;
+    }
+
+    .mini-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .users-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .user-card{
+      padding:20px;
+      border-radius:24px;
+      background: linear-gradient(180deg,#fff,#fcf8ff);
+      border:1px solid #f0e6c9;
+      box-shadow: var(--card-shadow);
+    }
+
+    .user-card h3{
+      margin:0 0 8px;
+      font-size:18px;
+      color:#40337f;
+    }
+
+    .user-card p{
+      margin:0 0 12px;
+      font-size:14px;
+      line-height:1.72;
+      color:var(--muted);
+    }
+
+    .user-metric{
+      font-size:26px;
+      font-weight:800;
+      color:#3f3281;
+      margin-bottom:10px;
+    }
+
+    .site-footer{
+      margin-top:22px;
+      background:#181427;
+      color:#fff;
+      padding:40px 0;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr 1fr;
+      gap:24px;
+    }
+
+    .footer-col h3{
+      margin:0 0 14px;
+      font-size:18px;
+      color:#ffffff;
+    }
+
+    .footer-col p,
+    .footer-col a{
+      display:block;
+      margin:0 0 10px;
+      color:#d9d4ea;
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    @media (max-width: 1180px){
+      .metrics-grid,
+      .users-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .dashboard-grid,
+      .footer-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media (max-width: 768px){
+      .container{
+        width:min(100% - 20px, 1200px);
+      }
+
+      .menu-toggle{
+        display:block;
+      }
+
+      .main-nav{
+        display:none;
+        position:absolute;
+        top:82px;
+        left:0;
+        right:0;
+        background:#fff;
+        border:1px solid #ecdcb4;
+        border-radius:18px;
+        box-shadow:0 18px 40px rgba(0,0,0,0.08);
+        padding:14px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
+      }
+
+      .main-nav.show{
+        display:flex;
+      }
+
+      .main-nav a{
+        width:100%;
+        background:#faf7ff;
+        justify-content:flex-start;
+      }
+
+      .hero-box h1{
+        font-size:34px;
+      }
+
+      .hero-actions{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .metrics-grid,
+      .dashboard-grid,
+      .split-grid,
+      .quick-grid,
+      .users-grid,
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-box,
+      .metric-card,
+      .panel-card,
+      .activity-card,
+      .quick-card,
+      .user-card{
+        padding:16px;
+      }
+
+      .activity-item{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="header">
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="floating-orb orb-3"></div>
 
-<div class="logo">Bariq AI Admin</div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
+      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
 
-<div class="menu">
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="home-link">🏠 Home</a>
+        <a href="business-dashboard.html">🏢 Business</a>
+        <a href="ai-generator.html">✨ AI Generator</a>
+        <a href="campaign.html">📣 Campaign</a>
+        <a href="creator-marketplace.html">🎥 Creators</a>
+        <a href="templates.html">🧩 Templates</a>
+        <a href="payments.html">💳 Payments</a>
+        <a href="login.html">🔐 Login</a>
+        <a href="admin-dashboard.html" class="active">⚙️ Admin</a>
+      </nav>
+    </div>
+  </header>
 
-<a href="index.html">Home</a>
-<a href="ai-generator.html">AI Generator</a>
-<a href="business-dashboard.html">Businesses</a>
-<a href="creator-dashboard.html">Creators</a>
-<a href="campaign-studio-pro.html">Campaigns</a>
-<a href="payments.html">Payments</a>
+  <section class="page-section">
+    <div class="container">
 
-</div>
+      <div class="hero-box">
+        <div class="hero-tag">Platform Control Center</div>
+        <h1>
+          Monitor <span class="text-gold">users</span>,
+          manage <span class="text-purple">growth</span>,
+          track <span class="text-pink">activity</span>,
+          and control <span class="text-blue">Bariq AI</span>
+        </h1>
 
-</div>
+        <p>
+          The Admin Dashboard gives a top-level view of Bariq performance across business users,
+          creators, plans, campaigns, templates, and platform activity so everything feels structured and in control.
+        </p>
 
+        <div class="hero-actions">
+          <button class="btn btn-primary">📊 Export Reports</button>
+          <a href="payments.html" class="btn btn-light">💳 View Revenue</a>
+          <a href="creator-marketplace.html" class="btn btn-light">🎥 Review Creators</a>
+        </div>
+      </div>
 
-<div class="container">
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="label">👥 Total Users</div>
+          <div class="big">2,460</div>
+          <p>Combined business users, creators, and admins currently using the Bariq platform.</p>
+        </div>
 
-<div class="grid">
+        <div class="metric-card">
+          <div class="label">📣 Active Campaigns</div>
+          <div class="big">186</div>
+          <p>Campaigns currently in draft, in progress, or actively being used across the platform.</p>
+        </div>
 
-<div class="card">
-<h3>Total Businesses</h3>
-<p id="businessCount">24</p>
-</div>
+        <div class="metric-card">
+          <div class="label">💳 Monthly Revenue</div>
+          <div class="big">₹4.8L</div>
+          <p>Current subscription and platform revenue snapshot from active Bariq plans.</p>
+        </div>
 
-<div class="card">
-<h3>Total Creators</h3>
-<p id="creatorCount">142</p>
-</div>
+        <div class="metric-card">
+          <div class="label">🎥 Creator Profiles</div>
+          <div class="big">312</div>
+          <p>Registered creators available for campaigns, collaborations, and marketplace visibility.</p>
+        </div>
+      </div>
 
-<div class="card">
-<h3>Total Campaigns</h3>
-<p id="campaignCount">61</p>
-</div>
+      <div class="dashboard-grid">
+        <div class="panel-card">
+          <h2>Platform health overview</h2>
+          <p class="panel-sub">Use these indicators to understand how Bariq is performing across the most important system layers.</p>
 
-<div class="card">
-<h3>Total Revenue</h3>
-<p>₹2,84,500</p>
-</div>
+          <div class="bar-list">
+            <div class="bar-item">
+              <div class="bar-head">
+                <span>Business Dashboard Usage</span>
+                <span>82%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill" style="width:82%;"></div></div>
+            </div>
 
-</div>
+            <div class="bar-item">
+              <div class="bar-head">
+                <span>AI Generator Usage</span>
+                <span>91%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill" style="width:91%;"></div></div>
+            </div>
 
+            <div class="bar-item">
+              <div class="bar-head">
+                <span>Creator Marketplace Activity</span>
+                <span>68%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill" style="width:68%;"></div></div>
+            </div>
 
-<div class="section">
+            <div class="bar-item">
+              <div class="bar-head">
+                <span>Payments Conversion</span>
+                <span>57%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill" style="width:57%;"></div></div>
+            </div>
+          </div>
 
-<h2>Recent Businesses</h2>
+          <div class="split-grid" style="margin-top:18px;">
+            <div class="mini-box">
+              <h3>System status</h3>
+              <p>Major page flows are stable and visually connected. Monitoring remains active for platform consistency.</p>
+              <div class="status-row">
+                <span class="status-pill green">Website Live</span>
+                <span class="status-pill blue">Payments Ready</span>
+                <span class="status-pill">Templates Active</span>
+              </div>
+            </div>
 
-<table class="table">
+            <div class="mini-box">
+              <h3>Admin focus today</h3>
+              <p>Review creator quality, improve payment conversions, and grow premium user adoption for stronger revenue.</p>
+              <div class="status-row">
+                <span class="status-pill">User Growth</span>
+                <span class="status-pill green">Campaign Quality</span>
+                <span class="status-pill red">Login Fixes</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<tr>
-<th>Name</th>
-<th>Email</th>
-<th>Plan</th>
-<th>Status</th>
-</tr>
+        <div class="activity-card">
+          <h2>Recent admin activity</h2>
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-left">
+                <strong>New Pro subscriptions added</strong>
+                14 new users upgraded to Pro Plan in the last 24 hours.
+              </div>
+              <div class="activity-tag">Revenue</div>
+            </div>
 
-<tr>
-<td>Glow Clinic</td>
-<td>glow@gmail.com</td>
-<td>Growth</td>
-<td>Active</td>
-</tr>
+            <div class="activity-item">
+              <div class="activity-left">
+                <strong>Creator approvals pending</strong>
+                9 creator applications are waiting for profile review and verification.
+              </div>
+              <div class="activity-tag">Creators</div>
+            </div>
 
-<tr>
-<td>SkinCare Hub</td>
-<td>skin@gmail.com</td>
-<td>Starter</td>
-<td>Active</td>
-</tr>
+            <div class="activity-item">
+              <div class="activity-left">
+                <strong>Campaign spike recorded</strong>
+                AI Generator and Campaign Studio usage increased after new page improvements.
+              </div>
+              <div class="activity-tag">Usage</div>
+            </div>
 
-<tr>
-<td>Beauty Studio</td>
-<td>beauty@gmail.com</td>
-<td>Pro</td>
-<td>Active</td>
-</tr>
+            <div class="activity-item">
+              <div class="activity-left">
+                <strong>Payment page visits increased</strong>
+                Pricing and payments views are up compared to the previous week.
+              </div>
+              <div class="activity-tag">Plans</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-</table>
+      <div class="quick-card" style="margin-bottom:18px;">
+        <h2>Quick admin actions</h2>
+        <p class="panel-sub">Fast navigation shortcuts for the most important platform controls.</p>
 
-</div>
+        <div class="quick-grid">
+          <div class="quick-box">
+            <h3>User Management</h3>
+            <p>Review business users, creator accounts, plan distribution, and access control.</p>
+            <div class="quick-links">
+              <button class="mini-btn">View Users</button>
+              <button class="mini-btn">Approve Creators</button>
+            </div>
+          </div>
 
+          <div class="quick-box">
+            <h3>Revenue Control</h3>
+            <p>Track plan conversions, payment activity, upgrades, and subscription health.</p>
+            <div class="quick-links">
+              <button class="mini-btn">Revenue Report</button>
+              <button class="mini-btn">Plans Overview</button>
+            </div>
+          </div>
 
-<div class="section">
+          <div class="quick-box">
+            <h3>Content & Campaigns</h3>
+            <p>Monitor campaign usage, AI output adoption, and active creator collaborations.</p>
+            <div class="quick-links">
+              <button class="mini-btn">View Campaigns</button>
+              <button class="mini-btn">Check Templates</button>
+            </div>
+          </div>
 
-<h2>Recent Campaigns</h2>
+          <div class="quick-box">
+            <h3>Platform Quality</h3>
+            <p>Watch stability, admin tasks, UI consistency, and areas that still need improvement.</p>
+            <div class="quick-links">
+              <button class="mini-btn">Status Review</button>
+              <button class="mini-btn">Open Logs</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<table class="table">
+      <div class="users-grid">
+        <div class="user-card">
+          <h3>Business Users</h3>
+          <div class="user-metric">1,420</div>
+          <p>Primary paying users using Bariq for campaigns, AI marketing content, templates, and creator collaborations.</p>
+        </div>
 
-<tr>
-<th>Campaign</th>
-<th>Business</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
+        <div class="user-card">
+          <h3>Creator Users</h3>
+          <div class="user-metric">312</div>
+          <p>Creators using the marketplace and dashboard to receive opportunities, manage work, and grow profile visibility.</p>
+        </div>
 
-<tr>
-<td>Laser Hair Removal Ads</td>
-<td>Glow Clinic</td>
-<td>Running</td>
-<td><button class="button">View</button></td>
-</tr>
+        <div class="user-card">
+          <h3>Trial / New Signups</h3>
+          <div class="user-metric">728</div>
+          <p>Fresh signups exploring Bariq before converting into Starter, Pro, or Scale plan customers.</p>
+        </div>
+      </div>
 
-<tr>
-<td>Weight Loss Offer</td>
-<td>SkinCare Hub</td>
-<td>Draft</td>
-<td><button class="button">View</button></td>
-</tr>
+    </div>
+  </section>
 
-</table>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Bariq AI</h3>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation, and execution systems.</p>
+        </div>
 
-</div>
+        <div class="footer-col">
+          <h3>Platform</h3>
+          <a href="index.html">Home</a>
+          <a href="ai-generator.html">AI Generator</a>
+          <a href="business-dashboard.html">Business Dashboard</a>
+          <a href="admin-dashboard.html">Admin Dashboard</a>
+        </div>
 
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund-policy.html">Refund Policy</a>
+        </div>
 
-</div>
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <a href="contact.html">Contact Us</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="payments.html">Payments</a>
+          <p>support@bariqai.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
 
+  <script>
+    function toggleMobileMenu() {
+      document.getElementById("mainNav").classList.toggle("show");
+    }
+  </script>
 </body>
 </html>
