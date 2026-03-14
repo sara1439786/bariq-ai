@@ -1,72 +1,752 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Login BariqAI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI — Login</title>
+  <style>
+    * { box-sizing: border-box; }
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    :root{
+      --bg1:#fffaf3;
+      --bg2:#faf7ff;
+      --bg3:#f7f0ff;
+      --text:#2c235c;
+      --muted:#6d6684;
+      --line:#ece0c0;
+      --white:#ffffff;
+      --purple:#5a3fff;
+      --gold:#d8b05b;
+      --pink:#ff7cc8;
+      --blue:#4f8dff;
+      --shadow:0 20px 55px rgba(75,45,120,0.08);
+      --card-shadow:0 14px 32px rgba(83,57,139,0.07);
+    }
 
-<style>
-body{
-font-family:Arial;
-text-align:center;
-margin-top:120px;
-}
-input{
-display:block;
-margin:10px auto;
-padding:10px;
-width:260px;
-}
-button{
-padding:10px 20px;
-cursor:pointer;
-}
-</style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
+      color: var(--text);
+    }
 
+    body { position: relative; }
+
+    body::before{
+      content:"";
+      position:fixed;
+      top:-220px;
+      right:-220px;
+      width:720px;
+      height:720px;
+      background:radial-gradient(circle at center, rgba(120,80,255,0.22), rgba(120,80,255,0.08), transparent 70%);
+      z-index:-3;
+      filter:blur(85px);
+      animation:glowMove 14s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      bottom:-240px;
+      left:-220px;
+      width:700px;
+      height:700px;
+      background:radial-gradient(circle, rgba(216,176,91,0.22), transparent 70%);
+      z-index:-3;
+      filter:blur(95px);
+      animation:goldGlow 16s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+
+    .floating-orb{
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(18px);
+      pointer-events: none;
+      z-index: -2;
+      opacity: 0.35;
+    }
+
+    .orb-1{
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, #8f6bff, #c69cff);
+      left: 8%;
+      top: 20%;
+      animation: floatOrb1 12s ease-in-out infinite alternate;
+    }
+
+    .orb-2{
+      width: 140px;
+      height: 140px;
+      background: linear-gradient(135deg, #ffd28e, #ffb86f);
+      right: 10%;
+      top: 40%;
+      animation: floatOrb2 15s ease-in-out infinite alternate;
+    }
+
+    .orb-3{
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #ff9adf, #d79bff);
+      left: 46%;
+      bottom: 10%;
+      animation: floatOrb3 13s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowMove{
+      0%{transform:translate(0,0);}
+      100%{transform:translate(-80px,60px);}
+    }
+    @keyframes goldGlow{
+      0%{transform:translate(0,0);}
+      100%{transform:translate(120px,-80px);}
+    }
+    @keyframes floatOrb1{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(40px) translateX(30px);}
+    }
+    @keyframes floatOrb2{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(-30px) translateX(-25px);}
+    }
+    @keyframes floatOrb3{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(-25px) translateX(35px);}
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: min(1360px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid #eee2bf;
+    }
+
+    .site-header::after{
+      content:"";
+      position:absolute;
+      bottom:0;
+      left:0;
+      width:100%;
+      height:3px;
+      background:linear-gradient(90deg,#d8b05b,#7b5cff,#ff8acc,#d8b05b);
+      background-size:300% 100%;
+      animation:headerFlow 7s linear infinite;
+    }
+
+    @keyframes headerFlow{
+      0%{background-position:0%;}
+      100%{background-position:300%;}
+    }
+
+    .nav-wrap {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      position: relative;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      font-size: 30px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--gold), var(--purple), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--purple));
+      box-shadow: 0 0 16px rgba(90,63,255,0.3);
+    }
+
+    .menu-toggle {
+      display: none;
+      border: none;
+      background: #f3edff;
+      color: #2f216f;
+      font-size: 28px;
+      line-height: 1;
+      padding: 10px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      white-space: nowrap;
+    }
+
+    .main-nav::-webkit-scrollbar { display:none; }
+
+    .main-nav a {
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #3a2d77;
+      border-radius: 12px;
+      flex: 0 0 auto;
+      transition: 0.18s ease;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      background: #f3edff;
+    }
+
+    .home-link {
+      background: linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
+      border: 1px solid #eadfc2;
+    }
+
+    .page-section {
+      padding: 18px 0 24px;
+    }
+
+    .login-grid{
+      display:grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .hero-card,
+    .login-card,
+    .mini-card{
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #f0e6c9;
+      border-radius: 26px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .hero-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      right:-60px;
+      top:-60px;
+      width:220px;
+      height:220px;
+      background: radial-gradient(circle, rgba(216,176,91,0.16), transparent 65%);
+      pointer-events:none;
+    }
+
+    .hero-tag{
+      display:inline-block;
+      font-size:13px;
+      font-weight:800;
+      color:#4a3b92;
+      border:1px solid #ece1bf;
+      background:#fff;
+      border-radius:999px;
+      padding:10px 16px;
+      margin-bottom:14px;
+    }
+
+    .hero-card h1{
+      margin:0 0 12px;
+      font-size:46px;
+      line-height:1.02;
+      letter-spacing:-0.04em;
+      color:#312668;
+    }
+
+    .hero-card p{
+      margin:0 0 18px;
+      font-size:17px;
+      line-height:1.75;
+      color:var(--muted);
+      max-width:700px;
+    }
+
+    .text-gold{ color: var(--gold); text-shadow: 0 0 18px rgba(216,176,91,0.18); }
+    .text-purple{ color: var(--purple); text-shadow: 0 0 18px rgba(90,63,255,0.14); }
+    .text-pink{ color: var(--pink); text-shadow: 0 0 18px rgba(255,124,200,0.14); }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:14px 18px;
+      border-radius:16px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      border:none;
+      transition:0.2s ease;
+      text-align:center;
+    }
+
+    .btn:hover{ transform:translateY(-2px); }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(90,63,255,0.18);
+    }
+
+    .btn-light{
+      background:#f4eeff;
+      color:#34296a;
+      border:1px solid #e4d7ff;
+    }
+
+    .hero-strip{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .mini-card{
+      padding:16px;
+      background:#fff;
+    }
+
+    .mini-card .big{
+      font-size:22px;
+      font-weight:800;
+      color:#3f3281;
+      margin-bottom:6px;
+    }
+
+    .mini-card .lab{
+      font-size:13px;
+      font-weight:700;
+      color:#776f8a;
+      margin-bottom:6px;
+    }
+
+    .mini-card p{
+      margin:0;
+      font-size:13px;
+      line-height:1.65;
+      color:var(--muted);
+    }
+
+    .login-card{
+      padding:24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,243,255,0.96));
+    }
+
+    .login-card h2{
+      margin:0 0 8px;
+      font-size:28px;
+      color:#35296f;
+    }
+
+    .login-card .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-bottom:14px;
+    }
+
+    .field label{
+      font-size:14px;
+      font-weight:800;
+      color:#433685;
+    }
+
+    .field input,
+    .field select{
+      width:100%;
+      border:1px solid #eadfc2;
+      background:#fff;
+      border-radius:16px;
+      padding:14px;
+      font:inherit;
+      color:var(--text);
+      outline:none;
+    }
+
+    .field input:focus,
+    .field select:focus{
+      border-color:#cdb2ff;
+      box-shadow:0 0 0 4px rgba(90,63,255,0.08);
+    }
+
+    .row-between{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      margin:6px 0 16px;
+      font-size:13px;
+      color:#6f6983;
+      flex-wrap:wrap;
+    }
+
+    .checkbox-line{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .social-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .social-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:13px 14px;
+      border-radius:14px;
+      border:1px solid #eadfc2;
+      background:#fff;
+      color:#433685;
+      font-weight:800;
+      font-size:14px;
+      cursor:pointer;
+      transition:0.2s ease;
+    }
+
+    .social-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 18px rgba(83,57,139,0.06);
+    }
+
+    .divider{
+      text-align:center;
+      color:#7b7291;
+      font-size:13px;
+      font-weight:700;
+      margin:18px 0 14px;
+      position:relative;
+    }
+
+    .divider::before,
+    .divider::after{
+      content:"";
+      position:absolute;
+      top:50%;
+      width:38%;
+      height:1px;
+      background:#eadfc2;
+    }
+
+    .divider::before{ left:0; }
+    .divider::after{ right:0; }
+
+    .login-links{
+      margin-top:16px;
+      display:grid;
+      gap:8px;
+      font-size:14px;
+      color:#6f6983;
+    }
+
+    .login-links a{
+      color:#4a3b92;
+      font-weight:700;
+    }
+
+    .site-footer{
+      margin-top:22px;
+      background:#181427;
+      color:#fff;
+      padding:40px 0;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr 1fr;
+      gap:24px;
+    }
+
+    .footer-col h3{
+      margin:0 0 14px;
+      font-size:18px;
+      color:#ffffff;
+    }
+
+    .footer-col p,
+    .footer-col a{
+      display:block;
+      margin:0 0 10px;
+      color:#d9d4ea;
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    @media (max-width: 1180px){
+      .login-grid{
+        grid-template-columns:1fr;
+      }
+
+      .footer-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media (max-width: 768px){
+      .container{
+        width:min(100% - 20px, 1200px);
+      }
+
+      .menu-toggle{
+        display:block;
+      }
+
+      .main-nav{
+        display:none;
+        position:absolute;
+        top:82px;
+        left:0;
+        right:0;
+        background:#fff;
+        border:1px solid #ecdcb4;
+        border-radius:18px;
+        box-shadow:0 18px 40px rgba(0,0,0,0.08);
+        padding:14px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
+      }
+
+      .main-nav.show{
+        display:flex;
+      }
+
+      .main-nav a{
+        width:100%;
+        background:#faf7ff;
+        justify-content:flex-start;
+      }
+
+      .hero-card h1{
+        font-size:34px;
+      }
+
+      .hero-actions{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .hero-strip,
+      .social-grid,
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-card,
+      .login-card{
+        padding:16px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<h2>Login to BariqAI</h2>
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="floating-orb orb-3"></div>
 
-<input type="email" id="email" placeholder="Email">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
+      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
 
-<input type="password" id="password" placeholder="Password">
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="home-link">🏠 Home</a>
+        <a href="business-dashboard.html">🏢 Business</a>
+        <a href="ai-generator.html">✨ AI Generator</a>
+        <a href="campaign.html">📣 Campaign</a>
+        <a href="creator-marketplace.html">🎥 Creators</a>
+        <a href="templates.html">🧩 Templates</a>
+        <a href="payments.html">💳 Payments</a>
+        <a href="login.html" class="active">🔐 Login</a>
+        <a href="admin-dashboard.html">⚙️ Admin</a>
+      </nav>
+    </div>
+  </header>
 
-<button onclick="login()">Login</button>
+  <section class="page-section">
+    <div class="container">
+      <div class="login-grid">
 
-<br><br>
+        <div class="hero-card">
+          <div class="hero-tag">Welcome Back</div>
+          <h1>
+            Sign in to your <span class="text-gold">Bariq</span>
+            <span class="text-purple">workspace</span> and continue
+            building <span class="text-pink">growth</span>
+          </h1>
 
-<a href="signup.html">Create account</a>
+          <p>
+            Access campaigns, AI tools, creator workflows, templates, video creation,
+            and premium business controls from one connected dashboard.
+          </p>
 
+          <div class="hero-actions">
+            <a href="pricing.html" class="btn btn-primary">💰 View Plans</a>
+            <a href="campaign.html" class="btn btn-light">📣 Explore Campaigns</a>
+          </div>
 
-<script>
+          <div class="hero-strip">
+            <div class="mini-card">
+              <div class="big">AI</div>
+              <div class="lab">Smart Workflow</div>
+              <p>Generate ads, reels, captions, and more from one place.</p>
+            </div>
+            <div class="mini-card">
+              <div class="big">Pro</div>
+              <div class="lab">Business Control</div>
+              <p>Track campaigns, leads, creators, and performance clearly.</p>
+            </div>
+            <div class="mini-card">
+              <div class="big">Fast</div>
+              <div class="lab">Ready Access</div>
+              <p>Move from login to execution without friction.</p>
+            </div>
+          </div>
+        </div>
 
-const supabaseUrl = https://bariq-ai-three.vercel.app
-const supabaseKey = ""sb_publishable_npll8QpLghinRC6gMO4_wA_ZgM-ogRd
+        <div class="login-card">
+          <h2>Login to Bariq AI</h2>
+          <p class="sub">Use your email and password to access your dashboard.</p>
 
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input id="email" type="email" placeholder="you@example.com" />
+          </div>
 
-async function login(){
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="Enter your password" />
+          </div>
 
-const email = document.getElementById("email").value
-const password = document.getElementById("password").value
+          <div class="field">
+            <label for="role">Login As</label>
+            <select id="role">
+              <option>Business User</option>
+              <option>Creator</option>
+              <option>Admin</option>
+            </select>
+          </div>
 
-const { data, error } = await supabase.auth.signInWithPassword({
-email: email,
-password: password
-})
+          <div class="row-between">
+            <label class="checkbox-line">
+              <input type="checkbox" />
+              <span>Remember me</span>
+            </label>
+            <a href="#">Forgot Password?</a>
+          </div>
 
-if(error){
-alert(error.message)
-}else{
-alert("Login successful")
-window.location.href="business-dashboard.html"
-}
+          <button class="btn btn-primary" style="width:100%;">Login to Dashboard</button>
 
-}
+          <div class="divider">OR CONTINUE WITH</div>
 
-</script>
+          <div class="social-grid">
+            <button class="social-btn">🔵 Google</button>
+            <button class="social-btn">📘 Facebook</button>
+          </div>
 
+          <div class="login-links">
+            <div>New to Bariq? <a href="pricing.html">Choose a plan</a></div>
+            <div>Want creator access? <a href="creator-register.html">Register as creator</a></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Bariq AI</h3>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation, and execution systems.</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Platform</h3>
+          <a href="index.html">Home</a>
+          <a href="ai-generator.html">AI Generator</a>
+          <a href="business-dashboard.html">Business Dashboard</a>
+          <a href="login.html">Login</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund-policy.html">Refund Policy</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <a href="contact.html">Contact Us</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="payments.html">Payments</a>
+          <p>support@bariqai.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() {
+      document.getElementById("mainNav").classList.toggle("show");
+    }
+  </script>
 </body>
 </html>
