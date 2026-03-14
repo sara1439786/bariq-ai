@@ -13,30 +13,25 @@
       --bg3:#f7f0ff;
       --text:#2c235c;
       --muted:#6d6684;
-      --line:#ece0c0;
-      --white:#ffffff;
       --purple:#5a3fff;
-      --purple2:#7a63ff;
       --gold:#d8b05b;
-      --gold2:#f0c977;
       --pink:#ff7cc8;
       --blue:#4f8dff;
-      --shadow:0 20px 55px rgba(75,45,120,0.08);
       --card-shadow:0 14px 32px rgba(83,57,139,0.07);
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
-      color: var(--text);
+    html, body{
+      margin:0;
+      padding:0;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+      font-family:Arial, sans-serif;
+      background:linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
+      color:var(--text);
     }
 
     body{
-      position: relative;
+      position:relative;
     }
 
     body::before{
@@ -46,107 +41,42 @@
       right:-220px;
       width:720px;
       height:720px;
-      background:radial-gradient(circle at center,
-      rgba(120,80,255,0.22),
-      rgba(120,80,255,0.08),
-      transparent 70%);
-      z-index:-3;
-      filter:blur(85px);
-      animation:glowMove 14s ease-in-out infinite alternate;
+      background:radial-gradient(circle at center, rgba(120,80,255,0.18), rgba(120,80,255,0.06), transparent 70%);
+      filter:blur(90px);
       pointer-events:none;
+      z-index:-2;
     }
 
     body::after{
       content:"";
       position:fixed;
-      bottom:-240px;
+      bottom:-220px;
       left:-220px;
-      width:700px;
-      height:700px;
-      background:radial-gradient(circle,
-      rgba(216,176,91,0.22),
-      transparent 70%);
-      z-index:-3;
-      filter:blur(95px);
-      animation:goldGlow 16s ease-in-out infinite alternate;
+      width:680px;
+      height:680px;
+      background:radial-gradient(circle, rgba(216,176,91,0.18), transparent 70%);
+      filter:blur(90px);
       pointer-events:none;
+      z-index:-2;
     }
 
-    .floating-orb{
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(18px);
-      pointer-events: none;
-      z-index: -2;
-      opacity: 0.35;
+    a{
+      text-decoration:none;
+      color:inherit;
     }
 
-    .orb-1{
-      width: 180px;
-      height: 180px;
-      background: linear-gradient(135deg, #8f6bff, #c69cff);
-      left: 8%;
-      top: 22%;
-      animation: floatOrb1 12s ease-in-out infinite alternate;
+    .container{
+      width:min(1360px, calc(100% - 32px));
+      margin:0 auto;
     }
 
-    .orb-2{
-      width: 140px;
-      height: 140px;
-      background: linear-gradient(135deg, #ffd28e, #ffb86f);
-      right: 12%;
-      top: 42%;
-      animation: floatOrb2 15s ease-in-out infinite alternate;
-    }
-
-    .orb-3{
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #ff9adf, #d79bff);
-      left: 48%;
-      bottom: 12%;
-      animation: floatOrb3 13s ease-in-out infinite alternate;
-    }
-
-    @keyframes glowMove{
-      0%{transform:translate(0,0);}
-      100%{transform:translate(-80px,60px);}
-    }
-
-    @keyframes goldGlow{
-      0%{transform:translate(0,0);}
-      100%{transform:translate(120px,-80px);}
-    }
-
-    @keyframes floatOrb1{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(40px) translateX(30px);}
-    }
-
-    @keyframes floatOrb2{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(-30px) translateX(-25px);}
-    }
-
-    @keyframes floatOrb3{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(-25px) translateX(35px);}
-    }
-
-    a { text-decoration: none; color: inherit; }
-
-    .container {
-      width: min(1360px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(255,255,255,0.94);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid #eee2bf;
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:rgba(255,255,255,0.94);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid #eee2bf;
     }
 
     .site-header::after{
@@ -166,753 +96,633 @@
       100%{background-position:300%;}
     }
 
-    .nav-wrap {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      position: relative;
+    .nav-wrap{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      position:relative;
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
-      font-size: 30px;
-      font-weight: 800;
-      background: linear-gradient(90deg, var(--gold), var(--purple), var(--blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+      font-size:30px;
+      font-weight:800;
+      background:linear-gradient(90deg,var(--gold),var(--purple),var(--blue));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
     }
 
-    .brand-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--purple));
-      box-shadow: 0 0 16px rgba(90,63,255,0.3);
+    .brand-dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      box-shadow:0 0 16px rgba(90,63,255,0.3);
     }
 
-    .menu-toggle {
-      display: none;
-      border: none;
-      background: #f3edff;
-      color: #2f216f;
-      font-size: 28px;
-      line-height: 1;
-      padding: 10px 14px;
-      border-radius: 14px;
-      cursor: pointer;
+    .menu-toggle{
+      display:none;
+      border:none;
+      background:#f3edff;
+      color:#2f216f;
+      font-size:28px;
+      line-height:1;
+      padding:10px 14px;
+      border-radius:14px;
+      cursor:pointer;
     }
 
-    .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scrollbar-width: none;
-      white-space: nowrap;
+    .main-nav{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      scrollbar-width:none;
+      white-space:nowrap;
     }
 
-    .main-nav::-webkit-scrollbar { display:none; }
+    .main-nav::-webkit-scrollbar{
+      display:none;
+    }
 
-    .main-nav a {
-      padding: 10px 12px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #3a2d77;
-      border-radius: 12px;
-      flex: 0 0 auto;
-      transition: 0.18s ease;
+    .main-nav a{
+      padding:10px 12px;
+      font-size:14px;
+      font-weight:700;
+      color:#3a2d77;
+      border-radius:12px;
+      flex:0 0 auto;
     }
 
     .main-nav a:hover,
-    .main-nav a.active {
-      background: #f3edff;
+    .main-nav a.active{
+      background:#f3edff;
     }
 
-    .home-link {
-      background: linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
-      border: 1px solid #eadfc2;
+    .home-link{
+      background:linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
+      border:1px solid #eadfc2;
     }
 
-    .hero-section {
-      padding: 14px 0 12px;
+    .page-section{
+      padding:18px 0 24px;
     }
 
-    .hero-shell {
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
+    .hero-shell,
+    .campaign-card,
+    .output-card,
+    .tip-card,
+    .mini-stat-box,
+    .continue-card{
+      background:rgba(255,255,255,0.95);
+      border:1px solid #f0e6c9;
+      border-radius:26px;
+      box-shadow:var(--card-shadow);
     }
 
-    .hero-shell::before {
-      content: "";
-      position: absolute;
-      right: -70px;
-      top: -70px;
-      width: 240px;
-      height: 240px;
-      background: radial-gradient(circle, rgba(216,176,91,0.16), transparent 65%);
-      pointer-events: none;
+    .hero-shell{
+      padding:22px;
+      margin-bottom:18px;
+      background:linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap:16px;
+      grid-template-columns:1.04fr 0.96fr;
+      gap:18px;
       align-items:stretch;
     }
 
-    .hero-left,
-    .hero-visual{
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #f0e6c9;
-      border-radius: 24px;
-      box-shadow: var(--card-shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
     .hero-left{
-      padding: 22px;
+      padding:6px;
+      min-width:0;
     }
 
-    .hero-left::after{
-      content:"";
-      position:absolute;
-      inset:auto -40px -40px auto;
-      width:180px;
-      height:180px;
-      background:radial-gradient(circle, rgba(90,63,255,0.10), transparent 70%);
-      pointer-events:none;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 800;
-      color: #4a3b92;
-      border: 1px solid #ece1bf;
-      background: #fff;
-      border-radius: 999px;
-      padding: 10px 16px;
-      margin-bottom: 14px;
-    }
-
-    .hero-left h1 {
-      margin: 0 0 12px;
-      font-size: 42px;
-      line-height: 1.02;
-      letter-spacing: -0.04em;
-      color: #312668;
-      max-width: 760px;
-    }
-
-    .hero-left p {
-      margin: 0 0 16px;
-      font-size: 17px;
-      line-height: 1.72;
-      color: var(--muted);
-      max-width: 820px;
-    }
-
-    .text-gold{
-      color: var(--gold);
-      text-shadow: 0 0 18px rgba(216,176,91,0.18);
-    }
-
-    .text-purple{
-      color: var(--purple);
-      text-shadow: 0 0 18px rgba(90,63,255,0.14);
-    }
-
-    .text-pink{
-      color: var(--pink);
-      text-shadow: 0 0 18px rgba(255,124,200,0.14);
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      border: none;
-      transition: 0.2s ease;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold), var(--purple));
-      color: #fff;
-      box-shadow: 0 12px 24px rgba(90,63,255,0.18);
-    }
-
-    .btn-light {
-      background: #f4eeff;
-      color: #34296a;
-      border: 1px solid #e4d7ff;
-    }
-
-    .marquee-wrap {
-      margin-top: 10px;
-      border: 1px solid #eee2bf;
-      border-radius: 16px;
-      background: #fff;
-      overflow: hidden;
-      padding: 10px 0;
-    }
-
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      gap: 12px;
-      padding: 0 12px;
-      animation: scrollLeft 28s linear infinite;
-    }
-
-    .mini-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #faf7ff;
-      border: 1px solid #ece1bf;
-      font-size: 13px;
-      font-weight: 700;
-      color: #4a3b92;
-      white-space: nowrap;
-      box-shadow: 0 6px 16px rgba(83,57,139,0.04);
-    }
-
-    @keyframes scrollLeft {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .hero-visual{
-      padding: 16px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      justify-content:space-between;
-      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,243,255,0.96));
-    }
-
-    .visual-title{
-      font-size: 18px;
-      font-weight: 800;
-      color: #433685;
-      margin: 0;
-    }
-
-    .visual-sub{
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .image-strip{
-      overflow:hidden;
-      border-radius:20px;
-      border:1px solid #eee2bf;
+    .hero-tag{
+      display:inline-block;
+      font-size:13px;
+      font-weight:800;
+      color:#4a3b92;
+      border:1px solid #ece1bf;
       background:#fff;
+      border-radius:999px;
+      padding:10px 16px;
+      margin-bottom:16px;
+    }
+
+    .hero-left h1{
+      margin:0 0 14px;
+      font-size:56px;
+      line-height:0.98;
+      letter-spacing:-0.04em;
+      color:#312668;
+      word-break:break-word;
+    }
+
+    .hero-left p{
+      margin:0 0 20px;
+      font-size:17px;
+      line-height:1.75;
+      color:var(--muted);
+      max-width:720px;
+    }
+
+    .text-gold{ color:var(--gold); }
+    .text-purple{ color:var(--purple); }
+    .text-pink{ color:var(--pink); }
+    .text-blue{ color:var(--blue); }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:14px 18px;
+      border-radius:16px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      border:none;
+      transition:0.2s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(90,63,255,0.18);
+    }
+
+    .btn-light{
+      background:#f4eeff;
+      color:#34296a;
+      border:1px solid #e4d7ff;
+    }
+
+    .marquee-wrap{
+      width:100%;
+      overflow:hidden;
+      border:1px solid #efe2c3;
+      border-radius:18px;
+      background:rgba(255,255,255,0.9);
       padding:10px 0;
     }
 
-    .image-track{
+    .marquee-track{
       display:flex;
       gap:12px;
       width:max-content;
-      animation: imageScroll 30s linear infinite;
-      padding:0 10px;
+      animation:marqueeMove 24s linear infinite;
     }
 
-    .image-card{
-      width:200px;
-      height:140px;
-      border-radius:18px;
+    @keyframes marqueeMove{
+      0%{ transform:translateX(0); }
+      100%{ transform:translateX(-50%); }
+    }
+
+    .mini-chip{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid #eadfc2;
+      background:#fff;
+      font-size:14px;
+      font-weight:700;
+      color:#4a3b92;
+      white-space:nowrap;
+    }
+
+    .hero-right{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      min-width:0;
+    }
+
+    .hero-side-panel{
+      background:rgba(255,255,255,0.95);
+      border:1px solid #f0e6c9;
+      border-radius:24px;
+      padding:20px;
+      box-shadow:0 10px 24px rgba(83,57,139,0.05);
+      height:100%;
+      overflow:hidden;
+    }
+
+    .hero-side-panel h3{
+      margin:0 0 10px;
+      font-size:18px;
+      color:#433685;
+    }
+
+    .hero-side-panel p{
+      margin:0 0 16px;
+      font-size:15px;
+      line-height:1.7;
+      color:#6f6983;
+    }
+
+    .template-wall{
+      width:100%;
+      overflow:hidden;
+      border-radius:20px;
+      position:relative;
+    }
+
+    .template-track{
+      display:flex;
+      gap:14px;
+      width:max-content;
+      animation:scrollTemplates 26s linear infinite;
+    }
+
+    .template-wall:hover .template-track{
+      animation-play-state:paused;
+    }
+
+    @keyframes scrollTemplates{
+      0%{ transform:translateX(0); }
+      100%{ transform:translateX(-50%); }
+    }
+
+    .template-card{
+      min-width:210px;
+      max-width:210px;
+      height:170px;
+      border-radius:20px;
       overflow:hidden;
       position:relative;
+      border:1px solid #eadfc2;
+      background:#fff;
+      box-shadow:0 10px 22px rgba(83,57,139,0.08);
       flex:0 0 auto;
-      box-shadow:0 10px 24px rgba(60,40,110,0.10);
-      border:1px solid #f0e6c9;
     }
 
-    .image-card img{
+    .template-card img{
       width:100%;
       height:100%;
       object-fit:cover;
       display:block;
-      transform:scale(1.02);
+      transition:transform 0.35s ease;
     }
 
-    .image-card span{
+    .template-card:hover img{
+      transform:scale(1.06);
+    }
+
+    .template-card span{
       position:absolute;
-      left:10px;
-      bottom:10px;
-      padding:8px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:800;
+      left:12px;
+      bottom:12px;
+      background:rgba(47,33,111,0.82);
       color:#fff;
-      background:rgba(44,35,92,0.72);
-      backdrop-filter:blur(6px);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
     }
 
-    @keyframes imageScroll{
-      0%{transform:translateX(0);}
-      100%{transform:translateX(-50%);}
-    }
-
-    .glow-stats{
+    .mini-stats-row{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:10px;
+      gap:12px;
+      margin-top:16px;
     }
 
-    .glow-stat{
-      padding:14px;
-      border-radius:18px;
-      background:#fff;
-      border:1px solid #eee2bf;
+    .mini-stat-box{
+      padding:14px 10px;
       text-align:center;
-      box-shadow:0 8px 18px rgba(83,57,139,0.05);
+      background:#fff;
     }
 
-    .glow-stat .num{
+    .mini-stat-box strong{
+      display:block;
       font-size:22px;
-      font-weight:800;
       color:#3f3281;
+      margin-bottom:4px;
     }
 
-    .glow-stat .lab{
-      margin-top:4px;
+    .mini-stat-box small{
+      color:#776f8a;
       font-size:12px;
       font-weight:700;
-      color:#7a7291;
-    }
-
-    .section {
-      padding: 8px 0 18px;
     }
 
     .main-grid{
       display:grid;
-      grid-template-columns: 500px 1fr;
-      gap:20px;
+      grid-template-columns:0.98fr 1.02fr;
+      gap:18px;
       align-items:start;
     }
 
-    .form-card,
-    .output-card,
-    .status-card,
-    .output-box,
-    .next-step-card,
-    .mini-panel {
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #f0e6c9;
-      border-radius: 22px;
-      box-shadow: var(--card-shadow);
-      transition: all 0.25s ease;
+    .campaign-card{
+      padding:22px;
+      background:linear-gradient(180deg,#fff,#fcf8ff);
     }
 
-    .form-card:hover,
-    .output-card:hover,
-    .mini-panel:hover,
-    .next-step-card:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 26px 55px rgba(80,50,150,0.10);
+    .campaign-card h2{
+      margin:0 0 10px;
+      font-size:30px;
+      color:#35296f;
     }
 
-    .form-card,
-    .output-card {
-      padding: 20px;
+    .campaign-sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
     }
 
-    .section-title {
-      margin: 0 0 8px;
-      font-size: 26px;
-      color: #35296f;
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
     }
 
-    .section-text {
-      margin: 0 0 16px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 16px;
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+    .field.full{
+      grid-column:1 / -1;
     }
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
-    .field label {
-      font-size: 14px;
-      font-weight: 800;
-      color: #433685;
+    .field label{
+      font-size:14px;
+      font-weight:800;
+      color:#433685;
     }
 
     .field input,
     .field select,
-    .field textarea {
-      width: 100%;
-      border: 1px solid #eadfc2;
-      background: #fff;
-      border-radius: 16px;
-      padding: 14px 14px;
-      font: inherit;
-      color: var(--text);
-      outline: none;
-      transition: 0.18s ease;
+    .field textarea{
+      width:100%;
+      border:1px solid #eadfc2;
+      background:#fff;
+      border-radius:16px;
+      padding:14px;
+      font:inherit;
+      color:var(--text);
+      outline:none;
+    }
+
+    .field textarea{
+      min-height:118px;
+      resize:vertical;
+      line-height:1.65;
     }
 
     .field input:focus,
     .field select:focus,
-    .field textarea:focus {
-      border-color: #cdb2ff;
-      box-shadow: 0 0 0 4px rgba(90,63,255,0.08);
+    .field textarea:focus{
+      border-color:#cdb2ff;
+      box-shadow:0 0 0 4px rgba(90,63,255,0.08);
     }
 
-    .field textarea {
-      min-height: 100px;
-      resize: vertical;
-      line-height: 1.6;
+    .voice-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:-2px;
+      margin-bottom:2px;
     }
 
-    .voice-actions,
-    .action-row,
-    .next-links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+    .action-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:16px;
     }
 
-    .action-row {
-      margin-top: 16px;
+    .status-bar{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid #eee2bf;
+      color:#645c7b;
+      line-height:1.65;
+      font-size:14px;
     }
 
-    .action-row .btn {
-      min-width: 145px;
+    .output-side{
+      display:grid;
+      gap:14px;
     }
 
-    .status-card{
-      margin-top: 14px;
-      padding: 16px 18px;
-      background:linear-gradient(135deg,#fff,#f6f2ff);
-      border:1px solid #eee;
+    .tip-card{
+      padding:18px;
+      background:linear-gradient(135deg,#fff,#f8f2ff);
     }
 
-    .status-card h4 {
-      margin: 0 0 8px;
-      color: #433685;
-      font-size: 16px;
-    }
-
-    .status-message {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.7;
-      color: #5f5778;
-      white-space: pre-wrap;
-      word-break: break-word;
+    .tip-card p{
+      margin:0;
+      color:#6f6983;
+      line-height:1.7;
+      font-size:14px;
     }
 
     .output-card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,247,255,0.96));
-      overflow: hidden;
-      position: relative;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      background:#fff;
     }
 
-    .output-card::before {
-      content: "";
-      position: absolute;
-      top: -80px;
-      right: -80px;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(90,63,255,0.12), transparent 65%);
-      pointer-events: none;
+    .output-card::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      width:5px;
+      height:100%;
+      background:linear-gradient(180deg,var(--gold),var(--purple));
     }
 
-    .preview-banner {
-      margin-bottom: 14px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #fff7e9, #f4eeff);
-      border: 1px solid #ece0c0;
-      color: #564d73;
-      line-height: 1.7;
-      font-size: 14px;
+    .output-card h3{
+      margin:0 0 10px;
+      font-size:18px;
+      color:#433685;
+      padding-left:8px;
     }
 
-    .output-stack {
-      display: grid;
-      gap: 12px;
+    .output-card div{
+      margin:0;
+      color:#5f5876;
+      line-height:1.8;
+      font-size:14px;
+      padding-left:8px;
+      white-space:pre-wrap;
     }
 
-    .output-box{
-      padding:20px;
-      border-radius:18px;
-      background:white;
-      border:1px solid #eee;
-      box-shadow:0 10px 30px rgba(0,0,0,0.06);
-      transition:0.2s;
-      position: relative;
-      overflow: hidden;
+    .continue-card{
+      padding:18px;
+      background:linear-gradient(135deg, rgba(255,250,242,0.98), rgba(248,243,255,0.98));
     }
 
-    .output-box::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 6px;
-      height: 100%;
-      background: linear-gradient(180deg, var(--gold), var(--purple));
-      opacity: 0.9;
+    .continue-card h3{
+      margin:0 0 8px;
+      font-size:22px;
+      color:#3d317d;
     }
 
-    .output-box:hover{
-      transform:translateY(-4px);
-      box-shadow:0 20px 40px rgba(0,0,0,0.08);
+    .continue-card p{
+      margin:0 0 14px;
+      color:#6f6983;
+      line-height:1.7;
+      font-size:14px;
     }
 
-    .output-box h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      color: #45388c;
-      padding-left: 8px;
+    .continue-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
-    .output-box pre {
-      margin: 0;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      font-family: Arial, sans-serif;
-      font-size: 15px;
-      line-height: 1.78;
-      color: #5f5778;
-      padding-left: 8px;
+    .site-footer{
+      margin-top:24px;
+      background:#181427;
+      color:#fff;
+      padding:40px 0;
     }
 
-    .right-secondary-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 14px;
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr 1fr;
+      gap:24px;
     }
 
-    .mini-panel {
-      padding: 18px;
-      background: linear-gradient(135deg, #ffffff, #faf5ff);
-    }
-
-    .mini-panel h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      color: #433685;
-    }
-
-    .mini-panel p {
-      margin: 0 0 12px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 14px;
-    }
-
-    .mini-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .mini-item {
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: #fff;
-      border: 1px solid #eee2bf;
-      font-size: 14px;
-      color: #4f4768;
-      line-height: 1.6;
-    }
-
-    .next-step-card {
-      margin-top: 14px;
-      padding: 16px 18px;
-      background: linear-gradient(135deg, #ffffff, #f8f2ff);
-      border: 1px solid #eadcfb;
-    }
-
-    .next-step-card h3 {
-      margin: 0 0 8px;
-      color: #433685;
-      font-size: 18px;
-    }
-
-    .next-step-card p {
-      margin: 0 0 12px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
-    }
-
-    .site-footer {
-      margin-top: 10px;
-      background: #181427;
-      color: #fff;
-      padding: 34px 0;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr 1fr;
-      gap: 24px;
-    }
-
-    .footer-col h3 {
-      margin: 0 0 14px;
-      font-size: 18px;
-      color: #ffffff;
+    .footer-col h3{
+      margin:0 0 14px;
+      font-size:18px;
+      color:#ffffff;
     }
 
     .footer-col p,
-    .footer-col a {
-      display: block;
-      margin: 0 0 10px;
-      color: #d9d4ea;
-      font-size: 15px;
-      line-height: 1.7;
+    .footer-col a{
+      display:block;
+      margin:0 0 10px;
+      color:#d9d4ea;
+      font-size:15px;
+      line-height:1.7;
     }
 
-    @media (max-width: 1180px) {
-      .hero-grid{
-        grid-template-columns: 1fr;
-      }
-
-      .main-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .right-secondary-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
+    @media (max-width: 1180px){
+      .hero-grid,
+      .main-grid,
+      .footer-grid{
+        grid-template-columns:1fr;
       }
     }
 
-    @media (max-width: 768px) {
-      .container { width: min(100% - 20px, 1200px); }
-      .menu-toggle { display: block; }
-
-      .main-nav {
-        display: none;
-        position: absolute;
-        top: 82px;
-        left: 0;
-        right: 0;
-        background: #fff;
-        border: 1px solid #ecdcb4;
-        border-radius: 18px;
-        box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-        padding: 14px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
+    @media (max-width: 768px){
+      .container{
+        width:min(100% - 20px, 1200px);
       }
 
-      .main-nav.show { display: flex; }
-
-      .main-nav a {
-        width: 100%;
-        background: #faf7ff;
-        justify-content: flex-start;
+      .menu-toggle{
+        display:block;
       }
 
-      .hero-left h1 { font-size: 30px; }
+      .main-nav{
+        display:none;
+        position:absolute;
+        top:82px;
+        left:0;
+        right:0;
+        background:#fff;
+        border:1px solid #ecdcb4;
+        border-radius:18px;
+        box-shadow:0 18px 40px rgba(0,0,0,0.08);
+        padding:14px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
+      }
+
+      .main-nav.show{
+        display:flex;
+      }
+
+      .main-nav a{
+        width:100%;
+        background:#faf7ff;
+        justify-content:flex-start;
+      }
+
+      .hero-left h1{
+        font-size:36px;
+        line-height:1.06;
+      }
 
       .hero-actions,
-      .voice-actions,
       .action-row,
-      .next-links {
-        flex-direction: column;
+      .voice-row,
+      .continue-actions{
+        flex-direction:column;
       }
 
-      .btn { width: 100%; }
+      .btn{
+        width:100%;
+      }
 
+      .template-card{
+        min-width:180px;
+        max-width:180px;
+        height:145px;
+      }
+
+      .mini-stats-row,
       .form-grid,
-      .footer-grid,
-      .glow-stats {
-        grid-template-columns: 1fr;
+      .footer-grid{
+        grid-template-columns:1fr;
       }
 
-      .form-card,
+      .hero-shell,
+      .campaign-card,
       .output-card,
-      .hero-left,
-      .hero-visual {
-        padding: 16px;
-      }
-
-      .image-card{
-        width:170px;
-        height:120px;
+      .tip-card,
+      .continue-card{
+        padding:16px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="floating-orb orb-1"></div>
-  <div class="floating-orb orb-2"></div>
-  <div class="floating-orb orb-3"></div>
-
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
-
       <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
 
       <nav class="main-nav" id="mainNav">
-        <a href="index.html" class="home-link active">🏠 Home</a>
+        <a href="index.html" class="home-link">🏠 Home</a>
         <a href="business-dashboard.html">🏢 Business</a>
         <a href="ai-generator.html">✨ AI Generator</a>
-        <a href="campaign.html">📣 Campaign</a>
+        <a href="campaign.html" class="active">📣 Campaign</a>
         <a href="creator-marketplace.html">🎥 Creators</a>
         <a href="templates.html">🧩 Templates</a>
         <a href="payments.html">💳 Payments</a>
@@ -922,192 +732,184 @@
     </div>
   </header>
 
-  <section class="hero-section">
+  <section class="page-section">
     <div class="container">
+
       <div class="hero-shell">
         <div class="hero-grid">
 
           <div class="hero-left">
             <div class="hero-tag">Campaign Studio Pro</div>
             <h1>
-              Create <span class="text-gold">beautiful</span> campaigns
-              with <span class="text-purple">voice</span> and
-              <span class="text-pink">AI</span>
+              Create <span class="text-gold">beautiful</span>
+              <span class="text-purple">campaigns</span> with
+              <span class="text-blue">voice</span> and
+              <span class="text-pink">strategy</span>
             </h1>
 
             <p>
-              Speak one campaign idea and Bariq turns it into ad copy, reel direction,
-              CTA lines, and ready marketing outputs from one connected, premium marketing workspace.
+              Bariq AI helps you turn one campaign idea into Meta ad copy, Google ad copy, reel direction, CTA lines, hashtags, and launch-ready campaign structure from one premium page.
             </p>
 
             <div class="hero-actions">
-              <button class="btn btn-primary" onclick="document.getElementById('campaignForm').scrollIntoView({behavior:'smooth'})">✨ Start Campaign</button>
-              <a href="ai-generator.html" class="btn btn-light">Open AI Generator</a>
-              <a href="business-dashboard.html" class="btn btn-light">Business Dashboard</a>
+              <a href="#campaignForm" class="btn btn-primary">✨ Start Campaign</a>
+              <a href="ai-generator.html" class="btn btn-light">✨ Open AI Generator</a>
+              <a href="business-dashboard.html" class="btn btn-light">🏢 Business Dashboard</a>
             </div>
 
             <div class="marquee-wrap">
               <div class="marquee-track">
-                <span class="mini-chip">📣 CTA Ideas</span>
-                <span class="mini-chip">✨ Premium Campaign Flow</span>
                 <span class="mini-chip">📍 City Targeting</span>
                 <span class="mini-chip">💜 Easy For Business Owners</span>
                 <span class="mini-chip">🎯 Meta Ads</span>
-                <span class="mini-chip">🎥 Reel Script</span>
+                <span class="mini-chip">🎬 Reel Script</span>
                 <span class="mini-chip">🪄 Voice Prompt</span>
-                <span class="mini-chip">💳 Payments Ready</span>
-                <span class="mini-chip">🏢 Business Dashboard</span>
-                <span class="mini-chip">🧩 Templates</span>
-                <span class="mini-chip">📣 CTA Ideas</span>
+                <span class="mini-chip">🔔 CTA Ideas</span>
                 <span class="mini-chip">✨ Premium Campaign Flow</span>
+                <span class="mini-chip">📦 Launch Ready</span>
+
                 <span class="mini-chip">📍 City Targeting</span>
                 <span class="mini-chip">💜 Easy For Business Owners</span>
                 <span class="mini-chip">🎯 Meta Ads</span>
-                <span class="mini-chip">🎥 Reel Script</span>
+                <span class="mini-chip">🎬 Reel Script</span>
                 <span class="mini-chip">🪄 Voice Prompt</span>
-                <span class="mini-chip">💳 Payments Ready</span>
-                <span class="mini-chip">🏢 Business Dashboard</span>
-                <span class="mini-chip">🧩 Templates</span>
+                <span class="mini-chip">🔔 CTA Ideas</span>
+                <span class="mini-chip">✨ Premium Campaign Flow</span>
+                <span class="mini-chip">📦 Launch Ready</span>
               </div>
             </div>
           </div>
 
-          <div class="hero-visual">
-            <div>
-              <h3 class="visual-title">Live campaign inspiration wall</h3>
-              <p class="visual-sub">Scrolling visuals make the page feel active, modern, and closer to a real AI marketing studio.</p>
-            </div>
+          <div class="hero-right">
+            <div class="hero-side-panel">
+              <h3>Live marketing inspiration wall</h3>
+              <p>Campaign visuals here are different from the AI page so Bariq feels like a connected product with unique experiences on each page.</p>
 
-            <div class="image-strip">
-              <div class="image-track">
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Beauty ad">
-                  <span>Beauty Campaign</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="Skincare campaign">
-                  <span>Clinic Creative</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="Woman campaign">
-                  <span>Women Offer</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="Premium lifestyle">
-                  <span>Premium Brand</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="Fashion campaign">
-                  <span>Reel Mood</span>
-                </div>
+              <div class="template-wall">
+                <div class="template-track">
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=900&q=80" alt="Meta Ad Campaign">
+                    <span>Meta Ad Campaign</span>
+                  </div>
 
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Beauty ad">
-                  <span>Beauty Campaign</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="Skincare campaign">
-                  <span>Clinic Creative</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="Woman campaign">
-                  <span>Women Offer</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="Premium lifestyle">
-                  <span>Premium Brand</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="Fashion campaign">
-                  <span>Reel Mood</span>
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80" alt="Brand Offer">
+                    <span>Brand Offer</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80" alt="Promo Launch">
+                    <span>Promo Launch</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Growth Campaign">
+                    <span>Growth Campaign</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=900&q=80" alt="Meta Ad Campaign">
+                    <span>Meta Ad Campaign</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80" alt="Brand Offer">
+                    <span>Brand Offer</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80" alt="Promo Launch">
+                    <span>Promo Launch</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Growth Campaign">
+                    <span>Growth Campaign</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="glow-stats">
-              <div class="glow-stat">
-                <div class="num">AI</div>
-                <div class="lab">Prompt Powered</div>
-              </div>
-              <div class="glow-stat">
-                <div class="num">1-Click</div>
-                <div class="lab">Campaign Flow</div>
-              </div>
-              <div class="glow-stat">
-                <div class="num">Voice</div>
-                <div class="lab">Input Ready</div>
+              <div class="mini-stats-row">
+                <div class="mini-stat-box">
+                  <strong>Launch</strong>
+                  <small>Campaign Ready</small>
+                </div>
+                <div class="mini-stat-box">
+                  <strong>Smart</strong>
+                  <small>Structured Flow</small>
+                </div>
+                <div class="mini-stat-box">
+                  <strong>Voice</strong>
+                  <small>Input Ready</small>
+                </div>
               </div>
             </div>
           </div>
 
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="main-grid">
+      <div class="main-grid" id="campaignForm">
 
-        <div class="form-card" id="campaignForm">
-          <h2 class="section-title">Create Campaign</h2>
-          <p class="section-text">Fill the form or just speak your campaign idea. Bariq will take it forward.</p>
+        <div class="campaign-card">
+          <h2>Create Campaign</h2>
+          <p class="campaign-sub">Fill the form or just speak your campaign idea. Bariq will take it forward into complete campaign outputs.</p>
 
           <div class="form-grid">
             <div class="field">
               <label for="businessName">Business Name</label>
-              <input id="businessName" type="text" placeholder="e.g. RSCC Clinic" />
+              <input id="businessName" type="text" placeholder="e.g. RSCC Clinic">
             </div>
 
             <div class="field">
               <label for="campaignName">Campaign Name</label>
-              <input id="campaignName" type="text" placeholder="e.g. Laser Hair Reduction Offer" />
+              <input id="campaignName" type="text" placeholder="e.g. Laser Hair Reduction">
             </div>
 
             <div class="field full">
-              <label for="productService">Product / Service</label>
-              <input id="productService" type="text" placeholder="e.g. Laser hair reduction" />
+              <label for="serviceName">Product / Service</label>
+              <input id="serviceName" type="text" placeholder="e.g. Laser hair reduction">
             </div>
 
             <div class="field full">
               <label for="offer">Offer</label>
-              <input id="offer" type="text" placeholder="e.g. Flat 60% off" />
+              <input id="offer" type="text" placeholder="e.g. Flat 60% off">
             </div>
 
             <div class="field">
-              <label for="audience">Target Audience</label>
-              <input id="audience" type="text" placeholder="e.g. Women 25-40" />
+              <label for="targetAudience">Target Audience</label>
+              <input id="targetAudience" type="text" placeholder="e.g. Women 25-40">
             </div>
 
             <div class="field">
-              <label for="city">Target City</label>
-              <input id="city" type="text" placeholder="e.g. Hyderabad" />
+              <label for="targetCity">Target City</label>
+              <input id="targetCity" type="text" placeholder="e.g. Hyderabad">
             </div>
 
             <div class="field">
               <label for="budget">Budget</label>
-              <input id="budget" type="text" placeholder="e.g. ₹5000" />
+              <input id="budget" type="text" placeholder="e.g. ₹5000">
             </div>
 
             <div class="field">
-              <label for="goal">Campaign Goal</label>
-              <select id="goal">
+              <label for="campaignGoal">Campaign Goal</label>
+              <select id="campaignGoal">
                 <option value="">Select goal</option>
                 <option>Leads</option>
                 <option>Sales</option>
+                <option>Brand Awareness</option>
                 <option>Traffic</option>
-                <option>Awareness</option>
-                <option>Engagement</option>
+                <option>Appointments</option>
               </select>
             </div>
 
             <div class="field full">
               <label for="voicePrompt">Voice Campaign Brief</label>
-              <textarea id="voicePrompt" placeholder="Speak or type one simple brief. Example: Make an ad on laser hair reduction for Hyderabad women 25 to 40 years."></textarea>
+              <textarea id="voicePrompt" placeholder="Speak or type one simple brief. Example: Make an ad on laser hair reduction for Hyderabad women 25 to 40 years with flat 60% off."></textarea>
             </div>
 
             <div class="field full">
-              <div class="voice-actions">
+              <div class="voice-row">
                 <button class="btn btn-light" type="button" onclick="startVoiceInput()">🎤 Start Voice</button>
                 <button class="btn btn-light" type="button" onclick="stopVoiceInput()">⏹ Stop Voice</button>
                 <button class="btn btn-light" type="button" onclick="useVoicePrompt()">✨ Use Voice Brief</button>
@@ -1116,93 +918,64 @@
 
             <div class="field full">
               <label for="notes">Extra Notes</label>
-              <textarea id="notes" placeholder="Anything special Bariq should know? Tone, urgency, style, local language, premium feel, etc."></textarea>
+              <textarea id="notes" placeholder="Anything special Bariq should know? Tone, urgency, style, local language, premium feel, emotional angle, etc."></textarea>
             </div>
           </div>
 
           <div class="action-row">
-            <button class="btn btn-primary" id="generateAdsBtn" type="button">Generate Ads</button>
-            <button class="btn btn-light" id="generateVideoBtn" type="button">Generate Video</button>
-            <button class="btn btn-light" id="saveCampaignBtn" type="button">Save Campaign</button>
+            <button class="btn btn-primary" onclick="generateCampaign()">Generate Ads</button>
+            <button class="btn btn-light" onclick="generateVideo()">Generate Video</button>
+            <button class="btn btn-light" onclick="saveCampaign()">Save Campaign</button>
           </div>
 
-          <div class="status-card">
-            <h4>Campaign Status</h4>
-            <p class="status-message" id="statusBar">AI ready. Enter a campaign idea or use voice prompt.</p>
+          <div class="status-bar" id="statusBar">
+            AI ready. Enter a campaign idea or use voice prompt.
           </div>
         </div>
 
-        <div>
+        <div class="output-side">
+          <div class="tip-card">
+            <p>Live campaign preview area. Even if OpenAI server fails later, Bariq can still show structured fallback output so the page always feels active while testing.</p>
+          </div>
+
           <div class="output-card">
-            <div class="preview-banner">
-              Live campaign preview area. Even if OpenAI server fails, Bariq still generates a smart fallback result locally so the page never feels dead.
-            </div>
-
-            <h2 class="section-title">Campaign Outputs</h2>
-            <p class="section-text">Generated marketing content will appear here in a structured premium layout.</p>
-
-            <div class="output-stack">
-              <div class="output-box">
-                <h3>Meta Ad Copy</h3>
-                <pre id="metaOutput">No output yet.</pre>
-              </div>
-
-              <div class="output-box">
-                <h3>Google Ad Copy</h3>
-                <pre id="googleOutput">No output yet.</pre>
-              </div>
-
-              <div class="output-box">
-                <h3>Reel Script</h3>
-                <pre id="reelOutput">No output yet.</pre>
-              </div>
-
-              <div class="output-box">
-                <h3>CTA Suggestions</h3>
-                <pre id="ctaOutput">No output yet.</pre>
-              </div>
-
-              <div class="output-box">
-                <h3>Hashtags</h3>
-                <pre id="hashtagOutput">No output yet.</pre>
-              </div>
-            </div>
+            <h3>Meta Ad Copy</h3>
+            <div id="metaOutput">No output yet.</div>
           </div>
 
-          <div class="right-secondary-grid">
-            <div class="mini-panel">
-              <h3>Publishing Queue</h3>
-              <p>These are the next natural actions for this campaign once copy is approved.</p>
-              <div class="mini-list">
-                <div class="mini-item">Meta Ad Publishing — Ready for future integration</div>
-                <div class="mini-item">WhatsApp Follow-up — Lead nurturing flow can connect here</div>
-                <div class="mini-item">Google Ads Upload — Structured copy can be pushed later</div>
-              </div>
-            </div>
-
-            <div class="mini-panel">
-              <h3>Saved Campaign Snapshot</h3>
-              <p>Use this area as a quick planning memory for the campaign you are building right now.</p>
-              <div class="mini-list">
-                <div class="mini-item">Campaign Type: Offer + Lead Generation</div>
-                <div class="mini-item">Best Use: Clinics, beauty brands, products, local businesses</div>
-                <div class="mini-item">Fast Flow: Voice → Copy → Video → Templates</div>
-              </div>
-            </div>
+          <div class="output-card">
+            <h3>Google Ad Copy</h3>
+            <div id="googleOutput">No output yet.</div>
           </div>
 
-          <div class="next-step-card">
+          <div class="output-card">
+            <h3>Reel Script</h3>
+            <div id="reelOutput">No output yet.</div>
+          </div>
+
+          <div class="output-card">
+            <h3>CTA Suggestions</h3>
+            <div id="ctaOutput">No output yet.</div>
+          </div>
+
+          <div class="output-card">
+            <h3>Hashtags</h3>
+            <div id="hashtagOutput">No output yet.</div>
+          </div>
+
+          <div class="continue-card">
             <h3>Continue this campaign</h3>
             <p>Take this same campaign into video creation, templates, or business dashboard flow without leaving Bariq AI.</p>
-            <div class="next-links">
-              <a href="video-creator.html" class="btn btn-primary">Open Video Creator</a>
-              <a href="templates.html" class="btn btn-light">Open Templates</a>
-              <a href="business-dashboard.html" class="btn btn-light">Business Dashboard</a>
+            <div class="continue-actions">
+              <a href="video-creator.html" class="btn btn-primary">🎥 Open Video Creator</a>
+              <a href="templates.html" class="btn btn-light">🧩 Open Templates</a>
+              <a href="business-dashboard.html" class="btn btn-light">🏢 Business Dashboard</a>
             </div>
           </div>
         </div>
 
       </div>
+
     </div>
   </section>
 
@@ -1211,15 +984,15 @@
       <div class="footer-grid">
         <div class="footer-col">
           <h3>Bariq AI</h3>
-          <p>AI-driven marketing workflows for businesses, creators, campaigns, and execution systems.</p>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation, and execution systems.</p>
         </div>
 
         <div class="footer-col">
           <h3>Platform</h3>
           <a href="index.html">Home</a>
           <a href="ai-generator.html">AI Generator</a>
+          <a href="campaign.html">Campaign Studio</a>
           <a href="business-dashboard.html">Business Dashboard</a>
-          <a href="creator-dashboard.html">Creator Dashboard</a>
         </div>
 
         <div class="footer-col">
@@ -1241,88 +1014,34 @@
   </footer>
 
   <script>
-    let recognition;
-    let isListening = false;
-
     function toggleMobileMenu() {
       document.getElementById("mainNav").classList.toggle("show");
     }
 
-    function setStatus(message) {
-      document.getElementById("statusBar").textContent = message;
-    }
-
-    function getCampaignData() {
-      return {
-        businessName: document.getElementById("businessName").value.trim(),
-        campaignName: document.getElementById("campaignName").value.trim(),
-        productService: document.getElementById("productService").value.trim(),
-        offer: document.getElementById("offer").value.trim(),
-        audience: document.getElementById("audience").value.trim(),
-        city: document.getElementById("city").value.trim(),
-        budget: document.getElementById("budget").value.trim(),
-        goal: document.getElementById("goal").value.trim(),
-        voicePrompt: document.getElementById("voicePrompt").value.trim(),
-        notes: document.getElementById("notes").value.trim()
-      };
-    }
-
-    function validateData(data) {
-      const hasMainFields =
-        data.businessName &&
-        data.campaignName &&
-        data.productService &&
-        data.offer &&
-        data.audience &&
-        data.city &&
-        data.budget &&
-        data.goal;
-
-      const hasVoiceBrief = data.voicePrompt && data.voicePrompt.length > 5;
-      return hasMainFields || hasVoiceBrief;
-    }
-
-    function useVoicePrompt() {
-      const voicePrompt = document.getElementById("voicePrompt").value.trim();
-
-      if (!voicePrompt) {
-        setStatus("Please record or type a voice campaign brief first.");
-        return;
-      }
-
-      if (!document.getElementById("campaignName").value.trim()) {
-        document.getElementById("campaignName").value = "Voice Campaign";
-      }
-
-      const notes = document.getElementById("notes");
-      if (!notes.value.trim()) {
-        notes.value = "Voice Brief:\n" + voicePrompt;
-      } else if (!notes.value.includes(voicePrompt)) {
-        notes.value += "\n\nVoice Brief:\n" + voicePrompt;
-      }
-
-      setStatus("Voice brief added. You can now generate ads or video.");
-    }
+    let recognition = null;
+    let recognizing = false;
 
     function startVoiceInput() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
       if (!SpeechRecognition) {
-        setStatus("Voice input is not supported in this browser. Please use Chrome.");
+        document.getElementById("statusBar").textContent = "Voice input is not supported in this browser.";
         return;
       }
+
+      if (recognizing) return;
 
       recognition = new SpeechRecognition();
       recognition.lang = "en-IN";
       recognition.interimResults = true;
       recognition.continuous = true;
 
-      recognition.onstart = function () {
-        isListening = true;
-        setStatus("Listening... speak your campaign brief now.");
+      recognition.onstart = function() {
+        recognizing = true;
+        document.getElementById("statusBar").textContent = "Voice listening started...";
       };
 
-      recognition.onresult = function (event) {
+      recognition.onresult = function(event) {
         let transcript = "";
         for (let i = event.resultIndex; i < event.results.length; i++) {
           transcript += event.results[i][0].transcript;
@@ -1330,158 +1049,142 @@
         document.getElementById("voicePrompt").value = transcript.trim();
       };
 
-      recognition.onerror = function (event) {
-        setStatus("Voice input error: " + event.error);
+      recognition.onerror = function() {
+        document.getElementById("statusBar").textContent = "Voice input had an error. Please try again.";
       };
 
-      recognition.onend = function () {
-        if (isListening) {
-          setStatus("Voice input stopped.");
-        }
-        isListening = false;
+      recognition.onend = function() {
+        recognizing = false;
+        document.getElementById("statusBar").textContent = "Voice listening stopped.";
       };
 
       recognition.start();
     }
 
     function stopVoiceInput() {
-      if (recognition && isListening) {
+      if (recognition && recognizing) {
         recognition.stop();
-        isListening = false;
-        setStatus("Voice recording stopped.");
       } else {
-        setStatus("Voice input is not currently running.");
+        document.getElementById("statusBar").textContent = "Voice input is not active.";
       }
     }
 
-    function setOutputs(meta, google, reel, cta, hashtags) {
-      document.getElementById("metaOutput").textContent = meta;
-      document.getElementById("googleOutput").textContent = google;
-      document.getElementById("reelOutput").textContent = reel;
-      document.getElementById("ctaOutput").textContent = cta;
-      document.getElementById("hashtagOutput").textContent = hashtags;
+    function useVoicePrompt() {
+      const brief = document.getElementById("voicePrompt").value.trim();
+      if (!brief) {
+        document.getElementById("statusBar").textContent = "Please speak or type a voice brief first.";
+        return;
+      }
+
+      const notes = document.getElementById("notes");
+      notes.value = "Voice Brief:\n" + brief + (notes.value.trim() ? "\n\n" + notes.value.trim() : "");
+      document.getElementById("statusBar").textContent = "Voice brief added into notes.";
     }
 
-    function localFallbackGeneration(data) {
-      const product = data.productService || "your service";
-      const offer = data.offer || "a limited time offer";
-      const city = data.city || "your city";
-      const audience = data.audience || "your audience";
-      const business = data.businessName || "your business";
+    function getValue(id, fallback) {
+      const value = document.getElementById(id).value.trim();
+      return value || fallback;
+    }
 
-      const meta = `Headline: Get ${product} with ${offer}
+    function buildCampaignContent() {
+      const businessName = getValue("businessName", "Your brand");
+      const campaignName = getValue("campaignName", "Voice Campaign");
+      const serviceName = getValue("serviceName", "your service");
+      const offer = getValue("offer", "special offer");
+      const targetAudience = getValue("targetAudience", "your audience");
+      const targetCity = getValue("targetCity", "your city");
+      const budget = getValue("budget", "₹5000");
+      const campaignGoal = getValue("campaignGoal", "Leads");
+      const notes = getValue("notes", "premium, high-conversion, local, clean style");
+
+      const metaText =
+`Headline: Get your ${serviceName} with ${offer}
 
 Primary Text:
-Looking for ${product} in ${city}? ${business} now brings ${offer} for ${audience}. Book today and take the first step toward visible results.
+Looking for ${serviceName} in ${targetCity}? ${businessName} now brings ${offer} for ${targetAudience}. Book today and take the first step toward visible results.
 
 CTA:
 Book Now | Message Now | Limited Slots Available`;
 
-      const google = `Headline 1: ${product} in ${city}
-Headline 2: ${offer}
-Headline 3: Book With ${business}
+      const googleText =
+`1. ${serviceName} in ${targetCity}
+2. ${offer} at ${businessName}
+3. Best Offer for ${targetAudience}
+4. Book Today
+5. Smart ${campaignGoal} Campaign`;
 
-Description:
-Discover premium ${product} solutions at ${business}. Designed for ${audience}. Enquire today and grab ${offer}.`;
-
-      const reel = `Hook:
-Still searching for ${product} in ${city}?
+      const reelText =
+`Hook:
+Still searching for ${serviceName} in ${targetCity}?
 
 Scene 1:
-Show the common pain point faced by ${audience}.
+Show the common pain point faced by ${targetAudience}.
 
 Scene 2:
-Introduce ${business} and highlight ${offer}.
+Introduce ${businessName} and highlight ${offer}.
 
 Scene 3:
 Show service, treatment, or happy customer result.
 
 Scene 4:
-Close with confidence, premium feel, and urgency.
+Close with confidence, premium feel, urgency, and trust.
 
 Ending CTA:
 Book now. DM today. Limited slots.`;
 
-      const cta = `1. Book Now
+      const ctaText =
+`1. Book Now
 2. Message For Offer
 3. Claim Your Slot
 4. Enquire Today
 5. Limited Period Offer`;
 
-      const hashtags = `#${product.replace(/\s+/g, "")} #${city.replace(/\s+/g, "")} #BeautyClinic #AestheticCare #WomensWellness #PremiumCare #LimitedOffer #BookNow`;
+      const hashtagText =
+`#${serviceName.replace(/\s+/g, "")} #${targetCity.replace(/\s+/g, "")} #BeautyClinic #AestheticCare #WomensWellness #PremiumCare #LimitedOffer #BookNow`;
 
-      setOutputs(meta, google, reel, cta, hashtags);
-      setStatus("OpenAI server failed, so Bariq generated a smart fallback campaign locally.");
+      return {
+        businessName,
+        campaignName,
+        serviceName,
+        offer,
+        targetAudience,
+        targetCity,
+        budget,
+        campaignGoal,
+        notes,
+        metaText,
+        googleText,
+        reelText,
+        ctaText,
+        hashtagText
+      };
     }
 
-    function generateAds() {
-      const data = getCampaignData();
+    function generateCampaign() {
+      const data = buildCampaignContent();
 
-      if (!validateData(data)) {
-        setStatus("Please fill the main fields or at least use a voice campaign brief.");
-        return;
-      }
+      document.getElementById("metaOutput").textContent = data.metaText;
+      document.getElementById("googleOutput").textContent = data.googleText;
+      document.getElementById("reelOutput").textContent = data.reelText;
+      document.getElementById("ctaOutput").textContent = data.ctaText;
+      document.getElementById("hashtagOutput").textContent = data.hashtagText;
 
-      localFallbackGeneration(data);
+      document.getElementById("statusBar").textContent =
+        `Campaign "${data.campaignName}" generated successfully. Goal: ${data.campaignGoal}. Budget: ${data.budget}. Tone: ${data.notes}.`;
     }
 
-    function generateVideoPlan() {
-      const data = getCampaignData();
-
-      if (!validateData(data)) {
-        setStatus("Please fill the main fields or at least use a voice campaign brief.");
-        return;
-      }
-
-      const product = data.productService || "your service";
-      const offer = data.offer || "a special offer";
-      const city = data.city || "your city";
-      const audience = data.audience || "your target audience";
-      const business = data.businessName || "your brand";
-
-      const script = `Hook:
-Attention ${audience} in ${city}.
-
-Scene 1:
-Show the problem or concern related to ${product}.
-
-Scene 2:
-Introduce ${business} and present ${offer}.
-
-Scene 3:
-Show how the service works in a premium, trust-building way.
-
-Scene 4:
-Show happy result or confident customer moment.
-
-Ending CTA:
-Book now with ${business}. Limited slots available.`;
-
-      document.getElementById("reelOutput").textContent = script;
-      setStatus("Video script direction generated successfully.");
+    function generateVideo() {
+      const data = buildCampaignContent();
+      document.getElementById("reelOutput").textContent = data.reelText;
+      document.getElementById("statusBar").textContent =
+        `Video script generated for "${data.campaignName}". You can now move this idea into Video Creator.`;
     }
 
     function saveCampaign() {
-      const data = getCampaignData();
-
-      if (!validateData(data)) {
-        setStatus("Please fill the main fields or at least use a voice campaign brief before saving.");
-        return;
-      }
-
-      const savedCampaigns = JSON.parse(localStorage.getItem("bariq_campaigns") || "[]");
-      savedCampaigns.push({
-        ...data,
-        savedAt: new Date().toISOString()
-      });
-
-      localStorage.setItem("bariq_campaigns", JSON.stringify(savedCampaigns));
-      setStatus("Campaign saved locally in this browser.");
+      const data = buildCampaignContent();
+      document.getElementById("statusBar").textContent =
+        `Campaign "${data.campaignName}" saved locally as a draft concept for ${data.targetCity}.`;
     }
-
-    document.getElementById("generateAdsBtn").addEventListener("click", generateAds);
-    document.getElementById("generateVideoBtn").addEventListener("click", generateVideoPlan);
-    document.getElementById("saveCampaignBtn").addEventListener("click", saveCampaign);
   </script>
 </body>
 </html>
