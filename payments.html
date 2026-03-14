@@ -14,12 +14,10 @@
       --text:#2c235c;
       --muted:#6d6684;
       --line:#ece0c0;
-      --white:#ffffff;
       --purple:#5a3fff;
       --gold:#d8b05b;
       --pink:#ff7cc8;
       --blue:#4f8dff;
-      --green:#35b36e;
       --shadow:0 20px 55px rgba(75,45,120,0.08);
       --card-shadow:0 14px 32px rgba(83,57,139,0.07);
     }
@@ -28,13 +26,13 @@
       margin: 0;
       padding: 0;
       overflow-x: hidden;
-      scroll-behavior: smooth;
       font-family: Arial, sans-serif;
       background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
       color: var(--text);
+      scroll-behavior: smooth;
     }
 
-    body{ position: relative; }
+    body { position: relative; }
 
     body::before{
       content:"";
@@ -43,13 +41,9 @@
       right:-220px;
       width:720px;
       height:720px;
-      background:radial-gradient(circle at center,
-      rgba(120,80,255,0.22),
-      rgba(120,80,255,0.08),
-      transparent 70%);
+      background:radial-gradient(circle at center, rgba(120,80,255,0.22), rgba(120,80,255,0.08), transparent 70%);
       z-index:-3;
       filter:blur(85px);
-      animation:glowMove 14s ease-in-out infinite alternate;
       pointer-events:none;
     }
 
@@ -60,86 +54,26 @@
       left:-220px;
       width:700px;
       height:700px;
-      background:radial-gradient(circle,
-      rgba(216,176,91,0.22),
-      transparent 70%);
+      background:radial-gradient(circle, rgba(216,176,91,0.22), transparent 70%);
       z-index:-3;
       filter:blur(95px);
-      animation:goldGlow 16s ease-in-out infinite alternate;
       pointer-events:none;
     }
 
-    .floating-orb{
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(18px);
-      pointer-events: none;
-      z-index: -2;
-      opacity: 0.35;
-    }
-
-    .orb-1{
-      width: 180px;
-      height: 180px;
-      background: linear-gradient(135deg, #8f6bff, #c69cff);
-      left: 8%;
-      top: 20%;
-      animation: floatOrb1 12s ease-in-out infinite alternate;
-    }
-
-    .orb-2{
-      width: 140px;
-      height: 140px;
-      background: linear-gradient(135deg, #ffd28e, #ffb86f);
-      right: 10%;
-      top: 40%;
-      animation: floatOrb2 15s ease-in-out infinite alternate;
-    }
-
-    .orb-3{
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #ff9adf, #d79bff);
-      left: 46%;
-      bottom: 10%;
-      animation: floatOrb3 13s ease-in-out infinite alternate;
-    }
-
-    @keyframes glowMove{
-      0%{transform:translate(0,0);}
-      100%{transform:translate(-80px,60px);}
-    }
-    @keyframes goldGlow{
-      0%{transform:translate(0,0);}
-      100%{transform:translate(120px,-80px);}
-    }
-    @keyframes floatOrb1{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(40px) translateX(30px);}
-    }
-    @keyframes floatOrb2{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(-30px) translateX(-25px);}
-    }
-    @keyframes floatOrb3{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(-25px) translateX(35px);}
-    }
-
-    a { text-decoration: none; color: inherit; }
+    a { text-decoration:none; color:inherit; }
 
     .container {
-      width: min(1360px, calc(100% - 32px));
-      margin: 0 auto;
+      width:min(1360px, calc(100% - 32px));
+      margin:0 auto;
     }
 
     .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(255,255,255,0.94);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid #eee2bf;
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:rgba(255,255,255,0.94);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid #eee2bf;
     }
 
     .site-header::after{
@@ -160,343 +94,195 @@
     }
 
     .nav-wrap {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      position: relative;
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      position:relative;
     }
 
     .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
-      font-size: 30px;
-      font-weight: 800;
-      background: linear-gradient(90deg, var(--gold), var(--purple), var(--blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+      font-size:30px;
+      font-weight:800;
+      background:linear-gradient(90deg,var(--gold),var(--purple),var(--blue));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
     }
 
     .brand-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--purple));
-      box-shadow: 0 0 16px rgba(90,63,255,0.3);
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      box-shadow:0 0 16px rgba(90,63,255,0.3);
     }
 
     .menu-toggle {
-      display: none;
-      border: none;
-      background: #f3edff;
-      color: #2f216f;
-      font-size: 28px;
-      line-height: 1;
-      padding: 10px 14px;
-      border-radius: 14px;
-      cursor: pointer;
+      display:none;
+      border:none;
+      background:#f3edff;
+      color:#2f216f;
+      font-size:28px;
+      line-height:1;
+      padding:10px 14px;
+      border-radius:14px;
+      cursor:pointer;
     }
 
     .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scrollbar-width: none;
-      white-space: nowrap;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      scrollbar-width:none;
+      white-space:nowrap;
     }
 
     .main-nav::-webkit-scrollbar { display:none; }
 
     .main-nav a {
-      padding: 10px 12px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #3a2d77;
-      border-radius: 12px;
-      flex: 0 0 auto;
-      transition: 0.18s ease;
+      padding:10px 12px;
+      font-size:14px;
+      font-weight:700;
+      color:#3a2d77;
+      border-radius:12px;
+      flex:0 0 auto;
     }
 
     .main-nav a:hover,
     .main-nav a.active {
-      background: #f3edff;
+      background:#f3edff;
     }
 
-    .home-link {
-      background: linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
-      border: 1px solid #eadfc2;
+    .home-link{
+      background:linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
+      border:1px solid #eadfc2;
     }
 
-    .hero-section {
-      padding: 14px 0 12px;
+    .page-section { padding:18px 0 24px; }
+
+    .hero-box,
+    .price-card,
+    .card,
+    .method-card,
+    .feature-card{
+      background:rgba(255,255,255,0.95);
+      border:1px solid #f0e6c9;
+      border-radius:26px;
+      box-shadow:var(--card-shadow);
     }
 
-    .hero-shell {
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
+    .hero-box{
+      padding:24px;
+      margin-bottom:18px;
+      background:linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
+      position:relative;
+      overflow:hidden;
     }
 
-    .hero-shell::before {
-      content: "";
-      position: absolute;
-      right: -70px;
-      top: -70px;
-      width: 240px;
-      height: 240px;
-      background: radial-gradient(circle, rgba(216,176,91,0.16), transparent 65%);
-      pointer-events: none;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap:16px;
-      align-items:stretch;
-    }
-
-    .hero-left,
-    .hero-right{
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #f0e6c9;
-      border-radius: 24px;
-      box-shadow: var(--card-shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-left{
-      padding: 24px;
-    }
-
-    .hero-left::after{
+    .hero-box::before{
       content:"";
       position:absolute;
-      inset:auto -40px -40px auto;
-      width:180px;
-      height:180px;
-      background:radial-gradient(circle, rgba(90,63,255,0.10), transparent 70%);
-      pointer-events:none;
+      right:-60px;
+      top:-60px;
+      width:220px;
+      height:220px;
+      background:radial-gradient(circle, rgba(216,176,91,0.16), transparent 65%);
     }
 
-    .hero-tag {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 800;
-      color: #4a3b92;
-      border: 1px solid #ece1bf;
-      background: #fff;
-      border-radius: 999px;
-      padding: 10px 16px;
-      margin-bottom: 14px;
-    }
-
-    .hero-left h1 {
-      margin: 0 0 12px;
-      font-size: 48px;
-      line-height: 1.0;
-      letter-spacing: -0.045em;
-      color: #312668;
-      max-width: 780px;
-    }
-
-    .hero-left p {
-      margin: 0 0 18px;
-      font-size: 17px;
-      line-height: 1.74;
-      color: var(--muted);
-      max-width: 820px;
-    }
-
-    .text-gold{ color: var(--gold); text-shadow: 0 0 18px rgba(216,176,91,0.18); }
-    .text-purple{ color: var(--purple); text-shadow: 0 0 18px rgba(90,63,255,0.14); }
-    .text-pink{ color: var(--pink); text-shadow: 0 0 18px rgba(255,124,200,0.14); }
-    .text-blue{ color: var(--blue); text-shadow: 0 0 18px rgba(79,141,255,0.14); }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      border: none;
-      transition: 0.2s ease;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold), var(--purple));
-      color: #fff;
-      box-shadow: 0 12px 24px rgba(90,63,255,0.18);
-    }
-
-    .btn-light {
-      background: #f4eeff;
-      color: #34296a;
-      border: 1px solid #e4d7ff;
-    }
-
-    .marquee-wrap {
-      margin-top: 10px;
-      border: 1px solid #eee2bf;
-      border-radius: 16px;
-      background: #fff;
-      overflow: hidden;
-      padding: 10px 0;
-    }
-
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      gap: 12px;
-      padding: 0 12px;
-      animation: scrollLeft 28s linear infinite;
-    }
-
-    .mini-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #faf7ff;
-      border: 1px solid #ece1bf;
-      font-size: 13px;
-      font-weight: 700;
-      color: #4a3b92;
-      white-space: nowrap;
-      box-shadow: 0 6px 16px rgba(83,57,139,0.04);
-    }
-
-    @keyframes scrollLeft {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .hero-right{
-      padding: 18px;
-      display:grid;
-      gap:14px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,243,255,0.96));
-    }
-
-    .pay-note{
-      padding:16px;
-      border-radius:20px;
-      border:1px solid #eee2bf;
-      background:#fff;
-      box-shadow:0 10px 22px rgba(83,57,139,0.05);
-    }
-
-    .pay-note h3{
-      margin:0 0 8px;
-      font-size:18px;
-      color:#433685;
-    }
-
-    .pay-note p{
-      margin:0;
-      font-size:14px;
-      line-height:1.7;
-      color:var(--muted);
-    }
-
-    .pay-stats{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-    }
-
-    .pay-stat{
-      padding:14px;
-      border-radius:18px;
-      background:#fff;
-      border:1px solid #eee2bf;
-      text-align:center;
-      box-shadow:0 8px 18px rgba(83,57,139,0.05);
-    }
-
-    .pay-stat .num{
-      font-size:22px;
+    .hero-tag{
+      display:inline-block;
+      font-size:13px;
       font-weight:800;
-      color:#3f3281;
+      color:#4a3b92;
+      border:1px solid #ece1bf;
+      background:#fff;
+      border-radius:999px;
+      padding:10px 16px;
+      margin-bottom:14px;
+      position:relative;
+      z-index:1;
     }
 
-    .pay-stat .lab{
-      margin-top:4px;
-      font-size:12px;
-      font-weight:700;
-      color:#7a7291;
+    .hero-box h1{
+      margin:0 0 12px;
+      font-size:48px;
+      line-height:1.02;
+      letter-spacing:-0.04em;
+      color:#312668;
+      max-width:850px;
+      position:relative;
+      z-index:1;
     }
 
-    .section {
-      padding: 6px 0 18px;
+    .hero-box p{
+      margin:0 0 18px;
+      font-size:17px;
+      line-height:1.75;
+      color:var(--muted);
+      max-width:820px;
+      position:relative;
+      z-index:1;
     }
 
-    .section-box {
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #ece0c0;
-      border-radius: 28px;
-      padding: 24px;
-      box-shadow: 0 16px 36px rgba(75, 45, 120, 0.06);
-      transition: 0.25s ease;
+    .text-gold{ color:var(--gold); }
+    .text-purple{ color:var(--purple); }
+    .text-pink{ color:var(--pink); }
+    .text-blue{ color:var(--blue); }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      position:relative;
+      z-index:1;
     }
 
-    .section-box:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 24px 48px rgba(75,45,120,0.08);
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:14px 18px;
+      border-radius:16px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      border:none;
+      text-align:center;
     }
 
-    .section-box h2 {
-      margin: 0 0 10px;
-      font-size: 28px;
-      color: #35296f;
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(90,63,255,0.18);
     }
 
-    .section-box .section-text {
-      margin: 0 0 20px;
-      color: #6f6983;
-      line-height: 1.75;
-      font-size: 16px;
+    .btn-light{
+      background:#f4eeff;
+      color:#34296a;
+      border:1px solid #e4d7ff;
     }
 
     .pricing-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:16px;
+      margin-bottom:18px;
     }
 
     .price-card{
       padding:22px;
-      border-radius:24px;
-      background: linear-gradient(180deg,#fff,#fcf8ff);
-      border:1px solid #f0e6c9;
-      box-shadow: var(--card-shadow);
-      transition:0.22s ease;
       position:relative;
       overflow:hidden;
+      background:linear-gradient(180deg,#fff,#fcf8ff);
     }
 
     .price-card::before{
@@ -506,16 +292,11 @@
       top:0;
       width:6px;
       height:100%;
-      background: linear-gradient(180deg, var(--gold), var(--purple));
-    }
-
-    .price-card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 18px 36px rgba(83,57,139,0.10);
+      background:linear-gradient(180deg,var(--gold),var(--purple));
     }
 
     .price-card.featured{
-      background: linear-gradient(135deg, rgba(255,250,242,0.98), rgba(248,243,255,0.98));
+      background:linear-gradient(135deg, rgba(255,250,242,0.98), rgba(248,243,255,0.98));
       border-color:#d9c9ff;
       box-shadow:0 18px 40px rgba(90,63,255,0.10);
     }
@@ -530,6 +311,7 @@
       background:#f5f0ff;
       border:1px solid #eadffc;
       color:#4a3b92;
+      margin-left:8px;
     }
 
     .price-card h3{
@@ -596,37 +378,26 @@
 
     .payment-layout{
       display:grid;
-      grid-template-columns: 0.95fr 1.05fr;
+      grid-template-columns:0.95fr 1.05fr;
       gap:16px;
-      align-items:start;
+      margin-bottom:18px;
     }
 
     .card{
       padding:20px;
-      border-radius:24px;
-      background: linear-gradient(180deg,#fff,#fcf8ff);
-      border:1px solid #f0e6c9;
-      box-shadow: var(--card-shadow);
-      transition:0.22s ease;
-      position:relative;
-      overflow:hidden;
+      background:linear-gradient(180deg,#fff,#fcf8ff);
     }
 
-    .card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 18px 36px rgba(83,57,139,0.10);
+    .card h2{
+      margin:0 0 10px;
+      font-size:26px;
+      color:#35296f;
     }
 
-    .card h3{
-      margin:0 0 8px;
-      font-size:22px;
-      color:#45388c;
-    }
-
-    .card p{
-      margin:0;
-      color:#6e6782;
-      line-height:1.75;
+    .sub{
+      margin:0 0 16px;
+      color:var(--muted);
+      line-height:1.7;
       font-size:15px;
     }
 
@@ -646,19 +417,19 @@
     .field input,
     .field select{
       width:100%;
-      border: 1px solid #eadfc2;
-      background: #fff;
-      border-radius: 16px;
-      padding: 14px 14px;
-      font: inherit;
-      color: var(--text);
-      outline: none;
+      border:1px solid #eadfc2;
+      background:#fff;
+      border-radius:16px;
+      padding:14px;
+      font:inherit;
+      color:var(--text);
+      outline:none;
     }
 
     .field input:focus,
     .field select:focus{
-      border-color: #cdb2ff;
-      box-shadow: 0 0 0 4px rgba(90,63,255,0.08);
+      border-color:#cdb2ff;
+      box-shadow:0 0 0 4px rgba(90,63,255,0.08);
     }
 
     .summary-box{
@@ -696,13 +467,10 @@
 
     .method-card{
       padding:18px;
-      border-radius:20px;
       background:#fff;
-      border:1px solid #eee2bf;
-      box-shadow:0 10px 24px rgba(83,57,139,0.05);
     }
 
-    .method-card h4{
+    .method-card h3{
       margin:0 0 8px;
       font-size:17px;
       color:#40337f;
@@ -715,27 +483,18 @@
       color:var(--muted);
     }
 
-    .showcase-grid{
+    .feature-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:16px;
     }
 
-    .showcase-card{
+    .feature-card{
       padding:22px;
-      border-radius:24px;
-      background: linear-gradient(135deg,#fff,#f8f2ff);
-      border: 1px solid #ece0c0;
-      box-shadow: var(--card-shadow);
-      transition: 0.25s ease;
+      background:linear-gradient(135deg,#fff,#f8f2ff);
     }
 
-    .showcase-card:hover{
-      transform: translateY(-4px);
-      box-shadow: 0 20px 38px rgba(83,57,139,0.10);
-    }
-
-    .showcase-icon{
+    .feature-icon{
       width:52px;
       height:52px;
       display:flex;
@@ -744,168 +503,117 @@
       border-radius:16px;
       margin-bottom:14px;
       font-size:24px;
-      background: linear-gradient(135deg, rgba(216,176,91,0.18), rgba(90,63,255,0.14));
+      background:linear-gradient(135deg, rgba(216,176,91,0.18), rgba(90,63,255,0.14));
     }
 
-    .showcase-card h3{
+    .feature-card h3{
       margin:0 0 8px;
       font-size:20px;
       color:#382c76;
     }
 
-    .showcase-card p{
+    .feature-card p{
       margin:0;
       font-size:15px;
       line-height:1.75;
-      color: var(--muted);
+      color:var(--muted);
     }
 
-    .quick-links-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
+    .site-footer{
+      margin-top:22px;
+      background:#181427;
+      color:#fff;
+      padding:40px 0;
     }
 
-    .quick-link {
-      padding: 20px 16px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 800;
-      color: #433685;
-      transition: 0.2s ease;
-      background: linear-gradient(180deg,#fff,#faf6ff);
-      border-radius: 20px;
-      border: 1px solid #f0e6c9;
-      box-shadow: var(--card-shadow);
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr 1fr;
+      gap:24px;
     }
 
-    .quick-link:hover {
-      transform: translateY(-3px);
-      background: #faf6ff;
-      box-shadow: 0 16px 30px rgba(83,57,139,0.08);
-    }
-
-    .site-footer {
-      margin-top: 22px;
-      background: #181427;
-      color: #fff;
-      padding: 40px 0;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr 1fr;
-      gap: 24px;
-    }
-
-    .footer-col h3 {
-      margin: 0 0 14px;
-      font-size: 18px;
-      color: #ffffff;
+    .footer-col h3{
+      margin:0 0 14px;
+      font-size:18px;
+      color:#ffffff;
     }
 
     .footer-col p,
-    .footer-col a {
-      display: block;
-      margin: 0 0 10px;
-      color: #d9d4ea;
-      font-size: 15px;
-      line-height: 1.7;
+    .footer-col a{
+      display:block;
+      margin:0 0 10px;
+      color:#d9d4ea;
+      font-size:15px;
+      line-height:1.7;
     }
 
-    @media (max-width: 1180px) {
-      .hero-grid,
+    @media (max-width: 1180px){
       .pricing-grid,
       .payment-layout,
-      .showcase-grid{
-        grid-template-columns: 1fr 1fr;
+      .feature-grid,
+      .footer-grid{
+        grid-template-columns:repeat(2,1fr);
       }
 
-      .quick-links-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .payment-layout{
+        grid-template-columns:1fr;
       }
     }
 
-    @media (max-width: 768px) {
-      .container { width: min(100% - 20px, 1200px); }
-      .menu-toggle { display: block; }
+    @media (max-width: 768px){
+      .container{ width:min(100% - 20px, 1200px); }
+      .menu-toggle{ display:block; }
 
-      .main-nav {
-        display: none;
-        position: absolute;
-        top: 82px;
-        left: 0;
-        right: 0;
-        background: #fff;
-        border: 1px solid #ecdcb4;
-        border-radius: 18px;
-        box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-        padding: 14px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
+      .main-nav{
+        display:none;
+        position:absolute;
+        top:82px;
+        left:0;
+        right:0;
+        background:#fff;
+        border:1px solid #ecdcb4;
+        border-radius:18px;
+        box-shadow:0 18px 40px rgba(0,0,0,0.08);
+        padding:14px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
       }
 
-      .main-nav.show { display: flex; }
+      .main-nav.show{ display:flex; }
 
-      .main-nav a {
-        width: 100%;
-        background: #faf7ff;
-        justify-content: flex-start;
+      .main-nav a{
+        width:100%;
+        background:#faf7ff;
+        justify-content:flex-start;
       }
 
-      .hero-grid,
+      .hero-box h1{ font-size:34px; }
+      .hero-actions{ flex-direction:column; }
+      .btn{ width:100%; }
+
       .pricing-grid,
-      .payment-layout,
-      .showcase-grid,
-      .quick-links-grid,
+      .feature-grid,
       .footer-grid,
-      .pay-stats,
-      .methods-grid {
-        grid-template-columns: 1fr;
+      .methods-grid{
+        grid-template-columns:1fr;
       }
 
-      .hero-left h1 { font-size: 34px; }
-
-      .hero-actions {
-        flex-direction: column;
-      }
-
-      .btn { width: 100%; }
-
-      .hero-left,
-      .hero-right,
-      .section-box,
-      .card {
-        padding: 16px;
-      }
-
-      .quick-link {
-        text-align: left;
-      }
-
-      .summary-row{
-        font-size:13px;
+      .hero-box,
+      .price-card,
+      .card,
+      .method-card,
+      .feature-card{
+        padding:16px;
       }
     }
   </style>
 </head>
 <body>
-
-  <div class="floating-orb orb-1"></div>
-  <div class="floating-orb orb-2"></div>
-  <div class="floating-orb orb-3"></div>
-
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
-
       <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
-
       <nav class="main-nav" id="mainNav">
         <a href="index.html" class="home-link">🏠 Home</a>
         <a href="business-dashboard.html">🏢 Business</a>
@@ -915,286 +623,157 @@
         <a href="templates.html">🧩 Templates</a>
         <a href="payments.html" class="active">💳 Payments</a>
         <a href="login.html">🔐 Login</a>
-        <a href="admin-dashboard.html">⚙️ Admin</a>
+        <a href="pricing.html">💰 Pricing</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero-section">
+  <section class="page-section">
     <div class="container">
-      <div class="hero-shell">
-        <div class="hero-grid">
-
-          <div class="hero-left">
-            <div class="hero-tag">Payments & Plans</div>
-            <h1>
-              Choose the <span class="text-gold">right plan</span>,
-              unlock <span class="text-purple">premium tools</span>,
-              and scale with <span class="text-pink">confidence</span>
-              in <span class="text-blue">Bariq AI</span>
-            </h1>
-
-            <p>
-              Bariq Payments brings a clean SaaS feel to the platform with clear plans,
-              transparent billing, and a simple path to unlock more AI, campaigns, creators, and execution features.
-            </p>
-
-            <div class="hero-actions">
-              <a href="#plans" class="btn btn-primary">💳 View Plans</a>
-              <a href="#checkout" class="btn btn-light">⚡ Start Checkout</a>
-              <a href="pricing.html" class="btn btn-light">💰 Pricing Page</a>
-            </div>
-
-            <div class="marquee-wrap">
-              <div class="marquee-track">
-                <span class="mini-chip">💳 Monthly Plans</span>
-                <span class="mini-chip">⭐ Premium Features</span>
-                <span class="mini-chip">📣 Campaign Access</span>
-                <span class="mini-chip">🎥 Creator Tools</span>
-                <span class="mini-chip">✨ AI Generator</span>
-                <span class="mini-chip">🧩 Templates</span>
-                <span class="mini-chip">📈 Business Growth</span>
-                <span class="mini-chip">💳 Monthly Plans</span>
-                <span class="mini-chip">⭐ Premium Features</span>
-                <span class="mini-chip">📣 Campaign Access</span>
-                <span class="mini-chip">🎥 Creator Tools</span>
-                <span class="mini-chip">✨ AI Generator</span>
-                <span class="mini-chip">🧩 Templates</span>
-                <span class="mini-chip">📈 Business Growth</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-right">
-            <div class="pay-note">
-              <h3>Launch-ready monetization</h3>
-              <p>Payments make Bariq feel like a real SaaS platform by showing exactly how users subscribe, upgrade, and unlock more value.</p>
-            </div>
-
-            <div class="pay-stats">
-              <div class="pay-stat">
-                <div class="num">3</div>
-                <div class="lab">Core Plans</div>
-              </div>
-              <div class="pay-stat">
-                <div class="num">Pro</div>
-                <div class="lab">Best Value</div>
-              </div>
-              <div class="pay-stat">
-                <div class="num">Easy</div>
-                <div class="lab">Checkout Flow</div>
-              </div>
-            </div>
-
-            <div class="pay-note">
-              <h3>Built for growth</h3>
-              <p>Start smaller, upgrade later, and keep the product simple for early users while still looking premium and scalable.</p>
-            </div>
-          </div>
-
+      <div class="hero-box">
+        <div class="hero-tag">Payments & Plans</div>
+        <h1>
+          Choose the <span class="text-gold">right plan</span>, unlock
+          <span class="text-purple">premium tools</span>, and scale with
+          <span class="text-pink">confidence</span> in
+          <span class="text-blue">Bariq AI</span>
+        </h1>
+        <p>
+          Bariq Payments gives the platform a clean SaaS feel with clear plans, transparent billing, and a simple path to unlock more AI, campaigns, creators, and execution features.
+        </p>
+        <div class="hero-actions">
+          <a href="#plans" class="btn btn-primary">💳 View Plans</a>
+          <a href="#checkout" class="btn btn-light">⚡ Start Checkout</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section" id="plans">
-    <div class="container">
-      <div class="section-box">
-        <h2>Bariq AI plans</h2>
-        <p class="section-text">Choose the plan that matches your business size, campaign needs, and growth stage.</p>
-
-        <div class="pricing-grid">
-          <div class="price-card">
-            <div class="badge">Starter</div>
-            <h3>Starter Plan</h3>
-            <div class="price"><strong>₹999</strong> <span>/ month</span></div>
-            <p>Good for solo founders and small businesses who want to start creating simple ad campaigns and content.</p>
-
-            <div class="feature-list">
-              <div class="feature-item"><span class="check">✓</span><span>AI Generator access</span></div>
-              <div class="feature-item"><span class="check">✓</span><span>Basic campaign creation</span></div>
-              <div class="feature-item"><span class="check">✓</span><span>Template browsing</span></div>
-              <div class="feature-item"><span class="check">✓</span><span>Save simple drafts</span></div>
-            </div>
-
-            <button class="btn btn-light" style="width:100%;">Choose Starter</button>
+      <div class="pricing-grid" id="plans">
+        <div class="price-card">
+          <div class="badge">Starter</div>
+          <h3>Starter Plan</h3>
+          <div class="price"><strong>₹999</strong> <span>/ month</span></div>
+          <p>Good for solo founders and small businesses starting with simple AI marketing workflows.</p>
+          <div class="feature-list">
+            <div class="feature-item"><span class="check">✓</span><span>AI Generator access</span></div>
+            <div class="feature-item"><span class="check">✓</span><span>Basic campaign creation</span></div>
+            <div class="feature-item"><span class="check">✓</span><span>Template browsing</span></div>
+            <div class="feature-item"><span class="check">✓</span><span>Save simple drafts</span></div>
           </div>
+          <button class="btn btn-light" style="width:100%;">Choose Starter</button>
+        </div>
 
-          <div class="price-card featured">
-            <div class="badge">Most Popular</div>
-            <h3>Pro Plan</h3>
-            <div class="price"><strong>₹2,999</strong> <span>/ month</span></div>
-            <p>Best for active brands who need stronger campaigns, creator workflow, more AI usage, and a more complete marketing stack.</p>
-
-            <div class="feature-list">
-              <div class="feature-item"><span class="check">✓</span><span>Everything in Starter</span></div>
-              <div class="feature-item"><span class="check">✓</span><span>Campaign Studio access</span></div>
-              <div class="feature-item"><span class="check">✓</span><span>Creator marketplace access</span></div>
-              <div class="feature-item"><span class="check">✓</span><span>Priority template library</span></div>
-              <div class="feature-item"><span class="check">✓</span><span>Premium output workflow</span></div>
-            </div>
-
-            <button class="btn btn-primary" style="width:100%;">Choose Pro</button>
+        <div class="price-card featured">
+          <div class="badge">Most Popular</div>
+          <h3>Pro Plan</h3>
+          <div class="price"><strong>₹2,999</strong> <span>/ month</span></div>
+          <p>Best for active brands who need stronger campaigns, creator workflow, more AI usage, and a complete marketing stack.</p>
+          <div class="feature-list">
+            <div class="feature-item"><span class="check">✓</span><span>Everything in Starter</span></div>
+            <div class="feature-item"><span class="check">✓</span><span>Campaign Studio access</span></div>
+            <div class="feature-item"><span class="check">✓</span><span>Creator marketplace access</span></div>
+            <div class="feature-item"><span class="check">✓</span><span>Priority templates</span></div>
+            <div class="feature-item"><span class="check">✓</span><span>Premium output workflow</span></div>
           </div>
+          <button class="btn btn-primary" style="width:100%;">Choose Pro</button>
+        </div>
 
-          <div class="price-card">
-            <div class="badge">Advanced</div>
-            <h3>Scale Plan</h3>
-            <div class="price"><strong>₹7,999</strong> <span>/ month</span></div>
-            <p>For teams and agencies that need bigger creator access, more campaigns, faster workflows, and future premium automation features.</p>
-
-            <div class="feature-list">
-              <div class="feature-item"><span class="check">✓</span><span>Everything in Pro</span></div>
-              <div class="feature-item"><span class="check">✓</span><span>Higher usage limits</span></div>
-              <div class="feature-item"><span class="check">✓</span><span>Multi-campaign support</span></div>
-              <div class="feature-item"><span class="check">✓</span><span>Advanced business dashboard view</span></div>
-              <div class="feature-item"><span class="check">✓</span><span>Future automation priority</span></div>
-            </div>
-
-            <button class="btn btn-light" style="width:100%;">Choose Scale</button>
+        <div class="price-card">
+          <div class="badge">Advanced</div>
+          <h3>Scale Plan</h3>
+          <div class="price"><strong>₹7,999</strong> <span>/ month</span></div>
+          <p>For teams and agencies needing bigger creator access, more campaigns, and future premium automation features.</p>
+          <div class="feature-list">
+            <div class="feature-item"><span class="check">✓</span><span>Everything in Pro</span></div>
+            <div class="feature-item"><span class="check">✓</span><span>Higher usage limits</span></div>
+            <div class="feature-item"><span class="check">✓</span><span>Multi-campaign support</span></div>
+            <div class="feature-item"><span class="check">✓</span><span>Advanced dashboard view</span></div>
+            <div class="feature-item"><span class="check">✓</span><span>Automation priority</span></div>
           </div>
+          <button class="btn btn-light" style="width:100%;">Choose Scale</button>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section" id="checkout">
-    <div class="container">
-      <div class="section-box">
-        <div class="payment-layout">
-          <div class="card">
-            <h3>Billing details</h3>
-            <p>Use this clean mock checkout section to make Bariq feel real and launch-ready.</p>
+      <div class="payment-layout" id="checkout">
+        <div class="card">
+          <h2>Billing details</h2>
+          <p class="sub">Use this clean mock checkout section to make Bariq feel real and launch-ready.</p>
 
-            <div class="field" style="margin-top:16px;">
-              <label for="fullName">Full Name</label>
-              <input id="fullName" type="text" placeholder="Your full name" />
-            </div>
-
-            <div class="field">
-              <label for="email">Email Address</label>
-              <input id="email" type="email" placeholder="you@example.com" />
-            </div>
-
-            <div class="field">
-              <label for="company">Business / Company Name</label>
-              <input id="company" type="text" placeholder="Your business name" />
-            </div>
-
-            <div class="field">
-              <label for="plan">Choose Plan</label>
-              <select id="plan">
-                <option>Starter Plan - ₹999 / month</option>
-                <option selected>Pro Plan - ₹2,999 / month</option>
-                <option>Scale Plan - ₹7,999 / month</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="coupon">Coupon Code</label>
-              <input id="coupon" type="text" placeholder="Enter coupon if any" />
-            </div>
-
-            <button class="btn btn-primary" style="width:100%; margin-top:8px;">Proceed to Payment</button>
+          <div class="field">
+            <label>Full Name</label>
+            <input type="text" placeholder="Your full name" />
+          </div>
+          <div class="field">
+            <label>Email Address</label>
+            <input type="email" placeholder="you@example.com" />
+          </div>
+          <div class="field">
+            <label>Business / Company Name</label>
+            <input type="text" placeholder="Your business name" />
+          </div>
+          <div class="field">
+            <label>Choose Plan</label>
+            <select>
+              <option>Starter Plan - ₹999 / month</option>
+              <option selected>Pro Plan - ₹2,999 / month</option>
+              <option>Scale Plan - ₹7,999 / month</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Coupon Code</label>
+            <input type="text" placeholder="Enter coupon if any" />
           </div>
 
-          <div class="card">
-            <h3>Order summary</h3>
-            <p>Simple structured summary block so the page feels trustworthy and polished.</p>
+          <button class="btn btn-primary" style="width:100%; margin-top:8px;">Proceed to Payment</button>
+        </div>
 
-            <div class="summary-box">
-              <div class="summary-row">
-                <span>Selected Plan</span>
-                <span>Pro Plan</span>
-              </div>
-              <div class="summary-row">
-                <span>Billing Cycle</span>
-                <span>Monthly</span>
-              </div>
-              <div class="summary-row">
-                <span>Subtotal</span>
-                <span>₹2,999</span>
-              </div>
-              <div class="summary-row">
-                <span>Discount</span>
-                <span>₹0</span>
-              </div>
-              <div class="summary-row">
-                <span>Total</span>
-                <span>₹2,999</span>
-              </div>
+        <div class="card">
+          <h2>Order summary</h2>
+          <p class="sub">Simple structured summary block so the page feels trustworthy and polished.</p>
+
+          <div class="summary-box">
+            <div class="summary-row"><span>Selected Plan</span><span>Pro Plan</span></div>
+            <div class="summary-row"><span>Billing Cycle</span><span>Monthly</span></div>
+            <div class="summary-row"><span>Subtotal</span><span>₹2,999</span></div>
+            <div class="summary-row"><span>Discount</span><span>₹0</span></div>
+            <div class="summary-row"><span>Total</span><span>₹2,999</span></div>
+          </div>
+
+          <div class="methods-grid">
+            <div class="method-card">
+              <h3>UPI / Razorpay</h3>
+              <p>Fast local checkout with a simple Indian payment flow for early launch.</p>
             </div>
-
-            <div class="methods-grid">
-              <div class="method-card">
-                <h4>UPI / Razorpay</h4>
-                <p>Fast local checkout with a simple Indian payment flow for early launch.</p>
-              </div>
-
-              <div class="method-card">
-                <h4>Cards / Net Banking</h4>
-                <p>Supports users who want a more standard SaaS billing experience.</p>
-              </div>
-
-              <div class="method-card">
-                <h4>Business Invoices</h4>
-                <p>Useful later for higher plans, agencies, and enterprise-style onboarding.</p>
-              </div>
-
-              <div class="method-card">
-                <h4>Upgrade Anytime</h4>
-                <p>Keep pricing flexible so users can start small and scale as they grow.</p>
-              </div>
+            <div class="method-card">
+              <h3>Cards / Net Banking</h3>
+              <p>Supports users who want a more standard SaaS billing experience.</p>
+            </div>
+            <div class="method-card">
+              <h3>Business Invoices</h3>
+              <p>Useful later for higher plans, agencies, and enterprise-style onboarding.</p>
+            </div>
+            <div class="method-card">
+              <h3>Upgrade Anytime</h3>
+              <p>Keep pricing flexible so users can start small and scale as they grow.</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-box">
-        <h2>Why payments make Bariq feel real</h2>
-        <p class="section-text">A clear monetization layer makes the platform feel closer to launch and more trustworthy for users.</p>
-
-        <div class="showcase-grid">
-          <div class="showcase-card">
-            <div class="showcase-icon">💳</div>
-            <h3>Clear product value</h3>
-            <p>Users understand what Bariq offers when plans, feature access, and upgrades are shown clearly.</p>
-          </div>
-
-          <div class="showcase-card">
-            <div class="showcase-icon">⭐</div>
-            <h3>Premium SaaS perception</h3>
-            <p>Strong pricing cards and a polished checkout area make the website feel much more real and investment-worthy.</p>
-          </div>
-
-          <div class="showcase-card">
-            <div class="showcase-icon">📈</div>
-            <h3>Growth-ready structure</h3>
-            <p>This creates the base for subscriptions, upgrades, coupons, invoices, and larger business plans later.</p>
-          </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">💳</div>
+          <h3>Clear product value</h3>
+          <p>Users understand what Bariq offers when plans, feature access, and upgrades are shown clearly.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-box">
-        <div class="quick-links-grid">
-          <a class="quick-link" href="index.html">🏠 Home</a>
-          <a class="quick-link" href="business-dashboard.html">🏢 Business</a>
-          <a class="quick-link" href="ai-generator.html">✨ AI Generator</a>
-          <a class="quick-link" href="campaign.html">📣 Campaign Studio</a>
-          <a class="quick-link" href="creator-marketplace.html">🎥 Creators</a>
-          <a class="quick-link" href="templates.html">🧩 Templates</a>
-          <a class="quick-link" href="pricing.html">💰 Pricing</a>
-          <a class="quick-link" href="login.html">🔐 Login</a>
-          <a class="quick-link" href="admin-dashboard.html">⚙️ Admin</a>
-          <a class="quick-link" href="contact.html">☎️ Contact</a>
+        <div class="feature-card">
+          <div class="feature-icon">⭐</div>
+          <h3>Premium SaaS perception</h3>
+          <p>Strong pricing cards and a polished checkout area make the website feel much more real and investment-worthy.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Growth-ready structure</h3>
+          <p>This creates the base for subscriptions, upgrades, coupons, invoices, and larger business plans later.</p>
         </div>
       </div>
     </div>
@@ -1205,24 +784,21 @@
       <div class="footer-grid">
         <div class="footer-col">
           <h3>Bariq AI</h3>
-          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, and execution systems.</p>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation, and execution systems.</p>
         </div>
-
         <div class="footer-col">
           <h3>Platform</h3>
           <a href="index.html">Home</a>
           <a href="ai-generator.html">AI Generator</a>
           <a href="business-dashboard.html">Business Dashboard</a>
-          <a href="creator-dashboard.html">Creator Dashboard</a>
+          <a href="payments.html">Payments</a>
         </div>
-
         <div class="footer-col">
           <h3>Legal</h3>
           <a href="terms.html">Terms</a>
           <a href="privacy.html">Privacy Policy</a>
           <a href="refund-policy.html">Refund Policy</a>
         </div>
-
         <div class="footer-col">
           <h3>Contact</h3>
           <a href="contact.html">Contact Us</a>
