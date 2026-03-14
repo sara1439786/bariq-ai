@@ -3,21 +3,133 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI Video Creator</title>
+  <title>Bariq AI — Video Creator</title>
   <style>
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; overflow-x: hidden; }
 
-    body {
+    :root{
+      --bg1:#fffaf3;
+      --bg2:#faf7ff;
+      --bg3:#f7f0ff;
+      --text:#2c235c;
+      --muted:#6d6684;
+      --line:#ece0c0;
+      --white:#ffffff;
+      --purple:#5a3fff;
+      --gold:#d8b05b;
+      --pink:#ff7cc8;
+      --blue:#4f8dff;
+      --green:#35b36e;
+      --shadow:0 20px 55px rgba(75,45,120,0.08);
+      --card-shadow:0 14px 32px rgba(83,57,139,0.07);
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #fffaf3 0%, #faf7ff 45%, #f6f0ff 100%);
-      color: #2c235c;
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
+      color: var(--text);
+    }
+
+    body{ position: relative; }
+
+    body::before{
+      content:"";
+      position:fixed;
+      top:-220px;
+      right:-220px;
+      width:720px;
+      height:720px;
+      background:radial-gradient(circle at center,
+      rgba(120,80,255,0.22),
+      rgba(120,80,255,0.08),
+      transparent 70%);
+      z-index:-3;
+      filter:blur(85px);
+      animation:glowMove 14s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      bottom:-240px;
+      left:-220px;
+      width:700px;
+      height:700px;
+      background:radial-gradient(circle,
+      rgba(216,176,91,0.22),
+      transparent 70%);
+      z-index:-3;
+      filter:blur(95px);
+      animation:goldGlow 16s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+
+    .floating-orb{
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(18px);
+      pointer-events: none;
+      z-index: -2;
+      opacity: 0.35;
+    }
+
+    .orb-1{
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, #8f6bff, #c69cff);
+      left: 8%;
+      top: 20%;
+      animation: floatOrb1 12s ease-in-out infinite alternate;
+    }
+
+    .orb-2{
+      width: 140px;
+      height: 140px;
+      background: linear-gradient(135deg, #ffd28e, #ffb86f);
+      right: 10%;
+      top: 40%;
+      animation: floatOrb2 15s ease-in-out infinite alternate;
+    }
+
+    .orb-3{
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #ff9adf, #d79bff);
+      left: 46%;
+      bottom: 10%;
+      animation: floatOrb3 13s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowMove{
+      0%{transform:translate(0,0);}
+      100%{transform:translate(-80px,60px);}
+    }
+    @keyframes goldGlow{
+      0%{transform:translate(0,0);}
+      100%{transform:translate(120px,-80px);}
+    }
+    @keyframes floatOrb1{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(40px) translateX(30px);}
+    }
+    @keyframes floatOrb2{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(-30px) translateX(-25px);}
+    }
+    @keyframes floatOrb3{
+      0%{transform:translateY(0) translateX(0);}
+      100%{transform:translateY(-25px) translateX(35px);}
     }
 
     a { text-decoration: none; color: inherit; }
 
     .container {
-      width: min(1280px, calc(100% - 32px));
+      width: min(1360px, calc(100% - 32px));
       margin: 0 auto;
     }
 
@@ -25,9 +137,26 @@
       position: sticky;
       top: 0;
       z-index: 999;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid #eee2bf;
+    }
+
+    .site-header::after{
+      content:"";
+      position:absolute;
+      bottom:0;
+      left:0;
+      width:100%;
+      height:3px;
+      background:linear-gradient(90deg,#d8b05b,#7b5cff,#ff8acc,#d8b05b);
+      background-size:300% 100%;
+      animation:headerFlow 7s linear infinite;
+    }
+
+    @keyframes headerFlow{
+      0%{background-position:0%;}
+      100%{background-position:300%;}
     }
 
     .nav-wrap {
@@ -40,67 +169,127 @@
     }
 
     .brand {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       white-space: nowrap;
       font-size: 30px;
       font-weight: 800;
-      line-height: 1;
-      background: linear-gradient(90deg, #d8b05b, #5a3fff);
+      background: linear-gradient(90deg, var(--gold), var(--purple), var(--blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .top-links {
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--purple));
+      box-shadow: 0 0 16px rgba(90,63,255,0.3);
+    }
+
+    .menu-toggle {
+      display: none;
+      border: none;
+      background: #f3edff;
+      color: #2f216f;
+      font-size: 28px;
+      line-height: 1;
+      padding: 10px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    .main-nav {
       display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      white-space: nowrap;
+    }
+
+    .main-nav::-webkit-scrollbar { display:none; }
+
+    .main-nav a {
+      padding: 10px 12px;
       font-size: 14px;
       font-weight: 700;
-      color: #45388c;
-    }
-
-    .top-links a {
-      padding: 10px 12px;
+      color: #3a2d77;
       border-radius: 12px;
+      flex: 0 0 auto;
+      transition: 0.18s ease;
     }
 
-    .top-links a:hover {
-      background: #f4eeff;
+    .main-nav a:hover,
+    .main-nav a.active {
+      background: #f3edff;
     }
 
-    .page {
-      padding: 24px 0 40px;
+    .home-link {
+      background: linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
+      border: 1px solid #eadfc2;
     }
 
-    .hero {
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.95));
-      border: 1px solid #ecdcb4;
+    .hero-section {
+      padding: 14px 0 12px;
+    }
+
+    .hero-shell {
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
+      border: 1px solid var(--line);
       border-radius: 30px;
-      padding: 22px;
-      box-shadow: 0 16px 40px rgba(75, 45, 120, 0.08);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
-      gap: 18px;
-      align-items: start;
+    .hero-shell::before {
+      content: "";
+      position: absolute;
+      right: -70px;
+      top: -70px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(216,176,91,0.16), transparent 65%);
+      pointer-events: none;
     }
 
-    .panel, .preview-phone, .mini-box, .clip-card, .footer-note {
-      background: rgba(255,255,255,0.94);
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap:16px;
+      align-items:stretch;
+    }
+
+    .hero-left,
+    .hero-right{
+      background: rgba(255,255,255,0.95);
       border: 1px solid #f0e6c9;
       border-radius: 24px;
-      box-shadow: 0 10px 24px rgba(83, 57, 139, 0.05);
-      min-width: 0;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
     }
 
-    .panel {
-      padding: 22px;
+    .hero-left{
+      padding: 24px;
     }
 
-    .eyebrow {
+    .hero-left::after{
+      content:"";
+      position:absolute;
+      inset:auto -40px -40px auto;
+      width:180px;
+      height:180px;
+      background:radial-gradient(circle, rgba(90,63,255,0.10), transparent 70%);
+      pointer-events:none;
+    }
+
+    .hero-tag {
       display: inline-block;
       font-size: 13px;
       font-weight: 800;
@@ -112,77 +301,55 @@
       margin-bottom: 14px;
     }
 
-    h1 {
-      margin: 0 0 10px;
-      font-size: clamp(34px, 4vw, 52px);
-      line-height: 1.02;
+    .hero-left h1 {
+      margin: 0 0 12px;
+      font-size: 48px;
+      line-height: 1.0;
+      letter-spacing: -0.045em;
       color: #312668;
-      letter-spacing: -0.04em;
+      max-width: 780px;
     }
 
-    .subtitle {
-      margin: 0 0 20px;
-      font-size: 16px;
-      line-height: 1.7;
-      color: #6c6483;
-      max-width: 760px;
+    .hero-left p {
+      margin: 0 0 18px;
+      font-size: 17px;
+      line-height: 1.74;
+      color: var(--muted);
+      max-width: 820px;
     }
 
-    .voice-box {
-      background: #fff;
-      border: 1px solid #eadfbf;
-      border-radius: 22px;
-      padding: 16px;
-      margin-bottom: 18px;
-    }
+    .text-gold{ color: var(--gold); text-shadow: 0 0 18px rgba(216,176,91,0.18); }
+    .text-purple{ color: var(--purple); text-shadow: 0 0 18px rgba(90,63,255,0.14); }
+    .text-pink{ color: var(--pink); text-shadow: 0 0 18px rgba(255,124,200,0.14); }
+    .text-blue{ color: var(--blue); text-shadow: 0 0 18px rgba(79,141,255,0.14); }
 
-    .voice-label {
-      font-size: 14px;
-      font-weight: 800;
-      color: #433685;
-      margin-bottom: 10px;
-    }
-
-    textarea, input, select {
-      width: 100%;
-      border: 1px solid #e6ddc4;
-      background: #fff;
-      border-radius: 16px;
-      padding: 14px 14px;
-      font-size: 15px;
-      color: #2c235c;
-      outline: none;
-    }
-
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-      font-family: Arial, sans-serif;
-    }
-
-    .button-row {
+    .hero-actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-top: 12px;
+      margin-bottom: 14px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       padding: 14px 18px;
       border-radius: 16px;
       font-size: 14px;
       font-weight: 800;
       cursor: pointer;
       border: none;
+      transition: 0.2s ease;
     }
 
+    .btn:hover { transform: translateY(-2px); }
+
     .btn-primary {
-      background: linear-gradient(135deg, #d7b15e, #5a3fff);
+      background: linear-gradient(135deg, var(--gold), var(--purple));
       color: #fff;
-      box-shadow: 0 10px 22px rgba(90,63,255,0.2);
+      box-shadow: 0 12px 24px rgba(90,63,255,0.18);
     }
 
     .btn-light {
@@ -191,656 +358,973 @@
       border: 1px solid #e4d7ff;
     }
 
-    .btn-gold {
-      background: linear-gradient(135deg, #f7e8ba, #e2b85a);
-      color: #5f4710;
-      border: 1px solid #ebd08c;
-    }
-
-    .status-bar {
-      margin-top: 14px;
-      padding: 14px 16px;
+    .marquee-wrap {
+      margin-top: 10px;
+      border: 1px solid #eee2bf;
       border-radius: 16px;
-      background: #fbf8ff;
-      border: 1px solid #ece2ff;
-      color: #4a3b92;
-      font-weight: 700;
+      background: #fff;
+      overflow: hidden;
+      padding: 10px 0;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      display: block;
-      margin: 0 0 8px;
-      font-size: 14px;
-      font-weight: 800;
-      color: #433685;
-    }
-
-    .suggestions {
-      margin-top: 18px;
-    }
-
-    .suggestions h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      color: #433685;
-    }
-
-    .chips {
+    .marquee-track {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      width: max-content;
+      gap: 12px;
+      padding: 0 12px;
+      animation: scrollLeft 28s linear infinite;
     }
 
-    .chip {
+    .mini-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       padding: 10px 14px;
       border-radius: 999px;
-      background: #f6f1ff;
-      border: 1px solid #e7dcff;
-      color: #45388c;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .preview-phone {
-      padding: 18px;
-      background: linear-gradient(180deg, #5d43d8 0%, #2b1f64 100%);
-      border: 8px solid #1f1b2f;
-      min-height: 560px;
-      color: #fff;
-    }
-
-    .phone-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 22px;
-    }
-
-    .pill {
-      background: #f8e9be;
-      color: #6c5104;
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .logo-box {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.14);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: #faf7ff;
+      border: 1px solid #ece1bf;
       font-size: 13px;
-      font-weight: 800;
-    }
-
-    .phone-kicker {
-      font-size: 14px;
-      color: #efe6b7;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    .phone-headline {
-      font-size: 42px;
-      line-height: 1.05;
-      font-weight: 800;
-      color: #fff3c8;
-      text-align: center;
-      margin: 0 0 14px;
-    }
-
-    .phone-subline {
-      font-size: 16px;
-      line-height: 1.7;
-      color: #f5e9b5;
-      text-align: center;
-      margin: 0 0 18px;
-    }
-
-    .phone-offer {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 15px;
       font-weight: 700;
-      color: #ffffff;
+      color: #4a3b92;
+      white-space: nowrap;
+      box-shadow: 0 6px 16px rgba(83,57,139,0.04);
     }
 
-    .output-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 22px;
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    .mini-box {
+    .hero-right{
       padding: 18px;
+      display:grid;
+      gap:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,243,255,0.96));
     }
 
-    .mini-box h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
+    .hero-note{
+      padding:16px;
+      border-radius:20px;
+      border:1px solid #eee2bf;
+      background:#fff;
+      box-shadow:0 10px 22px rgba(83,57,139,0.05);
+    }
+
+    .hero-note h3{
+      margin:0 0 8px;
+      font-size:18px;
+      color:#433685;
+    }
+
+    .hero-note p{
+      margin:0;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--muted);
+    }
+
+    .mini-stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+
+    .mini-stat{
+      padding:14px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid #eee2bf;
+      text-align:center;
+      box-shadow:0 8px 18px rgba(83,57,139,0.05);
+    }
+
+    .mini-stat .num{
+      font-size:22px;
+      font-weight:800;
+      color:#3f3281;
+    }
+
+    .mini-stat .lab{
+      margin-top:4px;
+      font-size:12px;
+      font-weight:700;
+      color:#7a7291;
+    }
+
+    .section {
+      padding: 6px 0 18px;
+    }
+
+    .studio-grid{
+      display:grid;
+      grid-template-columns: 500px 1fr;
+      gap:20px;
+      align-items:start;
+    }
+
+    .form-card,
+    .output-card,
+    .status-card,
+    .scene-card,
+    .export-card,
+    .platform-card,
+    .next-step-card {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #f0e6c9;
+      border-radius: 22px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.25s ease;
+    }
+
+    .form-card:hover,
+    .output-card:hover,
+    .scene-card:hover,
+    .export-card:hover,
+    .platform-card:hover,
+    .next-step-card:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 26px 55px rgba(80,50,150,0.10);
+    }
+
+    .form-card,
+    .output-card {
+      padding: 20px;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 26px;
+      color: #35296f;
+    }
+
+    .section-text {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      font-size: 14px;
+      font-weight: 800;
       color: #433685;
     }
 
-    .mini-box p, .mini-box div {
-      color: #6e6782;
-      line-height: 1.7;
-      font-size: 15px;
-      white-space: pre-wrap;
-    }
-
-    .clips-section {
-      margin-top: 24px;
-    }
-
-    .clips-title {
-      font-size: 24px;
-      font-weight: 800;
-      color: #35296f;
-      margin: 0 0 14px;
-    }
-
-    .clips-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .clip-card {
-      padding: 14px;
-    }
-
-    .clip-card video {
+    .field input,
+    .field select,
+    .field textarea {
       width: 100%;
-      height: 220px;
-      object-fit: cover;
+      border: 1px solid #eadfc2;
+      background: #fff;
       border-radius: 16px;
-      background: #000;
+      padding: 14px 14px;
+      font: inherit;
+      color: var(--text);
+      outline: none;
+      transition: 0.18s ease;
     }
 
-    .clip-meta {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #6e6782;
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: #cdb2ff;
+      box-shadow: 0 0 0 4px rgba(90,63,255,0.08);
+    }
+
+    .field textarea {
+      min-height: 110px;
+      resize: vertical;
       line-height: 1.6;
     }
 
-    .footer-note {
-      margin-top: 22px;
-      padding: 18px;
-      text-align: center;
+    .voice-actions,
+    .action-row,
+    .platform-actions,
+    .next-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .footer-note strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 18px;
+    .action-row {
+      margin-top: 16px;
+    }
+
+    .status-card{
+      margin-top: 14px;
+      padding: 16px 18px;
+      background:linear-gradient(135deg,#fff,#f6f2ff);
+      border:1px solid #eee;
+    }
+
+    .status-card h4 {
+      margin: 0 0 8px;
       color: #433685;
+      font-size: 16px;
     }
 
-    .footer-note span {
-      color: #6e6782;
+    .status-message {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #5f5778;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .output-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,247,255,0.96));
+      overflow: hidden;
+      position: relative;
+    }
+
+    .output-card::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(90,63,255,0.12), transparent 65%);
+      pointer-events: none;
+    }
+
+    .preview-banner {
+      margin-bottom: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fff7e9, #f4eeff);
+      border: 1px solid #ece0c0;
+      color: #564d73;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .video-preview{
+      height:240px;
+      border-radius:22px;
+      background:
+        linear-gradient(135deg, rgba(44,35,92,0.92), rgba(90,63,255,0.82)),
+        radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 40%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:#fff;
+      margin-bottom:16px;
+      border:1px solid rgba(255,255,255,0.1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .video-preview .preview-inner{
+      max-width: 360px;
+      padding: 20px;
+    }
+
+    .video-preview h3{
+      color:#fff;
+      font-size:22px;
+      margin:0 0 8px;
+    }
+
+    .video-preview p{
+      margin:0;
+      color:rgba(255,255,255,0.85);
+      line-height:1.7;
+      font-size:14px;
+    }
+
+    .scene-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .scene-card{
+      padding:16px;
+      background:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .scene-card::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      width:6px;
+      height:100%;
+      background: linear-gradient(180deg, var(--gold), var(--purple));
+    }
+
+    .scene-card h4{
+      margin:0 0 8px;
+      font-size:17px;
+      color:#433685;
+      padding-left:8px;
+    }
+
+    .scene-card p{
+      margin:0;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--muted);
+      padding-left:8px;
+    }
+
+    .export-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .export-card,
+    .platform-card{
+      padding:18px;
+      background:#fff;
+    }
+
+    .export-card h3,
+    .platform-card h3{
+      margin:0 0 8px;
+      font-size:18px;
+      color:#40337f;
+    }
+
+    .export-card p,
+    .platform-card p{
+      margin:0 0 12px;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--muted);
+    }
+
+    .pill-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      background:#f5f0ff;
+      border:1px solid #eadffc;
+      color:#4a3b92;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .next-step-card {
+      margin-top: 14px;
+      padding: 16px 18px;
+      background: linear-gradient(135deg, #ffffff, #f8f2ff);
+      border: 1px solid #eadcfb;
+    }
+
+    .next-step-card h3 {
+      margin: 0 0 8px;
+      color: #433685;
+      font-size: 18px;
+    }
+
+    .next-step-card p {
+      margin: 0 0 12px;
+      color: var(--muted);
       line-height: 1.7;
       font-size: 15px;
     }
 
-    @media (max-width: 1100px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .output-grid { grid-template-columns: 1fr 1fr; }
-      .clips-grid { grid-template-columns: 1fr 1fr; }
+    .site-footer {
+      margin-top: 22px;
+      background: #181427;
+      color: #fff;
+      padding: 40px 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .footer-col h3 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      color: #ffffff;
+    }
+
+    .footer-col p,
+    .footer-col a {
+      display: block;
+      margin: 0 0 10px;
+      color: #d9d4ea;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1180px) {
+      .hero-grid,
+      .studio-grid,
+      .scene-grid,
+      .export-grid,
+      .footer-grid,
+      .mini-stats{
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .studio-grid{
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 768px) {
-      .container { width: min(100% - 20px, 1280px); }
-      .nav-wrap { flex-direction: column; align-items: flex-start; padding: 12px 0; }
-      .top-links { gap: 8px; }
-      .hero { padding: 16px; border-radius: 22px; }
-      .panel { padding: 18px; }
-      .grid, .output-grid, .clips-grid { grid-template-columns: 1fr; }
-      .button-row { flex-direction: column; }
+      .container { width: min(100% - 20px, 1200px); }
+      .menu-toggle { display: block; }
+
+      .main-nav {
+        display: none;
+        position: absolute;
+        top: 82px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border: 1px solid #ecdcb4;
+        border-radius: 18px;
+        box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+        padding: 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .main-nav.show { display: flex; }
+
+      .main-nav a {
+        width: 100%;
+        background: #faf7ff;
+        justify-content: flex-start;
+      }
+
+      .hero-grid,
+      .scene-grid,
+      .export-grid,
+      .footer-grid,
+      .mini-stats{
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left h1 { font-size: 34px; }
+
+      .hero-actions,
+      .voice-actions,
+      .action-row,
+      .platform-actions,
+      .next-links {
+        flex-direction: column;
+      }
+
       .btn { width: 100%; }
-      .preview-phone { min-height: auto; padding: 16px; }
-      .phone-headline { font-size: 32px; }
-      .phone-subline { font-size: 15px; }
+
+      .hero-left,
+      .hero-right,
+      .form-card,
+      .output-card {
+        padding: 16px;
+      }
     }
   </style>
 </head>
 <body>
+
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="floating-orb orb-3"></div>
+
   <header class="site-header">
     <div class="container nav-wrap">
-      <a href="index.html" class="brand">Bariq AI</a>
-      <div class="top-links">
-        <a href="index.html">Home</a>
-        <a href="campaign.html">Campaign</a>
-        <a href="ai-generator.html">AI Generator</a>
-        <a href="business-dashboard.html">Business</a>
-      </div>
+      <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
+
+      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="home-link">🏠 Home</a>
+        <a href="business-dashboard.html">🏢 Business</a>
+        <a href="ai-generator.html">✨ AI Generator</a>
+        <a href="campaign.html">📣 Campaign</a>
+        <a href="creator-marketplace.html">🎥 Creators</a>
+        <a href="templates.html">🧩 Templates</a>
+        <a href="payments.html">💳 Payments</a>
+        <a href="video-creator.html" class="active">🎬 Video Creator</a>
+        <a href="admin-dashboard.html">⚙️ Admin</a>
+      </nav>
     </div>
   </header>
 
-  <section class="page">
+  <section class="hero-section">
     <div class="container">
-      <div class="hero">
+      <div class="hero-shell">
         <div class="hero-grid">
-          <div class="panel">
-            <div class="eyebrow">Voice Ad Creator</div>
-            <h1>Speak one idea. Bariq fills the ad.</h1>
-            <p class="subtitle">
-              Perfect for salons, clinics, boutiques, home businesses, electronics stores, fashion sellers, beauty brands, and anyone who does not want to fill long forms manually.
+
+          <div class="hero-left">
+            <div class="hero-tag">Video Creator Studio</div>
+            <h1>
+              Create <span class="text-gold">videos</span>,
+              build <span class="text-purple">scenes</span>,
+              export <span class="text-pink">content</span>,
+              and prepare for <span class="text-blue">publishing</span>
+            </h1>
+
+            <p>
+              Bariq Video Creator helps you turn one short campaign brief into a structured video concept,
+              scene flow, captions, CTA overlays, and export-ready content for future publishing workflows.
             </p>
 
-            <div class="voice-box">
-              <div class="voice-label">Say or type your campaign idea</div>
-              <textarea id="smartBrief" placeholder="Example: Create a product promo for my bluetooth speaker for young music lovers with WhatsApp order"></textarea>
-
-              <div class="button-row">
-                <button class="btn btn-gold" onclick="startVoiceInput()">🎤 Speak</button>
-                <button class="btn btn-primary" onclick="autoFillFromBrief()">✨ Auto Fill with AI</button>
-                <button class="btn btn-light" onclick="clearAll()">Clear</button>
-                <button class="btn btn-light" onclick="fetchClips()">🎬 Fetch Pexels Clips</button>
-              </div>
-
-              <div class="status-bar" id="statusText">Waiting for your idea...</div>
+            <div class="hero-actions">
+              <button class="btn btn-primary" onclick="document.getElementById('videoForm').scrollIntoView({behavior:'smooth'})">🎬 Start Video</button>
+              <a href="campaign.html" class="btn btn-light">📣 Open Campaign Studio</a>
+              <a href="ai-generator.html" class="btn btn-light">✨ Open AI Generator</a>
             </div>
 
-            <div class="grid">
-              <div>
-                <label>Brand Name</label>
-                <input id="brandName" placeholder="Your brand" />
-              </div>
-
-              <div>
-                <label>Product / Service</label>
-                <input id="productName" placeholder="Your product or service" />
-              </div>
-
-              <div>
-                <label>Video Type</label>
-                <select id="videoType">
-                  <option>Offer Ad</option>
-                  <option>Product Promo</option>
-                  <option>Founder Intro</option>
-                  <option>Testimonial Ad</option>
-                  <option>Festival Offer</option>
-                </select>
-              </div>
-
-              <div>
-                <label>Audience</label>
-                <input id="audience" placeholder="Who is this for?" />
-              </div>
-
-              <div class="full">
-                <label>Offer / Key Message</label>
-                <input id="offer" placeholder="Example: Order now on WhatsApp" />
-              </div>
-
-              <div class="full">
-                <label>Headline Overlay</label>
-                <input id="headline" placeholder="Big headline for the ad" />
-              </div>
-
-              <div class="full">
-                <label>Subline</label>
-                <input id="subline" placeholder="Supporting text for the ad" />
-              </div>
-            </div>
-
-            <div class="suggestions">
-              <h3>AI Prompt Suggestions</h3>
-              <div class="chips">
-                <button class="chip" onclick="useSuggestion('Create a reel for my slimming clinic with WhatsApp booking')">Slimming clinic reel</button>
-                <button class="chip" onclick="useSuggestion('Create a product promo for glutathione tablets for women glow and confidence')">Glutathione promo</button>
-                <button class="chip" onclick="useSuggestion('Create a jewellery festive offer reel for home business')">Jewellery festive offer</button>
-                <button class="chip" onclick="useSuggestion('Create a product promo for my bluetooth speaker for young music lovers')">Bluetooth speaker promo</button>
+            <div class="marquee-wrap">
+              <div class="marquee-track">
+                <span class="mini-chip">🎥 Reel Scripts</span>
+                <span class="mini-chip">🪄 Voice Briefs</span>
+                <span class="mini-chip">📱 Vertical Videos</span>
+                <span class="mini-chip">💬 CTA Overlays</span>
+                <span class="mini-chip">📣 Promo Scenes</span>
+                <span class="mini-chip">💄 Beauty Campaigns</span>
+                <span class="mini-chip">🚀 Export Ready</span>
+                <span class="mini-chip">🎥 Reel Scripts</span>
+                <span class="mini-chip">🪄 Voice Briefs</span>
+                <span class="mini-chip">📱 Vertical Videos</span>
+                <span class="mini-chip">💬 CTA Overlays</span>
+                <span class="mini-chip">📣 Promo Scenes</span>
+                <span class="mini-chip">💄 Beauty Campaigns</span>
+                <span class="mini-chip">🚀 Export Ready</span>
               </div>
             </div>
           </div>
 
-          <div class="preview-phone">
-            <div class="phone-top">
-              <div class="pill" id="previewType">Offer Ad</div>
-              <div class="logo-box">LOGO</div>
+          <div class="hero-right">
+            <div class="hero-note">
+              <h3>Frontend MVP tonight</h3>
+              <p>This page is designed to look and work like a real product now, while staying ready for future API and backend integration.</p>
             </div>
 
-            <div class="phone-kicker" id="previewBrand">Your Brand</div>
-            <div class="phone-headline" id="previewHeadline">Your headline will appear here</div>
-            <div class="phone-subline" id="previewSubline">Premium short-form ad created from your brief</div>
-            <div class="phone-offer" id="previewOffer">Offer: Your message here</div>
-          </div>
-        </div>
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="num">4+</div>
+                <div class="lab">Scene Blocks</div>
+              </div>
+              <div class="mini-stat">
+                <div class="num">Export</div>
+                <div class="lab">Ready UI</div>
+              </div>
+              <div class="mini-stat">
+                <div class="num">Voice</div>
+                <div class="lab">Prompt Input</div>
+              </div>
+            </div>
 
-        <div class="output-grid">
-          <div class="mini-box">
-            <h3>AI Caption</h3>
-            <div id="captionBox">Your caption will appear here.</div>
-          </div>
-
-          <div class="mini-box">
-            <h3>AI Hook</h3>
-            <div id="hookBox">Your hook will appear here.</div>
-          </div>
-
-          <div class="mini-box">
-            <h3>Scene Direction</h3>
-            <div id="sceneBox">Scene 1: Hook
-Scene 2: Product / service
-Scene 3: Offer
-Scene 4: CTA</div>
-          </div>
-        </div>
-
-        <div class="clips-section">
-          <h2 class="clips-title">Fetched Pexels Clips</h2>
-          <div class="clips-grid" id="clipsGrid">
-            <div class="mini-box">
-              <h3>No clips yet</h3>
-              <div>Click “Fetch Pexels Clips” or use “Auto Fill with AI” to load matching stock videos.</div>
+            <div class="hero-note">
+              <h3>About real publishing</h3>
+              <p>Meta, Google, WhatsApp, LinkedIn, and Threads publishing needs real backend APIs, tokens, and server-side upload flow later.</p>
             </div>
           </div>
-        </div>
 
-        <div class="footer-note">
-          <strong>Bariq AI Smart Reel Flow</strong>
-          <span>Describe your business idea once. Bariq fills the ad, builds the caption, suggests the hook, and fetches relevant stock clips for your campaign.</span>
         </div>
       </div>
     </div>
   </section>
 
-  <script>
-    function setStatus(text) {
-      document.getElementById("statusText").textContent = text;
-    }
+  <section class="section">
+    <div class="container">
+      <div class="studio-grid">
 
-    function useSuggestion(text) {
-      document.getElementById("smartBrief").value = text;
-      autoFillFromBrief();
-    }
+        <div class="form-card" id="videoForm">
+          <h2 class="section-title">Video Brief Builder</h2>
+          <p class="section-text">Describe the video once and Bariq builds a structured video concept for you.</p>
 
-    function updatePreview() {
-      document.getElementById("previewType").textContent =
-        document.getElementById("videoType").value || "Offer Ad";
+          <div class="field">
+            <label for="brandName">Brand / Business Name</label>
+            <input id="brandName" type="text" placeholder="e.g. RSCC Clinic" />
+          </div>
 
-      document.getElementById("previewBrand").textContent =
-        document.getElementById("brandName").value || "Your Brand";
+          <div class="field">
+            <label for="videoGoal">Video Goal</label>
+            <select id="videoGoal">
+              <option value="">Select goal</option>
+              <option>Lead Generation</option>
+              <option>Awareness</option>
+              <option>Sales Promotion</option>
+              <option>Product Launch</option>
+              <option>Clinic Offer</option>
+            </select>
+          </div>
 
-      document.getElementById("previewHeadline").textContent =
-        document.getElementById("headline").value || "Your headline will appear here";
+          <div class="field">
+            <label for="targetAudience">Target Audience</label>
+            <input id="targetAudience" type="text" placeholder="e.g. Women 25-40 in Hyderabad" />
+          </div>
 
-      document.getElementById("previewSubline").textContent =
-        document.getElementById("subline").value || "Premium short-form ad created from your brief";
+          <div class="field">
+            <label for="videoTone">Video Tone</label>
+            <select id="videoTone">
+              <option value="">Select tone</option>
+              <option>Premium</option>
+              <option>Bold</option>
+              <option>Emotional</option>
+              <option>Luxury</option>
+              <option>Trust-Building</option>
+            </select>
+          </div>
 
-      document.getElementById("previewOffer").textContent =
-        "Offer: " + (document.getElementById("offer").value || "Your message here");
-    }
+          <div class="field">
+            <label for="offerText">Offer / Main Message</label>
+            <input id="offerText" type="text" placeholder="e.g. Flat 60% off on laser hair reduction" />
+          </div>
 
-    function buildCaption() {
-      const brand = document.getElementById("brandName").value || "Your Brand";
-      const product = document.getElementById("productName").value || "your product";
-      const audience = document.getElementById("audience").value || "your ideal customers";
-      const offer = document.getElementById("offer").value || "DM now for details";
-      const headline = document.getElementById("headline").value || "Your next reel can convert better";
+          <div class="field">
+            <label for="videoPrompt">Video Prompt / Brief</label>
+            <textarea id="videoPrompt" placeholder="Describe the video. Example: Create a premium reel for laser hair reduction with confidence-focused visuals for women in Hyderabad."></textarea>
+          </div>
 
-      document.getElementById("captionBox").textContent =
-        `${headline}. ${brand} brings ${product} for ${audience}. ${offer}. DM now to get started.`;
-    }
-
-    function buildHook() {
-      const audience = document.getElementById("audience").value || "your ideal customers";
-      const product = document.getElementById("productName").value || "your product";
-
-      document.getElementById("hookBox").textContent =
-        `Stop scrolling — ${product} is made for ${audience}.`;
-    }
-
-    function buildScenes() {
-      const product = document.getElementById("productName").value || "your product";
-      const offer = document.getElementById("offer").value || "DM now for details";
-      const brand = document.getElementById("brandName").value || "Your Brand";
-
-      document.getElementById("sceneBox").textContent =
-`Scene 1: Strong hook visual
-Scene 2: Show ${product}
-Scene 3: Highlight offer - ${offer}
-Scene 4: CTA with ${brand}`;
-    }
-
-    function detectAudience(brief) {
-      if (brief.includes("women")) return "women audience";
-      if (brief.includes("men")) return "men audience";
-      if (brief.includes("kids")) return "kids audience";
-      if (brief.includes("music")) return "music lovers";
-      if (brief.includes("student")) return "students";
-      return "your ideal customers";
-    }
-
-    function detectProduct(brief) {
-      if (brief.includes("bluetooth")) return "Bluetooth Speaker";
-      if (brief.includes("speaker")) return "Bluetooth Speaker";
-      if (brief.includes("headphone")) return "Wireless Headphones";
-      if (brief.includes("earbuds")) return "Wireless Earbuds";
-      if (brief.includes("clinic")) return "Clinic Services";
-      if (brief.includes("salon")) return "Salon Services";
-      if (brief.includes("glutathione")) return "Glutathione Tablets";
-      if (brief.includes("jewellery") || brief.includes("jewelry") || brief.includes("bangles")) return "Festive Jewellery Collection";
-      if (brief.includes("dress")) return "Fashion Collection";
-      if (brief.includes("shoe")) return "Shoes Collection";
-      return "Your Product";
-    }
-
-    function detectHeadline(product, brief) {
-      if (brief.includes("offer")) return `Special offer on ${product}`;
-      if (brief.includes("bluetooth")) return `Turn up your sound with ${product}`;
-      if (brief.includes("clinic")) return "Start your transformation with expert support";
-      if (brief.includes("salon")) return "Your next salon result starts here";
-      if (brief.includes("glow")) return "Glow with confidence";
-      return `Discover ${product} today`;
-    }
-
-    function detectSubline(product, brief) {
-      if (brief.includes("bluetooth")) return `Powerful sound and smart style built for everyday use`;
-      if (brief.includes("clinic")) return `Premium care designed for visible results and confidence`;
-      if (brief.includes("salon")) return `Beauty, shine, and confidence packed into one premium offer`;
-      return `Premium short-form ad created for ${product}`;
-    }
-
-    function detectOffer(brief) {
-      if (brief.includes("whatsapp")) return "Order now on WhatsApp";
-      if (brief.includes("book")) return "Book now";
-      if (brief.includes("discount")) return "Limited period discount available";
-      if (brief.includes("sale")) return "Shop now before the offer ends";
-      return "DM now for details";
-    }
-
-    function autoFillFromBrief() {
-      const brief = document.getElementById("smartBrief").value.toLowerCase().trim();
-
-      if (!brief) {
-        setStatus("Please type or speak your ad idea first.");
-        return;
-      }
-
-      const product = detectProduct(brief);
-      const audience = detectAudience(brief);
-      const offer = detectOffer(brief);
-      const headline = detectHeadline(product, brief);
-      const subline = detectSubline(product, brief);
-
-      let brand = "Your Brand";
-      if (brief.includes("rss")) brand = "RSS";
-      if (brief.includes("clinic")) brand = "Your Clinic";
-      if (brief.includes("salon")) brand = "Your Salon";
-      if (brief.includes("bluetooth")) brand = "Your Electronics Brand";
-
-      document.getElementById("brandName").value = brand;
-      document.getElementById("productName").value = product;
-      document.getElementById("audience").value = audience;
-      document.getElementById("offer").value = offer;
-      document.getElementById("headline").value = headline;
-      document.getElementById("subline").value = subline;
-
-      if (brief.includes("promo") || brief.includes("product")) {
-        document.getElementById("videoType").value = "Product Promo";
-      } else {
-        document.getElementById("videoType").value = "Offer Ad";
-      }
-
-      updatePreview();
-      buildCaption();
-      buildHook();
-      buildScenes();
-      setStatus("Campaign auto-filled from your brief.");
-      fetchClips();
-    }
-
-    async function fetchClips() {
-      const query =
-        document.getElementById("productName").value ||
-        document.getElementById("smartBrief").value ||
-        "business";
-
-      setStatus("Fetching Pexels clips...");
-
-      try {
-        const response = await fetch(`/api/videos?q=${encodeURIComponent(query)}`);
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || "Could not fetch clips");
-        }
-
-        renderClips(data.videos || []);
-        setStatus("Pexels clips loaded successfully.");
-      } catch (error) {
-        document.getElementById("clipsGrid").innerHTML =
-          `<div class="mini-box"><h3>Pexels API Error</h3><div>${error.message}</div></div>`;
-        setStatus("Could not fetch Pexels clips.");
-      }
-    }
-
-    function pickPlayableFile(videoFiles) {
-      if (!videoFiles || !videoFiles.length) return null;
-      let chosen = videoFiles.find(file => file.quality === "sd");
-      if (!chosen) chosen = videoFiles[0];
-      return chosen ? chosen.link : null;
-    }
-
-    function renderClips(videos) {
-      const grid = document.getElementById("clipsGrid");
-
-      if (!videos.length) {
-        grid.innerHTML = `<div class="mini-box"><h3>No clips found</h3><div>Try a different product or brief.</div></div>`;
-        return;
-      }
-
-      grid.innerHTML = videos.map(video => {
-        const file = pickPlayableFile(video.video_files);
-        return `
-          <div class="clip-card">
-            <video controls muted playsinline>
-              <source src="${file || ""}" type="video/mp4">
-            </video>
-            <div class="clip-meta">
-              <strong>Pexels ID:</strong> ${video.id}<br>
-              <strong>Duration:</strong> ${video.duration || 0} sec
+          <div class="field">
+            <div class="voice-actions">
+              <button class="btn btn-light" type="button" onclick="startVoiceInput()">🎤 Start Voice</button>
+              <button class="btn btn-light" type="button" onclick="stopVoiceInput()">⏹ Stop Voice</button>
+              <button class="btn btn-light" type="button" onclick="useVoicePrompt()">✨ Use Voice Prompt</button>
             </div>
           </div>
-        `;
-      }).join("");
+
+          <div class="action-row">
+            <button class="btn btn-primary" id="generateVideoBtn" type="button">Generate Video Plan</button>
+            <button class="btn btn-light" id="exportJsonBtn" type="button">Export JSON</button>
+            <button class="btn btn-light" id="exportTxtBtn" type="button">Export Script</button>
+          </div>
+
+          <div class="status-card">
+            <h4>Video Creator Status</h4>
+            <p class="status-message" id="statusBar">Studio ready. Enter a brief and generate your video structure.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="output-card">
+            <div class="preview-banner">
+              This is a frontend MVP preview. It creates structured scenes, captions, and export-ready text now. Real rendering and publishing can be connected later.
+            </div>
+
+            <h2 class="section-title">Video Preview & Scene Plan</h2>
+            <p class="section-text">Bariq will generate a real-looking video plan, scene structure, and publishing-ready output.</p>
+
+            <div class="video-preview">
+              <div class="preview-inner">
+                <h3 id="previewTitle">No video generated yet</h3>
+                <p id="previewText">Create a video plan to see the preview concept, tone, and direction appear here.</p>
+              </div>
+            </div>
+
+            <div class="scene-grid">
+              <div class="scene-card">
+                <h4>Scene 1</h4>
+                <p id="scene1">No scene yet.</p>
+              </div>
+              <div class="scene-card">
+                <h4>Scene 2</h4>
+                <p id="scene2">No scene yet.</p>
+              </div>
+              <div class="scene-card">
+                <h4>Scene 3</h4>
+                <p id="scene3">No scene yet.</p>
+              </div>
+              <div class="scene-card">
+                <h4>Scene 4</h4>
+                <p id="scene4">No scene yet.</p>
+              </div>
+            </div>
+
+            <div class="export-grid">
+              <div class="export-card">
+                <h3>Export Pack</h3>
+                <p id="exportSummary">Video export pack not generated yet.</p>
+                <div class="pill-row">
+                  <span class="pill">TXT Script</span>
+                  <span class="pill">JSON Structure</span>
+                  <span class="pill">Caption Text</span>
+                </div>
+              </div>
+
+              <div class="platform-card">
+                <h3>Platform Publishing</h3>
+                <p>These buttons are UI-ready. Real publishing will require backend API integration later.</p>
+                <div class="platform-actions">
+                  <button class="btn btn-light" type="button" onclick="mockPublish('Meta')">Meta</button>
+                  <button class="btn btn-light" type="button" onclick="mockPublish('WhatsApp')">WhatsApp</button>
+                  <button class="btn btn-light" type="button" onclick="mockPublish('LinkedIn')">LinkedIn</button>
+                  <button class="btn btn-light" type="button" onclick="mockPublish('Threads')">Threads</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="next-step-card">
+            <h3>Continue from this video</h3>
+            <p>Take your video concept into templates, campaign execution, or business planning after the structure is ready.</p>
+            <div class="next-links">
+              <a href="campaign.html" class="btn btn-primary">Open Campaign Studio</a>
+              <a href="templates.html" class="btn btn-light">Open Templates</a>
+              <a href="business-dashboard.html" class="btn btn-light">Business Dashboard</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Bariq AI</h3>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation, and execution systems.</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Platform</h3>
+          <a href="index.html">Home</a>
+          <a href="ai-generator.html">AI Generator</a>
+          <a href="business-dashboard.html">Business Dashboard</a>
+          <a href="video-creator.html">Video Creator</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund-policy.html">Refund Policy</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <a href="contact.html">Contact Us</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="payments.html">Payments</a>
+          <p>support@bariqai.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let recognition;
+    let isListening = false;
+    let currentVideoData = null;
+
+    function toggleMobileMenu() {
+      document.getElementById("mainNav").classList.toggle("show");
     }
 
-    function clearAll() {
-      document.getElementById("smartBrief").value = "";
-      document.getElementById("brandName").value = "";
-      document.getElementById("productName").value = "";
-      document.getElementById("videoType").value = "Offer Ad";
-      document.getElementById("audience").value = "";
-      document.getElementById("offer").value = "";
-      document.getElementById("headline").value = "";
-      document.getElementById("subline").value = "";
-      document.getElementById("captionBox").textContent = "Your caption will appear here.";
-      document.getElementById("hookBox").textContent = "Your hook will appear here.";
-      document.getElementById("sceneBox").textContent = `Scene 1: Hook
-Scene 2: Product / service
-Scene 3: Offer
-Scene 4: CTA`;
-      document.getElementById("clipsGrid").innerHTML =
-        `<div class="mini-box"><h3>No clips yet</h3><div>Click “Fetch Pexels Clips” or use “Auto Fill with AI” to load matching stock videos.</div></div>`;
-      setStatus("Waiting for your idea...");
-      updatePreview();
+    function setStatus(message) {
+      document.getElementById("statusBar").textContent = message;
+    }
+
+    function getVideoData() {
+      return {
+        brandName: document.getElementById("brandName").value.trim(),
+        videoGoal: document.getElementById("videoGoal").value.trim(),
+        targetAudience: document.getElementById("targetAudience").value.trim(),
+        videoTone: document.getElementById("videoTone").value.trim(),
+        offerText: document.getElementById("offerText").value.trim(),
+        videoPrompt: document.getElementById("videoPrompt").value.trim()
+      };
+    }
+
+    function validateVideoData(data) {
+      return data.videoPrompt || data.offerText || data.brandName;
     }
 
     function startVoiceInput() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
       if (!SpeechRecognition) {
-        alert("Voice input is not supported in this browser.");
+        setStatus("Voice input is not supported in this browser. Please use Chrome.");
         return;
       }
 
-      const recognition = new SpeechRecognition();
+      recognition = new SpeechRecognition();
       recognition.lang = "en-IN";
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
+      recognition.interimResults = true;
+      recognition.continuous = true;
 
-      setStatus("Listening... speak your ad idea now.");
-      recognition.start();
-
-      recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById("smartBrief").value = transcript;
-        autoFillFromBrief();
+      recognition.onstart = function () {
+        isListening = true;
+        setStatus("Listening... speak your video brief now.");
       };
 
-      recognition.onerror = function() {
-        setStatus("Voice input failed. Please type your ad idea.");
-      };
-
-      recognition.onend = function() {
-        if (!document.getElementById("smartBrief").value.trim()) {
-          setStatus("Voice ended. Please try again or type manually.");
+      recognition.onresult = function (event) {
+        let transcript = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
         }
+        document.getElementById("videoPrompt").value = transcript.trim();
       };
+
+      recognition.onerror = function (event) {
+        setStatus("Voice input error: " + event.error);
+      };
+
+      recognition.onend = function () {
+        if (isListening) setStatus("Voice input stopped.");
+        isListening = false;
+      };
+
+      recognition.start();
     }
 
-    ["brandName","productName","videoType","audience","offer","headline","subline"].forEach(function(id) {
-      document.addEventListener("input", function(e) {
-        if (e.target && e.target.id === id) {
-          updatePreview();
-          buildCaption();
-          buildHook();
-          buildScenes();
-        }
-      });
+    function stopVoiceInput() {
+      if (recognition && isListening) {
+        recognition.stop();
+        isListening = false;
+        setStatus("Voice recording stopped.");
+      } else {
+        setStatus("Voice input is not currently running.");
+      }
+    }
 
-      document.addEventListener("change", function(e) {
-        if (e.target && e.target.id === id) {
-          updatePreview();
-          buildCaption();
-          buildHook();
-          buildScenes();
-        }
-      });
-    });
+    function useVoicePrompt() {
+      const prompt = document.getElementById("videoPrompt").value.trim();
+      if (!prompt) {
+        setStatus("Please record or type a video prompt first.");
+        return;
+      }
+      setStatus("Voice prompt ready for video generation.");
+    }
 
-    updatePreview();
+    function generateVideoPlan() {
+      const data = getVideoData();
+
+      if (!validateVideoData(data)) {
+        setStatus("Please enter at least a short brief, offer, or brand name.");
+        return;
+      }
+
+      const brand = data.brandName || "Your Brand";
+      const goal = data.videoGoal || "Awareness";
+      const audience = data.targetAudience || "your target audience";
+      const tone = data.videoTone || "Premium";
+      const offer = data.offerText || "a special offer";
+      const prompt = data.videoPrompt || "Create a video concept";
+
+      const previewTitle = `${brand} Video Concept`;
+      const previewText = `${goal} video for ${audience} in a ${tone.toLowerCase()} style, centered around ${offer}.`;
+
+      const scene1 = `Hook scene: open with an attention-grabbing visual and emotional problem statement for ${audience}.`;
+      const scene2 = `Introduce ${brand} and highlight ${offer} with premium text overlay and trust-building visuals.`;
+      const scene3 = `Show transformation, result, product use, or service flow in a visually polished and aspirational way.`;
+      const scene4 = `Close with CTA: message now, book today, limited slots, and a strong brand recall ending.`;
+
+      document.getElementById("previewTitle").textContent = previewTitle;
+      document.getElementById("previewText").textContent = previewText;
+      document.getElementById("scene1").textContent = scene1;
+      document.getElementById("scene2").textContent = scene2;
+      document.getElementById("scene3").textContent = scene3;
+      document.getElementById("scene4").textContent = scene4;
+      document.getElementById("exportSummary").textContent =
+        `Ready to export script, scene structure, and publishing notes for ${brand}. Video goal: ${goal}. Tone: ${tone}.`;
+
+      currentVideoData = {
+        brand,
+        goal,
+        audience,
+        tone,
+        offer,
+        prompt,
+        previewTitle,
+        previewText,
+        scenes: [scene1, scene2, scene3, scene4]
+      };
+
+      setStatus("Video structure generated successfully. Export is now ready.");
+    }
+
+    function downloadFile(filename, content, type) {
+      const blob = new Blob([content], { type: type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function exportAsJson() {
+      if (!currentVideoData) {
+        setStatus("Generate a video plan first before exporting JSON.");
+        return;
+      }
+      downloadFile("bariq-video-plan.json", JSON.stringify(currentVideoData, null, 2), "application/json");
+      setStatus("JSON export downloaded.");
+    }
+
+    function exportAsText() {
+      if (!currentVideoData) {
+        setStatus("Generate a video plan first before exporting script.");
+        return;
+      }
+
+      const content = `
+Bariq AI Video Script
+
+Brand: ${currentVideoData.brand}
+Goal: ${currentVideoData.goal}
+Audience: ${currentVideoData.audience}
+Tone: ${currentVideoData.tone}
+Offer: ${currentVideoData.offer}
+
+Preview:
+${currentVideoData.previewText}
+
+Scene 1:
+${currentVideoData.scenes[0]}
+
+Scene 2:
+${currentVideoData.scenes[1]}
+
+Scene 3:
+${currentVideoData.scenes[2]}
+
+Scene 4:
+${currentVideoData.scenes[3]}
+      `.trim();
+
+      downloadFile("bariq-video-script.txt", content, "text/plain");
+      setStatus("Script export downloaded.");
+    }
+
+    function mockPublish(platform) {
+      if (!currentVideoData) {
+        setStatus(`Generate a video plan first before using ${platform} publishing.`);
+        return;
+      }
+      setStatus(`${platform} publishing is UI-ready here, but real publishing needs backend APIs, tokens, and server integration.`);
+    }
+
+    document.getElementById("generateVideoBtn").addEventListener("click", generateVideoPlan);
+    document.getElementById("exportJsonBtn").addEventListener("click", exportAsJson);
+    document.getElementById("exportTxtBtn").addEventListener("click", exportAsText);
   </script>
 </body>
 </html>
