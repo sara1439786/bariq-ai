@@ -24,7 +24,16 @@
       --radius:26px;
     }
 
-    html, body {
+    html, body::before{
+content:"";
+position:fixed;
+top:-200px;
+right:-200px;
+width:600px;
+height:600px;
+background:radial-gradient(circle,rgba(120,80,255,0.15),transparent 70%);
+z-index:-1;
+}{
       margin: 0;
       padding: 0;
       overflow-x: hidden;
