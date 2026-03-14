@@ -1,1091 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI — Campaign Studio</title>
-  <style>
-    * { box-sizing: border-box; }
-
-    :root{
-      --bg1:#fffaf3;
-      --bg2:#faf7ff;
-      --bg3:#f7f0ff;
-      --text:#2c235c;
-      --muted:#6d6684;
-      --purple:#5a3fff;
-      --gold:#d8b05b;
-      --pink:#ff7cc8;
-      --blue:#4f8dff;
-      --line:#ece0c0;
-      --card-shadow:0 14px 32px rgba(83,57,139,0.07);
-    }
-
-    html, body{
-      margin:0;
-      padding:0;
-      overflow-x:hidden;
-      scroll-behavior:smooth;
-      font-family:Arial, sans-serif;
-      background:linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
-      color:var(--text);
-    }
-
-    body{
-      position:relative;
-    }
-
-    body::before{
-      content:"";
-      position:fixed;
-      top:-220px;
-      right:-220px;
-      width:720px;
-      height:720px;
-      background:radial-gradient(circle at center, rgba(120,80,255,0.18), rgba(120,80,255,0.06), transparent 70%);
-      filter:blur(90px);
-      pointer-events:none;
-      z-index:-2;
-    }
-
-    body::after{
-      content:"";
-      position:fixed;
-      bottom:-220px;
-      left:-220px;
-      width:680px;
-      height:680px;
-      background:radial-gradient(circle, rgba(216,176,91,0.18), transparent 70%);
-      filter:blur(90px);
-      pointer-events:none;
-      z-index:-2;
-    }
-
-    a{
-      text-decoration:none;
-      color:inherit;
-    }
-
-    .container{
-      width:min(1380px, calc(100% - 28px));
-      margin:0 auto;
-    }
-
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:999;
-      background:rgba(255,255,255,0.94);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid #eee2bf;
-    }
-
-    .site-header::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:0;
-      width:100%;
-      height:3px;
-      background:linear-gradient(90deg,#d8b05b,#7b5cff,#ff8acc,#d8b05b);
-      background-size:300% 100%;
-      animation:headerFlow 7s linear infinite;
-    }
-
-    @keyframes headerFlow{
-      0%{ background-position:0%; }
-      100%{ background-position:300%; }
-    }
-
-    .nav-wrap{
-      min-height:76px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      position:relative;
-    }
-
-    .brand{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      white-space:nowrap;
-      font-size:30px;
-      font-weight:800;
-      background:linear-gradient(90deg,var(--gold),var(--purple),var(--blue));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
-    }
-
-    .brand-dot{
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      background:linear-gradient(135deg,var(--gold),var(--purple));
-      box-shadow:0 0 16px rgba(90,63,255,0.3);
-    }
-
-    .menu-toggle{
-      display:none;
-      border:none;
-      background:#f3edff;
-      color:#2f216f;
-      font-size:28px;
-      line-height:1;
-      padding:10px 14px;
-      border-radius:14px;
-      cursor:pointer;
-    }
-
-    .main-nav{
-      display:flex;
-      align-items:center;
-      gap:6px;
-      overflow-x:auto;
-      scrollbar-width:none;
-      white-space:nowrap;
-    }
-
-    .main-nav::-webkit-scrollbar{
-      display:none;
-    }
-
-    .main-nav a{
-      padding:10px 12px;
-      font-size:14px;
-      font-weight:700;
-      color:#3a2d77;
-      border-radius:12px;
-      flex:0 0 auto;
-    }
-
-    .main-nav a:hover,
-    .main-nav a.active{
-      background:#f3edff;
-    }
-
-    .home-link{
-      background:linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
-      border:1px solid #eadfc2;
-    }
-
-    .page-section{
-      padding:16px 0 24px;
-    }
-
-    .top-strip,
-    .step-board,
-    .builder-shell,
-    .left-panel,
-    .right-panel,
-    .output-card,
-    .stage-card,
-    .status-box,
-    .continue-card{
-      background:rgba(255,255,255,0.95);
-      border:1px solid #f0e6c9;
-      border-radius:24px;
-      box-shadow:var(--card-shadow);
-    }
-
-    .top-strip{
-      padding:18px 20px;
-      display:grid;
-      grid-template-columns:1.15fr 0.85fr;
-      gap:16px;
-      margin-bottom:16px;
-      background:linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
-    }
-
-    .strip-left h1{
-      margin:0 0 8px;
-      font-size:34px;
-      line-height:1.05;
-      color:#2f2567;
-      letter-spacing:-0.03em;
-    }
-
-    .strip-left p{
-      margin:0;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.7;
-      max-width:720px;
-    }
-
-    .tool-tag{
-      display:inline-flex;
-      width:max-content;
-      align-items:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid #ece1bf;
-      color:#4a3b92;
-      font-size:13px;
-      font-weight:800;
-      margin-bottom:12px;
-    }
-
-    .text-gold{ color:var(--gold); }
-    .text-blue{ color:var(--blue); }
-    .text-pink{ color:var(--pink); }
-    .text-purple{ color:var(--purple); }
-
-    .strip-right{
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid #eadfc2;
-      background:#fff;
-      font-size:13px;
-      font-weight:800;
-      color:#4a3b92;
-      white-space:nowrap;
-    }
-
-    .step-board{
-      padding:14px;
-      margin-bottom:16px;
-      background:#fff;
-    }
-
-    .step-grid{
-      display:grid;
-      grid-template-columns:repeat(4, 1fr);
-      gap:12px;
-    }
-
-    .stage-card{
-      padding:14px;
-      background:linear-gradient(135deg,#fff,#f8f2ff);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .stage-card::before{
-      content:"";
-      position:absolute;
-      left:0;
-      top:0;
-      width:4px;
-      height:100%;
-      background:linear-gradient(180deg,var(--gold),var(--purple));
-    }
-
-    .stage-card strong{
-      display:block;
-      font-size:14px;
-      color:#403381;
-      margin-bottom:6px;
-      padding-left:8px;
-    }
-
-    .stage-card span{
-      display:block;
-      font-size:13px;
-      line-height:1.55;
-      color:#726b87;
-      padding-left:8px;
-    }
-
-    .builder-shell{
-      padding:16px;
-      background:linear-gradient(180deg,#fff,#fcf8ff);
-    }
-
-    .builder-grid{
-      display:grid;
-      grid-template-columns:0.95fr 1.05fr;
-      gap:16px;
-      align-items:start;
-    }
-
-    .left-panel,
-    .right-panel{
-      padding:18px;
-      background:#fff;
-    }
-
-    .panel-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:14px;
-    }
-
-    .panel-head h2{
-      margin:0 0 4px;
-      font-size:24px;
-      color:#35296f;
-    }
-
-    .panel-head p{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-    }
-
-    .live-pill{
-      flex:0 0 auto;
-      padding:10px 12px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:800;
-      color:#473989;
-      background:#f7f0ff;
-      border:1px solid #e5d8ff;
-    }
-
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
-
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:7px;
-    }
-
-    .field.full{
-      grid-column:1 / -1;
-    }
-
-    .field label{
-      font-size:13px;
-      font-weight:800;
-      color:#433685;
-    }
-
-    .field input,
-    .field select,
-    .field textarea{
-      width:100%;
-      border:1px solid #eadfc2;
-      background:#fff;
-      border-radius:16px;
-      padding:13px 14px;
-      font:inherit;
-      color:var(--text);
-      outline:none;
-    }
-
-    .field textarea{
-      min-height:112px;
-      resize:vertical;
-      line-height:1.65;
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus{
-      border-color:#cdb2ff;
-      box-shadow:0 0 0 4px rgba(90,63,255,0.08);
-    }
-
-    .voice-box{
-      margin-top:14px;
-      padding:16px;
-      border-radius:20px;
-      background:linear-gradient(135deg, rgba(255,249,240,0.98), rgba(246,240,255,0.98));
-      border:1px solid #eadfc2;
-    }
-
-    .voice-box h3{
-      margin:0 0 6px;
-      font-size:18px;
-      color:#403381;
-    }
-
-    .voice-box p{
-      margin:0 0 12px;
-      font-size:13px;
-      color:#6f6983;
-      line-height:1.6;
-    }
-
-    .voice-actions,
-    .main-actions,
-    .continue-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:13px 16px;
-      border-radius:15px;
-      font-size:14px;
-      font-weight:800;
-      cursor:pointer;
-      border:none;
-      transition:0.2s ease;
-      text-align:center;
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-    }
-
-    .btn-primary{
-      background:linear-gradient(135deg,var(--gold),var(--purple));
-      color:#fff;
-      box-shadow:0 12px 24px rgba(90,63,255,0.18);
-    }
-
-    .btn-light{
-      background:#f4eeff;
-      color:#34296a;
-      border:1px solid #e4d7ff;
-    }
-
-    .main-actions{
-      margin-top:14px;
-    }
-
-    .status-box{
-      margin-top:14px;
-      padding:14px 16px;
-      background:#fff;
-    }
-
-    .status-box strong{
-      display:block;
-      font-size:14px;
-      color:#433685;
-      margin-bottom:6px;
-    }
-
-    .status-box span{
-      display:block;
-      font-size:14px;
-      line-height:1.65;
-      color:#675f7c;
-    }
-
-    .output-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
-
-    .output-card{
-      position:relative;
-      overflow:hidden;
-      padding:16px;
-      min-height:170px;
-      background:#fff;
-    }
-
-    .output-card::before{
-      content:"";
-      position:absolute;
-      left:0;
-      top:0;
-      width:4px;
-      height:100%;
-      background:linear-gradient(180deg,var(--gold),var(--purple));
-    }
-
-    .output-card h3{
-      margin:0 0 10px;
-      font-size:17px;
-      color:#433685;
-      padding-left:8px;
-    }
-
-    .output-card div{
-      margin:0;
-      color:#5f5876;
-      line-height:1.78;
-      font-size:14px;
-      padding-left:8px;
-      white-space:pre-wrap;
-    }
-
-    .continue-card{
-      margin-top:12px;
-      padding:16px;
-      background:linear-gradient(135deg, rgba(255,250,242,0.98), rgba(248,243,255,0.98));
-    }
-
-    .continue-card h3{
-      margin:0 0 8px;
-      font-size:20px;
-      color:#3d317d;
-    }
-
-    .continue-card p{
-      margin:0 0 12px;
-      color:#6f6983;
-      line-height:1.7;
-      font-size:14px;
-    }
-
-    .site-footer{
-      margin-top:24px;
-      background:#181427;
-      color:#fff;
-      padding:40px 0;
-    }
-
-    .footer-grid{
-      display:grid;
-      grid-template-columns:1.2fr 1fr 1fr 1fr;
-      gap:24px;
-    }
-
-    .footer-col h3{
-      margin:0 0 14px;
-      font-size:18px;
-      color:#ffffff;
-    }
-
-    .footer-col p,
-    .footer-col a{
-      display:block;
-      margin:0 0 10px;
-      color:#d9d4ea;
-      font-size:15px;
-      line-height:1.7;
-    }
-
-    @media (max-width: 1180px){
-      .top-strip,
-      .builder-grid,
-      .footer-grid{
-        grid-template-columns:1fr;
-      }
-
-      .step-grid,
-      .output-grid{
-        grid-template-columns:1fr 1fr;
-      }
-    }
-
-    @media (max-width: 768px){
-      .container{
-        width:min(100% - 18px, 1200px);
-      }
-
-      .menu-toggle{
-        display:block;
-      }
-
-      .main-nav{
-        display:none;
-        position:absolute;
-        top:82px;
-        left:0;
-        right:0;
-        background:#fff;
-        border:1px solid #ecdcb4;
-        border-radius:18px;
-        box-shadow:0 18px 40px rgba(0,0,0,0.08);
-        padding:14px;
-        flex-direction:column;
-        align-items:stretch;
-        gap:10px;
-      }
-
-      .main-nav.show{
-        display:flex;
-      }
-
-      .main-nav a{
-        width:100%;
-        background:#faf7ff;
-      }
-
-      .strip-left h1{
-        font-size:28px;
-        line-height:1.1;
-      }
-
-      .step-grid,
-      .form-grid,
-      .output-grid,
-      .footer-grid{
-        grid-template-columns:1fr;
-      }
-
-      .voice-actions,
-      .main-actions,
-      .continue-actions,
-      .strip-right{
-        flex-direction:column;
-        align-items:stretch;
-      }
-
-      .btn{
-        width:100%;
-      }
-
-      .top-strip,
-      .step-board,
-      .builder-shell,
-      .left-panel,
-      .right-panel,
-      .output-card,
-      .stage-card,
-      .status-box,
-      .continue-card{
-        padding:14px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bariq AI — Campaign Builder</title>
+
+<style>
+
+*{box-sizing:border-box;}
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#FFF3EA;
+color:#2f2a4a;
+}
+
+.container{
+width:min(1300px, calc(100% - 30px));
+margin:auto;
+}
+
+/* NAVBAR */
+
+.header{
+background:#ffffff;
+border-bottom:1px solid #f0e6df;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+height:70px;
+}
+
+.brand{
+font-size:28px;
+font-weight:800;
+color:#ff8c70;
+}
+
+.menu{
+display:flex;
+gap:12px;
+}
+
+.menu a{
+padding:10px 14px;
+border-radius:12px;
+font-size:14px;
+font-weight:700;
+color:#6d657f;
+text-decoration:none;
+}
+
+.menu a:hover{
+background:#fff6f2;
+}
+
+/* WORKSPACE */
+
+.workspace{
+padding:40px 0;
+}
+
+/* STEPS */
+
+.steps{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin-bottom:20px;
+}
+
+.step{
+background:#FFFCF6;
+padding:14px;
+border-radius:14px;
+font-weight:700;
+font-size:14px;
+}
+
+/* GRID */
+
+.builder{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+/* CARDS */
+
+.card{
+background:#FFFCF6;
+border-radius:18px;
+padding:20px;
+box-shadow:0 12px 30px rgba(0,0,0,0.04);
+}
+
+/* FORM */
+
+.field{
+display:flex;
+flex-direction:column;
+gap:6px;
+margin-bottom:14px;
+}
+
+.field label{
+font-size:13px;
+font-weight:700;
+}
+
+.field input,
+.field textarea,
+.field select{
+border:1px solid #f0e6df;
+padding:12px;
+border-radius:12px;
+font:inherit;
+}
+
+textarea{
+min-height:90px;
+}
+
+/* BUTTON */
+
+button{
+background:#FF9A7A;
+border:none;
+padding:12px 16px;
+border-radius:12px;
+color:white;
+font-weight:700;
+cursor:pointer;
+}
+
+button:hover{
+opacity:0.9;
+}
+
+/* OUTPUT */
+
+.output{
+background:white;
+border-radius:14px;
+padding:14px;
+margin-bottom:14px;
+min-height:120px;
+border:1px solid #f2e7df;
+}
+
+.output h4{
+margin:0 0 6px;
+font-size:16px;
+}
+
+</style>
 </head>
+
 <body>
 
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
-      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
-
-      <nav class="main-nav" id="mainNav">
-        <a href="index.html" class="home-link">🏠 Home</a>
-        <a href="business-dashboard.html">🏢 Business</a>
-        <a href="ai-generator.html">✨ AI Generator</a>
-        <a href="campaign.html" class="active">📣 Campaign</a>
-        <a href="creator-marketplace.html">🎥 Creators</a>
-        <a href="templates.html">🧩 Templates</a>
-        <a href="payments.html">💳 Payments</a>
-        <a href="login.html">🔐 Login</a>
-        <a href="admin-dashboard.html">⚙️ Admin</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="page-section">
-    <div class="container">
-
-      <div class="top-strip">
-        <div class="strip-left">
-          <div class="tool-tag">📣 Campaign Builder Workspace</div>
-          <h1>
-            Build <span class="text-gold">offers</span>,
-            <span class="text-blue">audience</span>,
-            <span class="text-pink">copy</span> and
-            <span class="text-purple">launch flow</span>
-          </h1>
-          <p>
-            One builder-style workspace to structure campaign brief, audience, goal, outputs, CTA lines, hashtags, and rollout direction without repeating the same hero layout.
-          </p>
-        </div>
-
-        <div class="strip-right">
-          <span class="chip">📍 City Targeting</span>
-          <span class="chip">🎯 Offer Positioning</span>
-          <span class="chip">🎬 Reel Direction</span>
-          <span class="chip">🚀 Launch Ready</span>
-        </div>
-      </div>
-
-      <div class="step-board">
-        <div class="step-grid">
-          <div class="stage-card">
-            <strong>Step 1 — Brief</strong>
-            <span>Define campaign name, business, service, and one-line voice brief.</span>
-          </div>
-          <div class="stage-card">
-            <strong>Step 2 — Audience</strong>
-            <span>Choose city, audience type, budget, and campaign goal for better targeting.</span>
-          </div>
-          <div class="stage-card">
-            <strong>Step 3 — Generate</strong>
-            <span>Create Meta ad copy, Google copy, reel script, CTA ideas, and hashtags.</span>
-          </div>
-          <div class="stage-card">
-            <strong>Step 4 — Launch</strong>
-            <span>Move into video, templates, or dashboard without losing campaign continuity.</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="builder-shell">
-        <div class="builder-grid">
-
-          <div class="left-panel">
-            <div class="panel-head">
-              <div>
-                <h2>Campaign brief</h2>
-                <p>Fill the builder inputs below. Bariq converts them into campaign-ready outputs.</p>
-              </div>
-              <div class="live-pill">Builder Mode</div>
-            </div>
-
-            <div class="form-grid">
-              <div class="field">
-                <label for="businessName">Business Name</label>
-                <input id="businessName" type="text" placeholder="e.g. RSCC Clinic">
-              </div>
-
-              <div class="field">
-                <label for="campaignName">Campaign Name</label>
-                <input id="campaignName" type="text" placeholder="e.g. Summer Skin Offer">
-              </div>
-
-              <div class="field full">
-                <label for="serviceName">Product / Service</label>
-                <input id="serviceName" type="text" placeholder="e.g. Laser hair reduction">
-              </div>
-
-              <div class="field">
-                <label for="offer">Offer</label>
-                <input id="offer" type="text" placeholder="e.g. Flat 60% off">
-              </div>
-
-              <div class="field">
-                <label for="budget">Budget</label>
-                <input id="budget" type="text" placeholder="e.g. ₹5000">
-              </div>
-
-              <div class="field">
-                <label for="targetAudience">Target Audience</label>
-                <input id="targetAudience" type="text" placeholder="e.g. Women 25-40">
-              </div>
-
-              <div class="field">
-                <label for="targetCity">Target City</label>
-                <input id="targetCity" type="text" placeholder="e.g. Hyderabad">
-              </div>
-
-              <div class="field full">
-                <label for="campaignGoal">Campaign Goal</label>
-                <select id="campaignGoal">
-                  <option value="">Select goal</option>
-                  <option>Leads</option>
-                  <option>Sales</option>
-                  <option>Brand Awareness</option>
-                  <option>Traffic</option>
-                  <option>Appointments</option>
-                </select>
-              </div>
-
-              <div class="field full">
-                <label for="notes">Extra Direction</label>
-                <textarea id="notes" placeholder="Tone, urgency, style, city relevance, premium feel, local language, conversion angle, etc."></textarea>
-              </div>
-            </div>
-
-            <div class="voice-box">
-              <h3>Voice brief</h3>
-              <p>Speak one simple campaign idea. Bariq uses it as an extra builder input.</p>
-
-              <div class="field full" style="margin-bottom:12px;">
-                <textarea id="voicePrompt" placeholder="Example: Make a campaign for laser hair reduction with flat 60% off for women in Hyderabad."></textarea>
-              </div>
-
-              <div class="voice-actions">
-                <button class="btn btn-light" type="button" onclick="startVoiceInput()">🎤 Start Voice</button>
-                <button class="btn btn-light" type="button" onclick="stopVoiceInput()">⏹ Stop Voice</button>
-                <button class="btn btn-light" type="button" onclick="useVoicePrompt()">✨ Use Voice Brief</button>
-              </div>
-            </div>
-
-            <div class="main-actions">
-              <button class="btn btn-primary" onclick="generateCampaign()">Generate Ads</button>
-              <button class="btn btn-light" onclick="generateVideo()">Generate Video</button>
-              <button class="btn btn-light" onclick="saveCampaign()">Save Campaign</button>
-            </div>
-
-            <div class="status-box">
-              <strong>Campaign status</strong>
-              <span id="statusBar">Ready. Enter a campaign idea or use voice prompt.</span>
-            </div>
-          </div>
-
-          <div class="right-panel">
-            <div class="panel-head">
-              <div>
-                <h2>Campaign outputs</h2>
-                <p>Preview structured launch content instantly in a compact builder layout.</p>
-              </div>
-              <div class="live-pill">Output View</div>
-            </div>
-
-            <div class="output-grid">
-              <div class="output-card">
-                <h3>Meta Ad Copy</h3>
-                <div id="metaOutput">No output yet.</div>
-              </div>
-
-              <div class="output-card">
-                <h3>Google Ad Copy</h3>
-                <div id="googleOutput">No output yet.</div>
-              </div>
-
-              <div class="output-card">
-                <h3>Reel Script</h3>
-                <div id="reelOutput">No output yet.</div>
-              </div>
-
-              <div class="output-card">
-                <h3>CTA Suggestions</h3>
-                <div id="ctaOutput">No output yet.</div>
-              </div>
-
-              <div class="output-card">
-                <h3>Hashtags</h3>
-                <div id="hashtagOutput">No output yet.</div>
-              </div>
-
-              <div class="output-card">
-                <h3>Campaign Summary</h3>
-                <div id="summaryOutput">No output yet.</div>
-              </div>
-            </div>
-
-            <div class="continue-card">
-              <h3>Continue this campaign</h3>
-              <p>Move this builder output into video creation, templates, or dashboard flow without losing connected product feel.</p>
-              <div class="continue-actions">
-                <a href="video-creator.html" class="btn btn-primary">🎥 Open Video Creator</a>
-                <a href="templates.html" class="btn btn-light">🧩 Open Templates</a>
-                <a href="business-dashboard.html" class="btn btn-light">🏢 Business Dashboard</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h3>Bariq AI</h3>
-          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation, and execution systems.</p>
-        </div>
-
-        <div class="footer-col">
-          <h3>Platform</h3>
-          <a href="index.html">Home</a>
-          <a href="ai-generator.html">AI Generator</a>
-          <a href="campaign.html">Campaign Studio</a>
-          <a href="business-dashboard.html">Business Dashboard</a>
-        </div>
-
-        <div class="footer-col">
-          <h3>Legal</h3>
-          <a href="terms.html">Terms</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="refund-policy.html">Refund Policy</a>
-        </div>
-
-        <div class="footer-col">
-          <h3>Contact</h3>
-          <a href="contact.html">Contact Us</a>
-          <a href="pricing.html">Pricing</a>
-          <a href="payments.html">Payments</a>
-          <p>support@bariqai.com</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    function toggleMobileMenu() {
-      document.getElementById("mainNav").classList.toggle("show");
-    }
-
-    let recognition = null;
-    let recognizing = false;
-
-    function startVoiceInput() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-      if (!SpeechRecognition) {
-        document.getElementById("statusBar").textContent = "Voice input is not supported in this browser.";
-        return;
-      }
-
-      if (recognizing) return;
-
-      recognition = new SpeechRecognition();
-      recognition.lang = "en-IN";
-      recognition.interimResults = true;
-      recognition.continuous = true;
-
-      recognition.onstart = function() {
-        recognizing = true;
-        document.getElementById("statusBar").textContent = "Voice listening started...";
-      };
-
-      recognition.onresult = function(event) {
-        let transcript = "";
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          transcript += event.results[i][0].transcript;
-        }
-        document.getElementById("voicePrompt").value = transcript.trim();
-      };
-
-      recognition.onerror = function() {
-        document.getElementById("statusBar").textContent = "Voice input had an error. Please try again.";
-      };
-
-      recognition.onend = function() {
-        recognizing = false;
-        document.getElementById("statusBar").textContent = "Voice listening stopped.";
-      };
-
-      recognition.start();
-    }
-
-    function stopVoiceInput() {
-      if (recognition && recognizing) {
-        recognition.stop();
-      } else {
-        document.getElementById("statusBar").textContent = "Voice input is not active.";
-      }
-    }
-
-    function useVoicePrompt() {
-      const brief = document.getElementById("voicePrompt").value.trim();
-      if (!brief) {
-        document.getElementById("statusBar").textContent = "Please speak or type a voice brief first.";
-        return;
-      }
-
-      const notes = document.getElementById("notes");
-      notes.value = "Voice Brief:\n" + brief + (notes.value.trim() ? "\n\n" + notes.value.trim() : "");
-      document.getElementById("statusBar").textContent = "Voice brief added into extra direction.";
-    }
-
-    function getValue(id, fallback) {
-      const value = document.getElementById(id).value.trim();
-      return value || fallback;
-    }
-
-    function buildCampaignContent() {
-      const businessName = getValue("businessName", "Your brand");
-      const campaignName = getValue("campaignName", "Voice Campaign");
-      const serviceName = getValue("serviceName", "your service");
-      const offer = getValue("offer", "special offer");
-      const targetAudience = getValue("targetAudience", "your audience");
-      const targetCity = getValue("targetCity", "your city");
-      const budget = getValue("budget", "₹5000");
-      const campaignGoal = getValue("campaignGoal", "Leads");
-      const notes = getValue("notes", "premium, high-conversion, local, clean style");
-
-      const metaText =
-`Headline: Get your ${serviceName} with ${offer}
-
-Primary Text:
-Looking for ${serviceName} in ${targetCity}? ${businessName} now brings ${offer} for ${targetAudience}. Book today and take the first step toward visible results.
-
-CTA:
-Book Now | Message Now | Limited Slots Available`;
-
-      const googleText =
-`1. ${serviceName} in ${targetCity}
-2. ${offer} at ${businessName}
-3. Best Offer for ${targetAudience}
-4. Book Today
-5. Smart ${campaignGoal} Campaign`;
-
-      const reelText =
-`Hook:
-Still searching for ${serviceName} in ${targetCity}?
-
-Scene 1:
-Show the common pain point faced by ${targetAudience}.
-
-Scene 2:
-Introduce ${businessName} and highlight ${offer}.
-
-Scene 3:
-Show service, treatment, or happy customer result.
-
-Scene 4:
-Close with confidence, premium feel, urgency, and trust.
-
-Ending CTA:
-Book now. DM today. Limited slots.`;
-
-      const ctaText =
-`1. Book Now
-2. Message For Offer
-3. Claim Your Slot
-4. Enquire Today
-5. Limited Period Offer`;
-
-      const hashtagText =
-`#${serviceName.replace(/\s+/g, "")} #${targetCity.replace(/\s+/g, "")} #BeautyClinic #AestheticCare #WomensWellness #PremiumCare #LimitedOffer #BookNow`;
-
-      const summaryText =
-`Campaign: ${campaignName}
-Goal: ${campaignGoal}
-Budget: ${budget}
-Audience: ${targetAudience}
-City: ${targetCity}
-Tone: ${notes}`;
-
-      return {
-        campaignName,
-        campaignGoal,
-        budget,
-        notes,
-        metaText,
-        googleText,
-        reelText,
-        ctaText,
-        hashtagText,
-        summaryText
-      };
-    }
-
-    function generateCampaign() {
-      const data = buildCampaignContent();
-
-      document.getElementById("metaOutput").textContent = data.metaText;
-      document.getElementById("googleOutput").textContent = data.googleText;
-      document.getElementById("reelOutput").textContent = data.reelText;
-      document.getElementById("ctaOutput").textContent = data.ctaText;
-      document.getElementById("hashtagOutput").textContent = data.hashtagText;
-      document.getElementById("summaryOutput").textContent = data.summaryText;
-
-      document.getElementById("statusBar").textContent =
-        `Campaign "${data.campaignName}" generated successfully. Goal: ${data.campaignGoal}. Budget: ${data.budget}. Tone: ${data.notes}.`;
-    }
-
-    function generateVideo() {
-      const data = buildCampaignContent();
-      document.getElementById("reelOutput").textContent = data.reelText;
-      document.getElementById("statusBar").textContent =
-        `Video script generated for "${data.campaignName}". Move it into Video Creator next.`;
-    }
-
-    function saveCampaign() {
-      const data = buildCampaignContent();
-      document.getElementById("summaryOutput").textContent = data.summaryText;
-      document.getElementById("statusBar").textContent =
-        `Campaign "${data.campaignName}" saved locally as a draft concept.`;
-    }
-  </script>
+<header class="header">
+<div class="container nav">
+
+<div class="brand">Bariq AI</div>
+
+<div class="menu">
+<a href="index.html">Home</a>
+<a href="ai-generator.html">AI Generator</a>
+<a href="campaign.html">Campaign</a>
+<a href="templates.html">Templates</a>
+<a href="payments.html">Payments</a>
+<a href="login.html">Login</a>
+</div>
+
+</div>
+</header>
+
+<section class="workspace">
+<div class="container">
+
+<div class="steps">
+<div class="step">Step 1 — Brief</div>
+<div class="step">Step 2 — Audience</div>
+<div class="step">Step 3 — Generate</div>
+<div class="step">Step 4 — Launch</div>
+</div>
+
+<div class="builder">
+
+<!-- LEFT SIDE -->
+
+<div class="card">
+
+<div class="field">
+<label>Business Name</label>
+<input id="business">
+</div>
+
+<div class="field">
+<label>Service</label>
+<input id="service">
+</div>
+
+<div class="field">
+<label>Offer</label>
+<input id="offer">
+</div>
+
+<div class="field">
+<label>City</label>
+<input id="city">
+</div>
+
+<div class="field">
+<label>Audience</label>
+<input id="audience">
+</div>
+
+<div class="field">
+<label>Extra Direction</label>
+<textarea id="notes"></textarea>
+</div>
+
+<button onclick="generate()">Generate Campaign</button>
+
+</div>
+
+<!-- RIGHT SIDE -->
+
+<div class="card">
+
+<div class="output">
+<h4>Meta Ad Copy</h4>
+<div id="meta"></div>
+</div>
+
+<div class="output">
+<h4>Reel Script</h4>
+<div id="reel"></div>
+</div>
+
+<div class="output">
+<h4>WhatsApp Promo</h4>
+<div id="whatsapp"></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+<script>
+
+function generate(){
+
+let business=document.getElementById("business").value
+let service=document.getElementById("service").value
+let offer=document.getElementById("offer").value
+let city=document.getElementById("city").value
+let audience=document.getElementById("audience").value
+
+document.getElementById("meta").innerText=
+`Get ${service} at ${business} with ${offer} in ${city}. Perfect for ${audience}. Limited slots available.`
+
+document.getElementById("reel").innerText=
+`Hook: Looking for ${service} in ${city}?  
+Scene: Show transformation  
+Offer: ${offer}  
+CTA: Book today with ${business}`
+
+document.getElementById("whatsapp").innerText=
+`Hi! ${business} is offering ${offer} on ${service}. Reply to book today.`
+
+}
+
+</script>
+
 </body>
 </html>
