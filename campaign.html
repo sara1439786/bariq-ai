@@ -269,14 +269,14 @@
       grid-template-columns: 480px 1fr;
       gap:20px;
       align-items:start;
-      min-height:auto;
     }
 
     .form-card,
     .output-card,
     .status-card,
     .output-box,
-    .next-step-card {
+    .next-step-card,
+    .mini-panel {
       background: rgba(255,255,255,0.95);
       border: 1px solid #f0e6c9;
       border-radius: 22px;
@@ -362,6 +362,10 @@
       margin-top: 16px;
     }
 
+    .action-row .btn {
+      min-width: 140px;
+    }
+
     .status-card{
       margin-top: 14px;
       padding: 16px 18px;
@@ -385,9 +389,6 @@
     }
 
     .output-card{
-      position:sticky;
-      top:100px;
-      height:fit-content;
       background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,247,255,0.96));
       overflow: hidden;
     }
@@ -464,6 +465,46 @@
       padding-left: 8px;
     }
 
+    .right-secondary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .mini-panel {
+      padding: 18px;
+      background: linear-gradient(135deg, #ffffff, #faf5ff);
+    }
+
+    .mini-panel h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #433685;
+    }
+
+    .mini-panel p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-item {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid #eee2bf;
+      font-size: 14px;
+      color: #4f4768;
+      line-height: 1.6;
+    }
+
     .next-step-card {
       margin-top: 14px;
       padding: 16px 18px;
@@ -517,8 +558,8 @@
         grid-template-columns: 1fr;
       }
 
-      .output-card {
-        position: static;
+      .right-secondary-grid {
+        grid-template-columns: 1fr;
       }
 
       .footer-grid {
@@ -760,6 +801,28 @@
               <div class="output-box">
                 <h3>Hashtags</h3>
                 <pre id="hashtagOutput">No output yet.</pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-secondary-grid">
+            <div class="mini-panel">
+              <h3>Publishing Queue</h3>
+              <p>These are the next natural actions for this campaign once copy is approved.</p>
+              <div class="mini-list">
+                <div class="mini-item">Meta Ad Publishing — Ready for future integration</div>
+                <div class="mini-item">WhatsApp Follow-up — Lead nurturing flow can connect here</div>
+                <div class="mini-item">Google Ads Upload — Structured copy can be pushed later</div>
+              </div>
+            </div>
+
+            <div class="mini-panel">
+              <h3>Saved Campaign Snapshot</h3>
+              <p>Use this area as a quick planning memory for the campaign you are building right now.</p>
+              <div class="mini-list">
+                <div class="mini-item">Campaign Type: Offer + Lead Generation</div>
+                <div class="mini-item">Best Use: Clinics, beauty brands, products, local businesses</div>
+                <div class="mini-item">Fast Flow: Voice → Copy → Video → Templates</div>
               </div>
             </div>
           </div>
