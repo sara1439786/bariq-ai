@@ -14,28 +14,27 @@
       --text:#2c235c;
       --muted:#6d6684;
       --line:#ece0c0;
-      --white:#ffffff;
       --purple:#5a3fff;
-      --purple2:#7a63ff;
       --gold:#d8b05b;
       --pink:#ff7cc8;
       --blue:#4f8dff;
-      --green:#35b36e;
-      --shadow:0 20px 55px rgba(75,45,120,0.08);
+      --white:#ffffff;
       --card-shadow:0 14px 32px rgba(83,57,139,0.07);
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
-      color: var(--text);
+    html, body{
+      margin:0;
+      padding:0;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+      font-family:Arial, sans-serif;
+      background:linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 50%, var(--bg3) 100%);
+      color:var(--text);
     }
 
-    body{ position: relative; }
+    body{
+      position:relative;
+    }
 
     body::before{
       content:"";
@@ -44,107 +43,42 @@
       right:-220px;
       width:720px;
       height:720px;
-      background:radial-gradient(circle at center,
-      rgba(120,80,255,0.22),
-      rgba(120,80,255,0.08),
-      transparent 70%);
-      z-index:-3;
-      filter:blur(85px);
-      animation:glowMove 14s ease-in-out infinite alternate;
+      background:radial-gradient(circle at center, rgba(120,80,255,0.18), rgba(120,80,255,0.06), transparent 70%);
+      filter:blur(90px);
       pointer-events:none;
+      z-index:-2;
     }
 
     body::after{
       content:"";
       position:fixed;
-      bottom:-240px;
+      bottom:-220px;
       left:-220px;
-      width:700px;
-      height:700px;
-      background:radial-gradient(circle,
-      rgba(216,176,91,0.22),
-      transparent 70%);
-      z-index:-3;
-      filter:blur(95px);
-      animation:goldGlow 16s ease-in-out infinite alternate;
+      width:680px;
+      height:680px;
+      background:radial-gradient(circle, rgba(216,176,91,0.18), transparent 70%);
+      filter:blur(90px);
       pointer-events:none;
+      z-index:-2;
     }
 
-    .floating-orb{
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(18px);
-      pointer-events: none;
-      z-index: -2;
-      opacity: 0.35;
+    a{
+      text-decoration:none;
+      color:inherit;
     }
 
-    .orb-1{
-      width: 180px;
-      height: 180px;
-      background: linear-gradient(135deg, #8f6bff, #c69cff);
-      left: 8%;
-      top: 20%;
-      animation: floatOrb1 12s ease-in-out infinite alternate;
+    .container{
+      width:min(1360px, calc(100% - 32px));
+      margin:0 auto;
     }
 
-    .orb-2{
-      width: 140px;
-      height: 140px;
-      background: linear-gradient(135deg, #ffd28e, #ffb86f);
-      right: 10%;
-      top: 40%;
-      animation: floatOrb2 15s ease-in-out infinite alternate;
-    }
-
-    .orb-3{
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #ff9adf, #d79bff);
-      left: 46%;
-      bottom: 10%;
-      animation: floatOrb3 13s ease-in-out infinite alternate;
-    }
-
-    @keyframes glowMove{
-      0%{transform:translate(0,0);}
-      100%{transform:translate(-80px,60px);}
-    }
-
-    @keyframes goldGlow{
-      0%{transform:translate(0,0);}
-      100%{transform:translate(120px,-80px);}
-    }
-
-    @keyframes floatOrb1{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(40px) translateX(30px);}
-    }
-
-    @keyframes floatOrb2{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(-30px) translateX(-25px);}
-    }
-
-    @keyframes floatOrb3{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(-25px) translateX(35px);}
-    }
-
-    a { text-decoration: none; color: inherit; }
-
-    .container {
-      width: min(1360px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(255,255,255,0.94);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid #eee2bf;
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:rgba(255,255,255,0.94);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid #eee2bf;
     }
 
     .site-header::after{
@@ -164,280 +98,282 @@
       100%{background-position:300%;}
     }
 
-    .nav-wrap {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      position: relative;
+    .nav-wrap{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      position:relative;
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
-      font-size: 30px;
-      font-weight: 800;
-      background: linear-gradient(90deg, var(--gold), var(--purple), var(--blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+      font-size:30px;
+      font-weight:800;
+      background:linear-gradient(90deg,var(--gold),var(--purple),var(--blue));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
     }
 
-    .brand-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--purple));
-      box-shadow: 0 0 16px rgba(90,63,255,0.3);
+    .brand-dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      box-shadow:0 0 16px rgba(90,63,255,0.3);
     }
 
-    .menu-toggle {
-      display: none;
-      border: none;
-      background: #f3edff;
-      color: #2f216f;
-      font-size: 28px;
-      line-height: 1;
-      padding: 10px 14px;
-      border-radius: 14px;
-      cursor: pointer;
+    .menu-toggle{
+      display:none;
+      border:none;
+      background:#f3edff;
+      color:#2f216f;
+      font-size:28px;
+      line-height:1;
+      padding:10px 14px;
+      border-radius:14px;
+      cursor:pointer;
     }
 
-    .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scrollbar-width: none;
-      white-space: nowrap;
+    .main-nav{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      scrollbar-width:none;
+      white-space:nowrap;
     }
 
-    .main-nav::-webkit-scrollbar { display:none; }
+    .main-nav::-webkit-scrollbar{
+      display:none;
+    }
 
-    .main-nav a {
-      padding: 10px 12px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #3a2d77;
-      border-radius: 12px;
-      flex: 0 0 auto;
-      transition: 0.18s ease;
+    .main-nav a{
+      padding:10px 12px;
+      font-size:14px;
+      font-weight:700;
+      color:#3a2d77;
+      border-radius:12px;
+      flex:0 0 auto;
     }
 
     .main-nav a:hover,
-    .main-nav a.active {
-      background: #f3edff;
+    .main-nav a.active{
+      background:#f3edff;
     }
 
-    .home-link {
-      background: linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
-      border: 1px solid #eadfc2;
+    .home-link{
+      background:linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
+      border:1px solid #eadfc2;
     }
 
-    .hero-section {
-      padding: 14px 0 12px;
+    .page-section{
+      padding:18px 0 24px;
     }
 
-    .hero-shell {
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
+    .hero-shell,
+    .generator-card,
+    .output-card,
+    .tip-card,
+    .mini-stat-box{
+      background:rgba(255,255,255,0.95);
+      border:1px solid #f0e6c9;
+      border-radius:26px;
+      box-shadow:var(--card-shadow);
     }
 
-    .hero-shell::before {
-      content: "";
-      position: absolute;
-      right: -70px;
-      top: -70px;
-      width: 240px;
-      height: 240px;
-      background: radial-gradient(circle, rgba(216,176,91,0.16), transparent 65%);
-      pointer-events: none;
+    .hero-shell{
+      padding:22px;
+      margin-bottom:18px;
+      background:linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap:16px;
+      grid-template-columns:1.02fr 0.98fr;
+      gap:18px;
       align-items:stretch;
     }
 
-    .hero-left,
-    .hero-right{
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #f0e6c9;
-      border-radius: 24px;
-      box-shadow: var(--card-shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
     .hero-left{
-      padding: 24px;
+      padding:6px;
     }
 
-    .hero-left::after{
-      content:"";
-      position:absolute;
-      inset:auto -40px -40px auto;
-      width:180px;
-      height:180px;
-      background:radial-gradient(circle, rgba(90,63,255,0.10), transparent 70%);
-      pointer-events:none;
+    .hero-tag{
+      display:inline-block;
+      font-size:13px;
+      font-weight:800;
+      color:#4a3b92;
+      border:1px solid #ece1bf;
+      background:#fff;
+      border-radius:999px;
+      padding:10px 16px;
+      margin-bottom:16px;
     }
 
-    .hero-tag {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 800;
-      color: #4a3b92;
-      border: 1px solid #ece1bf;
-      background: #fff;
-      border-radius: 999px;
-      padding: 10px 16px;
-      margin-bottom: 14px;
+    .hero-left h1{
+      margin:0 0 14px;
+      font-size:56px;
+      line-height:0.98;
+      letter-spacing:-0.04em;
+      color:#312668;
     }
 
-    .hero-left h1 {
-      margin: 0 0 12px;
-      font-size: 48px;
-      line-height: 1.0;
-      letter-spacing: -0.045em;
-      color: #312668;
-      max-width: 780px;
+    .hero-left p{
+      margin:0 0 20px;
+      font-size:17px;
+      line-height:1.75;
+      color:var(--muted);
+      max-width:720px;
     }
 
-    .hero-left p {
-      margin: 0 0 18px;
-      font-size: 17px;
-      line-height: 1.74;
-      color: var(--muted);
-      max-width: 820px;
+    .text-gold{ color:var(--gold); }
+    .text-purple{ color:var(--purple); }
+    .text-pink{ color:var(--pink); }
+    .text-blue{ color:var(--blue); }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
     }
 
-    .text-gold{ color: var(--gold); text-shadow: 0 0 18px rgba(216,176,91,0.18); }
-    .text-purple{ color: var(--purple); text-shadow: 0 0 18px rgba(90,63,255,0.14); }
-    .text-pink{ color: var(--pink); text-shadow: 0 0 18px rgba(255,124,200,0.14); }
-    .text-blue{ color: var(--blue); text-shadow: 0 0 18px rgba(79,141,255,0.14); }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:14px 18px;
+      border-radius:16px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      border:none;
+      transition:0.2s ease;
+      text-align:center;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      border: none;
-      transition: 0.2s ease;
+    .btn:hover{
+      transform:translateY(-2px);
     }
 
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold), var(--purple));
-      color: #fff;
-      box-shadow: 0 12px 24px rgba(90,63,255,0.18);
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(90,63,255,0.18);
     }
 
-    .btn-light {
-      background: #f4eeff;
-      color: #34296a;
-      border: 1px solid #e4d7ff;
+    .btn-light{
+      background:#f4eeff;
+      color:#34296a;
+      border:1px solid #e4d7ff;
     }
 
-    .marquee-wrap {
-      margin-top: 10px;
-      border: 1px solid #eee2bf;
-      border-radius: 16px;
-      background: #fff;
-      overflow: hidden;
-      padding: 10px 0;
+    .marquee-wrap{
+      width:100%;
+      overflow:hidden;
+      border:1px solid #efe2c3;
+      border-radius:18px;
+      background:rgba(255,255,255,0.9);
+      padding:10px 0;
     }
 
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      gap: 12px;
-      padding: 0 12px;
-      animation: scrollLeft 28s linear infinite;
+    .marquee-track{
+      display:flex;
+      gap:12px;
+      width:max-content;
+      animation:marqueeMove 22s linear infinite;
     }
 
-    .mini-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #faf7ff;
-      border: 1px solid #ece1bf;
-      font-size: 13px;
-      font-weight: 700;
-      color: #4a3b92;
-      white-space: nowrap;
-      box-shadow: 0 6px 16px rgba(83,57,139,0.04);
+    @keyframes marqueeMove{
+      0%{ transform:translateX(0); }
+      100%{ transform:translateX(-50%); }
     }
 
-    @keyframes scrollLeft {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    .mini-chip{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid #eadfc2;
+      background:#fff;
+      font-size:14px;
+      font-weight:700;
+      color:#4a3b92;
+      white-space:nowrap;
     }
 
     .hero-right{
-      padding: 18px;
-      display:grid;
+      display:flex;
+      flex-direction:column;
       gap:14px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,243,255,0.96));
+    }
+
+    .hero-side-panel{
+      background:rgba(255,255,255,0.95);
+      border:1px solid #f0e6c9;
+      border-radius:24px;
+      padding:20px;
+      box-shadow:0 10px 24px rgba(83,57,139,0.05);
+      height:100%;
+    }
+
+    .hero-side-panel h3{
+      margin:0 0 10px;
+      font-size:18px;
+      color:#433685;
+    }
+
+    .hero-side-panel p{
+      margin:0 0 16px;
+      font-size:15px;
+      line-height:1.7;
+      color:#6f6983;
     }
 
     .template-wall{
-      border-radius:22px;
-      border:1px solid #eee2bf;
-      background:#fff;
+      width:100%;
       overflow:hidden;
-      padding:10px 0;
+      border-radius:20px;
+      position:relative;
     }
 
     .template-track{
       display:flex;
-      gap:12px;
+      gap:14px;
       width:max-content;
-      padding:0 10px;
-      animation:imageScroll 30s linear infinite;
+      animation:scrollTemplates 24s linear infinite;
+    }
+
+    .template-wall:hover .template-track{
+      animation-play-state:paused;
+    }
+
+    @keyframes scrollTemplates{
+      0%{ transform:translateX(0); }
+      100%{ transform:translateX(-50%); }
     }
 
     .template-card{
-      width:190px;
-      height:145px;
-      flex:0 0 auto;
-      border-radius:18px;
+      min-width:210px;
+      max-width:210px;
+      height:170px;
+      border-radius:20px;
       overflow:hidden;
       position:relative;
-      box-shadow:0 10px 24px rgba(60,40,110,0.10);
-      border:1px solid #f0e6c9;
-      transition:0.2s ease;
-    }
-
-    .template-card:hover{
-      transform: translateY(-4px) scale(1.02);
-      box-shadow:0 18px 30px rgba(60,40,110,0.15);
+      border:1px solid #eadfc2;
+      background:#fff;
+      box-shadow:0 10px 22px rgba(83,57,139,0.08);
+      flex:0 0 auto;
     }
 
     .template-card img{
@@ -445,415 +381,342 @@
       height:100%;
       object-fit:cover;
       display:block;
+      transition:transform 0.35s ease;
+    }
+
+    .template-card:hover img{
+      transform:scale(1.06);
     }
 
     .template-card span{
       position:absolute;
-      left:10px;
-      bottom:10px;
-      padding:8px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:800;
+      left:12px;
+      bottom:12px;
+      background:rgba(47,33,111,0.82);
       color:#fff;
-      background:rgba(44,35,92,0.72);
-      backdrop-filter:blur(6px);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
     }
 
-    @keyframes imageScroll{
-      0%{transform:translateX(0);}
-      100%{transform:translateX(-50%);}
-    }
-
-    .right-mini-grid{
+    .mini-stats-row{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:10px;
+      gap:12px;
+      margin-top:16px;
     }
 
-    .right-mini{
-      padding:14px;
-      border-radius:18px;
-      background:#fff;
-      border:1px solid #eee2bf;
+    .mini-stat-box{
+      padding:14px 10px;
       text-align:center;
-      box-shadow:0 8px 18px rgba(83,57,139,0.05);
+      background:#fff;
     }
 
-    .right-mini .num{
+    .mini-stat-box strong{
+      display:block;
       font-size:22px;
-      font-weight:800;
       color:#3f3281;
+      margin-bottom:4px;
     }
 
-    .right-mini .lab{
-      margin-top:4px;
+    .mini-stat-box small{
+      color:#776f8a;
       font-size:12px;
       font-weight:700;
-      color:#7a7291;
     }
 
-    .section {
-      padding: 6px 0 18px;
-    }
-
-    .generator-grid{
+    .main-grid{
       display:grid;
-      grid-template-columns: 500px 1fr;
-      gap:20px;
+      grid-template-columns:0.98fr 1.02fr;
+      gap:18px;
       align-items:start;
     }
 
-    .form-card,
-    .output-card,
-    .status-card,
-    .output-box,
-    .tool-card,
-    .next-step-card {
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #f0e6c9;
-      border-radius: 22px;
-      box-shadow: var(--card-shadow);
-      transition: all 0.25s ease;
+    .generator-card{
+      padding:22px;
+      background:linear-gradient(180deg,#fff,#fcf8ff);
     }
 
-    .form-card:hover,
-    .output-card:hover,
-    .tool-card:hover,
-    .next-step-card:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 26px 55px rgba(80,50,150,0.10);
+    .generator-card h2{
+      margin:0 0 10px;
+      font-size:30px;
+      color:#35296f;
     }
 
-    .form-card,
-    .output-card {
-      padding: 20px;
-    }
-
-    .section-title {
-      margin: 0 0 8px;
-      font-size: 26px;
-      color: #35296f;
-    }
-
-    .section-text {
-      margin: 0 0 16px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 16px;
-    }
-
-    .tool-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-      margin-bottom:16px;
-    }
-
-    .tool-card{
-      padding:14px 16px;
-      cursor:pointer;
-      background:linear-gradient(180deg,#fff,#fbf8ff);
-    }
-
-    .tool-card.active{
-      border-color:#d9c9ff;
-      background:linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
-    }
-
-    .tool-card h4{
-      margin:0 0 6px;
-      font-size:16px;
-      color:#433685;
-    }
-
-    .tool-card p{
-      margin:0;
-      font-size:13px;
-      line-height:1.6;
+    .generator-sub{
+      margin:0 0 18px;
       color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
     }
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 14px;
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
     }
 
-    .field label {
-      font-size: 14px;
-      font-weight: 800;
-      color: #433685;
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    .field label{
+      font-size:14px;
+      font-weight:800;
+      color:#433685;
     }
 
     .field input,
     .field select,
-    .field textarea {
-      width: 100%;
-      border: 1px solid #eadfc2;
-      background: #fff;
-      border-radius: 16px;
-      padding: 14px 14px;
-      font: inherit;
-      color: var(--text);
-      outline: none;
-      transition: 0.18s ease;
+    .field textarea{
+      width:100%;
+      border:1px solid #eadfc2;
+      background:#fff;
+      border-radius:16px;
+      padding:14px;
+      font:inherit;
+      color:var(--text);
+      outline:none;
+    }
+
+    .field textarea{
+      min-height:118px;
+      resize:vertical;
+      line-height:1.65;
     }
 
     .field input:focus,
     .field select:focus,
-    .field textarea:focus {
-      border-color: #cdb2ff;
-      box-shadow: 0 0 0 4px rgba(90,63,255,0.08);
+    .field textarea:focus{
+      border-color:#cdb2ff;
+      box-shadow:0 0 0 4px rgba(90,63,255,0.08);
     }
 
-    .field textarea {
-      min-height: 120px;
-      resize: vertical;
-      line-height: 1.6;
+    .voice-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:-2px;
+      margin-bottom:2px;
     }
 
-    .voice-actions,
-    .action-row,
-    .next-links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+    .action-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:16px;
     }
 
-    .action-row {
-      margin-top: 16px;
+    .status-bar{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid #eee2bf;
+      color:#645c7b;
+      line-height:1.65;
+      font-size:14px;
     }
 
-    .action-row .btn {
-      min-width: 145px;
+    .output-side{
+      display:grid;
+      gap:14px;
     }
 
-    .status-card{
-      margin-top: 14px;
-      padding: 16px 18px;
-      background:linear-gradient(135deg,#fff,#f6f2ff);
-      border:1px solid #eee;
+    .tip-card{
+      padding:18px;
+      background:linear-gradient(135deg,#fff,#f8f2ff);
     }
 
-    .status-card h4 {
-      margin: 0 0 8px;
-      color: #433685;
-      font-size: 16px;
-    }
-
-    .status-message {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.7;
-      color: #5f5778;
-      white-space: pre-wrap;
-      word-break: break-word;
+    .tip-card p{
+      margin:0;
+      color:#6f6983;
+      line-height:1.7;
+      font-size:14px;
     }
 
     .output-card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,247,255,0.96));
-      overflow: hidden;
-      position: relative;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      background:#fff;
     }
 
-    .output-card::before {
-      content: "";
-      position: absolute;
-      top: -80px;
-      right: -80px;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(90,63,255,0.12), transparent 65%);
-      pointer-events: none;
+    .output-card::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      width:5px;
+      height:100%;
+      background:linear-gradient(180deg,var(--gold),var(--purple));
     }
 
-    .preview-banner {
-      margin-bottom: 14px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #fff7e9, #f4eeff);
-      border: 1px solid #ece0c0;
-      color: #564d73;
-      line-height: 1.7;
-      font-size: 14px;
+    .output-card h3{
+      margin:0 0 10px;
+      font-size:18px;
+      color:#433685;
+      padding-left:8px;
     }
 
-    .output-stack {
-      display: grid;
-      gap: 12px;
+    .output-card p,
+    .output-card div{
+      margin:0;
+      color:#5f5876;
+      line-height:1.8;
+      font-size:14px;
+      padding-left:8px;
+      white-space:pre-wrap;
     }
 
-    .output-box{
-      padding:20px;
-      border-radius:18px;
-      background:white;
-      border:1px solid #eee;
-      box-shadow:0 10px 30px rgba(0,0,0,0.06);
-      transition:0.2s;
-      position: relative;
-      overflow: hidden;
+    .continue-card{
+      padding:18px;
+      border-radius:24px;
+      background:linear-gradient(135deg, rgba(255,250,242,0.98), rgba(248,243,255,0.98));
+      border:1px solid #eadfc2;
+      box-shadow:var(--card-shadow);
     }
 
-    .output-box::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 6px;
-      height: 100%;
-      background: linear-gradient(180deg, var(--gold), var(--purple));
-      opacity: 0.9;
+    .continue-card h3{
+      margin:0 0 8px;
+      font-size:22px;
+      color:#3d317d;
     }
 
-    .output-box:hover{
-      transform:translateY(-4px);
-      box-shadow:0 20px 40px rgba(0,0,0,0.08);
+    .continue-card p{
+      margin:0 0 14px;
+      color:#6f6983;
+      line-height:1.7;
+      font-size:14px;
     }
 
-    .output-box h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      color: #45388c;
-      padding-left: 8px;
+    .continue-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
-    .output-box pre {
-      margin: 0;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      font-family: Arial, sans-serif;
-      font-size: 15px;
-      line-height: 1.78;
-      color: #5f5778;
-      padding-left: 8px;
+    .site-footer{
+      margin-top:24px;
+      background:#181427;
+      color:#fff;
+      padding:40px 0;
     }
 
-    .next-step-card {
-      margin-top: 14px;
-      padding: 16px 18px;
-      background: linear-gradient(135deg, #ffffff, #f8f2ff);
-      border: 1px solid #eadcfb;
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr 1fr;
+      gap:24px;
     }
 
-    .next-step-card h3 {
-      margin: 0 0 8px;
-      color: #433685;
-      font-size: 18px;
-    }
-
-    .next-step-card p {
-      margin: 0 0 12px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
-    }
-
-    .site-footer {
-      margin-top: 22px;
-      background: #181427;
-      color: #fff;
-      padding: 40px 0;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr 1fr;
-      gap: 24px;
-    }
-
-    .footer-col h3 {
-      margin: 0 0 14px;
-      font-size: 18px;
-      color: #ffffff;
+    .footer-col h3{
+      margin:0 0 14px;
+      font-size:18px;
+      color:#ffffff;
     }
 
     .footer-col p,
-    .footer-col a {
-      display: block;
-      margin: 0 0 10px;
-      color: #d9d4ea;
-      font-size: 15px;
-      line-height: 1.7;
+    .footer-col a{
+      display:block;
+      margin:0 0 10px;
+      color:#d9d4ea;
+      font-size:15px;
+      line-height:1.7;
     }
 
-    @media (max-width: 1180px) {
+    @media (max-width: 1180px){
       .hero-grid,
-      .generator-grid{
-        grid-template-columns: 1fr;
+      .main-grid,
+      .footer-grid{
+        grid-template-columns:1fr;
       }
     }
 
-    @media (max-width: 768px) {
-      .container { width: min(100% - 20px, 1200px); }
-      .menu-toggle { display: block; }
-
-      .main-nav {
-        display: none;
-        position: absolute;
-        top: 82px;
-        left: 0;
-        right: 0;
-        background: #fff;
-        border: 1px solid #ecdcb4;
-        border-radius: 18px;
-        box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-        padding: 14px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
+    @media (max-width: 768px){
+      .container{
+        width:min(100% - 20px, 1200px);
       }
 
-      .main-nav.show { display: flex; }
-
-      .main-nav a {
-        width: 100%;
-        background: #faf7ff;
-        justify-content: flex-start;
+      .menu-toggle{
+        display:block;
       }
 
-      .hero-left h1 { font-size: 34px; }
+      .main-nav{
+        display:none;
+        position:absolute;
+        top:82px;
+        left:0;
+        right:0;
+        background:#fff;
+        border:1px solid #ecdcb4;
+        border-radius:18px;
+        box-shadow:0 18px 40px rgba(0,0,0,0.08);
+        padding:14px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
+      }
+
+      .main-nav.show{
+        display:flex;
+      }
+
+      .main-nav a{
+        width:100%;
+        background:#faf7ff;
+        justify-content:flex-start;
+      }
+
+      .hero-left h1{
+        font-size:38px;
+        line-height:1.04;
+      }
 
       .hero-actions,
-      .voice-actions,
       .action-row,
-      .next-links {
-        flex-direction: column;
+      .voice-row,
+      .continue-actions{
+        flex-direction:column;
       }
 
-      .btn { width: 100%; }
-
-      .tool-grid,
-      .right-mini-grid,
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-left,
-      .hero-right,
-      .form-card,
-      .output-card {
-        padding: 16px;
+      .btn{
+        width:100%;
       }
 
       .template-card{
-        width:170px;
-        height:120px;
+        min-width:180px;
+        max-width:180px;
+        height:145px;
+      }
+
+      .mini-stats-row,
+      .form-grid,
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-shell,
+      .generator-card,
+      .output-card,
+      .tip-card,
+      .continue-card{
+        padding:16px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="floating-orb orb-1"></div>
-  <div class="floating-orb orb-2"></div>
-  <div class="floating-orb orb-3"></div>
-
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
-
       <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
 
       <nav class="main-nav" id="mainNav">
@@ -870,238 +733,251 @@
     </div>
   </header>
 
-  <section class="hero-section">
+  <section class="page-section">
     <div class="container">
+
       <div class="hero-shell">
         <div class="hero-grid">
 
           <div class="hero-left">
-            <div class="hero-tag">AI Generator Studio</div>
+            <div class="hero-tag">AI Generator</div>
             <h1>
-              Generate <span class="text-gold">ads</span>,
-              <span class="text-purple">hooks</span>,
-              <span class="text-pink">reels</span>, and
-              <span class="text-blue">campaign ideas</span>
+              Create <span class="text-gold">beautiful</span>
+              <span class="text-blue">AI ideas</span>,
+              <span class="text-purple">copy</span>,
+              <span class="text-pink">hooks</span> and campaigns
             </h1>
 
             <p>
-              Bariq AI Generator helps you create premium marketing outputs from one simple brief.
-              Use text or voice, choose a content type, and instantly generate ready-to-use content.
+              Bariq AI helps you generate Meta ads, Google headlines, WhatsApp promos, reel scripts,
+              hook lines, captions, and local marketing outputs from one connected premium workspace.
             </p>
 
             <div class="hero-actions">
-              <button class="btn btn-primary" onclick="document.getElementById('generatorForm').scrollIntoView({behavior:'smooth'})">✨ Start Generating</button>
+              <a href="#generator" class="btn btn-primary">✨ Start Generating</a>
               <a href="campaign.html" class="btn btn-light">📣 Open Campaign Studio</a>
               <a href="business-dashboard.html" class="btn btn-light">🏢 Business Dashboard</a>
             </div>
 
             <div class="marquee-wrap">
               <div class="marquee-track">
-                <span class="mini-chip">🎯 Meta Ad Copy</span>
-                <span class="mini-chip">📢 Google Headlines</span>
-                <span class="mini-chip">🎥 Reel Scripts</span>
+                <span class="mini-chip">📢 Meta Ad Copy</span>
+                <span class="mini-chip">📊 Google Headlines</span>
+                <span class="mini-chip">🎬 Reel Scripts</span>
                 <span class="mini-chip">🪄 Voice Prompt</span>
                 <span class="mini-chip">💬 WhatsApp Promo</span>
                 <span class="mini-chip">🔥 Hook Lines</span>
-                <span class="mini-chip">🧩 Captions</span>
+                <span class="mini-chip">🌿 Captions</span>
                 <span class="mini-chip">📍 Local Offers</span>
-                <span class="mini-chip">🎯 Meta Ad Copy</span>
-                <span class="mini-chip">📢 Google Headlines</span>
-                <span class="mini-chip">🎥 Reel Scripts</span>
+
+                <span class="mini-chip">📢 Meta Ad Copy</span>
+                <span class="mini-chip">📊 Google Headlines</span>
+                <span class="mini-chip">🎬 Reel Scripts</span>
                 <span class="mini-chip">🪄 Voice Prompt</span>
                 <span class="mini-chip">💬 WhatsApp Promo</span>
                 <span class="mini-chip">🔥 Hook Lines</span>
-                <span class="mini-chip">🧩 Captions</span>
+                <span class="mini-chip">🌿 Captions</span>
                 <span class="mini-chip">📍 Local Offers</span>
               </div>
             </div>
           </div>
 
           <div class="hero-right">
-            <div class="template-wall">
-              <div class="template-track">
-                
-<img src="https://images.unsplash.com/photo-1677442135136-760c813028c0?auto=format&fit=crop&w=900&q=80" alt="">
-<span>Beauty Ad</span>
-</div>
+            <div class="hero-side-panel">
+              <h3>Live AI inspiration wall</h3>
+              <p>Different visuals make this page feel active, premium, and clearly focused on AI generation instead of looking copy pasted.</p>
 
-<div class="template-card">
-<img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=900&q=80" alt="">
-<span>Clinic Promo</span>
-</div>
-<div class="template-card">
-<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="">
-<span>Women Offer</span>
-</div>
-                <div class="template-card">
-                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Reel Mood</span>
-                </div>
+              <div class="template-wall">
+                <div class="template-track">
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1677442135136-760c813028c0?auto=format&fit=crop&w=900&q=80" alt="AI Brain">
+                    <span>AI Brain</span>
+                  </div>
 
-                <div class="template-card">
-                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Beauty Ad</span>
-                </div>
-                <div class="template-card">
-                  <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Clinic Promo</span>
-                </div>
-                <div class="template-card">
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Women Offer</span>
-                </div>
-                <div class="template-card">
-                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Reel Mood</span>
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=900&q=80" alt="Automation">
+                    <span>Automation</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=900&q=80" alt="Smart Generator">
+                    <span>Smart Generator</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="Content Ideas">
+                    <span>Content Ideas</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1677442135136-760c813028c0?auto=format&fit=crop&w=900&q=80" alt="AI Brain">
+                    <span>AI Brain</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=900&q=80" alt="Automation">
+                    <span>Automation</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=900&q=80" alt="Smart Generator">
+                    <span>Smart Generator</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="Content Ideas">
+                    <span>Content Ideas</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="right-mini-grid">
-              <div class="right-mini">
-                <div class="num">8+</div>
-                <div class="lab">Output Types</div>
-              </div>
-              <div class="right-mini">
-                <div class="num">Voice</div>
-                <div class="lab">Input Ready</div>
-              </div>
-              <div class="right-mini">
-                <div class="num">Fast</div>
-                <div class="lab">AI Workflow</div>
+              <div class="mini-stats-row">
+                <div class="mini-stat-box">
+                  <strong>AI</strong>
+                  <small>Prompt Powered</small>
+                </div>
+                <div class="mini-stat-box">
+                  <strong>Fast</strong>
+                  <small>Output Ready</small>
+                </div>
+                <div class="mini-stat-box">
+                  <strong>Voice</strong>
+                  <small>Input Friendly</small>
+                </div>
               </div>
             </div>
           </div>
 
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="generator-grid">
+      <div class="main-grid" id="generator">
 
-        <div class="form-card" id="generatorForm">
-          <h2 class="section-title">AI Content Generator</h2>
-          <p class="section-text">Choose what you want Bariq to generate and give one short brief.</p>
+        <div class="generator-card">
+          <h2>Generate AI marketing output</h2>
+          <p class="generator-sub">Fill the form or just speak one simple brief. Bariq will turn it into ad copy, captions, hooks, reel ideas, and local campaign direction.</p>
 
-          <div class="tool-grid">
-            <div class="tool-card active" onclick="setTool('meta')">
-              <h4>🎯 Meta Ad</h4>
-              <p>Primary text, headline, CTA</p>
+          <div class="form-grid">
+            <div class="field">
+              <label for="businessName">Business Name</label>
+              <input id="businessName" type="text" placeholder="e.g. RSCC Clinic">
             </div>
-            <div class="tool-card" onclick="setTool('google')">
-              <h4>📢 Google Ad</h4>
-              <p>Headlines and description</p>
+
+            <div class="field">
+              <label for="businessType">Business Type</label>
+              <input id="businessType" type="text" placeholder="e.g. Aesthetic Clinic">
             </div>
-            <div class="tool-card" onclick="setTool('reel')">
-              <h4>🎥 Reel Script</h4>
-              <p>Scenes, hook, ending CTA</p>
+
+            <div class="field full">
+              <label for="serviceName">Product / Service</label>
+              <input id="serviceName" type="text" placeholder="e.g. Laser Hair Reduction">
             </div>
-            <div class="tool-card" onclick="setTool('whatsapp')">
-              <h4>💬 WhatsApp Promo</h4>
-              <p>Short promo message</p>
+
+            <div class="field">
+              <label for="offer">Offer</label>
+              <input id="offer" type="text" placeholder="e.g. Flat 60% Off">
             </div>
-          </div>
 
-          <div class="field">
-            <label for="brandName">Brand / Business Name</label>
-            <input id="brandName" type="text" placeholder="e.g. RSCC Clinic" />
-          </div>
+            <div class="field">
+              <label for="targetCity">Target City</label>
+              <input id="targetCity" type="text" placeholder="e.g. Hyderabad">
+            </div>
 
-          <div class="field">
-            <label for="category">Category</label>
-            <input id="category" type="text" placeholder="e.g. Aesthetic clinic / Skincare / Product" />
-          </div>
+            <div class="field">
+              <label for="targetAudience">Target Audience</label>
+              <input id="targetAudience" type="text" placeholder="e.g. Women 25-40">
+            </div>
 
-          <div class="field">
-            <label for="offer">Offer / Message</label>
-            <input id="offer" type="text" placeholder="e.g. Flat 60% off on laser hair reduction" />
-          </div>
+            <div class="field">
+              <label for="outputType">Output Type</label>
+              <select id="outputType">
+                <option>Meta Ad Copy</option>
+                <option>Google Headlines</option>
+                <option>Reel Script</option>
+                <option>WhatsApp Promo</option>
+                <option>Captions</option>
+                <option>Hook Lines</option>
+                <option>Full Pack</option>
+              </select>
+            </div>
 
-          <div class="field">
-            <label for="audience">Target Audience</label>
-            <input id="audience" type="text" placeholder="e.g. Women 25-40 in Hyderabad" />
-          </div>
+            <div class="field full">
+              <label for="voicePrompt">Voice Campaign Brief</label>
+              <textarea id="voicePrompt" placeholder="Speak or type one simple brief. Example: Create a Meta ad for laser hair reduction with flat 60% off for women in Hyderabad."></textarea>
+            </div>
 
-          <div class="field">
-            <label for="tone">Tone</label>
-            <select id="tone">
-              <option value="">Select tone</option>
-              <option>Premium</option>
-              <option>Emotional</option>
-              <option>Bold</option>
-              <option>Trust-building</option>
-              <option>Luxury</option>
-              <option>Friendly</option>
-            </select>
-          </div>
+            <div class="field full">
+              <div class="voice-row">
+                <button class="btn btn-light" type="button" onclick="startVoiceInput()">🎤 Start Voice</button>
+                <button class="btn btn-light" type="button" onclick="stopVoiceInput()">⏹ Stop Voice</button>
+                <button class="btn btn-light" type="button" onclick="useVoicePrompt()">✨ Use Voice Brief</button>
+              </div>
+            </div>
 
-          <div class="field">
-            <label for="prompt">Prompt / Brief</label>
-            <textarea id="prompt" placeholder="Describe what you want. Example: Create a Meta ad for laser hair reduction with flat 60% off targeting Hyderabad women aged 25 to 40."></textarea>
-          </div>
-
-          <div class="field">
-            <div class="voice-actions">
-              <button class="btn btn-light" type="button" onclick="startVoiceInput()">🎤 Start Voice</button>
-              <button class="btn btn-light" type="button" onclick="stopVoiceInput()">⏹ Stop Voice</button>
-              <button class="btn btn-light" type="button" onclick="useVoicePrompt()">✨ Use Voice Prompt</button>
+            <div class="field full">
+              <label for="notes">Extra Notes</label>
+              <textarea id="notes" placeholder="Anything special Bariq should know? Tone, urgency, style, local language, premium feel, emotional angle, etc."></textarea>
             </div>
           </div>
 
           <div class="action-row">
-            <button class="btn btn-primary" id="generateBtn" type="button">Generate</button>
-            <button class="btn btn-light" id="clearBtn" type="button">Clear</button>
-            <button class="btn btn-light" id="saveBtn" type="button">Save Draft</button>
+            <button class="btn btn-primary" onclick="generateAI()">Generate Output</button>
+            <button class="btn btn-light" onclick="clearAI()">Clear</button>
           </div>
 
-          <div class="status-card">
-            <h4>Generator Status</h4>
-            <p class="status-message" id="statusBar">AI ready. Select a tool and enter your brief.</p>
+          <div class="status-bar" id="statusBar">
+            Ready. Fill the inputs and generate AI marketing outputs.
           </div>
         </div>
 
-        <div>
-          <div class="output-card">
-            <div class="preview-banner">
-              Bariq instantly shows structured output here. Even if live AI is not connected, this page still generates smart fallback copy so the experience never feels dead.
-            </div>
-
-            <h2 class="section-title">Generated Output</h2>
-            <p class="section-text">Your selected AI output will appear below in a premium structured format.</p>
-
-            <div class="output-stack">
-              <div class="output-box">
-                <h3>Primary Output</h3>
-                <pre id="primaryOutput">No output yet.</pre>
-              </div>
-
-              <div class="output-box">
-                <h3>Bonus Variations</h3>
-                <pre id="variationOutput">No output yet.</pre>
-              </div>
-
-              <div class="output-box">
-                <h3>Suggested Hashtags / CTA</h3>
-                <pre id="extraOutput">No output yet.</pre>
-              </div>
-            </div>
+        <div class="output-side">
+          <div class="tip-card">
+            <p>Live AI output preview area. Even without backend connection, this page gives clean smart draft outputs so Bariq never feels dead while testing.</p>
           </div>
 
-          <div class="next-step-card">
-            <h3>Continue with this output</h3>
-            <p>Take your generated content into campaign planning, templates, or business execution without leaving Bariq AI.</p>
-            <div class="next-links">
-              <a href="campaign.html" class="btn btn-primary">Open Campaign Studio</a>
-              <a href="templates.html" class="btn btn-light">Open Templates</a>
-              <a href="business-dashboard.html" class="btn btn-light">Business Dashboard</a>
+          <div class="output-card">
+            <h3>Meta Ad Copy</h3>
+            <div id="metaOutput">No output yet.</div>
+          </div>
+
+          <div class="output-card">
+            <h3>Google Headlines</h3>
+            <div id="googleOutput">No output yet.</div>
+          </div>
+
+          <div class="output-card">
+            <h3>Reel Script</h3>
+            <div id="reelOutput">No output yet.</div>
+          </div>
+
+          <div class="output-card">
+            <h3>WhatsApp Promo</h3>
+            <div id="whatsappOutput">No output yet.</div>
+          </div>
+
+          <div class="output-card">
+            <h3>Hook Lines</h3>
+            <div id="hooksOutput">No output yet.</div>
+          </div>
+
+          <div class="output-card">
+            <h3>Captions</h3>
+            <div id="captionsOutput">No output yet.</div>
+          </div>
+
+          <div class="continue-card">
+            <h3>Continue this idea</h3>
+            <p>Take the generated idea into Campaign Studio, Templates, or Business Dashboard without losing the premium connected flow.</p>
+            <div class="continue-actions">
+              <a href="campaign.html" class="btn btn-primary">📣 Open Campaign Studio</a>
+              <a href="templates.html" class="btn btn-light">🧩 Open Templates</a>
+              <a href="business-dashboard.html" class="btn btn-light">🏢 Business Dashboard</a>
             </div>
           </div>
         </div>
 
       </div>
+
     </div>
   </section>
 
@@ -1110,15 +986,15 @@
       <div class="footer-grid">
         <div class="footer-col">
           <h3>Bariq AI</h3>
-          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, and execution systems.</p>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation, and execution systems.</p>
         </div>
 
         <div class="footer-col">
           <h3>Platform</h3>
           <a href="index.html">Home</a>
           <a href="ai-generator.html">AI Generator</a>
+          <a href="campaign.html">Campaign Studio</a>
           <a href="business-dashboard.html">Business Dashboard</a>
-          <a href="creator-dashboard.html">Creator Dashboard</a>
         </div>
 
         <div class="footer-col">
@@ -1140,51 +1016,17 @@
   </footer>
 
   <script>
-    let recognition;
-    let isListening = false;
-    let selectedTool = "meta";
-
     function toggleMobileMenu() {
       document.getElementById("mainNav").classList.toggle("show");
     }
 
-    function setStatus(message) {
-      document.getElementById("statusBar").textContent = message;
-    }
-
-    function setTool(tool) {
-      selectedTool = tool;
-      document.querySelectorAll(".tool-card").forEach(card => card.classList.remove("active"));
-
-      const tools = document.querySelectorAll(".tool-card");
-      if (tool === "meta") tools[0].classList.add("active");
-      if (tool === "google") tools[1].classList.add("active");
-      if (tool === "reel") tools[2].classList.add("active");
-      if (tool === "whatsapp") tools[3].classList.add("active");
-
-      setStatus("Selected tool: " + tool.toUpperCase());
-    }
-
-    function getData() {
-      return {
-        brandName: document.getElementById("brandName").value.trim(),
-        category: document.getElementById("category").value.trim(),
-        offer: document.getElementById("offer").value.trim(),
-        audience: document.getElementById("audience").value.trim(),
-        tone: document.getElementById("tone").value.trim(),
-        prompt: document.getElementById("prompt").value.trim()
-      };
-    }
-
-    function validateData(data) {
-      return data.prompt || data.offer || data.brandName;
-    }
+    let recognition;
+    let recognizing = false;
 
     function startVoiceInput() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
       if (!SpeechRecognition) {
-        setStatus("Voice input is not supported in this browser. Please use Chrome.");
+        document.getElementById("statusBar").textContent = "Voice input is not supported in this browser.";
         return;
       }
 
@@ -1193,212 +1035,151 @@
       recognition.interimResults = true;
       recognition.continuous = true;
 
-      recognition.onstart = function () {
-        isListening = true;
-        setStatus("Listening... speak your brief now.");
+      recognition.onstart = function() {
+        recognizing = true;
+        document.getElementById("statusBar").textContent = "Voice listening started...";
       };
 
-      recognition.onresult = function (event) {
+      recognition.onresult = function(event) {
         let transcript = "";
         for (let i = event.resultIndex; i < event.results.length; i++) {
           transcript += event.results[i][0].transcript;
         }
-        document.getElementById("prompt").value = transcript.trim();
+        document.getElementById("voicePrompt").value = transcript.trim();
       };
 
-      recognition.onerror = function (event) {
-        setStatus("Voice input error: " + event.error);
+      recognition.onerror = function() {
+        document.getElementById("statusBar").textContent = "Voice input had an error. Please try again.";
       };
 
-      recognition.onend = function () {
-        if (isListening) {
-          setStatus("Voice input stopped.");
-        }
-        isListening = false;
+      recognition.onend = function() {
+        recognizing = false;
+        document.getElementById("statusBar").textContent = "Voice listening stopped.";
       };
 
       recognition.start();
     }
 
     function stopVoiceInput() {
-      if (recognition && isListening) {
+      if (recognition && recognizing) {
         recognition.stop();
-        isListening = false;
-        setStatus("Voice recording stopped.");
       } else {
-        setStatus("Voice input is not currently running.");
+        document.getElementById("statusBar").textContent = "Voice input is not active.";
       }
     }
 
     function useVoicePrompt() {
-      const prompt = document.getElementById("prompt").value.trim();
-      if (!prompt) {
-        setStatus("Please record or type a prompt first.");
-        return;
-      }
-      setStatus("Voice prompt ready for generation.");
-    }
-
-    function setOutputs(primary, variation, extra) {
-      document.getElementById("primaryOutput").textContent = primary;
-      document.getElementById("variationOutput").textContent = variation;
-      document.getElementById("extraOutput").textContent = extra;
-    }
-
-    function generateContent() {
-      const data = getData();
-
-      if (!validateData(data)) {
-        setStatus("Please enter at least a short prompt, offer, or brand name.");
+      const brief = document.getElementById("voicePrompt").value.trim();
+      if (!brief) {
+        document.getElementById("statusBar").textContent = "Please speak or type a voice brief first.";
         return;
       }
 
-      const brand = data.brandName || "Your Brand";
-      const category = data.category || "your service";
-      const offer = data.offer || "a special offer";
-      const audience = data.audience || "your target audience";
-      const tone = data.tone || "premium";
+      if (!document.getElementById("serviceName").value.trim()) {
+        document.getElementById("serviceName").value = "Your service";
+      }
 
-      let primary = "";
-      let variation = "";
-      let extra = "";
+      document.getElementById("notes").value = "Voice Brief:\n" + brief + "\n\n" + document.getElementById("notes").value.trim();
+      document.getElementById("statusBar").textContent = "Voice brief added into notes.";
+    }
 
-      if (selectedTool === "meta") {
-        primary = `Headline: ${brand} brings ${offer}
+    function getValue(id, fallback) {
+      const value = document.getElementById(id).value.trim();
+      return value || fallback;
+    }
+
+    function generateAI() {
+      const businessName = getValue("businessName", "Your brand");
+      const businessType = getValue("businessType", "business");
+      const serviceName = getValue("serviceName", "your service");
+      const offer = getValue("offer", "special offer");
+      const targetCity = getValue("targetCity", "your city");
+      const targetAudience = getValue("targetAudience", "your audience");
+      const notes = getValue("notes", "premium, high-conversion, clean style");
+      const voicePrompt = getValue("voicePrompt", "");
+
+      const mainContext = voicePrompt || `${businessName} ${businessType} ${serviceName} ${offer} ${targetCity} ${targetAudience}`;
+
+      const metaText =
+`Headline: ${serviceName} with ${offer}
 
 Primary Text:
-Looking for ${category}? ${brand} now offers ${offer} for ${audience}. Designed in a ${tone.toLowerCase()} tone to drive stronger engagement and action.
+Looking for ${serviceName} in ${targetCity}? ${businessName} now brings ${offer} for ${targetAudience}. Get premium results with a smart, trusted, and confidence-led approach.
 
 CTA:
 Book Now | Message Now | Limited Slots Available`;
 
-        variation = `Variation 1:
-Your search for premium ${category} ends here. ${brand} brings ${offer} for ${audience}.
+      const googleText =
+`1. ${serviceName} in ${targetCity}
+2. ${offer} at ${businessName}
+3. Best ${businessType} Offer
+4. Book ${serviceName} Today
+5. Trusted Care for ${targetAudience}`;
 
-Variation 2:
-Step into confidence with ${brand}. Discover ${category} with ${offer} today.
-
-Variation 3:
-Premium care. Visible results. ${offer} now live with ${brand}.`;
-
-        extra = `Suggested CTA:
-Book Today
-Send Message
-Claim Offer
-
-Suggested Hashtags:
-#${brand.replace(/\s+/g, "")} #${category.replace(/\s+/g, "")} #PremiumOffer #BeautyPromo #BookNow`;
-      }
-
-      if (selectedTool === "google") {
-        primary = `Headline 1: ${category} by ${brand}
-Headline 2: ${offer}
-Headline 3: Trusted Choice For ${audience}
-
-Description:
-Discover ${category} with ${brand}. Enjoy ${offer} in a ${tone.toLowerCase()} style. Enquire now for premium service and better results.`;
-
-        variation = `More Headline Ideas:
-Premium ${category}
-Best ${category} Offer
-Book With ${brand}
-Trusted Local Service
-
-More Description Ideas:
-Explore premium results with ${brand}.
-Fast, polished, and easy enquiry flow.
-Designed for ${audience}.`;
-
-        extra = `Recommended Usage:
-Use for search campaigns
-Add local city name
-Test 3 headline combinations`;
-      }
-
-      if (selectedTool === "reel") {
-        primary = `Hook:
-Still searching for the right ${category}?
+      const reelText =
+`Hook:
+Still searching for ${serviceName} in ${targetCity}?
 
 Scene 1:
-Show the common pain point for ${audience}.
+Show the common pain point faced by ${targetAudience}.
 
 Scene 2:
-Introduce ${brand} and highlight ${offer}.
+Introduce ${businessName} and highlight ${offer}.
 
 Scene 3:
-Show premium result, treatment process, or transformation.
+Show service, treatment, or transformation result.
 
 Scene 4:
-Add trust, confidence, and urgency.
+Close with confidence, premium feel, urgency, and trust.
 
 Ending CTA:
-Book now with ${brand}. Limited slots available.`;
+Book now. DM today. Limited slots.`;
 
-        variation = `Alternative Hooks:
-1. Your upgrade starts here.
-2. Why wait to feel confident?
-3. Premium results begin with the right choice.
+      const whatsappText =
+`Hi! ${businessName} is now offering ${offer} on ${serviceName} for ${targetAudience} in ${targetCity}. Reply now to know details or book your slot today.`;
 
-Ending Styles:
-Luxury
-Emotional
-Offer-led`;
+      const hooksText =
+`• ${offer} on ${serviceName} is now live
+• ${targetAudience} in ${targetCity}, this one is for you
+• Premium results start with one smart step
+• Stop waiting, start your transformation now
+• ${serviceName} made easier with ${businessName}`;
 
-        extra = `Suggested Reel Caption:
-${brand} now brings ${offer} for ${audience}. DM now to enquire.
+      const captionsText =
+`1. Confidence begins with the right care. ${offer} now live on ${serviceName}.
+2. ${targetCity}, your premium ${serviceName} solution is here.
+3. Smart offers. Better results. Trusted care by ${businessName}.
+4. ${targetAudience}, it is time to choose yourself.
+5. ${serviceName} + ${offer} + premium support = Bariq-ready campaign.`;
 
-Suggested Overlay Text:
-Premium Care
-Visible Results
-Book Today`;
-      }
+      document.getElementById("metaOutput").textContent = metaText;
+      document.getElementById("googleOutput").textContent = googleText;
+      document.getElementById("reelOutput").textContent = reelText;
+      document.getElementById("whatsappOutput").textContent = whatsappText;
+      document.getElementById("hooksOutput").textContent = hooksText;
+      document.getElementById("captionsOutput").textContent = captionsText;
 
-      if (selectedTool === "whatsapp") {
-        primary = `Hello! ${brand} is now offering ${offer} on ${category}. This is specially designed for ${audience}. Reply now to know more or book your slot.`;
-
-        variation = `Short Version:
-${brand}: ${offer} on ${category}. Reply now for details.
-
-Warm Version:
-Hi! We would love to help you with ${category}. ${offer} is now live. Message us to book.`;
-
-        extra = `Suggested Quick Replies:
-Send Price
-Book Slot
-Need Details
-Talk To Team`;
-      }
-
-      setOutputs(primary, variation, extra);
-      setStatus("Content generated successfully with Bariq smart fallback AI.");
+      document.getElementById("statusBar").textContent =
+        `AI-ready draft generated successfully for: ${mainContext}. Notes tone: ${notes}.`;
     }
 
-    function clearForm() {
-      document.getElementById("brandName").value = "";
-      document.getElementById("category").value = "";
+    function clearAI() {
+      document.getElementById("businessName").value = "";
+      document.getElementById("businessType").value = "";
+      document.getElementById("serviceName").value = "";
       document.getElementById("offer").value = "";
-      document.getElementById("audience").value = "";
-      document.getElementById("tone").value = "";
-      document.getElementById("prompt").value = "";
-      setOutputs("No output yet.", "No output yet.", "No output yet.");
-      setStatus("Form cleared.");
+      document.getElementById("targetCity").value = "";
+      document.getElementById("targetAudience").value = "";
+      document.getElementById("voicePrompt").value = "";
+      document.getElementById("notes").value = "";
+      document.getElementById("metaOutput").textContent = "No output yet.";
+      document.getElementById("googleOutput").textContent = "No output yet.";
+      document.getElementById("reelOutput").textContent = "No output yet.";
+      document.getElementById("whatsappOutput").textContent = "No output yet.";
+      document.getElementById("hooksOutput").textContent = "No output yet.";
+      document.getElementById("captionsOutput").textContent = "No output yet.";
+      document.getElementById("statusBar").textContent = "Cleared. Fill the inputs and generate AI marketing outputs.";
     }
-
-    function saveDraft() {
-      const data = getData();
-      const drafts = JSON.parse(localStorage.getItem("bariq_ai_generator_drafts") || "[]");
-      drafts.push({
-        tool: selectedTool,
-        ...data,
-        savedAt: new Date().toISOString()
-      });
-      localStorage.setItem("bariq_ai_generator_drafts", JSON.stringify(drafts));
-      setStatus("Draft saved locally in this browser.");
-    }
-
-    document.getElementById("generateBtn").addEventListener("click", generateContent);
-    document.getElementById("clearBtn").addEventListener("click", clearForm);
-    document.getElementById("saveBtn").addEventListener("click", saveDraft);
   </script>
 </body>
 </html>
