@@ -4,11 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bariq AI</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
   <style>
     * { box-sizing: border-box; }
     html, body {
@@ -16,672 +14,719 @@
       padding: 0;
       overflow-x: hidden;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(to bottom, #ffffff, #fffdfa);
       color: #2d2947;
+      background:
+        radial-gradient(circle at top left, rgba(115,87,199,.04), transparent 24%),
+        radial-gradient(circle at top right, rgba(197,155,67,.05), transparent 24%),
+        linear-gradient(to bottom, #ffffff, #fffdfa);
     }
 
-    :root {
-      --line: #eee6df;
-      --text: #2d2947;
-      --muted: #6f6987;
-      --gold: #c59b43;
-      --purple: #7357c7;
-      --purple-soft: #f6f1ff;
-      --peach: #fff2ea;
-      --mint: #edf8ef;
-      --pink: #fff0f6;
-      --blue: #eef4ff;
-      --yellow: #fff5d9;
-      --shadow: 0 14px 34px rgba(80, 60, 40, 0.08);
-      --radius: 26px;
+    :root{
+      --text:#2d2947;
+      --muted:#6f6987;
+      --gold:#c59b43;
+      --purple:#7357c7;
+      --line:#eee6df;
+      --white:#ffffff;
+      --peach:#fff1e8;
+      --pink:#ffe9f2;
+      --lav:#f3edff;
+      --mint:#edf8ef;
+      --blue:#eef4ff;
+      --yellow:#fff4d9;
+      --shadow:0 16px 36px rgba(90,70,50,.08);
+      --radius:28px;
     }
 
     a { text-decoration: none; color: inherit; }
+    img { display:block; width:100%; }
 
-    .container {
-      width: min(1380px, calc(100% - 28px));
-      margin: 0 auto;
+    .container{
+      width:min(1380px, calc(100% - 28px));
+      margin:0 auto;
     }
 
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(255,255,255,0.93);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line);
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
     }
 
-    .nav-wrap {
-      min-height: 74px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      position: relative;
+    .nav-wrap{
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      position:relative;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
     }
 
-    .brand-dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--purple));
-      flex: 0 0 auto;
+    .brand-dot{
+      width:11px;
+      height:11px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      flex:0 0 auto;
     }
 
-    .brand-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 46px;
-      line-height: 1;
-      font-weight: 700;
-      background: linear-gradient(90deg, var(--gold) 0%, #8f6d24 30%, var(--purple) 75%, #5648a0 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
+    .brand-text{
+      font-family:'Cormorant Garamond', serif;
+      font-size:46px;
+      line-height:1;
+      font-weight:700;
+      background:linear-gradient(90deg,var(--gold) 0%, #8f6d24 28%, var(--purple) 75%, #5648a0 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
     }
 
-    .menu-toggle {
-      display: none;
-      border: none;
-      background: var(--purple-soft);
-      color: var(--purple);
-      border-radius: 14px;
-      padding: 10px 14px;
-      font-size: 28px;
-      cursor: pointer;
+    .menu-toggle{
+      display:none;
+      border:none;
+      background:#f6f1ff;
+      color:var(--purple);
+      border-radius:14px;
+      padding:10px 14px;
+      font-size:28px;
+      cursor:pointer;
     }
 
-    .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow-x: auto;
-      white-space: nowrap;
-      scrollbar-width: none;
+    .main-nav{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      overflow-x:auto;
+      white-space:nowrap;
+      scrollbar-width:none;
     }
+    .main-nav::-webkit-scrollbar{display:none}
 
-    .main-nav::-webkit-scrollbar { display: none; }
-
-    .main-nav a {
-      padding: 11px 14px;
-      border-radius: 14px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #645d80;
-      flex: 0 0 auto;
+    .main-nav a{
+      padding:11px 14px;
+      border-radius:14px;
+      font-size:14px;
+      font-weight:700;
+      color:#645d80;
+      flex:0 0 auto;
     }
-
     .main-nav a.active,
-    .main-nav a:hover {
-      background: #faf6ff;
-      color: var(--purple);
+    .main-nav a:hover{
+      background:#faf6ff;
+      color:var(--purple);
     }
 
-    .page {
-      padding: 12px 0 34px;
+    .page{ padding:14px 0 36px; }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
     }
 
-    .card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .hero {
-      margin-top: 10px;
-      padding: 26px;
+    .hero{
+      padding:24px;
       background:
-        radial-gradient(circle at 20% 20%, rgba(115,87,199,.05), transparent 22%),
-        radial-gradient(circle at 70% 10%, rgba(197,155,67,.06), transparent 22%),
-        linear-gradient(180deg, #ffffff 0%, #fffdfa 100%);
+        radial-gradient(circle at 20% 30%, rgba(115,87,199,.06), transparent 20%),
+        radial-gradient(circle at 78% 12%, rgba(197,155,67,.06), transparent 18%),
+        linear-gradient(180deg,#ffffff 0%, #fffdfa 100%);
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      align-items: center;
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 1.05fr;
+      gap:22px;
+      align-items:center;
     }
 
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #fff;
-      border: 1px solid var(--line);
-      color: #645d82;
-      font-size: 13px;
-      font-weight: 800;
-      box-shadow: 0 8px 18px rgba(100,70,50,.04);
-      margin-bottom: 14px;
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      font-size:13px;
+      font-weight:800;
+      color:#645d82;
+      box-shadow:0 8px 18px rgba(100,70,50,.04);
+      margin-bottom:14px;
     }
 
-    .hero-title {
-      margin: 0;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 68px;
-      line-height: 0.98;
-      letter-spacing: -0.8px;
-      font-weight: 700;
-      color: #26213d;
-      max-width: 620px;
+    .hero-title{
+      margin:0;
+      font-family:'Cormorant Garamond', serif;
+      font-size:72px;
+      line-height:.96;
+      letter-spacing:-0.8px;
+      font-weight:700;
+      color:#26213d;
+      max-width:620px;
     }
 
-    .hero-title .gold {
-      background: linear-gradient(90deg, var(--gold), #9a7428);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
+    .hero-title .gold{
+      background:linear-gradient(90deg,var(--gold),#997326);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
     }
 
-    .hero-title .purple {
-      background: linear-gradient(90deg, var(--purple), #584aaa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
+    .hero-title .purple{
+      background:linear-gradient(90deg,var(--purple),#584aaa);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
     }
 
-    .hero-sub {
-      margin: 16px 0 0;
-      max-width: 600px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.8;
+    .hero-sub{
+      margin:16px 0 0;
+      max-width:620px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.85;
     }
 
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 20px;
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:20px;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: none;
-      border-radius: 16px;
-      padding: 13px 18px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: .2s ease;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      border-radius:16px;
+      padding:13px 18px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.2s ease;
     }
 
-    .btn:hover { transform: translateY(-2px); }
+    .btn:hover{ transform:translateY(-2px); }
 
-    .btn-primary {
-      background: linear-gradient(90deg, var(--gold), var(--purple));
-      color: #fff;
+    .btn-primary{
+      background:linear-gradient(90deg,var(--gold),var(--purple));
+      color:#fff;
     }
 
-    .btn-light {
-      background: #fff;
-      border: 1px solid var(--line);
-      color: #5f597f;
+    .btn-light{
+      background:#fff;
+      border:1px solid var(--line);
+      color:#5f597f;
     }
 
-    .hero-right {
-      background: linear-gradient(135deg, #fff3ec 0%, #fff8f3 50%, #f7f3ff 100%);
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      padding: 18px;
-      min-height: 520px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .hero-visual{
+      min-height:540px;
+      background:linear-gradient(135deg,#fff3ec 0%, #fff8f2 48%, #f6f2ff 100%);
+      border:1px solid var(--line);
+      border-radius:30px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
     }
 
-    .hero-right-top h3 {
-      margin: 0 0 10px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 40px;
-      line-height: 1.02;
-      font-weight: 700;
-      color: #2d2947;
+    .hero-visual h3{
+      margin:0 0 8px;
+      font-family:'Cormorant Garamond', serif;
+      font-size:40px;
+      line-height:1.03;
+      font-weight:700;
+      color:#2d2947;
+      max-width:330px;
     }
 
-    .hero-right-top p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.75;
-      max-width: 380px;
+    .hero-visual p{
+      margin:0 0 18px;
+      max-width:360px;
+      font-size:15px;
+      line-height:1.75;
+      color:var(--muted);
     }
 
-    .visual-grid {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      align-items: stretch;
+    .collage{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:14px;
+      align-items:stretch;
     }
 
-    .visual-card {
-      position: relative;
-      border-radius: 24px;
-      overflow: hidden;
-      min-height: 165px;
-      box-shadow: 0 12px 26px rgba(0,0,0,.08);
-      background: #fff;
-      border: 1px solid rgba(255,255,255,.9);
+    .collage-left,
+    .collage-right{
+      display:grid;
+      gap:14px;
     }
 
-    .visual-card.large {
-      grid-row: span 2;
-      min-height: 350px;
+    .collage-left{
+      grid-template-rows:1fr auto;
     }
 
-    .visual-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .collage-right{
+      grid-template-rows:1fr 1fr;
     }
 
-    .visual-caption {
-      position: absolute;
-      left: 12px;
-      bottom: 12px;
-      background: rgba(255,255,255,0.88);
-      color: #4f4873;
-      padding: 10px 12px;
-      border-radius: 14px;
-      font-size: 13px;
-      font-weight: 800;
-      backdrop-filter: blur(8px);
+    .visual-panel{
+      border-radius:24px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 12px 26px rgba(0,0,0,.08);
+      border:1px solid rgba(255,255,255,.9);
+      position:relative;
     }
 
-    .platform-strip {
-      margin-top: 16px;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 10px;
+    .visual-panel.tall{ min-height:260px; }
+    .visual-panel.short{ min-height:156px; }
+
+    .visual-panel img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
 
-    .platform-box {
-      background: rgba(255,255,255,.9);
-      border: 1px solid rgba(255,255,255,.95);
-      border-radius: 18px;
-      min-height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 800;
-      color: #544d77;
-      box-shadow: 0 10px 18px rgba(0,0,0,.06);
+    .visual-badge{
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      background:rgba(255,255,255,.88);
+      color:#4f4873;
+      padding:10px 12px;
+      border-radius:14px;
+      font-size:13px;
+      font-weight:800;
+      backdrop-filter:blur(8px);
     }
 
-    .prompt-box {
-      margin-top: 16px;
-      background: #fff;
-      border-radius: 20px;
-      padding: 8px;
-      display: flex;
-      gap: 8px;
-      box-shadow: 0 16px 30px rgba(0,0,0,.08);
-      border: 1px solid var(--line);
+    .mini-pills{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
     }
 
-    .prompt-box input {
-      flex: 1;
-      border: none;
-      outline: none;
-      padding: 13px 14px;
-      font: inherit;
-      background: transparent;
-      color: var(--text);
+    .mini-pill{
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(255,255,255,.95);
+      border-radius:18px;
+      min-height:58px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:13px;
+      font-weight:800;
+      color:#544d77;
+      box-shadow:0 10px 18px rgba(0,0,0,.06);
     }
 
-    .prompt-box button {
-      border: none;
-      border-radius: 14px;
-      padding: 12px 18px;
-      background: linear-gradient(90deg, var(--purple), var(--gold));
-      color: #fff;
-      font-weight: 800;
-      cursor: pointer;
+    .prompt-box{
+      margin-top:16px;
+      background:#fff;
+      border-radius:20px;
+      padding:8px;
+      display:flex;
+      gap:8px;
+      box-shadow:0 16px 30px rgba(0,0,0,.08);
+      border:1px solid var(--line);
     }
 
-    .pill-strip {
-      margin-top: 18px;
-      overflow: hidden;
-      border-radius: 22px;
-      background: #fff;
-      border: 1px solid var(--line);
-      padding: 12px 0;
-      box-shadow: 0 10px 18px rgba(100,70,50,.04);
+    .prompt-box input{
+      flex:1;
+      border:none;
+      outline:none;
+      padding:13px 14px;
+      font:inherit;
+      background:transparent;
+      color:var(--text);
     }
 
-    .pill-track {
-      display: flex;
-      gap: 14px;
-      width: max-content;
-      animation: marquee 24s linear infinite;
-      align-items: center;
+    .prompt-box button{
+      border:none;
+      border-radius:14px;
+      padding:12px 18px;
+      background:linear-gradient(90deg,var(--purple),var(--gold));
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
     }
 
-    .soft-pill {
-      flex: 0 0 auto;
-      padding: 12px 16px;
-      border-radius: 18px;
-      font-size: 14px;
-      font-weight: 800;
-      color: #433d5f;
-      white-space: nowrap;
-      box-shadow: 0 8px 18px rgba(80,60,40,.05);
+    .pill-strip{
+      margin-top:18px;
+      overflow:hidden;
+      border-radius:22px;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:12px 0;
+      box-shadow:0 10px 18px rgba(100,70,50,.04);
     }
 
-    .p1 { background: linear-gradient(135deg, #ffe1ec, #ffd4e3); }
-    .p2 { background: linear-gradient(135deg, #e8f8ef, #daf4e5); }
-    .p3 { background: linear-gradient(135deg, #eef4ff, #dfeaff); }
-    .p4 { background: linear-gradient(135deg, #fff5da, #ffefc5); }
-    .p5 { background: linear-gradient(135deg, #f4eeff, #ece4ff); }
-
-    .section {
-      margin-top: 20px;
+    .pill-track{
+      display:flex;
+      gap:14px;
+      width:max-content;
+      animation:marquee 24s linear infinite;
+      align-items:center;
     }
 
-    .section-head {
-      text-align: center;
-      margin-bottom: 18px;
+    .soft-pill{
+      flex:0 0 auto;
+      padding:12px 16px;
+      border-radius:18px;
+      font-size:14px;
+      font-weight:800;
+      color:#433d5f;
+      white-space:nowrap;
+      box-shadow:0 8px 18px rgba(80,60,40,.05);
+    }
+    .p1{background:linear-gradient(135deg,#ffe1ec,#ffd4e3)}
+    .p2{background:linear-gradient(135deg,#e8f8ef,#daf4e5)}
+    .p3{background:linear-gradient(135deg,#eef4ff,#dfeaff)}
+    .p4{background:linear-gradient(135deg,#fff5da,#ffefc5)}
+    .p5{background:linear-gradient(135deg,#f4eeff,#ece4ff)}
+
+    .section{
+      margin-top:22px;
     }
 
-    .section-head h2 {
-      margin: 0 0 10px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 54px;
-      line-height: 1;
-      font-weight: 700;
-      color: #2d2947;
+    .section-head{
+      margin-bottom:16px;
     }
 
-    .section-head p {
-      margin: 0 auto;
-      max-width: 760px;
-      font-size: 16px;
-      line-height: 1.8;
-      color: var(--muted);
+    .section-head h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.2;
+      font-weight:800;
+      color:#26213d;
     }
 
-    .feature-grid {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 16px;
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.8;
+      max-width:860px;
     }
 
-    .feature-main {
-      min-height: 430px;
-      border-radius: 30px;
-      background: linear-gradient(135deg, #ff9e97 0%, #ff8f86 35%, #ffb58c 100%);
-      position: relative;
-      overflow: hidden;
-      padding: 28px;
-      color: #fff;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
+    .workspace-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
     }
 
-    .feature-main h3 {
-      margin: 0 0 16px;
-      font-size: 38px;
-      line-height: 1.1;
-      max-width: 620px;
-      font-weight: 700;
+    .workspace-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:26px;
+      padding:20px;
+      box-shadow:var(--shadow);
     }
 
-    .feature-main .feature-btn {
-      display: inline-flex;
-      padding: 12px 16px;
-      border-radius: 14px;
-      background: #fff;
-      color: #5b567a;
-      font-size: 13px;
-      font-weight: 800;
-      box-shadow: 0 10px 20px rgba(0,0,0,.08);
+    .workspace-card:nth-child(1){ background:linear-gradient(180deg,#ffffff 0%, #f9fbff 100%); }
+    .workspace-card:nth-child(2){ background:linear-gradient(180deg,#ffffff 0%, #fffaf5 100%); }
+    .workspace-card:nth-child(3){ background:linear-gradient(180deg,#ffffff 0%, #f8fcf8 100%); }
+
+    .workspace-card h3{
+      margin:0 0 10px;
+      font-size:20px;
+      line-height:1.3;
     }
 
-    .float-art {
-      position: absolute;
-      border-radius: 18px;
-      overflow: hidden;
-      background: #fff;
-      border: 1px solid rgba(255,255,255,.85);
-      box-shadow: 0 14px 28px rgba(0,0,0,.14);
+    .workspace-card p{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.75;
+      min-height:80px;
     }
 
-    .float-art img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .workspace-thumb{
+      border-radius:22px;
+      overflow:hidden;
+      height:220px;
     }
 
-    .a1 { width: 116px; height: 90px; left: 24px; bottom: 108px; }
-    .a2 { width: 118px; height: 90px; left: 160px; top: 140px; }
-    .a3 { width: 132px; height: 100px; right: 56px; top: 92px; }
-    .a4 { width: 116px; height: 88px; right: 24px; bottom: 118px; }
-    .a5 { width: 84px; height: 70px; right: 28px; top: 24px; }
-
-    .feature-main .prompt-demo {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 28px;
-      width: min(78%, 520px);
-      background: #fff;
-      border-radius: 18px;
-      padding: 8px;
-      display: flex;
-      gap: 8px;
-      box-shadow: 0 14px 30px rgba(0,0,0,.14);
+    .workspace-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
 
-    .feature-main .prompt-demo input {
-      flex: 1;
-      border: none;
-      background: transparent;
-      font: inherit;
-      padding: 12px;
-      color: var(--text);
-      outline: none;
+    .scroll-gallery{
+      overflow:hidden;
+      border-radius:28px;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:14px 0;
+      box-shadow:var(--shadow);
     }
 
-    .feature-main .prompt-demo button {
-      border: none;
-      border-radius: 14px;
-      padding: 12px 18px;
-      background: linear-gradient(90deg, var(--purple), var(--gold));
-      color: #fff;
-      font-weight: 800;
-      cursor: pointer;
+    .gallery-track{
+      display:flex;
+      gap:14px;
+      width:max-content;
+      animation:marquee 30s linear infinite;
     }
 
-    .feature-side {
-      display: grid;
-      gap: 16px;
+    .gallery-card{
+      flex:0 0 auto;
+      width:330px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:0 10px 20px rgba(100,70,50,.04);
     }
 
-    .feature-small {
-      min-height: 206px;
-      border-radius: 30px;
-      padding: 24px;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
+    .gallery-img{
+      height:180px;
+      overflow:hidden;
     }
 
-    .feature-small h3 {
-      margin: 0 0 14px;
-      font-size: 18px;
-      line-height: 1.35;
-      color: #2d2947;
-      max-width: 220px;
+    .gallery-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
 
-    .feature-small .small-btn {
-      display: inline-flex;
-      padding: 11px 14px;
-      border-radius: 14px;
-      background: #fff;
-      color: #5d567b;
-      font-size: 13px;
-      font-weight: 800;
-      box-shadow: 0 10px 18px rgba(0,0,0,.08);
+    .gallery-body{
+      padding:16px;
     }
 
-    .small-yellow { background: linear-gradient(135deg, #fff0a9, #ffe994); }
-    .small-pink { background: linear-gradient(135deg, #ffdcbf, #ffc98d); }
-
-    .feature-side .photo {
-      position: absolute;
-      right: 16px;
-      bottom: 0;
-      width: 150px;
-      height: 150px;
-      border-radius: 22px 22px 0 0;
-      overflow: hidden;
-      box-shadow: 0 12px 24px rgba(0,0,0,.1);
+    .gallery-body strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:18px;
+      color:#2f2b49;
     }
 
-    .feature-side .photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .gallery-body span{
+      display:block;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--muted);
     }
 
-    .site-footer {
-      margin-top: 26px;
-      background: #181427;
-      color: #fff;
-      padding: 40px 0;
+    .dual-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
     }
 
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr 1fr;
-      gap: 24px;
+    .feature-box{
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      background:#fff;
+      position:relative;
+      overflow:hidden;
     }
 
-    .footer-col h3 {
-      margin: 0 0 14px;
-      font-size: 18px;
-      color: #fff;
+    .feature-box.peach{ background:linear-gradient(180deg,#fffdfb 0%, #fff7f2 100%); }
+    .feature-box.yellow{ background:linear-gradient(180deg,#fffef8 0%, #fff8e9 100%); }
+
+    .feature-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .feature-top h3{
+      margin:0;
+      font-size:22px;
+      line-height:1.3;
+    }
+
+    .feature-top .label{
+      flex:0 0 auto;
+      padding:10px 14px;
+      border-radius:999px;
+      background:#f6f1ff;
+      color:#6a5a9b;
+      font-size:13px;
+      font-weight:800;
+      border:1px solid var(--line);
+    }
+
+    .feature-box p{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.75;
+      max-width:520px;
+    }
+
+    .feature-image{
+      border-radius:22px;
+      overflow:hidden;
+      height:200px;
+    }
+
+    .feature-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .quick-access{
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      background:#fff;
+      padding:22px;
+    }
+
+    .quick-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .quick-link{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px 14px;
+      text-align:center;
+      font-weight:800;
+      color:#524a81;
+      box-shadow:0 10px 20px rgba(90,70,170,.05);
+      transition:.2s ease;
+    }
+
+    .quick-link:hover{ transform:translateY(-2px); }
+
+    .site-footer{
+      margin-top:28px;
+      background:#181427;
+      color:#fff;
+      padding:40px 0;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr 1fr;
+      gap:24px;
+    }
+
+    .footer-col h3{
+      margin:0 0 14px;
+      font-size:18px;
+      color:#fff;
     }
 
     .footer-col p,
-    .footer-col a {
-      display: block;
-      margin: 0 0 10px;
-      color: #d9d4ea;
-      font-size: 15px;
-      line-height: 1.7;
+    .footer-col a{
+      display:block;
+      margin:0 0 10px;
+      color:#d9d4ea;
+      font-size:15px;
+      line-height:1.7;
     }
 
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    @keyframes marquee{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-50%)}
     }
 
-    @media (max-width: 1180px) {
+    @media (max-width:1180px){
       .hero-grid,
-      .feature-grid,
-      .footer-grid {
-        grid-template-columns: 1fr;
+      .workspace-grid,
+      .dual-grid,
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+      .quick-grid{
+        grid-template-columns:repeat(3,1fr);
       }
     }
 
-    @media (max-width: 768px) {
-      .container { width: min(100% - 18px, 1200px); }
-      .menu-toggle { display: block; }
+    @media (max-width:768px){
+      .container{ width:min(100% - 18px, 1200px); }
+      .menu-toggle{ display:block; }
 
-      .main-nav {
-        display: none;
-        position: absolute;
-        top: 82px;
-        left: 0;
-        right: 0;
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        box-shadow: 0 18px 40px rgba(0,0,0,.08);
-        padding: 14px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
+      .main-nav{
+        display:none;
+        position:absolute;
+        top:82px;
+        left:0;
+        right:0;
+        background:#fff;
+        border:1px solid var(--line);
+        border-radius:18px;
+        box-shadow:0 18px 40px rgba(0,0,0,.08);
+        padding:14px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
       }
 
-      .main-nav.show { display: flex; }
-      .main-nav a {
-        width: 100%;
-        background: #fff8f2;
+      .main-nav.show{ display:flex; }
+      .main-nav a{
+        width:100%;
+        background:#fff8f2;
       }
 
-      .brand-text { font-size: 38px; }
+      .brand-text{ font-size:38px; }
 
-      .hero-title {
-        font-size: 48px;
-        line-height: 1;
+      .hero-title{
+        font-size:50px;
+        line-height:1;
       }
 
-      .hero-actions {
-        flex-direction: column;
+      .hero-actions{
+        flex-direction:column;
       }
 
-      .btn {
-        width: 100%;
+      .btn{
+        width:100%;
       }
 
-      .prompt-box,
-      .feature-main .prompt-demo {
-        flex-direction: column;
+      .collage{
+        grid-template-columns:1fr;
       }
 
-      .prompt-box button,
-      .feature-main .prompt-demo button {
-        width: 100%;
+      .mini-pills{
+        grid-template-columns:repeat(2,1fr);
       }
 
-      .platform-strip {
-        grid-template-columns: repeat(3, 1fr);
+      .prompt-box{
+        flex-direction:column;
       }
 
-      .visual-grid {
-        grid-template-columns: 1fr;
+      .prompt-box button{
+        width:100%;
       }
 
-      .visual-card.large {
-        grid-row: span 1;
-        min-height: 220px;
+      .workspace-grid,
+      .dual-grid,
+      .quick-grid,
+      .footer-grid{
+        grid-template-columns:1fr;
       }
 
-      .feature-main .prompt-demo {
-        width: calc(100% - 28px);
-        left: 14px;
-        right: 14px;
-        transform: none;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
+      .gallery-card{
+        width:270px;
       }
     }
   </style>
@@ -715,17 +760,18 @@
 
       <div class="card hero">
         <div class="hero-grid">
-          <div class="hero-left">
+          <div>
             <div class="tag">✨ Bariq AI Platform</div>
 
             <h1 class="hero-title">
-              Where <span class="gold">ideas</span> meet
-              <span class="purple">campaigns</span>,
-              visuals and launch
+              Create <span class="purple">campaigns</span>, reels
+              and marketing
+              workflows in one <span class="gold">live</span>
+              visual platform
             </h1>
 
             <p class="hero-sub">
-              Bariq AI helps businesses create marketing ideas, campaigns, reels, templates and execution-ready launch flows through a softer, visual-first premium experience.
+              Bariq AI helps businesses generate ideas, ads, campaigns, videos and launch-ready content with a softer, more visual product experience.
             </p>
 
             <div class="hero-actions">
@@ -735,41 +781,46 @@
             </div>
           </div>
 
-          <div class="hero-right">
-            <div class="hero-right-top">
-              <h3>Get hands on your marketing in one place</h3>
-              <p>Simplified campaign planning, content flow, templates and launch visuals — all from one softer premium platform.</p>
+          <div class="hero-visual">
+            <h3>See the platform feel alive</h3>
+            <p>Bariq is designed to feel visual, welcoming and easy to understand without too much text.</p>
+
+            <div class="collage">
+              <div class="collage-left">
+                <div class="visual-panel tall">
+                  <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="">
+                  <div class="visual-badge">Create premium campaigns</div>
+                </div>
+                <div class="visual-panel short">
+                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="">
+                  <div class="visual-badge">Content direction</div>
+                </div>
+              </div>
+
+              <div class="collage-right">
+                <div class="visual-panel short" style="background:linear-gradient(135deg,#ffe59f,#ffdf83); display:flex; align-items:center; justify-content:center; padding:18px;">
+                  <div style="font-size:22px; font-weight:800; line-height:1.25; color:#3a3457;">Build ideas faster</div>
+                </div>
+
+                <div class="visual-panel short">
+                  <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="">
+                  <div class="visual-badge">Launch visuals</div>
+                </div>
+              </div>
             </div>
 
-            <div class="visual-grid">
-              <div class="visual-card large">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="">
-                <div class="visual-caption">Campaign planning</div>
-              </div>
-
-              <div class="visual-card">
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="">
-                <div class="visual-caption">Content direction</div>
-              </div>
-
-              <div class="visual-card">
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="">
-                <div class="visual-caption">Launch ready</div>
-              </div>
-            </div>
-
-            <div class="platform-strip">
-              <div class="platform-box">IG</div>
-              <div class="platform-box">WA</div>
-              <div class="platform-box">PN</div>
-              <div class="platform-box">X</div>
-              <div class="platform-box">FB</div>
-              <div class="platform-box">IN</div>
+            <div class="mini-pills">
+              <div class="mini-pill">Instagram</div>
+              <div class="mini-pill">WhatsApp</div>
+              <div class="mini-pill">Pinterest</div>
+              <div class="mini-pill">Facebook</div>
+              <div class="mini-pill">LinkedIn</div>
+              <div class="mini-pill">Reels</div>
             </div>
 
             <div class="prompt-box">
-              <input type="text" value="Create a premium campaign for women-focused laser hair reduction in Hyderabad" readonly>
-              <button type="button">Create</button>
+              <input type="text" value="Create a premium ad campaign for women-focused laser hair reduction in Hyderabad" readonly>
+              <button type="button">Generate</button>
             </div>
           </div>
         </div>
@@ -793,53 +844,151 @@
 
       <div class="section">
         <div class="section-head">
-          <h2>Explore Bariq AI</h2>
-          <p>One connected platform to turn prompts into campaigns, visuals, scripts, templates, reels and ready-to-launch business content.</p>
+          <h2>Main workspaces</h2>
+          <p>Each page in Bariq has its own visual mood so the platform feels easier, softer and more premium.</p>
         </div>
 
-        <div class="feature-grid">
-          <div class="feature-main">
-            <h3>Turn your words into campaigns, creatives and content that feels ready to launch</h3>
-            <div class="feature-btn">Generate media</div>
-
-            <div class="float-art a1">
-              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="">
-            </div>
-            <div class="float-art a2">
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="">
-            </div>
-            <div class="float-art a3">
-              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="">
-            </div>
-            <div class="float-art a4">
-              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="">
-            </div>
-            <div class="float-art a5">
-              <img src="https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&w=900&q=80" alt="">
-            </div>
-
-            <div class="prompt-demo">
-              <input type="text" value="Luxury campaign visuals, soft feminine tone, Hyderabad audience" readonly>
-              <button type="button">Create</button>
+        <div class="workspace-grid">
+          <div class="workspace-card">
+            <h3>AI Generator</h3>
+            <p>Create Meta ads, Google headlines, WhatsApp copy, captions and hooks in one clean workspace.</p>
+            <div class="workspace-thumb">
+              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="">
             </div>
           </div>
 
-          <div class="feature-side">
-            <div class="feature-small small-yellow">
-              <h3>Build hooks, CTA lines and campaign angles instantly</h3>
-              <div class="small-btn">Open Campaign</div>
-              <div class="photo">
-                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="">
+          <div class="workspace-card">
+            <h3>Campaign Studio</h3>
+            <p>Build campaign brief, select angle, create outputs and prepare launch flow with soft visual guidance.</p>
+            <div class="workspace-thumb">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="">
+            </div>
+          </div>
+
+          <div class="workspace-card">
+            <h3>Video Creator</h3>
+            <p>Turn one prompt into promo videos, reel scenes, story ideas and export-ready content directions.</p>
+            <div class="workspace-thumb">
+              <img src="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=1200&q=80" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="scroll-gallery">
+          <div class="gallery-track">
+            <div class="gallery-card">
+              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+              <div class="gallery-body">
+                <strong>1. Add your idea</strong>
+                <span>Start with a simple prompt about offer, audience, city and tone.</span>
               </div>
             </div>
 
-            <div class="feature-small small-pink">
-              <h3>Create scroll-stopping social media and video content</h3>
-              <div class="small-btn">Open Video Creator</div>
-              <div class="photo">
-                <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="">
+            <div class="gallery-card">
+              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+              <div class="gallery-body">
+                <strong>2. Build the campaign</strong>
+                <span>Shape angles, hooks, content and output flow in a visual builder.</span>
               </div>
             </div>
+
+            <div class="gallery-card">
+              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+              <div class="gallery-body">
+                <strong>3. Create visuals</strong>
+                <span>Generate reels, promo videos and visual-first launch ideas.</span>
+              </div>
+            </div>
+
+            <div class="gallery-card">
+              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+              <div class="gallery-body">
+                <strong>4. Launch everywhere</strong>
+                <span>Prepare exports and workflows for Instagram, WhatsApp, YouTube and LinkedIn.</span>
+              </div>
+            </div>
+
+            <div class="gallery-card">
+              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+              <div class="gallery-body">
+                <strong>1. Add your idea</strong>
+                <span>Start with a simple prompt about offer, audience, city and tone.</span>
+              </div>
+            </div>
+
+            <div class="gallery-card">
+              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+              <div class="gallery-body">
+                <strong>2. Build the campaign</strong>
+                <span>Shape angles, hooks, content and output flow in a visual builder.</span>
+              </div>
+            </div>
+
+            <div class="gallery-card">
+              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+              <div class="gallery-body">
+                <strong>3. Create visuals</strong>
+                <span>Generate reels, promo videos and visual-first launch ideas.</span>
+              </div>
+            </div>
+
+            <div class="gallery-card">
+              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+              <div class="gallery-body">
+                <strong>4. Launch everywhere</strong>
+                <span>Prepare exports and workflows for Instagram, WhatsApp, YouTube and LinkedIn.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="dual-grid">
+          <div class="feature-box peach">
+            <div class="feature-top">
+              <h3>Creators and execution</h3>
+              <div class="label">Connected Layer</div>
+            </div>
+            <p>Move from brand strategy into creator collaboration and execution without breaking flow.</p>
+            <div class="feature-image">
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="">
+            </div>
+          </div>
+
+          <div class="feature-box yellow">
+            <div class="feature-top">
+              <h3>Templates and launch assets</h3>
+              <div class="label">Reusable</div>
+            </div>
+            <p>Use reusable layouts, scripts and visual building blocks for faster campaigns and video creation.</p>
+            <div class="feature-image">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="quick-access">
+          <div class="section-head" style="margin-bottom:0;">
+            <h2>Quick access</h2>
+            <p>Open Bariq sections directly from one clean area.</p>
+          </div>
+
+          <div class="quick-grid">
+            <a class="quick-link" href="business-dashboard.html">🏢 Business</a>
+            <a class="quick-link" href="ai-generator.html">✨ AI Generator</a>
+            <a class="quick-link" href="campaign.html">📣 Campaign Studio</a>
+            <a class="quick-link" href="creator-marketplace.html">🎥 Creators</a>
+            <a class="quick-link" href="templates.html">🧩 Templates</a>
+            <a class="quick-link" href="video-creator.html">🎬 Video Creator</a>
+            <a class="quick-link" href="pricing.html">💰 Pricing</a>
+            <a class="quick-link" href="payments.html">💳 Payments</a>
+            <a class="quick-link" href="login.html">🔐 Login</a>
+            <a class="quick-link" href="admin-dashboard.html">⚙️ Admin</a>
           </div>
         </div>
       </div>
