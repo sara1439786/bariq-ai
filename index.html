@@ -13,30 +13,25 @@
       --bg3:#f7f0ff;
       --text:#2c235c;
       --muted:#6d6684;
-      --line:#ece0c0;
-      --white:#ffffff;
       --purple:#5a3fff;
-      --purple2:#7a63ff;
       --gold:#d8b05b;
-      --gold2:#f0c977;
       --pink:#ff7cc8;
       --blue:#4f8dff;
-      --shadow:0 20px 55px rgba(75,45,120,0.08);
       --card-shadow:0 14px 32px rgba(83,57,139,0.07);
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
-      color: var(--text);
+    html, body{
+      margin:0;
+      padding:0;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+      font-family:Arial, sans-serif;
+      background:linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
+      color:var(--text);
     }
 
     body{
-      position: relative;
+      position:relative;
     }
 
     body::before{
@@ -46,107 +41,42 @@
       right:-220px;
       width:720px;
       height:720px;
-      background:radial-gradient(circle at center,
-      rgba(120,80,255,0.22),
-      rgba(120,80,255,0.08),
-      transparent 70%);
-      z-index:-3;
-      filter:blur(85px);
-      animation:glowMove 14s ease-in-out infinite alternate;
+      background:radial-gradient(circle at center, rgba(120,80,255,0.18), rgba(120,80,255,0.06), transparent 70%);
+      filter:blur(90px);
       pointer-events:none;
+      z-index:-2;
     }
 
     body::after{
       content:"";
       position:fixed;
-      bottom:-240px;
+      bottom:-220px;
       left:-220px;
-      width:700px;
-      height:700px;
-      background:radial-gradient(circle,
-      rgba(216,176,91,0.22),
-      transparent 70%);
-      z-index:-3;
-      filter:blur(95px);
-      animation:goldGlow 16s ease-in-out infinite alternate;
+      width:680px;
+      height:680px;
+      background:radial-gradient(circle, rgba(216,176,91,0.18), transparent 70%);
+      filter:blur(90px);
       pointer-events:none;
+      z-index:-2;
     }
 
-    .floating-orb{
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(18px);
-      pointer-events: none;
-      z-index: -2;
-      opacity: 0.35;
+    a{
+      text-decoration:none;
+      color:inherit;
     }
 
-    .orb-1{
-      width: 180px;
-      height: 180px;
-      background: linear-gradient(135deg, #8f6bff, #c69cff);
-      left: 8%;
-      top: 22%;
-      animation: floatOrb1 12s ease-in-out infinite alternate;
+    .container{
+      width:min(1360px, calc(100% - 32px));
+      margin:0 auto;
     }
 
-    .orb-2{
-      width: 140px;
-      height: 140px;
-      background: linear-gradient(135deg, #ffd28e, #ffb86f);
-      right: 12%;
-      top: 42%;
-      animation: floatOrb2 15s ease-in-out infinite alternate;
-    }
-
-    .orb-3{
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #ff9adf, #d79bff);
-      left: 48%;
-      bottom: 12%;
-      animation: floatOrb3 13s ease-in-out infinite alternate;
-    }
-
-    @keyframes glowMove{
-      0%{transform:translate(0,0);}
-      100%{transform:translate(-80px,60px);}
-    }
-
-    @keyframes goldGlow{
-      0%{transform:translate(0,0);}
-      100%{transform:translate(120px,-80px);}
-    }
-
-    @keyframes floatOrb1{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(40px) translateX(30px);}
-    }
-
-    @keyframes floatOrb2{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(-30px) translateX(-25px);}
-    }
-
-    @keyframes floatOrb3{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(-25px) translateX(35px);}
-    }
-
-    a { text-decoration: none; color: inherit; }
-
-    .container {
-      width: min(1360px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(255,255,255,0.94);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid #eee2bf;
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:rgba(255,255,255,0.94);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid #eee2bf;
     }
 
     .site-header::after{
@@ -166,639 +96,549 @@
       100%{background-position:300%;}
     }
 
-    .nav-wrap {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      position: relative;
+    .nav-wrap{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      position:relative;
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
-      font-size: 30px;
-      font-weight: 800;
-      background: linear-gradient(90deg, var(--gold), var(--purple), var(--blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+      font-size:30px;
+      font-weight:800;
+      background:linear-gradient(90deg,var(--gold),var(--purple),var(--blue));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
     }
 
-    .brand-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--purple));
-      box-shadow: 0 0 16px rgba(90,63,255,0.3);
+    .brand-dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      box-shadow:0 0 16px rgba(90,63,255,0.3);
     }
 
-    .menu-toggle {
-      display: none;
-      border: none;
-      background: #f3edff;
-      color: #2f216f;
-      font-size: 28px;
-      line-height: 1;
-      padding: 10px 14px;
-      border-radius: 14px;
-      cursor: pointer;
+    .menu-toggle{
+      display:none;
+      border:none;
+      background:#f3edff;
+      color:#2f216f;
+      font-size:28px;
+      line-height:1;
+      padding:10px 14px;
+      border-radius:14px;
+      cursor:pointer;
     }
 
-    .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scrollbar-width: none;
-      white-space: nowrap;
+    .main-nav{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      scrollbar-width:none;
+      white-space:nowrap;
     }
 
-    .main-nav::-webkit-scrollbar { display:none; }
+    .main-nav::-webkit-scrollbar{
+      display:none;
+    }
 
-    .main-nav a {
-      padding: 10px 12px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #3a2d77;
-      border-radius: 12px;
-      flex: 0 0 auto;
-      transition: 0.18s ease;
+    .main-nav a{
+      padding:10px 12px;
+      font-size:14px;
+      font-weight:700;
+      color:#3a2d77;
+      border-radius:12px;
+      flex:0 0 auto;
     }
 
     .main-nav a:hover,
-    .main-nav a.active {
-      background: #f3edff;
+    .main-nav a.active{
+      background:#f3edff;
     }
 
-    .home-link {
-      background: linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
-      border: 1px solid #eadfc2;
+    .page-section{
+      padding:18px 0 24px;
     }
 
-    .hero-section {
-      padding: 14px 0 12px;
+    .hero-shell,
+    .stats-card,
+    .feature-card,
+    .quick-card,
+    .hero-side-panel{
+      background:rgba(255,255,255,0.95);
+      border:1px solid #f0e6c9;
+      border-radius:26px;
+      box-shadow:var(--card-shadow);
     }
 
-    .hero-shell {
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero-shell::before {
-      content: "";
-      position: absolute;
-      right: -70px;
-      top: -70px;
-      width: 240px;
-      height: 240px;
-      background: radial-gradient(circle, rgba(216,176,91,0.16), transparent 65%);
-      pointer-events: none;
+    .hero-shell{
+      padding:22px;
+      margin-bottom:18px;
+      background:linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap:16px;
+      grid-template-columns:1.05fr 0.95fr;
+      gap:18px;
       align-items:stretch;
     }
 
-    .hero-left,
-    .hero-visual{
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #f0e6c9;
-      border-radius: 24px;
-      box-shadow: var(--card-shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
     .hero-left{
-      padding: 24px;
+      padding:6px;
+      min-width:0;
     }
 
-    .hero-left::after{
-      content:"";
-      position:absolute;
-      inset:auto -40px -40px auto;
-      width:180px;
-      height:180px;
-      background:radial-gradient(circle, rgba(90,63,255,0.10), transparent 70%);
-      pointer-events:none;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 800;
-      color: #4a3b92;
-      border: 1px solid #ece1bf;
-      background: #fff;
-      border-radius: 999px;
-      padding: 10px 16px;
-      margin-bottom: 14px;
-    }
-
-    .hero-left h1 {
-      margin: 0 0 12px;
-      font-size: 52px;
-      line-height: 0.98;
-      letter-spacing: -0.045em;
-      color: #312668;
-      max-width: 780px;
-    }
-
-    .hero-left p {
-      margin: 0 0 18px;
-      font-size: 17px;
-      line-height: 1.74;
-      color: var(--muted);
-      max-width: 820px;
-    }
-
-    .text-gold{
-      color: var(--gold);
-      text-shadow: 0 0 18px rgba(216,176,91,0.18);
-    }
-
-    .text-purple{
-      color: var(--purple);
-      text-shadow: 0 0 18px rgba(90,63,255,0.14);
-    }
-
-    .text-pink{
-      color: var(--pink);
-      text-shadow: 0 0 18px rgba(255,124,200,0.14);
-    }
-
-    .text-blue{
-      color: var(--blue);
-      text-shadow: 0 0 18px rgba(79,141,255,0.14);
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      border: none;
-      transition: 0.2s ease;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold), var(--purple));
-      color: #fff;
-      box-shadow: 0 12px 24px rgba(90,63,255,0.18);
-    }
-
-    .btn-light {
-      background: #f4eeff;
-      color: #34296a;
-      border: 1px solid #e4d7ff;
-    }
-
-    .marquee-wrap {
-      margin-top: 10px;
-      border: 1px solid #eee2bf;
-      border-radius: 16px;
-      background: #fff;
-      overflow: hidden;
-      padding: 10px 0;
-    }
-
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      gap: 12px;
-      padding: 0 12px;
-      animation: scrollLeft 28s linear infinite;
-    }
-
-    .mini-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #faf7ff;
-      border: 1px solid #ece1bf;
-      font-size: 13px;
-      font-weight: 700;
-      color: #4a3b92;
-      white-space: nowrap;
-      box-shadow: 0 6px 16px rgba(83,57,139,0.04);
-    }
-
-    @keyframes scrollLeft {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .hero-visual{
-      padding: 16px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      justify-content:space-between;
-      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,243,255,0.96));
-    }
-
-    .visual-title{
-      font-size: 18px;
-      font-weight: 800;
-      color: #433685;
-      margin: 0;
-    }
-
-    .visual-sub{
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .image-strip{
-      overflow:hidden;
-      border-radius:20px;
-      border:1px solid #eee2bf;
+    .hero-tag{
+      display:inline-block;
+      font-size:13px;
+      font-weight:800;
+      color:#4a3b92;
+      border:1px solid #ece1bf;
       background:#fff;
+      border-radius:999px;
+      padding:10px 16px;
+      margin-bottom:16px;
+    }
+
+    .hero-left h1{
+      margin:0 0 14px;
+      font-size:62px;
+      line-height:0.96;
+      letter-spacing:-0.04em;
+      color:#312668;
+      word-break:break-word;
+    }
+
+    .hero-left p{
+      margin:0 0 20px;
+      font-size:17px;
+      line-height:1.75;
+      color:var(--muted);
+      max-width:720px;
+    }
+
+    .text-gold{ color:var(--gold); }
+    .text-purple{ color:var(--purple); }
+    .text-pink{ color:var(--pink); }
+    .text-blue{ color:var(--blue); }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:14px 18px;
+      border-radius:16px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      border:none;
+      transition:0.2s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--purple));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(90,63,255,0.18);
+    }
+
+    .btn-light{
+      background:#f4eeff;
+      color:#34296a;
+      border:1px solid #e4d7ff;
+    }
+
+    .marquee-wrap{
+      width:100%;
+      overflow:hidden;
+      border:1px solid #efe2c3;
+      border-radius:18px;
+      background:rgba(255,255,255,0.9);
       padding:10px 0;
     }
 
-    .image-track{
+    .marquee-track{
       display:flex;
       gap:12px;
       width:max-content;
-      animation: imageScroll 30s linear infinite;
-      padding:0 10px;
+      animation:marqueeMove 24s linear infinite;
     }
 
-    .image-card{
-      width:200px;
-      height:150px;
-      border-radius:18px;
+    @keyframes marqueeMove{
+      0%{ transform:translateX(0); }
+      100%{ transform:translateX(-50%); }
+    }
+
+    .mini-chip{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid #eadfc2;
+      background:#fff;
+      font-size:14px;
+      font-weight:700;
+      color:#4a3b92;
+      white-space:nowrap;
+    }
+
+    .hero-right{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      min-width:0;
+    }
+
+    .hero-side-panel{
+      padding:20px;
+      height:100%;
+      overflow:hidden;
+    }
+
+    .hero-side-panel h3{
+      margin:0 0 10px;
+      font-size:18px;
+      color:#433685;
+    }
+
+    .hero-side-panel p{
+      margin:0 0 16px;
+      font-size:15px;
+      line-height:1.7;
+      color:#6f6983;
+    }
+
+    .template-wall{
+      width:100%;
+      overflow:hidden;
+      border-radius:20px;
+      position:relative;
+    }
+
+    .template-track{
+      display:flex;
+      gap:14px;
+      width:max-content;
+      animation:scrollTemplates 26s linear infinite;
+    }
+
+    .template-wall:hover .template-track{
+      animation-play-state:paused;
+    }
+
+    @keyframes scrollTemplates{
+      0%{ transform:translateX(0); }
+      100%{ transform:translateX(-50%); }
+    }
+
+    .template-card{
+      min-width:220px;
+      max-width:220px;
+      height:176px;
+      border-radius:20px;
       overflow:hidden;
       position:relative;
+      border:1px solid #eadfc2;
+      background:#fff;
+      box-shadow:0 10px 22px rgba(83,57,139,0.08);
       flex:0 0 auto;
-      box-shadow:0 10px 24px rgba(60,40,110,0.10);
-      border:1px solid #f0e6c9;
-      transition: 0.2s ease;
     }
 
-    .image-card:hover{
-      transform: translateY(-4px) scale(1.02);
-      box-shadow:0 18px 30px rgba(60,40,110,0.15);
-    }
-
-    .image-card img{
+    .template-card img{
       width:100%;
       height:100%;
       object-fit:cover;
       display:block;
-      transform:scale(1.02);
+      transition:transform 0.35s ease;
     }
 
-    .image-card span{
+    .template-card:hover img{
+      transform:scale(1.06);
+    }
+
+    .template-card span{
       position:absolute;
-      left:10px;
-      bottom:10px;
-      padding:8px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:800;
+      left:12px;
+      bottom:12px;
+      background:rgba(47,33,111,0.82);
       color:#fff;
-      background:rgba(44,35,92,0.72);
-      backdrop-filter:blur(6px);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
     }
 
-    @keyframes imageScroll{
-      0%{transform:translateX(0);}
-      100%{transform:translateX(-50%);}
-    }
-
-    .glow-stats{
+    .mini-stats-row{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:10px;
+      gap:12px;
+      margin-top:16px;
     }
 
-    .glow-stat{
-      padding:14px;
-      border-radius:18px;
-      background:#fff;
-      border:1px solid #eee2bf;
+    .mini-stat-box{
+      padding:14px 10px;
       text-align:center;
-      box-shadow:0 8px 18px rgba(83,57,139,0.05);
+      background:#fff;
     }
 
-    .glow-stat .num{
+    .mini-stat-box strong{
+      display:block;
       font-size:22px;
-      font-weight:800;
       color:#3f3281;
+      margin-bottom:4px;
     }
 
-    .glow-stat .lab{
-      margin-top:4px;
+    .mini-stat-box small{
+      color:#776f8a;
       font-size:12px;
       font-weight:700;
-      color:#7a7291;
     }
 
-    .section {
-      padding: 6px 0 18px;
-    }
-
-    .section-box {
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #ece0c0;
-      border-radius: 28px;
-      padding: 24px;
-      box-shadow: 0 16px 36px rgba(75, 45, 120, 0.06);
-      transition: 0.25s ease;
-    }
-
-    .section-box:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 24px 48px rgba(75,45,120,0.08);
-    }
-
-    .section-box h2 {
-      margin: 0 0 10px;
-      font-size: 28px;
-      color: #35296f;
-    }
-
-    .section-box .section-text {
-      margin: 0 0 20px;
-      color: #6f6983;
-      line-height: 1.75;
-      font-size: 16px;
-    }
-
-    .platform-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .platform-card {
-      padding: 20px;
-      border-radius: 22px;
-      background: linear-gradient(180deg, #ffffff, #fcf8ff);
-      border: 1px solid #f0e6c9;
-      box-shadow: var(--card-shadow);
-      transition: 0.22s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .platform-card::before{
-      content:"";
-      position:absolute;
-      left:0;
-      top:0;
-      width:6px;
-      height:100%;
-      background: linear-gradient(180deg, var(--gold), var(--purple));
-    }
-
-    .platform-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 36px rgba(83,57,139,0.10);
-    }
-
-    .platform-card h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      color: #45388c;
-      padding-left: 8px;
-    }
-
-    .platform-card p {
-      margin: 0;
-      color: #6e6782;
-      line-height: 1.72;
-      font-size: 15px;
-      padding-left: 8px;
-    }
-
-    .quick-links-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-    }
-
-    .quick-link {
-      padding: 20px 16px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 800;
-      color: #433685;
-      transition: 0.2s ease;
-      background: linear-gradient(180deg,#fff,#faf6ff);
-      border-radius: 20px;
-      border: 1px solid #f0e6c9;
-      box-shadow: var(--card-shadow);
-    }
-
-    .quick-link:hover {
-      transform: translateY(-3px);
-      background: #faf6ff;
-      box-shadow: 0 16px 30px rgba(83,57,139,0.08);
-    }
-
-    .showcase-grid{
+    .stats-row{
       display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .stats-card{
+      padding:20px;
+      background:linear-gradient(180deg,#fff,#fcf8ff);
+    }
+
+    .stats-card .label{
+      font-size:13px;
+      font-weight:700;
+      color:#746c8d;
+      margin-bottom:12px;
+    }
+
+    .stats-card .big{
+      font-size:24px;
+      font-weight:800;
+      color:#41357f;
+      margin-bottom:8px;
+    }
+
+    .stats-card p{
+      margin:0;
+      color:#6f6983;
+      line-height:1.6;
+      font-size:15px;
+    }
+
+    .section-box{
+      background:rgba(255,255,255,0.95);
+      border:1px solid #ece0c0;
+      border-radius:28px;
+      padding:24px;
+      box-shadow:0 16px 36px rgba(75,45,120,0.06);
+      margin-bottom:18px;
+    }
+
+    .section-box h2{
+      margin:0 0 10px;
+      font-size:28px;
+      color:#35296f;
+    }
+
+    .section-box .section-text{
+      margin:0 0 20px;
+      color:#6f6983;
+      line-height:1.7;
+      font-size:16px;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
       gap:16px;
     }
 
-    .showcase-card{
-      padding:22px;
-      border-radius:24px;
-      background: linear-gradient(135deg,#fff,#f8f2ff);
-      border: 1px solid #ece0c0;
-      box-shadow: var(--card-shadow);
-      transition: 0.25s ease;
-      position: relative;
-      overflow: hidden;
+    .feature-card{
+      padding:20px;
+      background:linear-gradient(135deg,#fff,#f8f2ff);
     }
 
-    .showcase-card:hover{
-      transform: translateY(-4px);
-      box-shadow: 0 20px 38px rgba(83,57,139,0.10);
+    .feature-card h3{
+      margin:0 0 10px;
+      font-size:19px;
+      color:#45388c;
     }
 
-    .showcase-icon{
-      width:52px;
-      height:52px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:16px;
-      margin-bottom:14px;
-      font-size:24px;
-      background: linear-gradient(135deg, rgba(216,176,91,0.18), rgba(90,63,255,0.14));
-    }
-
-    .showcase-card h3{
-      margin:0 0 8px;
-      font-size:20px;
-      color:#382c76;
-    }
-
-    .showcase-card p{
+    .feature-card p{
       margin:0;
+      color:#6e6782;
+      line-height:1.7;
       font-size:15px;
-      line-height:1.75;
-      color: var(--muted);
     }
 
-    .site-footer {
-      margin-top: 22px;
-      background: #181427;
-      color: #fff;
-      padding: 40px 0;
+    .quick-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:16px;
     }
 
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr 1fr;
-      gap: 24px;
+    .quick-card{
+      padding:20px 16px;
+      text-align:center;
+      font-size:16px;
+      font-weight:800;
+      color:#433685;
+      transition:0.2s ease;
+      background:#fff;
     }
 
-    .footer-col h3 {
-      margin: 0 0 14px;
-      font-size: 18px;
-      color: #ffffff;
+    .quick-card:hover{
+      transform:translateY(-2px);
+      background:#faf6ff;
+    }
+
+    .site-footer{
+      margin-top:24px;
+      background:#181427;
+      color:#fff;
+      padding:40px 0;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr 1fr;
+      gap:24px;
+    }
+
+    .footer-col h3{
+      margin:0 0 14px;
+      font-size:18px;
+      color:#ffffff;
     }
 
     .footer-col p,
-    .footer-col a {
-      display: block;
-      margin: 0 0 10px;
-      color: #d9d4ea;
-      font-size: 15px;
-      line-height: 1.7;
+    .footer-col a{
+      display:block;
+      margin:0 0 10px;
+      color:#d9d4ea;
+      font-size:15px;
+      line-height:1.7;
     }
 
-    @media (max-width: 1180px) {
-      .hero-grid{
-        grid-template-columns: 1fr;
-      }
-
-      .platform-grid,
-      .showcase-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .quick-links-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
+    @media (max-width: 1180px){
+      .hero-grid,
+      .stats-row,
+      .feature-grid,
+      .quick-grid,
+      .footer-grid{
+        grid-template-columns:1fr 1fr;
       }
     }
 
-    @media (max-width: 768px) {
-      .container { width: min(100% - 20px, 1200px); }
-      .menu-toggle { display: block; }
-
-      .main-nav {
-        display: none;
-        position: absolute;
-        top: 82px;
-        left: 0;
-        right: 0;
-        background: #fff;
-        border: 1px solid #ecdcb4;
-        border-radius: 18px;
-        box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-        padding: 14px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
+    @media (max-width: 768px){
+      .container{
+        width:min(100% - 20px, 1200px);
       }
 
-      .main-nav.show { display: flex; }
-
-      .main-nav a {
-        width: 100%;
-        background: #faf7ff;
-        justify-content: flex-start;
+      .menu-toggle{
+        display:block;
       }
 
-      .hero-left h1 { font-size: 34px; }
-
-      .hero-actions {
-        flex-direction: column;
+      .main-nav{
+        display:none;
+        position:absolute;
+        top:82px;
+        left:0;
+        right:0;
+        background:#fff;
+        border:1px solid #ecdcb4;
+        border-radius:18px;
+        box-shadow:0 18px 40px rgba(0,0,0,0.08);
+        padding:14px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
       }
 
-      .btn { width: 100%; }
-
-      .platform-grid,
-      .quick-links-grid,
-      .footer-grid,
-      .showcase-grid,
-      .glow-stats {
-        grid-template-columns: 1fr;
+      .main-nav.show{
+        display:flex;
       }
 
-      .hero-left,
-      .hero-visual,
-      .section-box {
-        padding: 16px;
+      .main-nav a{
+        width:100%;
+        background:#faf7ff;
+        justify-content:flex-start;
       }
 
-      .image-card{
-        width:170px;
-        height:120px;
+      .hero-left h1{
+        font-size:38px;
+        line-height:1.04;
       }
 
-      .quick-link {
-        text-align: left;
+      .hero-actions{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .template-card{
+        min-width:180px;
+        max-width:180px;
+        height:145px;
+      }
+
+      .mini-stats-row,
+      .stats-row,
+      .feature-grid,
+      .quick-grid,
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-shell,
+      .stats-card,
+      .feature-card,
+      .quick-card,
+      .hero-side-panel,
+      .section-box{
+        padding:16px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="floating-orb orb-1"></div>
-  <div class="floating-orb orb-2"></div>
-  <div class="floating-orb orb-3"></div>
-
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
-
       <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
 
       <nav class="main-nav" id="mainNav">
-        <a href="index.html" class="home-link active">🏠 Home</a>
+        <a href="index.html" class="active">🏠 Home</a>
         <a href="business-dashboard.html">🏢 Business</a>
         <a href="ai-generator.html">✨ AI Generator</a>
         <a href="campaign.html">📣 Campaign</a>
@@ -811,216 +651,204 @@
     </div>
   </header>
 
-  <section class="hero-section">
+  <section class="page-section">
     <div class="container">
+
       <div class="hero-shell">
         <div class="hero-grid">
 
           <div class="hero-left">
             <div class="hero-tag">AI Marketing Platform</div>
             <h1>
-              Build <span class="text-gold">campaigns</span>,
+              Build <span class="text-gold">marketing</span>,
               <span class="text-purple">creators</span>, and
-              <span class="text-pink">growth</span> in one
-              <span class="text-blue">place</span>
+              <span class="text-pink">growth</span> in
+              <span class="text-blue">one place</span>
             </h1>
 
             <p>
-              Bariq AI helps businesses generate ads, reel scripts, hooks, campaign plans,
-              creator workflows, templates, and execution systems from one connected premium dashboard.
+              Bariq AI helps businesses generate ads, reel scripts, hooks, campaign plans, creator workflows, and execution systems from one connected premium dashboard flow.
             </p>
 
             <div class="hero-actions">
-              <a href="ai-generator.html" class="btn btn-primary">✨ Open AI Generator</a>
-              <a href="campaign.html" class="btn btn-light">📣 Open Campaign Studio</a>
-              <a href="pricing.html" class="btn btn-light">💳 View Pricing</a>
+              <a href="campaign.html" class="btn btn-primary">✨ Open Campaign Studio</a>
+              <a href="ai-generator.html" class="btn btn-light">✨ Open AI Generator</a>
+              <a href="pricing.html" class="btn btn-light">💰 View Pricing</a>
             </div>
 
             <div class="marquee-wrap">
               <div class="marquee-track">
-                <span class="mini-chip">🎯 Meta Ad Copy</span>
-                <span class="mini-chip">🎥 Reel Script Builder</span>
-                <span class="mini-chip">🪄 Voice Prompt Campaigns</span>
-                <span class="mini-chip">💜 Easy For Business Owners</span>
-                <span class="mini-chip">📍 Local City Targeting</span>
-                <span class="mini-chip">🧩 Templates</span>
-                <span class="mini-chip">👩 Creator Marketplace</span>
-                <span class="mini-chip">📈 Growth Workflow</span>
-                <span class="mini-chip">🏢 Business Dashboard</span>
+                <span class="mini-chip">📈 Growth Dashboard</span>
+                <span class="mini-chip">📣 Campaign Flow</span>
+                <span class="mini-chip">🎥 Creator Network</span>
+                <span class="mini-chip">💡 AI Outputs</span>
+                <span class="mini-chip">🧩 Smart Templates</span>
                 <span class="mini-chip">💳 Payments Ready</span>
-                <span class="mini-chip">🎯 Meta Ad Copy</span>
-                <span class="mini-chip">🎥 Reel Script Builder</span>
-                <span class="mini-chip">🪄 Voice Prompt Campaigns</span>
-                <span class="mini-chip">💜 Easy For Business Owners</span>
-                <span class="mini-chip">📍 Local City Targeting</span>
-                <span class="mini-chip">🧩 Templates</span>
-                <span class="mini-chip">👩 Creator Marketplace</span>
-                <span class="mini-chip">📈 Growth Workflow</span>
-                <span class="mini-chip">🏢 Business Dashboard</span>
+                <span class="mini-chip">⚙️ Admin Control</span>
+                <span class="mini-chip">🚀 Launch Stack</span>
+
+                <span class="mini-chip">📈 Growth Dashboard</span>
+                <span class="mini-chip">📣 Campaign Flow</span>
+                <span class="mini-chip">🎥 Creator Network</span>
+                <span class="mini-chip">💡 AI Outputs</span>
+                <span class="mini-chip">🧩 Smart Templates</span>
                 <span class="mini-chip">💳 Payments Ready</span>
+                <span class="mini-chip">⚙️ Admin Control</span>
+                <span class="mini-chip">🚀 Launch Stack</span>
               </div>
             </div>
           </div>
 
-          <div class="hero-visual">
-            <div>
-              <h3 class="visual-title">Live marketing inspiration wall</h3>
-              <p class="visual-sub">Scrolling visuals make Bariq feel active, premium, and closer to a real AI SaaS platform.</p>
-            </div>
+          <div class="hero-right">
+            <div class="hero-side-panel">
+              <h3>Live marketing inspiration wall</h3>
+              <p>Homepage visuals focus on dashboards, business growth, startup movement, and campaign execution so Bariq feels like a real SaaS platform.</p>
 
-            <div class="image-strip">
-              <div class="image-track">
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Beauty campaign">
-                  <span>Beauty Campaign</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="Clinic creative">
-                  <span>Clinic Creative</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="Women offer">
-                  <span>Women Offer</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="Premium brand">
-                  <span>Premium Brand</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="Reel mood">
-                  <span>Reel Mood</span>
-                </div>
+              <div class="template-wall">
+                <div class="template-track">
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Growth Dashboard">
+                    <span>Growth Dashboard</span>
+                  </div>
 
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Beauty campaign">
-                  <span>Beauty Campaign</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="Clinic creative">
-                  <span>Clinic Creative</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="Women offer">
-                  <span>Women Offer</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="Premium brand">
-                  <span>Premium Brand</span>
-                </div>
-                <div class="image-card">
-                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="Reel mood">
-                  <span>Reel Mood</span>
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Analytics View">
+                    <span>Analytics View</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=900&q=80" alt="Business Strategy">
+                    <span>Business Strategy</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="Startup Launch">
+                    <span>Startup Launch</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Growth Dashboard">
+                    <span>Growth Dashboard</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Analytics View">
+                    <span>Analytics View</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=900&q=80" alt="Business Strategy">
+                    <span>Business Strategy</span>
+                  </div>
+
+                  <div class="template-card">
+                    <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="Startup Launch">
+                    <span>Startup Launch</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="glow-stats">
-              <div class="glow-stat">
-                <div class="num">5+</div>
-                <div class="lab">AI Workflows</div>
-              </div>
-              <div class="glow-stat">
-                <div class="num">1-Click</div>
-                <div class="lab">Campaign Flow</div>
-              </div>
-              <div class="glow-stat">
-                <div class="num">Live</div>
-                <div class="lab">Creator Layer</div>
+              <div class="mini-stats-row">
+                <div class="mini-stat-box">
+                  <strong>AI</strong>
+                  <small>Prompt Powered</small>
+                </div>
+                <div class="mini-stat-box">
+                  <strong>Growth</strong>
+                  <small>Business Ready</small>
+                </div>
+                <div class="mini-stat-box">
+                  <strong>Launch</strong>
+                  <small>Platform Ready</small>
+                </div>
               </div>
             </div>
           </div>
 
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
+      <div class="stats-row">
+        <div class="stats-card">
+          <div class="label">⚡ AI Tools</div>
+          <div class="big">5+</div>
+          <p>Generate Meta ads, reel scripts, hook lines, CTA ideas, captions, and campaign direction from one engine.</p>
+        </div>
+
+        <div class="stats-card">
+          <div class="label">📣 Campaign Flow</div>
+          <div class="big">Live</div>
+          <p>Move from AI generation to Campaign Studio and creator workflow inside one connected system.</p>
+        </div>
+
+        <div class="stats-card">
+          <div class="label">🎥 Creator Layer</div>
+          <div class="big">Ready</div>
+          <p>Use Bariq to connect businesses with creators, briefs, video ideas, and execution pathways.</p>
+        </div>
+
+        <div class="stats-card">
+          <div class="label">💳 Launch Stack</div>
+          <div class="big">On</div>
+          <p>Pricing, payments, login, dashboard, and legal pages are structured to make Bariq feel real and monetizable.</p>
+        </div>
+      </div>
+
       <div class="section-box">
         <h2>Main platform areas</h2>
-        <p class="section-text">Use these sections to test Bariq AI page by page and build it into a complete premium marketing platform.</p>
+        <p class="section-text">Use these connected sections to test Bariq AI page by page and move from idea to execution without breaking flow.</p>
 
-        <div class="platform-grid">
-          <a class="platform-card" href="ai-generator.html">
-            <h3>✨ AI Generator</h3>
-            <p>Generate Meta ads, hooks, captions, WhatsApp promo ideas, and campaign direction from one structured AI prompt flow.</p>
-          </a>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>AI Generator</h3>
+            <p>Generate Meta ads, WhatsApp promos, Google headlines, hook lines, captions, and more from one clean workflow.</p>
+          </div>
 
-          <a class="platform-card" href="business-dashboard.html">
-            <h3>🏢 Business Dashboard</h3>
-            <p>Give businesses a premium home to manage campaigns, leads, growth plans, ideas, and marketing execution.</p>
-          </a>
+          <div class="feature-card">
+            <h3>Campaign Studio</h3>
+            <p>Turn one simple input into structured campaign outputs with CTA suggestions, reel direction, and launch clarity.</p>
+          </div>
 
-          <a class="platform-card" href="campaign.html">
-            <h3>📣 Campaign Studio</h3>
-            <p>Build full campaign structure, voice-led inputs, ad copy, CTA ideas, and reel scripts from one workflow.</p>
-          </a>
+          <div class="feature-card">
+            <h3>Business Dashboard</h3>
+            <p>Give businesses a premium home to manage campaigns, execution, performance direction, and marketing planning.</p>
+          </div>
 
-          <a class="platform-card" href="creator-marketplace.html">
-            <h3>🎥 Creator Marketplace</h3>
-            <p>List creators, connect brands with influencers, and build a direct execution marketplace inside Bariq AI.</p>
-          </a>
+          <div class="feature-card">
+            <h3>Creator Marketplace</h3>
+            <p>List creators, connect with campaigns, and build the execution side of Bariq as a real creator-business platform.</p>
+          </div>
 
-          <a class="platform-card" href="creator-dashboard.html">
-            <h3>👩 Creator Dashboard</h3>
-            <p>Help creators manage opportunities, applications, deliverables, profiles, earnings, and collaboration flow.</p>
-          </a>
+          <div class="feature-card">
+            <h3>Templates</h3>
+            <p>Keep reusable layouts, ad ideas, promo structures, and future creative systems in one connected area.</p>
+          </div>
 
-          <a class="platform-card" href="admin-dashboard.html">
-            <h3>⚙️ Admin Dashboard</h3>
-            <p>Track platform growth, campaigns, user flow, payments, and all Bariq pages from one control center.</p>
-          </a>
+          <div class="feature-card">
+            <h3>Admin Control</h3>
+            <p>Oversee platform pages, growth flow, users, campaign directions, and internal testing from one place.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
       <div class="section-box">
-        <h2>Why Bariq feels different</h2>
-        <p class="section-text">Bariq is designed to feel less like a basic tool and more like a complete marketing system for modern brands.</p>
+        <h2>Quick links</h2>
+        <p class="section-text">Jump into the core product sections directly.</p>
 
-        <div class="showcase-grid">
-          <div class="showcase-card">
-            <div class="showcase-icon">🎤</div>
-            <h3>Voice-first campaign creation</h3>
-            <p>Business owners do not want to type long briefs. Bariq lets them speak one simple idea and turn it into campaign-ready outputs.</p>
-          </div>
-
-          <div class="showcase-card">
-            <div class="showcase-icon">🎯</div>
-            <h3>Ads made for real platforms</h3>
-            <p>Create copy and structure that can later connect to Meta, Google, WhatsApp, LinkedIn, Threads, and creator-led publishing.</p>
-          </div>
-
-          <div class="showcase-card">
-            <div class="showcase-icon">💜</div>
-            <h3>Simple but premium experience</h3>
-            <p>The platform is designed to feel clean, modern, and alive — with glow, motion, premium visuals, and connected pages.</p>
-          </div>
+        <div class="quick-grid">
+          <a class="quick-card" href="business-dashboard.html">🏢 Business</a>
+          <a class="quick-card" href="ai-generator.html">✨ AI Generator</a>
+          <a class="quick-card" href="campaign.html">📣 Campaign Studio</a>
+          <a class="quick-card" href="creator-marketplace.html">🎥 Creators</a>
+          <a class="quick-card" href="templates.html">🧩 Templates</a>
+          <a class="quick-card" href="video-creator.html">🎬 Video Creator</a>
+          <a class="quick-card" href="pricing.html">💰 Pricing</a>
+          <a class="quick-card" href="payments.html">💳 Payments</a>
+          <a class="quick-card" href="login.html">🔐 Login</a>
+          <a class="quick-card" href="admin-dashboard.html">⚙️ Admin</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-box">
-        <div class="quick-links-grid">
-          <a class="quick-link" href="index.html">🏠 Home</a>
-          <a class="quick-link" href="business-dashboard.html">🏢 Business</a>
-          <a class="quick-link" href="ai-generator.html">✨ AI Generator</a>
-          <a class="quick-link" href="campaign.html">📣 Campaign Studio</a>
-          <a class="quick-link" href="creator-marketplace.html">🎥 Creators</a>
-          <a class="quick-link" href="templates.html">🧩 Templates</a>
-          <a class="quick-link" href="video-creator.html">🎬 Video Creator</a>
-          <a class="quick-link" href="pricing.html">💳 Pricing</a>
-          <a class="quick-link" href="payments.html">💰 Payments</a>
-          <a class="quick-link" href="admin-dashboard.html">⚙️ Admin</a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1029,15 +857,15 @@
       <div class="footer-grid">
         <div class="footer-col">
           <h3>Bariq AI</h3>
-          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, and execution systems.</p>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation, and execution systems.</p>
         </div>
 
         <div class="footer-col">
           <h3>Platform</h3>
           <a href="index.html">Home</a>
           <a href="ai-generator.html">AI Generator</a>
+          <a href="campaign.html">Campaign Studio</a>
           <a href="business-dashboard.html">Business Dashboard</a>
-          <a href="creator-dashboard.html">Creator Dashboard</a>
         </div>
 
         <div class="footer-col">
