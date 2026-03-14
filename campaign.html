@@ -1,289 +1,1171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bariq AI — Campaign Builder</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bariq AI — Campaign Studio</title>
+  <style>
+    *{box-sizing:border-box}
+    :root{
+      --bg:#fff8f2;
+      --white:#ffffff;
+      --text:#2d2947;
+      --muted:#716b88;
+      --line:#f0e4da;
 
-<style>
+      --peach:#fff1e7;
+      --peach-2:#ffe7d8;
+      --coral:#ff8c70;
 
-*{box-sizing:border-box;}
+      --cream:#fffdf8;
+      --lav:#f5f1ff;
+      --mint:#eef9f1;
+      --blue:#eef4ff;
+      --pink:#fff2f7;
 
-body{
-margin:0;
-font-family:Arial, sans-serif;
-background:#FFF3EA;
-color:#2f2a4a;
-}
+      --shadow:0 18px 40px rgba(120,90,60,0.08);
+      --radius:28px;
+    }
 
-.container{
-width:min(1300px, calc(100% - 30px));
-margin:auto;
-}
+    html,body{
+      margin:0;
+      padding:0;
+      font-family:Arial,sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(255,140,112,0.08), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(255,196,170,0.07), transparent 28%),
+        var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+    }
 
-/* NAVBAR */
+    a{ text-decoration:none; color:inherit; }
 
-.header{
-background:#ffffff;
-border-bottom:1px solid #f0e6df;
-position:sticky;
-top:0;
-z-index:1000;
-}
+    .container{
+      width:min(1400px, calc(100% - 28px));
+      margin:auto;
+    }
 
-.nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-height:70px;
-}
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,0.84);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--line);
+    }
 
-.brand{
-font-size:28px;
-font-weight:800;
-color:#ff8c70;
-}
+    .nav-wrap{
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      position:relative;
+    }
 
-.menu{
-display:flex;
-gap:12px;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:31px;
+      font-weight:800;
+      color:var(--coral);
+      white-space:nowrap;
+    }
 
-.menu a{
-padding:10px 14px;
-border-radius:12px;
-font-size:14px;
-font-weight:700;
-color:#6d657f;
-text-decoration:none;
-}
+    .brand-dot{
+      width:11px;
+      height:11px;
+      border-radius:50%;
+      background:var(--coral);
+      box-shadow:0 0 14px rgba(255,140,112,0.35);
+    }
 
-.menu a:hover{
-background:#fff6f2;
-}
+    .menu-toggle{
+      display:none;
+      border:none;
+      background:#fff0ea;
+      color:var(--coral);
+      border-radius:14px;
+      padding:10px 14px;
+      font-size:28px;
+      cursor:pointer;
+    }
 
-/* WORKSPACE */
+    .main-nav{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      overflow-x:auto;
+      white-space:nowrap;
+      scrollbar-width:none;
+    }
+    .main-nav::-webkit-scrollbar{display:none}
 
-.workspace{
-padding:40px 0;
-}
+    .main-nav a{
+      padding:11px 14px;
+      border-radius:14px;
+      font-size:14px;
+      font-weight:700;
+      color:#5f597f;
+      flex:0 0 auto;
+    }
 
-/* STEPS */
+    .main-nav a:hover,
+    .main-nav a.active{
+      background:#fff1e7;
+      color:var(--coral);
+    }
 
-.steps{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
-margin-bottom:20px;
-}
+    .page{ padding:18px 0 28px; }
 
-.step{
-background:#FFFCF6;
-padding:14px;
-border-radius:14px;
-font-weight:700;
-font-size:14px;
-}
+    .grid{ display:grid; gap:16px; }
 
-/* GRID */
+    .hero-grid{
+      grid-template-columns:1.15fr .85fr;
+      margin-bottom:16px;
+    }
 
-.builder{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
+    .card{
+      background:var(--white);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
 
-/* CARDS */
+    .card-inner{ padding:24px; }
 
-.card{
-background:#FFFCF6;
-border-radius:18px;
-padding:20px;
-box-shadow:0 12px 30px rgba(0,0,0,0.04);
-}
+    .soft-peach{ background:linear-gradient(180deg,#fff6ef 0%, #fff0e7 100%); }
+    .soft-blue{ background:linear-gradient(180deg,#f3f7ff 0%, #edf4ff 100%); }
+    .soft-mint{ background:linear-gradient(180deg,#f4fbf5 0%, #eef8f1 100%); }
+    .soft-pink{ background:linear-gradient(180deg,#fff6fb 0%, #fff1f7 100%); }
+    .soft-cream{ background:linear-gradient(180deg,#fffdfa 0%, #fffaf4 100%); }
+    .soft-lav{ background:linear-gradient(180deg,#f8f5ff 0%, #f2edff 100%); }
 
-/* FORM */
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      width:max-content;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.82);
+      border:1px solid rgba(255,255,255,0.95);
+      font-size:13px;
+      font-weight:800;
+      color:#5a547b;
+      margin-bottom:16px;
+    }
 
-.field{
-display:flex;
-flex-direction:column;
-gap:6px;
-margin-bottom:14px;
-}
+    .hero-title{
+      margin:0 0 12px;
+      font-size:46px;
+      line-height:1.04;
+      letter-spacing:-0.04em;
+      color:#2d2947;
+      max-width:760px;
+    }
 
-.field label{
-font-size:13px;
-font-weight:700;
-}
+    .hero-sub{
+      margin:0 0 18px;
+      font-size:16px;
+      line-height:1.75;
+      color:var(--muted);
+      max-width:720px;
+    }
 
-.field input,
-.field textarea,
-.field select{
-border:1px solid #f0e6df;
-padding:12px;
-border-radius:12px;
-font:inherit;
-}
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
 
-textarea{
-min-height:90px;
-}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      border:none;
+      border-radius:16px;
+      padding:13px 18px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .btn:hover{ transform:translateY(-2px); }
 
-/* BUTTON */
+    .btn-primary{
+      background:var(--coral);
+      color:#fff;
+      box-shadow:0 16px 28px rgba(255,140,112,0.25);
+    }
 
-button{
-background:#FF9A7A;
-border:none;
-padding:12px 16px;
-border-radius:12px;
-color:white;
-font-weight:700;
-cursor:pointer;
-}
+    .btn-light{
+      background:rgba(255,255,255,0.82);
+      color:#5c577d;
+    }
 
-button:hover{
-opacity:0.9;
-}
+    .publish-board{
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
 
-/* OUTPUT */
+    .publish-board h3{
+      margin:0 0 12px;
+      font-size:22px;
+      color:#2f2b49;
+    }
 
-.output{
-background:white;
-border-radius:14px;
-padding:14px;
-margin-bottom:14px;
-min-height:120px;
-border:1px solid #f2e7df;
-}
+    .publish-board p{
+      margin:0 0 18px;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--muted);
+    }
 
-.output h4{
-margin:0 0 6px;
-font-size:16px;
-}
+    .platform-area{
+      border-radius:24px;
+      background:linear-gradient(135deg,#4e84ff,#3368e8);
+      min-height:290px;
+      position:relative;
+      overflow:hidden;
+      padding:24px;
+    }
 
-</style>
+    .platform-grid{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      display:grid;
+      grid-template-columns:repeat(3,88px);
+      gap:16px;
+    }
+
+    .platform-box{
+      width:88px;
+      height:88px;
+      background:rgba(255,255,255,0.96);
+      border-radius:22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:34px;
+      box-shadow:0 12px 24px rgba(0,0,0,0.08);
+    }
+
+    .platform-tag{
+      position:absolute;
+      right:18px;
+      bottom:18px;
+      background:rgba(255,255,255,0.18);
+      color:#fff;
+      border:1px solid rgba(255,255,255,0.3);
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:800;
+      font-size:13px;
+      backdrop-filter:blur(8px);
+    }
+
+    .section-title{
+      font-size:30px;
+      line-height:1.1;
+      letter-spacing:-0.03em;
+      margin:0 0 8px;
+      color:#2f2b49;
+    }
+
+    .section-sub{
+      font-size:15px;
+      line-height:1.7;
+      color:var(--muted);
+      margin:0 0 16px;
+    }
+
+    .steps-grid{
+      grid-template-columns:repeat(4,1fr);
+      margin-bottom:16px;
+    }
+
+    .step-card{
+      background:var(--white);
+      border:1px solid var(--line);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .step-img{
+      height:150px;
+      overflow:hidden;
+    }
+
+    .step-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .step-body{
+      padding:16px;
+    }
+
+    .step-body h3{
+      margin:0 0 8px;
+      font-size:18px;
+      color:#2f2b49;
+    }
+
+    .step-body p{
+      margin:0;
+      font-size:14px;
+      line-height:1.65;
+      color:var(--muted);
+    }
+
+    .hooks-grid{
+      grid-template-columns:1fr 1fr 1fr;
+      margin-bottom:16px;
+    }
+
+    .hook-card{
+      padding:20px;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:var(--white);
+      box-shadow:var(--shadow);
+    }
+
+    .hook-card h3{
+      margin:0 0 10px;
+      font-size:18px;
+      color:#2f2b49;
+    }
+
+    .hook-card ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:14px;
+    }
+
+    .builder-grid{
+      grid-template-columns:.95fr 1.05fr;
+    }
+
+    .builder-card{
+      background:var(--white);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    .head-row{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .head-row h2{
+      margin:0 0 4px;
+      font-size:28px;
+      color:#2f2b49;
+    }
+
+    .head-row p{
+      margin:0;
+      font-size:14px;
+      line-height:1.6;
+      color:var(--muted);
+    }
+
+    .pill{
+      padding:10px 14px;
+      border-radius:999px;
+      background:#fff3ea;
+      color:var(--coral);
+      font-size:12px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+    }
+
+    .field.full{ grid-column:1 / -1; }
+
+    .field label{
+      font-size:13px;
+      font-weight:800;
+      color:#4f486f;
+    }
+
+    .field input,
+    .field textarea,
+    .field select{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      background:#fff;
+      font:inherit;
+      color:var(--text);
+      outline:none;
+    }
+
+    .field textarea{
+      min-height:110px;
+      resize:vertical;
+      line-height:1.65;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus{
+      border-color:#ffb49f;
+      box-shadow:0 0 0 4px rgba(255,140,112,0.08);
+    }
+
+    .voice-panel{
+      margin-top:14px;
+      padding:16px;
+      border-radius:22px;
+      background:linear-gradient(180deg,#fff8f4 0%, #fff2ea 100%);
+      border:1px solid var(--line);
+    }
+
+    .voice-panel h3{
+      margin:0 0 6px;
+      font-size:18px;
+      color:#2f2b49;
+    }
+
+    .voice-panel p{
+      margin:0 0 12px;
+      font-size:13px;
+      line-height:1.6;
+      color:var(--muted);
+    }
+
+    .voice-actions,
+    .main-actions,
+    .continue-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .main-actions{ margin-top:14px; }
+
+    .status-box{
+      margin-top:14px;
+      border-radius:18px;
+      background:#fff8f2;
+      border:1px solid var(--line);
+      padding:14px 16px;
+    }
+
+    .status-box strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:14px;
+      color:#2f2b49;
+    }
+
+    .status-box span{
+      display:block;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .output-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .output-card{
+      min-height:170px;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:#fff;
+      padding:16px;
+      box-shadow:0 12px 22px rgba(100,70,50,0.04);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .output-card::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      width:4px;
+      height:100%;
+      background:var(--coral);
+    }
+
+    .output-card h3{
+      margin:0 0 10px;
+      padding-left:8px;
+      font-size:18px;
+      color:#2f2b49;
+    }
+
+    .output-card div{
+      padding-left:8px;
+      font-size:14px;
+      line-height:1.75;
+      color:var(--muted);
+      white-space:pre-wrap;
+    }
+
+    .continue-card{
+      margin-top:12px;
+      padding:18px;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,#fffdfa 0%, #fff6f0 100%);
+    }
+
+    .continue-card h3{
+      margin:0 0 8px;
+      font-size:21px;
+      color:#2f2b49;
+    }
+
+    .continue-card p{
+      margin:0 0 12px;
+      font-size:14px;
+      line-height:1.65;
+      color:var(--muted);
+    }
+
+    .site-footer{
+      margin-top:24px;
+      background:#181427;
+      color:#fff;
+      padding:40px 0;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr 1fr;
+      gap:24px;
+    }
+
+    .footer-col h3{
+      margin:0 0 14px;
+      font-size:18px;
+      color:#fff;
+    }
+
+    .footer-col p,
+    .footer-col a{
+      display:block;
+      margin:0 0 10px;
+      color:#d9d4ea;
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    @media (max-width:1180px){
+      .hero-grid,
+      .steps-grid,
+      .hooks-grid,
+      .builder-grid,
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+      .output-grid{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width:768px){
+      .container{
+        width:min(100% - 18px, 1200px);
+      }
+
+      .menu-toggle{ display:block; }
+
+      .main-nav{
+        display:none;
+        position:absolute;
+        top:82px;
+        left:0;
+        right:0;
+        background:#fff;
+        border:1px solid var(--line);
+        border-radius:18px;
+        box-shadow:0 18px 40px rgba(0,0,0,0.08);
+        padding:14px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
+      }
+
+      .main-nav.show{ display:flex; }
+      .main-nav a{
+        width:100%;
+        background:#fff8f2;
+      }
+
+      .hero-title{
+        font-size:32px;
+        line-height:1.08;
+      }
+
+      .hero-actions,
+      .voice-actions,
+      .main-actions,
+      .continue-actions{
+        flex-direction:column;
+      }
+
+      .btn{ width:100%; }
+
+      .platform-grid{
+        grid-template-columns:repeat(3,70px);
+        gap:12px;
+      }
+
+      .platform-box{
+        width:70px;
+        height:70px;
+        font-size:28px;
+        border-radius:18px;
+      }
+
+      .form-grid,
+      .output-grid,
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+
+      .card-inner,
+      .builder-card{
+        padding:16px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<header class="header">
-<div class="container nav">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
+      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
 
-<div class="brand">Bariq AI</div>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html">🏠 Home</a>
+        <a href="business-dashboard.html">🏢 Business</a>
+        <a href="ai-generator.html">✨ AI Generator</a>
+        <a href="campaign.html" class="active">📣 Campaign</a>
+        <a href="creator-marketplace.html">🎥 Creators</a>
+        <a href="templates.html">🧩 Templates</a>
+        <a href="payments.html">💳 Payments</a>
+        <a href="login.html">🔐 Login</a>
+        <a href="admin-dashboard.html">⚙️ Admin</a>
+      </nav>
+    </div>
+  </header>
 
-<div class="menu">
-<a href="index.html">Home</a>
-<a href="ai-generator.html">AI Generator</a>
-<a href="campaign.html">Campaign</a>
-<a href="templates.html">Templates</a>
-<a href="payments.html">Payments</a>
-<a href="login.html">Login</a>
-</div>
+  <section class="page">
+    <div class="container">
 
-</div>
-</header>
+      <!-- HERO -->
+      <div class="grid hero-grid">
+        <div class="card soft-peach">
+          <div class="card-inner">
+            <div class="tag">📣 Campaign Studio</div>
+            <h1 class="hero-title">Turn one campaign idea into hooks, creatives and launch-ready content</h1>
+            <p class="hero-sub">Bariq helps you plan offer, audience, city, CTA and platform rollout through visuals first — not through boring dead forms.</p>
 
-<section class="workspace">
-<div class="container">
+            <div class="hero-actions">
+              <a href="#builder" class="btn btn-primary">Start Campaign</a>
+              <a href="ai-generator.html" class="btn btn-light">Open AI Generator</a>
+              <a href="video-creator.html" class="btn btn-light">Open Video Creator</a>
+            </div>
+          </div>
+        </div>
 
-<div class="steps">
-<div class="step">Step 1 — Brief</div>
-<div class="step">Step 2 — Audience</div>
-<div class="step">Step 3 — Generate</div>
-<div class="step">Step 4 — Launch</div>
-</div>
+        <div class="card soft-blue publish-board">
+          <div class="card-inner">
+            <h3>Publish-ready flow</h3>
+            <p>Create once, adapt for Instagram, WhatsApp, Pinterest, X, Facebook and LinkedIn.</p>
 
-<div class="builder">
+            <div class="platform-area">
+              <div class="platform-grid">
+                <div class="platform-box">📸</div>
+                <div class="platform-box">💬</div>
+                <div class="platform-box">📌</div>
+                <div class="platform-box">✖️</div>
+                <div class="platform-box">📘</div>
+                <div class="platform-box">💼</div>
+              </div>
+              <div class="platform-tag">Multi-platform campaign flow</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<!-- LEFT SIDE -->
+      <!-- SIMPLE VISUAL STEPS -->
+      <div class="grid steps-grid">
+        <div class="step-card">
+          <div class="step-img">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="">
+          </div>
+          <div class="step-body">
+            <h3>1. Add campaign brief</h3>
+            <p>Enter service, offer, city and target audience in one simple builder.</p>
+          </div>
+        </div>
 
-<div class="card">
+        <div class="step-card">
+          <div class="step-img">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="">
+          </div>
+          <div class="step-body">
+            <h3>2. Select angle</h3>
+            <p>Decide emotional, urgent, premium or offer-led tone for your campaign.</p>
+          </div>
+        </div>
 
-<div class="field">
-<label>Business Name</label>
-<input id="business">
-</div>
+        <div class="step-card">
+          <div class="step-img">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="">
+          </div>
+          <div class="step-body">
+            <h3>3. Generate content</h3>
+            <p>Create Meta ads, reel scripts, CTA lines, Google copy and WhatsApp promo.</p>
+          </div>
+        </div>
 
-<div class="field">
-<label>Service</label>
-<input id="service">
-</div>
+        <div class="step-card">
+          <div class="step-img">
+            <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80" alt="">
+          </div>
+          <div class="step-body">
+            <h3>4. Launch everywhere</h3>
+            <p>Take the campaign into video, templates, creators and platform publishing flow.</p>
+          </div>
+        </div>
+      </div>
 
-<div class="field">
-<label>Offer</label>
-<input id="offer">
-</div>
+      <!-- HOOKS -->
+      <div class="grid hooks-grid">
+        <div class="hook-card soft-cream">
+          <h3>Hook ideas</h3>
+          <ul>
+            <li>Still searching for the right treatment in your city?</li>
+            <li>Your glow-up starts with one smart booking.</li>
+            <li>Limited slots. Premium results. Simple next step.</li>
+          </ul>
+        </div>
 
-<div class="field">
-<label>City</label>
-<input id="city">
-</div>
+        <div class="hook-card soft-pink">
+          <h3>Offer hooks</h3>
+          <ul>
+            <li>Flat 60% off — only for a limited campaign window.</li>
+            <li>Exclusive city launch pricing now live.</li>
+            <li>Book now before this campaign closes.</li>
+          </ul>
+        </div>
 
-<div class="field">
-<label>Audience</label>
-<input id="audience">
-</div>
+        <div class="hook-card soft-mint">
+          <h3>Trust hooks</h3>
+          <ul>
+            <li>Trusted care designed around real customer needs.</li>
+            <li>Premium service, visible results, confident experience.</li>
+            <li>Built for women who want results without confusion.</li>
+          </ul>
+        </div>
+      </div>
 
-<div class="field">
-<label>Extra Direction</label>
-<textarea id="notes"></textarea>
-</div>
+      <!-- BUILDER -->
+      <div class="grid builder-grid" id="builder">
+        <div class="builder-card">
+          <div class="head-row">
+            <div>
+              <h2>Campaign builder</h2>
+              <p>Fill a few fields and let Bariq structure the campaign for you.</p>
+            </div>
+            <div class="pill">Builder Mode</div>
+          </div>
 
-<button onclick="generate()">Generate Campaign</button>
+          <div class="form-grid">
+            <div class="field">
+              <label for="businessName">Business Name</label>
+              <input id="businessName" type="text" placeholder="e.g. RSCC Clinic">
+            </div>
 
-</div>
+            <div class="field">
+              <label for="campaignName">Campaign Name</label>
+              <input id="campaignName" type="text" placeholder="e.g. Summer Skin Offer">
+            </div>
 
-<!-- RIGHT SIDE -->
+            <div class="field full">
+              <label for="serviceName">Product / Service</label>
+              <input id="serviceName" type="text" placeholder="e.g. Laser hair reduction">
+            </div>
 
-<div class="card">
+            <div class="field">
+              <label for="offer">Offer</label>
+              <input id="offer" type="text" placeholder="e.g. Flat 60% off">
+            </div>
 
-<div class="output">
-<h4>Meta Ad Copy</h4>
-<div id="meta"></div>
-</div>
+            <div class="field">
+              <label for="budget">Budget</label>
+              <input id="budget" type="text" placeholder="e.g. ₹5000">
+            </div>
 
-<div class="output">
-<h4>Reel Script</h4>
-<div id="reel"></div>
-</div>
+            <div class="field">
+              <label for="targetAudience">Target Audience</label>
+              <input id="targetAudience" type="text" placeholder="e.g. Women 25-40">
+            </div>
 
-<div class="output">
-<h4>WhatsApp Promo</h4>
-<div id="whatsapp"></div>
-</div>
+            <div class="field">
+              <label for="targetCity">Target City</label>
+              <input id="targetCity" type="text" placeholder="e.g. Hyderabad">
+            </div>
 
-</div>
+            <div class="field full">
+              <label for="campaignGoal">Campaign Goal</label>
+              <select id="campaignGoal">
+                <option value="">Select goal</option>
+                <option>Leads</option>
+                <option>Sales</option>
+                <option>Brand Awareness</option>
+                <option>Traffic</option>
+                <option>Appointments</option>
+              </select>
+            </div>
 
-</div>
+            <div class="field full">
+              <label for="notes">Extra Direction</label>
+              <textarea id="notes" placeholder="Tone, urgency, premium feel, city relevance, local language, confidence angle, etc."></textarea>
+            </div>
+          </div>
 
-</div>
-</section>
+          <div class="voice-panel">
+            <h3>Voice brief</h3>
+            <p>Speak one campaign idea instead of typing everything manually.</p>
 
-<script>
+            <div class="field full" style="margin-bottom:12px;">
+              <textarea id="voicePrompt" placeholder="Example: Create a premium campaign for laser hair reduction with flat 60% off for women in Hyderabad."></textarea>
+            </div>
 
-function generate(){
+            <div class="voice-actions">
+              <button class="btn btn-light" type="button" onclick="startVoiceInput()">🎤 Start Voice</button>
+              <button class="btn btn-light" type="button" onclick="stopVoiceInput()">⏹ Stop Voice</button>
+              <button class="btn btn-light" type="button" onclick="useVoicePrompt()">✨ Use Voice Brief</button>
+            </div>
+          </div>
 
-let business=document.getElementById("business").value
-let service=document.getElementById("service").value
-let offer=document.getElementById("offer").value
-let city=document.getElementById("city").value
-let audience=document.getElementById("audience").value
+          <div class="main-actions">
+            <button class="btn btn-primary" onclick="generateCampaign()">Generate Campaign</button>
+            <button class="btn btn-light" onclick="generateVideo()">Generate Video Script</button>
+            <button class="btn btn-light" onclick="saveCampaign()">Save Draft</button>
+          </div>
 
-document.getElementById("meta").innerText=
-`Get ${service} at ${business} with ${offer} in ${city}. Perfect for ${audience}. Limited slots available.`
+          <div class="status-box">
+            <strong>Campaign status</strong>
+            <span id="statusBar">Ready. Build your campaign with a simple brief.</span>
+          </div>
+        </div>
 
-document.getElementById("reel").innerText=
-`Hook: Looking for ${service} in ${city}?  
-Scene: Show transformation  
-Offer: ${offer}  
-CTA: Book today with ${business}`
+        <div class="builder-card">
+          <div class="head-row">
+            <div>
+              <h2>Live outputs</h2>
+              <p>See campaign content appear in structured visual cards.</p>
+            </div>
+            <div class="pill">Output View</div>
+          </div>
 
-document.getElementById("whatsapp").innerText=
-`Hi! ${business} is offering ${offer} on ${service}. Reply to book today.`
+          <div class="output-grid">
+            <div class="output-card">
+              <h3>Meta Ad Copy</h3>
+              <div id="metaOutput">No output yet.</div>
+            </div>
 
-}
+            <div class="output-card">
+              <h3>Google Ad Copy</h3>
+              <div id="googleOutput">No output yet.</div>
+            </div>
 
-</script>
+            <div class="output-card">
+              <h3>Reel Script</h3>
+              <div id="reelOutput">No output yet.</div>
+            </div>
 
+            <div class="output-card">
+              <h3>CTA Suggestions</h3>
+              <div id="ctaOutput">No output yet.</div>
+            </div>
+
+            <div class="output-card">
+              <h3>Hashtags</h3>
+              <div id="hashtagOutput">No output yet.</div>
+            </div>
+
+            <div class="output-card">
+              <h3>Campaign Summary</h3>
+              <div id="summaryOutput">No output yet.</div>
+            </div>
+          </div>
+
+          <div class="continue-card">
+            <h3>Continue this campaign</h3>
+            <p>Move this into video creation, templates, creators or dashboard flow without losing momentum.</p>
+            <div class="continue-actions">
+              <a href="video-creator.html" class="btn btn-primary">🎬 Open Video Creator</a>
+              <a href="templates.html" class="btn btn-light">🧩 Open Templates</a>
+              <a href="creator-marketplace.html" class="btn btn-light">🎥 Creators</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Bariq AI</h3>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation and execution systems.</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Platform</h3>
+          <a href="index.html">Home</a>
+          <a href="ai-generator.html">AI Generator</a>
+          <a href="campaign.html">Campaign Studio</a>
+          <a href="business-dashboard.html">Business Dashboard</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund-policy.html">Refund Policy</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <a href="contact.html">Contact Us</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="payments.html">Payments</a>
+          <p>support@bariqai.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() {
+      document.getElementById("mainNav").classList.toggle("show");
+    }
+
+    let recognition = null;
+    let recognizing = false;
+
+    function startVoiceInput() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        document.getElementById("statusBar").textContent = "Voice input is not supported in this browser.";
+        return;
+      }
+
+      if (recognizing) return;
+
+      recognition = new SpeechRecognition();
+      recognition.lang = "en-IN";
+      recognition.interimResults = true;
+      recognition.continuous = true;
+
+      recognition.onstart = function() {
+        recognizing = true;
+        document.getElementById("statusBar").textContent = "Voice listening started...";
+      };
+
+      recognition.onresult = function(event) {
+        let transcript = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        document.getElementById("voicePrompt").value = transcript.trim();
+      };
+
+      recognition.onerror = function() {
+        document.getElementById("statusBar").textContent = "Voice input had an error. Please try again.";
+      };
+
+      recognition.onend = function() {
+        recognizing = false;
+        document.getElementById("statusBar").textContent = "Voice listening stopped.";
+      };
+
+      recognition.start();
+    }
+
+    function stopVoiceInput() {
+      if (recognition && recognizing) {
+        recognition.stop();
+      } else {
+        document.getElementById("statusBar").textContent = "Voice input is not active.";
+      }
+    }
+
+    function useVoicePrompt() {
+      const brief = document.getElementById("voicePrompt").value.trim();
+      if (!brief) {
+        document.getElementById("statusBar").textContent = "Please speak or type a voice brief first.";
+        return;
+      }
+
+      const notes = document.getElementById("notes");
+      notes.value = "Voice Brief:\n" + brief + (notes.value.trim() ? "\n\n" + notes.value.trim() : "");
+      document.getElementById("statusBar").textContent = "Voice brief added into extra direction.";
+    }
+
+    function getValue(id, fallback) {
+      const value = document.getElementById(id).value.trim();
+      return value || fallback;
+    }
+
+    function buildCampaignContent() {
+      const businessName = getValue("businessName", "Your brand");
+      const campaignName = getValue("campaignName", "Campaign Launch");
+      const serviceName = getValue("serviceName", "your service");
+      const offer = getValue("offer", "special offer");
+      const targetAudience = getValue("targetAudience", "your audience");
+      const targetCity = getValue("targetCity", "your city");
+      const budget = getValue("budget", "₹5000");
+      const campaignGoal = getValue("campaignGoal", "Leads");
+      const notes = getValue("notes", "premium, high-conversion, local, clean style");
+
+      const metaText =
+`Headline: ${serviceName} with ${offer}
+
+Primary Text:
+Looking for ${serviceName} in ${targetCity}? ${businessName} now brings ${offer} for ${targetAudience}. Premium experience, visible results and limited slots.
+
+CTA:
+Book Now | Message Now | Limited Offer`;
+
+      const googleText =
+`1. ${serviceName} in ${targetCity}
+2. ${offer} at ${businessName}
+3. Best Offer for ${targetAudience}
+4. Book Today
+5. Smart ${campaignGoal} Campaign`;
+
+      const reelText =
+`Hook:
+Still searching for ${serviceName} in ${targetCity}?
+
+Scene 1:
+Show the pain point faced by ${targetAudience}.
+
+Scene 2:
+Introduce ${businessName} and highlight ${offer}.
+
+Scene 3:
+Show service or happy customer result.
+
+Scene 4:
+Close with urgency, confidence and trust.
+
+Ending CTA:
+Book now. DM today. Limited slots.`;
+
+      const ctaText =
+`1. Book Now
+2. Message For Offer
+3. Claim Your Slot
+4. Enquire Today
+5. Limited Period Offer`;
+
+      const hashtagText =
+`#${serviceName.replace(/\s+/g, "")} #${targetCity.replace(/\s+/g, "")} #CampaignLaunch #PremiumOffer #BookNow #WomensCare #VisibleResults`;
+
+      const summaryText =
+`Campaign: ${campaignName}
+Goal: ${campaignGoal}
+Budget: ${budget}
+Audience: ${targetAudience}
+City: ${targetCity}
+Tone: ${notes}`;
+
+      return {
+        campaignName,
+        campaignGoal,
+        budget,
+        notes,
+        metaText,
+        googleText,
+        reelText,
+        ctaText,
+        hashtagText,
+        summaryText
+      };
+    }
+
+    function generateCampaign() {
+      const data = buildCampaignContent();
+
+      document.getElementById("metaOutput").textContent = data.metaText;
+      document.getElementById("googleOutput").textContent = data.googleText;
+      document.getElementById("reelOutput").textContent = data.reelText;
+      document.getElementById("ctaOutput").textContent = data.ctaText;
+      document.getElementById("hashtagOutput").textContent = data.hashtagText;
+      document.getElementById("summaryOutput").textContent = data.summaryText;
+
+      document.getElementById("statusBar").textContent =
+        `Campaign "${data.campaignName}" generated successfully. Goal: ${data.campaignGoal}. Budget: ${data.budget}. Tone: ${data.notes}.`;
+    }
+
+    function generateVideo() {
+      const data = buildCampaignContent();
+      document.getElementById("reelOutput").textContent = data.reelText;
+      document.getElementById("statusBar").textContent =
+        `Video script generated for "${data.campaignName}".`;
+    }
+
+    function saveCampaign() {
+      const data = buildCampaignContent();
+      document.getElementById("summaryOutput").textContent = data.summaryText;
+      document.getElementById("statusBar").textContent =
+        `Campaign "${data.campaignName}" saved locally as a draft concept.`;
+    }
+  </script>
 </body>
 </html>
