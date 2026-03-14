@@ -13,12 +13,10 @@
       --bg3:#f7f0ff;
       --text:#2c235c;
       --muted:#6d6684;
-      --line:#ece0c0;
       --purple:#5a3fff;
       --gold:#d8b05b;
       --pink:#ff7cc8;
       --blue:#4f8dff;
-      --white:#ffffff;
       --card-shadow:0 14px 32px rgba(83,57,139,0.07);
     }
 
@@ -28,7 +26,7 @@
       overflow-x:hidden;
       scroll-behavior:smooth;
       font-family:Arial, sans-serif;
-      background:linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 50%, var(--bg3) 100%);
+      background:linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
       color:var(--text);
     }
 
@@ -196,13 +194,14 @@
 
     .hero-grid{
       display:grid;
-      grid-template-columns:1.02fr 0.98fr;
+      grid-template-columns:1.08fr 0.92fr;
       gap:18px;
       align-items:stretch;
     }
 
     .hero-left{
       padding:6px;
+      min-width:0;
     }
 
     .hero-tag{
@@ -223,6 +222,7 @@
       line-height:0.98;
       letter-spacing:-0.04em;
       color:#312668;
+      word-break:break-word;
     }
 
     .hero-left p{
@@ -289,7 +289,7 @@
       display:flex;
       gap:12px;
       width:max-content;
-      animation:marqueeMove 22s linear infinite;
+      animation:marqueeMove 24s linear infinite;
     }
 
     @keyframes marqueeMove{
@@ -316,6 +316,7 @@
       display:flex;
       flex-direction:column;
       gap:14px;
+      min-width:0;
     }
 
     .hero-side-panel{
@@ -325,6 +326,7 @@
       padding:20px;
       box-shadow:0 10px 24px rgba(83,57,139,0.05);
       height:100%;
+      overflow:hidden;
     }
 
     .hero-side-panel h3{
@@ -351,7 +353,7 @@
       display:flex;
       gap:14px;
       width:max-content;
-      animation:scrollTemplates 24s linear infinite;
+      animation:scrollTemplates 26s linear infinite;
     }
 
     .template-wall:hover .template-track{
@@ -675,8 +677,8 @@
       }
 
       .hero-left h1{
-        font-size:38px;
-        line-height:1.04;
+        font-size:36px;
+        line-height:1.06;
       }
 
       .hero-actions,
@@ -749,8 +751,7 @@
             </h1>
 
             <p>
-              Bariq AI helps you generate Meta ads, Google headlines, WhatsApp promos, reel scripts,
-              hook lines, captions, and local marketing outputs from one connected premium workspace.
+              Bariq AI helps you generate Meta ads, Google headlines, WhatsApp promos, reel scripts, hook lines, captions, and local marketing outputs from one connected premium workspace.
             </p>
 
             <div class="hero-actions">
@@ -785,7 +786,7 @@
           <div class="hero-right">
             <div class="hero-side-panel">
               <h3>Live AI inspiration wall</h3>
-              <p>Different visuals make this page feel active, premium, and clearly focused on AI generation instead of looking copy pasted.</p>
+              <p>AI-focused visuals make this page feel different from home and campaign pages while keeping Bariq premium and connected.</p>
 
               <div class="template-wall">
                 <div class="template-track">
@@ -855,7 +856,7 @@
 
         <div class="generator-card">
           <h2>Generate AI marketing output</h2>
-          <p class="generator-sub">Fill the form or just speak one simple brief. Bariq will turn it into ad copy, captions, hooks, reel ideas, and local campaign direction.</p>
+          <p class="generator-sub">Fill the form or speak one brief. Bariq will turn it into ad copy, captions, hooks, reel ideas, and local campaign direction.</p>
 
           <div class="form-grid">
             <div class="field">
@@ -1020,15 +1021,18 @@
       document.getElementById("mainNav").classList.toggle("show");
     }
 
-    let recognition;
+    let recognition = null;
     let recognizing = false;
 
     function startVoiceInput() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
       if (!SpeechRecognition) {
         document.getElementById("statusBar").textContent = "Voice input is not supported in this browser.";
         return;
       }
+
+      if (recognizing) return;
 
       recognition = new SpeechRecognition();
       recognition.lang = "en-IN";
@@ -1075,11 +1079,8 @@
         return;
       }
 
-      if (!document.getElementById("serviceName").value.trim()) {
-        document.getElementById("serviceName").value = "Your service";
-      }
-
-      document.getElementById("notes").value = "Voice Brief:\n" + brief + "\n\n" + document.getElementById("notes").value.trim();
+      const notes = document.getElementById("notes");
+      notes.value = "Voice Brief:\n" + brief + (notes.value.trim() ? "\n\n" + notes.value.trim() : "");
       document.getElementById("statusBar").textContent = "Voice brief added into notes.";
     }
 
@@ -1096,9 +1097,6 @@
       const targetCity = getValue("targetCity", "your city");
       const targetAudience = getValue("targetAudience", "your audience");
       const notes = getValue("notes", "premium, high-conversion, clean style");
-      const voicePrompt = getValue("voicePrompt", "");
-
-      const mainContext = voicePrompt || `${businessName} ${businessType} ${serviceName} ${offer} ${targetCity} ${targetAudience}`;
 
       const metaText =
 `Headline: ${serviceName} with ${offer}
@@ -1160,7 +1158,7 @@ Book now. DM today. Limited slots.`;
       document.getElementById("captionsOutput").textContent = captionsText;
 
       document.getElementById("statusBar").textContent =
-        `AI-ready draft generated successfully for: ${mainContext}. Notes tone: ${notes}.`;
+        `AI-ready draft generated successfully. Tone used: ${notes}.`;
     }
 
     function clearAI() {
