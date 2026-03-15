@@ -17,11 +17,11 @@
       padding:0;
       overflow-x:hidden;
       font-family:'Inter',sans-serif;
-      color:#2d2947;
       background:
         radial-gradient(circle at top left, rgba(115,87,199,.05), transparent 22%),
         radial-gradient(circle at top right, rgba(197,155,67,.06), transparent 22%),
-        linear-gradient(180deg, #ffffff 0%, #fffdfa 100%);
+        linear-gradient(180deg,#ffffff 0%,#fffdfa 100%);
+      color:#2d2947;
     }
 
     :root{
@@ -30,19 +30,11 @@
       --gold:#c59b43;
       --purple:#7357c7;
       --line:#eee6df;
-      --white:#ffffff;
-      --pink:#ffeaf3;
-      --mint:#edf8ef;
-      --blue:#eef4ff;
-      --yellow:#fff4d9;
-      --peach:#fff1e8;
-      --lav:#f3edff;
       --shadow:0 16px 36px rgba(90,70,50,.08);
       --radius:28px;
     }
 
     a{text-decoration:none;color:inherit}
-    img{display:block;width:100%}
 
     .container{
       width:min(1380px, calc(100% - 28px));
@@ -130,7 +122,7 @@
       color:var(--purple);
     }
 
-    .page{padding:8px 0 36px}
+    .page{padding:10px 0 36px}
 
     .card{
       background:#fff;
@@ -144,8 +136,8 @@
       margin-top:10px;
       padding:18px 20px 20px;
       background:
-        radial-gradient(circle at 20% 25%, rgba(115,87,199,.05), transparent 16%),
-        radial-gradient(circle at 75% 14%, rgba(197,155,67,.06), transparent 16%),
+        radial-gradient(circle at 22% 28%, rgba(115,87,199,.05), transparent 16%),
+        radial-gradient(circle at 78% 14%, rgba(197,155,67,.06), transparent 16%),
         linear-gradient(180deg,#ffffff 0%, #fffdfa 100%);
     }
 
@@ -157,10 +149,10 @@
     }
 
     .hero-left{
-      padding-top:6px;
       display:flex;
       flex-direction:column;
       min-height:520px;
+      padding-top:6px;
     }
 
     .tag{
@@ -266,12 +258,12 @@
       gap:8px;
       box-shadow:0 10px 22px rgba(90,70,50,.05);
       color:#544d77;
+      transition:.2s ease;
     }
 
-    .platform-card i{
-      font-size:22px;
-    }
+    .platform-card:hover{transform:translateY(-3px)}
 
+    .platform-card i{font-size:22px}
     .platform-card span{
       font-size:12px;
       font-weight:800;
@@ -286,7 +278,6 @@
       background:linear-gradient(135deg,#fff3ec 0%, #fff8f2 50%, #f6f2ff 100%);
       padding:18px;
       overflow:hidden;
-      position:relative;
     }
 
     .hero-right-top h3{
@@ -329,31 +320,24 @@
       animation:floatUp 8s ease-in-out infinite;
     }
 
-    .hero-card.delay1{ animation-delay:1s; }
-    .hero-card.delay2{ animation-delay:2s; }
-    .hero-card.delay3{ animation-delay:3s; }
+    .hero-card.delay1{animation-delay:1s}
+    .hero-card.delay2{animation-delay:2s}
 
     .hero-card.tall{min-height:215px}
     .hero-card.small{min-height:145px}
-
-    .hero-card img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      animation:slowZoom 10s ease-in-out infinite alternate;
-    }
 
     .hero-label{
       position:absolute;
       left:12px;
       bottom:12px;
-      background:rgba(255,255,255,.9);
+      background:rgba(255,255,255,.92);
       padding:9px 12px;
       border-radius:14px;
       font-size:13px;
       font-weight:800;
       color:#4d4671;
       backdrop-filter:blur(8px);
+      z-index:2;
     }
 
     .soft-box{
@@ -388,6 +372,19 @@
 
     .box-yellow{background:linear-gradient(135deg,#fff0a9,#ffe994)}
     .box-mint{background:linear-gradient(135deg,#dff7e7,#cef1da)}
+
+    .photo{
+      width:100%;
+      height:100%;
+      background-size:cover;
+      background-position:center;
+      transform:scale(1);
+      animation:slowZoom 12s ease-in-out infinite alternate;
+    }
+
+    .hero-1{background-image:url('https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=80')}
+    .hero-2{background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80')}
+    .hero-3{background-image:url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1400&q=80')}
 
     .prompt-box{
       margin-top:16px;
@@ -457,10 +454,7 @@
 
     .section{margin-top:22px}
 
-    .section-head{
-      margin-bottom:16px;
-    }
-
+    .section-head{margin-bottom:16px}
     .section-head h2{
       margin:0 0 10px;
       font-size:24px;
@@ -513,14 +507,12 @@
       border-radius:22px;
       overflow:hidden;
       height:220px;
+      background:#f7f3ff;
     }
 
-    .workspace-thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      animation:slowZoom 11s ease-in-out infinite alternate;
-    }
+    .ws-1{background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1400&q=80')}
+    .ws-2{background-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=80')}
+    .ws-3{background-image:url('https://images.unsplash.com/photo-1574717024453-354056b2d4a?auto=format&fit=crop&w=1400&q=80')}
 
     .scroll-gallery{
       overflow:hidden;
@@ -535,7 +527,7 @@
       display:flex;
       gap:14px;
       width:max-content;
-      animation:marquee 30s linear infinite;
+      animation:marquee 32s linear infinite;
     }
 
     .gallery-card{
@@ -551,19 +543,10 @@
     .gallery-img{
       height:180px;
       overflow:hidden;
+      background:#f7f4ff;
     }
 
-    .gallery-img img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      animation:slowZoom 12s ease-in-out infinite alternate;
-    }
-
-    .gallery-body{
-      padding:16px;
-    }
-
+    .gallery-body{padding:16px}
     .gallery-body strong{
       display:block;
       margin-bottom:8px;
@@ -578,6 +561,15 @@
       color:var(--muted);
     }
 
+    .g1{background-image:url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1400&q=80')}
+    .g2{background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=80')}
+    .g3{background-image:url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1400&q=80')}
+    .g4{background-image:url('https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1400&q=80')}
+    .g5{background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80')}
+    .g6{background-image:url('https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&w=1400&q=80')}
+    .g7{background-image:url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1400&q=80')}
+    .g8{background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80')}
+
     .dual-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -589,7 +581,6 @@
       border-radius:28px;
       box-shadow:var(--shadow);
       padding:22px;
-      position:relative;
       overflow:hidden;
     }
 
@@ -633,14 +624,11 @@
       border-radius:22px;
       overflow:hidden;
       height:200px;
+      background:#f7f3ff;
     }
 
-    .feature-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      animation:slowZoom 12s ease-in-out infinite alternate;
-    }
+    .f1{background-image:url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=80')}
+    .f2{background-image:url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1400&q=80')}
 
     .quick-access{
       border:1px solid var(--line);
@@ -751,7 +739,7 @@
       }
 
       .brand-text{font-size:38px}
-      .hero-title{font-size:46px; line-height:1}
+      .hero-title{font-size:46px;line-height:1}
       .hero-actions{flex-direction:column}
       .btn{width:100%}
       .hero-platforms{grid-template-columns:repeat(2,1fr)}
@@ -835,12 +823,12 @@
             <div class="hero-collage">
               <div class="hero-col">
                 <div class="hero-card tall">
-                  <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80" alt="Marketing team planning campaign">
+                  <div class="photo hero-1"></div>
                   <div class="hero-label">Marketing strategy</div>
                 </div>
 
                 <div class="hero-card small delay1">
-                  <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80" alt="Creative team collaboration">
+                  <div class="photo hero-2"></div>
                   <div class="hero-label">Creators workflow</div>
                 </div>
               </div>
@@ -852,7 +840,7 @@
                 </div>
 
                 <div class="hero-card small delay2">
-                  <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1200&q=80" alt="Digital ads and content planning">
+                  <div class="photo hero-3"></div>
                   <div class="hero-label">Ad concepts</div>
                 </div>
 
@@ -897,25 +885,19 @@
           <div class="workspace-card">
             <h3>AI Generator</h3>
             <p>Create Meta ads, Google headlines, WhatsApp copy, captions and hooks in one clean workspace.</p>
-            <div class="workspace-thumb">
-              <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80" alt="AI interface and smart content generation">
-            </div>
+            <div class="workspace-thumb"><div class="photo ws-1"></div></div>
           </div>
 
           <div class="workspace-card">
             <h3>Campaign Studio</h3>
             <p>Build campaign brief, select angle, create outputs and prepare launch flow with soft visual guidance.</p>
-            <div class="workspace-thumb">
-              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="Campaign planning and business strategy">
-            </div>
+            <div class="workspace-thumb"><div class="photo ws-2"></div></div>
           </div>
 
           <div class="workspace-card">
             <h3>Video Creator</h3>
             <p>Turn one prompt into promo videos, reel scenes, story ideas and export-ready content directions.</p>
-            <div class="workspace-thumb">
-              <img src="https://images.unsplash.com/photo-1574717024453-354056b2d230?auto=format&fit=crop&w=1200&q=80" alt="Video creation and editing">
-            </div>
+            <div class="workspace-thumb"><div class="photo ws-3"></div></div>
           </div>
         </div>
       </div>
@@ -924,7 +906,7 @@
         <div class="scroll-gallery">
           <div class="gallery-track">
             <div class="gallery-card">
-              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80" alt="Team discussing ideas"></div>
+              <div class="gallery-img"><div class="photo g1"></div></div>
               <div class="gallery-body">
                 <strong>1. Add your idea</strong>
                 <span>Start with a simple prompt about offer, audience, city and tone.</span>
@@ -932,7 +914,7 @@
             </div>
 
             <div class="gallery-card">
-              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="Campaign planning session"></div>
+              <div class="gallery-img"><div class="photo g2"></div></div>
               <div class="gallery-body">
                 <strong>2. Build the campaign</strong>
                 <span>Shape angles, hooks, content and output flow in a visual builder.</span>
@@ -940,7 +922,7 @@
             </div>
 
             <div class="gallery-card">
-              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80" alt="Creative ad and content design"></div>
+              <div class="gallery-img"><div class="photo g3"></div></div>
               <div class="gallery-body">
                 <strong>3. Create visuals</strong>
                 <span>Generate reels, promo videos and visual-first launch ideas.</span>
@@ -948,7 +930,7 @@
             </div>
 
             <div class="gallery-card">
-              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1200&q=80" alt="Social media launch and publishing"></div>
+              <div class="gallery-img"><div class="photo g4"></div></div>
               <div class="gallery-body">
                 <strong>4. Launch everywhere</strong>
                 <span>Prepare exports and workflows for Instagram, WhatsApp, YouTube and LinkedIn.</span>
@@ -956,7 +938,7 @@
             </div>
 
             <div class="gallery-card">
-              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Digital content planning"></div>
+              <div class="gallery-img"><div class="photo g5"></div></div>
               <div class="gallery-body">
                 <strong>5. Refine messaging</strong>
                 <span>Create hooks, captions and strong calls to action for each platform.</span>
@@ -964,7 +946,7 @@
             </div>
 
             <div class="gallery-card">
-              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&w=1200&q=80" alt="Creative design process"></div>
+              <div class="gallery-img"><div class="photo g6"></div></div>
               <div class="gallery-body">
                 <strong>6. Build launch assets</strong>
                 <span>Prepare visuals, templates and branded content pieces faster.</span>
@@ -972,7 +954,7 @@
             </div>
 
             <div class="gallery-card">
-              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1200&q=80" alt="Business creator workflow"></div>
+              <div class="gallery-img"><div class="photo g7"></div></div>
               <div class="gallery-body">
                 <strong>7. Collaborate with creators</strong>
                 <span>Connect content, execution and creators in one smooth workflow.</span>
@@ -980,10 +962,42 @@
             </div>
 
             <div class="gallery-card">
-              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="Analytics and launch overview"></div>
+              <div class="gallery-img"><div class="photo g8"></div></div>
               <div class="gallery-body">
                 <strong>8. Track and improve</strong>
                 <span>Review output quality and improve the next launch cycle.</span>
+              </div>
+            </div>
+
+            <div class="gallery-card">
+              <div class="gallery-img"><div class="photo g1"></div></div>
+              <div class="gallery-body">
+                <strong>1. Add your idea</strong>
+                <span>Start with a simple prompt about offer, audience, city and tone.</span>
+              </div>
+            </div>
+
+            <div class="gallery-card">
+              <div class="gallery-img"><div class="photo g2"></div></div>
+              <div class="gallery-body">
+                <strong>2. Build the campaign</strong>
+                <span>Shape angles, hooks, content and output flow in a visual builder.</span>
+              </div>
+            </div>
+
+            <div class="gallery-card">
+              <div class="gallery-img"><div class="photo g3"></div></div>
+              <div class="gallery-body">
+                <strong>3. Create visuals</strong>
+                <span>Generate reels, promo videos and visual-first launch ideas.</span>
+              </div>
+            </div>
+
+            <div class="gallery-card">
+              <div class="gallery-img"><div class="photo g4"></div></div>
+              <div class="gallery-body">
+                <strong>4. Launch everywhere</strong>
+                <span>Prepare exports and workflows for Instagram, WhatsApp, YouTube and LinkedIn.</span>
               </div>
             </div>
           </div>
@@ -998,9 +1012,7 @@
               <div class="label">Connected Layer</div>
             </div>
             <p>Move from brand strategy into creator collaboration and execution without breaking flow.</p>
-            <div class="feature-image">
-              <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80" alt="Creators collaborating on content">
-            </div>
+            <div class="feature-image"><div class="photo f1"></div></div>
           </div>
 
           <div class="feature-box yellow">
@@ -1009,9 +1021,7 @@
               <div class="label">Reusable</div>
             </div>
             <p>Use reusable layouts, scripts and visual building blocks for faster campaigns and video creation.</p>
-            <div class="feature-image">
-              <img src="https://images.unsplash.com/photo-1516321310764-8d0d4f4f1f1e?auto=format&fit=crop&w=1200&q=80" alt="Templates and design assets">
-            </div>
+            <div class="feature-image"><div class="photo f2"></div></div>
           </div>
         </div>
       </div>
