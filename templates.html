@@ -3,1219 +3,738 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI — Templates</title>
+  <title>BariqAI Templates</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
   <style>
-    * { box-sizing: border-box; }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      color:#2d2947;
+      background:
+        radial-gradient(circle at top left, rgba(115,87,199,.05), transparent 20%),
+        radial-gradient(circle at top right, rgba(197,155,67,.08), transparent 20%),
+        linear-gradient(180deg,#fffefe 0%,#fffaf4 100%);
+    }
 
     :root{
-      --bg1:#fffaf3;
-      --bg2:#faf7ff;
-      --bg3:#f7f0ff;
-      --text:#2c235c;
-      --muted:#6d6684;
-      --line:#ece0c0;
-      --white:#ffffff;
-      --purple:#5a3fff;
-      --gold:#d8b05b;
-      --pink:#ff7cc8;
-      --blue:#4f8dff;
-      --green:#35b36e;
-      --shadow:0 20px 55px rgba(75,45,120,0.08);
-      --card-shadow:0 14px 32px rgba(83,57,139,0.07);
+      --text:#2d2947;
+      --muted:#6f6987;
+      --gold:#c59b43;
+      --purple:#7357c7;
+      --line:#ece4dc;
+      --shadow:0 18px 40px rgba(90,70,50,.08);
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
-      color: var(--text);
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1360px, calc(100% - 28px));margin:0 auto}
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line);
     }
 
-    body{ position: relative; }
-
-    body::before{
-      content:"";
-      position:fixed;
-      top:-220px;
-      right:-220px;
-      width:720px;
-      height:720px;
-      background:radial-gradient(circle at center,
-      rgba(120,80,255,0.22),
-      rgba(120,80,255,0.08),
-      transparent 70%);
-      z-index:-3;
-      filter:blur(85px);
-      animation:glowMove 14s ease-in-out infinite alternate;
-      pointer-events:none;
+    .nav-wrap{
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
     }
 
-    body::after{
-      content:"";
-      position:fixed;
-      bottom:-240px;
-      left:-220px;
-      width:700px;
-      height:700px;
-      background:radial-gradient(circle,
-      rgba(216,176,91,0.22),
-      transparent 70%);
-      z-index:-3;
-      filter:blur(95px);
-      animation:goldGlow 16s ease-in-out infinite alternate;
-      pointer-events:none;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      white-space:nowrap;
     }
 
-    .floating-orb{
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(18px);
-      pointer-events: none;
-      z-index: -2;
-      opacity: 0.35;
-    }
-
-    .orb-1{
-      width: 180px;
-      height: 180px;
-      background: linear-gradient(135deg, #8f6bff, #c69cff);
-      left: 8%;
-      top: 20%;
-      animation: floatOrb1 12s ease-in-out infinite alternate;
-    }
-
-    .orb-2{
-      width: 140px;
-      height: 140px;
-      background: linear-gradient(135deg, #ffd28e, #ffb86f);
-      right: 10%;
-      top: 40%;
-      animation: floatOrb2 15s ease-in-out infinite alternate;
-    }
-
-    .orb-3{
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #ff9adf, #d79bff);
-      left: 46%;
-      bottom: 10%;
-      animation: floatOrb3 13s ease-in-out infinite alternate;
-    }
-
-    @keyframes glowMove{
-      0%{transform:translate(0,0);}
-      100%{transform:translate(-80px,60px);}
-    }
-    @keyframes goldGlow{
-      0%{transform:translate(0,0);}
-      100%{transform:translate(120px,-80px);}
-    }
-    @keyframes floatOrb1{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(40px) translateX(30px);}
-    }
-    @keyframes floatOrb2{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(-30px) translateX(-25px);}
-    }
-    @keyframes floatOrb3{
-      0%{transform:translateY(0) translateX(0);}
-      100%{transform:translateY(-25px) translateX(35px);}
-    }
-
-    a { text-decoration: none; color: inherit; }
-
-    .container {
-      width: min(1360px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(255,255,255,0.94);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid #eee2bf;
-    }
-
-    .site-header::after{
-      content:"";
-      position:absolute;
-      bottom:0;
-      left:0;
-      width:100%;
-      height:3px;
-      background:linear-gradient(90deg,#d8b05b,#7b5cff,#ff8acc,#d8b05b);
-      background-size:300% 100%;
-      animation:headerFlow 7s linear infinite;
-    }
-
-    @keyframes headerFlow{
-      0%{background-position:0%;}
-      100%{background-position:300%;}
-    }
-
-    .nav-wrap {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      position: relative;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
-      font-size: 30px;
-      font-weight: 800;
-      background: linear-gradient(90deg, var(--gold), var(--purple), var(--blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .brand-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--purple));
-      box-shadow: 0 0 16px rgba(90,63,255,0.3);
-    }
-
-    .menu-toggle {
-      display: none;
-      border: none;
-      background: #f3edff;
-      color: #2f216f;
-      font-size: 28px;
-      line-height: 1;
-      padding: 10px 14px;
-      border-radius: 14px;
-      cursor: pointer;
-    }
-
-    .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scrollbar-width: none;
-      white-space: nowrap;
-    }
-
-    .main-nav::-webkit-scrollbar { display:none; }
-
-    .main-nav a {
-      padding: 10px 12px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #3a2d77;
-      border-radius: 12px;
-      flex: 0 0 auto;
-      transition: 0.18s ease;
-    }
-
-    .main-nav a:hover,
-    .main-nav a.active {
-      background: #f3edff;
-    }
-
-    .home-link {
-      background: linear-gradient(135deg, rgba(216,176,91,0.12), rgba(90,63,255,0.10));
-      border: 1px solid #eadfc2;
-    }
-
-    .hero-section {
-      padding: 14px 0 12px;
-    }
-
-    .hero-shell {
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,250,242,0.96));
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero-shell::before {
-      content: "";
-      position: absolute;
-      right: -70px;
-      top: -70px;
-      width: 240px;
-      height: 240px;
-      background: radial-gradient(circle, rgba(216,176,91,0.16), transparent 65%);
-      pointer-events: none;
-    }
-
-    .hero-grid{
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:14px;
       display:grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap:16px;
-      align-items:stretch;
+      place-items:center;
+      font-size:22px;
+      font-weight:800;
+      background:linear-gradient(135deg,#f2dfad 0%, #c59b43 100%);
+      color:#2d2947;
+      box-shadow:0 8px 18px rgba(197,155,67,.20);
     }
 
-    .hero-left,
-    .hero-right{
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #f0e6c9;
-      border-radius: 24px;
-      box-shadow: var(--card-shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-left{
-      padding: 24px;
-    }
-
-    .hero-left::after{
-      content:"";
-      position:absolute;
-      inset:auto -40px -40px auto;
-      width:180px;
-      height:180px;
-      background:radial-gradient(circle, rgba(90,63,255,0.10), transparent 70%);
-      pointer-events:none;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 800;
-      color: #4a3b92;
-      border: 1px solid #ece1bf;
-      background: #fff;
-      border-radius: 999px;
-      padding: 10px 16px;
-      margin-bottom: 14px;
-    }
-
-    .hero-left h1 {
-      margin: 0 0 12px;
-      font-size: 48px;
-      line-height: 1.0;
-      letter-spacing: -0.045em;
-      color: #312668;
-      max-width: 780px;
-    }
-
-    .hero-left p {
-      margin: 0 0 18px;
-      font-size: 17px;
-      line-height: 1.74;
-      color: var(--muted);
-      max-width: 820px;
-    }
-
-    .text-gold{ color: var(--gold); text-shadow: 0 0 18px rgba(216,176,91,0.18); }
-    .text-purple{ color: var(--purple); text-shadow: 0 0 18px rgba(90,63,255,0.14); }
-    .text-pink{ color: var(--pink); text-shadow: 0 0 18px rgba(255,124,200,0.14); }
-    .text-blue{ color: var(--blue); text-shadow: 0 0 18px rgba(79,141,255,0.14); }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      border: none;
-      transition: 0.2s ease;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold), var(--purple));
-      color: #fff;
-      box-shadow: 0 12px 24px rgba(90,63,255,0.18);
-    }
-
-    .btn-light {
-      background: #f4eeff;
-      color: #34296a;
-      border: 1px solid #e4d7ff;
-    }
-
-    .marquee-wrap {
-      margin-top: 10px;
-      border: 1px solid #eee2bf;
-      border-radius: 16px;
-      background: #fff;
-      overflow: hidden;
-      padding: 10px 0;
-    }
-
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      gap: 12px;
-      padding: 0 12px;
-      animation: scrollLeft 28s linear infinite;
-    }
-
-    .mini-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #faf7ff;
-      border: 1px solid #ece1bf;
-      font-size: 13px;
-      font-weight: 700;
-      color: #4a3b92;
-      white-space: nowrap;
-      box-shadow: 0 6px 16px rgba(83,57,139,0.04);
-    }
-
-    @keyframes scrollLeft {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .hero-right{
-      padding: 18px;
-      display:grid;
-      gap:14px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,243,255,0.96));
-    }
-
-    .hero-note{
-      padding:16px;
-      border-radius:20px;
-      border:1px solid #eee2bf;
-      background:#fff;
-      box-shadow:0 10px 22px rgba(83,57,139,0.05);
-    }
-
-    .hero-note h3{
-      margin:0 0 8px;
+    .brand-text{
       font-size:18px;
-      color:#433685;
+      font-weight:800;
+      color:#23203b;
     }
 
-    .hero-note p{
-      margin:0;
+    .main-nav{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+      overflow-x:auto;
+      scrollbar-width:none;
+    }
+    .main-nav::-webkit-scrollbar{display:none}
+
+    .main-nav a{
+      padding:11px 14px;
+      border-radius:14px;
       font-size:14px;
-      line-height:1.7;
-      color:var(--muted);
+      font-weight:700;
+      color:#645d80;
     }
 
-    .mini-stats{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
+    .main-nav a.active,
+    .main-nav a:hover{
+      background:#faf6ff;
+      color:var(--purple);
+    }
+
+    .nav-actions{
+      display:flex;
       gap:10px;
     }
 
-    .mini-stat{
-      padding:14px;
-      border-radius:18px;
-      background:#fff;
-      border:1px solid #eee2bf;
-      text-align:center;
-      box-shadow:0 8px 18px rgba(83,57,139,0.05);
-    }
-
-    .mini-stat .num{
-      font-size:22px;
+    .top-btn{
+      padding:12px 18px;
+      border-radius:16px;
+      font-size:14px;
       font-weight:800;
-      color:#3f3281;
+      border:1px solid var(--line);
     }
 
-    .mini-stat .lab{
-      margin-top:4px;
-      font-size:12px;
-      font-weight:700;
-      color:#7a7291;
+    .top-btn.login{background:#fff}
+    .top-btn.start{
+      background:linear-gradient(90deg,#f1dfae 0%, #d8b35d 100%);
+      border-color:#e5cf95;
     }
 
-    .template-strip{
-      overflow:hidden;
-      border-radius:22px;
-      border:1px solid #eee2bf;
+    .page{padding:22px 0 40px}
+
+    .hero{
       background:#fff;
-      padding:10px 0;
+      border:1px solid var(--line);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      padding:24px;
+      margin-bottom:22px;
     }
 
-    .template-track{
-      display:flex;
-      gap:12px;
-      width:max-content;
-      padding:0 10px;
-      animation:imageScroll 30s linear infinite;
-    }
-
-    .template-image{
-      width:190px;
-      height:145px;
-      flex:0 0 auto;
-      border-radius:20px;
-      overflow:hidden;
-      position:relative;
-      box-shadow:0 10px 24px rgba(60,40,110,0.10);
-      border:1px solid #f0e6c9;
-      transition:0.2s ease;
-    }
-
-    .template-image:hover{
-      transform: translateY(-4px) scale(1.02);
-      box-shadow:0 18px 30px rgba(60,40,110,0.15);
-    }
-
-    .template-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .template-image span{
-      position:absolute;
-      left:10px;
-      bottom:10px;
-      padding:8px 10px;
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
       border-radius:999px;
-      font-size:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size:13px;
       font-weight:800;
-      color:#fff;
-      background:rgba(44,35,92,0.72);
-      backdrop-filter:blur(6px);
+      color:#645d82;
+      margin-bottom:12px;
     }
 
-    @keyframes imageScroll{
-      0%{transform:translateX(0);}
-      100%{transform:translateX(-50%);}
+    .hero h1{
+      margin:0;
+      font-family:'Cormorant Garamond',serif;
+      font-size:56px;
+      line-height:.98;
+      max-width:820px;
+      font-weight:700;
+      color:#26213d;
     }
 
-    .section {
-      padding: 6px 0 18px;
+    .hero h1 .gold{
+      background:linear-gradient(90deg,var(--gold),#9b7427);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
     }
 
-    .section-box {
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #ece0c0;
-      border-radius: 28px;
-      padding: 24px;
-      box-shadow: 0 16px 36px rgba(75, 45, 120, 0.06);
-      transition: 0.25s ease;
+    .hero p{
+      margin:14px 0 0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.85;
+      max-width:980px;
     }
 
-    .section-box:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 24px 48px rgba(75,45,120,0.08);
+    .filters{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:26px;
+      box-shadow:var(--shadow);
+      padding:18px;
+      margin-bottom:22px;
     }
 
-    .section-box h2 {
-      margin: 0 0 10px;
-      font-size: 28px;
-      color: #35296f;
-    }
-
-    .section-box .section-text {
-      margin: 0 0 20px;
-      color: #6f6983;
-      line-height: 1.75;
-      font-size: 16px;
-    }
-
-    .filter-bar{
+    .filters-grid{
       display:grid;
-      grid-template-columns: 1.2fr 1fr 1fr 1fr;
-      gap:12px;
-      margin-bottom:18px;
+      grid-template-columns:1.2fr 1fr 1fr 1fr;
+      gap:14px;
     }
 
-    .filter-bar input,
-    .filter-bar select{
+    .filters input,
+    .filters select{
       width:100%;
-      border: 1px solid #eadfc2;
-      background: #fff;
-      border-radius: 16px;
-      padding: 14px 14px;
-      font: inherit;
-      color: var(--text);
-      outline: none;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      font:inherit;
+      color:var(--text);
+      background:#fff;
+      outline:none;
     }
 
-    .filter-bar input:focus,
-    .filter-bar select:focus{
-      border-color: #cdb2ff;
-      box-shadow: 0 0 0 4px rgba(90,63,255,0.08);
+    .section-title{
+      margin:0 0 14px;
+      font-size:24px;
+      font-weight:800;
+      color:#292440;
     }
 
     .template-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:16px;
+      gap:18px;
     }
 
     .template-card{
-      padding:18px;
-      border-radius:24px;
-      background: linear-gradient(180deg,#fff,#fcf8ff);
-      border:1px solid #f0e6c9;
-      box-shadow: var(--card-shadow);
-      transition:0.22s ease;
-      position:relative;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:26px;
+      box-shadow:var(--shadow);
       overflow:hidden;
-    }
-
-    .template-card::before{
-      content:"";
-      position:absolute;
-      left:0;
-      top:0;
-      width:6px;
-      height:100%;
-      background: linear-gradient(180deg, var(--gold), var(--purple));
+      transition:.25s ease;
     }
 
     .template-card:hover{
       transform:translateY(-4px);
-      box-shadow:0 18px 36px rgba(83,57,139,0.10);
+    }
+
+    .template-visual{
+      height:220px;
+      padding:16px;
+      display:flex;
+      align-items:stretch;
+      justify-content:stretch;
+      background:linear-gradient(135deg,#fff4e3,#f6efff);
+    }
+
+    .mock{
+      width:100%;
+      border-radius:22px;
+      background:#fff;
+      border:1px solid #efe7e0;
+      box-shadow:0 10px 24px rgba(90,70,50,.08);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .mock-header{
+      height:46px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:0 14px;
+      background:linear-gradient(90deg,#f7f2ff,#fff5de);
+      border-bottom:1px solid #f0e7df;
+    }
+
+    .dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:#d5c8f7;
+    }
+
+    .mock-body{
+      padding:14px;
+    }
+
+    .line{
+      height:10px;
+      border-radius:999px;
+      background:#efe8fb;
+      margin-bottom:10px;
+    }
+
+    .line.gold{background:#f6e8bd}
+    .line.short{width:45%}
+    .line.mid{width:68%}
+    .line.long{width:88%}
+
+    .visual-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .mini-box{
+      min-height:70px;
+      border-radius:14px;
+      background:linear-gradient(135deg,#f8f4ff,#fff);
+      border:1px solid #efe7e0;
+    }
+
+    .template-body{
+      padding:18px;
     }
 
     .template-top{
-      width:100%;
-      height:170px;
-      border-radius:18px;
-      overflow:hidden;
-      margin-bottom:14px;
-      border:1px solid #eee2bf;
-      box-shadow:0 8px 18px rgba(83,57,139,0.08);
-    }
-
-    .template-top img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .template-card h3{
-      margin:0 0 8px;
-      font-size:18px;
-      color:#40337f;
-      padding-left:8px;
-    }
-
-    .template-card p{
-      margin:0 0 14px;
-      font-size:14px;
-      line-height:1.72;
-      color:var(--muted);
-      padding-left:8px;
-    }
-
-    .pill-row{
       display:flex;
-      gap:8px;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+      margin-bottom:10px;
+    }
+
+    .template-body h3{
+      margin:0;
+      font-size:19px;
+      line-height:1.3;
+      color:#2f2a49;
+    }
+
+    .badge{
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      white-space:nowrap;
+      background:#faf6ff;
+      color:var(--purple);
+      border:1px solid #eadcf9;
+    }
+
+    .template-body p{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.8;
+      min-height:78px;
+    }
+
+    .chips{
+      display:flex;
       flex-wrap:wrap;
-      padding-left:8px;
+      gap:8px;
       margin-bottom:14px;
     }
 
-    .pill{
+    .chip{
       padding:8px 10px;
       border-radius:999px;
-      background:#f5f0ff;
-      border:1px solid #eadffc;
-      color:#4a3b92;
+      background:#fff8e8;
+      color:#8e6b1c;
       font-size:12px;
-      font-weight:700;
+      font-weight:800;
+      border:1px solid #f0dfb5;
     }
 
-    .card-actions{
+    .template-actions{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      padding-left:8px;
     }
 
-    .btn-small{
-      padding:10px 12px;
-      border-radius:12px;
+    .action-btn{
+      border:none;
+      border-radius:14px;
+      padding:11px 14px;
       font-size:13px;
       font-weight:800;
-      border:none;
       cursor:pointer;
-      transition:0.2s ease;
     }
 
-    .btn-small:hover{
-      transform:translateY(-2px);
-    }
-
-    .btn-small.primary{
-      background:linear-gradient(135deg,var(--gold),var(--purple));
+    .action-btn.use{
+      background:linear-gradient(90deg,var(--gold),var(--purple));
       color:#fff;
     }
 
-    .btn-small.light{
-      background:#f4eeff;
-      color:#34296a;
-      border:1px solid #e4d7ff;
+    .action-btn.preview{
+      background:#f7f1ff;
+      color:#6b51b7;
     }
 
-    .showcase-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-    }
-
-    .showcase-card{
+    .library-block{
+      margin-top:26px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
       padding:22px;
-      border-radius:24px;
-      background: linear-gradient(135deg,#fff,#f8f2ff);
-      border: 1px solid #ece0c0;
-      box-shadow: var(--card-shadow);
-      transition: 0.25s ease;
     }
 
-    .showcase-card:hover{
-      transform: translateY(-4px);
-      box-shadow: 0 20px 38px rgba(83,57,139,0.10);
+    .library-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin-top:14px;
     }
 
-    .showcase-icon{
-      width:52px;
-      height:52px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:16px;
-      margin-bottom:14px;
-      font-size:24px;
-      background: linear-gradient(135deg, rgba(216,176,91,0.18), rgba(90,63,255,0.14));
+    .library-item{
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px;
+      background:#fffdfa;
     }
 
-    .showcase-card h3{
-      margin:0 0 8px;
-      font-size:20px;
-      color:#382c76;
-    }
-
-    .showcase-card p{
-      margin:0;
+    .library-item strong{
+      display:block;
+      margin-bottom:8px;
+      color:#2f2a49;
       font-size:15px;
-      line-height:1.75;
-      color: var(--muted);
     }
 
-    .quick-links-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
+    .library-item span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
     }
 
-    .quick-link {
-      padding: 20px 16px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 800;
-      color: #433685;
-      transition: 0.2s ease;
-      background: linear-gradient(180deg,#fff,#faf6ff);
-      border-radius: 20px;
-      border: 1px solid #f0e6c9;
-      box-shadow: var(--card-shadow);
-    }
-
-    .quick-link:hover {
-      transform: translateY(-3px);
-      background: #faf6ff;
-      box-shadow: 0 16px 30px rgba(83,57,139,0.08);
-    }
-
-    .site-footer {
-      margin-top: 22px;
-      background: #181427;
-      color: #fff;
-      padding: 40px 0;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr 1fr;
-      gap: 24px;
-    }
-
-    .footer-col h3 {
-      margin: 0 0 14px;
-      font-size: 18px;
-      color: #ffffff;
-    }
-
-    .footer-col p,
-    .footer-col a {
-      display: block;
-      margin: 0 0 10px;
-      color: #d9d4ea;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    @media (max-width: 1180px) {
-      .hero-grid,
+    @media (max-width:1100px){
+      .filters-grid,
       .template-grid,
-      .showcase-grid{
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .filter-bar{
+      .library-grid{
         grid-template-columns:1fr 1fr;
       }
-
-      .quick-links-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
 
-    @media (max-width: 768px) {
-      .container { width: min(100% - 20px, 1200px); }
-      .menu-toggle { display: block; }
-
-      .main-nav {
-        display: none;
-        position: absolute;
-        top: 82px;
-        left: 0;
-        right: 0;
-        background: #fff;
-        border: 1px solid #ecdcb4;
-        border-radius: 18px;
-        box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-        padding: 14px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-      }
-
-      .main-nav.show { display: flex; }
-
-      .main-nav a {
-        width: 100%;
-        background: #faf7ff;
-        justify-content: flex-start;
-      }
-
-      .hero-grid,
+    @media (max-width:768px){
+      .container{width:min(100% - 18px,1200px)}
+      .main-nav,.nav-actions{display:none}
+      .hero h1{font-size:44px}
+      .filters-grid,
       .template-grid,
-      .showcase-grid,
-      .quick-links-grid,
-      .footer-grid,
-      .mini-stats,
-      .filter-bar {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-left h1 { font-size: 34px; }
-
-      .hero-actions {
-        flex-direction: column;
-      }
-
-      .btn { width: 100%; }
-
-      .hero-left,
-      .hero-right,
-      .section-box {
-        padding: 16px;
-      }
-
-      .quick-link {
-        text-align: left;
+      .library-grid{
+        grid-template-columns:1fr;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="floating-orb orb-1"></div>
-  <div class="floating-orb orb-2"></div>
-  <div class="floating-orb orb-3"></div>
-
   <header class="site-header">
     <div class="container nav-wrap">
-      <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
+      <a href="index.html" class="brand">
+        <span class="brand-mark">B</span>
+        <span class="brand-text">BariqAI</span>
+      </a>
 
-      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
-
-      <nav class="main-nav" id="mainNav">
-        <a href="index.html" class="home-link">🏠 Home</a>
-        <a href="business-dashboard.html">🏢 Business</a>
-        <a href="ai-generator.html">✨ AI Generator</a>
-        <a href="campaign.html">📣 Campaign</a>
-        <a href="creator-marketplace.html">🎥 Creators</a>
-        <a href="templates.html" class="active">🧩 Templates</a>
-        <a href="payments.html">💳 Payments</a>
-        <a href="login.html">🔐 Login</a>
-        <a href="admin-dashboard.html">⚙️ Admin</a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="business-dashboard.html">Business</a>
+        <a href="ai-generator.html">AI Generator</a>
+        <a href="campaign.html">Campaign</a>
+        <a href="creator-marketplace.html">Creators</a>
+        <a href="templates.html" class="active">Templates</a>
+        <a href="video-creator.html">Video Creator</a>
+        <a href="payments.html">Payments</a>
       </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="top-btn login">Login</a>
+        <a href="signup.html" class="top-btn start">Start Free</a>
+      </div>
     </div>
   </header>
 
-  <section class="hero-section">
+  <section class="page">
     <div class="container">
-      <div class="hero-shell">
-        <div class="hero-grid">
 
-          <div class="hero-left">
-            <div class="hero-tag">Templates Library</div>
-            <h1>
-              Use <span class="text-gold">ready templates</span>,
-              save <span class="text-purple">time</span>,
-              and launch <span class="text-pink">faster</span>
-              with <span class="text-blue">clarity</span>
-            </h1>
-
-            <p>
-              Bariq Templates gives businesses and creators a premium library of layouts,
-              campaign structures, post ideas, ad styles, and reusable assets for faster execution.
-            </p>
-
-            <div class="hero-actions">
-              <a href="ai-generator.html" class="btn btn-primary">✨ Generate New Content</a>
-              <a href="campaign.html" class="btn btn-light">📣 Open Campaign Studio</a>
-              <a href="business-dashboard.html" class="btn btn-light">🏢 Business Dashboard</a>
-            </div>
-
-            <div class="marquee-wrap">
-              <div class="marquee-track">
-                <span class="mini-chip">📣 Meta Ad Templates</span>
-                <span class="mini-chip">🎥 Reel Layouts</span>
-                <span class="mini-chip">💬 WhatsApp Promo Styles</span>
-                <span class="mini-chip">🧩 Creative Blocks</span>
-                <span class="mini-chip">⭐ Premium Designs</span>
-                <span class="mini-chip">📍 Local Offers</span>
-                <span class="mini-chip">💄 Beauty Formats</span>
-                <span class="mini-chip">📣 Meta Ad Templates</span>
-                <span class="mini-chip">🎥 Reel Layouts</span>
-                <span class="mini-chip">💬 WhatsApp Promo Styles</span>
-                <span class="mini-chip">🧩 Creative Blocks</span>
-                <span class="mini-chip">⭐ Premium Designs</span>
-                <span class="mini-chip">📍 Local Offers</span>
-                <span class="mini-chip">💄 Beauty Formats</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-right">
-            <div class="hero-note">
-              <h3>Template-first productivity</h3>
-              <p>Instead of starting from scratch every time, Bariq lets you choose reusable premium formats that match real campaign goals.</p>
-            </div>
-
-            <div class="mini-stats">
-              <div class="mini-stat">
-                <div class="num">40+</div>
-                <div class="lab">Templates</div>
-              </div>
-              <div class="mini-stat">
-                <div class="num">8</div>
-                <div class="lab">Use Cases</div>
-              </div>
-              <div class="mini-stat">
-                <div class="num">Fast</div>
-                <div class="lab">Workflow</div>
-              </div>
-            </div>
-
-            <div class="template-strip">
-              <div class="template-track">
-                <div class="template-image">
-                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Beauty Promo</span>
-                </div>
-                <div class="template-image">
-                  <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Clinic Offer</span>
-                </div>
-                <div class="template-image">
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Women Campaign</span>
-                </div>
-                <div class="template-image">
-                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Luxury Ad</span>
-                </div>
-
-                <div class="template-image">
-                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Beauty Promo</span>
-                </div>
-                <div class="template-image">
-                  <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Clinic Offer</span>
-                </div>
-                <div class="template-image">
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Women Campaign</span>
-                </div>
-                <div class="template-image">
-                  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="">
-                  <span>Luxury Ad</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+      <div class="hero">
+        <div class="tag">Ready-to-use marketing templates</div>
+        <h1>Use <span class="gold">industry-wise templates</span> for ads, reels, offers, banners and campaigns.</h1>
+        <p>
+          BariqAI Templates helps users pick campaign-ready structures by industry, platform and objective so content creation feels faster, smarter and more premium.
+        </p>
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-box">
-        <h2>Browse template categories</h2>
-        <p class="section-text">Find the right format for the campaign before you generate or publish.</p>
-
-        <div class="filter-bar">
-          <input type="text" placeholder="Search template name" />
+      <div class="filters">
+        <div class="filters-grid">
+          <input type="text" placeholder="Search template name">
           <select>
-            <option>All Categories</option>
+            <option>All Industries</option>
+            <option>Clinics / Aesthetic</option>
+            <option>Salon / Beauty</option>
+            <option>Real Estate</option>
+            <option>D2C Brand</option>
+            <option>Restaurant / Cafe</option>
+          </select>
+          <select>
+            <option>All Platforms</option>
             <option>Meta Ads</option>
-            <option>Reels</option>
-            <option>WhatsApp</option>
-            <option>Clinic Offers</option>
-            <option>Luxury</option>
+            <option>Instagram</option>
+            <option>Google Ads</option>
+            <option>YouTube</option>
+            <option>LinkedIn</option>
           </select>
           <select>
-            <option>All Styles</option>
-            <option>Premium</option>
-            <option>Bold</option>
-            <option>Emotional</option>
-            <option>Direct Response</option>
-          </select>
-          <select>
-            <option>All Goals</option>
-            <option>Leads</option>
-            <option>Awareness</option>
-            <option>Sales</option>
-            <option>Engagement</option>
+            <option>All Objectives</option>
+            <option>Lead Generation</option>
+            <option>Sales Conversion</option>
+            <option>Brand Awareness</option>
+            <option>Offer Promotion</option>
           </select>
         </div>
+      </div>
 
-        <div class="template-grid">
-          <div class="template-card">
-            <div class="template-top">
-              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="">
-            </div>
-            <h3>Beauty Offer Meta Ad</h3>
-            <p>Premium beauty and skincare ad layout designed for women-focused offers and strong CTR-based campaigns.</p>
-            <div class="pill-row">
-              <span class="pill">Meta</span>
-              <span class="pill">Beauty</span>
-              <span class="pill">Leads</span>
-            </div>
-            <div class="card-actions">
-              <button class="btn-small primary">Use Template</button>
-              <button class="btn-small light">Preview</button>
+      <h2 class="section-title">Featured templates</h2>
+
+      <div class="template-grid">
+        <div class="template-card">
+          <div class="template-visual">
+            <div class="mock">
+              <div class="mock-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="mock-body">
+                <div class="line gold long"></div>
+                <div class="line mid"></div>
+                <div class="line short"></div>
+                <div class="visual-grid">
+                  <div class="mini-box"></div>
+                  <div class="mini-box"></div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="template-card">
+          <div class="template-body">
             <div class="template-top">
-              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="">
+              <h3>Clinic Lead Generation Ad</h3>
+              <span class="badge">Meta Ads</span>
             </div>
-            <h3>Clinic Consultation Promo</h3>
-            <p>Clean clinic template for consultation offers, treatment-based services, and local healthcare or wellness campaigns.</p>
-            <div class="pill-row">
-              <span class="pill">Clinic</span>
-              <span class="pill">Trust</span>
-              <span class="pill">Local</span>
+            <p>Perfect for aesthetic clinics, laser care, slimming, skin and confidence services with a premium women-first angle.</p>
+            <div class="chips">
+              <span class="chip">Clinics</span>
+              <span class="chip">Leads</span>
+              <span class="chip">Premium</span>
             </div>
-            <div class="card-actions">
-              <button class="btn-small primary">Use Template</button>
-              <button class="btn-small light">Preview</button>
+            <div class="template-actions">
+              <button class="action-btn use">Use Template</button>
+              <button class="action-btn preview">Preview</button>
             </div>
           </div>
+        </div>
 
-          <div class="template-card">
-            <div class="template-top">
-              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="">
-            </div>
-            <h3>Women Wellness Reel</h3>
-            <p>Soft emotional reel format for women confidence, wellness, transformation, and self-care storytelling campaigns.</p>
-            <div class="pill-row">
-              <span class="pill">Reel</span>
-              <span class="pill">Women</span>
-              <span class="pill">Emotional</span>
-            </div>
-            <div class="card-actions">
-              <button class="btn-small primary">Use Template</button>
-              <button class="btn-small light">Preview</button>
+        <div class="template-card">
+          <div class="template-visual">
+            <div class="mock">
+              <div class="mock-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="mock-body">
+                <div class="line long"></div>
+                <div class="line gold mid"></div>
+                <div class="line short"></div>
+                <div class="visual-grid">
+                  <div class="mini-box"></div>
+                  <div class="mini-box" style="background:linear-gradient(135deg,#fff5df,#f8f1ff)"></div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="template-card">
+          <div class="template-body">
             <div class="template-top">
-              <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="">
+              <h3>Salon Offer Reel Template</h3>
+              <span class="badge">Instagram</span>
             </div>
-            <h3>Luxury Product Ad</h3>
-            <p>Premium product format for high-perception launches, packaging visuals, and luxury lifestyle campaigns.</p>
-            <div class="pill-row">
-              <span class="pill">Luxury</span>
-              <span class="pill">Product</span>
-              <span class="pill">Premium</span>
+            <p>Fast, attractive offer template for salons, beauty studios and makeover campaigns with hook-first short-form storytelling.</p>
+            <div class="chips">
+              <span class="chip">Salon</span>
+              <span class="chip">Reels</span>
+              <span class="chip">Offers</span>
             </div>
-            <div class="card-actions">
-              <button class="btn-small primary">Use Template</button>
-              <button class="btn-small light">Preview</button>
+            <div class="template-actions">
+              <button class="action-btn use">Use Template</button>
+              <button class="action-btn preview">Preview</button>
             </div>
           </div>
+        </div>
 
-          <div class="template-card">
-            <div class="template-top">
-              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="">
-            </div>
-            <h3>Direct Response Promo</h3>
-            <p>Fast conversion-led template with stronger CTA blocks, urgency lines, and practical action-focused messaging.</p>
-            <div class="pill-row">
-              <span class="pill">Sales</span>
-              <span class="pill">Urgency</span>
-              <span class="pill">Direct Response</span>
-            </div>
-            <div class="card-actions">
-              <button class="btn-small primary">Use Template</button>
-              <button class="btn-small light">Preview</button>
+        <div class="template-card">
+          <div class="template-visual">
+            <div class="mock">
+              <div class="mock-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="mock-body">
+                <div class="line gold long"></div>
+                <div class="line mid"></div>
+                <div class="line mid"></div>
+                <div class="visual-grid">
+                  <div class="mini-box"></div>
+                  <div class="mini-box"></div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="template-card">
+          <div class="template-body">
             <div class="template-top">
-              <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=900&q=80" alt="">
+              <h3>Real Estate Site Visit Campaign</h3>
+              <span class="badge">Meta + Google</span>
             </div>
-            <h3>WhatsApp Offer Message</h3>
-            <p>Short promo structure for follow-up broadcasts, launch offers, and quick lead-nurturing messages.</p>
-            <div class="pill-row">
-              <span class="pill">WhatsApp</span>
-              <span class="pill">Follow-up</span>
-              <span class="pill">Promo</span>
+            <p>Structured for property launches, premium site visit campaigns, urgency offers and locality-first targeting.</p>
+            <div class="chips">
+              <span class="chip">Real Estate</span>
+              <span class="chip">Site Visit</span>
+              <span class="chip">Launch</span>
             </div>
-            <div class="card-actions">
-              <button class="btn-small primary">Use Template</button>
-              <button class="btn-small light">Preview</button>
+            <div class="template-actions">
+              <button class="action-btn use">Use Template</button>
+              <button class="action-btn preview">Preview</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-visual">
+            <div class="mock">
+              <div class="mock-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="mock-body">
+                <div class="line long"></div>
+                <div class="line gold short"></div>
+                <div class="line mid"></div>
+                <div class="visual-grid">
+                  <div class="mini-box"></div>
+                  <div class="mini-box"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="template-body">
+            <div class="template-top">
+              <h3>D2C Product Launch Creative</h3>
+              <span class="badge">Ads + Social</span>
+            </div>
+            <p>Built for product-first launches with benefits, urgency, CTA, captions and creator-friendly promo structure.</p>
+            <div class="chips">
+              <span class="chip">D2C</span>
+              <span class="chip">Launch</span>
+              <span class="chip">Sales</span>
+            </div>
+            <div class="template-actions">
+              <button class="action-btn use">Use Template</button>
+              <button class="action-btn preview">Preview</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-visual">
+            <div class="mock">
+              <div class="mock-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="mock-body">
+                <div class="line gold mid"></div>
+                <div class="line long"></div>
+                <div class="line short"></div>
+                <div class="visual-grid">
+                  <div class="mini-box"></div>
+                  <div class="mini-box"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="template-body">
+            <div class="template-top">
+              <h3>Restaurant Weekend Promo</h3>
+              <span class="badge">Instagram + Meta</span>
+            </div>
+            <p>Quick local promo layout for cafes and restaurants with cravings-based messaging and action-first CTA.</p>
+            <div class="chips">
+              <span class="chip">Restaurant</span>
+              <span class="chip">Weekend</span>
+              <span class="chip">Local Reach</span>
+            </div>
+            <div class="template-actions">
+              <button class="action-btn use">Use Template</button>
+              <button class="action-btn preview">Preview</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-visual">
+            <div class="mock">
+              <div class="mock-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="mock-body">
+                <div class="line long"></div>
+                <div class="line mid"></div>
+                <div class="line gold short"></div>
+                <div class="visual-grid">
+                  <div class="mini-box"></div>
+                  <div class="mini-box"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="template-body">
+            <div class="template-top">
+              <h3>Creator Personal Branding Reel</h3>
+              <span class="badge">Reels + Shorts</span>
+            </div>
+            <p>Good for coaches, personal brands, consultants and creators who want fast growth hooks and story-led positioning.</p>
+            <div class="chips">
+              <span class="chip">Creator</span>
+              <span class="chip">Branding</span>
+              <span class="chip">Reels</span>
+            </div>
+            <div class="template-actions">
+              <button class="action-btn use">Use Template</button>
+              <button class="action-btn preview">Preview</button>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="library-block">
+        <h2 class="section-title" style="margin-bottom:0;">Template library direction</h2>
+        <div class="library-grid">
+          <div class="library-item">
+            <strong>Lead Ads</strong>
+            <span>Clinic, salon, service and real estate inquiry templates with strong CTA blocks.</span>
+          </div>
+          <div class="library-item">
+            <strong>Offer Reels</strong>
+            <span>Short-form promo reels for beauty, fashion, food and festive campaign offers.</span>
+          </div>
+          <div class="library-item">
+            <strong>Banner Headlines</strong>
+            <span>Static creative text systems with premium offer-first headline formats.</span>
+          </div>
+          <div class="library-item">
+            <strong>Google Headlines</strong>
+            <span>Search-friendly headline packs for conversions, leads and local business growth.</span>
+          </div>
+          <div class="library-item">
+            <strong>Video Storyboards</strong>
+            <span>Scene-by-scene structures for product launches, clinic confidence and social videos.</span>
+          </div>
+          <div class="library-item">
+            <strong>Voiceover Packs</strong>
+            <span>Warm, premium, strong and persuasive voiceover templates for reels and ads.</span>
+          </div>
+          <div class="library-item">
+            <strong>Festival Campaigns</strong>
+            <span>Diwali, Dhanteras, Women’s Day and local festive template systems.</span>
+          </div>
+          <div class="library-item">
+            <strong>Creator Collabs</strong>
+            <span>Templates for brand x creator promo campaigns and influencer launch kits.</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-box">
-        <h2>Why templates matter inside Bariq</h2>
-        <p class="section-text">Templates make the platform faster, easier, and more usable for daily campaign execution.</p>
-
-        <div class="showcase-grid">
-          <div class="showcase-card">
-            <div class="showcase-icon">⚡</div>
-            <h3>Faster creation</h3>
-            <p>Templates reduce decision fatigue and help brands go from idea to launch without starting from zero every time.</p>
-          </div>
-
-          <div class="showcase-card">
-            <div class="showcase-icon">💜</div>
-            <h3>More consistency</h3>
-            <p>Using premium reusable formats helps Bariq outputs feel polished and visually connected across campaigns.</p>
-          </div>
-
-          <div class="showcase-card">
-            <div class="showcase-icon">📈</div>
-            <h3>Better execution</h3>
-            <p>Templates bridge the gap between AI ideas and real-world campaign deployment for business owners and creators.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-box">
-        <div class="quick-links-grid">
-          <a class="quick-link" href="index.html">🏠 Home</a>
-          <a class="quick-link" href="business-dashboard.html">🏢 Business</a>
-          <a class="quick-link" href="ai-generator.html">✨ AI Generator</a>
-          <a class="quick-link" href="campaign.html">📣 Campaign Studio</a>
-          <a class="quick-link" href="creator-marketplace.html">🎥 Creators</a>
-          <a class="quick-link" href="creator-dashboard.html">👩 Creator Dashboard</a>
-          <a class="quick-link" href="video-creator.html">🎬 Video Creator</a>
-          <a class="quick-link" href="payments.html">💳 Payments</a>
-          <a class="quick-link" href="pricing.html">💰 Pricing</a>
-          <a class="quick-link" href="admin-dashboard.html">⚙️ Admin</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h3>Bariq AI</h3>
-          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, and execution systems.</p>
-        </div>
-
-        <div class="footer-col">
-          <h3>Platform</h3>
-          <a href="index.html">Home</a>
-          <a href="ai-generator.html">AI Generator</a>
-          <a href="business-dashboard.html">Business Dashboard</a>
-          <a href="creator-dashboard.html">Creator Dashboard</a>
-        </div>
-
-        <div class="footer-col">
-          <h3>Legal</h3>
-          <a href="terms.html">Terms</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="refund-policy.html">Refund Policy</a>
-        </div>
-
-        <div class="footer-col">
-          <h3>Contact</h3>
-          <a href="contact.html">Contact Us</a>
-          <a href="pricing.html">Pricing</a>
-          <a href="payments.html">Payments</a>
-          <p>support@bariqai.com</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    function toggleMobileMenu() {
-      document.getElementById("mainNav").classList.toggle("show");
-    }
-  </script>
 </body>
 </html>
