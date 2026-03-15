@@ -3,45 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BariqAI AI Generator</title>
+  <title>BariqAI — AI Generator</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
   <style>
     *{box-sizing:border-box}
+    html,body{margin:0;padding:0;overflow-x:hidden}
     body{
-      margin:0;
       font-family:'Inter',sans-serif;
-      background:linear-gradient(180deg,#fcfcff 0%, #f7f8ff 100%);
-      color:#2f3250;
+      color:#3f3a5a;
+      background:
+        radial-gradient(circle at top left, rgba(144,120,214,.06), transparent 18%),
+        radial-gradient(circle at top right, rgba(235,196,120,.08), transparent 18%),
+        linear-gradient(180deg,#fffefe 0%,#fffaf5 100%);
     }
 
     :root{
-      --card:#ffffff;
-      --line:#e9ebf5;
-      --text:#2f3250;
-      --muted:#70758f;
-      --purple:#7b6df6;
-      --purple-soft:#f1efff;
-      --pink-soft:#fff1f6;
-      --blue-soft:#eef6ff;
-      --mint-soft:#eefcf6;
-      --peach-soft:#fff4eb;
-      --yellow-soft:#fff8e7;
-      --shadow:0 14px 32px rgba(90,100,140,.08);
+      --text:#3f3a5a;
+      --muted:#7b7592;
+      --purple:#8a72d8;
+      --purple-soft:#f4efff;
+      --gold:#d8b15b;
+      --gold-soft:#fff4d8;
+      --pink-soft:#fff1f7;
+      --blue-soft:#eef7ff;
+      --mint-soft:#eefcf4;
+      --line:#efe7e1;
+      --white:#ffffff;
+      --shadow:0 16px 36px rgba(110,90,70,.08);
+      --radius:26px;
     }
 
     a{text-decoration:none;color:inherit}
-    .container{width:min(1320px,calc(100% - 28px));margin:0 auto}
+    button,input,select,textarea{font:inherit}
+    .container{width:min(1360px,calc(100% - 28px));margin:0 auto}
 
     .site-header{
       position:sticky;
       top:0;
       z-index:999;
-      background:rgba(255,255,255,.92);
-      backdrop-filter:blur(10px);
+      background:rgba(255,255,255,.93);
+      backdrop-filter:blur(12px);
       border-bottom:1px solid var(--line);
     }
 
@@ -50,39 +56,52 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:18px;
+      gap:16px;
+      position:relative;
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:12px;
+      gap:10px;
       white-space:nowrap;
     }
 
-    .brand-mark{
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(135deg,#ddd6ff,#b9a9ff);
-      color:#3d2f83;
-      font-weight:800;
-      font-size:22px;
+    .brand-dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),var(--purple));
       flex:0 0 auto;
     }
 
     .brand-text{
-      font-size:18px;
-      font-weight:800;
-      color:#27304a;
+      font-family:'Cormorant Garamond',serif;
+      font-size:42px;
+      line-height:1;
+      font-weight:700;
+      background:linear-gradient(90deg,var(--gold) 0%, #8f6d24 35%, var(--purple) 78%, #5d4ca7 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .menu-toggle{
+      display:none;
+      border:none;
+      background:#f8f3ff;
+      color:var(--purple);
+      border-radius:14px;
+      padding:10px 14px;
+      font-size:24px;
+      cursor:pointer;
     }
 
     .main-nav{
       display:flex;
-      gap:8px;
       align-items:center;
+      gap:8px;
       white-space:nowrap;
       overflow-x:auto;
       scrollbar-width:none;
@@ -91,167 +110,276 @@
     .main-nav::-webkit-scrollbar{display:none}
 
     .main-nav a{
-      padding:10px 14px;
+      padding:10px 13px;
       border-radius:14px;
-      font-size:14px;
+      font-size:13px;
       font-weight:700;
-      color:#66708d;
+      color:#736d8b;
+      display:flex;
+      align-items:center;
+      gap:7px;
     }
+
+    .main-nav a i{font-size:13px;color:#a58fdc}
 
     .main-nav a.active,
     .main-nav a:hover{
-      background:var(--purple-soft);
+      background:#fbf8ff;
       color:var(--purple);
     }
 
-    .nav-actions{
-      display:flex;
-      gap:10px;
-    }
+    .main-nav a.active i,
+    .main-nav a:hover i{color:var(--gold)}
 
-    .top-btn{
-      padding:11px 16px;
-      border-radius:14px;
-      font-size:14px;
-      font-weight:800;
-      border:1px solid var(--line);
+    .page{padding:12px 0 34px}
+
+    .soft-card{
       background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
     }
-
-    .top-btn.start{
-      background:linear-gradient(90deg,#7b6df6,#9e8cff);
-      color:#fff;
-      border:none;
-    }
-
-    .page{padding:22px 0 40px}
 
     .hero{
-      background:linear-gradient(135deg,#ffffff 0%, #f7f4ff 46%, #eef7ff 100%);
-      border:1px solid var(--line);
-      border-radius:30px;
-      box-shadow:var(--shadow);
-      padding:28px;
-      margin-bottom:20px;
+      padding:20px;
+      background:
+        radial-gradient(circle at 18% 24%, rgba(142,114,216,.07), transparent 16%),
+        radial-gradient(circle at 84% 14%, rgba(216,177,91,.09), transparent 16%),
+        linear-gradient(180deg,#ffffff 0%,#fffdfa 100%);
+      overflow:hidden;
     }
 
-    .badge{
+    .hero-grid{
+      display:grid;
+      grid-template-columns:.98fr 1.02fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .hero-left{
+      min-height:500px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      padding-top:4px;
+    }
+
+    .tag{
       display:inline-flex;
       align-items:center;
       gap:8px;
       padding:10px 14px;
       border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#6d6787;
+      font-size:12px;
+      font-weight:700;
+      box-shadow:0 8px 18px rgba(100,70,50,.04);
+      margin-bottom:10px;
+      width:max-content;
+    }
+
+    .hero-title{
+      margin:0;
+      font-family:'Cormorant Garamond',serif;
+      font-size:54px;
+      line-height:.98;
+      letter-spacing:-0.4px;
+      font-weight:700;
+      color:#2e2947;
+      max-width:580px;
+    }
+
+    .hero-title .gold{
+      background:linear-gradient(90deg,var(--gold),#9a742a);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .hero-title .purple{
+      background:linear-gradient(90deg,var(--purple),#604eb0);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .hero-sub{
+      margin:12px 0 0;
+      max-width:560px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.85;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      border:none;
+      border-radius:16px;
+      padding:13px 16px;
+      font-size:13px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(90deg,var(--gold),var(--purple));
+      box-shadow:0 12px 26px rgba(138,114,216,.18);
+    }
+
+    .btn-light{
       background:#fff;
       border:1px solid var(--line);
-      font-size:13px;
-      font-weight:800;
-      color:#66708d;
-      margin-bottom:14px;
+      color:#625c7c;
     }
 
-    .hero h1{
-      margin:0;
-      font-size:48px;
-      line-height:1.06;
-      font-weight:800;
-      max-width:780px;
-      color:#26314b;
-    }
-
-    .hero p{
-      margin:12px 0 0;
-      max-width:720px;
-      font-size:16px;
-      line-height:1.75;
-      color:var(--muted);
-    }
-
-    .guide{
+    .platforms{
+      margin-top:18px;
       display:grid;
       grid-template-columns:repeat(4,1fr);
-      gap:16px;
-      margin-bottom:22px;
+      gap:12px;
     }
 
-    .guide-card{
-      background:#fff;
+    .platform{
+      min-height:86px;
+      border-radius:20px;
       border:1px solid var(--line);
-      border-radius:24px;
+      background:linear-gradient(180deg,#ffffff 0%, #fcf9ff 100%);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      box-shadow:0 10px 22px rgba(90,70,50,.05);
+      transition:.2s ease;
+      text-align:center;
+      padding:8px;
+    }
+
+    .platform:hover{transform:translateY(-3px)}
+    .platform i{font-size:20px}
+    .platform span{
+      font-size:11px;
+      font-weight:700;
+      line-height:1.2;
+      color:#5b5675;
+    }
+
+    .hero-right{
+      min-height:500px;
+      border-radius:28px;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg,#fff3ec 0%,#fff9f5 48%,#f6f2ff 100%);
       padding:18px;
-      box-shadow:var(--shadow);
-    }
-
-    .guide-step{
-      width:34px;
-      height:34px;
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      background:var(--purple-soft);
-      color:var(--purple);
-      font-size:14px;
-      font-weight:800;
-      margin-bottom:12px;
-    }
-
-    .guide-card h3{
-      margin:0 0 6px;
-      font-size:18px;
-      color:#29324c;
-    }
-
-    .guide-card p{
-      margin:0;
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.7;
-    }
-
-    .studio-grid{
-      display:grid;
-      grid-template-columns:420px 1fr;
-      gap:18px;
-      align-items:start;
-    }
-
-    .panel{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:26px;
-      box-shadow:var(--shadow);
+      position:relative;
       overflow:hidden;
     }
 
-    .panel-head{
-      padding:20px 20px 10px;
+    .hero-right:before{
+      content:"";
+      position:absolute;
+      right:-60px;
+      bottom:-80px;
+      width:200px;
+      height:200px;
+      background:radial-gradient(circle, rgba(142,114,216,.12), transparent 65%);
+      pointer-events:none;
     }
 
-    .panel-head h2{
-      margin:0 0 6px;
-      font-size:23px;
-      font-weight:800;
-      color:#29324c;
-    }
-
-    .panel-head p{
+    .hero-right h3{
       margin:0;
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.7;
+      font-family:'Cormorant Garamond',serif;
+      font-size:34px;
+      line-height:1.02;
+      font-weight:700;
+      max-width:360px;
+      color:#2f2a49;
     }
 
-    .form-wrap{
-      padding:18px 20px 20px;
+    .hero-right p{
+      margin:8px 0 16px;
+      max-width:420px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.75;
+    }
+
+    .floating-strip{
+      overflow:hidden;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:10px 0;
+      box-shadow:0 10px 18px rgba(100,70,50,.04);
+      margin-bottom:14px;
+    }
+
+    .floating-track{
+      display:flex;
+      gap:12px;
+      width:max-content;
+      animation:marquee 22s linear infinite;
+    }
+
+    .floating-pill{
+      flex:0 0 auto;
+      padding:10px 14px;
+      border-radius:16px;
+      font-size:13px;
+      font-weight:700;
+      white-space:nowrap;
+      color:#4b4568;
+    }
+
+    .fp1{background:var(--pink-soft)}
+    .fp2{background:var(--mint-soft)}
+    .fp3{background:var(--blue-soft)}
+    .fp4{background:var(--gold-soft)}
+    .fp5{background:var(--purple-soft)}
+
+    .input-shell{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:14px;
+      box-shadow:0 14px 28px rgba(0,0,0,.05);
+      margin-bottom:14px;
+    }
+
+    .field-grid{
       display:grid;
-      gap:14px;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
     }
 
     .field label{
-      display:block;
-      margin-bottom:8px;
-      font-size:13px;
-      font-weight:800;
-      color:#4f5776;
+      font-size:12px;
+      font-weight:700;
+      color:#645d80;
     }
 
     .field input,
@@ -259,148 +387,95 @@
     .field textarea{
       width:100%;
       border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px;
-      font:inherit;
-      color:var(--text);
+      border-radius:14px;
+      padding:13px 14px;
       background:#fff;
+      color:var(--text);
       outline:none;
     }
 
     .field textarea{
-      min-height:110px;
+      min-height:96px;
       resize:vertical;
     }
 
-    .grid-2{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
-
-    .chips{
+    .action-bar{
       display:flex;
-      flex-wrap:wrap;
       gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
     }
 
-    .chip{
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:#fff;
-      font-size:13px;
+    .section{
+      margin-top:22px;
+    }
+
+    .section-head{
+      margin-bottom:14px;
+    }
+
+    .section-head h2{
+      margin:0 0 8px;
+      font-size:22px;
       font-weight:700;
-      color:#5d6685;
-      cursor:pointer;
+      color:#2e2947;
     }
 
-    .chip.active{
-      background:var(--purple-soft);
-      color:var(--purple);
-      border-color:#e2dcfb;
-    }
-
-    .generate-btn{
-      width:100%;
-      border:none;
-      border-radius:18px;
-      padding:16px 18px;
-      font-size:15px;
-      font-weight:800;
-      color:#fff;
-      cursor:pointer;
-      background:linear-gradient(90deg,#7b6df6,#9e8cff);
-      box-shadow:0 14px 28px rgba(123,109,246,.18);
-    }
-
-    .workspace{
-      padding:20px;
-    }
-
-    .workspace-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:14px;
-      flex-wrap:wrap;
-      margin-bottom:16px;
-    }
-
-    .workspace-top h3{
+    .section-head p{
       margin:0;
-      font-size:24px;
-      font-weight:800;
-      color:#29324c;
-    }
-
-    .workspace-top p{
-      margin:6px 0 0;
-      font-size:14px;
       color:var(--muted);
-      line-height:1.7;
+      font-size:14px;
+      line-height:1.75;
     }
 
-    .status{
-      padding:10px 14px;
-      border-radius:999px;
-      background:#eef6ff;
-      color:#4277c4;
-      font-size:13px;
-      font-weight:800;
-      border:1px solid #dbe9ff;
-      white-space:nowrap;
-    }
-
-    .output-tabs{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:16px;
-    }
-
-    .tab{
-      padding:10px 14px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid var(--line);
-      font-size:13px;
-      font-weight:800;
-      color:#68729a;
-      cursor:pointer;
-    }
-
-    .tab.active{
-      background:var(--purple-soft);
-      color:var(--purple);
-      border-color:#e2dcfb;
-    }
-
-    .output-grid{
+    .outputs{
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:repeat(3,1fr);
       gap:16px;
     }
 
     .output-card{
-      border:1px solid var(--line);
-      border-radius:22px;
       padding:18px;
-      background:#fff;
-      box-shadow:0 10px 20px rgba(90,100,140,.05);
       min-height:220px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      transition:.2s ease;
     }
 
-    .output-card h4{
-      margin:0 0 10px;
+    .output-card:hover{transform:translateY(-3px)}
+
+    .output-card .type{
+      display:inline-flex;
+      padding:8px 11px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:700;
+      width:max-content;
+      margin-bottom:10px;
+    }
+
+    .type-purple{background:var(--purple-soft);color:#6b59db}
+    .type-pink{background:var(--pink-soft);color:#d86190}
+    .type-blue{background:var(--blue-soft);color:#4781da}
+    .type-mint{background:var(--mint-soft);color:#3d9d72}
+    .type-gold{background:var(--gold-soft);color:#9c7a1f}
+
+    .output-card h3{
+      margin:0 0 8px;
       font-size:18px;
-      color:#29324c;
+      font-weight:700;
+      color:#2f2a49;
     }
 
     .output-card p,
     .output-card li{
       margin:0;
-      font-size:14px;
+      font-size:13px;
       color:var(--muted);
       line-height:1.8;
     }
@@ -417,70 +492,151 @@
       margin-top:14px;
     }
 
-    .small-btn{
+    .mini-btn{
       border:none;
       border-radius:12px;
       padding:10px 12px;
       font-size:12px;
-      font-weight:800;
+      font-weight:700;
       cursor:pointer;
-      background:#f4f6ff;
-      color:#69729a;
+      background:#f6f2ff;
+      color:#6553b7;
     }
 
-    .small-btn.primary{
-      background:var(--purple-soft);
-      color:var(--purple);
+    .mini-btn.gold{
+      background:#fff4dc;
+      color:#9a7320;
     }
 
-    .quick-strip{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-    }
-
-    .quick-card{
+    .moving-ideas{
+      overflow:hidden;
+      border-radius:22px;
+      background:#fff;
       border:1px solid var(--line);
-      border-radius:20px;
+      padding:12px 0;
+      box-shadow:var(--shadow);
+    }
+
+    .ideas-track{
+      display:flex;
+      gap:14px;
+      width:max-content;
+      animation:marquee 28s linear infinite;
+    }
+
+    .idea-box{
+      flex:0 0 auto;
+      width:270px;
       padding:16px;
-      background:#fbfbff;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(100,70,50,.04);
     }
 
-    .quick-card strong{
+    .idea-box strong{
       display:block;
-      margin-bottom:8px;
+      margin-bottom:6px;
       font-size:15px;
-      color:#2d3653;
+      color:#2f2a49;
     }
 
-    .quick-card span{
+    .idea-box span{
       display:block;
       font-size:13px;
       color:var(--muted);
       line-height:1.7;
     }
 
+    .site-footer{
+      margin-top:28px;
+      background:#181427;
+      color:#fff;
+      padding:40px 0;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr 1fr;
+      gap:24px;
+    }
+
+    .footer-col h3{
+      margin:0 0 14px;
+      font-size:18px;
+      color:#fff;
+      font-weight:700;
+    }
+
+    .footer-col p,
+    .footer-col a{
+      display:block;
+      margin:0 0 10px;
+      color:#d9d4ea;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    @keyframes marquee{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-50%)}
+    }
+
     @media (max-width:1100px){
-      .guide,
-      .output-grid,
-      .quick-strip{
+      .hero-grid,
+      .outputs,
+      .footer-grid{
         grid-template-columns:1fr 1fr;
       }
-      .studio-grid{
+      .outputs{grid-template-columns:1fr 1fr}
+    }
+
+    @media (max-width:900px){
+      .hero-grid,
+      .outputs,
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+      .field-grid{
         grid-template-columns:1fr;
       }
     }
 
     @media (max-width:768px){
       .container{width:min(100% - 18px,1200px)}
-      .main-nav,.nav-actions{display:none}
-      .hero h1{font-size:36px}
-      .guide,
-      .output-grid,
-      .quick-strip,
-      .grid-2{
+      .menu-toggle{display:block}
+      .main-nav{
+        display:none;
+        position:absolute;
+        top:82px;
+        left:0;
+        right:0;
+        background:#fff;
+        border:1px solid var(--line);
+        border-radius:18px;
+        box-shadow:0 18px 40px rgba(0,0,0,.08);
+        padding:14px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
+      }
+      .main-nav.show{display:flex}
+      .main-nav a{width:100%;background:#fff8f2}
+      .brand-text{font-size:38px}
+      .hero-title{font-size:42px}
+      .hero-grid,
+      .platforms,
+      .outputs,
+      .footer-grid,
+      .field-grid{
         grid-template-columns:1fr;
+      }
+      .hero-actions,.action-bar{
+        flex-direction:column;
+      }
+      .btn,.mini-btn{
+        width:100%;
+        justify-content:center;
       }
     }
   </style>
@@ -490,220 +646,318 @@
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="brand">
-        <span class="brand-mark">B</span>
-        <span class="brand-text">BariqAI</span>
+        <span class="brand-dot"></span>
+        <span class="brand-text">Bariq AI</span>
       </a>
 
-      <nav class="main-nav">
-        <a href="index.html">Home</a>
-        <a href="business-dashboard.html">Business</a>
-        <a href="ai-generator.html" class="active">AI Generator</a>
-        <a href="campaign.html">Campaign</a>
-        <a href="creator-marketplace.html">Creators</a>
-        <a href="templates.html">Templates</a>
-        <a href="video-creator.html">Video Creator</a>
-        <a href="payments.html">Payments</a>
-      </nav>
+      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
 
-      <div class="nav-actions">
-        <a href="login.html" class="top-btn">Login</a>
-        <a href="signup.html" class="top-btn start">Start Free</a>
-      </div>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="business-dashboard.html"><i class="fa-solid fa-building"></i> Business</a>
+        <a href="ai-generator.html" class="active"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Generator</a>
+        <a href="campaign.html"><i class="fa-solid fa-bullhorn"></i> Campaign</a>
+        <a href="creator-marketplace.html"><i class="fa-solid fa-video"></i> Creators</a>
+        <a href="templates.html"><i class="fa-solid fa-layer-group"></i> Templates</a>
+        <a href="video-creator.html"><i class="fa-solid fa-clapperboard"></i> Video Creator</a>
+        <a href="payments.html"><i class="fa-solid fa-credit-card"></i> Payments</a>
+      </nav>
     </div>
   </header>
 
   <section class="page">
     <div class="container">
 
-      <div class="hero">
-        <div class="badge">AI content creation workspace</div>
-        <h1>Create hooks, ads, captions, headlines and CTA copy from one guided prompt.</h1>
-        <p>Fast, soft, visual and easy to use — this should feel like the main working engine inside BariqAI.</p>
+      <div class="soft-card hero">
+        <div class="hero-grid">
+          <div class="hero-left">
+            <div class="tag">Bariq AI Generator</div>
+
+            <h1 class="hero-title">
+              Create <span class="purple">ads</span>, captions,
+              hooks and <span class="gold">campaign copy</span>
+              from one prompt
+            </h1>
+
+            <p class="hero-sub">
+              Make your content feel live, soft and premium. Type once, and turn your idea into clean ready-to-use copy for Meta, Google, Instagram, LinkedIn and more.
+            </p>
+
+            <div class="hero-actions">
+              <button class="btn btn-primary" onclick="generateOutputs()">
+                <i class="fa-solid fa-sparkles"></i> Generate Content
+              </button>
+              <a href="templates.html" class="btn btn-light">
+                <i class="fa-solid fa-layer-group"></i> Open Templates
+              </a>
+              <a href="campaign.html" class="btn btn-light">
+                <i class="fa-solid fa-bullhorn"></i> Open Campaign
+              </a>
+            </div>
+
+            <div class="platforms">
+              <div class="platform">
+                <i class="fa-brands fa-instagram" style="color:#E1306C"></i>
+                <span>Instagram</span>
+              </div>
+              <div class="platform">
+                <i class="fa-brands fa-facebook-f" style="color:#1877F2"></i>
+                <span>Facebook</span>
+              </div>
+              <div class="platform">
+                <i class="fa-brands fa-linkedin-in" style="color:#0A66C2"></i>
+                <span>LinkedIn</span>
+              </div>
+              <div class="platform">
+                <i class="fa-brands fa-google" style="color:#4285F4"></i>
+                <span>Google</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <h3>Prompt once. Output everywhere.</h3>
+            <p>Use one clean prompt and let BariqAI shape multiple outputs for different platforms and styles.</p>
+
+            <div class="floating-strip">
+              <div class="floating-track">
+                <div class="floating-pill fp1">Meta ad copy</div>
+                <div class="floating-pill fp2">Instagram captions</div>
+                <div class="floating-pill fp3">Google headlines</div>
+                <div class="floating-pill fp4">CTA options</div>
+                <div class="floating-pill fp5">Campaign hooks</div>
+
+                <div class="floating-pill fp1">Meta ad copy</div>
+                <div class="floating-pill fp2">Instagram captions</div>
+                <div class="floating-pill fp3">Google headlines</div>
+                <div class="floating-pill fp4">CTA options</div>
+                <div class="floating-pill fp5">Campaign hooks</div>
+              </div>
+            </div>
+
+            <div class="input-shell">
+              <div class="field-grid">
+                <div class="field">
+                  <label>Brand name</label>
+                  <input id="brand" type="text" value="RSCC Aesthetic Clinic">
+                </div>
+                <div class="field">
+                  <label>Platform</label>
+                  <select id="platform">
+                    <option>Meta Ads</option>
+                    <option>Instagram</option>
+                    <option>Google Ads</option>
+                    <option>LinkedIn</option>
+                    <option>WhatsApp</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field-grid">
+                <div class="field">
+                  <label>Audience</label>
+                  <input id="audience" type="text" value="Women aged 22 to 45">
+                </div>
+                <div class="field">
+                  <label>City</label>
+                  <input id="city" type="text" value="Hyderabad">
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Main prompt</label>
+                <textarea id="prompt">Create a premium women-first campaign for laser hair reduction in Hyderabad. Focus on confidence, convenience, smooth skin and modern treatment.</textarea>
+              </div>
+
+              <div class="action-bar">
+                <button class="btn btn-primary" onclick="generateOutputs()">
+                  <i class="fa-solid fa-bolt"></i> Generate
+                </button>
+                <button class="btn btn-light" onclick="fillSample()">
+                  <i class="fa-solid fa-rotate"></i> Try Another Prompt
+                </button>
+              </div>
+            </div>
+
+            <div class="moving-ideas">
+              <div class="ideas-track">
+                <div class="idea-box">
+                  <strong>Ad Direction</strong>
+                  <span>Premium, women-first and confidence-led positioning.</span>
+                </div>
+                <div class="idea-box">
+                  <strong>Caption Style</strong>
+                  <span>Short, soft and conversion-friendly wording.</span>
+                </div>
+                <div class="idea-box">
+                  <strong>Campaign Hook</strong>
+                  <span>From repeated hassle to smooth confidence.</span>
+                </div>
+                <div class="idea-box">
+                  <strong>CTA Flow</strong>
+                  <span>Consultation-first and easy next step language.</span>
+                </div>
+
+                <div class="idea-box">
+                  <strong>Ad Direction</strong>
+                  <span>Premium, women-first and confidence-led positioning.</span>
+                </div>
+                <div class="idea-box">
+                  <strong>Caption Style</strong>
+                  <span>Short, soft and conversion-friendly wording.</span>
+                </div>
+                <div class="idea-box">
+                  <strong>Campaign Hook</strong>
+                  <span>From repeated hassle to smooth confidence.</span>
+                </div>
+                <div class="idea-box">
+                  <strong>CTA Flow</strong>
+                  <span>Consultation-first and easy next step language.</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
 
-      <div class="guide">
-        <div class="guide-card">
-          <div class="guide-step">1</div>
-          <h3>Add business details</h3>
-          <p>Enter brand, offer, audience and platform.</p>
+      <div class="section">
+        <div class="section-head">
+          <h2>Generated outputs</h2>
+          <p>Quick, editable and ready to move into templates, campaigns or videos.</p>
         </div>
-        <div class="guide-card">
-          <div class="guide-step">2</div>
-          <h3>Choose output type</h3>
-          <p>Generate ad copy, captions, hooks or headlines.</p>
-        </div>
-        <div class="guide-card">
-          <div class="guide-step">3</div>
-          <h3>Get instant draft</h3>
-          <p>Use clean ready-to-edit generated content.</p>
-        </div>
-        <div class="guide-card">
-          <div class="guide-step">4</div>
-          <h3>Send to workflow</h3>
-          <p>Move content into campaigns, video or templates.</p>
-        </div>
-      </div>
 
-      <div class="studio-grid">
-
-        <div class="panel">
-          <div class="panel-head">
-            <h2>Prompt Builder</h2>
-            <p>Fill once and generate multiple marketing outputs.</p>
+        <div class="outputs">
+          <div class="output-card">
+            <div>
+              <span class="type type-purple">Primary Ad Copy</span>
+              <h3>Main ad text</h3>
+              <p id="adCopy">Still depending on repeated temporary routines? Discover premium laser hair reduction for women at RSCC Aesthetic Clinic in Hyderabad. Feel smoother, more confident and more in control with care designed for modern women. Book your consultation today.</p>
+            </div>
+            <div class="card-actions">
+              <button class="mini-btn" onclick="copyText('adCopy')">Copy</button>
+              <button class="mini-btn gold">Save</button>
+            </div>
           </div>
 
-          <div class="form-wrap">
-            <div class="field">
-              <label>Brand / Business</label>
-              <input id="brand" type="text" value="RSCC Aesthetic Clinic">
+          <div class="output-card">
+            <div>
+              <span class="type type-pink">Hooks</span>
+              <h3>Opening lines</h3>
+              <ul id="hookList">
+                <li>Done with temporary fixes?</li>
+                <li>Choose smooth confidence instead.</li>
+                <li>Premium care for modern women.</li>
+                <li>Your routine deserves an upgrade.</li>
+              </ul>
             </div>
-
-            <div class="grid-2">
-              <div class="field">
-                <label>Platform</label>
-                <select id="platform">
-                  <option>Meta Ads</option>
-                  <option>Instagram</option>
-                  <option>Google Ads</option>
-                  <option>WhatsApp</option>
-                  <option>LinkedIn</option>
-                </select>
-              </div>
-              <div class="field">
-                <label>Output Type</label>
-                <select id="outputType">
-                  <option>Ad Copy</option>
-                  <option>Captions</option>
-                  <option>Hooks</option>
-                  <option>Google Headlines</option>
-                </select>
-              </div>
+            <div class="card-actions">
+              <button class="mini-btn" onclick="copyText('hookList')">Copy</button>
+              <button class="mini-btn gold">Save</button>
             </div>
+          </div>
 
-            <div class="field">
-              <label>Offer / Service</label>
-              <input id="offer" type="text" value="Laser hair reduction for women">
+          <div class="output-card">
+            <div>
+              <span class="type type-blue">Caption</span>
+              <h3>Social caption</h3>
+              <p id="captionText">Confidence looks better when it feels effortless. Discover laser hair reduction for women with a premium and modern experience at RSCC Aesthetic Clinic, Hyderabad. #LaserHairReduction #WomenCare #HyderabadClinic</p>
             </div>
-
-            <div class="grid-2">
-              <div class="field">
-                <label>Audience</label>
-                <input id="audience" type="text" value="Women aged 22 to 45">
-              </div>
-              <div class="field">
-                <label>City</label>
-                <input id="city" type="text" value="Hyderabad">
-              </div>
+            <div class="card-actions">
+              <button class="mini-btn" onclick="copyText('captionText')">Copy</button>
+              <button class="mini-btn gold">Save</button>
             </div>
+          </div>
 
-            <div class="field">
-              <label>Tone</label>
-              <div class="chips">
-                <button class="chip active" type="button">Premium</button>
-                <button class="chip" type="button">Emotional</button>
-                <button class="chip" type="button">Modern</button>
-                <button class="chip" type="button">Direct</button>
-              </div>
+          <div class="output-card">
+            <div>
+              <span class="type type-mint">Headlines</span>
+              <h3>Search / banner lines</h3>
+              <ul id="headlineList">
+                <li>Premium Laser Hair Reduction</li>
+                <li>Smoother Skin Starts Here</li>
+                <li>Confidence for Modern Women</li>
+                <li>Book Your Consultation Today</li>
+              </ul>
             </div>
-
-            <div class="field">
-              <label>Main Prompt</label>
-              <textarea id="prompt">Create a women-first premium campaign for laser hair reduction in Hyderabad. Focus on confidence, convenience, smooth skin and modern treatment. Make it attractive and conversion-ready.</textarea>
+            <div class="card-actions">
+              <button class="mini-btn" onclick="copyText('headlineList')">Copy</button>
+              <button class="mini-btn gold">Save</button>
             </div>
+          </div>
 
-            <button class="generate-btn" onclick="generateContent()">Generate Content</button>
+          <div class="output-card">
+            <div>
+              <span class="type type-gold">CTA</span>
+              <h3>Call-to-action lines</h3>
+              <ul id="ctaList">
+                <li>Book your premium consultation now</li>
+                <li>Start your confidence journey today</li>
+                <li>Experience women-first care in Hyderabad</li>
+                <li>Take the smarter next step now</li>
+              </ul>
+            </div>
+            <div class="card-actions">
+              <button class="mini-btn" onclick="copyText('ctaList')">Copy</button>
+              <button class="mini-btn gold">Save</button>
+            </div>
+          </div>
+
+          <div class="output-card">
+            <div>
+              <span class="type type-purple">Direction</span>
+              <h3>Creative note</h3>
+              <p id="creativeNote">Use a light premium visual style, women-first language, soft confidence-led messaging, and a clean transformation angle. Keep the tone aspirational but easy to understand.</p>
+            </div>
+            <div class="card-actions">
+              <button class="mini-btn" onclick="copyText('creativeNote')">Copy</button>
+              <button class="mini-btn gold">Open Template</button>
+            </div>
           </div>
         </div>
-
-        <div class="panel">
-          <div class="workspace">
-            <div class="workspace-top">
-              <div>
-                <h3>Generated Content</h3>
-                <p>One prompt, multiple usable output formats.</p>
-              </div>
-              <div class="status">Ready for campaign, ads and reels</div>
-            </div>
-
-            <div class="output-tabs">
-              <button class="tab active">Ad Copy</button>
-              <button class="tab">Hooks</button>
-              <button class="tab">Captions</button>
-              <button class="tab">Headlines</button>
-            </div>
-
-            <div class="output-grid">
-              <div class="output-card">
-                <h4>Primary Ad Copy</h4>
-                <p id="adCopy">Still depending on repeated temporary routines? Discover premium laser hair reduction for women at RSCC Aesthetic Clinic in Hyderabad. Feel smoother, more confident and more in control with care designed for modern women. Book your consultation today.</p>
-                <div class="card-actions">
-                  <button class="small-btn primary" onclick="copyText('adCopy')">Copy</button>
-                  <button class="small-btn">Save</button>
-                </div>
-              </div>
-
-              <div class="output-card">
-                <h4>Hook Options</h4>
-                <ul id="hookList">
-                  <li>Done with temporary fixes?</li>
-                  <li>Choose smooth confidence instead.</li>
-                  <li>Premium care for modern women.</li>
-                  <li>Your routine deserves an upgrade.</li>
-                </ul>
-                <div class="card-actions">
-                  <button class="small-btn primary" onclick="copyText('hookList')">Copy</button>
-                  <button class="small-btn">Save</button>
-                </div>
-              </div>
-
-              <div class="output-card">
-                <h4>Caption</h4>
-                <p id="captionText">Confidence looks better when it feels effortless. Discover laser hair reduction for women with a premium and modern experience at RSCC Aesthetic Clinic, Hyderabad. #LaserHairReduction #WomenCare #HyderabadClinic</p>
-                <div class="card-actions">
-                  <button class="small-btn primary" onclick="copyText('captionText')">Copy</button>
-                  <button class="small-btn">Save</button>
-                </div>
-              </div>
-
-              <div class="output-card">
-                <h4>Headline Set</h4>
-                <ul id="headlineList">
-                  <li>Premium Laser Hair Reduction</li>
-                  <li>Smoother Skin Starts Here</li>
-                  <li>Confidence for Modern Women</li>
-                  <li>Book Your Consultation Today</li>
-                </ul>
-                <div class="card-actions">
-                  <button class="small-btn primary" onclick="copyText('headlineList')">Copy</button>
-                  <button class="small-btn">Save</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="quick-strip">
-              <div class="quick-card">
-                <strong>Use in Campaign</strong>
-                <span>Move the message into Campaign Studio.</span>
-              </div>
-              <div class="quick-card">
-                <strong>Use in Video Creator</strong>
-                <span>Turn these hooks into reel scenes and voiceover.</span>
-              </div>
-              <div class="quick-card">
-                <strong>Use in Templates</strong>
-                <span>Match this copy with a ready visual layout.</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
       </div>
 
     </div>
   </section>
 
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Bariq AI</h3>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation and execution systems.</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Platform</h3>
+          <a href="index.html">Home</a>
+          <a href="ai-generator.html">AI Generator</a>
+          <a href="campaign.html">Campaign Studio</a>
+          <a href="video-creator.html">Video Creator</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund-policy.html">Refund Policy</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <a href="contact.html">Contact Us</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="payments.html">Payments</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
+    function toggleMobileMenu() {
+      document.getElementById("mainNav").classList.toggle("show");
+    }
+
     function copyText(id){
       const el = document.getElementById(id);
       const text = el.innerText || el.textContent;
@@ -711,34 +965,71 @@
       alert("Copied");
     }
 
-    function generateContent(){
+    function generateOutputs(){
       const brand = document.getElementById('brand').value;
       const platform = document.getElementById('platform').value;
-      const outputType = document.getElementById('outputType').value;
-      const offer = document.getElementById('offer').value;
       const audience = document.getElementById('audience').value;
       const city = document.getElementById('city').value;
       const prompt = document.getElementById('prompt').value;
 
       document.getElementById('adCopy').innerText =
-        `${brand} now brings ${offer} for ${audience} in ${city}. Designed for a more confident and modern lifestyle, this ${platform} campaign should feel premium, attractive and clear. ${prompt}`;
+        `${brand} now brings a smarter, more confident solution for ${audience} in ${city}. Built for ${platform}, this content should feel premium, attractive and easy to act on. ${prompt}`;
 
       document.getElementById('hookList').innerHTML = `
-        <li>${offer} made smarter for ${audience}</li>
-        <li>Why settle for repeated hassle?</li>
-        <li>${brand} brings modern care to ${city}</li>
-        <li>Confidence starts with one better choice</li>
+        <li>${brand} in ${city} brings a smarter choice</li>
+        <li>Done with old routines and repeated hassle?</li>
+        <li>Choose confidence with a modern approach</li>
+        <li>Make your next step feel effortless</li>
       `;
 
       document.getElementById('captionText').innerText =
-        `${offer} for ${audience} in ${city}. Created by ${brand} with a premium and modern experience in mind. Feel more confident, more comfortable and ready for a better routine.`;
+        `A softer, smarter way to choose confidence. ${brand} in ${city} is ready with content that feels premium, clear and women-first. ${prompt}`;
 
       document.getElementById('headlineList').innerHTML = `
-        <li>${offer} in ${city}</li>
-        <li>Premium care by ${brand}</li>
-        <li>Designed for ${audience}</li>
-        <li>Start your consultation now</li>
+        <li>${brand} in ${city}</li>
+        <li>Premium care for ${audience}</li>
+        <li>Modern confidence starts here</li>
+        <li>Book your next step today</li>
       `;
+
+      document.getElementById('ctaList').innerHTML = `
+        <li>Book your premium consultation today</li>
+        <li>Choose the smarter next step now</li>
+        <li>Start your confidence journey in ${city}</li>
+        <li>Enquire now with ${brand}</li>
+      `;
+
+      document.getElementById('creativeNote').innerText =
+        `Visual direction for ${platform}: keep it soft, premium, women-first, and easy to understand. Use clean layouts, elegant text and a confidence-led emotional angle.`;
+    }
+
+    function fillSample(){
+      const samples = [
+        {
+          brand:"SipnFit",
+          audience:"Women looking for beauty wellness",
+          city:"Hyderabad",
+          prompt:"Create a soft premium launch for beauty wellness supplements. Focus on glow, confidence and clean lifestyle."
+        },
+        {
+          brand:"RozGold",
+          audience:"Women saving daily in gold",
+          city:"India",
+          prompt:"Create a premium fintech campaign for women-friendly gold savings. Focus on trust, small daily habits and future security."
+        },
+        {
+          brand:"RSCC Aesthetic Clinic",
+          audience:"Women aged 25 to 45",
+          city:"Hyderabad",
+          prompt:"Create a premium women-first campaign for laser hair reduction. Focus on convenience, confidence and smooth skin."
+        }
+      ];
+
+      const pick = samples[Math.floor(Math.random() * samples.length)];
+      document.getElementById('brand').value = pick.brand;
+      document.getElementById('audience').value = pick.audience;
+      document.getElementById('city').value = pick.city;
+      document.getElementById('prompt').value = pick.prompt;
     }
   </script>
 </body>
