@@ -4,9 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bariq AI</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
   <style>
     *{box-sizing:border-box}
     html,body{
@@ -148,13 +151,16 @@
 
     .hero-grid{
       display:grid;
-      grid-template-columns:.95fr 1.05fr;
+      grid-template-columns: .95fr 1.05fr;
       gap:18px;
       align-items:start;
     }
 
     .hero-left{
       padding-top:6px;
+      display:flex;
+      flex-direction:column;
+      min-height:520px;
     }
 
     .tag{
@@ -170,13 +176,14 @@
       font-weight:800;
       box-shadow:0 8px 18px rgba(100,70,50,.04);
       margin-bottom:10px;
+      width:max-content;
     }
 
     .hero-title{
       margin:0;
       font-family:'Cormorant Garamond',serif;
-      font-size:62px;
-      line-height:.97;
+      font-size:60px;
+      line-height:.98;
       letter-spacing:-0.7px;
       font-weight:700;
       color:#26213d;
@@ -240,8 +247,40 @@
       color:#5f597f;
     }
 
+    .hero-platforms{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+
+    .platform-card{
+      background:linear-gradient(180deg,#ffffff 0%, #faf7ff 100%);
+      border:1px solid var(--line);
+      border-radius:22px;
+      min-height:88px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      box-shadow:0 10px 22px rgba(90,70,50,.05);
+      color:#544d77;
+    }
+
+    .platform-card i{
+      font-size:22px;
+    }
+
+    .platform-card span{
+      font-size:12px;
+      font-weight:800;
+      text-align:center;
+      line-height:1.2;
+    }
+
     .hero-right{
-      min-height:490px;
+      min-height:520px;
       border-radius:30px;
       border:1px solid var(--line);
       background:linear-gradient(135deg,#fff3ec 0%, #fff8f2 50%, #f6f2ff 100%);
@@ -250,75 +289,65 @@
       position:relative;
     }
 
-    .hero-right-top{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom:14px;
-    }
-
     .hero-right-top h3{
       margin:0;
       font-family:'Cormorant Garamond',serif;
       font-size:38px;
       line-height:1.02;
       font-weight:700;
-      max-width:290px;
+      max-width:350px;
       color:#2d2947;
     }
 
     .hero-right-top p{
-      margin:4px 0 0;
-      max-width:270px;
+      margin:8px 0 16px;
+      max-width:420px;
       color:var(--muted);
       font-size:14px;
       line-height:1.75;
     }
 
-    .floating-wall{
-      height:320px;
-      overflow:hidden;
-      position:relative;
-      border-radius:24px;
-    }
-
-    .wall-grid{
+    .hero-collage{
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:1.05fr .95fr;
       gap:14px;
-      animation:wallFloat 9s ease-in-out infinite;
+      align-items:start;
     }
 
-    @keyframes wallFloat{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-18px)}
-    }
-
-    .wall-col{
+    .hero-col{
       display:grid;
       gap:14px;
     }
 
-    .wall-card{
-      border-radius:24px;
-      overflow:hidden;
+    .hero-card{
       position:relative;
+      overflow:hidden;
+      border-radius:24px;
       background:#fff;
       box-shadow:0 12px 26px rgba(0,0,0,.08);
-      min-height:145px;
+      min-height:165px;
+      animation:floatUp 8s ease-in-out infinite;
     }
 
-    .wall-card.large{min-height:230px}
-    .wall-card.small{min-height:145px}
+    .hero-card.delay1{ animation-delay:1s; }
+    .hero-card.delay2{ animation-delay:2s; }
+    .hero-card.delay3{ animation-delay:3s; }
 
-    .wall-card img{
+    @keyframes floatUp{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+    }
+
+    .hero-card.tall{min-height:215px}
+    .hero-card.small{min-height:145px}
+
+    .hero-card img{
       width:100%;
       height:100%;
       object-fit:cover;
     }
 
-    .wall-label{
+    .hero-label{
       position:absolute;
       left:12px;
       bottom:12px;
@@ -328,14 +357,16 @@
       font-size:13px;
       font-weight:800;
       color:#4d4671;
+      backdrop-filter:blur(8px);
     }
 
     .soft-box{
       border-radius:24px;
-      padding:20px;
+      padding:22px;
       min-height:145px;
       position:relative;
       box-shadow:0 12px 26px rgba(0,0,0,.06);
+      animation:floatUp 9s ease-in-out infinite;
     }
 
     .soft-box h4{
@@ -343,6 +374,7 @@
       font-size:22px;
       line-height:1.25;
       color:#322d4e;
+      max-width:190px;
     }
 
     .soft-box span{
@@ -360,6 +392,37 @@
 
     .box-yellow{background:linear-gradient(135deg,#fff0a9,#ffe994)}
     .box-mint{background:linear-gradient(135deg,#dff7e7,#cef1da)}
+
+    .prompt-box{
+      margin-top:16px;
+      background:#fff;
+      border-radius:20px;
+      padding:8px;
+      display:flex;
+      gap:8px;
+      box-shadow:0 16px 30px rgba(0,0,0,.08);
+      border:1px solid var(--line);
+    }
+
+    .prompt-box input{
+      flex:1;
+      border:none;
+      outline:none;
+      padding:13px 14px;
+      font:inherit;
+      background:transparent;
+      color:var(--text);
+    }
+
+    .prompt-box button{
+      border:none;
+      border-radius:14px;
+      padding:12px 18px;
+      background:linear-gradient(90deg,var(--purple),var(--gold));
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+    }
 
     .pill-strip{
       margin-top:16px;
@@ -679,22 +742,18 @@
       }
 
       .brand-text{font-size:38px}
-
-      .hero-title{
-        font-size:48px;
-        line-height:1;
-      }
-
+      .hero-title{font-size:46px; line-height:1}
       .hero-actions{flex-direction:column}
       .btn{width:100%}
-
-      .gallery-card{width:270px}
+      .hero-platforms{grid-template-columns:repeat(2,1fr)}
+      .hero-collage{grid-template-columns:1fr}
+      .prompt-box{flex-direction:column}
+      .prompt-box button{width:100%}
       .workspace-grid,
       .dual-grid,
       .quick-grid,
-      .footer-grid{
-        grid-template-columns:1fr;
-      }
+      .footer-grid{grid-template-columns:1fr}
+      .gallery-card{width:270px}
     }
   </style>
 </head>
@@ -745,53 +804,54 @@
               <a href="campaign.html" class="btn btn-light">Open Campaign</a>
               <a href="video-creator.html" class="btn btn-light">Open Video Creator</a>
             </div>
+
+            <div class="hero-platforms">
+              <div class="platform-card"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+              <div class="platform-card"><i class="fa-brands fa-facebook-f"></i><span>Facebook</span></div>
+              <div class="platform-card"><i class="fa-brands fa-linkedin-in"></i><span>LinkedIn</span></div>
+              <div class="platform-card"><i class="fa-brands fa-x-twitter"></i><span>X</span></div>
+              <div class="platform-card"><i class="fa-brands fa-pinterest-p"></i><span>Pinterest</span></div>
+              <div class="platform-card"><i class="fa-brands fa-reddit-alien"></i><span>Reddit</span></div>
+              <div class="platform-card"><i class="fa-brands fa-threads"></i><span>Threads</span></div>
+              <div class="platform-card"><i class="fa-solid fa-clapperboard"></i><span>Reels</span></div>
+            </div>
           </div>
 
           <div class="hero-right">
             <div class="hero-right-top">
-              <div>
-                <h3>See the platform feel alive</h3>
-                <p>Bariq is designed to feel visual, welcoming and premium — without looking crowded.</p>
-              </div>
+              <h3>Get hands on your marketing in one place</h3>
+              <p>Simplified campaign planning, content flow, templates and launch visuals — all from one softer premium platform.</p>
             </div>
 
-            <div class="floating-wall">
-              <div class="wall-grid">
-                <div class="wall-col">
-                  <div class="wall-card large">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="">
-                    <div class="wall-label">Campaign builder</div>
-                  </div>
-                  <div class="wall-card small">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="">
-                    <div class="wall-label">Ad direction</div>
-                  </div>
+            <div class="hero-collage">
+              <div class="hero-col">
+                <div class="hero-card tall">
+                  <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="">
+                  <div class="hero-label">Campaign builder</div>
                 </div>
 
-                <div class="wall-col">
-                  <div class="soft-box box-yellow">
-                    <h4>Build ideas faster</h4>
-                    <span>Explore</span>
-                  </div>
-                  <div class="wall-card small">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt="">
-                    <div class="wall-label">Launch assets</div>
-                  </div>
-                  <div class="soft-box box-mint">
-                    <h4>Launch platform flow</h4>
-                    <span>See more</span>
-                  </div>
+                <div class="hero-card small delay1">
+                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="">
+                  <div class="hero-label">Ad direction</div>
                 </div>
               </div>
-            </div>
 
-            <div class="mini-pills">
-              <div class="mini-pill">Instagram</div>
-              <div class="mini-pill">WhatsApp</div>
-              <div class="mini-pill">Pinterest</div>
-              <div class="mini-pill">Facebook</div>
-              <div class="mini-pill">LinkedIn</div>
-              <div class="mini-pill">Reels</div>
+              <div class="hero-col">
+                <div class="soft-box box-yellow delay2">
+                  <h4>Build ideas faster</h4>
+                  <span>Explore</span>
+                </div>
+
+                <div class="hero-card small delay2">
+                  <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt="">
+                  <div class="hero-label">Launch assets</div>
+                </div>
+
+                <div class="soft-box box-mint delay3">
+                  <h4>Launch platform flow</h4>
+                  <span>See more</span>
+                </div>
+              </div>
             </div>
 
             <div class="prompt-box">
