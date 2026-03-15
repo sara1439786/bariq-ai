@@ -29,6 +29,8 @@
       --pink-soft:#fff1f6;
       --blue-soft:#eef6ff;
       --mint-soft:#eefcf6;
+      --peach-soft:#fff4eb;
+      --yellow-soft:#fff8e7;
       --shadow:0 14px 32px rgba(90,100,140,.08);
       --radius:24px;
     }
@@ -70,6 +72,7 @@
       color:#3d2f83;
       font-weight:800;
       font-size:22px;
+      flex:0 0 auto;
     }
 
     .brand-text{
@@ -159,7 +162,7 @@
 
     .hero p{
       margin:12px 0 0;
-      max-width:720px;
+      max-width:680px;
       font-size:16px;
       line-height:1.75;
       color:var(--muted);
@@ -196,7 +199,7 @@
       display:grid;
       grid-template-columns:1.2fr 1fr 1fr 1fr;
       gap:14px;
-      margin-bottom:22px;
+      margin-bottom:20px;
     }
 
     .filters input,
@@ -212,14 +215,7 @@
       box-shadow:var(--shadow);
     }
 
-    .section-title{
-      margin:0 0 14px;
-      font-size:26px;
-      font-weight:800;
-      color:#28314b;
-    }
-
-    .quick-guide{
+    .guide{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:16px;
@@ -230,34 +226,41 @@
       background:#fff;
       border:1px solid var(--line);
       border-radius:24px;
+      padding:18px;
       box-shadow:var(--shadow);
-      padding:20px;
     }
 
-    .guide-card .step{
+    .guide-step{
       width:34px;
       height:34px;
       border-radius:12px;
       display:grid;
       place-items:center;
+      background:var(--purple-soft);
+      color:var(--purple);
       font-size:14px;
       font-weight:800;
       margin-bottom:12px;
-      color:#4f4a78;
-      background:var(--purple-soft);
     }
 
     .guide-card h3{
-      margin:0 0 8px;
+      margin:0 0 6px;
       font-size:18px;
       color:#29324c;
     }
 
     .guide-card p{
       margin:0;
-      color:var(--muted);
       font-size:14px;
+      color:var(--muted);
       line-height:1.7;
+    }
+
+    .section-title{
+      margin:0 0 14px;
+      font-size:26px;
+      font-weight:800;
+      color:#28314b;
     }
 
     .template-grid{
@@ -278,48 +281,156 @@
     .template-card:hover{transform:translateY(-4px)}
 
     .template-preview{
-      height:180px;
       padding:16px;
       border-bottom:1px solid var(--line);
+      min-height:270px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
     .preview-purple{background:linear-gradient(135deg,#f4f1ff,#ebe7ff)}
     .preview-pink{background:linear-gradient(135deg,#fff2f7,#ffe9f1)}
     .preview-blue{background:linear-gradient(135deg,#eef6ff,#e7f1ff)}
     .preview-mint{background:linear-gradient(135deg,#eefcf6,#e6f8f0)}
+    .preview-peach{background:linear-gradient(135deg,#fff4eb,#ffefe4)}
+    .preview-yellow{background:linear-gradient(135deg,#fff9ea,#fff3d0)}
 
-    .mock{
+    .real-template{
       width:100%;
-      height:100%;
-      border-radius:18px;
+      max-width:360px;
       background:#fff;
-      border:1px solid #ececf6;
+      border-radius:22px;
+      box-shadow:0 10px 26px rgba(100,110,150,.10);
+      overflow:hidden;
+      border:1px solid #ebeef7;
+    }
+
+    .template-topbar{
+      height:44px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 14px;
+      font-size:12px;
+      font-weight:800;
+      color:#5f6788;
+      background:#fff;
+      border-bottom:1px solid #eef1f8;
+    }
+
+    .dots{
+      display:flex;
+      gap:6px;
+    }
+
+    .dots span{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#d8dff7;
+      display:block;
+    }
+
+    .template-canvas{
       padding:14px;
     }
 
-    .mock-line{
-      height:10px;
+    .mini-pill{
+      display:inline-block;
+      padding:7px 10px;
       border-radius:999px;
-      background:#ecebff;
+      font-size:11px;
+      font-weight:800;
       margin-bottom:10px;
     }
 
-    .mock-line.short{width:42%}
-    .mock-line.mid{width:68%}
-    .mock-line.long{width:88%}
+    .pill-purple{background:#f1efff;color:#6b59db}
+    .pill-pink{background:#fff1f6;color:#db5e92}
+    .pill-blue{background:#eef6ff;color:#4683d9}
+    .pill-mint{background:#eefcf6;color:#3f9b73}
+    .pill-yellow{background:#fff8e7;color:#b3871e}
+    .pill-peach{background:#fff4eb;color:#c97142}
 
-    .mock-boxes{
+    .tpl-title{
+      font-size:24px;
+      line-height:1.05;
+      font-weight:800;
+      color:#28314b;
+      margin-bottom:8px;
+    }
+
+    .tpl-sub{
+      font-size:13px;
+      line-height:1.6;
+      color:#6f7694;
+      margin-bottom:12px;
+    }
+
+    .tpl-row{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:10px;
+      align-items:stretch;
+    }
+
+    .tpl-image{
+      min-height:130px;
+      border-radius:16px;
+      background-size:cover;
+      background-position:center;
+    }
+
+    .tpl-side{
+      display:grid;
+      gap:10px;
+    }
+
+    .side-box{
+      border-radius:16px;
+      padding:14px;
+      font-size:14px;
+      font-weight:800;
+      line-height:1.2;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:60px;
+    }
+
+    .cta-chip{
+      display:inline-block;
+      padding:8px 11px;
+      border-radius:999px;
+      background:#fff;
+      font-size:11px;
+      font-weight:800;
+      width:max-content;
+    }
+
+    .box-yellow{background:#f6e28a;color:#594400}
+    .box-mint{background:#d8f2dd;color:#2d6149}
+    .box-purple{background:#e6e0ff;color:#4a3ca6}
+    .box-peach{background:#ffd8c7;color:#8a4e34}
+    .box-blue{background:#dcecff;color:#3b5d98}
+    .box-pink{background:#ffd8e8;color:#92466d}
+
+    .two-cols{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:10px;
-      margin-top:14px;
+      margin-top:10px;
     }
 
-    .mock-box{
-      height:68px;
+    .mini-card{
+      background:#fafbff;
+      border:1px solid #edf0f8;
       border-radius:14px;
-      background:#f7f8ff;
-      border:1px solid #ececf6;
+      padding:12px;
+      font-size:12px;
+      font-weight:700;
+      color:#606888;
+      min-height:56px;
     }
 
     .template-body{
@@ -437,9 +548,16 @@
       color:var(--muted);
     }
 
+    .img1{background-image:url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80')}
+    .img2{background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80')}
+    .img3{background-image:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80')}
+    .img4{background-image:url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80')}
+    .img5{background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80')}
+    .img6{background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80')}
+
     @media (max-width:1100px){
       .filters,
-      .quick-guide,
+      .guide,
       .template-grid,
       .library-grid{
         grid-template-columns:1fr 1fr;
@@ -451,9 +569,12 @@
       .main-nav,.nav-actions{display:none}
       .hero h1{font-size:36px}
       .filters,
-      .quick-guide,
+      .guide,
       .template-grid,
       .library-grid{
+        grid-template-columns:1fr;
+      }
+      .tpl-row{
         grid-template-columns:1fr;
       }
     }
@@ -492,7 +613,7 @@
       <div class="hero">
         <div class="badge">Ready-to-use marketing templates</div>
         <h1>Pick a template. Customize fast. Launch confidently.</h1>
-        <p>Choose by industry, platform and goal. BariqAI should feel simple, visual and guided.</p>
+        <p>Choose by industry, platform and goal. Simple, visual and guided — the way BariqAI should feel.</p>
         <div class="hero-actions">
           <button class="hero-btn primary">Explore Templates</button>
           <button class="hero-btn secondary">Open Prompt Studio</button>
@@ -508,6 +629,7 @@
           <option>Real Estate</option>
           <option>D2C</option>
           <option>Restaurant</option>
+          <option>Creators</option>
         </select>
         <select>
           <option>All Platforms</option>
@@ -515,6 +637,7 @@
           <option>Instagram</option>
           <option>Google Ads</option>
           <option>YouTube</option>
+          <option>Reels</option>
         </select>
         <select>
           <option>All Goals</option>
@@ -525,36 +648,50 @@
         </select>
       </div>
 
-      <div class="quick-guide">
+      <div class="guide">
         <div class="guide-card">
-          <div class="step">1</div>
+          <div class="guide-step">1</div>
           <h3>Choose a style</h3>
-          <p>Pick a template by business type and campaign goal.</p>
+          <p>Pick a template by business type and goal.</p>
         </div>
         <div class="guide-card">
-          <div class="step">2</div>
+          <div class="guide-step">2</div>
           <h3>Edit your message</h3>
           <p>Add your offer, city, audience and tone.</p>
         </div>
         <div class="guide-card">
-          <div class="step">3</div>
+          <div class="guide-step">3</div>
           <h3>Launch faster</h3>
-          <p>Use the template inside BariqAI Prompt Studio.</p>
+          <p>Use the template inside Prompt Studio.</p>
         </div>
       </div>
 
       <h2 class="section-title">Featured templates</h2>
 
       <div class="template-grid">
+
         <div class="template-card">
           <div class="template-preview preview-purple">
-            <div class="mock">
-              <div class="mock-line long"></div>
-              <div class="mock-line mid"></div>
-              <div class="mock-line short"></div>
-              <div class="mock-boxes">
-                <div class="mock-box"></div>
-                <div class="mock-box"></div>
+            <div class="real-template">
+              <div class="template-topbar">
+                <span>Clinic Ad</span>
+                <div class="dots"><span></span><span></span><span></span></div>
+              </div>
+              <div class="template-canvas">
+                <div class="mini-pill pill-purple">Women-first lead campaign</div>
+                <div class="tpl-title">Feel confident in your skin again</div>
+                <div class="tpl-sub">Premium laser solutions with consultation support</div>
+                <div class="tpl-row">
+                  <div class="tpl-image img1"></div>
+                  <div class="tpl-side">
+                    <div class="side-box box-purple">Flat 50% Off <span class="cta-chip">Book Now</span></div>
+                    <div class="side-box box-mint">Trusted care for women <span class="cta-chip">Consult</span></div>
+                  </div>
+                </div>
+                <div class="two-cols">
+                  <div class="mini-card">Laser • Skin • Slimming</div>
+                  <div class="mini-card">Hyderabad • Premium Care</div>
+                </div>
               </div>
             </div>
           </div>
@@ -563,7 +700,7 @@
               <h3>Clinic Lead Ad</h3>
               <span class="mini-badge">Meta</span>
             </div>
-            <p>For clinics, laser, slimming and women-focused lead campaigns.</p>
+            <p>For clinics, laser, slimming and confidence campaigns.</p>
             <div class="chips">
               <span class="chip">Clinics</span>
               <span class="chip">Leads</span>
@@ -578,13 +715,26 @@
 
         <div class="template-card">
           <div class="template-preview preview-pink">
-            <div class="mock">
-              <div class="mock-line long"></div>
-              <div class="mock-line short"></div>
-              <div class="mock-line mid"></div>
-              <div class="mock-boxes">
-                <div class="mock-box"></div>
-                <div class="mock-box"></div>
+            <div class="real-template">
+              <div class="template-topbar">
+                <span>Salon Reel</span>
+                <div class="dots"><span></span><span></span><span></span></div>
+              </div>
+              <div class="template-canvas">
+                <div class="mini-pill pill-pink">Short reel offer</div>
+                <div class="tpl-title">Glow up starts with one appointment</div>
+                <div class="tpl-sub">Beauty offers that feel fresh, fast and shareable</div>
+                <div class="tpl-row">
+                  <div class="tpl-image img2"></div>
+                  <div class="tpl-side">
+                    <div class="side-box box-pink">Festival Makeover <span class="cta-chip">View Offer</span></div>
+                    <div class="side-box box-yellow">Skin • Hair • Nails <span class="cta-chip">Book</span></div>
+                  </div>
+                </div>
+                <div class="two-cols">
+                  <div class="mini-card">Hook-first reel text</div>
+                  <div class="mini-card">Limited-time offer</div>
+                </div>
               </div>
             </div>
           </div>
@@ -593,7 +743,7 @@
               <h3>Salon Offer Reel</h3>
               <span class="mini-badge">Instagram</span>
             </div>
-            <p>For beauty offers, festive campaigns and short reels.</p>
+            <p>For beauty offers, festive campaigns and quick reels.</p>
             <div class="chips">
               <span class="chip">Salon</span>
               <span class="chip">Reels</span>
@@ -608,13 +758,26 @@
 
         <div class="template-card">
           <div class="template-preview preview-blue">
-            <div class="mock">
-              <div class="mock-line long"></div>
-              <div class="mock-line mid"></div>
-              <div class="mock-line mid"></div>
-              <div class="mock-boxes">
-                <div class="mock-box"></div>
-                <div class="mock-box"></div>
+            <div class="real-template">
+              <div class="template-topbar">
+                <span>Property Launch</span>
+                <div class="dots"><span></span><span></span><span></span></div>
+              </div>
+              <div class="template-canvas">
+                <div class="mini-pill pill-blue">Site visit campaign</div>
+                <div class="tpl-title">Your next address starts here</div>
+                <div class="tpl-sub">Premium homes with locality-first lead generation</div>
+                <div class="tpl-row">
+                  <div class="tpl-image img3"></div>
+                  <div class="tpl-side">
+                    <div class="side-box box-blue">Book Site Visit <span class="cta-chip">Enquire</span></div>
+                    <div class="side-box box-mint">Launch Offer Live <span class="cta-chip">Today</span></div>
+                  </div>
+                </div>
+                <div class="two-cols">
+                  <div class="mini-card">2 & 3 BHK options</div>
+                  <div class="mini-card">Prime location callout</div>
+                </div>
               </div>
             </div>
           </div>
@@ -638,13 +801,26 @@
 
         <div class="template-card">
           <div class="template-preview preview-mint">
-            <div class="mock">
-              <div class="mock-line long"></div>
-              <div class="mock-line short"></div>
-              <div class="mock-line mid"></div>
-              <div class="mock-boxes">
-                <div class="mock-box"></div>
-                <div class="mock-box"></div>
+            <div class="real-template">
+              <div class="template-topbar">
+                <span>D2C Launch</span>
+                <div class="dots"><span></span><span></span><span></span></div>
+              </div>
+              <div class="template-canvas">
+                <div class="mini-pill pill-mint">Product-first sales template</div>
+                <div class="tpl-title">New drop. Limited stock. Big buzz.</div>
+                <div class="tpl-sub">Designed for launch offers and conversion creatives</div>
+                <div class="tpl-row">
+                  <div class="tpl-image img4"></div>
+                  <div class="tpl-side">
+                    <div class="side-box box-mint">Launch Week Offer <span class="cta-chip">Shop</span></div>
+                    <div class="side-box box-purple">Best Seller Angle <span class="cta-chip">Try Now</span></div>
+                  </div>
+                </div>
+                <div class="two-cols">
+                  <div class="mini-card">Problem → Benefit → CTA</div>
+                  <div class="mini-card">Product hero frame</div>
+                </div>
               </div>
             </div>
           </div>
@@ -667,14 +843,27 @@
         </div>
 
         <div class="template-card">
-          <div class="template-preview preview-pink">
-            <div class="mock">
-              <div class="mock-line mid"></div>
-              <div class="mock-line long"></div>
-              <div class="mock-line short"></div>
-              <div class="mock-boxes">
-                <div class="mock-box"></div>
-                <div class="mock-box"></div>
+          <div class="template-preview preview-peach">
+            <div class="real-template">
+              <div class="template-topbar">
+                <span>Restaurant Promo</span>
+                <div class="dots"><span></span><span></span><span></span></div>
+              </div>
+              <div class="template-canvas">
+                <div class="mini-pill pill-peach">Weekend promo post</div>
+                <div class="tpl-title">This weekend deserves better food</div>
+                <div class="tpl-sub">Fast local promo layout for cafes and restaurants</div>
+                <div class="tpl-row">
+                  <div class="tpl-image img5"></div>
+                  <div class="tpl-side">
+                    <div class="side-box box-peach">Flat Combo Offer <span class="cta-chip">Order</span></div>
+                    <div class="side-box box-yellow">Fresh • Fast • Local <span class="cta-chip">Menu</span></div>
+                  </div>
+                </div>
+                <div class="two-cols">
+                  <div class="mini-card">Weekend craving hook</div>
+                  <div class="mini-card">Local CTA button</div>
+                </div>
               </div>
             </div>
           </div>
@@ -697,14 +886,27 @@
         </div>
 
         <div class="template-card">
-          <div class="template-preview preview-purple">
-            <div class="mock">
-              <div class="mock-line long"></div>
-              <div class="mock-line mid"></div>
-              <div class="mock-line short"></div>
-              <div class="mock-boxes">
-                <div class="mock-box"></div>
-                <div class="mock-box"></div>
+          <div class="template-preview preview-yellow">
+            <div class="real-template">
+              <div class="template-topbar">
+                <span>Creator Reel</span>
+                <div class="dots"><span></span><span></span><span></span></div>
+              </div>
+              <div class="template-canvas">
+                <div class="mini-pill pill-yellow">Personal branding reel</div>
+                <div class="tpl-title">Build your audience with story-led content</div>
+                <div class="tpl-sub">For creators, coaches and personal brands</div>
+                <div class="tpl-row">
+                  <div class="tpl-image img6"></div>
+                  <div class="tpl-side">
+                    <div class="side-box box-yellow">Hook + Insight <span class="cta-chip">Record</span></div>
+                    <div class="side-box box-blue">Growth-ready CTA <span class="cta-chip">Follow</span></div>
+                  </div>
+                </div>
+                <div class="two-cols">
+                  <div class="mini-card">Personal story opener</div>
+                  <div class="mini-card">Short CTA ending</div>
+                </div>
               </div>
             </div>
           </div>
@@ -725,6 +927,7 @@
             </div>
           </div>
         </div>
+
       </div>
 
       <div class="library">
