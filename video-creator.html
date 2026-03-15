@@ -3,60 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bariq AI — Video Creator</title>
+  <title>BariqAI Video Creator</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:linear-gradient(180deg,#fcfcff 0%, #f7f8ff 100%);
+      color:#2f3250;
+    }
 
     :root{
-      --bg:#fff9f7;
-      --white:#ffffff;
-      --text:#2d2947;
-      --muted:#6f6987;
-      --line:#f0e6e1;
-
-      --lav:#f5f1ff;
-      --pink:#fff2f8;
-      --mint:#eef9f3;
-      --peach:#fff3ea;
-      --sky:#eef5ff;
-      --yellow:#fff7d9;
-
-      --purple:#7a5ad7;
-      --pinkAccent:#ff71b8;
-      --peachAccent:#ff986f;
-      --blueAccent:#5f8fff;
-      --mintAccent:#44b88b;
-
-      --shadow:0 20px 40px rgba(100,70,50,0.08);
-      --radius:28px;
+      --card:#ffffff;
+      --line:#e9ebf5;
+      --text:#2f3250;
+      --muted:#70758f;
+      --purple:#7b6df6;
+      --purple-soft:#f1efff;
+      --pink-soft:#fff1f6;
+      --blue-soft:#eef6ff;
+      --mint-soft:#eefcf6;
+      --peach-soft:#fff4eb;
+      --yellow-soft:#fff8e7;
+      --shadow:0 14px 32px rgba(90,100,140,.08);
     }
 
-    html,body{
-      margin:0;
-      padding:0;
-      font-family:Arial,sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(122,90,215,0.06), transparent 24%),
-        radial-gradient(circle at bottom right, rgba(255,113,184,0.06), transparent 24%),
-        var(--bg);
-      color:var(--text);
-      overflow-x:hidden;
-      scroll-behavior:smooth;
-    }
-
-    a{ text-decoration:none; color:inherit; }
-
-    .container{
-      width:min(1400px, calc(100% - 28px));
-      margin:0 auto;
-    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1320px,calc(100% - 28px));margin:0 auto}
 
     .site-header{
       position:sticky;
       top:0;
-      z-index:1000;
-      background:rgba(255,255,255,0.86);
-      backdrop-filter:blur(16px);
+      z-index:999;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
     }
 
@@ -66,771 +51,508 @@
       align-items:center;
       justify-content:space-between;
       gap:18px;
-      position:relative;
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:10px;
-      font-size:31px;
-      font-weight:800;
-      color:var(--purple);
+      gap:12px;
       white-space:nowrap;
     }
 
-    .brand-dot{
-      width:11px;
-      height:11px;
-      border-radius:50%;
-      background:linear-gradient(135deg,var(--purple),var(--pinkAccent));
-      box-shadow:0 0 14px rgba(122,90,215,0.35);
+    .brand-mark{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,#ddd6ff,#b9a9ff);
+      color:#3d2f83;
+      font-weight:800;
+      font-size:22px;
+      flex:0 0 auto;
     }
 
-    .menu-toggle{
-      display:none;
-      border:none;
-      background:#f5efff;
-      color:var(--purple);
-      border-radius:14px;
-      padding:10px 14px;
-      font-size:28px;
-      cursor:pointer;
+    .brand-text{
+      font-size:18px;
+      font-weight:800;
+      color:#27304a;
     }
 
     .main-nav{
       display:flex;
-      align-items:center;
       gap:8px;
-      overflow-x:auto;
+      align-items:center;
       white-space:nowrap;
+      overflow-x:auto;
       scrollbar-width:none;
     }
 
     .main-nav::-webkit-scrollbar{display:none}
 
     .main-nav a{
-      padding:11px 14px;
+      padding:10px 14px;
       border-radius:14px;
       font-size:14px;
       font-weight:700;
-      color:#5f597f;
-      flex:0 0 auto;
+      color:#66708d;
     }
 
-    .main-nav a:hover,
-    .main-nav a.active{
-      background:#f3edff;
+    .main-nav a.active,
+    .main-nav a:hover{
+      background:var(--purple-soft);
       color:var(--purple);
     }
 
-    .page{
-      padding:18px 0 30px;
+    .nav-actions{
+      display:flex;
+      gap:10px;
     }
 
-    .grid{
-      display:grid;
-      gap:16px;
-    }
-
-    .hero-grid{
-      grid-template-columns:1.08fr .92fr;
-      margin-bottom:16px;
-    }
-
-    .builder-grid{
-      grid-template-columns:.9fr 1.1fr;
-      margin-top:16px;
-    }
-
-    .card{
-      background:var(--white);
+    .top-btn{
+      padding:11px 16px;
+      border-radius:14px;
+      font-size:14px;
+      font-weight:800;
       border:1px solid var(--line);
-      border-radius:var(--radius);
+      background:#fff;
+    }
+
+    .top-btn.start{
+      background:linear-gradient(90deg,#7b6df6,#9e8cff);
+      color:#fff;
+      border:none;
+    }
+
+    .page{padding:22px 0 40px}
+
+    .hero{
+      background:linear-gradient(135deg,#ffffff 0%, #f7f4ff 46%, #eef7ff 100%);
+      border:1px solid var(--line);
+      border-radius:30px;
       box-shadow:var(--shadow);
-      overflow:hidden;
-      position:relative;
+      padding:28px;
+      margin-bottom:20px;
     }
 
-    .card-inner{
-      padding:24px;
-    }
-
-    .hero-left{
-      background:linear-gradient(135deg,#fff7fb 0%, #f5f1ff 55%, #eef5ff 100%);
-    }
-
-    .hero-right{
-      background:linear-gradient(135deg,#fff2f8 0%, #fff7df 45%, #eef8ff 100%);
-    }
-
-    .tag{
+    .badge{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      width:max-content;
       padding:10px 14px;
       border-radius:999px;
-      background:rgba(255,255,255,0.8);
-      border:1px solid rgba(255,255,255,0.95);
+      background:#fff;
+      border:1px solid var(--line);
       font-size:13px;
       font-weight:800;
-      color:#5a547b;
-      margin-bottom:16px;
+      color:#66708d;
+      margin-bottom:14px;
     }
 
-    .hero-title{
-      margin:0 0 12px;
+    .hero h1{
+      margin:0;
       font-size:48px;
-      line-height:1.04;
-      letter-spacing:-0.04em;
+      line-height:1.06;
+      font-weight:800;
       max-width:760px;
-      background:linear-gradient(90deg, #7a5ad7 0%, #ff71b8 38%, #ff986f 68%, #5f8fff 100%);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
-      color:transparent;
+      color:#26314b;
     }
 
-    .hero-sub{
-      margin:0 0 18px;
+    .hero p{
+      margin:12px 0 0;
+      max-width:690px;
       font-size:16px;
       line-height:1.75;
       color:var(--muted);
-      max-width:720px;
     }
 
     .hero-actions{
       display:flex;
       gap:12px;
       flex-wrap:wrap;
+      margin-top:18px;
     }
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      border:none;
-      border-radius:16px;
+    .hero-btn{
       padding:13px 18px;
+      border-radius:16px;
       font-size:14px;
       font-weight:800;
-      cursor:pointer;
-      transition:.2s ease;
-    }
-
-    .btn:hover{ transform:translateY(-2px); }
-
-    .btn-primary{
-      background:linear-gradient(90deg,var(--purple),var(--blueAccent));
-      color:#fff;
-      box-shadow:0 16px 28px rgba(95,143,255,0.22);
-    }
-
-    .btn-light{
-      background:rgba(255,255,255,0.84);
-      color:#5c577d;
-    }
-
-    .visual-board{
-      min-height:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-
-    .visual-board h3{
-      margin:0 0 10px;
-      font-size:22px;
-      color:#2f2b49;
-    }
-
-    .visual-board p{
-      margin:0 0 18px;
-      font-size:14px;
-      line-height:1.7;
-      color:var(--muted);
-    }
-
-    .visual-canvas{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:14px;
-      min-height:330px;
-    }
-
-    .big-panel{
-      background:linear-gradient(135deg,#ff9cb7 0%, #ff8a8a 30%, #ffb28a 100%);
-      border-radius:24px;
-      position:relative;
-      overflow:hidden;
-      padding:26px;
-      min-height:330px;
-      color:#fff;
-    }
-
-    .big-panel h4{
-      margin:0 0 16px;
-      font-size:20px;
-      line-height:1.35;
-      max-width:420px;
-    }
-
-    .prompt-bar{
-      position:absolute;
-      left:22px;
-      right:22px;
-      bottom:26px;
-      background:#fff;
-      border-radius:18px;
-      padding:8px;
-      display:flex;
-      gap:8px;
-      box-shadow:0 12px 30px rgba(0,0,0,0.12);
-    }
-
-    .prompt-bar input{
-      flex:1;
       border:none;
-      outline:none;
-      padding:12px;
-      font:inherit;
-      color:var(--text);
-      background:transparent;
-    }
-
-    .prompt-bar button{
-      border:none;
-      border-radius:14px;
-      padding:12px 18px;
-      background:linear-gradient(90deg,var(--purple),var(--blueAccent));
-      color:#fff;
-      font-weight:800;
       cursor:pointer;
     }
 
-    .floating-mini{
-      position:absolute;
-      border-radius:18px;
-      background:rgba(255,255,255,0.9);
-      box-shadow:0 10px 24px rgba(0,0,0,0.1);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.8);
+    .hero-btn.primary{
+      background:linear-gradient(90deg,#7b6df6,#9d8cff);
+      color:#fff;
     }
 
-    .mini-1{ width:120px; height:90px; top:40px; right:34px; }
-    .mini-2{ width:120px; height:90px; bottom:110px; left:28px; }
-    .mini-3{ width:120px; height:90px; bottom:110px; right:70px; }
-
-    .floating-mini img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
+    .hero-btn.secondary{
+      background:#fff;
+      color:#5f6788;
+      border:1px solid var(--line);
     }
 
-    .side-stack{
+    .guide{
       display:grid;
-      gap:14px;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-bottom:22px;
     }
 
-    .small-panel{
-      border-radius:24px;
-      padding:22px;
-      min-height:158px;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .small-panel h4{
-      margin:0 0 12px;
-      font-size:20px;
-      line-height:1.35;
-      color:#2f2b49;
-      max-width:220px;
-    }
-
-    .small-panel .small-btn{
-      display:inline-flex;
-      padding:11px 14px;
-      border-radius:14px;
-      background:#fff;
-      font-size:13px;
-      font-weight:800;
-      color:#5a547b;
-      box-shadow:0 10px 20px rgba(0,0,0,0.08);
-    }
-
-    .panel-yellow{ background:linear-gradient(135deg,#fff0a8,#ffe79c); }
-    .panel-mint{ background:linear-gradient(135deg,#dff8ef,#d8f2ea); }
-
-    .right-img{
-      position:absolute;
-      right:16px;
-      bottom:0;
-      width:130px;
-      height:130px;
-      border-radius:20px 20px 0 0;
-      overflow:hidden;
-      box-shadow:0 12px 24px rgba(0,0,0,0.08);
-    }
-
-    .right-img img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .modes-row{
-      overflow:hidden;
-      border-radius:24px;
-      background:rgba(255,255,255,0.45);
-      border:1px solid var(--line);
-      padding:14px 0;
-      margin-bottom:16px;
-      box-shadow:var(--shadow);
-    }
-
-    .modes-track{
-      display:flex;
-      gap:12px;
-      width:max-content;
-      animation:marqueeScroll 24s linear infinite;
-    }
-
-    .mode-pill{
-      flex:0 0 auto;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:12px 16px;
-      font-size:13px;
-      font-weight:700;
-      color:#5f597f;
-      white-space:nowrap;
-      box-shadow:0 8px 16px rgba(100,70,50,0.04);
-    }
-
-    .story-row{
-      overflow:hidden;
-      border-radius:24px;
-      background:rgba(255,255,255,0.45);
-      border:1px solid var(--line);
-      padding:14px 0;
-      margin-bottom:16px;
-      box-shadow:var(--shadow);
-    }
-
-    .story-track{
-      display:flex;
-      gap:14px;
-      width:max-content;
-      animation:marqueeScroll 30s linear infinite;
-    }
-
-    @keyframes marqueeScroll{
-      0%{ transform:translateX(0); }
-      100%{ transform:translateX(-50%); }
-    }
-
-    .story-card{
-      flex:0 0 auto;
-      width:290px;
+    .guide-card{
       background:#fff;
       border:1px solid var(--line);
       border-radius:24px;
-      overflow:hidden;
-      box-shadow:0 10px 22px rgba(100,70,50,0.04);
-    }
-
-    .story-img{
-      height:150px;
-      overflow:hidden;
-    }
-
-    .story-img img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .story-body{
-      padding:16px;
-    }
-
-    .story-body strong{
-      display:block;
-      font-size:18px;
-      margin-bottom:8px;
-      color:#2f2b49;
-    }
-
-    .story-body span{
-      display:block;
-      font-size:14px;
-      line-height:1.65;
-      color:var(--muted);
-    }
-
-    .builder-card{
-      background:var(--white);
-      border:1px solid var(--line);
-      border-radius:28px;
+      padding:18px;
       box-shadow:var(--shadow);
-      padding:20px;
     }
 
-    .head-row{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:14px;
-    }
-
-    .head-row h2{
-      margin:0 0 4px;
-      font-size:28px;
-      color:#2f2b49;
-    }
-
-    .head-row p{
-      margin:0;
-      font-size:14px;
-      line-height:1.6;
-      color:var(--muted);
-    }
-
-    .pill{
-      padding:10px 14px;
-      border-radius:999px;
-      background:#f4efff;
+    .guide-step{
+      width:34px;
+      height:34px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:var(--purple-soft);
       color:var(--purple);
-      font-size:12px;
+      font-size:14px;
       font-weight:800;
-      white-space:nowrap;
-    }
-
-    .tool-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-bottom:14px;
-    }
-
-    .tool-mini{
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:14px;
-      background:#fff;
-    }
-
-    .tool-mini strong{
-      display:block;
-      margin-bottom:6px;
-      font-size:16px;
-      color:#2f2b49;
-    }
-
-    .tool-mini span{
-      display:block;
-      font-size:13px;
-      line-height:1.6;
-      color:var(--muted);
-    }
-
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:7px;
       margin-bottom:12px;
     }
 
+    .guide-card h3{
+      margin:0 0 6px;
+      font-size:18px;
+      color:#29324c;
+    }
+
+    .guide-card p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .studio-grid{
+      display:grid;
+      grid-template-columns:400px 1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .panel{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:26px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .panel-head{
+      padding:20px 20px 10px;
+    }
+
+    .panel-head h2{
+      margin:0 0 6px;
+      font-size:23px;
+      font-weight:800;
+      color:#29324c;
+    }
+
+    .panel-head p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .form-wrap{
+      padding:18px 20px 20px;
+      display:grid;
+      gap:14px;
+    }
+
     .field label{
+      display:block;
+      margin-bottom:8px;
       font-size:13px;
       font-weight:800;
-      color:#4f486f;
+      color:#4f5776;
     }
 
     .field input,
-    .field textarea,
-    .field select{
+    .field select,
+    .field textarea{
       width:100%;
       border:1px solid var(--line);
       border-radius:16px;
       padding:14px;
-      background:#fff;
       font:inherit;
       color:var(--text);
+      background:#fff;
       outline:none;
     }
 
     .field textarea{
       min-height:110px;
       resize:vertical;
-      line-height:1.65;
     }
 
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus{
-      border-color:#c9baf5;
-      box-shadow:0 0 0 4px rgba(122,90,215,0.08);
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
     }
 
-    .style-row,
-    .export-row,
-    .main-actions{
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .chip{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size:13px;
+      font-weight:700;
+      color:#5d6685;
+      cursor:pointer;
+    }
+
+    .chip.active{
+      background:var(--purple-soft);
+      color:var(--purple);
+      border-color:#e2dcfb;
+    }
+
+    .generate-btn{
+      width:100%;
+      border:none;
+      border-radius:18px;
+      padding:16px 18px;
+      font-size:15px;
+      font-weight:800;
+      color:#fff;
+      cursor:pointer;
+      background:linear-gradient(90deg,#7b6df6,#9e8cff);
+      box-shadow:0 14px 28px rgba(123,109,246,.18);
+    }
+
+    .workspace{
+      padding:20px;
+    }
+
+    .workspace-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+
+    .workspace-top h3{
+      margin:0;
+      font-size:24px;
+      font-weight:800;
+      color:#29324c;
+    }
+
+    .workspace-top p{
+      margin:6px 0 0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .status{
+      padding:10px 14px;
+      border-radius:999px;
+      background:#eef6ff;
+      color:#4277c4;
+      font-size:13px;
+      font-weight:800;
+      border:1px solid #dbe9ff;
+      white-space:nowrap;
+    }
+
+    .storyboard{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin-bottom:18px;
+    }
+
+    .scene{
+      border:1px solid var(--line);
+      border-radius:22px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 10px 20px rgba(90,100,140,.06);
+    }
+
+    .scene-visual{
+      height:150px;
+      padding:14px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-start;
+      background-size:cover;
+      background-position:center;
+      position:relative;
+    }
+
+    .scene-visual::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,0) 35%, rgba(0,0,0,.18) 100%);
+    }
+
+    .scene-badge{
+      position:relative;
+      z-index:2;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.92);
+      font-size:12px;
+      font-weight:800;
+      color:#36405d;
+    }
+
+    .scene-body{
+      padding:14px;
+    }
+
+    .scene-body strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:15px;
+      color:#2b3450;
+    }
+
+    .scene-body span{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .output-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-top:16px;
+    }
+
+    .output-card{
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+      background:#fff;
+      box-shadow:0 10px 20px rgba(90,100,140,.05);
+    }
+
+    .output-card h4{
+      margin:0 0 10px;
+      font-size:18px;
+      color:#29324c;
+    }
+
+    .output-card p,
+    .output-card li{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .output-card ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .card-actions{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
+      margin-top:14px;
     }
 
-    .style-chip,
-    .export-chip{
-      padding:12px 15px;
-      border-radius:16px;
-      background:#fff;
-      border:1px solid var(--line);
-      font-size:13px;
+    .small-btn{
+      border:none;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:12px;
       font-weight:800;
-      color:#5f597f;
-      box-shadow:0 8px 16px rgba(100,70,50,0.04);
+      cursor:pointer;
+      background:#f4f6ff;
+      color:#69729a;
     }
 
-    .main-actions{
-      margin-top:14px;
+    .small-btn.primary{
+      background:var(--purple-soft);
+      color:var(--purple);
     }
 
-    .status-box{
-      margin-top:14px;
-      border-radius:18px;
-      background:#faf7ff;
-      border:1px solid var(--line);
-      padding:14px 16px;
-    }
-
-    .status-box strong{
-      display:block;
-      margin-bottom:6px;
-      font-size:14px;
-      color:#2f2b49;
-    }
-
-    .status-box span{
-      display:block;
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.6;
-    }
-
-    .preview-stage{
-      border-radius:24px;
-      overflow:hidden;
-      border:1px solid var(--line);
-      background:#fff;
-      box-shadow:0 12px 22px rgba(100,70,50,0.04);
-      margin-bottom:14px;
-    }
-
-    .preview-top{
-      min-height:300px;
-      background:linear-gradient(135deg,#ff9cb7 0%, #ff8a8a 35%, #ffb28a 100%);
-      position:relative;
-      padding:24px;
-      color:#fff;
-    }
-
-    .preview-top h3{
-      margin:0 0 10px;
-      font-size:28px;
-      line-height:1.2;
-      max-width:380px;
-    }
-
-    .preview-top p{
-      margin:0;
-      max-width:360px;
-      font-size:15px;
-      line-height:1.7;
-      opacity:0.95;
-    }
-
-    .preview-thumbs{
-      display:flex;
-      gap:8px;
-      padding:14px;
-      background:#fff;
-      overflow-x:auto;
-    }
-
-    .thumb{
-      flex:0 0 auto;
-      width:85px;
-      height:60px;
-      border-radius:14px;
-      overflow:hidden;
-      border:1px solid var(--line);
-    }
-
-    .thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .preview-bottom{
+    .quick-strip{
+      margin-top:18px;
       display:grid;
-      grid-template-columns:1fr 1fr 1fr;
-      gap:12px;
-      margin-top:12px;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
     }
 
-    .preview-card{
+    .quick-card{
+      border:1px solid var(--line);
       border-radius:20px;
-      border:1px solid var(--line);
-      background:#fff;
       padding:16px;
-      min-height:120px;
-      box-shadow:0 10px 20px rgba(100,70,50,0.04);
+      background:#fbfbff;
     }
 
-    .preview-card h4{
-      margin:0 0 8px;
-      font-size:17px;
-      color:#2f2b49;
-    }
-
-    .preview-card div{
-      font-size:14px;
-      line-height:1.7;
-      color:var(--muted);
-      white-space:pre-wrap;
-    }
-
-    .site-footer{
-      margin-top:24px;
-      background:#181427;
-      color:#fff;
-      padding:40px 0;
-    }
-
-    .footer-grid{
-      display:grid;
-      grid-template-columns:1.2fr 1fr 1fr 1fr;
-      gap:24px;
-    }
-
-    .footer-col h3{
-      margin:0 0 14px;
-      font-size:18px;
-      color:#fff;
-    }
-
-    .footer-col p,
-    .footer-col a{
+    .quick-card strong{
       display:block;
-      margin:0 0 10px;
-      color:#d9d4ea;
+      margin-bottom:8px;
       font-size:15px;
+      color:#2d3653;
+    }
+
+    .quick-card span{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
       line-height:1.7;
     }
 
-    @media (max-width:1180px){
-      .hero-grid,
-      .builder-grid,
-      .footer-grid{
-        grid-template-columns:1fr;
-      }
+    .img1{background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80')}
+    .img2{background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80')}
+    .img3{background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80')}
+    .img4{background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80')}
 
-      .preview-bottom{
+    @media (max-width:1100px){
+      .guide,
+      .storyboard,
+      .output-grid,
+      .quick-strip{
+        grid-template-columns:1fr 1fr;
+      }
+      .studio-grid{
         grid-template-columns:1fr;
       }
     }
 
     @media (max-width:768px){
-      .container{
-        width:min(100% - 18px, 1200px);
-      }
-
-      .menu-toggle{
-        display:block;
-      }
-
-      .main-nav{
-        display:none;
-        position:absolute;
-        top:82px;
-        left:0;
-        right:0;
-        background:#fff;
-        border:1px solid var(--line);
-        border-radius:18px;
-        box-shadow:0 18px 40px rgba(0,0,0,0.08);
-        padding:14px;
-        flex-direction:column;
-        align-items:stretch;
-        gap:10px;
-      }
-
-      .main-nav.show{
-        display:flex;
-      }
-
-      .main-nav a{
-        width:100%;
-        background:#fff8f2;
-      }
-
-      .hero-title{
-        font-size:32px;
-        line-height:1.08;
-      }
-
-      .hero-actions,
-      .style-row,
-      .export-row,
-      .main-actions{
-        flex-direction:column;
-      }
-
-      .btn,
-      .style-chip,
-      .export-chip{
-        width:100%;
-        justify-content:center;
-      }
-
-      .visual-canvas{
+      .container{width:min(100% - 18px,1200px)}
+      .main-nav,.nav-actions{display:none}
+      .hero h1{font-size:36px}
+      .guide,
+      .storyboard,
+      .output-grid,
+      .quick-strip,
+      .grid-2{
         grid-template-columns:1fr;
-      }
-
-      .prompt-bar{
-        left:14px;
-        right:14px;
-        flex-direction:column;
-      }
-
-      .prompt-bar button{
-        width:100%;
-      }
-
-      .tool-grid,
-      .footer-grid{
-        grid-template-columns:1fr;
-      }
-
-      .card-inner,
-      .builder-card{
-        padding:16px;
-      }
-
-      .story-card{
-        width:250px;
       }
     }
   </style>
@@ -839,445 +561,293 @@
 
   <header class="site-header">
     <div class="container nav-wrap">
-      <a href="index.html" class="brand"><span class="brand-dot"></span>Bariq AI</a>
-      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
+      <a href="index.html" class="brand">
+        <span class="brand-mark">B</span>
+        <span class="brand-text">BariqAI</span>
+      </a>
 
-      <nav class="main-nav" id="mainNav">
-        <a href="index.html">🏠 Home</a>
-        <a href="business-dashboard.html">🏢 Business</a>
-        <a href="ai-generator.html">✨ AI Generator</a>
-        <a href="campaign.html">📣 Campaign</a>
-        <a href="creator-marketplace.html">🎥 Creators</a>
-        <a href="templates.html">🧩 Templates</a>
-        <a href="payments.html">💳 Payments</a>
-        <a href="login.html">🔐 Login</a>
-        <a href="admin-dashboard.html">⚙️ Admin</a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="business-dashboard.html">Business</a>
+        <a href="ai-generator.html">AI Generator</a>
+        <a href="campaign.html">Campaign</a>
+        <a href="creator-marketplace.html">Creators</a>
+        <a href="templates.html">Templates</a>
+        <a href="video-creator.html" class="active">Video Creator</a>
+        <a href="payments.html">Payments</a>
       </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="top-btn">Login</a>
+        <a href="signup.html" class="top-btn start">Start Free</a>
+      </div>
     </div>
   </header>
 
   <section class="page">
     <div class="container">
 
-      <div class="grid hero-grid">
-        <div class="card hero-left">
-          <div class="card-inner">
-            <div class="tag">🎬 Video Creator Studio</div>
-            <h1 class="hero-title">Turn one idea into promo videos, reels and launch-ready exports</h1>
-            <p class="hero-sub">Bariq helps you build short videos from one prompt, pick visual style, create scenes, and prepare content for Instagram, WhatsApp, YouTube and LinkedIn.</p>
+      <div class="hero">
+        <div class="badge">AI video planning for campaigns</div>
+        <h1>Turn one prompt into a reel plan, storyboard, voiceover and video script.</h1>
+        <p>Create campaign-ready short video ideas that feel real, visual and easy to execute.</p>
+        <div class="hero-actions">
+          <button class="hero-btn primary">Create Video Plan</button>
+          <button class="hero-btn secondary">Open Templates</button>
+        </div>
+      </div>
 
-            <div class="hero-actions">
-              <a href="#videoBuilder" class="btn btn-primary">Start Creating</a>
-              <a href="campaign.html" class="btn btn-light">Open Campaign Studio</a>
-              <a href="templates.html" class="btn btn-light">Open Templates</a>
+      <div class="guide">
+        <div class="guide-card">
+          <div class="guide-step">1</div>
+          <h3>Describe your campaign</h3>
+          <p>Enter product, offer, audience and tone.</p>
+        </div>
+        <div class="guide-card">
+          <div class="guide-step">2</div>
+          <h3>Get scenes and script</h3>
+          <p>BariqAI builds reel flow and voiceover direction.</p>
+        </div>
+        <div class="guide-card">
+          <div class="guide-step">3</div>
+          <h3>Create faster</h3>
+          <p>Use outputs for editors, creators and ad launches.</p>
+        </div>
+      </div>
+
+      <div class="studio-grid">
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Video Prompt</h2>
+            <p>Fill once. Generate a complete short video direction.</p>
+          </div>
+
+          <div class="form-wrap">
+            <div class="field">
+              <label>Brand / Business</label>
+              <input id="brand" type="text" value="RSCC Aesthetic Clinic">
             </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label>Video Type</label>
+                <select id="videoType">
+                  <option>Instagram Reel</option>
+                  <option>Promo Video</option>
+                  <option>Story Ad</option>
+                  <option>YouTube Short</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Tone</label>
+                <select id="tone">
+                  <option>Premium & Elegant</option>
+                  <option>Strong & Direct</option>
+                  <option>Warm & Trustworthy</option>
+                  <option>Modern & Youthful</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Offer / Service</label>
+              <input id="offer" type="text" value="Laser hair reduction for women">
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label>Audience</label>
+                <input id="audience" type="text" value="Women aged 22 to 45">
+              </div>
+              <div class="field">
+                <label>City</label>
+                <input id="city" type="text" value="Hyderabad">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Main Message</label>
+              <textarea id="message">Focus on confidence, premium care, smooth skin, convenience and modern treatment. Show transformation from hassle to confidence.</textarea>
+            </div>
+
+            <div class="field">
+              <label>Outputs needed</label>
+              <div class="chips">
+                <button class="chip active" type="button">Storyboard</button>
+                <button class="chip active" type="button">Voiceover</button>
+                <button class="chip active" type="button">Reel Script</button>
+                <button class="chip active" type="button">CTA</button>
+              </div>
+            </div>
+
+            <button class="generate-btn" onclick="generateVideoPlan()">Generate Video Plan</button>
           </div>
         </div>
 
-        <div class="card hero-right visual-board">
-          <div class="card-inner">
-            <h3>See your prompt become visuals</h3>
-            <p>Bariq makes video creation feel live, simple and visual — just like a real creative tool.</p>
+        <div class="panel">
+          <div class="workspace">
+            <div class="workspace-top">
+              <div>
+                <h3>Generated Video Workspace</h3>
+                <p>Scene flow, voiceover, captions and CTA in one place.</p>
+              </div>
+              <div class="status">Ready for reels, edits and creator briefs</div>
+            </div>
 
-            <div class="visual-canvas">
-              <div class="big-panel">
-                <h4>Watch your words turn into marketing-ready visual scenes with AI</h4>
-
-                <div class="floating-mini mini-1">
-                  <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80" alt="">
-                </div>
-                <div class="floating-mini mini-2">
-                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="">
-                </div>
-                <div class="floating-mini mini-3">
-                  <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=800&q=80" alt="">
-                </div>
-
-                <div class="prompt-bar">
-                  <input id="heroPrompt" type="text" placeholder="Create a premium laser hair reduction reel for women in Hyderabad">
-                  <button type="button" onclick="copyHeroPrompt()">Create</button>
+            <div class="storyboard">
+              <div class="scene">
+                <div class="scene-visual img1"><div class="scene-badge">Scene 1</div></div>
+                <div class="scene-body">
+                  <strong>Show the problem</strong>
+                  <span id="scene1">Start with the pain point and current routine.</span>
                 </div>
               </div>
 
-              <div class="side-stack">
-                <div class="small-panel panel-yellow">
-                  <h4>Choose style in one click</h4>
-                  <div class="small-btn">Select style</div>
-                  <div class="right-img">
-                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="">
-                  </div>
+              <div class="scene">
+                <div class="scene-visual img2"><div class="scene-badge">Scene 2</div></div>
+                <div class="scene-body">
+                  <strong>Introduce the offer</strong>
+                  <span id="scene2">Present the service with a clean premium feel.</span>
                 </div>
+              </div>
 
-                <div class="small-panel panel-mint">
-                  <h4>Export for every platform</h4>
-                  <div class="small-btn">Prepare exports</div>
-                  <div class="right-img">
-                    <img src="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=800&q=80" alt="">
-                  </div>
+              <div class="scene">
+                <div class="scene-visual img3"><div class="scene-badge">Scene 3</div></div>
+                <div class="scene-body">
+                  <strong>Build trust</strong>
+                  <span id="scene3">Show care, expertise and visible confidence.</span>
+                </div>
+              </div>
+
+              <div class="scene">
+                <div class="scene-visual img4"><div class="scene-badge">Scene 4</div></div>
+                <div class="scene-body">
+                  <strong>Close with CTA</strong>
+                  <span id="scene4">End with action, offer and urgency.</span>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="modes-row">
-        <div class="modes-track">
-          <div class="mode-pill">🎞 Reel Maker</div>
-          <div class="mode-pill">📢 Promo Video</div>
-          <div class="mode-pill">🧠 AI Scenes</div>
-          <div class="mode-pill">🎙 Voice Script</div>
-          <div class="mode-pill">📱 Story Format</div>
-          <div class="mode-pill">🖥 Landscape Export</div>
-          <div class="mode-pill">📲 WhatsApp Video</div>
-          <div class="mode-pill">▶ YouTube Short</div>
-          <div class="mode-pill">💼 LinkedIn Promo</div>
+            <div class="output-grid">
+              <div class="output-card">
+                <h4>Reel Script</h4>
+                <p id="reelScript">Hook: Still planning your month around temporary fixes? Show frustration. Introduce premium laser care. Show confidence and smooth routine. End with a strong women-first CTA.</p>
+                <div class="card-actions">
+                  <button class="small-btn primary" onclick="copyText('reelScript')">Copy</button>
+                  <button class="small-btn">Save</button>
+                </div>
+              </div>
 
-          <div class="mode-pill">🎞 Reel Maker</div>
-          <div class="mode-pill">📢 Promo Video</div>
-          <div class="mode-pill">🧠 AI Scenes</div>
-          <div class="mode-pill">🎙 Voice Script</div>
-          <div class="mode-pill">📱 Story Format</div>
-          <div class="mode-pill">🖥 Landscape Export</div>
-          <div class="mode-pill">📲 WhatsApp Video</div>
-          <div class="mode-pill">▶ YouTube Short</div>
-          <div class="mode-pill">💼 LinkedIn Promo</div>
-        </div>
-      </div>
+              <div class="output-card">
+                <h4>Voiceover</h4>
+                <p id="voiceover">For women who are done with repeated hassle, RSCC Aesthetic Clinic in Hyderabad brings premium laser hair reduction designed for confidence, comfort and convenience. Book your consultation today.</p>
+                <div class="card-actions">
+                  <button class="small-btn primary" onclick="copyText('voiceover')">Copy</button>
+                  <button class="small-btn">Save</button>
+                </div>
+              </div>
 
-      <div class="story-row">
-        <div class="story-track">
-          <div class="story-card">
-            <div class="story-img">
-              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="">
-            </div>
-            <div class="story-body">
-              <strong>1. Add one simple brief</strong>
-              <span>Type or speak one line about your offer, audience and city.</span>
-            </div>
-          </div>
+              <div class="output-card">
+                <h4>On-screen text</h4>
+                <ul id="onscreen">
+                  <li>Done with waxing routines?</li>
+                  <li>Choose premium laser care</li>
+                  <li>Confidence starts here</li>
+                  <li>Book your consultation now</li>
+                </ul>
+                <div class="card-actions">
+                  <button class="small-btn primary" onclick="copyText('onscreen')">Copy</button>
+                  <button class="small-btn">Save</button>
+                </div>
+              </div>
 
-          <div class="story-card">
-            <div class="story-img">
-              <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=80" alt="">
+              <div class="output-card">
+                <h4>CTA Variants</h4>
+                <ul id="ctaList">
+                  <li>Book your premium consultation today</li>
+                  <li>Switch to smarter smooth confidence</li>
+                  <li>Experience women-first care in Hyderabad</li>
+                  <li>Start your transformation now</li>
+                </ul>
+                <div class="card-actions">
+                  <button class="small-btn primary" onclick="copyText('ctaList')">Copy</button>
+                  <button class="small-btn">Save</button>
+                </div>
+              </div>
             </div>
-            <div class="story-body">
-              <strong>2. Select visual style</strong>
-              <span>Pick premium, modern, emotional, elegant or high-energy look.</span>
-            </div>
-          </div>
 
-          <div class="story-card">
-            <div class="story-img">
-              <img src="https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&w=1200&q=80" alt="">
+            <div class="quick-strip">
+              <div class="quick-card">
+                <strong>Editor handoff</strong>
+                <span>Share scenes, text and voiceover with your editor.</span>
+              </div>
+              <div class="quick-card">
+                <strong>Creator brief</strong>
+                <span>Give influencers or creators a clear shoot flow.</span>
+              </div>
+              <div class="quick-card">
+                <strong>Ad-ready output</strong>
+                <span>Use the same script for reels, ads and short promos.</span>
+              </div>
             </div>
-            <div class="story-body">
-              <strong>3. Generate scenes</strong>
-              <span>Create hook, body, transformation, CTA and ending frames.</span>
-            </div>
-          </div>
 
-          <div class="story-card">
-            <div class="story-img">
-              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="">
-            </div>
-            <div class="story-body">
-              <strong>4. Export everywhere</strong>
-              <span>Prepare the video for reels, stories, ads, YouTube and LinkedIn.</span>
-            </div>
-          </div>
-
-          <div class="story-card">
-            <div class="story-img">
-              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="">
-            </div>
-            <div class="story-body">
-              <strong>1. Add one simple brief</strong>
-              <span>Type or speak one line about your offer, audience and city.</span>
-            </div>
-          </div>
-
-          <div class="story-card">
-            <div class="story-img">
-              <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=80" alt="">
-            </div>
-            <div class="story-body">
-              <strong>2. Select visual style</strong>
-              <span>Pick premium, modern, emotional, elegant or high-energy look.</span>
-            </div>
-          </div>
-
-          <div class="story-card">
-            <div class="story-img">
-              <img src="https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&w=1200&q=80" alt="">
-            </div>
-            <div class="story-body">
-              <strong>3. Generate scenes</strong>
-              <span>Create hook, body, transformation, CTA and ending frames.</span>
-            </div>
-          </div>
-
-          <div class="story-card">
-            <div class="story-img">
-              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="">
-            </div>
-            <div class="story-body">
-              <strong>4. Export everywhere</strong>
-              <span>Prepare the video for reels, stories, ads, YouTube and LinkedIn.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid builder-grid" id="videoBuilder">
-        <div class="builder-card">
-          <div class="head-row">
-            <div>
-              <h2>Video builder</h2>
-              <p>Create a marketing video from one short input.</p>
-            </div>
-            <div class="pill">Live Tool</div>
-          </div>
-
-          <div class="tool-grid">
-            <div class="tool-mini">
-              <strong>Reel Format</strong>
-              <span>9:16 short-form videos for Instagram and Shorts.</span>
-            </div>
-            <div class="tool-mini">
-              <strong>Promo Video</strong>
-              <span>Clean promotional video for ads and campaigns.</span>
-            </div>
-            <div class="tool-mini">
-              <strong>Voice Script</strong>
-              <span>Generate hook, scene lines and CTA audio direction.</span>
-            </div>
-            <div class="tool-mini">
-              <strong>Multi Export</strong>
-              <span>Prepare outputs for Meta, WhatsApp, YouTube and LinkedIn.</span>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="videoPrompt">Video Prompt</label>
-            <textarea id="videoPrompt" placeholder="Create a premium reel for laser hair reduction with flat 60% off for women in Hyderabad."></textarea>
-          </div>
-
-          <div class="field">
-            <label for="videoBrand">Business / Brand</label>
-            <input id="videoBrand" type="text" placeholder="e.g. RSCC Clinic">
-          </div>
-
-          <div class="field">
-            <label for="videoOffer">Offer</label>
-            <input id="videoOffer" type="text" placeholder="e.g. Flat 60% Off">
-          </div>
-
-          <div class="field">
-            <label for="videoAudience">Audience</label>
-            <input id="videoAudience" type="text" placeholder="e.g. Women 25-40 Hyderabad">
-          </div>
-
-          <div class="field">
-            <label for="videoStyle">Visual Style</label>
-            <select id="videoStyle">
-              <option>Premium Soft</option>
-              <option>Modern Clean</option>
-              <option>Emotional Elegant</option>
-              <option>Bold Ad Style</option>
-              <option>Clinic Promo</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="videoTone">Tone / Direction</label>
-            <textarea id="videoTone" placeholder="Luxury, feminine, welcoming, visible results, urgency, clean transitions."></textarea>
-          </div>
-
-          <div class="field">
-            <label>Style Cards</label>
-            <div class="style-row">
-              <div class="style-chip">✨ Premium Soft</div>
-              <div class="style-chip">🎀 Feminine</div>
-              <div class="style-chip">🎬 Story Style</div>
-              <div class="style-chip">💎 Luxury Ad</div>
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Export Destinations</label>
-            <div class="export-row">
-              <div class="export-chip">📸 Instagram Reel</div>
-              <div class="export-chip">💬 WhatsApp Video</div>
-              <div class="export-chip">▶ YouTube Short</div>
-              <div class="export-chip">💼 LinkedIn Promo</div>
-            </div>
-          </div>
-
-          <div class="main-actions">
-            <button class="btn btn-primary" onclick="generateVideoCreator()">Generate Video</button>
-            <button class="btn btn-light" onclick="exportVideo()">Export Plan</button>
-            <button class="btn btn-light" onclick="saveVideo()">Save Draft</button>
-          </div>
-
-          <div class="status-box">
-            <strong>Video status</strong>
-            <span id="videoStatus">Ready. Enter your prompt and create a video concept.</span>
           </div>
         </div>
 
-        <div class="builder-card">
-          <div class="head-row">
-            <div>
-              <h2>Live preview</h2>
-              <p>Preview scenes, script and export direction in one place.</p>
-            </div>
-            <div class="pill">Preview</div>
-          </div>
-
-          <div class="preview-stage">
-            <div class="preview-top">
-              <h3 id="previewHeadline">Create a beautiful promotional reel with Bariq AI</h3>
-              <p id="previewSub">Your visual video concept, hook and launch direction will appear here.</p>
-            </div>
-
-            <div class="preview-thumbs">
-              <div class="thumb"><img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80" alt=""></div>
-              <div class="thumb"><img src="https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&w=800&q=80" alt=""></div>
-              <div class="thumb"><img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=800&q=80" alt=""></div>
-              <div class="thumb"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt=""></div>
-              <div class="thumb"><img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80" alt=""></div>
-            </div>
-          </div>
-
-          <div class="preview-bottom">
-            <div class="preview-card">
-              <h4>Scene Flow</h4>
-              <div id="sceneFlow">No output yet.</div>
-            </div>
-
-            <div class="preview-card">
-              <h4>Voice Script</h4>
-              <div id="voiceScript">No output yet.</div>
-            </div>
-
-            <div class="preview-card">
-              <h4>Export Plan</h4>
-              <div id="exportPlan">No output yet.</div>
-            </div>
-          </div>
-        </div>
       </div>
 
     </div>
   </section>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h3>Bariq AI</h3>
-          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation and execution systems.</p>
-        </div>
-
-        <div class="footer-col">
-          <h3>Platform</h3>
-          <a href="index.html">Home</a>
-          <a href="campaign.html">Campaign Studio</a>
-          <a href="ai-generator.html">AI Generator</a>
-          <a href="video-creator.html">Video Creator</a>
-        </div>
-
-        <div class="footer-col">
-          <h3>Legal</h3>
-          <a href="terms.html">Terms</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="refund-policy.html">Refund Policy</a>
-        </div>
-
-        <div class="footer-col">
-          <h3>Contact</h3>
-          <a href="contact.html">Contact Us</a>
-          <a href="pricing.html">Pricing</a>
-          <a href="payments.html">Payments</a>
-          <p>support@bariqai.com</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
   <script>
-    function toggleMobileMenu() {
-      document.getElementById("mainNav").classList.toggle("show");
+    function copyText(id){
+      const el = document.getElementById(id);
+      const text = el.innerText || el.textContent;
+      navigator.clipboard.writeText(text);
+      alert("Copied");
     }
 
-    function copyHeroPrompt(){
-      const heroPrompt = document.getElementById("heroPrompt").value.trim();
-      if(heroPrompt){
-        document.getElementById("videoPrompt").value = heroPrompt;
-        document.getElementById("videoStatus").textContent = "Prompt added into video builder.";
-        document.getElementById("videoBuilder").scrollIntoView({behavior:"smooth"});
-      }
-    }
+    function generateVideoPlan(){
+      const brand = document.getElementById('brand').value;
+      const videoType = document.getElementById('videoType').value;
+      const tone = document.getElementById('tone').value;
+      const offer = document.getElementById('offer').value;
+      const audience = document.getElementById('audience').value;
+      const city = document.getElementById('city').value;
+      const message = document.getElementById('message').value;
 
-    function getValue(id, fallback){
-      const value = document.getElementById(id).value.trim();
-      return value || fallback;
-    }
+      document.getElementById('scene1').innerText =
+        `Open the ${videoType.toLowerCase()} with the current problem faced by ${audience}.`;
 
-    function buildVideoContent(){
-      const prompt = getValue("videoPrompt", "Create a premium promotional video");
-      const brand = getValue("videoBrand", "Your Brand");
-      const offer = getValue("videoOffer", "special offer");
-      const audience = getValue("videoAudience", "your target audience");
-      const style = getValue("videoStyle", "Premium Soft");
-      const tone = getValue("videoTone", "luxury, feminine, clean, engaging");
+      document.getElementById('scene2').innerText =
+        `Introduce ${offer} by ${brand} in a ${tone.toLowerCase()} way.`;
 
-      const headline = `${brand} video concept ready`;
-      const sub = `${style} visual direction for ${audience} with ${offer}.`;
+      document.getElementById('scene3').innerText =
+        `Build trust by showing care, experience and visible emotional confidence in ${city}.`;
 
-      const scenes =
-`Scene 1: Strong hook with visual pain point
-Scene 2: Introduce ${brand} and the offer ${offer}
-Scene 3: Show transformation / service / happy result
-Scene 4: Urgency + CTA + premium close`;
+      document.getElementById('scene4').innerText =
+        `End with a strong CTA and make viewers take the next step today.`;
 
-      const voice =
-`Hook: Still searching for the right result?
-Body: ${brand} now brings ${offer} for ${audience}.
-Tone: ${tone}
-Ending: Book now. DM today. Limited slots.`;
+      document.getElementById('reelScript').innerText =
+        `Hook: Are you still stuck with temporary solutions? Show the problem. Introduce ${offer}. Highlight ${brand} in ${city}. Build trust with a ${tone.toLowerCase()} feel. End with a confident action line.`;
 
-      const exportText =
-`Instagram Reel: 9:16 short version
-WhatsApp: compact promotional cut
-YouTube Short: hook-led energetic version
-LinkedIn: cleaner professional version`;
+      document.getElementById('voiceover').innerText =
+        `${brand} now brings ${offer} for ${audience} in ${city}. Built with a ${tone.toLowerCase()} tone, this video should move from problem to trust to confidence. ${message}`;
 
-      return { headline, sub, scenes, voice, exportText, prompt };
-    }
+      document.getElementById('onscreen').innerHTML = `
+        <li>${offer}</li>
+        <li>Designed for ${audience}</li>
+        <li>${brand} • ${city}</li>
+        <li>Book now for premium care</li>
+      `;
 
-    function generateVideoCreator(){
-      const data = buildVideoContent();
-
-      document.getElementById("previewHeadline").textContent = data.headline;
-      document.getElementById("previewSub").textContent = data.sub;
-      document.getElementById("sceneFlow").textContent = data.scenes;
-      document.getElementById("voiceScript").textContent = data.voice;
-      document.getElementById("exportPlan").textContent = data.exportText;
-      document.getElementById("videoStatus").textContent = `Video concept generated from prompt: "${data.prompt}".`;
-    }
-
-    function exportVideo(){
-      const data = buildVideoContent();
-      document.getElementById("exportPlan").textContent = data.exportText;
-      document.getElementById("videoStatus").textContent = "Export plan prepared for all selected platforms.";
-    }
-
-    function saveVideo(){
-      const data = buildVideoContent();
-      document.getElementById("sceneFlow").textContent = data.scenes;
-      document.getElementById("videoStatus").textContent = "Video draft saved locally as a concept.";
+      document.getElementById('ctaList').innerHTML = `
+        <li>Book your consultation in ${city}</li>
+        <li>Start your confidence journey today</li>
+        <li>Choose smarter premium care</li>
+        <li>Enquire now with ${brand}</li>
+      `;
     }
   </script>
 </body>
