@@ -3,49 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BariqAI Prompt Studio</title>
+  <title>BariqAI AI Generator</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:'Inter',sans-serif;
-      color:#2d2947;
-      background:
-        radial-gradient(circle at top left, rgba(115,87,199,.05), transparent 20%),
-        radial-gradient(circle at top right, rgba(197,155,67,.08), transparent 20%),
-        linear-gradient(180deg,#fffefe 0%,#fffaf4 100%);
+      background:linear-gradient(180deg,#fcfcff 0%, #f7f8ff 100%);
+      color:#2f3250;
     }
 
     :root{
-      --text:#2d2947;
-      --muted:#6f6987;
-      --gold:#c59b43;
-      --purple:#7357c7;
-      --line:#ece4dc;
-      --shadow:0 18px 40px rgba(90,70,50,.08);
-      --radius:26px;
+      --card:#ffffff;
+      --line:#e9ebf5;
+      --text:#2f3250;
+      --muted:#70758f;
+      --purple:#7b6df6;
+      --purple-soft:#f1efff;
+      --pink-soft:#fff1f6;
+      --blue-soft:#eef6ff;
+      --mint-soft:#eefcf6;
+      --peach-soft:#fff4eb;
+      --yellow-soft:#fff8e7;
+      --shadow:0 14px 32px rgba(90,100,140,.08);
     }
 
     a{text-decoration:none;color:inherit}
-    .container{width:min(1360px, calc(100% - 28px));margin:0 auto}
+    .container{width:min(1320px,calc(100% - 28px));margin:0 auto}
 
     .site-header{
       position:sticky;
       top:0;
       z-index:999;
-      background:rgba(255,255,255,.94);
-      backdrop-filter:blur(12px);
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
     }
 
     .nav-wrap{
-      min-height:76px;
+      min-height:74px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -60,28 +61,28 @@
     }
 
     .brand-mark{
-      width:46px;
-      height:46px;
+      width:44px;
+      height:44px;
       border-radius:14px;
       display:grid;
       place-items:center;
-      font-size:22px;
+      background:linear-gradient(135deg,#ddd6ff,#b9a9ff);
+      color:#3d2f83;
       font-weight:800;
-      background:linear-gradient(135deg,#f2dfad 0%, #c59b43 100%);
-      color:#2d2947;
-      box-shadow:0 8px 18px rgba(197,155,67,.20);
+      font-size:22px;
+      flex:0 0 auto;
     }
 
     .brand-text{
       font-size:18px;
       font-weight:800;
-      color:#23203b;
+      color:#27304a;
     }
 
     .main-nav{
       display:flex;
-      align-items:center;
       gap:8px;
+      align-items:center;
       white-space:nowrap;
       overflow-x:auto;
       scrollbar-width:none;
@@ -90,16 +91,16 @@
     .main-nav::-webkit-scrollbar{display:none}
 
     .main-nav a{
-      padding:11px 14px;
+      padding:10px 14px;
       border-radius:14px;
       font-size:14px;
       font-weight:700;
-      color:#645d80;
+      color:#66708d;
     }
 
     .main-nav a.active,
     .main-nav a:hover{
-      background:#faf6ff;
+      background:var(--purple-soft);
       color:var(--purple);
     }
 
@@ -109,105 +110,138 @@
     }
 
     .top-btn{
-      padding:12px 18px;
-      border-radius:16px;
+      padding:11px 16px;
+      border-radius:14px;
       font-size:14px;
       font-weight:800;
       border:1px solid var(--line);
+      background:#fff;
     }
 
-    .top-btn.login{background:#fff}
     .top-btn.start{
-      background:linear-gradient(90deg,#f1dfae 0%, #d8b35d 100%);
-      border-color:#e5cf95;
+      background:linear-gradient(90deg,#7b6df6,#9e8cff);
+      color:#fff;
+      border:none;
     }
 
     .page{padding:22px 0 40px}
 
     .hero{
-      background:#fff;
+      background:linear-gradient(135deg,#ffffff 0%, #f7f4ff 46%, #eef7ff 100%);
       border:1px solid var(--line);
-      border-radius:32px;
+      border-radius:30px;
       box-shadow:var(--shadow);
-      padding:24px;
-      margin-bottom:22px;
+      padding:28px;
+      margin-bottom:20px;
     }
 
-    .tag{
+    .badge{
       display:inline-flex;
       align-items:center;
       gap:8px;
       padding:10px 14px;
       border-radius:999px;
-      border:1px solid var(--line);
       background:#fff;
+      border:1px solid var(--line);
       font-size:13px;
       font-weight:800;
-      color:#645d82;
-      margin-bottom:12px;
+      color:#66708d;
+      margin-bottom:14px;
     }
 
     .hero h1{
       margin:0;
-      font-family:'Cormorant Garamond',serif;
-      font-size:58px;
-      line-height:.98;
-      max-width:760px;
-      font-weight:700;
-      color:#26213d;
-    }
-
-    .hero h1 .gold{
-      background:linear-gradient(90deg,var(--gold),#9b7427);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
-      color:transparent;
+      font-size:48px;
+      line-height:1.06;
+      font-weight:800;
+      max-width:780px;
+      color:#26314b;
     }
 
     .hero p{
-      margin:14px 0 0;
-      color:var(--muted);
+      margin:12px 0 0;
+      max-width:720px;
       font-size:16px;
-      line-height:1.85;
-      max-width:900px;
+      line-height:1.75;
+      color:var(--muted);
+    }
+
+    .guide{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-bottom:22px;
+    }
+
+    .guide-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .guide-step{
+      width:34px;
+      height:34px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:var(--purple-soft);
+      color:var(--purple);
+      font-size:14px;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+
+    .guide-card h3{
+      margin:0 0 6px;
+      font-size:18px;
+      color:#29324c;
+    }
+
+    .guide-card p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.7;
     }
 
     .studio-grid{
       display:grid;
       grid-template-columns:420px 1fr;
-      gap:20px;
+      gap:18px;
       align-items:start;
     }
 
     .panel{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:28px;
+      border-radius:26px;
       box-shadow:var(--shadow);
       overflow:hidden;
     }
 
     .panel-head{
-      padding:22px 22px 10px;
+      padding:20px 20px 10px;
     }
 
     .panel-head h2{
-      margin:0 0 8px;
-      font-size:24px;
+      margin:0 0 6px;
+      font-size:23px;
       font-weight:800;
-      color:#27223f;
+      color:#29324c;
     }
 
     .panel-head p{
       margin:0;
-      color:var(--muted);
       font-size:14px;
-      line-height:1.8;
+      color:var(--muted);
+      line-height:1.7;
     }
 
     .form-wrap{
-      padding:18px 22px 22px;
+      padding:18px 20px 20px;
       display:grid;
       gap:14px;
     }
@@ -217,7 +251,7 @@
       margin-bottom:8px;
       font-size:13px;
       font-weight:800;
-      color:#4b4568;
+      color:#4f5776;
     }
 
     .field input,
@@ -226,7 +260,7 @@
       width:100%;
       border:1px solid var(--line);
       border-radius:16px;
-      padding:14px 14px;
+      padding:14px;
       font:inherit;
       color:var(--text);
       background:#fff;
@@ -234,7 +268,7 @@
     }
 
     .field textarea{
-      min-height:120px;
+      min-height:110px;
       resize:vertical;
     }
 
@@ -257,20 +291,17 @@
       background:#fff;
       font-size:13px;
       font-weight:700;
-      color:#5d557c;
+      color:#5d6685;
       cursor:pointer;
-      transition:.2s ease;
     }
 
-    .chip.active,
-    .chip:hover{
-      background:#faf6ff;
+    .chip.active{
+      background:var(--purple-soft);
       color:var(--purple);
-      border-color:#e7daf8;
+      border-color:#e2dcfb;
     }
 
     .generate-btn{
-      margin-top:4px;
       width:100%;
       border:none;
       border-radius:18px;
@@ -279,16 +310,8 @@
       font-weight:800;
       color:#fff;
       cursor:pointer;
-      background:linear-gradient(90deg,var(--gold),var(--purple));
-      box-shadow:0 14px 28px rgba(115,87,199,.18);
-    }
-
-    .mini-note{
-      text-align:center;
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.6;
-      margin-top:4px;
+      background:linear-gradient(90deg,#7b6df6,#9e8cff);
+      box-shadow:0 14px 28px rgba(123,109,246,.18);
     }
 
     .workspace{
@@ -298,17 +321,17 @@
     .workspace-top{
       display:flex;
       justify-content:space-between;
-      align-items:center;
+      align-items:flex-start;
       gap:14px;
-      margin-bottom:18px;
       flex-wrap:wrap;
+      margin-bottom:16px;
     }
 
     .workspace-top h3{
       margin:0;
       font-size:24px;
       font-weight:800;
-      color:#292440;
+      color:#29324c;
     }
 
     .workspace-top p{
@@ -321,71 +344,68 @@
     .status{
       padding:10px 14px;
       border-radius:999px;
-      background:linear-gradient(135deg,#fff6de,#f8edd0);
-      color:#8d6a1e;
+      background:#eef6ff;
+      color:#4277c4;
       font-size:13px;
       font-weight:800;
-      border:1px solid #efdfb0;
+      border:1px solid #dbe9ff;
       white-space:nowrap;
     }
 
-    .tabs{
+    .output-tabs{
       display:flex;
-      flex-wrap:wrap;
       gap:10px;
-      margin-bottom:18px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
     }
 
     .tab{
-      padding:11px 14px;
-      border-radius:14px;
-      border:1px solid var(--line);
+      padding:10px 14px;
+      border-radius:999px;
       background:#fff;
-      color:#5b5478;
+      border:1px solid var(--line);
       font-size:13px;
       font-weight:800;
+      color:#68729a;
       cursor:pointer;
     }
 
     .tab.active{
-      background:#faf6ff;
-      border-color:#e8dbf9;
+      background:var(--purple-soft);
       color:var(--purple);
+      border-color:#e2dcfb;
     }
 
-    .results-grid{
+    .output-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:16px;
     }
 
-    .result-card{
+    .output-card{
       border:1px solid var(--line);
       border-radius:22px;
       padding:18px;
-      background:linear-gradient(180deg,#ffffff 0%, #fffdfa 100%);
-      box-shadow:0 10px 20px rgba(90,70,50,.05);
+      background:#fff;
+      box-shadow:0 10px 20px rgba(90,100,140,.05);
+      min-height:220px;
     }
 
-    .result-card h4{
+    .output-card h4{
       margin:0 0 10px;
       font-size:18px;
-      font-weight:800;
-      color:#2f2a49;
-      display:flex;
-      align-items:center;
-      gap:8px;
+      color:#29324c;
     }
 
-    .result-card p,
-    .result-card li{
-      color:#605a7d;
-      font-size:14px;
-      line-height:1.8;
+    .output-card p,
+    .output-card li{
       margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.8;
     }
 
-    .result-card ul{
+    .output-card ul{
       margin:0;
       padding-left:18px;
     }
@@ -404,86 +424,64 @@
       font-size:12px;
       font-weight:800;
       cursor:pointer;
-      background:#f7f1ff;
-      color:#6b51b7;
+      background:#f4f6ff;
+      color:#69729a;
     }
 
-    .small-btn.alt{
-      background:#fff4dd;
-      color:#946b17;
+    .small-btn.primary{
+      background:var(--purple-soft);
+      color:var(--purple);
     }
 
-    .template-strip{
+    .quick-strip{
       margin-top:18px;
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:14px;
     }
 
-    .template-card{
+    .quick-card{
       border:1px solid var(--line);
       border-radius:20px;
-      background:#fff;
       padding:16px;
+      background:#fbfbff;
     }
 
-    .template-card strong{
+    .quick-card strong{
       display:block;
       margin-bottom:8px;
-      color:#2f2a49;
       font-size:15px;
+      color:#2d3653;
     }
 
-    .template-card span{
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.7;
+    .quick-card span{
       display:block;
-    }
-
-    .history-box{
-      margin-top:18px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:#fff;
-      padding:18px;
-    }
-
-    .history-box h4{
-      margin:0 0 12px;
-      font-size:17px;
-      color:#2f2a49;
-    }
-
-    .history-list{
-      display:grid;
-      gap:10px;
-    }
-
-    .history-item{
-      padding:12px 14px;
-      border-radius:16px;
-      background:#fcfaf8;
-      border:1px solid #f1e8df;
-      color:#605a7d;
       font-size:13px;
-      line-height:1.6;
+      color:var(--muted);
+      line-height:1.7;
     }
 
     @media (max-width:1100px){
-      .studio-grid{grid-template-columns:1fr}
-      .results-grid,
-      .template-strip{grid-template-columns:1fr}
+      .guide,
+      .output-grid,
+      .quick-strip{
+        grid-template-columns:1fr 1fr;
+      }
+      .studio-grid{
+        grid-template-columns:1fr;
+      }
     }
 
     @media (max-width:768px){
       .container{width:min(100% - 18px,1200px)}
-      .main-nav,
-      .nav-actions{display:none}
-      .hero h1{font-size:46px}
-      .grid-2{grid-template-columns:1fr}
-      .results-grid,
-      .template-strip{grid-template-columns:1fr}
+      .main-nav,.nav-actions{display:none}
+      .hero h1{font-size:36px}
+      .guide,
+      .output-grid,
+      .quick-strip,
+      .grid-2{
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
@@ -508,7 +506,7 @@
       </nav>
 
       <div class="nav-actions">
-        <a href="login.html" class="top-btn login">Login</a>
+        <a href="login.html" class="top-btn">Login</a>
         <a href="signup.html" class="top-btn start">Start Free</a>
       </div>
     </div>
@@ -518,110 +516,102 @@
     <div class="container">
 
       <div class="hero">
-        <div class="tag">One prompt to many marketing outputs</div>
-        <h1>Build <span class="gold">ads, reels, voiceovers, captions, and campaigns</span> from one business prompt.</h1>
-        <p>
-          BariqAI Prompt Studio helps businesses enter one clear idea and instantly receive campaign-ready outputs for Meta, Google, Instagram, YouTube, LinkedIn, Reddit, Threads, and more.
-        </p>
+        <div class="badge">AI content creation workspace</div>
+        <h1>Create hooks, ads, captions, headlines and CTA copy from one guided prompt.</h1>
+        <p>Fast, soft, visual and easy to use — this should feel like the main working engine inside BariqAI.</p>
+      </div>
+
+      <div class="guide">
+        <div class="guide-card">
+          <div class="guide-step">1</div>
+          <h3>Add business details</h3>
+          <p>Enter brand, offer, audience and platform.</p>
+        </div>
+        <div class="guide-card">
+          <div class="guide-step">2</div>
+          <h3>Choose output type</h3>
+          <p>Generate ad copy, captions, hooks or headlines.</p>
+        </div>
+        <div class="guide-card">
+          <div class="guide-step">3</div>
+          <h3>Get instant draft</h3>
+          <p>Use clean ready-to-edit generated content.</p>
+        </div>
+        <div class="guide-card">
+          <div class="guide-step">4</div>
+          <h3>Send to workflow</h3>
+          <p>Move content into campaigns, video or templates.</p>
+        </div>
       </div>
 
       <div class="studio-grid">
+
         <div class="panel">
           <div class="panel-head">
-            <h2>Prompt Studio</h2>
-            <p>Fill your campaign details once. BariqAI will create platform-wise marketing outputs.</p>
+            <h2>Prompt Builder</h2>
+            <p>Fill once and generate multiple marketing outputs.</p>
           </div>
 
           <div class="form-wrap">
             <div class="field">
-              <label>Business / Brand Name</label>
-              <input id="brandName" type="text" value="RSCC Aesthetic Clinic">
+              <label>Brand / Business</label>
+              <input id="brand" type="text" value="RSCC Aesthetic Clinic">
             </div>
 
             <div class="grid-2">
               <div class="field">
-                <label>Industry</label>
-                <select id="industry">
-                  <option>Clinic / Aesthetic</option>
-                  <option>Salon / Beauty</option>
-                  <option>Real Estate</option>
-                  <option>D2C Brand</option>
-                  <option>Restaurant / Cafe</option>
-                  <option>Coach / Creator</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label>Campaign Objective</label>
-                <select id="objective">
-                  <option>Lead Generation</option>
-                  <option>Sales Conversion</option>
-                  <option>Brand Awareness</option>
-                  <option>Offer Promotion</option>
-                  <option>App Installs</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="grid-2">
-              <div class="field">
-                <label>Target Audience</label>
-                <input id="audience" type="text" value="Women aged 22 to 45">
-              </div>
-
-              <div class="field">
-                <label>City / Location</label>
-                <input id="location" type="text" value="Hyderabad">
-              </div>
-            </div>
-
-            <div class="field">
-              <label>Offer / Product / Service</label>
-              <input id="offer" type="text" value="Laser hair reduction with premium consultation">
-            </div>
-
-            <div class="grid-2">
-              <div class="field">
-                <label>Tone</label>
-                <select id="tone">
-                  <option>Premium & Elegant</option>
-                  <option>Strong & Direct</option>
-                  <option>Warm & Trustworthy</option>
-                  <option>Luxury & Aspirational</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label>Main Platform</label>
+                <label>Platform</label>
                 <select id="platform">
                   <option>Meta Ads</option>
                   <option>Instagram</option>
                   <option>Google Ads</option>
-                  <option>YouTube</option>
+                  <option>WhatsApp</option>
                   <option>LinkedIn</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Output Type</label>
+                <select id="outputType">
+                  <option>Ad Copy</option>
+                  <option>Captions</option>
+                  <option>Hooks</option>
+                  <option>Google Headlines</option>
                 </select>
               </div>
             </div>
 
             <div class="field">
-              <label>Extra Notes</label>
-              <textarea id="notes">Focus on confidence, convenience, premium care, and women-first messaging. Mention modern technology and hassle-free results.</textarea>
+              <label>Offer / Service</label>
+              <input id="offer" type="text" value="Laser hair reduction for women">
             </div>
 
-            <div class="field">
-              <label>Choose outputs</label>
-              <div class="chips">
-                <button class="chip active" type="button">Meta Ads</button>
-                <button class="chip active" type="button">Google Ads</button>
-                <button class="chip active" type="button">Reel Script</button>
-                <button class="chip active" type="button">Video Storyboard</button>
-                <button class="chip active" type="button">Voiceover</button>
-                <button class="chip active" type="button">Captions</button>
+            <div class="grid-2">
+              <div class="field">
+                <label>Audience</label>
+                <input id="audience" type="text" value="Women aged 22 to 45">
+              </div>
+              <div class="field">
+                <label>City</label>
+                <input id="city" type="text" value="Hyderabad">
               </div>
             </div>
 
-            <button class="generate-btn" onclick="generateOutputs()">Generate Campaign Outputs</button>
-            <div class="mini-note">This is the product core. Later we connect real AI, voice, video, templates, and publishing.</div>
+            <div class="field">
+              <label>Tone</label>
+              <div class="chips">
+                <button class="chip active" type="button">Premium</button>
+                <button class="chip" type="button">Emotional</button>
+                <button class="chip" type="button">Modern</button>
+                <button class="chip" type="button">Direct</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Main Prompt</label>
+              <textarea id="prompt">Create a women-first premium campaign for laser hair reduction in Hyderabad. Focus on confidence, convenience, smooth skin and modern treatment. Make it attractive and conversion-ready.</textarea>
+            </div>
+
+            <button class="generate-btn" onclick="generateContent()">Generate Content</button>
           </div>
         </div>
 
@@ -629,115 +619,85 @@
           <div class="workspace">
             <div class="workspace-top">
               <div>
-                <h3>Generated Output Workspace</h3>
-                <p>Beautiful, usable, campaign-ready outputs across multiple channels.</p>
+                <h3>Generated Content</h3>
+                <p>One prompt, multiple usable output formats.</p>
               </div>
-              <div class="status">Ready for Meta, Google, Video, Voice, and Social</div>
+              <div class="status">Ready for campaign, ads and reels</div>
             </div>
 
-            <div class="tabs">
-              <button class="tab active" type="button">All Outputs</button>
-              <button class="tab" type="button">Ads</button>
-              <button class="tab" type="button">Reels</button>
-              <button class="tab" type="button">Video</button>
-              <button class="tab" type="button">Voiceover</button>
-              <button class="tab" type="button">Captions</button>
+            <div class="output-tabs">
+              <button class="tab active">Ad Copy</button>
+              <button class="tab">Hooks</button>
+              <button class="tab">Captions</button>
+              <button class="tab">Headlines</button>
             </div>
 
-            <div class="results-grid">
-              <div class="result-card">
-                <h4><i class="fa-brands fa-facebook" style="color:#1877F2"></i> Meta Ad Copy</h4>
-                <p id="metaCopy">Tired of unwanted hair and repeated salon visits? Discover premium laser hair reduction at RSCC Aesthetic Clinic in Hyderabad. Designed for modern women who want smoother skin, less hassle, and more confidence. Book your consultation today.</p>
+            <div class="output-grid">
+              <div class="output-card">
+                <h4>Primary Ad Copy</h4>
+                <p id="adCopy">Still depending on repeated temporary routines? Discover premium laser hair reduction for women at RSCC Aesthetic Clinic in Hyderabad. Feel smoother, more confident and more in control with care designed for modern women. Book your consultation today.</p>
                 <div class="card-actions">
-                  <button class="small-btn" onclick="copyText('metaCopy')">Copy</button>
-                  <button class="small-btn alt">Save</button>
+                  <button class="small-btn primary" onclick="copyText('adCopy')">Copy</button>
+                  <button class="small-btn">Save</button>
                 </div>
               </div>
 
-              <div class="result-card">
-                <h4><i class="fa-brands fa-google" style="color:#4285F4"></i> Google Headlines</h4>
-                <ul id="googleCopy">
+              <div class="output-card">
+                <h4>Hook Options</h4>
+                <ul id="hookList">
+                  <li>Done with temporary fixes?</li>
+                  <li>Choose smooth confidence instead.</li>
+                  <li>Premium care for modern women.</li>
+                  <li>Your routine deserves an upgrade.</li>
+                </ul>
+                <div class="card-actions">
+                  <button class="small-btn primary" onclick="copyText('hookList')">Copy</button>
+                  <button class="small-btn">Save</button>
+                </div>
+              </div>
+
+              <div class="output-card">
+                <h4>Caption</h4>
+                <p id="captionText">Confidence looks better when it feels effortless. Discover laser hair reduction for women with a premium and modern experience at RSCC Aesthetic Clinic, Hyderabad. #LaserHairReduction #WomenCare #HyderabadClinic</p>
+                <div class="card-actions">
+                  <button class="small-btn primary" onclick="copyText('captionText')">Copy</button>
+                  <button class="small-btn">Save</button>
+                </div>
+              </div>
+
+              <div class="output-card">
+                <h4>Headline Set</h4>
+                <ul id="headlineList">
                   <li>Premium Laser Hair Reduction</li>
-                  <li>Women’s Laser Clinic Hyderabad</li>
-                  <li>Smooth Skin Starts Here</li>
-                  <li>Book Consultation Today</li>
-                  <li>Advanced Hair Reduction Care</li>
+                  <li>Smoother Skin Starts Here</li>
+                  <li>Confidence for Modern Women</li>
+                  <li>Book Your Consultation Today</li>
                 </ul>
                 <div class="card-actions">
-                  <button class="small-btn" onclick="copyText('googleCopy')">Copy</button>
-                  <button class="small-btn alt">Save</button>
-                </div>
-              </div>
-
-              <div class="result-card">
-                <h4><i class="fa-brands fa-instagram" style="color:#E1306C"></i> Reel Script</h4>
-                <p id="reelCopy">Hook: Still planning your month around waxing appointments? Scene 1: Close-up of tired routine. Scene 2: Woman enters premium clinic. Scene 3: Laser technology visual. Scene 4: Happy confident lifestyle shot. CTA: Switch to smart smooth confidence with RSCC Hyderabad.</p>
-                <div class="card-actions">
-                  <button class="small-btn" onclick="copyText('reelCopy')">Copy</button>
-                  <button class="small-btn alt">Save</button>
-                </div>
-              </div>
-
-              <div class="result-card">
-                <h4><i class="fa-solid fa-film" style="color:#7c6df1"></i> Video Storyboard</h4>
-                <ul id="videoCopy">
-                  <li>Scene 1: Problem setup – repeated waxing / shaving hassle</li>
-                  <li>Scene 2: Premium clinic arrival</li>
-                  <li>Scene 3: Technology and expert care visual</li>
-                  <li>Scene 4: Transformation into confidence</li>
-                  <li>Scene 5: Offer and CTA frame</li>
-                </ul>
-                <div class="card-actions">
-                  <button class="small-btn" onclick="copyText('videoCopy')">Copy</button>
-                  <button class="small-btn alt">Save</button>
-                </div>
-              </div>
-
-              <div class="result-card">
-                <h4><i class="fa-solid fa-microphone-lines" style="color:#c59b43"></i> Voiceover Script</h4>
-                <p id="voiceCopy">For women who are done with endless waxing and temporary fixes, RSCC Aesthetic Clinic in Hyderabad brings premium laser hair reduction designed for comfort, confidence, and convenience. Step into smoother skin and a smarter routine. Book your consultation today.</p>
-                <div class="card-actions">
-                  <button class="small-btn" onclick="copyText('voiceCopy')">Copy</button>
-                  <button class="small-btn alt">Save</button>
-                </div>
-              </div>
-
-              <div class="result-card">
-                <h4><i class="fa-solid fa-hashtag" style="color:#6f46c7"></i> Caption + Hashtags</h4>
-                <p id="captionCopy">Smooth skin. Less hassle. More confidence. Discover premium laser hair reduction for women at RSCC Hyderabad. Book now and upgrade your self-care routine. #LaserHairReduction #WomenCare #HyderabadClinic #SmoothSkin #PremiumBeauty #ConfidenceCare</p>
-                <div class="card-actions">
-                  <button class="small-btn" onclick="copyText('captionCopy')">Copy</button>
-                  <button class="small-btn alt">Save</button>
+                  <button class="small-btn primary" onclick="copyText('headlineList')">Copy</button>
+                  <button class="small-btn">Save</button>
                 </div>
               </div>
             </div>
 
-            <div class="template-strip">
-              <div class="template-card">
-                <strong>Recommended Ad Template</strong>
-                <span>Premium clinic lead generation layout with before/after style positioning and strong CTA.</span>
+            <div class="quick-strip">
+              <div class="quick-card">
+                <strong>Use in Campaign</strong>
+                <span>Move the message into Campaign Studio.</span>
               </div>
-              <div class="template-card">
-                <strong>Recommended Reel Style</strong>
-                <span>Fast transformation reel with problem-solution storytelling and elegant text overlays.</span>
+              <div class="quick-card">
+                <strong>Use in Video Creator</strong>
+                <span>Turn these hooks into reel scenes and voiceover.</span>
               </div>
-              <div class="template-card">
-                <strong>Recommended Banner Format</strong>
-                <span>Soft luxury creative with women-first offer positioning, trust cues, and consultation CTA.</span>
-              </div>
-            </div>
-
-            <div class="history-box">
-              <h4>Recent Prompt Ideas</h4>
-              <div class="history-list">
-                <div class="history-item">Laser hair reduction campaign for women in Hyderabad with premium tone and consultation focus.</div>
-                <div class="history-item">Glutathione product campaign for beauty-conscious women using Meta + Reels + Google headlines.</div>
-                <div class="history-item">D2C product launch campaign with short video storyboard, captions, and CTA variants.</div>
+              <div class="quick-card">
+                <strong>Use in Templates</strong>
+                <span>Match this copy with a ready visual layout.</span>
               </div>
             </div>
 
           </div>
         </div>
+
       </div>
 
     </div>
@@ -751,25 +711,34 @@
       alert("Copied");
     }
 
-    function generateOutputs(){
-      const brand = document.getElementById('brandName').value;
-      const audience = document.getElementById('audience').value;
-      const location = document.getElementById('location').value;
+    function generateContent(){
+      const brand = document.getElementById('brand').value;
+      const platform = document.getElementById('platform').value;
+      const outputType = document.getElementById('outputType').value;
       const offer = document.getElementById('offer').value;
-      const tone = document.getElementById('tone').value;
-      const notes = document.getElementById('notes').value;
+      const audience = document.getElementById('audience').value;
+      const city = document.getElementById('city').value;
+      const prompt = document.getElementById('prompt').value;
 
-      document.getElementById('metaCopy').innerText =
-        `Looking for a smarter way to promote ${offer}? ${brand} now brings a ${tone.toLowerCase()} campaign crafted for ${audience} in ${location}. Designed to attract attention, build trust, and drive real response. ${notes}`;
+      document.getElementById('adCopy').innerText =
+        `${brand} now brings ${offer} for ${audience} in ${city}. Designed for a more confident and modern lifestyle, this ${platform} campaign should feel premium, attractive and clear. ${prompt}`;
 
-      document.getElementById('reelCopy').innerText =
-        `Hook: Why settle for ordinary marketing when ${brand} can launch smarter? Scene 1: Show the problem. Scene 2: Introduce ${offer}. Scene 3: Build trust for ${audience}. Scene 4: Premium transformation visual. CTA: Take action in ${location} today.`;
+      document.getElementById('hookList').innerHTML = `
+        <li>${offer} made smarter for ${audience}</li>
+        <li>Why settle for repeated hassle?</li>
+        <li>${brand} brings modern care to ${city}</li>
+        <li>Confidence starts with one better choice</li>
+      `;
 
-      document.getElementById('voiceCopy').innerText =
-        `${brand} presents ${offer} for ${audience} in ${location}. Built with a ${tone.toLowerCase()} tone, this campaign helps your brand look stronger, feel more trusted, and convert attention into action.`;
+      document.getElementById('captionText').innerText =
+        `${offer} for ${audience} in ${city}. Created by ${brand} with a premium and modern experience in mind. Feel more confident, more comfortable and ready for a better routine.`;
 
-      document.getElementById('captionCopy').innerText =
-        `${brand} is now promoting ${offer} for ${audience} in ${location}. Smarter strategy. Better content. Faster execution. #BariqAI #MarketingAI #${location.replace(/\s+/g,'')} #CampaignLaunch`;
+      document.getElementById('headlineList').innerHTML = `
+        <li>${offer} in ${city}</li>
+        <li>Premium care by ${brand}</li>
+        <li>Designed for ${audience}</li>
+        <li>Start your consultation now</li>
+      `;
     }
   </script>
 </body>
