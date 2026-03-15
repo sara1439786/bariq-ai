@@ -8,13 +8,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      font-family: 'Inter', sans-serif;
-      color: #2d2947;
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding:0;
+      overflow-x:hidden;
+      font-family:'Inter',sans-serif;
+      color:#2d2947;
       background:
         radial-gradient(circle at top left, rgba(115,87,199,.04), transparent 24%),
         radial-gradient(circle at top right, rgba(197,155,67,.05), transparent 24%),
@@ -28,18 +28,18 @@
       --purple:#7357c7;
       --line:#eee6df;
       --white:#ffffff;
-      --peach:#fff1e8;
-      --pink:#ffe9f2;
-      --lav:#f3edff;
+      --pink:#ffeaf3;
       --mint:#edf8ef;
       --blue:#eef4ff;
       --yellow:#fff4d9;
+      --peach:#fff1e8;
+      --lav:#f3edff;
       --shadow:0 16px 36px rgba(90,70,50,.08);
       --radius:28px;
     }
 
-    a { text-decoration: none; color: inherit; }
-    img { display:block; width:100%; }
+    a{text-decoration:none;color:inherit}
+    img{display:block;width:100%}
 
     .container{
       width:min(1380px, calc(100% - 28px));
@@ -50,7 +50,7 @@
       position:sticky;
       top:0;
       z-index:999;
-      background:rgba(255,255,255,.94);
+      background:rgba(255,255,255,.95);
       backdrop-filter:blur(14px);
       border-bottom:1px solid var(--line);
     }
@@ -80,11 +80,11 @@
     }
 
     .brand-text{
-      font-family:'Cormorant Garamond', serif;
+      font-family:'Cormorant Garamond',serif;
       font-size:46px;
       line-height:1;
       font-weight:700;
-      background:linear-gradient(90deg,var(--gold) 0%, #8f6d24 28%, var(--purple) 75%, #5648a0 100%);
+      background:linear-gradient(90deg,var(--gold) 0%, #8f6d24 30%, var(--purple) 78%, #5648a0 100%);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       background-clip:text;
@@ -120,13 +120,14 @@
       color:#645d80;
       flex:0 0 auto;
     }
+
     .main-nav a.active,
     .main-nav a:hover{
       background:#faf6ff;
       color:var(--purple);
     }
 
-    .page{ padding:14px 0 36px; }
+    .page{padding:8px 0 36px}
 
     .card{
       background:#fff;
@@ -137,18 +138,23 @@
     }
 
     .hero{
-      padding:24px;
+      margin-top:10px;
+      padding:18px 20px 20px;
       background:
-        radial-gradient(circle at 20% 30%, rgba(115,87,199,.06), transparent 20%),
-        radial-gradient(circle at 78% 12%, rgba(197,155,67,.06), transparent 18%),
+        radial-gradient(circle at 20% 25%, rgba(115,87,199,.05), transparent 16%),
+        radial-gradient(circle at 75% 14%, rgba(197,155,67,.06), transparent 16%),
         linear-gradient(180deg,#ffffff 0%, #fffdfa 100%);
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:1fr 1.05fr;
-      gap:22px;
-      align-items:center;
+      grid-template-columns:.95fr 1.05fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .hero-left{
+      padding-top:6px;
     }
 
     .tag{
@@ -159,26 +165,26 @@
       border-radius:999px;
       background:#fff;
       border:1px solid var(--line);
+      color:#645d82;
       font-size:13px;
       font-weight:800;
-      color:#645d82;
       box-shadow:0 8px 18px rgba(100,70,50,.04);
-      margin-bottom:14px;
+      margin-bottom:10px;
     }
 
     .hero-title{
       margin:0;
-      font-family:'Cormorant Garamond', serif;
-      font-size:72px;
-      line-height:.96;
-      letter-spacing:-0.8px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:62px;
+      line-height:.97;
+      letter-spacing:-0.7px;
       font-weight:700;
       color:#26213d;
-      max-width:620px;
+      max-width:560px;
     }
 
     .hero-title .gold{
-      background:linear-gradient(90deg,var(--gold),#997326);
+      background:linear-gradient(90deg,var(--gold),#977126);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       background-clip:text;
@@ -194,18 +200,18 @@
     }
 
     .hero-sub{
-      margin:16px 0 0;
-      max-width:620px;
+      margin:12px 0 0;
+      max-width:560px;
       color:var(--muted);
-      font-size:16px;
-      line-height:1.85;
+      font-size:15px;
+      line-height:1.8;
     }
 
     .hero-actions{
       display:flex;
       gap:12px;
       flex-wrap:wrap;
-      margin-top:20px;
+      margin-top:18px;
     }
 
     .btn{
@@ -221,7 +227,7 @@
       transition:.2s ease;
     }
 
-    .btn:hover{ transform:translateY(-2px); }
+    .btn:hover{transform:translateY(-2px)}
 
     .btn-primary{
       background:linear-gradient(90deg,var(--gold),var(--purple));
@@ -234,140 +240,129 @@
       color:#5f597f;
     }
 
-    .hero-visual{
-      min-height:540px;
-      background:linear-gradient(135deg,#fff3ec 0%, #fff8f2 48%, #f6f2ff 100%);
-      border:1px solid var(--line);
+    .hero-right{
+      min-height:490px;
       border-radius:30px;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg,#fff3ec 0%, #fff8f2 50%, #f6f2ff 100%);
       padding:18px;
-      position:relative;
       overflow:hidden;
+      position:relative;
     }
 
-    .hero-visual h3{
-      margin:0 0 8px;
-      font-family:'Cormorant Garamond', serif;
-      font-size:40px;
-      line-height:1.03;
+    .hero-right-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:14px;
+    }
+
+    .hero-right-top h3{
+      margin:0;
+      font-family:'Cormorant Garamond',serif;
+      font-size:38px;
+      line-height:1.02;
       font-weight:700;
+      max-width:290px;
       color:#2d2947;
-      max-width:330px;
     }
 
-    .hero-visual p{
-      margin:0 0 18px;
-      max-width:360px;
-      font-size:15px;
-      line-height:1.75;
+    .hero-right-top p{
+      margin:4px 0 0;
+      max-width:270px;
       color:var(--muted);
+      font-size:14px;
+      line-height:1.75;
     }
 
-    .collage{
+    .floating-wall{
+      height:320px;
+      overflow:hidden;
+      position:relative;
+      border-radius:24px;
+    }
+
+    .wall-grid{
       display:grid;
-      grid-template-columns:1.15fr .85fr;
+      grid-template-columns:1fr 1fr;
       gap:14px;
-      align-items:stretch;
+      animation:wallFloat 9s ease-in-out infinite;
     }
 
-    .collage-left,
-    .collage-right{
+    @keyframes wallFloat{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-18px)}
+    }
+
+    .wall-col{
       display:grid;
       gap:14px;
     }
 
-    .collage-left{
-      grid-template-rows:1fr auto;
-    }
-
-    .collage-right{
-      grid-template-rows:1fr 1fr;
-    }
-
-    .visual-panel{
+    .wall-card{
       border-radius:24px;
       overflow:hidden;
+      position:relative;
       background:#fff;
       box-shadow:0 12px 26px rgba(0,0,0,.08);
-      border:1px solid rgba(255,255,255,.9);
-      position:relative;
+      min-height:145px;
     }
 
-    .visual-panel.tall{ min-height:260px; }
-    .visual-panel.short{ min-height:156px; }
+    .wall-card.large{min-height:230px}
+    .wall-card.small{min-height:145px}
 
-    .visual-panel img{
+    .wall-card img{
       width:100%;
       height:100%;
       object-fit:cover;
     }
 
-    .visual-badge{
+    .wall-label{
       position:absolute;
       left:12px;
       bottom:12px;
-      background:rgba(255,255,255,.88);
-      color:#4f4873;
-      padding:10px 12px;
+      background:rgba(255,255,255,.9);
+      padding:9px 12px;
       border-radius:14px;
       font-size:13px;
       font-weight:800;
-      backdrop-filter:blur(8px);
+      color:#4d4671;
     }
 
-    .mini-pills{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
+    .soft-box{
+      border-radius:24px;
+      padding:20px;
+      min-height:145px;
+      position:relative;
+      box-shadow:0 12px 26px rgba(0,0,0,.06);
     }
 
-    .mini-pill{
-      background:rgba(255,255,255,.92);
-      border:1px solid rgba(255,255,255,.95);
-      border-radius:18px;
-      min-height:58px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+    .soft-box h4{
+      margin:0;
+      font-size:22px;
+      line-height:1.25;
+      color:#322d4e;
+    }
+
+    .soft-box span{
+      position:absolute;
+      left:20px;
+      bottom:18px;
+      padding:10px 14px;
+      border-radius:14px;
+      background:#fff;
       font-size:13px;
       font-weight:800;
-      color:#544d77;
+      color:#5a557a;
       box-shadow:0 10px 18px rgba(0,0,0,.06);
     }
 
-    .prompt-box{
-      margin-top:16px;
-      background:#fff;
-      border-radius:20px;
-      padding:8px;
-      display:flex;
-      gap:8px;
-      box-shadow:0 16px 30px rgba(0,0,0,.08);
-      border:1px solid var(--line);
-    }
-
-    .prompt-box input{
-      flex:1;
-      border:none;
-      outline:none;
-      padding:13px 14px;
-      font:inherit;
-      background:transparent;
-      color:var(--text);
-    }
-
-    .prompt-box button{
-      border:none;
-      border-radius:14px;
-      padding:12px 18px;
-      background:linear-gradient(90deg,var(--purple),var(--gold));
-      color:#fff;
-      font-weight:800;
-      cursor:pointer;
-    }
+    .box-yellow{background:linear-gradient(135deg,#fff0a9,#ffe994)}
+    .box-mint{background:linear-gradient(135deg,#dff7e7,#cef1da)}
 
     .pill-strip{
-      margin-top:18px;
+      margin-top:16px;
       overflow:hidden;
       border-radius:22px;
       background:#fff;
@@ -394,15 +389,14 @@
       white-space:nowrap;
       box-shadow:0 8px 18px rgba(80,60,40,.05);
     }
+
     .p1{background:linear-gradient(135deg,#ffe1ec,#ffd4e3)}
     .p2{background:linear-gradient(135deg,#e8f8ef,#daf4e5)}
     .p3{background:linear-gradient(135deg,#eef4ff,#dfeaff)}
     .p4{background:linear-gradient(135deg,#fff5da,#ffefc5)}
     .p5{background:linear-gradient(135deg,#f4eeff,#ece4ff)}
 
-    .section{
-      margin-top:22px;
-    }
+    .section{margin-top:22px}
 
     .section-head{
       margin-bottom:16px;
@@ -431,16 +425,16 @@
     }
 
     .workspace-card{
-      background:#fff;
       border:1px solid var(--line);
       border-radius:26px;
       padding:20px;
+      background:#fff;
       box-shadow:var(--shadow);
     }
 
-    .workspace-card:nth-child(1){ background:linear-gradient(180deg,#ffffff 0%, #f9fbff 100%); }
-    .workspace-card:nth-child(2){ background:linear-gradient(180deg,#ffffff 0%, #fffaf5 100%); }
-    .workspace-card:nth-child(3){ background:linear-gradient(180deg,#ffffff 0%, #f8fcf8 100%); }
+    .workspace-card:nth-child(1){background:linear-gradient(180deg,#ffffff 0%, #f9fbff 100%)}
+    .workspace-card:nth-child(2){background:linear-gradient(180deg,#ffffff 0%, #fffaf5 100%)}
+    .workspace-card:nth-child(3){background:linear-gradient(180deg,#ffffff 0%, #f8fcf8 100%)}
 
     .workspace-card h3{
       margin:0 0 10px;
@@ -486,7 +480,7 @@
 
     .gallery-card{
       flex:0 0 auto;
-      width:330px;
+      width:320px;
       background:#fff;
       border:1px solid var(--line);
       border-radius:24px;
@@ -534,13 +528,12 @@
       border-radius:28px;
       box-shadow:var(--shadow);
       padding:22px;
-      background:#fff;
       position:relative;
       overflow:hidden;
     }
 
-    .feature-box.peach{ background:linear-gradient(180deg,#fffdfb 0%, #fff7f2 100%); }
-    .feature-box.yellow{ background:linear-gradient(180deg,#fffef8 0%, #fff8e9 100%); }
+    .feature-box.peach{background:linear-gradient(180deg,#fffdfb 0%, #fff7f2 100%)}
+    .feature-box.yellow{background:linear-gradient(180deg,#fffef8 0%, #fff8e9 100%)}
 
     .feature-top{
       display:flex;
@@ -614,7 +607,7 @@
       transition:.2s ease;
     }
 
-    .quick-link:hover{ transform:translateY(-2px); }
+    .quick-link:hover{transform:translateY(-2px)}
 
     .site-footer{
       margin-top:28px;
@@ -656,14 +649,12 @@
       .footer-grid{
         grid-template-columns:1fr;
       }
-      .quick-grid{
-        grid-template-columns:repeat(3,1fr);
-      }
+      .quick-grid{grid-template-columns:repeat(3,1fr)}
     }
 
     @media (max-width:768px){
-      .container{ width:min(100% - 18px, 1200px); }
-      .menu-toggle{ display:block; }
+      .container{width:min(100% - 18px,1200px)}
+      .menu-toggle{display:block}
 
       .main-nav{
         display:none;
@@ -681,52 +672,28 @@
         gap:10px;
       }
 
-      .main-nav.show{ display:flex; }
+      .main-nav.show{display:flex}
       .main-nav a{
         width:100%;
         background:#fff8f2;
       }
 
-      .brand-text{ font-size:38px; }
+      .brand-text{font-size:38px}
 
       .hero-title{
-        font-size:50px;
+        font-size:48px;
         line-height:1;
       }
 
-      .hero-actions{
-        flex-direction:column;
-      }
+      .hero-actions{flex-direction:column}
+      .btn{width:100%}
 
-      .btn{
-        width:100%;
-      }
-
-      .collage{
-        grid-template-columns:1fr;
-      }
-
-      .mini-pills{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .prompt-box{
-        flex-direction:column;
-      }
-
-      .prompt-box button{
-        width:100%;
-      }
-
+      .gallery-card{width:270px}
       .workspace-grid,
       .dual-grid,
       .quick-grid,
       .footer-grid{
         grid-template-columns:1fr;
-      }
-
-      .gallery-card{
-        width:270px;
       }
     }
   </style>
@@ -760,14 +727,13 @@
 
       <div class="card hero">
         <div class="hero-grid">
-          <div>
+          <div class="hero-left">
             <div class="tag">✨ Bariq AI Platform</div>
 
             <h1 class="hero-title">
               Create <span class="purple">campaigns</span>, reels
-              and marketing
-              workflows in one <span class="gold">live</span>
-              visual platform
+              and marketing workflows
+              in one <span class="gold">live</span> visual platform
             </h1>
 
             <p class="hero-sub">
@@ -781,30 +747,40 @@
             </div>
           </div>
 
-          <div class="hero-visual">
-            <h3>See the platform feel alive</h3>
-            <p>Bariq is designed to feel visual, welcoming and easy to understand without too much text.</p>
-
-            <div class="collage">
-              <div class="collage-left">
-                <div class="visual-panel tall">
-                  <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="">
-                  <div class="visual-badge">Create premium campaigns</div>
-                </div>
-                <div class="visual-panel short">
-                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="">
-                  <div class="visual-badge">Content direction</div>
-                </div>
+          <div class="hero-right">
+            <div class="hero-right-top">
+              <div>
+                <h3>See the platform feel alive</h3>
+                <p>Bariq is designed to feel visual, welcoming and premium — without looking crowded.</p>
               </div>
+            </div>
 
-              <div class="collage-right">
-                <div class="visual-panel short" style="background:linear-gradient(135deg,#ffe59f,#ffdf83); display:flex; align-items:center; justify-content:center; padding:18px;">
-                  <div style="font-size:22px; font-weight:800; line-height:1.25; color:#3a3457;">Build ideas faster</div>
+            <div class="floating-wall">
+              <div class="wall-grid">
+                <div class="wall-col">
+                  <div class="wall-card large">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="">
+                    <div class="wall-label">Campaign builder</div>
+                  </div>
+                  <div class="wall-card small">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="">
+                    <div class="wall-label">Ad direction</div>
+                  </div>
                 </div>
 
-                <div class="visual-panel short">
-                  <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="">
-                  <div class="visual-badge">Launch visuals</div>
+                <div class="wall-col">
+                  <div class="soft-box box-yellow">
+                    <h4>Build ideas faster</h4>
+                    <span>Explore</span>
+                  </div>
+                  <div class="wall-card small">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt="">
+                    <div class="wall-label">Launch assets</div>
+                  </div>
+                  <div class="soft-box box-mint">
+                    <h4>Launch platform flow</h4>
+                    <span>See more</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -845,7 +821,7 @@
       <div class="section">
         <div class="section-head">
           <h2>Main workspaces</h2>
-          <p>Each page in Bariq has its own visual mood so the platform feels easier, softer and more premium.</p>
+          <p>Each page in Bariq now has its own visual mood so the platform feels easier, softer and more premium.</p>
         </div>
 
         <div class="workspace-grid">
@@ -879,7 +855,7 @@
         <div class="scroll-gallery">
           <div class="gallery-track">
             <div class="gallery-card">
-              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt=""></div>
               <div class="gallery-body">
                 <strong>1. Add your idea</strong>
                 <span>Start with a simple prompt about offer, audience, city and tone.</span>
@@ -911,7 +887,7 @@
             </div>
 
             <div class="gallery-card">
-              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+              <div class="gallery-img"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt=""></div>
               <div class="gallery-body">
                 <strong>1. Add your idea</strong>
                 <span>Start with a simple prompt about offer, audience, city and tone.</span>
@@ -965,7 +941,7 @@
             </div>
             <p>Use reusable layouts, scripts and visual building blocks for faster campaigns and video creation.</p>
             <div class="feature-image">
-              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt="">
+              <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80" alt="">
             </div>
           </div>
         </div>
@@ -973,7 +949,7 @@
 
       <div class="section">
         <div class="quick-access">
-          <div class="section-head" style="margin-bottom:0;">
+          <div class="section-head" style="margin-bottom:0">
             <h2>Quick access</h2>
             <p>Open Bariq sections directly from one clean area.</p>
           </div>
@@ -1034,6 +1010,5 @@
       document.getElementById("mainNav").classList.toggle("show");
     }
   </script>
-
 </body>
 </html>
