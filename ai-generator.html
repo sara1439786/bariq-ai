@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BariqAI — AI Generator</title>
+  <title>BariqAI - AI Generator</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,39 +15,43 @@
     html,body{margin:0;padding:0;overflow-x:hidden}
     body{
       font-family:'Inter',sans-serif;
-      color:#3f3a5a;
       background:
-        radial-gradient(circle at top left, rgba(144,120,214,.06), transparent 18%),
-        radial-gradient(circle at top right, rgba(235,196,120,.08), transparent 18%),
-        linear-gradient(180deg,#fffefe 0%,#fffaf5 100%);
+        radial-gradient(circle at top left, rgba(115,87,199,.05), transparent 22%),
+        radial-gradient(circle at top right, rgba(197,155,67,.07), transparent 22%),
+        linear-gradient(180deg,#fff 0%,#fffdfa 100%);
+      color:#2d2947;
     }
 
     :root{
-      --text:#3f3a5a;
-      --muted:#7b7592;
-      --purple:#8a72d8;
-      --purple-soft:#f4efff;
-      --gold:#d8b15b;
-      --gold-soft:#fff4d8;
-      --pink-soft:#fff1f7;
-      --blue-soft:#eef7ff;
-      --mint-soft:#eefcf4;
-      --line:#efe7e1;
-      --white:#ffffff;
-      --shadow:0 16px 36px rgba(110,90,70,.08);
-      --radius:26px;
+      --text:#2d2947;
+      --muted:#6f6987;
+      --gold:#c59b43;
+      --gold-dark:#9b7427;
+      --purple:#7357c7;
+      --purple-dark:#5c46aa;
+      --line:#eee6df;
+      --shadow:0 16px 36px rgba(90,70,50,.08);
+      --radius:28px;
+      --soft-gold:#fff4db;
+      --soft-purple:#f5f1ff;
+      --soft-pink:#fff1f7;
+      --soft-mint:#eefaf2;
+      --soft-blue:#eef5ff;
     }
 
     a{text-decoration:none;color:inherit}
-    button,input,select,textarea{font:inherit}
-    .container{width:min(1360px,calc(100% - 28px));margin:0 auto}
+
+    .container{
+      width:min(1380px, calc(100% - 28px));
+      margin:0 auto;
+    }
 
     .site-header{
       position:sticky;
       top:0;
       z-index:999;
-      background:rgba(255,255,255,.93);
-      backdrop-filter:blur(12px);
+      background:rgba(255,255,255,.95);
+      backdrop-filter:blur(14px);
       border-bottom:1px solid var(--line);
     }
 
@@ -56,7 +60,7 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:16px;
+      gap:18px;
       position:relative;
     }
 
@@ -67,34 +71,34 @@
       white-space:nowrap;
     }
 
-    .brand-dot{
-      width:10px;
-      height:10px;
-      border-radius:50%;
-      background:linear-gradient(135deg,var(--gold),var(--purple));
+    .brand-box{
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      font-weight:700;
+      font-size:26px;
+      color:#2f2a46;
+      background:linear-gradient(135deg,#e7c777,#c59b43);
+      box-shadow:0 10px 22px rgba(197,155,67,.18);
       flex:0 0 auto;
     }
 
-    .brand-text{
-      font-family:'Cormorant Garamond',serif;
-      font-size:42px;
-      line-height:1;
+    .brand-name{
+      font-size:18px;
       font-weight:700;
-      background:linear-gradient(90deg,var(--gold) 0%, #8f6d24 35%, var(--purple) 78%, #5d4ca7 100%);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
-      color:transparent;
+      color:#2f2a46;
     }
 
     .menu-toggle{
       display:none;
       border:none;
-      background:#f8f3ff;
+      background:#f6f1ff;
       color:var(--purple);
       border-radius:14px;
       padding:10px 14px;
-      font-size:24px;
+      font-size:26px;
       cursor:pointer;
     }
 
@@ -102,66 +106,57 @@
       display:flex;
       align-items:center;
       gap:8px;
-      white-space:nowrap;
       overflow-x:auto;
+      white-space:nowrap;
       scrollbar-width:none;
     }
-
     .main-nav::-webkit-scrollbar{display:none}
 
     .main-nav a{
-      padding:10px 13px;
+      padding:11px 14px;
       border-radius:14px;
-      font-size:13px;
+      font-size:14px;
       font-weight:700;
-      color:#736d8b;
-      display:flex;
-      align-items:center;
-      gap:7px;
+      color:#645d80;
+      flex:0 0 auto;
     }
-
-    .main-nav a i{font-size:13px;color:#a58fdc}
 
     .main-nav a.active,
     .main-nav a:hover{
-      background:#fbf8ff;
+      background:#faf6ff;
       color:var(--purple);
     }
 
-    .main-nav a.active i,
-    .main-nav a:hover i{color:var(--gold)}
+    .page{padding:14px 0 36px}
 
-    .page{padding:12px 0 34px}
-
-    .soft-card{
+    .card{
       background:#fff;
       border:1px solid var(--line);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
+      overflow:hidden;
     }
 
     .hero{
-      padding:20px;
+      padding:18px 20px 20px;
       background:
-        radial-gradient(circle at 18% 24%, rgba(142,114,216,.07), transparent 16%),
-        radial-gradient(circle at 84% 14%, rgba(216,177,91,.09), transparent 16%),
-        linear-gradient(180deg,#ffffff 0%,#fffdfa 100%);
-      overflow:hidden;
+        radial-gradient(circle at 22% 28%, rgba(115,87,199,.05), transparent 16%),
+        radial-gradient(circle at 78% 14%, rgba(197,155,67,.06), transparent 16%),
+        linear-gradient(180deg,#ffffff 0%, #fffdfa 100%);
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:.98fr 1.02fr;
+      grid-template-columns:.95fr 1.05fr;
       gap:18px;
       align-items:start;
     }
 
     .hero-left{
-      min-height:500px;
       display:flex;
       flex-direction:column;
-      justify-content:flex-start;
-      padding-top:4px;
+      min-height:520px;
+      padding-top:6px;
     }
 
     .tag{
@@ -170,10 +165,10 @@
       gap:8px;
       padding:10px 14px;
       border-radius:999px;
-      border:1px solid var(--line);
       background:#fff;
-      color:#6d6787;
-      font-size:12px;
+      border:1px solid var(--line);
+      color:#645d82;
+      font-size:13px;
       font-weight:700;
       box-shadow:0 8px 18px rgba(100,70,50,.04);
       margin-bottom:10px;
@@ -183,16 +178,16 @@
     .hero-title{
       margin:0;
       font-family:'Cormorant Garamond',serif;
-      font-size:54px;
+      font-size:56px;
       line-height:.98;
-      letter-spacing:-0.4px;
+      letter-spacing:-0.5px;
       font-weight:700;
-      color:#2e2947;
-      max-width:580px;
+      color:#26213d;
+      max-width:560px;
     }
 
     .hero-title .gold{
-      background:linear-gradient(90deg,var(--gold),#9a742a);
+      background:linear-gradient(90deg,var(--gold),var(--gold-dark));
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       background-clip:text;
@@ -200,7 +195,7 @@
     }
 
     .hero-title .purple{
-      background:linear-gradient(90deg,var(--purple),#604eb0);
+      background:linear-gradient(90deg,var(--purple),var(--purple-dark));
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       background-clip:text;
@@ -211,8 +206,8 @@
       margin:12px 0 0;
       max-width:560px;
       color:var(--muted);
-      font-size:14px;
-      line-height:1.85;
+      font-size:15px;
+      line-height:1.8;
     }
 
     .hero-actions{
@@ -226,11 +221,10 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
       border:none;
       border-radius:16px;
-      padding:13px 16px;
-      font-size:13px;
+      padding:13px 18px;
+      font-size:14px;
       font-weight:700;
       cursor:pointer;
       transition:.2s ease;
@@ -239,131 +233,53 @@
     .btn:hover{transform:translateY(-2px)}
 
     .btn-primary{
-      color:#fff;
       background:linear-gradient(90deg,var(--gold),var(--purple));
-      box-shadow:0 12px 26px rgba(138,114,216,.18);
+      color:#fff;
     }
 
     .btn-light{
       background:#fff;
       border:1px solid var(--line);
-      color:#625c7c;
-    }
-
-    .platforms{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:12px;
-    }
-
-    .platform{
-      min-height:86px;
-      border-radius:20px;
-      border:1px solid var(--line);
-      background:linear-gradient(180deg,#ffffff 0%, #fcf9ff 100%);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      box-shadow:0 10px 22px rgba(90,70,50,.05);
-      transition:.2s ease;
-      text-align:center;
-      padding:8px;
-    }
-
-    .platform:hover{transform:translateY(-3px)}
-    .platform i{font-size:20px}
-    .platform span{
-      font-size:11px;
-      font-weight:700;
-      line-height:1.2;
-      color:#5b5675;
+      color:#5f597f;
     }
 
     .hero-right{
-      min-height:500px;
-      border-radius:28px;
+      min-height:520px;
+      border-radius:30px;
       border:1px solid var(--line);
-      background:linear-gradient(135deg,#fff3ec 0%,#fff9f5 48%,#f6f2ff 100%);
+      background:linear-gradient(135deg,#fff3ec 0%, #fff8f2 50%, #f6f2ff 100%);
       padding:18px;
-      position:relative;
       overflow:hidden;
     }
 
-    .hero-right:before{
-      content:"";
-      position:absolute;
-      right:-60px;
-      bottom:-80px;
-      width:200px;
-      height:200px;
-      background:radial-gradient(circle, rgba(142,114,216,.12), transparent 65%);
-      pointer-events:none;
-    }
-
-    .hero-right h3{
+    .hero-right-top h3{
       margin:0;
       font-family:'Cormorant Garamond',serif;
       font-size:34px;
-      line-height:1.02;
+      line-height:1.05;
       font-weight:700;
       max-width:360px;
-      color:#2f2a49;
+      color:#2d2947;
     }
 
-    .hero-right p{
-      margin:8px 0 16px;
-      max-width:420px;
+    .hero-right-top p{
+      margin:8px 0 14px;
+      max-width:430px;
       color:var(--muted);
-      font-size:13px;
+      font-size:14px;
       line-height:1.75;
     }
 
-    .floating-strip{
-      overflow:hidden;
-      border-radius:20px;
+    .prompt-box{
       background:#fff;
-      border:1px solid var(--line);
-      padding:10px 0;
-      box-shadow:0 10px 18px rgba(100,70,50,.04);
-      margin-bottom:14px;
-    }
-
-    .floating-track{
-      display:flex;
-      gap:12px;
-      width:max-content;
-      animation:marquee 22s linear infinite;
-    }
-
-    .floating-pill{
-      flex:0 0 auto;
-      padding:10px 14px;
-      border-radius:16px;
-      font-size:13px;
-      font-weight:700;
-      white-space:nowrap;
-      color:#4b4568;
-    }
-
-    .fp1{background:var(--pink-soft)}
-    .fp2{background:var(--mint-soft)}
-    .fp3{background:var(--blue-soft)}
-    .fp4{background:var(--gold-soft)}
-    .fp5{background:var(--purple-soft)}
-
-    .input-shell{
-      background:#fff;
-      border:1px solid var(--line);
       border-radius:22px;
+      border:1px solid var(--line);
+      box-shadow:0 16px 30px rgba(0,0,0,.06);
       padding:14px;
-      box-shadow:0 14px 28px rgba(0,0,0,.05);
       margin-bottom:14px;
     }
 
-    .field-grid{
+    .form-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
@@ -379,7 +295,7 @@
     .field label{
       font-size:12px;
       font-weight:700;
-      color:#645d80;
+      color:#625c7d;
     }
 
     .field input,
@@ -389,69 +305,98 @@
       border:1px solid var(--line);
       border-radius:14px;
       padding:13px 14px;
-      background:#fff;
-      color:var(--text);
       outline:none;
+      color:var(--text);
+      background:#fff;
+      font:inherit;
     }
 
     .field textarea{
-      min-height:96px;
+      min-height:110px;
       resize:vertical;
     }
 
-    .action-bar{
+    .actions-row{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-top:6px;
+      margin-top:8px;
     }
 
-    .section{
-      margin-top:22px;
+    .chip-strip{
+      overflow:hidden;
+      border-radius:22px;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:12px 0;
+      box-shadow:0 10px 18px rgba(100,70,50,.04);
     }
 
-    .section-head{
-      margin-bottom:14px;
+    .chip-track{
+      display:flex;
+      gap:14px;
+      width:max-content;
+      animation:marquee 22s linear infinite;
+      align-items:center;
     }
 
+    .chip{
+      flex:0 0 auto;
+      padding:11px 16px;
+      border-radius:18px;
+      font-size:13px;
+      font-weight:700;
+      color:#433d5f;
+      white-space:nowrap;
+      box-shadow:0 8px 18px rgba(80,60,40,.05);
+    }
+
+    .c1{background:var(--soft-pink)}
+    .c2{background:var(--soft-mint)}
+    .c3{background:var(--soft-blue)}
+    .c4{background:var(--soft-gold)}
+    .c5{background:var(--soft-purple)}
+
+    .section{margin-top:22px}
+
+    .section-head{margin-bottom:14px}
     .section-head h2{
       margin:0 0 8px;
       font-size:22px;
+      line-height:1.2;
       font-weight:700;
-      color:#2e2947;
+      color:#26213d;
     }
 
     .section-head p{
       margin:0;
       color:var(--muted);
       font-size:14px;
-      line-height:1.75;
+      line-height:1.8;
+      max-width:860px;
     }
 
-    .outputs{
+    .output-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:16px;
     }
 
     .output-card{
+      border:1px solid var(--line);
+      border-radius:24px;
       padding:18px;
+      background:#fff;
+      box-shadow:var(--shadow);
       min-height:220px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:24px;
-      box-shadow:var(--shadow);
-      transition:.2s ease;
     }
 
-    .output-card:hover{transform:translateY(-3px)}
-
-    .output-card .type{
-      display:inline-flex;
-      padding:8px 11px;
+    .output-type{
+      display:inline-block;
+      padding:8px 12px;
       border-radius:999px;
       font-size:11px;
       font-weight:700;
@@ -459,17 +404,17 @@
       margin-bottom:10px;
     }
 
-    .type-purple{background:var(--purple-soft);color:#6b59db}
-    .type-pink{background:var(--pink-soft);color:#d86190}
-    .type-blue{background:var(--blue-soft);color:#4781da}
-    .type-mint{background:var(--mint-soft);color:#3d9d72}
-    .type-gold{background:var(--gold-soft);color:#9c7a1f}
+    .t1{background:var(--soft-purple);color:#634ec0}
+    .t2{background:var(--soft-pink);color:#c9568d}
+    .t3{background:var(--soft-blue);color:#4f7fcb}
+    .t4{background:var(--soft-gold);color:#9a7222}
+    .t5{background:var(--soft-mint);color:#3f966f}
 
     .output-card h3{
       margin:0 0 8px;
       font-size:18px;
-      font-weight:700;
       color:#2f2a49;
+      font-weight:700;
     }
 
     .output-card p,
@@ -499,53 +444,13 @@
       font-size:12px;
       font-weight:700;
       cursor:pointer;
-      background:#f6f2ff;
-      color:#6553b7;
+      background:#f6f1ff;
+      color:#624db8;
     }
 
     .mini-btn.gold{
-      background:#fff4dc;
-      color:#9a7320;
-    }
-
-    .moving-ideas{
-      overflow:hidden;
-      border-radius:22px;
-      background:#fff;
-      border:1px solid var(--line);
-      padding:12px 0;
-      box-shadow:var(--shadow);
-    }
-
-    .ideas-track{
-      display:flex;
-      gap:14px;
-      width:max-content;
-      animation:marquee 28s linear infinite;
-    }
-
-    .idea-box{
-      flex:0 0 auto;
-      width:270px;
-      padding:16px;
-      border-radius:18px;
-      background:#fff;
-      border:1px solid var(--line);
-      box-shadow:0 8px 18px rgba(100,70,50,.04);
-    }
-
-    .idea-box strong{
-      display:block;
-      margin-bottom:6px;
-      font-size:15px;
-      color:#2f2a49;
-    }
-
-    .idea-box span{
-      display:block;
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.7;
+      background:#fff2d8;
+      color:#9a7321;
     }
 
     .site-footer{
@@ -573,7 +478,7 @@
       display:block;
       margin:0 0 10px;
       color:#d9d4ea;
-      font-size:14px;
+      font-size:15px;
       line-height:1.7;
     }
 
@@ -582,22 +487,10 @@
       100%{transform:translateX(-50%)}
     }
 
-    @media (max-width:1100px){
+    @media (max-width:1180px){
       .hero-grid,
-      .outputs,
+      .output-grid,
       .footer-grid{
-        grid-template-columns:1fr 1fr;
-      }
-      .outputs{grid-template-columns:1fr 1fr}
-    }
-
-    @media (max-width:900px){
-      .hero-grid,
-      .outputs,
-      .footer-grid{
-        grid-template-columns:1fr;
-      }
-      .field-grid{
         grid-template-columns:1fr;
       }
     }
@@ -605,6 +498,7 @@
     @media (max-width:768px){
       .container{width:min(100% - 18px,1200px)}
       .menu-toggle{display:block}
+
       .main-nav{
         display:none;
         position:absolute;
@@ -620,24 +514,17 @@
         align-items:stretch;
         gap:10px;
       }
+
       .main-nav.show{display:flex}
-      .main-nav a{width:100%;background:#fff8f2}
-      .brand-text{font-size:38px}
-      .hero-title{font-size:42px}
-      .hero-grid,
-      .platforms,
-      .outputs,
-      .footer-grid,
-      .field-grid{
-        grid-template-columns:1fr;
-      }
-      .hero-actions,.action-bar{
-        flex-direction:column;
-      }
-      .btn,.mini-btn{
+      .main-nav a{
         width:100%;
-        justify-content:center;
+        background:#fff8f2;
       }
+
+      .hero-title{font-size:42px}
+      .hero-actions,.actions-row{flex-direction:column}
+      .btn{width:100%}
+      .form-grid,.output-grid,.footer-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -646,21 +533,23 @@
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="brand">
-        <span class="brand-dot"></span>
-        <span class="brand-text">Bariq AI</span>
+        <span class="brand-box">B</span>
+        <span class="brand-name">BariqAI</span>
       </a>
 
       <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
 
       <nav class="main-nav" id="mainNav">
-        <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="business-dashboard.html"><i class="fa-solid fa-building"></i> Business</a>
-        <a href="ai-generator.html" class="active"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Generator</a>
-        <a href="campaign.html"><i class="fa-solid fa-bullhorn"></i> Campaign</a>
-        <a href="creator-marketplace.html"><i class="fa-solid fa-video"></i> Creators</a>
-        <a href="templates.html"><i class="fa-solid fa-layer-group"></i> Templates</a>
-        <a href="video-creator.html"><i class="fa-solid fa-clapperboard"></i> Video Creator</a>
-        <a href="payments.html"><i class="fa-solid fa-credit-card"></i> Payments</a>
+        <a href="index.html">Home</a>
+        <a href="business-dashboard.html">Business</a>
+        <a href="ai-generator.html" class="active">AI Generator</a>
+        <a href="campaign.html">Campaign</a>
+        <a href="creator-marketplace.html">Creators</a>
+        <a href="templates.html">Templates</a>
+        <a href="video-creator.html">Video Creator</a>
+        <a href="payments.html">Payments</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Start Free</a>
       </nav>
     </div>
   </header>
@@ -668,77 +557,38 @@
   <section class="page">
     <div class="container">
 
-      <div class="soft-card hero">
+      <div class="card hero">
         <div class="hero-grid">
           <div class="hero-left">
-            <div class="tag">Bariq AI Generator</div>
+            <div class="tag">AI Generator Workspace</div>
 
             <h1 class="hero-title">
               Create <span class="purple">ads</span>, captions,
-              hooks and <span class="gold">campaign copy</span>
-              from one prompt
+              hooks and <span class="gold">headlines</span>
+              from one clean prompt
             </h1>
 
             <p class="hero-sub">
-              Make your content feel live, soft and premium. Type once, and turn your idea into clean ready-to-use copy for Meta, Google, Instagram, LinkedIn and more.
+              BariqAI helps you generate ready-to-use marketing copy for Meta, Google, Instagram, LinkedIn and more in a softer, premium product experience.
             </p>
 
             <div class="hero-actions">
-              <button class="btn btn-primary" onclick="generateOutputs()">
-                <i class="fa-solid fa-sparkles"></i> Generate Content
-              </button>
-              <a href="templates.html" class="btn btn-light">
-                <i class="fa-solid fa-layer-group"></i> Open Templates
-              </a>
-              <a href="campaign.html" class="btn btn-light">
-                <i class="fa-solid fa-bullhorn"></i> Open Campaign
-              </a>
-            </div>
-
-            <div class="platforms">
-              <div class="platform">
-                <i class="fa-brands fa-instagram" style="color:#E1306C"></i>
-                <span>Instagram</span>
-              </div>
-              <div class="platform">
-                <i class="fa-brands fa-facebook-f" style="color:#1877F2"></i>
-                <span>Facebook</span>
-              </div>
-              <div class="platform">
-                <i class="fa-brands fa-linkedin-in" style="color:#0A66C2"></i>
-                <span>LinkedIn</span>
-              </div>
-              <div class="platform">
-                <i class="fa-brands fa-google" style="color:#4285F4"></i>
-                <span>Google</span>
-              </div>
+              <button class="btn btn-primary" onclick="generateContent()">Generate Content</button>
+              <a href="campaign.html" class="btn btn-light">Open Campaign</a>
+              <a href="templates.html" class="btn btn-light">Open Templates</a>
             </div>
           </div>
 
           <div class="hero-right">
-            <h3>Prompt once. Output everywhere.</h3>
-            <p>Use one clean prompt and let BariqAI shape multiple outputs for different platforms and styles.</p>
-
-            <div class="floating-strip">
-              <div class="floating-track">
-                <div class="floating-pill fp1">Meta ad copy</div>
-                <div class="floating-pill fp2">Instagram captions</div>
-                <div class="floating-pill fp3">Google headlines</div>
-                <div class="floating-pill fp4">CTA options</div>
-                <div class="floating-pill fp5">Campaign hooks</div>
-
-                <div class="floating-pill fp1">Meta ad copy</div>
-                <div class="floating-pill fp2">Instagram captions</div>
-                <div class="floating-pill fp3">Google headlines</div>
-                <div class="floating-pill fp4">CTA options</div>
-                <div class="floating-pill fp5">Campaign hooks</div>
-              </div>
+            <div class="hero-right-top">
+              <h3>Prompt once. Get live outputs.</h3>
+              <p>Type your idea and instantly shape your copy into ads, captions, hooks and CTA lines.</p>
             </div>
 
-            <div class="input-shell">
-              <div class="field-grid">
+            <div class="prompt-box">
+              <div class="form-grid">
                 <div class="field">
-                  <label>Brand name</label>
+                  <label>Brand</label>
                   <input id="brand" type="text" value="RSCC Aesthetic Clinic">
                 </div>
                 <div class="field">
@@ -753,7 +603,7 @@
                 </div>
               </div>
 
-              <div class="field-grid">
+              <div class="form-grid">
                 <div class="field">
                   <label>Audience</label>
                   <input id="audience" type="text" value="Women aged 22 to 45">
@@ -765,58 +615,31 @@
               </div>
 
               <div class="field">
-                <label>Main prompt</label>
+                <label>Prompt</label>
                 <textarea id="prompt">Create a premium women-first campaign for laser hair reduction in Hyderabad. Focus on confidence, convenience, smooth skin and modern treatment.</textarea>
               </div>
 
-              <div class="action-bar">
-                <button class="btn btn-primary" onclick="generateOutputs()">
-                  <i class="fa-solid fa-bolt"></i> Generate
-                </button>
-                <button class="btn btn-light" onclick="fillSample()">
-                  <i class="fa-solid fa-rotate"></i> Try Another Prompt
-                </button>
+              <div class="actions-row">
+                <button class="btn btn-primary" onclick="generateContent()">Generate</button>
+                <button class="btn btn-light" onclick="trySample()">Try Another Prompt</button>
               </div>
             </div>
 
-            <div class="moving-ideas">
-              <div class="ideas-track">
-                <div class="idea-box">
-                  <strong>Ad Direction</strong>
-                  <span>Premium, women-first and confidence-led positioning.</span>
-                </div>
-                <div class="idea-box">
-                  <strong>Caption Style</strong>
-                  <span>Short, soft and conversion-friendly wording.</span>
-                </div>
-                <div class="idea-box">
-                  <strong>Campaign Hook</strong>
-                  <span>From repeated hassle to smooth confidence.</span>
-                </div>
-                <div class="idea-box">
-                  <strong>CTA Flow</strong>
-                  <span>Consultation-first and easy next step language.</span>
-                </div>
+            <div class="chip-strip">
+              <div class="chip-track">
+                <div class="chip c1">Meta ad copy</div>
+                <div class="chip c2">Instagram captions</div>
+                <div class="chip c3">Google headlines</div>
+                <div class="chip c4">CTA options</div>
+                <div class="chip c5">Campaign hooks</div>
 
-                <div class="idea-box">
-                  <strong>Ad Direction</strong>
-                  <span>Premium, women-first and confidence-led positioning.</span>
-                </div>
-                <div class="idea-box">
-                  <strong>Caption Style</strong>
-                  <span>Short, soft and conversion-friendly wording.</span>
-                </div>
-                <div class="idea-box">
-                  <strong>Campaign Hook</strong>
-                  <span>From repeated hassle to smooth confidence.</span>
-                </div>
-                <div class="idea-box">
-                  <strong>CTA Flow</strong>
-                  <span>Consultation-first and easy next step language.</span>
-                </div>
+                <div class="chip c1">Meta ad copy</div>
+                <div class="chip c2">Instagram captions</div>
+                <div class="chip c3">Google headlines</div>
+                <div class="chip c4">CTA options</div>
+                <div class="chip c5">Campaign hooks</div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -824,13 +647,13 @@
       <div class="section">
         <div class="section-head">
           <h2>Generated outputs</h2>
-          <p>Quick, editable and ready to move into templates, campaigns or videos.</p>
+          <p>Editable, copy-friendly and ready to use inside campaigns, templates and creatives.</p>
         </div>
 
-        <div class="outputs">
+        <div class="output-grid">
           <div class="output-card">
             <div>
-              <span class="type type-purple">Primary Ad Copy</span>
+              <span class="output-type t1">Primary Ad Copy</span>
               <h3>Main ad text</h3>
               <p id="adCopy">Still depending on repeated temporary routines? Discover premium laser hair reduction for women at RSCC Aesthetic Clinic in Hyderabad. Feel smoother, more confident and more in control with care designed for modern women. Book your consultation today.</p>
             </div>
@@ -842,7 +665,7 @@
 
           <div class="output-card">
             <div>
-              <span class="type type-pink">Hooks</span>
+              <span class="output-type t2">Hooks</span>
               <h3>Opening lines</h3>
               <ul id="hookList">
                 <li>Done with temporary fixes?</li>
@@ -859,7 +682,7 @@
 
           <div class="output-card">
             <div>
-              <span class="type type-blue">Caption</span>
+              <span class="output-type t3">Caption</span>
               <h3>Social caption</h3>
               <p id="captionText">Confidence looks better when it feels effortless. Discover laser hair reduction for women with a premium and modern experience at RSCC Aesthetic Clinic, Hyderabad. #LaserHairReduction #WomenCare #HyderabadClinic</p>
             </div>
@@ -871,8 +694,8 @@
 
           <div class="output-card">
             <div>
-              <span class="type type-mint">Headlines</span>
-              <h3>Search / banner lines</h3>
+              <span class="output-type t4">Headlines</span>
+              <h3>Banner / search lines</h3>
               <ul id="headlineList">
                 <li>Premium Laser Hair Reduction</li>
                 <li>Smoother Skin Starts Here</li>
@@ -888,7 +711,7 @@
 
           <div class="output-card">
             <div>
-              <span class="type type-gold">CTA</span>
+              <span class="output-type t5">CTA</span>
               <h3>Call-to-action lines</h3>
               <ul id="ctaList">
                 <li>Book your premium consultation now</li>
@@ -905,9 +728,9 @@
 
           <div class="output-card">
             <div>
-              <span class="type type-purple">Direction</span>
-              <h3>Creative note</h3>
-              <p id="creativeNote">Use a light premium visual style, women-first language, soft confidence-led messaging, and a clean transformation angle. Keep the tone aspirational but easy to understand.</p>
+              <span class="output-type t1">Creative Direction</span>
+              <h3>Visual note</h3>
+              <p id="creativeNote">Use a light premium visual style, women-first language, soft confidence-led messaging, and a clean transformation angle. Keep the tone elegant but easy to understand.</p>
             </div>
             <div class="card-actions">
               <button class="mini-btn" onclick="copyText('creativeNote')">Copy</button>
@@ -965,7 +788,7 @@
       alert("Copied");
     }
 
-    function generateOutputs(){
+    function generateContent(){
       const brand = document.getElementById('brand').value;
       const platform = document.getElementById('platform').value;
       const audience = document.getElementById('audience').value;
@@ -1003,7 +826,7 @@
         `Visual direction for ${platform}: keep it soft, premium, women-first, and easy to understand. Use clean layouts, elegant text and a confidence-led emotional angle.`;
     }
 
-    function fillSample(){
+    function trySample(){
       const samples = [
         {
           brand:"SipnFit",
