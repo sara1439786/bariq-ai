@@ -3,51 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BariqAI - Campaign</title>
+  <title>BariqAI Campaign Studio</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;overflow-x:hidden}
     body{
+      margin:0;
       font-family:'Inter',sans-serif;
       background:
         radial-gradient(circle at top left, rgba(115,87,199,.04), transparent 22%),
         radial-gradient(circle at top right, rgba(197,155,67,.05), transparent 22%),
-        linear-gradient(180deg,#fff 0%,#fffdfa 100%);
-      color:#352f4f;
+        linear-gradient(180deg,#fffdfc 0%, #fbfafc 100%);
+      color:#332d4d;
     }
 
     :root{
-      --text:#352f4f;
-      --muted:#857e98;
-      --gold:#c59b43;
-      --gold-dark:#9d7526;
+      --card:#ffffff;
+      --line:#eee7e0;
+      --text:#332d4d;
+      --muted:#7b748f;
       --purple:#7357c7;
-      --purple-dark:#5f49ad;
-      --soft-gold:#fff6e3;
-      --soft-purple:#f6f2ff;
-      --soft-pink:#fff3f8;
-      --soft-mint:#effaf4;
-      --soft-cream:#fffaf3;
-      --line:#eee8e3;
-      --shadow:0 14px 30px rgba(90,70,50,.07);
-      --radius:26px;
+      --purple-soft:#f5f1ff;
+      --pink-soft:#fff2f7;
+      --blue-soft:#f3f7ff;
+      --mint-soft:#f0faf5;
+      --peach-soft:#fff6ef;
+      --yellow-soft:#fff7e7;
+      --gold:#c59b43;
+      --gold-dark:#9c7428;
+      --shadow:0 14px 32px rgba(90,100,140,.06);
     }
 
     a{text-decoration:none;color:inherit}
-    .container{width:min(1380px, calc(100% - 28px));margin:0 auto}
+    .container{width:min(1320px,calc(100% - 28px));margin:0 auto}
 
     .site-header{
       position:sticky;
       top:0;
       z-index:999;
-      background:rgba(255,255,255,.95);
-      backdrop-filter:blur(14px);
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
     }
 
@@ -57,155 +56,123 @@
       align-items:center;
       justify-content:space-between;
       gap:18px;
-      position:relative;
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:12px;
       white-space:nowrap;
     }
 
-    .brand-box{
-      width:46px;
-      height:46px;
+    .brand-mark{
+      width:44px;
+      height:44px;
       border-radius:14px;
       display:grid;
       place-items:center;
-      font-weight:700;
-      font-size:26px;
-      color:#2f2a46;
-      background:linear-gradient(135deg,#e7c777,#c59b43);
-      box-shadow:0 10px 22px rgba(197,155,67,.18);
+      background:linear-gradient(135deg,#ead18e,#c59b43);
+      color:#342a18;
+      font-weight:800;
+      font-size:22px;
       flex:0 0 auto;
+      box-shadow:0 10px 22px rgba(197,155,67,.18);
     }
 
-    .brand-name{
+    .brand-text{
       font-size:18px;
-      font-weight:700;
-      color:#2f2a46;
-    }
-
-    .menu-toggle{
-      display:none;
-      border:none;
-      background:#f6f1ff;
-      color:var(--purple);
-      border-radius:14px;
-      padding:10px 14px;
-      font-size:26px;
-      cursor:pointer;
+      font-weight:800;
+      color:#2e2947;
     }
 
     .main-nav{
       display:flex;
-      align-items:center;
       gap:8px;
-      overflow-x:auto;
+      align-items:center;
       white-space:nowrap;
+      overflow-x:auto;
       scrollbar-width:none;
     }
 
     .main-nav::-webkit-scrollbar{display:none}
 
     .main-nav a{
-      padding:11px 14px;
+      padding:10px 14px;
       border-radius:14px;
       font-size:14px;
       font-weight:700;
-      color:#6c6584;
-      flex:0 0 auto;
+      color:#6e6786;
     }
 
     .main-nav a.active,
     .main-nav a:hover{
-      background:#faf6ff;
+      background:var(--purple-soft);
       color:var(--purple);
     }
 
-    .page{padding:16px 0 34px}
-
-    .card{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      overflow:hidden;
+    .nav-actions{
+      display:flex;
+      gap:10px;
     }
+
+    .top-btn{
+      padding:11px 16px;
+      border-radius:14px;
+      font-size:14px;
+      font-weight:700;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#645d7f;
+    }
+
+    .top-btn.start{
+      background:linear-gradient(90deg,var(--gold),var(--purple));
+      color:#fff;
+      border:none;
+    }
+
+    .page{padding:22px 0 40px}
 
     .hero{
-      padding:18px;
-      background:
-        radial-gradient(circle at 22% 28%, rgba(115,87,199,.04), transparent 16%),
-        radial-gradient(circle at 78% 14%, rgba(197,155,67,.05), transparent 16%),
-        linear-gradient(180deg,#ffffff 0%, #fffdfa 100%);
+      background:linear-gradient(135deg,#ffffff 0%, #fbf8ff 46%, #fffaf4 100%);
+      border:1px solid var(--line);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      padding:26px;
+      margin-bottom:20px;
     }
 
-    .hero-grid{
-      display:grid;
-      grid-template-columns:.9fr 1.1fr;
-      gap:16px;
-      align-items:start;
-    }
-
-    .hero-left{
-      min-height:390px;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-start;
-      padding:6px 4px 0 4px;
-    }
-
-    .tag{
+    .badge{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding:9px 13px;
+      padding:10px 14px;
       border-radius:999px;
       background:#fff;
       border:1px solid var(--line);
-      color:#6c6584;
       font-size:12px;
-      font-weight:600;
-      box-shadow:0 6px 14px rgba(100,70,50,.04);
-      margin-bottom:10px;
-      width:max-content;
+      font-weight:700;
+      color:#6d6787;
+      margin-bottom:14px;
     }
 
-    .hero-title{
+    .hero h1{
       margin:0;
       font-family:'Cormorant Garamond',serif;
-      font-size:44px;
-      line-height:1.03;
-      letter-spacing:-0.3px;
+      font-size:52px;
+      line-height:1.02;
       font-weight:700;
-      color:#332d4d;
-      max-width:500px;
+      letter-spacing:-.3px;
+      max-width:760px;
+      color:#2f2948;
     }
 
-    .hero-title .gold{
-      background:linear-gradient(90deg,var(--gold),var(--gold-dark));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .hero-title .purple{
-      background:linear-gradient(90deg,var(--purple),var(--purple-dark));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .hero-sub{
+    .hero p{
       margin:12px 0 0;
-      max-width:500px;
-      color:var(--muted);
-      font-size:14px;
+      max-width:700px;
+      font-size:15px;
       line-height:1.8;
+      color:var(--muted);
       font-weight:400;
     }
 
@@ -213,345 +180,378 @@
       display:flex;
       gap:12px;
       flex-wrap:wrap;
-      margin-top:16px;
+      margin-top:18px;
     }
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+    .hero-btn{
+      padding:13px 18px;
+      border-radius:16px;
+      font-size:14px;
+      font-weight:700;
       border:none;
-      border-radius:15px;
-      padding:12px 16px;
-      font-size:13px;
-      font-weight:600;
       cursor:pointer;
-      transition:.2s ease;
     }
 
-    .btn:hover{transform:translateY(-2px)}
-
-    .btn-primary{
+    .hero-btn.primary{
       background:linear-gradient(90deg,var(--gold),var(--purple));
       color:#fff;
     }
 
-    .btn-light{
+    .hero-btn.secondary{
       background:#fff;
+      color:#635d7d;
       border:1px solid var(--line);
-      color:#665f7e;
     }
 
-    .hero-right{
-      min-height:390px;
-      border-radius:28px;
-      border:1px solid var(--line);
-      background:linear-gradient(135deg,#fff5ef 0%, #fffaf6 48%, #f7f4ff 100%);
-      padding:14px;
-      overflow:hidden;
-    }
-
-    .visual-grid{
+    .guide{
       display:grid;
-      grid-template-columns:1.08fr .92fr;
-      gap:12px;
-      height:100%;
-    }
-
-    .visual-col{
-      display:grid;
-      gap:12px;
-    }
-
-    .visual-card{
-      border-radius:22px;
-      overflow:hidden;
-      position:relative;
-      box-shadow:0 10px 20px rgba(0,0,0,.05);
-      background:#fff;
-      min-height:150px;
-    }
-
-    .visual-card.small{min-height:124px}
-    .visual-card.tall{min-height:205px}
-
-    .visual-img{
-      width:100%;
-      height:100%;
-      background-size:cover;
-      background-position:center;
-      transform:scale(1);
-      animation:zoomy 14s ease-in-out infinite alternate;
-    }
-
-    .v1{background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80')}
-    .v2{background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80')}
-    .v3{background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80')}
-
-    .visual-label{
-      position:absolute;
-      left:10px;
-      bottom:10px;
-      z-index:2;
-      background:rgba(255,255,255,.93);
-      padding:7px 11px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:600;
-      color:#57516f;
-    }
-
-    .soft-panel{
-      border-radius:22px;
-      padding:18px;
-      min-height:124px;
-      box-shadow:0 10px 20px rgba(0,0,0,.04);
-    }
-
-    .soft-panel h3{
-      margin:0;
-      font-family:'Cormorant Garamond',serif;
-      font-size:24px;
-      line-height:1.08;
-      font-weight:700;
-      color:#352f50;
-    }
-
-    .soft-panel p{
-      margin:8px 0 0;
-      font-size:12px;
-      color:#77708c;
-      line-height:1.75;
-    }
-
-    .gold-box{background:linear-gradient(135deg,#fff3c9,#f9e5a0)}
-    .mint-box{background:linear-gradient(135deg,#ecfbf2,#ddf5e7)}
-
-    .moving-strip{
-      margin-top:14px;
-      overflow:hidden;
-      border-radius:20px;
-      background:#fff;
-      border:1px solid var(--line);
-      padding:10px 0;
-      box-shadow:0 8px 16px rgba(100,70,50,.04);
-    }
-
-    .moving-track{
-      display:flex;
-      gap:12px;
-      width:max-content;
-      animation:marquee 26s linear infinite;
-      align-items:center;
-    }
-
-    .moving-pill{
-      flex:0 0 auto;
-      padding:10px 14px;
-      border-radius:18px;
-      font-size:12px;
-      font-weight:600;
-      color:#57516f;
-      white-space:nowrap;
-    }
-
-    .m1{background:var(--soft-pink)}
-    .m2{background:var(--soft-mint)}
-    .m3{background:var(--soft-purple)}
-    .m4{background:var(--soft-gold)}
-
-    .section{margin-top:20px}
-
-    .section-head{
-      margin-bottom:12px;
-    }
-
-    .section-head h2{
-      margin:0 0 5px;
-      font-size:18px;
-      font-weight:600;
-      color:#332d4d;
-    }
-
-    .section-head p{
-      margin:0;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.75;
-      max-width:720px;
-    }
-
-    .direction-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
+      grid-template-columns:repeat(4,1fr);
       gap:14px;
+      margin-bottom:20px;
     }
 
-    .direction-card{
+    .guide-card{
+      background:#fff;
       border:1px solid var(--line);
       border-radius:22px;
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+
+    .guide-step{
+      width:32px;
+      height:32px;
+      border-radius:11px;
+      display:grid;
+      place-items:center;
+      background:var(--purple-soft);
+      color:var(--purple);
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .guide-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+      color:#2f2948;
+      font-weight:700;
+    }
+
+    .guide-card p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.65;
+      font-weight:400;
+    }
+
+    .studio-grid{
+      display:grid;
+      grid-template-columns:390px 1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .panel{
       background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
       box-shadow:var(--shadow);
       overflow:hidden;
     }
 
-    .direction-image{
-      height:130px;
-      background-size:cover;
-      background-position:center;
+    .panel-head{
+      padding:18px 18px 8px;
     }
 
-    .d1{background-image:url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80')}
-    .d2{background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80')}
-    .d3{background-image:url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80')}
+    .panel-head h2{
+      margin:0 0 6px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:30px;
+      line-height:1.05;
+      font-weight:700;
+      color:#2f2948;
+    }
 
-    .direction-body{
+    .panel-head p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.7;
+      font-weight:400;
+    }
+
+    .form-wrap{
+      padding:16px 18px 18px;
+      display:grid;
+      gap:13px;
+    }
+
+    .field label{
+      display:block;
+      margin-bottom:8px;
+      font-size:12px;
+      font-weight:700;
+      color:#5a5474;
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:15px;
+      padding:13px 14px;
+      font:inherit;
+      color:var(--text);
+      background:#fff;
+      outline:none;
+    }
+
+    .field textarea{
+      min-height:100px;
+      resize:vertical;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .chip{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size:12px;
+      font-weight:700;
+      color:#645e7f;
+      cursor:pointer;
+    }
+
+    .chip.active{
+      background:var(--purple-soft);
+      color:var(--purple);
+      border-color:#e5defd;
+    }
+
+    .generate-btn{
+      width:100%;
+      border:none;
+      border-radius:17px;
+      padding:15px 18px;
+      font-size:15px;
+      font-weight:800;
+      color:#fff;
+      cursor:pointer;
+      background:linear-gradient(90deg,var(--gold),var(--purple));
+      box-shadow:0 14px 28px rgba(123,109,246,.14);
+    }
+
+    .workspace{
+      padding:18px;
+    }
+
+    .workspace-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .workspace-top h3{
+      margin:0;
+      font-family:'Cormorant Garamond',serif;
+      font-size:30px;
+      line-height:1.05;
+      font-weight:700;
+      color:#2f2948;
+    }
+
+    .workspace-top p{
+      margin:6px 0 0;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.7;
+      font-weight:400;
+    }
+
+    .status{
+      padding:10px 14px;
+      border-radius:999px;
+      background:#f0faf5;
+      color:#3b8d68;
+      font-size:12px;
+      font-weight:800;
+      border:1px solid #dcf2e6;
+      white-space:nowrap;
+    }
+
+    .campaign-flow{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .flow-card{
+      border:1px solid var(--line);
+      border-radius:20px;
       padding:14px;
+      background:#fff;
+      box-shadow:0 8px 18px rgba(90,100,140,.04);
     }
 
-    .direction-body h3{
-      margin:0 0 5px;
-      font-size:16px;
-      font-weight:600;
-      color:#3a3454;
+    .flow-label{
+      display:inline-block;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:10px;
+      font-weight:800;
+      margin-bottom:9px;
     }
 
-    .direction-body p{
+    .flow-card h4{
+      margin:0 0 7px;
+      font-size:15px;
+      color:#2f2948;
+      font-weight:700;
+    }
+
+    .flow-card p{
       margin:0;
       font-size:12px;
       color:var(--muted);
-      line-height:1.7;
+      line-height:1.65;
+      font-weight:400;
     }
 
-    .mini-flow{
+    .l1{background:var(--purple-soft);color:#6b59db}
+    .l2{background:var(--pink-soft);color:#d86190}
+    .l3{background:var(--blue-soft);color:#4a83d9}
+    .l4{background:var(--mint-soft);color:#3b9b72}
+
+    .output-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
       margin-top:14px;
+    }
+
+    .output-card{
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:16px;
+      background:#fff;
+      box-shadow:0 8px 18px rgba(90,100,140,.04);
+    }
+
+    .output-card h4{
+      margin:0 0 9px;
+      font-size:16px;
+      color:#2f2948;
+      font-weight:700;
+    }
+
+    .output-card p,
+    .output-card li{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.75;
+      font-weight:400;
+    }
+
+    .output-card ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .card-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .small-btn{
+      border:none;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:12px;
+      font-weight:700;
+      cursor:pointer;
+      background:#f5f3ff;
+      color:#6a6192;
+    }
+
+    .small-btn.primary{
+      background:var(--purple-soft);
+      color:var(--purple);
+    }
+
+    .quick-strip{
+      margin-top:16px;
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:12px;
     }
 
-    .mini-step{
+    .quick-card{
       border:1px solid var(--line);
       border-radius:18px;
-      background:#fff;
       padding:14px;
-      box-shadow:0 8px 18px rgba(90,70,50,.04);
+      background:#fdfcff;
     }
 
-    .step-no{
-      width:26px;
-      height:26px;
-      border-radius:9px;
-      display:grid;
-      place-items:center;
-      margin-bottom:8px;
-      background:var(--soft-purple);
-      color:var(--purple);
-      font-size:12px;
+    .quick-card strong{
+      display:block;
+      margin-bottom:7px;
+      font-size:14px;
+      color:#2f2948;
       font-weight:700;
     }
 
-    .mini-step strong{
-      display:block;
-      margin-bottom:5px;
-      font-size:14px;
-      font-weight:600;
-      color:#3a3454;
-    }
-
-    .mini-step span{
+    .quick-card span{
       display:block;
       font-size:12px;
       color:var(--muted);
       line-height:1.65;
+      font-weight:400;
     }
 
-    .site-footer{
-      margin-top:26px;
-      background:#181427;
-      color:#fff;
-      padding:40px 0;
-    }
-
-    .footer-grid{
-      display:grid;
-      grid-template-columns:1.2fr 1fr 1fr 1fr;
-      gap:24px;
-    }
-
-    .footer-col h3{
-      margin:0 0 14px;
-      font-size:18px;
-      color:#fff;
-      font-weight:700;
-    }
-
-    .footer-col p,
-    .footer-col a{
-      display:block;
-      margin:0 0 10px;
-      color:#d9d4ea;
-      font-size:15px;
-      line-height:1.7;
-    }
-
-    @keyframes marquee{
-      0%{transform:translateX(0)}
-      100%{transform:translateX(-50%)}
-    }
-
-    @keyframes zoomy{
-      0%{transform:scale(1)}
-      100%{transform:scale(1.05)}
-    }
-
-    @media (max-width:1180px){
-      .hero-grid,
-      .direction-grid,
-      .mini-flow,
-      .footer-grid{
+    @media (max-width:1100px){
+      .guide,
+      .campaign-flow,
+      .output-grid,
+      .quick-strip{
+        grid-template-columns:1fr 1fr;
+      }
+      .studio-grid{
         grid-template-columns:1fr;
       }
     }
 
     @media (max-width:768px){
       .container{width:min(100% - 18px,1200px)}
-      .menu-toggle{display:block}
-
-      .main-nav{
-        display:none;
-        position:absolute;
-        top:82px;
-        left:0;
-        right:0;
-        background:#fff;
-        border:1px solid var(--line);
-        border-radius:18px;
-        box-shadow:0 18px 40px rgba(0,0,0,.08);
-        padding:14px;
-        flex-direction:column;
-        align-items:stretch;
-        gap:10px;
-      }
-
-      .main-nav.show{display:flex}
-      .main-nav a{
-        width:100%;
-        background:#fff8f2;
-      }
-
-      .hero-title{font-size:36px}
-      .hero-actions{flex-direction:column}
-      .btn{width:100%}
-      .visual-grid,
-      .direction-grid,
-      .mini-flow,
-      .footer-grid{
+      .main-nav,.nav-actions{display:none}
+      .hero h1{font-size:38px}
+      .guide,
+      .campaign-flow,
+      .output-grid,
+      .quick-strip,
+      .grid-2{
         grid-template-columns:1fr;
-      }
-      .hero-left,
-      .hero-right{
-        min-height:auto;
       }
     }
   </style>
@@ -561,13 +561,11 @@
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="brand">
-        <span class="brand-box">B</span>
-        <span class="brand-name">BariqAI</span>
+        <span class="brand-mark">B</span>
+        <span class="brand-text">BariqAI</span>
       </a>
 
-      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
-
-      <nav class="main-nav" id="mainNav">
+      <nav class="main-nav">
         <a href="index.html">Home</a>
         <a href="business-dashboard.html">Business</a>
         <a href="ai-generator.html">AI Generator</a>
@@ -576,178 +574,290 @@
         <a href="templates.html">Templates</a>
         <a href="video-creator.html">Video Creator</a>
         <a href="payments.html">Payments</a>
-        <a href="login.html">Login</a>
-        <a href="signup.html">Start Free</a>
       </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="top-btn">Login</a>
+        <a href="signup.html" class="top-btn start">Start Free</a>
+      </div>
     </div>
   </header>
 
   <section class="page">
     <div class="container">
 
-      <div class="card hero">
-        <div class="hero-grid">
-          <div class="hero-left">
-            <div class="tag">Campaign Studio</div>
-
-            <h1 class="hero-title">
-              Build a <span class="purple">campaign flow</span>
-              that feels <span class="gold">soft</span>,
-              visual and clear
-            </h1>
-
-            <p class="hero-sub">
-              Shape your offer, mood and launch direction in one softer workflow. Let the visuals guide the page instead of heavy text.
-            </p>
-
-            <div class="hero-actions">
-              <a href="ai-generator.html" class="btn btn-primary">Start Campaign</a>
-              <a href="templates.html" class="btn btn-light">Use Templates</a>
-              <a href="video-creator.html" class="btn btn-light">Create Reel Flow</a>
-            </div>
-          </div>
-
-          <div class="hero-right">
-            <div class="visual-grid">
-              <div class="visual-col">
-                <div class="visual-card tall">
-                  <div class="visual-img v1"></div>
-                  <div class="visual-label">Campaign mood</div>
-                </div>
-
-                <div class="visual-card small">
-                  <div class="visual-img v2"></div>
-                  <div class="visual-label">Creative direction</div>
-                </div>
-              </div>
-
-              <div class="visual-col">
-                <div class="soft-panel gold-box">
-                  <h3>Choose the right angle</h3>
-                  <p>Premium, emotional or launch-led messaging in one smooth path.</p>
-                </div>
-
-                <div class="visual-card small">
-                  <div class="visual-img v3"></div>
-                  <div class="visual-label">Launch plan</div>
-                </div>
-
-                <div class="soft-panel mint-box">
-                  <h3>Move faster</h3>
-                  <p>Turn one idea into copy, visuals and reel flow.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="moving-strip">
-          <div class="moving-track">
-            <div class="moving-pill m1">One idea to multiple outputs</div>
-            <div class="moving-pill m2">Premium launch direction</div>
-            <div class="moving-pill m3">Reels, ads and short campaign flow</div>
-            <div class="moving-pill m4">Soft strategy, not confusing dashboards</div>
-
-            <div class="moving-pill m1">One idea to multiple outputs</div>
-            <div class="moving-pill m2">Premium launch direction</div>
-            <div class="moving-pill m3">Reels, ads and short campaign flow</div>
-            <div class="moving-pill m4">Soft strategy, not confusing dashboards</div>
-          </div>
+      <div class="hero">
+        <div class="badge">AI campaign planning workspace</div>
+        <h1>Build one complete campaign flow from idea to creatives, reels and launch actions.</h1>
+        <p>Plan your angle, audience, offer and outputs in one place so BariqAI feels guided, visual and usable.</p>
+        <div class="hero-actions">
+          <button class="hero-btn primary">Build Campaign</button>
+          <button class="hero-btn secondary">Open Templates</button>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-head">
-          <h2>Simple direction</h2>
-          <p>Use visuals first. Let the campaign feel easier instead of heavier.</p>
+      <div class="guide">
+        <div class="guide-card">
+          <div class="guide-step">1</div>
+          <h3>Set your goal</h3>
+          <p>Choose leads, sales, awareness or launch.</p>
+        </div>
+        <div class="guide-card">
+          <div class="guide-step">2</div>
+          <h3>Pick your angle</h3>
+          <p>Select emotional, direct, premium or urgent tone.</p>
+        </div>
+        <div class="guide-card">
+          <div class="guide-step">3</div>
+          <h3>Generate outputs</h3>
+          <p>Get hooks, creatives, reels and CTA paths.</p>
+        </div>
+        <div class="guide-card">
+          <div class="guide-step">4</div>
+          <h3>Launch faster</h3>
+          <p>Use the plan for ads, editors and creators.</p>
+        </div>
+      </div>
+
+      <div class="studio-grid">
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Campaign Setup</h2>
+            <p>Fill the campaign once and generate the full direction.</p>
+          </div>
+
+          <div class="form-wrap">
+            <div class="field">
+              <label>Brand / Business</label>
+              <input id="brand" type="text" value="RSCC Aesthetic Clinic">
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label>Campaign Goal</label>
+                <select id="goal">
+                  <option>Lead Generation</option>
+                  <option>Sales Conversion</option>
+                  <option>Brand Awareness</option>
+                  <option>Offer Promotion</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Industry</label>
+                <select id="industry">
+                  <option>Clinic / Aesthetic</option>
+                  <option>Salon / Beauty</option>
+                  <option>Real Estate</option>
+                  <option>D2C</option>
+                  <option>Restaurant</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Offer / Service</label>
+              <input id="offer" type="text" value="Laser hair reduction for women">
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label>Audience</label>
+                <input id="audience" type="text" value="Women aged 22 to 45">
+              </div>
+              <div class="field">
+                <label>City</label>
+                <input id="city" type="text" value="Hyderabad">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Main Campaign Message</label>
+              <textarea id="message">Show confidence, convenience, premium care and the emotional relief of choosing a modern treatment instead of repeated hassle.</textarea>
+            </div>
+
+            <div class="field">
+              <label>Preferred Angle</label>
+              <div class="chips">
+                <button class="chip active" type="button">Premium</button>
+                <button class="chip" type="button">Emotional</button>
+                <button class="chip" type="button">Urgent</button>
+                <button class="chip" type="button">Problem-Solution</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Outputs Needed</label>
+              <div class="chips">
+                <button class="chip active" type="button">Ad Hooks</button>
+                <button class="chip active" type="button">Creative Ideas</button>
+                <button class="chip active" type="button">Reel Flow</button>
+                <button class="chip active" type="button">CTA</button>
+              </div>
+            </div>
+
+            <button class="generate-btn" onclick="generateCampaign()">Generate Campaign Plan</button>
+          </div>
         </div>
 
-        <div class="direction-grid">
-          <div class="direction-card">
-            <div class="direction-image d1"></div>
-            <div class="direction-body">
-              <h3>Choose the offer mood</h3>
-              <p>Pick whether your campaign should feel premium, urgent or emotionally reassuring.</p>
+        <div class="panel">
+          <div class="workspace">
+            <div class="workspace-top">
+              <div>
+                <h3>Campaign Workspace</h3>
+                <p>One place for angle, hooks, creatives and launch path.</p>
+              </div>
+              <div class="status">Campaign plan ready to use</div>
             </div>
-          </div>
 
-          <div class="direction-card">
-            <div class="direction-image d2"></div>
-            <div class="direction-body">
-              <h3>Match the content style</h3>
-              <p>Connect the idea with softer headlines, visual tone and the right output style.</p>
-            </div>
-          </div>
+            <div class="campaign-flow">
+              <div class="flow-card">
+                <div class="flow-label l1">Audience</div>
+                <h4 id="flowAudience">Women 22–45 in Hyderabad</h4>
+                <p id="flowAudienceText">Looking for confidence, convenience and premium care.</p>
+              </div>
 
-          <div class="direction-card">
-            <div class="direction-image d3"></div>
-            <div class="direction-body">
-              <h3>Launch everywhere</h3>
-              <p>Move the same campaign into ads, reels, templates and creator execution.</p>
+              <div class="flow-card">
+                <div class="flow-label l2">Offer</div>
+                <h4 id="flowOffer">Laser Hair Reduction</h4>
+                <p id="flowOfferText">Position the offer as modern, safe and easy.</p>
+              </div>
+
+              <div class="flow-card">
+                <div class="flow-label l3">Message</div>
+                <h4 id="flowMessage">Confidence without repeated hassle</h4>
+                <p id="flowMessageText">Lead with emotional relief and smart choice.</p>
+              </div>
+
+              <div class="flow-card">
+                <div class="flow-label l4">Launch</div>
+                <h4 id="flowLaunch">Ads + Reels + CTA</h4>
+                <p id="flowLaunchText">Use across creators, ads and video content.</p>
+              </div>
             </div>
+
+            <div class="output-grid">
+              <div class="output-card">
+                <h4>Campaign Hook Ideas</h4>
+                <ul id="hookList">
+                  <li>Still planning your month around temporary fixes?</li>
+                  <li>Choose smoother confidence with premium care.</li>
+                  <li>Done with old routines? Move to a smarter solution.</li>
+                  <li>Your confidence deserves something better.</li>
+                </ul>
+                <div class="card-actions">
+                  <button class="small-btn primary" onclick="copyText('hookList')">Copy</button>
+                  <button class="small-btn">Save</button>
+                </div>
+              </div>
+
+              <div class="output-card">
+                <h4>Creative Direction</h4>
+                <p id="creativeDirection">Use a clean, soft, premium women-first visual style with elegant typography, treatment confidence and before-after emotional transformation.</p>
+                <div class="card-actions">
+                  <button class="small-btn primary" onclick="copyText('creativeDirection')">Copy</button>
+                  <button class="small-btn">Save</button>
+                </div>
+              </div>
+
+              <div class="output-card">
+                <h4>Reel Direction</h4>
+                <p id="reelDirection">Open with the problem. Show the smarter treatment option. Build trust with premium visuals. Close with confidence and urgency.</p>
+                <div class="card-actions">
+                  <button class="small-btn primary" onclick="copyText('reelDirection')">Copy</button>
+                  <button class="small-btn">Open Video Creator</button>
+                </div>
+              </div>
+
+              <div class="output-card">
+                <h4>CTA Variants</h4>
+                <ul id="ctaList">
+                  <li>Book your consultation today</li>
+                  <li>Choose smarter confidence now</li>
+                  <li>Experience premium care in Hyderabad</li>
+                  <li>Start your transformation today</li>
+                </ul>
+                <div class="card-actions">
+                  <button class="small-btn primary" onclick="copyText('ctaList')">Copy</button>
+                  <button class="small-btn">Save</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="quick-strip">
+              <div class="quick-card">
+                <strong>Use in AI Generator</strong>
+                <span>Turn these hooks into captions, ad copy and headlines.</span>
+              </div>
+              <div class="quick-card">
+                <strong>Use in Video Creator</strong>
+                <span>Convert this campaign into scenes, script and voiceover.</span>
+              </div>
+              <div class="quick-card">
+                <strong>Use with Templates</strong>
+                <span>Match the campaign plan with a ready template style.</span>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div class="mini-flow">
-          <div class="mini-step">
-            <div class="step-no">1</div>
-            <strong>Pick your message</strong>
-            <span>Choose what the user should feel first.</span>
-          </div>
-
-          <div class="mini-step">
-            <div class="step-no">2</div>
-            <strong>Build the creative path</strong>
-            <span>Shape copy, visuals and launch direction together.</span>
-          </div>
-
-          <div class="mini-step">
-            <div class="step-no">3</div>
-            <strong>Send to execution</strong>
-            <span>Move into video, templates and ad copy instantly.</span>
-          </div>
-        </div>
       </div>
 
     </div>
   </section>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h3>Bariq AI</h3>
-          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation and execution systems.</p>
-        </div>
-
-        <div class="footer-col">
-          <h3>Platform</h3>
-          <a href="index.html">Home</a>
-          <a href="ai-generator.html">AI Generator</a>
-          <a href="campaign.html">Campaign Studio</a>
-          <a href="video-creator.html">Video Creator</a>
-        </div>
-
-        <div class="footer-col">
-          <h3>Legal</h3>
-          <a href="terms.html">Terms</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="refund-policy.html">Refund Policy</a>
-        </div>
-
-        <div class="footer-col">
-          <h3>Contact</h3>
-          <a href="contact.html">Contact Us</a>
-          <a href="pricing.html">Pricing</a>
-          <a href="payments.html">Payments</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
   <script>
-    function toggleMobileMenu() {
-      document.getElementById("mainNav").classList.toggle("show");
+    function copyText(id){
+      const el = document.getElementById(id);
+      const text = el.innerText || el.textContent;
+      navigator.clipboard.writeText(text);
+      alert("Copied");
+    }
+
+    function generateCampaign(){
+      const brand = document.getElementById('brand').value;
+      const goal = document.getElementById('goal').value;
+      const industry = document.getElementById('industry').value;
+      const offer = document.getElementById('offer').value;
+      const audience = document.getElementById('audience').value;
+      const city = document.getElementById('city').value;
+      const message = document.getElementById('message').value;
+
+      document.getElementById('flowAudience').innerText = audience + " in " + city;
+      document.getElementById('flowAudienceText').innerText =
+        "Primary target for this " + goal.toLowerCase() + " campaign.";
+
+      document.getElementById('flowOffer').innerText = offer;
+      document.getElementById('flowOfferText').innerText =
+        "Position this within the " + industry + " category.";
+
+      document.getElementById('flowMessage').innerText = "Core message";
+      document.getElementById('flowMessageText').innerText = message;
+
+      document.getElementById('flowLaunch').innerText = brand;
+      document.getElementById('flowLaunchText').innerText =
+        "Use across ads, reels, creatives and prompt-based execution.";
+
+      document.getElementById('hookList').innerHTML = `
+        <li>Why are you still settling for old routines?</li>
+        <li>${offer} now made easier for ${audience}.</li>
+        <li>${brand} in ${city} brings a smarter way to choose confidence.</li>
+        <li>Turn hesitation into action with premium care.</li>
+      `;
+
+      document.getElementById('creativeDirection').innerText =
+        `Use a light, premium and visual-first style for ${brand}. Show ${offer} with clear emotional relief, smart positioning and elegant confidence for ${audience} in ${city}.`;
+
+      document.getElementById('reelDirection').innerText =
+        `Start with the problem faced by ${audience}. Introduce ${offer}. Build trust through premium visuals and strong transformation messaging. Close with a ${goal.toLowerCase()} CTA for ${city}.`;
+
+      document.getElementById('ctaList').innerHTML = `
+        <li>Book your ${offer} consultation in ${city}</li>
+        <li>Choose premium confidence with ${brand}</li>
+        <li>Start your next step today</li>
+        <li>Enquire now and transform faster</li>
+      `;
     }
   </script>
 </body>
