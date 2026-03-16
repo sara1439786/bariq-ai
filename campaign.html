@@ -16,26 +16,27 @@
     body{
       font-family:'Inter',sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(115,87,199,.05), transparent 22%),
-        radial-gradient(circle at top right, rgba(197,155,67,.07), transparent 22%),
+        radial-gradient(circle at top left, rgba(115,87,199,.04), transparent 22%),
+        radial-gradient(circle at top right, rgba(197,155,67,.05), transparent 22%),
         linear-gradient(180deg,#fff 0%,#fffdfa 100%);
-      color:#2d2947;
+      color:#352f4f;
     }
 
     :root{
-      --text:#2d2947;
-      --muted:#7a748f;
+      --text:#352f4f;
+      --muted:#857e98;
       --gold:#c59b43;
       --gold-dark:#9d7526;
       --purple:#7357c7;
       --purple-dark:#5f49ad;
-      --soft-gold:#fff4dc;
-      --soft-purple:#f5f1ff;
-      --soft-pink:#fff2f7;
-      --soft-mint:#eefaf3;
-      --line:#eee6df;
-      --shadow:0 16px 36px rgba(90,70,50,.08);
-      --radius:28px;
+      --soft-gold:#fff6e3;
+      --soft-purple:#f6f2ff;
+      --soft-pink:#fff3f8;
+      --soft-mint:#effaf4;
+      --soft-cream:#fffaf3;
+      --line:#eee8e3;
+      --shadow:0 14px 30px rgba(90,70,50,.07);
+      --radius:26px;
     }
 
     a{text-decoration:none;color:inherit}
@@ -113,7 +114,7 @@
       border-radius:14px;
       font-size:14px;
       font-weight:700;
-      color:#645d80;
+      color:#6c6584;
       flex:0 0 auto;
     }
 
@@ -123,7 +124,7 @@
       color:var(--purple);
     }
 
-    .page{padding:14px 0 34px}
+    .page{padding:16px 0 34px}
 
     .card{
       background:#fff;
@@ -134,40 +135,40 @@
     }
 
     .hero{
-      padding:18px 20px 20px;
+      padding:18px;
       background:
-        radial-gradient(circle at 22% 28%, rgba(115,87,199,.05), transparent 16%),
-        radial-gradient(circle at 78% 14%, rgba(197,155,67,.06), transparent 16%),
+        radial-gradient(circle at 22% 28%, rgba(115,87,199,.04), transparent 16%),
+        radial-gradient(circle at 78% 14%, rgba(197,155,67,.05), transparent 16%),
         linear-gradient(180deg,#ffffff 0%, #fffdfa 100%);
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:.95fr 1.05fr;
-      gap:18px;
+      grid-template-columns:.9fr 1.1fr;
+      gap:16px;
       align-items:start;
     }
 
     .hero-left{
-      min-height:500px;
+      min-height:390px;
       display:flex;
       flex-direction:column;
       justify-content:flex-start;
-      padding-top:8px;
+      padding:6px 4px 0 4px;
     }
 
     .tag{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding:10px 14px;
+      padding:9px 13px;
       border-radius:999px;
       background:#fff;
       border:1px solid var(--line);
-      color:#645d82;
-      font-size:13px;
+      color:#6c6584;
+      font-size:12px;
       font-weight:600;
-      box-shadow:0 8px 18px rgba(100,70,50,.04);
+      box-shadow:0 6px 14px rgba(100,70,50,.04);
       margin-bottom:10px;
       width:max-content;
     }
@@ -175,12 +176,12 @@
     .hero-title{
       margin:0;
       font-family:'Cormorant Garamond',serif;
-      font-size:54px;
-      line-height:.98;
-      letter-spacing:-0.4px;
+      font-size:44px;
+      line-height:1.03;
+      letter-spacing:-0.3px;
       font-weight:700;
-      color:#2b2643;
-      max-width:560px;
+      color:#332d4d;
+      max-width:500px;
     }
 
     .hero-title .gold{
@@ -201,10 +202,10 @@
 
     .hero-sub{
       margin:12px 0 0;
-      max-width:560px;
+      max-width:500px;
       color:var(--muted);
       font-size:14px;
-      line-height:1.85;
+      line-height:1.8;
       font-weight:400;
     }
 
@@ -212,7 +213,7 @@
       display:flex;
       gap:12px;
       flex-wrap:wrap;
-      margin-top:18px;
+      margin-top:16px;
     }
 
     .btn{
@@ -220,9 +221,9 @@
       align-items:center;
       justify-content:center;
       border:none;
-      border-radius:16px;
-      padding:13px 18px;
-      font-size:14px;
+      border-radius:15px;
+      padding:12px 16px;
+      font-size:13px;
       font-weight:600;
       cursor:pointer;
       transition:.2s ease;
@@ -238,23 +239,22 @@
     .btn-light{
       background:#fff;
       border:1px solid var(--line);
-      color:#5f597f;
+      color:#665f7e;
     }
 
     .hero-right{
-      min-height:500px;
-      border-radius:30px;
+      min-height:390px;
+      border-radius:28px;
       border:1px solid var(--line);
-      background:linear-gradient(135deg,#fff3ec 0%, #fff8f2 50%, #f6f2ff 100%);
-      padding:16px;
+      background:linear-gradient(135deg,#fff5ef 0%, #fffaf6 48%, #f7f4ff 100%);
+      padding:14px;
       overflow:hidden;
     }
 
     .visual-grid{
       display:grid;
-      grid-template-columns:1.1fr .9fr;
+      grid-template-columns:1.08fr .92fr;
       gap:12px;
-      align-items:stretch;
       height:100%;
     }
 
@@ -264,19 +264,16 @@
     }
 
     .visual-card{
-      border-radius:24px;
+      border-radius:22px;
       overflow:hidden;
       position:relative;
-      min-height:180px;
-      box-shadow:0 12px 24px rgba(0,0,0,.06);
-      animation:floaty 7s ease-in-out infinite;
+      box-shadow:0 10px 20px rgba(0,0,0,.05);
       background:#fff;
+      min-height:150px;
     }
 
-    .visual-card.small{min-height:140px}
-    .visual-card.tall{min-height:250px}
-    .visual-card.delay1{animation-delay:1s}
-    .visual-card.delay2{animation-delay:2s}
+    .visual-card.small{min-height:124px}
+    .visual-card.tall{min-height:205px}
 
     .visual-img{
       width:100%;
@@ -293,71 +290,69 @@
 
     .visual-label{
       position:absolute;
-      left:12px;
-      bottom:12px;
+      left:10px;
+      bottom:10px;
       z-index:2;
       background:rgba(255,255,255,.93);
-      padding:8px 12px;
+      padding:7px 11px;
       border-radius:999px;
-      font-size:12px;
+      font-size:11px;
       font-weight:600;
-      color:#4f4969;
+      color:#57516f;
     }
 
     .soft-panel{
-      border-radius:24px;
-      padding:22px;
-      min-height:140px;
-      box-shadow:0 12px 24px rgba(0,0,0,.05);
-      animation:floaty 8s ease-in-out infinite;
+      border-radius:22px;
+      padding:18px;
+      min-height:124px;
+      box-shadow:0 10px 20px rgba(0,0,0,.04);
     }
 
     .soft-panel h3{
       margin:0;
       font-family:'Cormorant Garamond',serif;
-      font-size:28px;
-      line-height:1.05;
+      font-size:24px;
+      line-height:1.08;
       font-weight:700;
-      color:#2e2947;
+      color:#352f50;
     }
 
     .soft-panel p{
       margin:8px 0 0;
-      font-size:13px;
-      color:#6f6987;
+      font-size:12px;
+      color:#77708c;
       line-height:1.75;
     }
 
-    .gold-box{background:linear-gradient(135deg,#fff0b9,#f7de84)}
-    .mint-box{background:linear-gradient(135deg,#e6faef,#d8f3e4)}
+    .gold-box{background:linear-gradient(135deg,#fff3c9,#f9e5a0)}
+    .mint-box{background:linear-gradient(135deg,#ecfbf2,#ddf5e7)}
 
     .moving-strip{
       margin-top:14px;
       overflow:hidden;
-      border-radius:22px;
+      border-radius:20px;
       background:#fff;
       border:1px solid var(--line);
-      padding:12px 0;
-      box-shadow:0 10px 18px rgba(100,70,50,.04);
+      padding:10px 0;
+      box-shadow:0 8px 16px rgba(100,70,50,.04);
     }
 
     .moving-track{
       display:flex;
-      gap:14px;
+      gap:12px;
       width:max-content;
-      animation:marquee 24s linear infinite;
+      animation:marquee 26s linear infinite;
       align-items:center;
     }
 
     .moving-pill{
       flex:0 0 auto;
-      padding:11px 16px;
+      padding:10px 14px;
       border-radius:18px;
-      font-size:13px;
+      font-size:12px;
       font-weight:600;
-      color:#4b4568;
+      color:#57516f;
       white-space:nowrap;
-      box-shadow:0 8px 18px rgba(80,60,40,.05);
     }
 
     .m1{background:var(--soft-pink)}
@@ -365,43 +360,43 @@
     .m3{background:var(--soft-purple)}
     .m4{background:var(--soft-gold)}
 
-    .section{margin-top:22px}
+    .section{margin-top:20px}
 
     .section-head{
-      margin-bottom:14px;
+      margin-bottom:12px;
     }
 
     .section-head h2{
-      margin:0 0 6px;
-      font-size:22px;
+      margin:0 0 5px;
+      font-size:18px;
       font-weight:600;
-      color:#2d2947;
+      color:#332d4d;
     }
 
     .section-head p{
       margin:0;
       color:var(--muted);
-      font-size:14px;
-      line-height:1.8;
-      max-width:760px;
+      font-size:13px;
+      line-height:1.75;
+      max-width:720px;
     }
 
     .direction-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:16px;
+      gap:14px;
     }
 
     .direction-card{
       border:1px solid var(--line);
-      border-radius:24px;
+      border-radius:22px;
       background:#fff;
       box-shadow:var(--shadow);
       overflow:hidden;
     }
 
     .direction-image{
-      height:170px;
+      height:130px;
       background-size:cover;
       background-position:center;
     }
@@ -411,68 +406,68 @@
     .d3{background-image:url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80')}
 
     .direction-body{
-      padding:16px;
+      padding:14px;
     }
 
     .direction-body h3{
-      margin:0 0 6px;
-      font-size:18px;
+      margin:0 0 5px;
+      font-size:16px;
       font-weight:600;
-      color:#2f2a49;
+      color:#3a3454;
     }
 
     .direction-body p{
       margin:0;
-      font-size:13px;
+      font-size:12px;
       color:var(--muted);
-      line-height:1.75;
+      line-height:1.7;
     }
 
     .mini-flow{
-      margin-top:18px;
+      margin-top:14px;
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:14px;
+      gap:12px;
     }
 
     .mini-step{
       border:1px solid var(--line);
-      border-radius:20px;
+      border-radius:18px;
       background:#fff;
-      padding:16px;
-      box-shadow:0 10px 20px rgba(90,70,50,.05);
+      padding:14px;
+      box-shadow:0 8px 18px rgba(90,70,50,.04);
     }
 
     .step-no{
-      width:30px;
-      height:30px;
-      border-radius:10px;
+      width:26px;
+      height:26px;
+      border-radius:9px;
       display:grid;
       place-items:center;
-      margin-bottom:10px;
+      margin-bottom:8px;
       background:var(--soft-purple);
       color:var(--purple);
-      font-size:13px;
+      font-size:12px;
       font-weight:700;
     }
 
     .mini-step strong{
       display:block;
-      margin-bottom:6px;
-      font-size:15px;
+      margin-bottom:5px;
+      font-size:14px;
       font-weight:600;
-      color:#2f2a49;
+      color:#3a3454;
     }
 
     .mini-step span{
       display:block;
-      font-size:13px;
+      font-size:12px;
       color:var(--muted);
-      line-height:1.7;
+      line-height:1.65;
     }
 
     .site-footer{
-      margin-top:28px;
+      margin-top:26px;
       background:#181427;
       color:#fff;
       padding:40px 0;
@@ -505,14 +500,9 @@
       100%{transform:translateX(-50%)}
     }
 
-    @keyframes floaty{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-8px)}
-    }
-
     @keyframes zoomy{
       0%{transform:scale(1)}
-      100%{transform:scale(1.06)}
+      100%{transform:scale(1.05)}
     }
 
     @media (max-width:1180px){
@@ -550,7 +540,7 @@
         background:#fff8f2;
       }
 
-      .hero-title{font-size:42px}
+      .hero-title{font-size:36px}
       .hero-actions{flex-direction:column}
       .btn{width:100%}
       .visual-grid,
@@ -558,6 +548,10 @@
       .mini-flow,
       .footer-grid{
         grid-template-columns:1fr;
+      }
+      .hero-left,
+      .hero-right{
+        min-height:auto;
       }
     }
   </style>
@@ -598,12 +592,12 @@
 
             <h1 class="hero-title">
               Build a <span class="purple">campaign flow</span>
-              that feels <span class="gold">live</span>,
-              visual and easy
+              that feels <span class="gold">soft</span>,
+              visual and clear
             </h1>
 
             <p class="hero-sub">
-              Plan your offer, mood and launch direction in one softer workflow. Less clutter, more movement, more confidence.
+              Shape your offer, mood and launch direction in one softer workflow. Let the visuals guide the page instead of heavy text.
             </p>
 
             <div class="hero-actions">
@@ -620,7 +614,8 @@
                   <div class="visual-img v1"></div>
                   <div class="visual-label">Campaign mood</div>
                 </div>
-                <div class="visual-card small delay1">
+
+                <div class="visual-card small">
                   <div class="visual-img v2"></div>
                   <div class="visual-label">Creative direction</div>
                 </div>
@@ -632,14 +627,14 @@
                   <p>Premium, emotional or launch-led messaging in one smooth path.</p>
                 </div>
 
-                <div class="visual-card small delay2">
+                <div class="visual-card small">
                   <div class="visual-img v3"></div>
                   <div class="visual-label">Launch plan</div>
                 </div>
 
                 <div class="soft-panel mint-box">
                   <h3>Move faster</h3>
-                  <p>Turn one idea into copy, visual direction and reel flow.</p>
+                  <p>Turn one idea into copy, visuals and reel flow.</p>
                 </div>
               </div>
             </div>
@@ -648,15 +643,15 @@
 
         <div class="moving-strip">
           <div class="moving-track">
-            <div class="moving-pill m1">Premium launch direction</div>
-            <div class="moving-pill m2">Reels, ads and short campaign flow</div>
-            <div class="moving-pill m3">Soft strategy, not confusing dashboards</div>
-            <div class="moving-pill m4">One idea to multiple outputs</div>
+            <div class="moving-pill m1">One idea to multiple outputs</div>
+            <div class="moving-pill m2">Premium launch direction</div>
+            <div class="moving-pill m3">Reels, ads and short campaign flow</div>
+            <div class="moving-pill m4">Soft strategy, not confusing dashboards</div>
 
-            <div class="moving-pill m1">Premium launch direction</div>
-            <div class="moving-pill m2">Reels, ads and short campaign flow</div>
-            <div class="moving-pill m3">Soft strategy, not confusing dashboards</div>
-            <div class="moving-pill m4">One idea to multiple outputs</div>
+            <div class="moving-pill m1">One idea to multiple outputs</div>
+            <div class="moving-pill m2">Premium launch direction</div>
+            <div class="moving-pill m3">Reels, ads and short campaign flow</div>
+            <div class="moving-pill m4">Soft strategy, not confusing dashboards</div>
           </div>
         </div>
       </div>
@@ -664,7 +659,7 @@
       <div class="section">
         <div class="section-head">
           <h2>Simple direction</h2>
-          <p>Use visuals first. Let the campaign feel easy instead of heavy.</p>
+          <p>Use visuals first. Let the campaign feel easier instead of heavier.</p>
         </div>
 
         <div class="direction-grid">
