@@ -8,16 +8,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
   <style>
     *{box-sizing:border-box}
+    html,body{margin:0;padding:0;overflow-x:hidden}
     body{
-      margin:0;
       font-family:'Inter',sans-serif;
       background:
         radial-gradient(circle at top left, rgba(115,87,199,.04), transparent 22%),
         radial-gradient(circle at top right, rgba(197,155,67,.05), transparent 22%),
-        linear-gradient(180deg,#fffdfc 0%, #fbfafc 100%);
+        linear-gradient(180deg,#fffdfb 0%, #fbfafc 100%);
       color:#332d4d;
     }
 
@@ -25,17 +26,18 @@
       --card:#ffffff;
       --line:#eee7e0;
       --text:#332d4d;
-      --muted:#7b748f;
+      --muted:#7c7591;
       --purple:#7357c7;
+      --purple-dark:#5f49ad;
       --purple-soft:#f5f1ff;
       --pink-soft:#fff2f7;
       --blue-soft:#f3f7ff;
-      --mint-soft:#f0faf5;
+      --mint-soft:#eefaf4;
       --peach-soft:#fff6ef;
-      --yellow-soft:#fff7e7;
+      --yellow-soft:#fff7e8;
       --gold:#c59b43;
-      --gold-dark:#9c7428;
-      --shadow:0 14px 32px rgba(90,100,140,.06);
+      --gold-dark:#9d7526;
+      --shadow:0 14px 30px rgba(90,100,140,.06);
     }
 
     a{text-decoration:none;color:inherit}
@@ -56,6 +58,7 @@
       align-items:center;
       justify-content:space-between;
       gap:18px;
+      position:relative;
     }
 
     .brand{
@@ -85,6 +88,17 @@
       color:#2e2947;
     }
 
+    .menu-toggle{
+      display:none;
+      border:none;
+      background:#f6f1ff;
+      color:var(--purple);
+      border-radius:14px;
+      padding:10px 14px;
+      font-size:26px;
+      cursor:pointer;
+    }
+
     .main-nav{
       display:flex;
       gap:8px;
@@ -101,7 +115,10 @@
       border-radius:14px;
       font-size:14px;
       font-weight:700;
-      color:#6e6786;
+      color:#6d6684;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
     }
 
     .main-nav a.active,
@@ -122,7 +139,7 @@
       font-weight:700;
       border:1px solid var(--line);
       background:#fff;
-      color:#645d7f;
+      color:#655e7e;
     }
 
     .top-btn.start{
@@ -131,15 +148,22 @@
       border:none;
     }
 
-    .page{padding:22px 0 40px}
+    .page{padding:20px 0 38px}
 
     .hero{
-      background:linear-gradient(135deg,#ffffff 0%, #fbf8ff 46%, #fffaf4 100%);
+      background:linear-gradient(135deg,#ffffff 0%, #fbf8ff 48%, #fffaf4 100%);
       border:1px solid var(--line);
       border-radius:30px;
       box-shadow:var(--shadow);
-      padding:26px;
-      margin-bottom:20px;
+      padding:22px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      align-items:center;
     }
 
     .badge{
@@ -152,24 +176,40 @@
       border:1px solid var(--line);
       font-size:12px;
       font-weight:700;
-      color:#6d6787;
-      margin-bottom:14px;
+      color:#6e6787;
+      margin-bottom:12px;
     }
 
     .hero h1{
       margin:0;
       font-family:'Cormorant Garamond',serif;
-      font-size:52px;
-      line-height:1.02;
+      font-size:48px;
+      line-height:1.03;
       font-weight:700;
-      letter-spacing:-.3px;
-      max-width:760px;
+      max-width:680px;
       color:#2f2948;
+      letter-spacing:-.2px;
+    }
+
+    .hero .gold{
+      background:linear-gradient(90deg,var(--gold),var(--gold-dark));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .hero .purple{
+      background:linear-gradient(90deg,var(--purple),var(--purple-dark));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
     }
 
     .hero p{
       margin:12px 0 0;
-      max-width:700px;
+      max-width:620px;
       font-size:15px;
       line-height:1.8;
       color:var(--muted);
@@ -190,6 +230,9 @@
       font-weight:700;
       border:none;
       cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
     }
 
     .hero-btn.primary{
@@ -203,25 +246,114 @@
       border:1px solid var(--line);
     }
 
+    .hero-visual{
+      display:grid;
+      gap:12px;
+    }
+
+    .hero-main{
+      position:relative;
+      border-radius:24px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      min-height:220px;
+      box-shadow:0 10px 22px rgba(90,100,140,.08);
+      background:#fff;
+    }
+
+    .hero-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .hero-small{
+      position:relative;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      min-height:130px;
+      box-shadow:0 10px 22px rgba(90,100,140,.06);
+      background:#fff;
+    }
+
+    .hero-visual img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform:scale(1);
+      transition:transform .6s ease;
+    }
+
+    .hero-main:hover img,
+    .hero-small:hover img{
+      transform:scale(1.06);
+    }
+
+    .hero-tag{
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      background:rgba(255,255,255,.92);
+      color:#4d4668;
+      font-size:12px;
+      font-weight:700;
+      padding:8px 12px;
+      border-radius:999px;
+    }
+
+    .hero-chip-strip{
+      margin-top:14px;
+      overflow:hidden;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:10px 0;
+    }
+
+    .hero-chip-track{
+      display:flex;
+      gap:12px;
+      width:max-content;
+      animation:marquee 24s linear infinite;
+      align-items:center;
+    }
+
+    .hero-chip{
+      flex:0 0 auto;
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      color:#595371;
+      white-space:nowrap;
+    }
+
+    .c1{background:var(--pink-soft)}
+    .c2{background:var(--mint-soft)}
+    .c3{background:var(--purple-soft)}
+    .c4{background:var(--yellow-soft)}
+
     .guide{
       display:grid;
       grid-template-columns:repeat(4,1fr);
-      gap:14px;
-      margin-bottom:20px;
+      gap:12px;
+      margin-bottom:18px;
     }
 
     .guide-card{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:22px;
-      padding:16px;
+      border-radius:20px;
+      padding:14px;
       box-shadow:var(--shadow);
     }
 
     .guide-step{
-      width:32px;
-      height:32px;
-      border-radius:11px;
+      width:30px;
+      height:30px;
+      border-radius:10px;
       display:grid;
       place-items:center;
       background:var(--purple-soft);
@@ -232,15 +364,15 @@
     }
 
     .guide-card h3{
-      margin:0 0 6px;
-      font-size:16px;
+      margin:0 0 5px;
+      font-size:15px;
       color:#2f2948;
       font-weight:700;
     }
 
     .guide-card p{
       margin:0;
-      font-size:13px;
+      font-size:12px;
       color:var(--muted);
       line-height:1.65;
       font-weight:400;
@@ -269,7 +401,7 @@
       margin:0 0 6px;
       font-family:'Cormorant Garamond',serif;
       font-size:30px;
-      line-height:1.05;
+      line-height:1.04;
       font-weight:700;
       color:#2f2948;
     }
@@ -373,7 +505,7 @@
       margin:0;
       font-family:'Cormorant Garamond',serif;
       font-size:30px;
-      line-height:1.05;
+      line-height:1.04;
       font-weight:700;
       color:#2f2948;
     }
@@ -389,7 +521,7 @@
     .status{
       padding:10px 14px;
       border-radius:999px;
-      background:#f0faf5;
+      background:#effaf4;
       color:#3b8d68;
       font-size:12px;
       font-weight:800;
@@ -401,12 +533,12 @@
       display:grid;
       grid-template-columns:repeat(4,1fr);
       gap:12px;
-      margin-bottom:16px;
+      margin-bottom:14px;
     }
 
     .flow-card{
       border:1px solid var(--line);
-      border-radius:20px;
+      border-radius:18px;
       padding:14px;
       background:#fff;
       box-shadow:0 8px 18px rgba(90,100,140,.04);
@@ -450,7 +582,7 @@
 
     .output-card{
       border:1px solid var(--line);
-      border-radius:20px;
+      border-radius:18px;
       padding:16px;
       background:#fff;
       box-shadow:0 8px 18px rgba(90,100,140,.04);
@@ -501,7 +633,7 @@
     }
 
     .quick-strip{
-      margin-top:16px;
+      margin-top:14px;
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:12px;
@@ -509,7 +641,7 @@
 
     .quick-card{
       border:1px solid var(--line);
-      border-radius:18px;
+      border-radius:16px;
       padding:14px;
       background:#fdfcff;
     }
@@ -530,7 +662,42 @@
       font-weight:400;
     }
 
+    .site-footer{
+      margin-top:24px;
+      background:#181427;
+      color:#fff;
+      padding:38px 0;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr 1fr;
+      gap:24px;
+    }
+
+    .footer-col h3{
+      margin:0 0 14px;
+      font-size:18px;
+      color:#fff;
+      font-weight:700;
+    }
+
+    .footer-col p,
+    .footer-col a{
+      display:block;
+      margin:0 0 10px;
+      color:#d9d4ea;
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    @keyframes marquee{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-50%)}
+    }
+
     @media (max-width:1100px){
+      .hero-grid,
       .guide,
       .campaign-flow,
       .output-grid,
@@ -540,17 +707,23 @@
       .studio-grid{
         grid-template-columns:1fr;
       }
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
     }
 
     @media (max-width:768px){
       .container{width:min(100% - 18px,1200px)}
       .main-nav,.nav-actions{display:none}
-      .hero h1{font-size:38px}
+      .menu-toggle{display:block}
+      .hero h1{font-size:36px}
       .guide,
       .campaign-flow,
       .output-grid,
       .quick-strip,
-      .grid-2{
+      .grid-2,
+      .hero-row,
+      .footer-grid{
         grid-template-columns:1fr;
       }
     }
@@ -565,15 +738,17 @@
         <span class="brand-text">BariqAI</span>
       </a>
 
+      <button class="menu-toggle">☰</button>
+
       <nav class="main-nav">
-        <a href="index.html">Home</a>
-        <a href="business-dashboard.html">Business</a>
-        <a href="ai-generator.html">AI Generator</a>
-        <a href="campaign.html" class="active">Campaign</a>
-        <a href="creator-marketplace.html">Creators</a>
-        <a href="templates.html">Templates</a>
-        <a href="video-creator.html">Video Creator</a>
-        <a href="payments.html">Payments</a>
+        <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="business-dashboard.html"><i class="fa-solid fa-briefcase"></i> Business</a>
+        <a href="ai-generator.html"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Generator</a>
+        <a href="campaign.html" class="active"><i class="fa-solid fa-bullhorn"></i> Campaign</a>
+        <a href="creator-marketplace.html"><i class="fa-solid fa-users"></i> Creators</a>
+        <a href="templates.html"><i class="fa-solid fa-layer-group"></i> Templates</a>
+        <a href="video-creator.html"><i class="fa-solid fa-video"></i> Video Creator</a>
+        <a href="payments.html"><i class="fa-solid fa-credit-card"></i> Payments</a>
       </nav>
 
       <div class="nav-actions">
@@ -587,12 +762,53 @@
     <div class="container">
 
       <div class="hero">
-        <div class="badge">AI campaign planning workspace</div>
-        <h1>Build one complete campaign flow from idea to creatives, reels and launch actions.</h1>
-        <p>Plan your angle, audience, offer and outputs in one place so BariqAI feels guided, visual and usable.</p>
-        <div class="hero-actions">
-          <button class="hero-btn primary">Build Campaign</button>
-          <button class="hero-btn secondary">Open Templates</button>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="badge">AI campaign planning workspace</div>
+            <h1>
+              Build one complete
+              <span class="purple">campaign flow</span>
+              from idea to <span class="gold">creatives, reels</span>
+              and launch actions.
+            </h1>
+            <p>Plan your angle, audience, offer and outputs in one place so BariqAI feels guided, visual and usable.</p>
+            <div class="hero-actions">
+              <button class="hero-btn primary"><i class="fa-solid fa-bullhorn"></i> Build Campaign</button>
+              <button class="hero-btn secondary"><i class="fa-solid fa-layer-group"></i> Open Templates</button>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-main">
+              <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="Campaign planning">
+              <div class="hero-tag">Campaign planning</div>
+            </div>
+
+            <div class="hero-row">
+              <div class="hero-small">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="Creative ideas">
+                <div class="hero-tag">Creative ideas</div>
+              </div>
+
+              <div class="hero-small">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Launch flow">
+                <div class="hero-tag">Launch flow</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-chip-strip">
+          <div class="hero-chip-track">
+            <div class="hero-chip c1">Campaign angle</div>
+            <div class="hero-chip c2">Creative ideas</div>
+            <div class="hero-chip c3">Ad hooks and CTA</div>
+            <div class="hero-chip c4">Reel launch flow</div>
+            <div class="hero-chip c1">Campaign angle</div>
+            <div class="hero-chip c2">Creative ideas</div>
+            <div class="hero-chip c3">Ad hooks and CTA</div>
+            <div class="hero-chip c4">Reel launch flow</div>
+          </div>
         </div>
       </div>
 
@@ -807,6 +1023,39 @@
     </div>
   </section>
 
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Bariq AI</h3>
+          <p>AI-driven marketing workflows for businesses, creators, campaigns, templates, video creation and execution systems.</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Platform</h3>
+          <a href="index.html">Home</a>
+          <a href="ai-generator.html">AI Generator</a>
+          <a href="campaign.html">Campaign Studio</a>
+          <a href="video-creator.html">Video Creator</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund-policy.html">Refund Policy</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <a href="contact.html">Contact Us</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="payments.html">Payments</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
     function copyText(id){
       const el = document.getElementById(id);
@@ -858,6 +1107,30 @@
         <li>Start your next step today</li>
         <li>Enquire now and transform faster</li>
       `;
+    }
+
+    const menuBtn = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.main-nav');
+    if(menuBtn && nav){
+      menuBtn.addEventListener('click', function(){
+        if(nav.style.display === 'flex'){
+          nav.style.display = '';
+        }else{
+          nav.style.display = 'flex';
+          nav.style.position = 'absolute';
+          nav.style.top = '76px';
+          nav.style.left = '0';
+          nav.style.right = '0';
+          nav.style.background = '#fff';
+          nav.style.padding = '14px';
+          nav.style.border = '1px solid #eee7e0';
+          nav.style.borderRadius = '18px';
+          nav.style.boxShadow = '0 18px 40px rgba(0,0,0,.08)';
+          nav.style.flexDirection = 'column';
+          nav.style.alignItems = 'stretch';
+          nav.style.zIndex = '999';
+        }
+      });
     }
   </script>
 </body>
